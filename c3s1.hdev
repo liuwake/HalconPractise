@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.1">
+<procedure name="main">
+<interface/>
+<body>
+<c>* 3.1.1</c>
+<c></c>
+<c>*eg 3-1</c>
+<l>cont := 2</l>
+<l>if(cont &gt;= 2)</l>
+<l>    cont := cont - 1</l>
+<l>endif</l>
+<c></c>
+<c>*eg 3-2</c>
+<l>cont := 2</l>
+<l>if(cont &gt;= 2)</l>
+<l>    cont := cont - 1</l>
+<l>else</l>
+<l>    cont := cont + 1</l>
+<l>endif</l>
+<c></c>
+<c>*eg 3-3</c>
+<l>cont := 2</l>
+<l>if(cont &gt;= 2)</l>
+<l>    cont := cont - 1</l>
+<l>elseif(cont &lt;= -1)</l>
+<l>    cont := cont + 1</l>
+<l>else</l>
+<l>    cont := cont + 2</l>
+<l>endif</l>
+<c></c>
+<c>*eg 3-4</c>
+<l>I := 5</l>
+<l>switch(I)</l>
+<l>case 1:</l>
+<l>    I := I -1</l>
+<l>    break</l>
+<l>case 5:</l>
+<l>    I := I + 5</l>
+<l>    break</l>
+<l>default:</l>
+<l>    I := 2 * I</l>
+<l>endswitch</l>
+<c></c>
+<c>*eg 3-5</c>
+<l>In := 1</l>
+<l>In_Sum := 0</l>
+<l>while (In &lt;= 100)</l>
+<l>    InSum := InSum + In</l>
+<l>    In := In + 10</l>
+<l>endwhile</l>
+<c></c>
+<c>*eg 3-6</c>
+<l>I := 0</l>
+<l>for J := 1 to 10 by 1</l>
+<l>    if (J &lt; 5)</l>
+<l>        continue</l>
+<l>    endif</l>
+<l>    I := I + J</l>
+<l>endfor</l>
+<c></c>
+<c>*eg 3-7</c>
+<l>I := 0</l>
+<l>for J := 1 to 10 by 1</l>
+<l>    if (J &gt; 5)</l>
+<l>        break</l>
+<l>    endif</l>
+<l>    if( J == 3)</l>
+<l>        continue</l>
+<l>    endif</l>
+<l>    I := I + J</l>
+<l>endfor</l>
+<c></c>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>
