@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.1">
+<procedure name="main">
+<interface/>
+<body>
+<c>*eg 6-1//</c>
+<c></c>
+<c>*eg 6-2</c>
+<l>* read_image (Image, 'lena')</l>
+<l>* get_image_size (Image, Width, Height)</l>
+<l>* dev_close_window ()</l>
+<l>* dev_open_window_fit_image (Image, 0, 0, -1, -1, WindowHandle)</l>
+<l>* dev_display (Image)</l>
+<l>* min_max_gray (Image, Image, 0, Min, Max, Range)</l>
+<l>* scale_image_max (Image, ImageScaleMax)</l>
+<l>* write_image (ImageScaleMax, 'bmp', 0, 'result.bmp')</l>
+<c></c>
+<c>*eg 6-3</c>
+<l>* read_image (Image, 'monkey')</l>
+<l>* get_image_size (Image, Width, Height)</l>
+<l>* dev_close_window ()</l>
+<l>* dev_open_window_fit_size (0, 0, Width, Width, -1, -1, WindowHandle)</l>
+<l>* dev_display (Image)</l>
+<l>* rgb1_to_gray (Image, GrayImage)</l>
+<l>* log_image (GrayImage, LogImage, 'e')</l>
+<l>* dump_window (WindowHandle, 'bmp', 'log.bmp')</l>
+<c></c>
+<c>*eg 6-4//</c>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>

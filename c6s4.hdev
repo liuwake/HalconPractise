@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.1">
+<procedure name="main">
+<interface/>
+<body>
+<c>*eg 6-8</c>
+<l>* read_image (Image, 'monkey')</l>
+<l>* get_image_size (Image, Width, Height)</l>
+<l>* dev_close_window ()</l>
+<l>* dev_open_window_fit_size (0, 0, Width, Width, -1, -1, WindowHandle)</l>
+<l>* dev_display (Image)</l>
+<l>* gauss_distribution (20, Distribution)</l>
+<l>* add_noise_distribution (Image, ImageNoise, Distribution)</l>
+<l>* dump_window (WindowHandle,'bmp','medianFilter,bmp')</l>
+<l>* mean_image (ImageNoise,ImageMean, 9, 9)</l>
+<l>* dump_window (WindowHandle, 'bmp', 'meanFiler.bmp')</l>
+<c></c>
+<c>*eg 6-9//</c>
+<c></c>
+<c>*eg 6-10//</c>
+<c></c>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>

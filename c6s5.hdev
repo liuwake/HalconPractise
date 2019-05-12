@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.1">
+<procedure name="main">
+<interface/>
+<body>
+<c>*eg 6-11</c>
+<l>* read_image (Image, 'monkey')</l>
+<l>* get_image_size (Image, Width, Height)</l>
+<l>* dev_close_window ()</l>
+<l>* dev_open_window_fit_size (0, 0, Width, Width, -1, -1, WindowHandle)</l>
+<l>* dev_display (Image)</l>
+<c></c>
+<l>* sobel_amp (Image, EdgeAmplitude, 'sum_abs', 3)</l>
+<l>* dump_window (WindowHandle, 'bmp', 'sobel.bmp')</l>
+<l>* sobel_amp (Image, EdgeAmplitude1, 'x', 3)</l>
+<l>* dump_window (WindowHandle, 'bmp', 'sobelX.bmp')</l>
+<l>* sobel_amp (Image, EdgeAmplitude2, 'y', 3)</l>
+<l>* dump_window (WindowHandle, 'bmp', 'sobelY.bmp')</l>
+<c></c>
+<c>*eg 6-12//</c>
+<c></c>
+<c>*eg 6-13</c>
+<l>read_image (Image, 'monkey')</l>
+<l>get_image_size (Image, Width, Height)</l>
+<l>dev_close_window ()</l>
+<l>dev_open_window_fit_size(0, 0, Width, Width, -1, -1, WindowHandle)</l>
+<l>dev_display (Image)</l>
+<l>gen_highpass (ImageHighpass, 0.1, 'none', 'dc_center', Width, Height)</l>
+<l>fft_generic (Image,ImageFFT, 'to_freq', -1, 'sqrt', 'dc_center', 'complex')</l>
+<l>convol_fft (ImageFFT,ImageHighpass, ImageConvol)</l>
+<l>fft_generic (ImageConvol, ImageFFT1, 'from_freq', 1, 'sqrt', 'dc_center', 'byte')</l>
+<l>dump_window (WindowHandle, 'bmp', 'highPass.bmp')</l>
+<c></c>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>
