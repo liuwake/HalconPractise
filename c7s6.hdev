@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.1">
+<procedure name="main">
+<interface/>
+<body>
+<c>*eg 7-14</c>
+<l>read_image (Image, 'meningg5')</l>
+<l>derivate_gauss (Image, DerivGauss, 2, 'none')</l>
+<l>convert_image_type (DerivGauss, ImageConverted, 'byte')</l>
+<l>watersheds (ImageConverted, Basins, Watersheds)</l>
+<l>dev_set_draw ('margin')</l>
+<l>dev_set_colored (6)</l>
+<l>dev_display (Watersheds)</l>
+<c></c>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>

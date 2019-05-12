@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.1">
+<procedure name="main">
+<interface/>
+<body>
+<c>*eg 7-12</c>
+<l>read_image (Image, 'fabrik')</l>
+<l>get_image_size (Image, Width, Height)</l>
+<l>dev_close_window ()</l>
+<l>dev_open_window_fit_size (0, 0, Width, Width, -1, -1, WindowHandle)</l>
+<l>dev_set_colored (12)</l>
+<l>regiongrowing (Image, Regions, 1, 1, 1, 1000)</l>
+<l>gen_empty_region (EmptyRegion)</l>
+<l>expand_gray (Regions, Image, EmptyRegion, RegionExpand, 'maximal', 'image', 4)</l>
+<c></c>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>

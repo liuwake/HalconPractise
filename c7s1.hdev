@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.1">
+<procedure name="main">
+<interface/>
+<body>
+<c>*eg 7-1</c>
+<l>* read_image (Image, 'fabrik')</l>
+<l>* get_image_size (Image, Width, Height)</l>
+<l>* dev_close_window ()</l>
+<l>* dev_open_window_fit_size (0, 0, Width, Width, -1, -1, WindowHandle)</l>
+<l>* threshold (Image, Region, 179, 255)</l>
+<l>* dev_display (Image)</l>
+<l>* dev_display (Region)</l>
+<c></c>
+<c>*eg 7-2//</c>
+<c></c>
+<c></c>
+<c>*eg 7-3//</c>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>
