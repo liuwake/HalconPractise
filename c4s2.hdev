@@ -65,46 +65,48 @@
 <l>* get_region_points (RegionIntersection, Rows, Columns)</l>
 <c></c>
 <c>*4-9</c>
-<l>* read_image (Image, 'clip')</l>
-<l>* dev_close_window ()</l>
-<l>* get_image_size (Image, Width, Height)</l>
-<l>* dev_open_window (0, 0, Width, Height, 'black', WindowHandle)</l>
-<l>* RowA1 := 255</l>
-<l>* ColumnA1 := 10</l>
-<l>* RowA2 := 255</l>
-<l>* ColumnA2 := 501</l>
-<l>* dev_set_color ('black')</l>
-<l>* disp_line (WindowHandle, RowA1, ColumnA1, RowA2, ColumnA2)</l>
-<l>* RowB1 := 255</l>
-<l>* ColumnB1 := 255</l>
-<l>* for i := 1 to 6 by 1</l>
-<l>*     RowB2 := 255 + sin(rad(i)) * 200</l>
-<l>*     ColumnB2 := 255 + cos(rad(i)) * 200</l>
-<l>*     disp_line (WindowHandle, RowB1, ColumnB1, RowB2, ColumnB2)</l>
-<l>*     gen_region_line (RegionLines1, RowB1, ColumnB1, RowB2, ColumnB2)</l>
-<l>*     orientation_region (RegionLines1, Phi1)</l>
-<l>*     line_orientation (RowB1, ColumnB1, RowB2, ColumnB2, Phi2)</l>
-<l>*     line_position (RowB1, ColumnB1, RowB2, ColumnB2, RowCenter, ColCenter, Length1, Phi3)</l>
-<l>*     angle_ll (RowA1, ColumnA1, RowA2, ColumnA2, RowB1, ColumnB1, RowB2, ColumnB2, Angle)</l>
+<l>read_image (Image, 'clip')</l>
+<l>dev_close_window ()</l>
+<l>get_image_size (Image, Width, Height)</l>
+<l>dev_open_window (0, 0, Width, Height, 'black', WindowHandle)</l>
+<l>RowA1 := 255</l>
+<l>ColumnA1 := 10</l>
+<l>RowA2 := 255</l>
+<l>ColumnA2 := 501</l>
+<l>dev_set_color ('black')</l>
+<l>disp_line (WindowHandle, RowA1, ColumnA1, RowA2, ColumnA2)</l>
+<l>RowB1 := 255</l>
+<l>ColumnB1 := 255</l>
+<l>for i := 1 to 6 by 1</l>
+<l>    RowB2 := 255 + sin(rad(i)) * 200</l>
+<l>    ColumnB2 := 255 + cos(rad(i)) * 200</l>
+<l>    disp_line (WindowHandle, RowB1, ColumnB1, RowB2, ColumnB2)</l>
+<l>    gen_region_line (RegionLines1, RowB1, ColumnB1, RowB2, ColumnB2)</l>
+<l>    orientation_region (RegionLines1, Phi1)</l>
+<l>    line_orientation (RowB1, ColumnB1, RowB2, ColumnB2, Phi2)</l>
+<l>    line_position (RowB1, ColumnB1, RowB2, ColumnB2, RowCenter, ColCenter, Length1, Phi3)</l>
+<l>    angle_ll (RowA1, ColumnA1, RowA2, ColumnA2, RowB1, ColumnB1, RowB2, ColumnB2, Angle)</l>
 <c>    </c>
-<l>* endfor</l>
+<l>endfor</l>
 <c></c>
-<l>* stop ()</l>
-<l>* threshold (Image, Dark, 0, 70)</l>
-<l>* connection(Dark, Single)</l>
-<l>* dev_clear_window ()</l>
-<l>* select_shape (Single,Selected, 'area', 'and', 5000, 9999)</l>
-<l>* orientation_region (Selected, Phi)</l>
-<l>* area_center (Selected,Area, Row, Column)</l>
-<l>* dev_set_color ('red')</l>
-<l>* dev_set_line_width (7)</l>
-<l>* Length := 80</l>
+<l>stop ()</l>
+<l>threshold (Image, Dark, 0, 70)</l>
+<l>connection(Dark, Single)</l>
+<l>dev_clear_window ()</l>
+<l>select_shape (Single,Selected, 'area', 'and', 5000, 9999)</l>
+<l>orientation_region (Selected, Phi)</l>
+<l>area_center (Selected,Area, Row, Column)</l>
+<l>dev_set_color ('red')</l>
+<l>dev_set_line_width (7)</l>
+<l>Length := 80</l>
 <c></c>
-<l>* a := Phi//</l>
+<l>a := Phi + 1.5// </l>
 <c></c>
-<l>* arrow_x := Row + cos(a) * Length//</l>
-<l>* arrow_y := Column + sin(a) * Length//</l>
-<l>* disp_arrow (WindowHandle, Row, Column,  arrow_x, arrow_y, 7)//?</l>
+<l>b := gen_tuple_const(1,2)</l>
+<c></c>
+<l>arrow_x := Row + cos(a) * Length//</l>
+<l>arrow_y := Column + sin(a) * Length//</l>
+<l>disp_arrow (WindowHandle, Row, Column,  arrow_x, arrow_y, 7)//?</l>
 <c></c>
 <c>*eg 4-10</c>
 <c></c>
