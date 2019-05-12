@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.1">
+<procedure name="main">
+<interface/>
+<body>
+<c>*eg 5-1//?</c>
+<l>* read_image (Image, 'patras')</l>
+<l>* rgb1_to_gray (Image, GrayImage)</l>
+<l>* convert_image_type (GrayImage, ImageConverted, 'real')</l>
+<l>* gen_image_const (Image1, 'real', 432, 769)</l>
+<l>* for i := 1 to 10 by 1</l>
+<l>*     add_noise_white (Image1, ImageNoise, 90)</l>
+<c>   // add_image (ImageNoise, Image1, ImageResult, 1,0)</c>
+<c>    </c>
+<l>* endfor</l>
+<l>* scale_image (ImageResult, ImageScaled, 0.1, 0)</l>
+<l>* scale_image (ImageNoise, ImageScaled, 0.1, 0)</l>
+<c></c>
+<c>*eg 5-2//</c>
+<c></c>
+<c></c>
+<c>*eg 5-3//</c>
+<c></c>
+<c>*eg 5-4//</c>
+<l>* read_image (Image, 'dog.jpeg')</l>
+<c></c>
+<c>*eg 5-5//</c>
+<c></c>
+<c>   </c>
+<c>*eg 5-6//</c>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>
