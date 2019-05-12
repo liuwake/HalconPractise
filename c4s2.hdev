@@ -2,7 +2,149 @@
 <hdevelop file_version="1.2" halcon_version="18.11.1.1">
 <procedure name="main">
 <interface/>
-<body/>
+<body>
+<c>*eg 4-3</c>
+<l>* read_image (Image, 'mreut')</l>
+<l>* dev_close_window ()</l>
+<l>* get_image_size (Image, Width, Height)</l>
+<l>* dev_open_window (0, 0, Width, Height, 'black', WindowHandle)</l>
+<l>* dev_display (Image)</l>
+<l>* dev_set_color ('red')</l>
+<l>* threshold (Image, Region, 0, 130)</l>
+<c></c>
+<c>*eg 4-4</c>
+<l>* read_image (Image, 'mreut')</l>
+<l>* dev_close_window ()</l>
+<l>* get_image_size (Image, Width, Height)</l>
+<l>* dev_open_window (0, 0, Width, Height, 'black', WindowHandle)</l>
+<l>* dev_display (Image)</l>
+<l>* dev_set_color ('red')</l>
+<l>* threshold (Image, Regions, 128, 176)</l>
+<c></c>
+<c>*eg 4-5</c>
+<l>* read_image (Image, 'mreut')</l>
+<l>* dev_close_window ()</l>
+<l>* get_image_size (Image, Width, Height)</l>
+<l>* dev_open_window (0, 0, Width, Height, 'black', WindowHandle)</l>
+<l>* median_image (Image, ImageMedian, 'circle', 2, 'mirrored')</l>
+<l>* regiongrowing (ImageMedian, Regions, 1, 1, 2, 100)</l>
+<c></c>
+<c>*eg 4-6</c>
+<l>* read_image (Image, 'fabrik')</l>
+<l>* dev_close_window ()</l>
+<l>* get_image_size (Image, Width, Height)</l>
+<l>* dev_open_window (0, 0, Width, Height, 'black', WindowHandle)</l>
+<l>* dev_display (Image)</l>
+<l>* dev_set_color ('red')</l>
+<l>* gen_rectangle1 (Rectangle1, 351, 289, 407, 340)</l>
+<l>* dev_set_color ('green')</l>
+<l>* gen_rectangle1 (Rectangle2, 78, 178, 144 ,244)</l>
+<l>* gray_histo (Rectangle1, Image, AbsoluteHisto1, RelativeHisto1)</l>
+<l>* gray_histo (Rectangle2, Image, AbsoluteHisto2, RelativeHisto2)</l>
+<l>* dev_set_color ('red')</l>
+<l>* gen_region_histo (Histo1, AbsoluteHisto1, 255, 255, 1)</l>
+<l>* dev_set_color ('green')</l>
+<l>* gen_region_histo (Histo2, AbsoluteHisto2, 255, 255, 1)</l>
+<c></c>
+<c>*eg 4-7</c>
+<l>* read_image (Image,'clip')</l>
+<l>* threshold (Image, Region, 128, 255)</l>
+<l>* connection (Image, ConnectedRegions)</l>
+<l>* select_shape (ConnectedRegions, SelectedRegions, 'area', 'and', 99999, 99999)</l>
+<l>* union1 (SelectedRegions, RegionUnion1)</l>
+<l>* union2 (RegionUnion1, Region, RegionUnion)</l>
+<l>* difference (Region, RegionUnion1, RegionDifference)</l>
+<l>* complement (RegionDifference, RegionComplement)</l>
+<c></c>
+<c>*eg 4-8</c>
+<l>* dev_open_window (0, 0, 512, 512, 'black', WindowHandle)</l>
+<l>* gen_region_line (RegionLines, 100, 70, 100, 130)</l>
+<l>* gen_region_line (RegionLines1, 70, 120, 120, 90)</l>
+<l>* dev_set_color ('yellow')</l>
+<l>* intersection (RegionLines, RegionLines1, RegionIntersection)</l>
+<l>* get_region_points (RegionIntersection, Rows, Columns)</l>
+<c></c>
+<c>*4-9</c>
+<l>* read_image (Image, 'clip')</l>
+<l>* dev_close_window ()</l>
+<l>* get_image_size (Image, Width, Height)</l>
+<l>* dev_open_window (0, 0, Width, Height, 'black', WindowHandle)</l>
+<l>* RowA1 := 255</l>
+<l>* ColumnA1 := 10</l>
+<l>* RowA2 := 255</l>
+<l>* ColumnA2 := 501</l>
+<l>* dev_set_color ('black')</l>
+<l>* disp_line (WindowHandle, RowA1, ColumnA1, RowA2, ColumnA2)</l>
+<l>* RowB1 := 255</l>
+<l>* ColumnB1 := 255</l>
+<l>* for i := 1 to 6 by 1</l>
+<l>*     RowB2 := 255 + sin(rad(i)) * 200</l>
+<l>*     ColumnB2 := 255 + cos(rad(i)) * 200</l>
+<l>*     disp_line (WindowHandle, RowB1, ColumnB1, RowB2, ColumnB2)</l>
+<l>*     gen_region_line (RegionLines1, RowB1, ColumnB1, RowB2, ColumnB2)</l>
+<l>*     orientation_region (RegionLines1, Phi1)</l>
+<l>*     line_orientation (RowB1, ColumnB1, RowB2, ColumnB2, Phi2)</l>
+<l>*     line_position (RowB1, ColumnB1, RowB2, ColumnB2, RowCenter, ColCenter, Length1, Phi3)</l>
+<l>*     angle_ll (RowA1, ColumnA1, RowA2, ColumnA2, RowB1, ColumnB1, RowB2, ColumnB2, Angle)</l>
+<c>    </c>
+<l>* endfor</l>
+<c></c>
+<l>* stop ()</l>
+<l>* threshold (Image, Dark, 0, 70)</l>
+<l>* connection(Dark, Single)</l>
+<l>* dev_clear_window ()</l>
+<l>* select_shape (Single,Selected, 'area', 'and', 5000, 9999)</l>
+<l>* orientation_region (Selected, Phi)</l>
+<l>* area_center (Selected,Area, Row, Column)</l>
+<l>* dev_set_color ('red')</l>
+<l>* dev_set_line_width (7)</l>
+<l>* Length := 80</l>
+<c></c>
+<l>* a := Phi//</l>
+<c></c>
+<l>* arrow_x := Row + cos(a) * Length//</l>
+<l>* arrow_y := Column + sin(a) * Length//</l>
+<l>* disp_arrow (WindowHandle, Row, Column,  arrow_x, arrow_y, 7)//?</l>
+<c></c>
+<c>*eg 4-10</c>
+<c></c>
+<c></c>
+<c>*eg 4-11</c>
+<c></c>
+<c>*eg 4-12</c>
+<c></c>
+<c>*eg 4-13</c>
+<l>* read_image (Image, 'fabrik')</l>
+<l>* dev_open_window (0, 0, 512, 512, 'black', WindowHandle)</l>
+<l>* dev_set_color ('white')</l>
+<l>* dev_set_draw ('fill')</l>
+<l>* regiongrowing (Image,Regions, 1, 1, 3, 400)</l>
+<l>* elliptic_axis (Regions, Ra, Rb, Phi)</l>
+<l>* area_center (Regions, Area, Row, Column)</l>
+<l>* dev_set_draw ('margin')</l>
+<l>* dev_set_colored (6)</l>
+<l>* disp_ellipse (WindowHandle, Row, Column, Phi, Ra, Rb)</l>
+<c></c>
+<c>*eg 4-14</c>
+<c></c>
+<c></c>
+<c></c>
+<c></c>
+<c></c>
+<c></c>
+<c></c>
+<c></c>
+<c></c>
+<c></c>
+<c></c>
+<c></c>
+<c></c>
+<c></c>
+<c></c>
+<c></c>
+<c></c>
+<c></c>
+</body>
 <docu id="main">
 <parameters/>
 </docu>
