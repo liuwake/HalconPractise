@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.1">
+<procedure name="main">
+<interface/>
+<body>
+<c>*eg 4-16</c>
+<l>* read_image (Image, 'mvtec_logo')</l>
+<l>* threshold_sub_pix (Image, Border, 128)</l>
+<l>* edges_sub_pix (Image, Edges, 'canny', 1, 20, 40)</l>
+<l>* select_shape_xld (Edges, SelectedXLD, 'area', 'and', 150, 99999)</l>
+<l>* select_contours_xld (Border, SelectedContours, 'contour_length', 0.5, 200, -0.5, 0.5)</l>
+<c></c>
+<c>*eg 4-17</c>
+<l>* read_image (Image, 'mvtec_logo')</l>
+<l>* get_image_size (Image, Width, Height)</l>
+<l>* dev_open_window (0, 0, Width, Height, 'black', WindowHandle)</l>
+<l>* threshold (Image, Region, 0, 125)</l>
+<l>* gen_contour_region_xld (Region, Contours, 'border')</l>
+<l>* select_shape_xld (Contours, SelectedXLD, 'area', 'and', 14500,99999)</l>
+<l>* get_contour_xld (SelectedXLD, Row, Col)</l>
+<l>* dev_clear_window ()</l>
+<l>* gen_contour_polygon_xld (Contour, Row, Col)</l>
+<l>* gen_polygons_xld (Contour,Polygons, 'ramer', 2)</l>
+<c></c>
+<c>*eg 4-18</c>
+<l>* dev_open_window (0, 0, 512, 512, 'black', WindowHandle)</l>
+<l>* read_image (Image, 'screw_thread')</l>
+<l>* threshold_sub_pix (Image, Border, 128)</l>
+<l>* edges_sub_pix (Image, Edges, 'canny', 1, 20, 40)</l>
+<l>* threshold(Image, Region, 0, 100)</l>
+<l>* select_shape_xld (Edges, SelectedXLD, 'area', 'and', 20000,99999)</l>
+<l>* fill_up (Region, RegionFillUp)</l>
+<l>* gen_contour_region_xld (RegionFillUp, Contours, 'border')</l>
+<l>* area_center_xld (Contours, Area, Row1, Column, PointOrder)</l>
+<l>* select_shape_xld (Contours, SelectedXLD1, 'area', 'and', 150, 99999)</l>
+<l>* get_contour_xld (SelectedXLD,Row1, Col)</l>
+<l>* gen_contour_polygon_xld (Contour1, Row1, Col)</l>
+<l>* query_contour_attribs_xld (SelectedXLD, Attribs)</l>
+<l>* get_contour_attrib_xld (SelectedXLD, 'angle', Attrib)</l>
+<l>* stop ()</l>
+<c></c>
+<c>*eg 4-19</c>
+<c></c>
+<c></c>
+<c>*eg 4-20</c>
+<c></c>
+<c>*eg 4-21</c>
+<c></c>
+<c></c>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>
