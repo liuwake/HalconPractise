@@ -4,7 +4,12 @@
 <interface/>
 <body>
 <c>*eg 7-14</c>
-<l>read_image (Image, 'meningg5')</l>
+<l>dev_close_window ()</l>
+<l>* read_image (Image, 'meningg5')</l>
+<l>read_image (Image, 'fabrik')</l>
+<l>get_image_size (Image, Width, Height)</l>
+<l>dev_open_window (0, 0, Width, Height, 'black', WindowHandle)</l>
+<c></c>
 <l>derivate_gauss (Image, DerivGauss, 2, 'none')</l>
 <l>convert_image_type (DerivGauss, ImageConverted, 'byte')</l>
 <l>watersheds (ImageConverted, Basins, Watersheds)</l>
