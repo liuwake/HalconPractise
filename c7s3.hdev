@@ -11,7 +11,7 @@
 <l>dev_set_colored (12)</l>
 <l>regiongrowing (Image, Regions, 1, 1, 1, 1000)</l>
 <l>gen_empty_region (EmptyRegion)</l>
-<l>expand_gray (Regions, Image, EmptyRegion, RegionExpand, 'maximal', 'image', 4)</l>
+<l>expand_gray (Regions, Image, EmptyRegion, RegionExpand, 'maximal', 'image', 4)//!!</l>
 <c></c>
 </body>
 <docu id="main">
