@@ -4,18 +4,33 @@
 <interface/>
 <body>
 <c>*eg 7-5</c>
+<l>* read_image (Image, 'fabrik')</l>
+<l>* get_image_size (Image, Width, Height)</l>
+<l>* dev_close_window ()</l>
+<l>* dev_open_window_fit_size (0, 0, Width, Width, -1, -1, WindowHandle)</l>
+<l>* roberts (Image, ImageRoberts, 'gradient_max')</l>
+<l>* threshold (ImageRoberts, Region, 9, 255)</l>
+<l>* skeleton (Region, Skeleton)</l>
+<l>* dev_display (Image)</l>
+<l>* dev_set_color ('red')</l>
+<l>* dev_display (Skeleton)</l>
+<c></c>
+<c>*eg 7-6</c>
+<c></c>
 <l>read_image (Image, 'fabrik')</l>
-<l>get_image_size (Image, Width, Height)</l>
 <l>dev_close_window ()</l>
-<l>dev_open_window_fit_size (0, 0, Width, Width, -1, -1, WindowHandle)</l>
-<l>roberts (Image, ImageRoberts, 'gradient_max')</l>
-<l>threshold (ImageRoberts, Region, 9, 255)</l>
+<l>get_image_size (Image, Width, Height)</l>
+<l>dev_open_window (0, 0, Width, Height, 'black', WindowHandle)</l>
+<c></c>
+<l>sobel_amp (Image, EdgeAmplitude, 'sum_abs', 3)</l>
+<l>threshold (EdgeAmplitude, Region, 10, 255)</l>
 <l>skeleton (Region, Skeleton)</l>
-<l>dev_display (Image)</l>
+<c></c>
+<l>dev_display (Skeleton)</l>
 <l>dev_set_color ('red')</l>
 <l>dev_display (Skeleton)</l>
 <c></c>
-<c>*eg 7-6//</c>
+<c>*eg 7-7//</c>
 <c></c>
 <c>*//</c>
 </body>
