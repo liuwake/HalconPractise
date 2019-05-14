@@ -12,10 +12,25 @@
 <l>* dev_display (Image)</l>
 <l>* dev_display (Region)</l>
 <c></c>
-<c>*eg 7-2//</c>
-<c></c>
+<c>*eg 7-2</c>
+<l>* dev_close_window ()</l>
+<l>* read_image (Image, 'letters')</l>
+<l>* get_image_size (Image, Width, Height)</l>
+<l>* dev_open_window (0, 0, Width/2, Height/2, 'black', WindowHandle)</l>
+<l>* dev_set_color ('red')</l>
+<l>* gray_histo (Image, Image, AbsoluteHisto, RelativeHisto)</l>
+<l>* gen_region_histo (Histo, AbsoluteHisto, 255, 255, 1)</l>
+<l>* histo_to_thresh (AbsoluteHisto, 8, MinThresh, MaxThresh)</l>
+<l>* dev_set_colored (12)</l>
+<l>* threshold (Image, Region, MinThresh[0], MaxThresh[0])//select foreground</l>
+<c>** threshold (Image, Region, MaxThresh[0], MaxThresh[1])//select background</c>
+<l>* dev_display (Region)</l>
 <c></c>
 <c>*eg 7-3//</c>
+<c></c>
+<c>*eg 7-4//</c>
+<c></c>
+<c></c>
 </body>
 <docu id="main">
 <parameters/>
