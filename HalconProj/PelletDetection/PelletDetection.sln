@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.352
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PelletDetection", "PelletDetection\PelletDetection.csproj", "{D9D4F823-F86C-44AD-8D15-84BA0D6317EE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D9D4F823-F86C-44AD-8D15-84BA0D6317EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9D4F823-F86C-44AD-8D15-84BA0D6317EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9D4F823-F86C-44AD-8D15-84BA0D6317EE}.Debug|x64.ActiveCfg = Debug|x64
+		{D9D4F823-F86C-44AD-8D15-84BA0D6317EE}.Debug|x64.Build.0 = Debug|x64
+		{D9D4F823-F86C-44AD-8D15-84BA0D6317EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9D4F823-F86C-44AD-8D15-84BA0D6317EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9D4F823-F86C-44AD-8D15-84BA0D6317EE}.Release|x64.ActiveCfg = Release|x64
+		{D9D4F823-F86C-44AD-8D15-84BA0D6317EE}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B02FA8A8-FF73-4D3F-8E2B-749BF47EF12A}
+	EndGlobalSection
+EndGlobal

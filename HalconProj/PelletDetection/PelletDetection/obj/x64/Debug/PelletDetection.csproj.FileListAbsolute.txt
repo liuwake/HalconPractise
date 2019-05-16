@@ -1,0 +1,12 @@
+C:\Users\iwake\OneDrive - wake\桌面\PelletDetection\PelletDetection\PelletDetection\bin\x64\Debug\PelletDetection.exe.config
+C:\Users\iwake\OneDrive - wake\桌面\PelletDetection\PelletDetection\PelletDetection\bin\x64\Debug\PelletDetection.exe
+C:\Users\iwake\OneDrive - wake\桌面\PelletDetection\PelletDetection\PelletDetection\bin\x64\Debug\PelletDetection.pdb
+C:\Users\iwake\OneDrive - wake\桌面\PelletDetection\PelletDetection\PelletDetection\bin\x64\Debug\halcondotnet.dll
+C:\Users\iwake\OneDrive - wake\桌面\PelletDetection\PelletDetection\PelletDetection\bin\x64\Debug\halcondotnet.xml
+C:\Users\iwake\OneDrive - wake\桌面\PelletDetection\PelletDetection\PelletDetection\obj\x64\Debug\PelletDetection.Form1.resources
+C:\Users\iwake\OneDrive - wake\桌面\PelletDetection\PelletDetection\PelletDetection\obj\x64\Debug\PelletDetection.Properties.Resources.resources
+C:\Users\iwake\OneDrive - wake\桌面\PelletDetection\PelletDetection\PelletDetection\obj\x64\Debug\PelletDetection.csproj.GenerateResource.cache
+C:\Users\iwake\OneDrive - wake\桌面\PelletDetection\PelletDetection\PelletDetection\obj\x64\Debug\PelletDetection.csproj.CoreCompileInputs.cache
+C:\Users\iwake\OneDrive - wake\桌面\PelletDetection\PelletDetection\PelletDetection\obj\x64\Debug\PelletDetection.csproj.CopyComplete
+C:\Users\iwake\OneDrive - wake\桌面\PelletDetection\PelletDetection\PelletDetection\obj\x64\Debug\PelletDetection.exe
+C:\Users\iwake\OneDrive - wake\桌面\PelletDetection\PelletDetection\PelletDetection\obj\x64\Debug\PelletDetection.pdb
