@@ -11,6 +11,8 @@
 <l>* dev_display (Image)</l>
 <l>* dev_set_color ('red')</l>
 <l>* threshold (Image, Region, 0, 130)</l>
+<c>**threshold (Image, Regions, 180, 231)</c>
+<c>**threshold (Image, Intersection, 180, 231)</c>
 <c></c>
 <c>*eg 4-4</c>
 <l>* read_image (Image, 'mreut')</l>
@@ -30,21 +32,21 @@
 <l>* regiongrowing (ImageMedian, Regions, 1, 1, 2, 100)</l>
 <c></c>
 <c>*eg 4-6</c>
-<l>read_image (Image, 'fabrik')</l>
-<l>dev_close_window ()</l>
-<l>get_image_size (Image, Width, Height)</l>
-<l>dev_open_window (0, 0, Width, Height, 'black', WindowHandle)</l>
-<l>dev_display (Image)</l>
-<l>dev_set_color ('red')</l>
-<l>gen_rectangle1 (Rectangle1, 351, 289, 407, 340)</l>
-<l>dev_set_color ('green')</l>
-<l>gen_rectangle1 (Rectangle2, 78, 178, 144 ,244)</l>
-<l>gray_histo (Rectangle1, Image, AbsoluteHisto1, RelativeHisto1)</l>
-<l>gray_histo (Rectangle2, Image, AbsoluteHisto2, RelativeHisto2)</l>
-<l>dev_set_color ('red')</l>
-<l>gen_region_histo (Histo1, AbsoluteHisto1, 255, 255, 1)</l>
-<l>dev_set_color ('green')</l>
-<l>gen_region_histo (Histo2, AbsoluteHisto2, 255, 255, 1)</l>
+<l>* read_image (Image, 'fabrik')</l>
+<l>* dev_close_window ()</l>
+<l>* get_image_size (Image, Width, Height)</l>
+<l>* dev_open_window (0, 0, Width, Height, 'black', WindowHandle)</l>
+<l>* dev_display (Image)</l>
+<l>* dev_set_color ('red')</l>
+<l>* gen_rectangle1 (Rectangle1, 351, 289, 407, 340)</l>
+<l>* dev_set_color ('green')</l>
+<l>* gen_rectangle1 (Rectangle2, 78, 178, 144 ,244)</l>
+<l>* gray_histo (Rectangle1, Image, AbsoluteHisto1, RelativeHisto1)</l>
+<l>* gray_histo (Rectangle2, Image, AbsoluteHisto2, RelativeHisto2)</l>
+<l>* dev_set_color ('red')</l>
+<l>* gen_region_histo (Histo1, AbsoluteHisto1, 255, 255, 1)</l>
+<l>* dev_set_color ('green')</l>
+<l>* gen_region_histo (Histo2, AbsoluteHisto2, 255, 255, 1)</l>
 <c></c>
 <c>*eg 4-7</c>
 <l>* read_image (Image,'clip')</l>
@@ -64,7 +66,8 @@
 <l>* intersection (RegionLines, RegionLines1, RegionIntersection)</l>
 <l>* get_region_points (RegionIntersection, Rows, Columns)</l>
 <c></c>
-<c>*eg 4-9</c>
+<c>*eg 4-9//?</c>
+<l>* dev_set_colored (12)</l>
 <l>* read_image (Image, 'clip')</l>
 <l>* dev_close_window ()</l>
 <l>* get_image_size (Image, Width, Height)</l>
@@ -108,14 +111,14 @@
 <l>* arrow_y := Column + sin(a) * Length//</l>
 <l>* disp_arrow (WindowHandle, Row, Column,  arrow_x, arrow_y, 7)//?</l>
 <c></c>
-<c>*eg 4-10</c>
+<c>*eg 4-10//</c>
 <c></c>
 <c></c>
-<c>*eg 4-11</c>
+<c>*eg 4-11//</c>
 <c></c>
-<c>*eg 4-12</c>
+<c>*eg 4-12//</c>
 <c></c>
-<c>*eg 4-13</c>
+<c>*eg 4-13//</c>
 <l>* read_image (Image, 'fabrik')</l>
 <l>* dev_open_window (0, 0, 512, 512, 'black', WindowHandle)</l>
 <l>* dev_set_color ('white')</l>

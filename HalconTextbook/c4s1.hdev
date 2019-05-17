@@ -22,7 +22,7 @@
 <l>gen_image_proto (image,Image, 164)</l>
 <l>get_domain (image, domain)</l>
 <l>disp_message (WindowHandle, Width, '', 12, 12, 'black', 'true')</l>
-<l>crop_domain (image, ImagePart)</l>
+<l>crop_domain (image, ImagePart)//似乎是固定值裁切出一个小矩形</l>
 <l>get_grayval(ImagePart, 10, 10, Grayval)</l>
 <l>set_grayval(ImagePart, 10, 10, 255)</l>
 <c></c>
