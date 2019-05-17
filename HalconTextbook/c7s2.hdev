@@ -16,7 +16,6 @@
 <l>* dev_display (Skeleton)</l>
 <c></c>
 <c>*eg 7-6</c>
-<c></c>
 <l>read_image (Image, 'fabrik')</l>
 <l>dev_close_window ()</l>
 <l>get_image_size (Image, Width, Height)</l>
