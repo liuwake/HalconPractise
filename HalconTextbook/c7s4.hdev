@@ -4,7 +4,20 @@
 <interface/>
 <body>
 <c>*eg 7-13</c>
-<c></c>
+<l>read_image (Image, 'fabrik')</l>
+<l>rectangle1_domain (Image, ImageReduced, 170, 280, 310, 370)</l>
+<l>sobel_dir (ImageReduced, EdgeAmplitude, EdgeDirection, 'sum_abs', 3)</l>
+<l>dev_set_color ('red')</l>
+<l>threshold (EdgeAmplitude, Region, 55,255)</l>
+<l>reduce_domain (EdgeDirection, Region, ImageDrectionReduced)</l>
+<l>hough_lines_dir (ImageDrectionReduced, HoughImage, Lines, 4, 2, 'mean', 3, 5, 5, 5, 'true', Angle, Dist)</l>
+<l>gen_region_hline (LinesHNF, Angle, Dist)</l>
+<l>dev_display (Image)</l>
+<l>dev_set_colored (6)</l>
+<l>dev_set_draw ('margin')</l>
+<l>dev_display (LinesHNF)</l>
+<l>dev_set_draw ('fill')</l>
+<l>dev_display (Lines)</l>
 </body>
 <docu id="main">
 <parameters/>
