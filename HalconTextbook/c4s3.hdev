@@ -47,13 +47,13 @@
 <c>*eg 4-21//</c>
 <c></c>
 <c>*eg 4-22</c>
-<l>dev_open_window (0, 0, 512, 512, 'black', WindowHandle)</l>
-<l>gen_circle_contour_xld (ContCircle, 290, 260, 100, 0, 1,'positive', 1)</l>
-<l>query_contour_global_attribs_xld (ContCircle, Attribs)</l>
-<l>regress_contours_xld (ContCircle, RegressContours, 'no', 1)</l>
-<l>query_contour_global_attribs_xld (RegressContours, Attribs1)</l>
-<l>get_contour_global_attrib_xld (RegressContours, 'regr_norm_row', Attrib)</l>
-<l>get_regress_params_xld (RegressContours, Length, Nx, Ny, Dist, Fpx, Fpy, Lpx, Lpy, Mean, Deviation)</l>
+<l>* dev_open_window (0, 0, 512, 512, 'black', WindowHandle)</l>
+<l>* gen_circle_contour_xld (ContCircle, 290, 260, 100, 0, 1,'positive', 1)</l>
+<l>* query_contour_global_attribs_xld (ContCircle, Attribs)</l>
+<l>* regress_contours_xld (ContCircle, RegressContours, 'no', 1)</l>
+<l>* query_contour_global_attribs_xld (RegressContours, Attribs1)</l>
+<l>* get_contour_global_attrib_xld (RegressContours, 'regr_norm_row', Attrib)</l>
+<l>* get_regress_params_xld (RegressContours, Length, Nx, Ny, Dist, Fpx, Fpy, Lpx, Lpy, Mean, Deviation)</l>
 </body>
 <docu id="main">
 <parameters/>
