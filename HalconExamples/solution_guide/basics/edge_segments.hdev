@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.0">
+<procedure name="main">
+<interface/>
+<body>
+<c>* edge_segments.hdev: extracting connected edges segments</c>
+<c>* </c>
+<l>dev_update_off ()</l>
+<l>dev_close_window ()</l>
+<c>* ****</c>
+<c>* step: acquire image</c>
+<c>* ****</c>
+<l>read_image (Image, 'mreut')</l>
+<l>get_image_size (Image, Width, Height)</l>
+<l>dev_open_window_fit_image (Image, 0, 0, Width, Height, WindowID)</l>
+<l>set_display_font (WindowID, 12, 'mono', 'true', 'false')</l>
+<l>dev_set_draw ('margin')</l>
+<l>dev_set_line_width (3)</l>
+<l>dev_display (Image)</l>
+<l>disp_continue_message (WindowID, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* ****</c>
+<c>* step: filter image</c>
+<c>* ****</c>
+<l>edges_image (Image, ImaAmp, ImaDir, 'lanser2', 0.5, 'nms', 20, 40)</l>
+<l>dev_display (ImaAmp)</l>
+<l>disp_continue_message (WindowID, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* ****</c>
+<c>* step: extract edges</c>
+<c>* ****</c>
+<l>threshold (ImaAmp, Region, 1, 255)</l>
+<l>connection (Region, ConnectedRegions)</l>
+<l>dev_clear_window ()</l>
+<l>dev_set_colored (12)</l>
+<l>dev_display (ConnectedRegions)</l>
+<l>disp_continue_message (WindowID, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* ****</c>
+<c>* step: process edges</c>
+<c>* ****</c>
+<l>dev_clear_window ()</l>
+<l>count_obj (ConnectedRegions, Number)</l>
+<l>gen_empty_obj (XLDContours)</l>
+<l>for i := 1 to Number by 1</l>
+<l>    select_obj (ConnectedRegions, SingleEdgeObject, i)</l>
+<l>    split_skeleton_lines (SingleEdgeObject, 2, BeginRow, BeginCol, EndRow, EndCol)</l>
+<l>    for k := 0 to |BeginRow| - 1 by 1</l>
+<l>        gen_contour_polygon_xld (Contour, [BeginRow[k],EndRow[k]], [BeginCol[k],EndCol[k]])</l>
+<l>        concat_obj (XLDContours, Contour, XLDContours)</l>
+<l>    endfor</l>
+<l>endfor</l>
+<l>dev_display (XLDContours)</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>

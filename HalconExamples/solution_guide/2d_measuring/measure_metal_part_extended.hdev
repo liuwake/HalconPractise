@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.0">
+<procedure name="main">
+<interface/>
+<body>
+<c>* This program inpects metal parts in various ways</c>
+<c>* </c>
+<l>dev_update_off ()</l>
+<c>* </c>
+<c>* step: acquire image</c>
+<c>* </c>
+<l>read_image (Image, 'metal-parts/metal-parts-01')</l>
+<l>init_visualization (Image, 3, 'white', 'margin', Width, Height, WindowID)</l>
+<l>set_display_font (WindowID, 16, 'mono', 'true', 'false')</l>
+<l>disp_continue_message (WindowID, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* </c>
+<c>* step: get center, area, and orientation via region processing</c>
+<c>* </c>
+<l>dev_set_draw ('fill')</l>
+<l>count_seconds (T1)</l>
+<l>threshold (Image, Region, 100, 255)</l>
+<l>area_center (Region, AreaRegion, RowCenterRegion, ColumnCenterRegion)</l>
+<l>orientation_region (Region, OrientationRegion)</l>
+<l>count_seconds (T2)</l>
+<l>dev_display (Region)</l>
+<l>set_tposition (WindowID, 10, 10)</l>
+<l>write_string (WindowID, 'Region Processing')</l>
+<l>set_tposition (WindowID, 10, 300)</l>
+<l>write_string (WindowID, 'Time: ' + ((T2 - T1) * 1000)$'.2' + ' ms')</l>
+<l>set_tposition (WindowID, 50, 10)</l>
+<l>write_string (WindowID, 'Center Row: ' + RowCenterRegion$'.5')</l>
+<l>set_tposition (WindowID, 50, 300)</l>
+<l>write_string (WindowID, 'Center Column: ' + ColumnCenterRegion$'.5')</l>
+<l>set_tposition (WindowID, 80, 10)</l>
+<l>write_string (WindowID, 'Area: ' + AreaRegion + ' pixels')</l>
+<l>set_tposition (WindowID, 80, 300)</l>
+<l>write_string (WindowID, 'Orientation: ' + OrientationRegion$'.3' + ' rad')</l>
+<l>dev_set_color ('gray')</l>
+<l>disp_cross (WindowID, RowCenterRegion, ColumnCenterRegion, 10, 0)</l>
+<l>smallest_rectangle2 (Region, Row_Region, Column_Region, Phi_Region, Length1_Region, Length2_Region)</l>
+<l>gen_rectangle2 (Rectangle, Row_Region, Column_Region, Phi_Region, Length1_Region, Length2_Region)</l>
+<l>disp_continue_message (WindowID, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* </c>
+<c>* step: create contours</c>
+<c>* </c>
+<l>count_seconds (T3)</l>
+<l>threshold (Image, Region, 100, 255)</l>
+<l>boundary (Region, RegionBorder, 'inner')</l>
+<l>dilation_circle (RegionBorder, RegionDilation, 1.5)</l>
+<l>reduce_domain (Image, RegionDilation, ImageReduced)</l>
+<l>edges_sub_pix (ImageReduced, Edges, 'lanser2', 0.5, 40, 90)</l>
+<c>* </c>
+<c>* step: get center, area, and orientation via contour processing</c>
+<c>* </c>
+<l>area_center_xld (Edges, AreaContours, RowCenterContours, ColumnCenterContours, PointOrderContours)</l>
+<l>AreaOfRegionByContours := AreaContours[0] - AreaContours[1] - AreaContours[2] - AreaContours[3]</l>
+<l>orientation_xld (Edges, OrientationContours)</l>
+<l>count_seconds (T4)</l>
+<l>dev_set_color ('light gray')</l>
+<l>dev_display (Edges)</l>
+<l>set_tposition (WindowID, 330, 10)</l>
+<l>write_string (WindowID, 'Contour Processing')</l>
+<l>set_tposition (WindowID, 330, 300)</l>
+<l>write_string (WindowID, 'Time: ' + ((T4 - T3) * 1000)$'.3' + ' ms')</l>
+<l>set_tposition (WindowID, 370, 10)</l>
+<l>write_string (WindowID, 'Center Row: ' + RowCenterContours[0]$'.4')</l>
+<l>set_tposition (WindowID, 370, 300)</l>
+<l>write_string (WindowID, 'Center Column: ' + ColumnCenterContours[0]$'.4')</l>
+<l>set_tposition (WindowID, 400, 10)</l>
+<l>write_string (WindowID, 'Area: ' + AreaOfRegionByContours[0] + ' pixels')</l>
+<l>set_tposition (WindowID, 400, 300)</l>
+<l>write_string (WindowID, 'Orientation: ' + OrientationContours[0]$'.3' + ' rad')</l>
+<l>disp_cross (WindowID, RowCenterContours, ColumnCenterContours, 6, 0)</l>
+<l>disp_cross (WindowID, RowCenterContours[0], ColumnCenterContours[0], 10, 0)</l>
+<l>smallest_rectangle2_xld (Edges, Row_Contours, Column_Contours, Phi_Contours, Length1_Contours, Length2_Contours)</l>
+<l>disp_continue_message (WindowID, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* </c>
+<c>* step: segment and sort contours</c>
+<c>* </c>
+<l>segment_contours_xld (Edges, ContoursSplit, 'lines_circles', 6, 4, 4)</l>
+<l>sort_contours_xld (ContoursSplit, SortedContours, 'upper_left', 'true', 'column')</l>
+<l>dev_clear_window ()</l>
+<l>dev_set_colored (12)</l>
+<l>dev_display (SortedContours)</l>
+<l>stop ()</l>
+<c>* </c>
+<c>* step: open zoom window</c>
+<c>* </c>
+<l>open_zoom_window (0, round(Width / 2), 115, 225, 395, 535, 2, WindowHandleZoom)</l>
+<l>set_display_font (WindowHandleZoom, 14, 'mono', 'true', 'false')</l>
+<c>* </c>
+<c>* step: fit circles and lines into contours</c>
+<c>* </c>
+<l>count_obj (SortedContours, NumSegments)</l>
+<l>dev_display (Image)</l>
+<l>NumCircles := 0</l>
+<l>NumLines := 0</l>
+<l>gen_empty_obj (Lines)</l>
+<l>RowsBegin := []</l>
+<l>ColsBegin := []</l>
+<l>RowsEnd := []</l>
+<l>ColsEnd := []</l>
+<l>dev_set_color ('white')</l>
+<l>set_tposition (WindowHandleZoom, 120, 230)</l>
+<l>write_string (WindowHandleZoom, 'Line lengths and circle radii: ')</l>
+<l>for i := 1 to NumSegments by 1</l>
+<l>    select_obj (SortedContours, SingleSegment, i)</l>
+<l>    get_contour_global_attrib_xld (SingleSegment, 'cont_approx', Attrib)</l>
+<l>    if (Attrib == 1)</l>
+<l>        NumCircles := NumCircles + 1</l>
+<l>        fit_circle_contour_xld (SingleSegment, 'atukey', -1, 2, 0, 5, 2, Row, Column, Radius, StartPhi, EndPhi, PointOrder)</l>
+<l>        gen_ellipse_contour_xld (ContEllipse, Row, Column, 0, Radius, Radius, 0, rad(360), 'positive', 1.0)</l>
+<l>        dev_set_color ('white')</l>
+<l>        dev_display (ContEllipse)</l>
+<l>        dist_ellipse_contour_xld (SingleSegment, 'algebraic', -1, 0, Row, Column, 0, Radius, Radius, MinDist, MaxDist, AvgDist, SigmaDist)</l>
+<l>        set_tposition (WindowHandleZoom, Row - Radius - 10, Column)</l>
+<l>        write_string (WindowHandleZoom, 'C' + NumCircles)</l>
+<l>        ResultText := 'C' + NumCircles + ': Radius = ' + Radius$'.3' + ' / MaxDeviation: ' + MaxDist$'.3'</l>
+<l>    else</l>
+<l>        NumLines := NumLines + 1</l>
+<l>        fit_line_contour_xld (SingleSegment, 'tukey', -1, 0, 5, 2, RowBegin, ColBegin, RowEnd, ColEnd, Nr, Nc, Dist)</l>
+<l>        gen_contour_polygon_xld (Line, [RowBegin,RowEnd], [ColBegin,ColEnd])</l>
+<l>        dev_set_color ('yellow')</l>
+<l>        dev_display (Line)</l>
+<l>        distance_pp (RowBegin, ColBegin, RowEnd, ColEnd, Length)</l>
+<l>        set_tposition (WindowHandleZoom, (RowBegin + RowEnd) / 2 - Nr * 10, (ColBegin + ColEnd) / 2)</l>
+<l>        write_string (WindowHandleZoom, 'L' + NumLines)</l>
+<l>        ResultText := 'L' + NumLines + ': Length = ' + Length$'.4'</l>
+<l>        concat_obj (Lines, Line, Lines)</l>
+<l>        RowsBegin := [RowsBegin,RowBegin]</l>
+<l>        ColsBegin := [ColsBegin,ColBegin]</l>
+<l>        RowsEnd := [RowsEnd,RowEnd]</l>
+<l>        ColsEnd := [ColsEnd,ColEnd]</l>
+<l>    endif</l>
+<l>    set_tposition (WindowHandleZoom, 275 + i * 10, 230)</l>
+<l>    write_string (WindowHandleZoom, ResultText)</l>
+<l>endfor</l>
+<l>disp_continue_message (WindowHandleZoom, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* </c>
+<c>* step: get corner points, two approaches (Foerstner, Intersection_ll)</c>
+<c>* and the angle between the lines building the corners</c>
+<c>* </c>
+<l>dev_display (Image)</l>
+<l>dev_set_color ('white')</l>
+<l>points_foerstner (Image, 1, 2, 3, 200, 0.3, 'gauss', 'false', RowJunctions, ColJunctions, CoRRJunctions, CoRCJunctions, CoCCJunctions, RowArea, ColArea, CoRRArea, CoRCArea, CoCCArea)</l>
+<l>gen_cross_contour_xld (CrossFoerstner, RowJunctions, ColJunctions, 10, 0)</l>
+<l>dev_display (CrossFoerstner)</l>
+<l>set_tposition (WindowHandleZoom, RowJunctions[0] - 10, ColJunctions[0] + 10)</l>
+<l>write_string (WindowHandleZoom, 'P2')</l>
+<l>set_tposition (WindowHandleZoom, RowJunctions[1] - 10, ColJunctions[1] + 10)</l>
+<l>write_string (WindowHandleZoom, 'P1')</l>
+<l>set_tposition (WindowHandleZoom, 120, 230)</l>
+<l>write_string (WindowHandleZoom, 'Foerstner Points')</l>
+<l>disp_continue_message (WindowHandleZoom, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* </c>
+<c>* intersection points and angles calculated</c>
+<c>* by the lines obtained by line-fitting</c>
+<c>* </c>
+<l>dev_set_color ('yellow')</l>
+<l>write_string (WindowHandleZoom, ' vs. intersection_l_l: ')</l>
+<l>intersection_lines (RowsBegin[0], ColsBegin[0], RowsEnd[0], ColsEnd[0], RowsBegin[1], ColsBegin[1], RowsEnd[1], ColsEnd[1], RowIntersect1, ColumnIntersect1, IsOverlapping1)</l>
+<l>gen_cross_contour_xld (CrossIntersection1, RowIntersect1, ColumnIntersect1, 10, 0.785398)</l>
+<l>dev_display (CrossIntersection1)</l>
+<l>dev_set_color ('white')</l>
+<l>distance_pp (RowJunctions[1], ColJunctions[1], RowIntersect1, ColumnIntersect1, Distance1)</l>
+<l>set_tposition (WindowHandleZoom, 325, 230)</l>
+<l>write_string (WindowHandleZoom, 'Distance between Foerstner points and')</l>
+<l>set_tposition (WindowHandleZoom, 335, 230)</l>
+<l>write_string (WindowHandleZoom, 'points obtained by intersection_ll:')</l>
+<l>set_tposition (WindowHandleZoom, 355, 230)</l>
+<l>write_string (WindowHandleZoom, 'in P1: ' + Distance1$'.3' + ' pixels')</l>
+<l>dev_set_color ('yellow')</l>
+<l>intersection_lines (RowsBegin[0], ColsBegin[0], RowsEnd[0], ColsEnd[0], RowsBegin[2], ColsBegin[2], RowsEnd[2], ColsEnd[2], RowIntersect2, ColumnIntersect2, IsOverlapping2)</l>
+<l>distance_pp (RowJunctions[0], ColJunctions[0], RowIntersect2, ColumnIntersect2, Distance2)</l>
+<l>gen_cross_contour_xld (CrossIntersection2, RowIntersect2, ColumnIntersect2, 10, 0.785398)</l>
+<l>dev_display (CrossIntersection2)</l>
+<l>dev_set_color ('white')</l>
+<l>set_tposition (WindowHandleZoom, 370, 230)</l>
+<l>write_string (WindowHandleZoom, 'in P2: ' + Distance2$'.3' + ' pixels')</l>
+<l>disp_continue_message (WindowHandleZoom, 'black', 'true')</l>
+<l>stop ()</l>
+<l>dev_display (Image)</l>
+<l>angle_ll (RowsBegin[0], ColsBegin[0], RowsEnd[0], ColsEnd[0], RowsBegin[1], ColsBegin[1], RowsEnd[1], ColsEnd[1], Angle1)</l>
+<l>set_tposition (WindowHandleZoom, RowsBegin[0] - 10, ColsBegin[0] + 10)</l>
+<l>write_string (WindowHandleZoom, 'P2')</l>
+<l>set_tposition (WindowHandleZoom, RowsEnd[0] - 10, ColsEnd[0] + 10)</l>
+<l>write_string (WindowHandleZoom, 'P1')</l>
+<l>set_tposition (WindowHandleZoom, 120, 230)</l>
+<l>write_string (WindowHandleZoom, 'Angle in P1: ' + deg(Angle1)$'.3' + ' degrees')</l>
+<l>disp_arrow (WindowHandleZoom, RowsEnd[0], ColsEnd[0], RowsBegin[0], ColsBegin[0], 1)</l>
+<l>disp_arrow (WindowHandleZoom, RowsBegin[1], ColsBegin[1], RowsEnd[1], ColsEnd[1], 1)</l>
+<l>disp_continue_message (WindowHandleZoom, 'black', 'true')</l>
+<l>stop ()</l>
+<l>dev_display (Image)</l>
+<l>angle_ll (RowsBegin[0], ColsBegin[0], RowsEnd[0], ColsEnd[0], RowsBegin[2], ColsBegin[2], RowsEnd[2], ColsEnd[2], Angle2)</l>
+<l>set_tposition (WindowHandleZoom, RowsBegin[0] - 10, ColsBegin[0] + 10)</l>
+<l>write_string (WindowHandleZoom, 'P2')</l>
+<l>set_tposition (WindowHandleZoom, RowsEnd[0] - 10, ColsEnd[0] + 10)</l>
+<l>write_string (WindowHandleZoom, 'P1')</l>
+<l>set_tposition (WindowHandleZoom, 120, 230)</l>
+<l>write_string (WindowHandleZoom, 'Angle in P2: ' + deg(Angle2)$'.3' + ' degrees')</l>
+<l>disp_arrow (WindowHandleZoom, RowsBegin[0], ColsBegin[0], RowsEnd[0], ColsEnd[0], 1)</l>
+<l>disp_arrow (WindowHandleZoom, RowsEnd[2], ColsEnd[2], RowsBegin[2], ColsBegin[2], 1)</l>
+<l>disp_continue_message (WindowHandleZoom, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* </c>
+<c>* step: get parallels with maximum lengths and the distances between them</c>
+<c>* </c>
+<l>gen_polygons_xld (ContoursSplit, Polygons, 'ramer', 2)</l>
+<l>gen_parallels_xld (Polygons, Parallels, 80, 75, 0.15, 'true')</l>
+<l>count_obj (Parallels, NumberParallels)</l>
+<l>dev_display (Image)</l>
+<l>for i := 1 to NumberParallels by 1</l>
+<l>    dev_set_color ('white')</l>
+<l>    select_obj (Parallels, SelectedParallel, i)</l>
+<l>    dev_display (SelectedParallel)</l>
+<l>    get_parallels_xld (SelectedParallel, Row1Parallels, Col1Parallels, Length1Parallels, Phi1Parallels, Row2Parallels, Col2Parallels, Length2Parallels, Phi2Parallels)</l>
+<c>    * </c>
+<l>    distance_pp (Row1Parallels[0], Col1Parallels[0], Row2Parallels[1], Col2Parallels[1], Distance2)</l>
+<l>    distance_pp (Row1Parallels[1], Col1Parallels[1], Row2Parallels[0], Col2Parallels[0], Distance1)</l>
+<c>    * </c>
+<l>    set_tposition (WindowHandleZoom, 120, 230)</l>
+<l>    write_string (WindowHandleZoom, 'Distance BC: ' + Distance1$'.4' + ' pixels')</l>
+<l>    set_tposition (WindowHandleZoom, 140, 230)</l>
+<l>    write_string (WindowHandleZoom, 'Distance AD: ' + Distance2$'.4' + ' pixels')</l>
+<l>    set_tposition (WindowHandleZoom, 340, 230)</l>
+<l>    write_string (WindowHandleZoom, 'Orientation AB: ' + deg(Phi1Parallels)$'.3' + ' degrees')</l>
+<l>    set_tposition (WindowHandleZoom, 360, 230)</l>
+<l>    write_string (WindowHandleZoom, 'Orientation DC: ' + deg(Phi2Parallels)$'.3' + ' degrees')</l>
+<l>    set_tposition (WindowHandleZoom, Row1Parallels[0] + 10, Col1Parallels[0])</l>
+<l>    write_string (WindowHandleZoom, 'A')</l>
+<l>    set_tposition (WindowHandleZoom, Row1Parallels[1] + 10, Col1Parallels[1])</l>
+<l>    write_string (WindowHandleZoom, 'B')</l>
+<l>    set_tposition (WindowHandleZoom, Row2Parallels[0] + 10, Col2Parallels[0])</l>
+<l>    write_string (WindowHandleZoom, 'C')</l>
+<l>    set_tposition (WindowHandleZoom, Row2Parallels[1] + 10, Col2Parallels[1])</l>
+<l>    write_string (WindowHandleZoom, 'D')</l>
+<c>    * </c>
+<l>    dev_set_color ('yellow')</l>
+<l>    disp_line (WindowHandleZoom, Row1Parallels[0], Col1Parallels[0], Row2Parallels[1], Col2Parallels[1])</l>
+<l>    disp_line (WindowHandleZoom, Row1Parallels[1], Col1Parallels[1], Row2Parallels[0], Col2Parallels[0])</l>
+<l>    disp_continue_message (WindowHandleZoom, 'black', 'true')</l>
+<l>    stop ()</l>
+<l>endfor</l>
+<c>* </c>
+<c>* step: visualize width of object obtained by the smallest enclosing rectangle</c>
+<c>* </c>
+<l>dev_set_color ('white')</l>
+<l>dev_set_draw ('margin')</l>
+<l>dev_display (Image)</l>
+<l>dev_display (Rectangle)</l>
+<l>set_tposition (WindowHandleZoom, 120, 230)</l>
+<l>write_string (WindowHandleZoom, 'Lenght / Width of smallest enclosing rectangle:')</l>
+<l>set_tposition (WindowHandleZoom, 140, 230)</l>
+<l>write_string (WindowHandleZoom, (2 * Length1_Region)$'.4' + ' / ' + (2 * Length2_Region)$'.4' + ' pixels')</l>
+<l>disp_continue_message (WindowHandleZoom, 'black', 'true')</l>
+<l>stop ()</l>
+<l>dev_set_window (WindowHandleZoom)</l>
+<l>dev_close_window ()</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+<procedure name="init_visualization">
+<interface>
+<io>
+<par name="Image" base_type="iconic" dimension="0"/>
+</io>
+<ic>
+<par name="LineWidth" base_type="ctrl" dimension="0"/>
+<par name="Color" base_type="ctrl" dimension="0"/>
+<par name="DrawMode" base_type="ctrl" dimension="0"/>
+</ic>
+<oc>
+<par name="Width" base_type="ctrl" dimension="0"/>
+<par name="Height" base_type="ctrl" dimension="0"/>
+<par name="WindowID" base_type="ctrl" dimension="0"/>
+</oc>
+</interface>
+<body>
+<l>get_image_size (Image, Width, Height)</l>
+<l>dev_close_window ()</l>
+<l>dev_open_window (0, 0, Width, Height, 'light gray', WindowID)</l>
+<l>dev_set_part (0, 0, Height - 1, Width - 1)</l>
+<l>dev_set_line_width (LineWidth)</l>
+<l>dev_set_color (Color)</l>
+<l>dev_set_draw (DrawMode)</l>
+<l>dev_display (Image)</l>
+<l>return ()</l>
+</body>
+<docu id="init_visualization">
+<short lang="en_US">open graphics window with correct size and set visualization parameters</short>
+<parameters>
+<parameter id="Color"/>
+<parameter id="DrawMode"/>
+<parameter id="Height">
+<default_type>integer</default_type>
+<sem_type>integer</sem_type>
+<type_list>
+<item>integer</item>
+</type_list>
+</parameter>
+<parameter id="Image"/>
+<parameter id="LineWidth">
+<default_type>integer</default_type>
+<default_value>1</default_value>
+<mixed_type>false</mixed_type>
+<sem_type>integer</sem_type>
+<type_list>
+<item>integer</item>
+</type_list>
+<value_max>1</value_max>
+<value_min>1</value_min>
+</parameter>
+<parameter id="Width">
+<default_type>integer</default_type>
+<sem_type>integer</sem_type>
+<type_list>
+<item>integer</item>
+</type_list>
+</parameter>
+<parameter id="WindowID">
+<default_type>integer</default_type>
+<mixed_type>false</mixed_type>
+<sem_type>window</sem_type>
+<type_list>
+<item>integer</item>
+</type_list>
+</parameter>
+</parameters>
+</docu>
+</procedure>
+<procedure name="open_zoom_window">
+<interface>
+<ic>
+<par name="RowPos" base_type="ctrl" dimension="0"/>
+<par name="ColPos" base_type="ctrl" dimension="0"/>
+<par name="RowROI1" base_type="ctrl" dimension="0"/>
+<par name="ColROI1" base_type="ctrl" dimension="0"/>
+<par name="RowROI2" base_type="ctrl" dimension="0"/>
+<par name="ColROI2" base_type="ctrl" dimension="0"/>
+<par name="ZoomFactor" base_type="ctrl" dimension="0"/>
+</ic>
+<oc>
+<par name="WindowHandleZoom" base_type="ctrl" dimension="0"/>
+</oc>
+</interface>
+<body>
+<l>dev_open_window (RowPos, ColPos, (ColROI2 - ColROI1) * ZoomFactor, (RowROI2 - RowROI1) * ZoomFactor, 'black', WindowHandleZoom)</l>
+<l>dev_set_part (round(RowROI1), round(ColROI1), round(RowROI2), round(ColROI2))</l>
+<l>return ()</l>
+</body>
+<docu id="open_zoom_window">
+<short lang="en_US">open window and set part</short>
+<parameters>
+<parameter id="ColPos"/>
+<parameter id="ColROI1"/>
+<parameter id="ColROI2"/>
+<parameter id="RowPos"/>
+<parameter id="RowROI1"/>
+<parameter id="RowROI2"/>
+<parameter id="WindowHandleZoom"/>
+<parameter id="ZoomFactor"/>
+</parameters>
+</docu>
+</procedure>
+</hdevelop>

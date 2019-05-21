@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.0">
+<procedure name="main">
+<interface/>
+<body>
+<c>* atoms.hdev: Locates irregularities in an atomic grid structure</c>
+<c>* </c>
+<l>dev_close_window ()</l>
+<l>dev_update_window ('off')</l>
+<c>* ****</c>
+<c>* Acquire image</c>
+<c>* ****</c>
+<l>read_image (Image, 'atoms')</l>
+<l>get_image_size (Image, Width, Height)</l>
+<l>crop_rectangle1 (Image, Image, Height / 2, 0, Height - 1, Width - 1)</l>
+<l>get_image_size (Image, Width, Height)</l>
+<l>dev_open_window_fit_image (Image, 0, 0, -1, -1, WindowID)</l>
+<l>set_display_font (WindowID, 14, 'mono', 'true', 'false')</l>
+<l>dev_set_draw ('margin')</l>
+<l>dev_set_line_width (2)</l>
+<l>dev_display (Image)</l>
+<l>disp_message (WindowID, 'Original image', 'window', 12, 12, 'black', 'true')</l>
+<l>disp_continue_message (WindowID, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* ****</c>
+<c>* Segment image</c>
+<c>* ****</c>
+<c>* -&gt; Using watershed</c>
+<l>gauss_filter (Image, ImageGauss, 5)</l>
+<l>watersheds (ImageGauss, Basins, Watersheds)</l>
+<l>dev_display (Image)</l>
+<l>dev_set_colored (12)</l>
+<l>dev_display (Watersheds)</l>
+<l>disp_message (WindowID, 'Watersheds', 'window', 12, 12, 'black', 'true')</l>
+<l>disp_continue_message (WindowID, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* ****</c>
+<c>* Process regions</c>
+<c>* ****</c>
+<c>* -&gt; Skip regions at the border of the image</c>
+<l>smallest_rectangle1 (Basins, Row1, Column1, Row2, Column2)</l>
+<l>select_shape (Basins, SelectedRegions1, 'column1', 'and', 2, Width - 1)</l>
+<l>select_shape (SelectedRegions1, SelectedRegions2, 'row1', 'and', 2, Height - 1)</l>
+<l>select_shape (SelectedRegions2, SelectedRegions3, 'column2', 'and', 1, Width - 3)</l>
+<l>select_shape (SelectedRegions3, Inner, 'row2', 'and', 1, Height - 3)</l>
+<c>* -&gt; Select irregularly shaped atoms</c>
+<l>select_shape (Inner, Irregular, ['moments_i1','moments_i1'], 'or', [0,9.5e8], [1.5e8,1e10])</l>
+<l>dev_display (Image)</l>
+<l>dev_set_line_width (1)</l>
+<l>dev_set_color ('white')</l>
+<l>dev_display (Inner)</l>
+<l>dev_set_line_width (3)</l>
+<l>dev_set_color ('red')</l>
+<l>dev_display (Irregular)</l>
+<l>disp_message (WindowID, 'Defects', 'window', 12, 12, 'black', 'true')</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>

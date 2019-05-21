@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.0">
+<procedure name="main">
+<interface/>
+<body>
+<c>* fuse.hdev: measuring the width of a fuse wire</c>
+<c>* </c>
+<l>dev_update_window ('off')</l>
+<l>dev_close_window ()</l>
+<c>* ****</c>
+<c>* step: acquire image</c>
+<c>* ****</c>
+<l>read_image (Fuse, 'fuse')</l>
+<l>get_image_size (Fuse, Width, Height)</l>
+<l>dev_open_window_fit_image (Fuse, 0, 0, Width, Height, WindowID)</l>
+<l>set_display_font (WindowID, 12, 'mono', 'true', 'false')</l>
+<l>dev_set_draw ('margin')</l>
+<l>dev_set_line_width (3)</l>
+<l>dev_display (Fuse)</l>
+<l>set_display_font (WindowID, 12, 'mono', 'true', 'false')</l>
+<l>disp_continue_message (WindowID, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* ****</c>
+<c>* step: create measure object</c>
+<c>* ****</c>
+<c>* -&gt; specify ROI</c>
+<l>Row := 297</l>
+<l>Column := 545</l>
+<l>Length1 := 80</l>
+<l>Length2 := 10</l>
+<l>Angle := rad(90)</l>
+<l>gen_rectangle2 (ROI, Row, Column, Angle, Length1, Length2)</l>
+<c>* -&gt; create measure object</c>
+<l>gen_measure_rectangle2 (Row, Column, Angle, Length1, Length2, Width, Height, 'bilinear', MeasureHandle)</l>
+<l>dev_display (ROI)</l>
+<l>disp_continue_message (WindowID, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* ****</c>
+<c>* step: measure</c>
+<c>* ****</c>
+<l>measure_pairs (Fuse, MeasureHandle, 1, 1, 'negative', 'all', RowEdgeFirst, ColumnEdgeFirst, AmplitudeFirst, RowEdgeSecond, ColumnEdgeSecond, AmplitudeSecond, IntraDistance, InterDistance)</l>
+<l>disp_continue_message (WindowID, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* ****</c>
+<c>* step: visualize results</c>
+<c>* ****</c>
+<l>for i := 0 to |RowEdgeFirst| - 1 by 1</l>
+<l>    gen_contour_polygon_xld (EdgeFirst, [-sin(Angle + rad(90)) * Length2 + RowEdgeFirst[i],-sin(Angle - rad(90)) * Length2 + RowEdgeFirst[i]], [cos(Angle + rad(90)) * Length2 + ColumnEdgeFirst[i],cos(Angle - rad(90)) * Length2 + ColumnEdgeFirst[i]])</l>
+<l>    gen_contour_polygon_xld (EdgeSecond, [-sin(Angle + rad(90)) * Length2 + RowEdgeSecond[i],-sin(Angle - rad(90)) * Length2 + RowEdgeSecond[i]], [cos(Angle + rad(90)) * Length2 + ColumnEdgeSecond[i],cos(Angle - rad(90)) * Length2 + ColumnEdgeSecond[i]])</l>
+<l>    dev_set_color ('cyan')</l>
+<l>    dev_display (EdgeFirst)</l>
+<l>    dev_set_color ('magenta')</l>
+<l>    dev_display (EdgeSecond)</l>
+<l>    dev_set_color ('blue')</l>
+<l>    if (i == 0)</l>
+<l>        set_tposition (WindowID, RowEdgeFirst[i] + 5, ColumnEdgeFirst[i] + 20)</l>
+<l>    else</l>
+<l>        set_tposition (WindowID, RowEdgeFirst[i] - 40, ColumnEdgeFirst[i] + 20)</l>
+<l>    endif</l>
+<l>    write_string (WindowID, 'width: ' + IntraDistance[i] + ' pix')</l>
+<l>endfor</l>
+<l>disp_continue_message (WindowID, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* ****</c>
+<c>* step: destroy measure object</c>
+<c>* ****</c>
+<l>close_measure (MeasureHandle)</l>
+<l>dev_update_window ('on')</l>
+<l>dev_clear_window ()</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>

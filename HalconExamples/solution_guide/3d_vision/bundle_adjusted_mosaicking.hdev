@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.0">
+<procedure name="main">
+<interface/>
+<body>
+<c>* This example program shows how several images can be combined</c>
+<c>* into a large mosaic image.</c>
+<c>* The program shows how to use proj_match_points_ransac,</c>
+<c>* bundle_adjust_mosaic, and gen_bundle_adjusted_mosaic to achieve this.</c>
+<c>* Especially, the effect of using different classes of transformations ('projective',</c>
+<c>* 'affine', 'similarity', and 'rigid') is shown.</c>
+<c>* </c>
+<c>* Set image path and name</c>
+<l>ImgPath := '3d_machine_vision/mosaic/'</l>
+<l>ImgName := 'bga_r_'</l>
+<l>dev_update_off ()</l>
+<l>dev_close_window ()</l>
+<l>dev_open_window (0, 0, 640, 480, 'white', WindowHandle1)</l>
+<l>set_display_font (WindowHandle1, 14, 'mono', 'true', 'false')</l>
+<c>* The internal camera parameters of the used camera (necessary to</c>
+<c>* eliminate the radial distortions)</c>
+<l>gen_cam_par_area_scan_division (0.0121693, -2675.63, 7.40046e-006, 7.4e-006, 290.491, 258.887, 640, 480, CamParam)</l>
+<l>change_radial_distortion_cam_par ('adaptive', CamParam, 0, CamParOut)</l>
+<c>* Read in the images and show them one-by-one.</c>
+<l>gen_empty_obj (Images)</l>
+<l>for J := 1 to 10 by 1</l>
+<l>    read_image (Image, ImgPath + ImgName + J$'02')</l>
+<c>    * Eliminate the radial distortions.</c>
+<l>    change_radial_distortion_image (Image, Image, Image, CamParam, CamParOut)</l>
+<l>    concat_obj (Images, Image, Images)</l>
+<l>    dev_display (Image)</l>
+<l>    disp_message (WindowHandle1, 'Image ' + J$'d', 'window', 20, 10, 'green', 'false')</l>
+<l>    wait_seconds (0.5)</l>
+<l>endfor</l>
+<l>disp_continue_message (WindowHandle1, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* To show the point matches that are used to compute the projective</c>
+<c>* transformation between the images, we will show all images in a large</c>
+<c>* tiled image with some space between the images so that the extents</c>
+<c>* of the images are easily visible.</c>
+<l>dev_set_window_extents (-1, -1, 3280 / 4, 980 / 4)</l>
+<l>tile_images_offset (Images, TiledImage, [0,0,0,0,0,500,500,500,500,500], [0,660,1320,1980,2640,0,660,1320,1980,2640], [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1], [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1], [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1], [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1], 3280, 980)</l>
+<l>dev_clear_window ()</l>
+<l>dev_display (TiledImage)</l>
+<l>disp_message (WindowHandle1, 'All 10 images', 'window', 20, 10, 'green', 'false')</l>
+<l>disp_continue_message (WindowHandle1, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* Now we compute point matches between pairs of images and with this</c>
+<c>* the transformation between the image pairs.</c>
+<l>dev_clear_window ()</l>
+<l>dev_display (TiledImage)</l>
+<l>disp_message (WindowHandle1, 'Point matches', 'window', 20, 10, 'green', 'false')</l>
+<c>* Define the pair configuration.</c>
+<l>From := [1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,5,5]</l>
+<l>To := [6,7,2,6,7,8,3,7,8,9,4,8,9,10,5,9,10]</l>
+<l>Num := |From|</l>
+<c>* We need variables to accumulate the projective transformation matrices,</c>
+<c>* the coordinates of the matched points, and the number of matched</c>
+<c>* points for each image pair.</c>
+<l>ProjMatrices := []</l>
+<l>Rows1 := []</l>
+<l>Cols1 := []</l>
+<l>Rows2 := []</l>
+<l>Cols2 := []</l>
+<l>NumCorrespondences := []</l>
+<c>* Now we can determine the transformations between the image pairs.</c>
+<l>for J := 0 to Num - 1 by 1</l>
+<l>    F := From[J]</l>
+<l>    T := To[J]</l>
+<l>    select_obj (Images, ImageF, F)</l>
+<l>    select_obj (Images, ImageT, T)</l>
+<c>    * Extract the points in both images.</c>
+<l>    SigmaGrad := 1</l>
+<l>    SigmaSmooth := 3</l>
+<l>    Alpha := 0.04</l>
+<l>    Threshold := 0</l>
+<l>    points_harris (ImageF, SigmaGrad, SigmaSmooth, Alpha, Threshold, RowFAll, ColFAll)</l>
+<l>    points_harris (ImageT, SigmaGrad, SigmaSmooth, Alpha, Threshold, RowTAll, ColTAll)</l>
+<c>    * Define initial values for the position of the search window</c>
+<l>    if (F &gt; 5)</l>
+<l>        FShiftR := 500</l>
+<l>        FShiftC := (F - 6) * 660</l>
+<l>    else</l>
+<l>        FShiftR := 0</l>
+<l>        FShiftC := (F - 1) * 660</l>
+<l>    endif</l>
+<l>    if (T &gt; 5)</l>
+<l>        TShiftR := 500</l>
+<l>        TShiftC := (T - 6) * 660</l>
+<l>    else</l>
+<l>        TShiftR := 0</l>
+<l>        TShiftC := (T - 1) * 660</l>
+<l>    endif</l>
+<l>    RowMove := (FShiftR - TShiftR) / 2.7</l>
+<l>    ColMove := (FShiftC - TShiftC) / 2</l>
+<c>    * Perform the matching</c>
+<l>    MaskSize := 21</l>
+<l>    RowTolerance := 20</l>
+<l>    ColTolerance := 20</l>
+<l>    Rotation := 0</l>
+<l>    MatchThreshold := 50</l>
+<l>    DistanceThreshold := 0.4</l>
+<l>    RandSeed := 4364537</l>
+<l>    proj_match_points_ransac (ImageF, ImageT, RowFAll, ColFAll, RowTAll, ColTAll, 'sad', MaskSize, RowMove, ColMove, RowTolerance, ColTolerance, Rotation, MatchThreshold, 'gold_standard', DistanceThreshold, RandSeed, ProjMatrix, Points1, Points2)</l>
+<c>    * Accumulate the transformation matrices</c>
+<l>    ProjMatrices := [ProjMatrices,ProjMatrix]</l>
+<c>    * and the matched points.</c>
+<l>    Rows1 := [Rows1,subset(RowFAll,Points1)]</l>
+<l>    Cols1 := [Cols1,subset(ColFAll,Points1)]</l>
+<l>    Rows2 := [Rows2,subset(RowTAll,Points2)]</l>
+<l>    Cols2 := [Cols2,subset(ColTAll,Points2)]</l>
+<l>    NumCorrespondences := [NumCorrespondences,|Points1|]</l>
+<c>    * Generate crosses that represent the extracted points in the tiled image.</c>
+<c>    * Note that we have to take the row offsets of the images in the tiled image</c>
+<c>    * into account.</c>
+<l>    gen_cross_contour_xld (PointsF, RowFAll + FShiftR, ColFAll + FShiftC, 6, rad(45))</l>
+<l>    gen_cross_contour_xld (PointsT, RowTAll + TShiftR, ColTAll + TShiftC, 6, rad(45))</l>
+<c>    * Generate a representation of the matched point pairs as lines.  We create</c>
+<c>    * XLD contours from the lines so that we can zoom into the graphics window</c>
+<c>    * to take a closer look at the matches.</c>
+<l>    RowF := subset(RowFAll,Points1) + FShiftR</l>
+<l>    ColF := subset(ColFAll,Points1) + FShiftC</l>
+<l>    RowT := subset(RowTAll,Points2) + TShiftR</l>
+<l>    ColT := subset(ColTAll,Points2) + TShiftC</l>
+<l>    gen_empty_obj (Matches)</l>
+<l>    for K := 0 to |RowF| - 1 by 1</l>
+<l>        gen_contour_polygon_xld (Match, [RowF[K],RowT[K]], [ColF[K],ColT[K]])</l>
+<l>        concat_obj (Matches, Match, Matches)</l>
+<l>    endfor</l>
+<c>    * Now display the extracted data.</c>
+<l>    dev_set_color ('blue')</l>
+<l>    dev_display (Matches)</l>
+<l>    dev_set_color ('green')</l>
+<l>    dev_display (PointsF)</l>
+<l>    dev_display (PointsT)</l>
+<l>endfor</l>
+<l>disp_continue_message (WindowHandle1, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* </c>
+<c>* Set the possible transformation types and the stacking order</c>
+<l>PossibleTransformations := ['projective','affine','similarity','rigid']</l>
+<l>StartImage := 3</l>
+<l>StackingOrder := [6,7,8,9,10,1,2,3,4,5]</l>
+<l>TransformRegion := 'false'</l>
+<c>* </c>
+<c>* Finally, we can generate the bundle adjusted mosaic image from the projective transformations.</c>
+<l>for i := 0 to |PossibleTransformations| - 1 by 1</l>
+<l>    Transformation := PossibleTransformations[i]</l>
+<l>    bundle_adjust_mosaic (10, StartImage, From, To, ProjMatrices, Rows1, Cols1, Rows2, Cols2, NumCorrespondences, Transformation, MosaicMatrices2D, Rows, Cols, Error)</l>
+<l>    gen_bundle_adjusted_mosaic (Images, MosaicImage, MosaicMatrices2D, StackingOrder, TransformRegion, TransMat2D)</l>
+<l>    get_image_pointer1 (MosaicImage, Pointer, Type, Width, Height)</l>
+<l>    dev_set_window_extents (-1, -1, Width / 3, Height / 3)</l>
+<l>    dev_clear_window ()</l>
+<l>    dev_display (MosaicImage)</l>
+<l>    disp_message (WindowHandle1, Transformation + ' mosaic', 'window', 20, 10, 'green', 'false')</l>
+<l>    disp_continue_message (WindowHandle1, 'black', 'true')</l>
+<l>    stop ()</l>
+<c>    * To investigate the seam between two images, we first display the borders</c>
+<c>    * of the individual images.</c>
+<c>    * This can be done most easily by creating an image that contains the border</c>
+<c>    * of the images, generating a mosaic from it, and segmenting the resulting</c>
+<c>    * mosaic image.</c>
+<l>    get_image_pointer1 (Image, Pointer, Type, Width, Height)</l>
+<l>    gen_image_const (ImageBlank, 'byte', Width, Height)</l>
+<l>    gen_rectangle1 (Rectangle, 0, 0, Height - 1, Width - 1)</l>
+<l>    paint_region (Rectangle, ImageBlank, ImageBorder, 255, 'margin')</l>
+<l>    gen_empty_obj (ImagesBorder)</l>
+<l>    for J := 1 to 10 by 1</l>
+<l>        concat_obj (ImagesBorder, ImageBorder, ImagesBorder)</l>
+<l>    endfor</l>
+<l>    gen_bundle_adjusted_mosaic (ImagesBorder, MosaicImageBorder, MosaicMatrices2D, StackingOrder, 'false', TransMat2D)</l>
+<l>    threshold (MosaicImageBorder, Seams, 128, 255)</l>
+<l>    dev_clear_window ()</l>
+<l>    dev_display (MosaicImage)</l>
+<l>    disp_message (WindowHandle1, 'Seams between the images', 'window', 20, 10, 'green', 'false')</l>
+<l>    dev_set_color ('green')</l>
+<l>    dev_display (Seams)</l>
+<l>    dev_set_color ('blue')</l>
+<c>    * Now, open a zoom window, showing the area around</c>
+<c>    * the seam between image five and image ten.</c>
+<l>    get_image_pointer1 (MosaicImage, Pointer, Type, Width, Height)</l>
+<l>    PartHeight := 64</l>
+<l>    PartWidth := 256</l>
+<l>    PartCenterRow := 490</l>
+<l>    PartCenterCol := 1800</l>
+<l>    dev_open_window (Height / 3 + 70, 0, PartWidth * 2, PartHeight * 2, 'black', WindowHandle2)</l>
+<l>    dev_set_part (PartCenterRow - PartHeight / 2 + 1, PartCenterCol - PartWidth / 2 + 1, PartCenterRow + PartHeight / 2, PartCenterCol + PartWidth / 2)</l>
+<l>    dev_display (MosaicImage)</l>
+<l>    dev_set_window (WindowHandle1)</l>
+<l>    get_image_size (MosaicImage, Width, Height)</l>
+<l>    dev_set_part (0, 0, Height - 1, Width - 1)</l>
+<l>    dev_set_draw ('margin')</l>
+<l>    disp_rectangle1 (WindowHandle1, PartCenterRow - PartHeight / 2 + 1, PartCenterCol - PartWidth / 2 + 1, PartCenterRow + PartHeight / 2, PartCenterCol + PartWidth / 2)</l>
+<l>    disp_continue_message (WindowHandle1, 'black', 'true')</l>
+<l>    stop ()</l>
+<l>    dev_set_window (WindowHandle2)</l>
+<l>    dev_close_window ()</l>
+<l>    dev_clear_window ()</l>
+<l>endfor</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>

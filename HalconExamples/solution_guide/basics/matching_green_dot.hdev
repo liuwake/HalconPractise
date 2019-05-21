@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.0">
+<procedure name="main">
+<interface/>
+<body>
+<c>* *********************** ATTENTION *************************</c>
+<c>* </c>
+<c>* Before starting this example please execute the program</c>
+<c>* 'create_model_green_dot.hdev' to create the shape model</c>
+<c>* 'green-dot.shm' that is needed in this example.</c>
+<c>* </c>
+<c>* ***********************************************************</c>
+<c>* </c>
+<c>* This example demonstrates how to find scaled and rotated</c>
+<c>* green dots using a shape model that was previously created</c>
+<c>* with the example program 'create_model_green_dot.hdev'.</c>
+<c>* </c>
+<c>* </c>
+<l>dev_update_off ()</l>
+<l>dev_close_window ()</l>
+<c>* </c>
+<c>* Acquire the search image</c>
+<l>read_image (ImageSearch, 'green-dots')</l>
+<l>dev_open_window_fit_image (ImageSearch, 0, 0, -1, -1, WindowHandle)</l>
+<l>dev_display (ImageSearch)</l>
+<c>* </c>
+<c>* Set display settings</c>
+<l>set_display_font (WindowHandle, 16, 'mono', 'true', 'false')</l>
+<l>dev_set_draw ('margin')</l>
+<l>dev_set_line_width (3)</l>
+<l>Message := 'Find scaled and rotated green dots using'</l>
+<l>Message[1] := 'a previously saved model.'</l>
+<l>disp_message (WindowHandle, Message, 'window', 12, 12, 'black', 'true')</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* </c>
+<c>* Check if the shape model file exists</c>
+<l>file_exists ('green-dot.shm', FileExists)</l>
+<c>* </c>
+<c>* If the model file exits, read it from file and apply the matching.</c>
+<c>* If the model file does not exist, display a message that the</c>
+<c>* model must be created before.</c>
+<l>if (FileExists)</l>
+<c>    * </c>
+<c>    * Read the saved model from file</c>
+<l>    read_shape_model ('green-dot.shm', ModelID)</l>
+<c>    * </c>
+<c>    * Find the matches in the search image</c>
+<l>    find_scaled_shape_model (ImageSearch, ModelID, rad(-45), rad(90), 0.8, 1.0, 0.5, 0, 0.5, 'least_squares', 5, 0.8, Row, Column, Angle, Scale, Score)</l>
+<l>    get_shape_model_contours (ModelContours, ModelID, 1)</l>
+<c>    * </c>
+<c>    * Display the found matches</c>
+<l>    dev_display (ImageSearch)</l>
+<l>    disp_message (WindowHandle, 'Found matches', 'window', 12, 12, 'black', 'true')</l>
+<l>    for I := 0 to |Score| - 1 by 1</l>
+<l>        vector_angle_to_rigid (0, 0, 0, Row[I], Column[I], Angle[I], HomMat2DRotate)</l>
+<l>        hom_mat2d_scale (HomMat2DRotate, Scale[I], Scale[I], Row[I], Column[I], HomMat2DScale)</l>
+<l>        affine_trans_contour_xld (ModelContours, ModelTrans, HomMat2DScale)</l>
+<l>        dev_display (ModelTrans)</l>
+<l>    endfor</l>
+<c>    * </c>
+<c>    * Clear the model</c>
+<l>    clear_shape_model (ModelID)</l>
+<l>else</l>
+<l>    dev_clear_window ()</l>
+<l>    Message := 'Could not find the model file! Please execute the'</l>
+<l>    Message[1] := 'program \'create_model_green_dot.hdev\' before'</l>
+<l>    Message[2] := 'starting this program to create the shape model.'</l>
+<l>    disp_message (WindowHandle, Message, 'window', 12, 12, 'red', 'true')</l>
+<l>endif</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>

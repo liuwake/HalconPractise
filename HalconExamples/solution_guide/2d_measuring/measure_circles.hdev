@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.0">
+<procedure name="main">
+<interface/>
+<body>
+<c>* This program fits circles into circular contour segments</c>
+<c>* to extract their positions and radii</c>
+<c>* </c>
+<l>dev_update_off ()</l>
+<c>* </c>
+<c>* step: acquire image</c>
+<c>* </c>
+<l>read_image (Image, 'circle_plate')</l>
+<l>get_image_size (Image, Width, Height)</l>
+<l>dev_close_window ()</l>
+<l>dev_open_window (0, 0, Width / 2, Height / 2, 'light gray', WindowID)</l>
+<l>dev_set_part (0, 0, Height - 1, Width - 1)</l>
+<l>dev_set_line_width (3)</l>
+<l>dev_set_color ('white')</l>
+<l>dev_set_draw ('margin')</l>
+<l>dev_display (Image)</l>
+<l>set_display_font (WindowID, 14, 'mono', 'true', 'false')</l>
+<l>disp_continue_message (WindowID, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* </c>
+<c>* step: segment image into regions</c>
+<c>* </c>
+<l>dev_set_colored (12)</l>
+<l>dev_set_line_width (2)</l>
+<l>dev_set_draw ('fill')</l>
+<l>fast_threshold (Image, Region, 200, 255, 20)</l>
+<l>connection (Region, ConnectedRegions)</l>
+<l>select_shape (ConnectedRegions, SelectedRegions, 'area', 'and', 70, 50000)</l>
+<l>dev_display (Image)</l>
+<l>dev_display (SelectedRegions)</l>
+<l>disp_continue_message (WindowID, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* </c>
+<c>* step: create ROI for contour processing</c>
+<c>* </c>
+<l>boundary (SelectedRegions, RegionBorder, 'inner_filled')</l>
+<l>dilation_circle (RegionBorder, RegionDilation, 3.5)</l>
+<l>union1 (RegionDilation, RegionUnion)</l>
+<l>reduce_domain (Image, RegionUnion, ImageReduced)</l>
+<l>dev_clear_window ()</l>
+<l>dev_display (ImageReduced)</l>
+<l>disp_continue_message (WindowID, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* </c>
+<c>* step: create contours and fit circles to them</c>
+<c>* </c>
+<l>edges_sub_pix (ImageReduced, Edges, 'canny', 1.5, 10, 40)</l>
+<l>segment_contours_xld (Edges, ContoursSplit, 'lines_circles', 5, 2, 2)</l>
+<l>select_contours_xld (ContoursSplit, SelectedContours, 'contour_length', 25, 99999, -0.5, 0.5)</l>
+<l>count_obj (SelectedContours, NumberContours)</l>
+<l>gen_empty_obj (Circles)</l>
+<l>for i := 1 to NumberContours by 1</l>
+<l>    select_obj (SelectedContours, ObjectSelected, i)</l>
+<l>    get_contour_global_attrib_xld (ObjectSelected, 'cont_approx', Attrib)</l>
+<l>    if (Attrib == 1)</l>
+<l>        concat_obj (Circles, ObjectSelected, Circles)</l>
+<l>    endif</l>
+<l>endfor</l>
+<l>union_cocircular_contours_xld (Circles, UnionContours, rad(60), rad(10), rad(30), 100, 50, 10, 'true', 1)</l>
+<l>dev_clear_window ()</l>
+<l>dev_set_color ('black')</l>
+<l>dev_display (UnionContours)</l>
+<l>disp_continue_message (WindowID, 'black', 'true')</l>
+<l>stop ()</l>
+<l>count_obj (UnionContours, NumberCircles)</l>
+<l>CenterRow := []</l>
+<l>CenterColumn := []</l>
+<l>dev_clear_window ()</l>
+<l>dev_set_color ('black')</l>
+<l>set_display_font (WindowID, 12, 'mono', 'true', 'false')</l>
+<l>dev_display (SelectedContours)</l>
+<l>for i := 1 to NumberCircles by 1</l>
+<l>    select_obj (UnionContours, ObjectSelected, i)</l>
+<l>    fit_circle_contour_xld (ObjectSelected, 'algebraic', -1, 0, 0, 3, 2, Row, Column, Radius, StartPhi, EndPhi, PointOrder)</l>
+<l>    gen_circle_contour_xld (ContCircle, Row, Column, Radius, 0, rad(360), 'positive', 1.5)</l>
+<l>    dev_set_color ('white')</l>
+<l>    dev_display (ContCircle)</l>
+<l>    if (i == 1)</l>
+<l>        Row2 := Row + Radius * sin(rad(-45))</l>
+<l>        Column2 := Column + Radius * cos(rad(-45))</l>
+<l>        set_tposition (WindowID, Row2 - 35, Column2 + 5)</l>
+<l>    endif</l>
+<l>    if (i &gt; 1)</l>
+<l>        exist := 0</l>
+<l>        for j := 0 to i - 2 by 1</l>
+<l>            distance_pp (Row, Column, CenterRow[j], CenterColumn[j], DistanceCenters)</l>
+<l>            if (DistanceCenters &lt; 20)</l>
+<l>                exist := 1</l>
+<l>            endif</l>
+<l>        endfor</l>
+<l>        if (exist == 1)</l>
+<l>            Row2 := Row + Radius * sin(rad(-135))</l>
+<l>            Column2 := Column + Radius * cos(rad(-135))</l>
+<l>            set_tposition (WindowID, Row2 - 40, Column2 - 30)</l>
+<l>        else</l>
+<l>            Row2 := Row + Radius * sin(rad(-45))</l>
+<l>            Column2 := Column + Radius * cos(rad(-45))</l>
+<l>            set_tposition (WindowID, Row2 - 35, Column2 + 5)</l>
+<l>        endif</l>
+<l>    endif</l>
+<l>    disp_arrow (WindowID, Row, Column, Row2, Column2, 2)</l>
+<l>    write_string (WindowID, i)</l>
+<l>    if (i &lt; 8)</l>
+<l>        disp_message (WindowID, 'R' + i + ' = ' + Radius$'.4', 'window', i * 20, 130, 'black', 'false')</l>
+<l>    else</l>
+<l>        disp_message (WindowID, 'R' + i + ' = ' + Radius$'.4', 'window', (i - 7) * 20, 400, 'black', 'false')</l>
+<l>    endif</l>
+<l>    CenterRow := [CenterRow,Row]</l>
+<l>    CenterColumn := [CenterColumn,Column]</l>
+<l>endfor</l>
+<c>* </c>
+<l>dev_update_window ('on')</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>

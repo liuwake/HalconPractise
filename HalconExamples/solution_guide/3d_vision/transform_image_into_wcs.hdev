@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.0">
+<procedure name="main">
+<interface/>
+<body>
+<c>* This program provides procedures for the determination of the</c>
+<c>* parameters Pose and Scale of the operators image_to_world_plane</c>
+<c>* and gen_image_to_world_plane_map.</c>
+<c>* </c>
+<c>* Read the image</c>
+<l>ImgPath := '3d_machine_vision/calib/'</l>
+<l>read_image (Image, ImgPath + 'caliper_01')</l>
+<c>* Set the camera parameters for the image</c>
+<l>gen_cam_par_area_scan_division (0.0160728, -631.843, 7.40077e-006, 7.4e-006, 326.369, 246.785, 652, 494, CamParam)</l>
+<l>create_pose (-41.2272, 26.763, 398.682, 359.655, 359.202, 322.648, 'Rp+T', 'gba', 'point', Pose)</l>
+<c>* Reopen the window appropriately</c>
+<l>get_image_size (Image, WidthOriginalImage, HeightOriginalImage)</l>
+<l>dev_open_window_fit_image (Image, 0, 0, WidthOriginalImage, HeightOriginalImage, WindowHandle)</l>
+<l>set_display_font (WindowHandle, 14, 'mono', 'true', 'false')</l>
+<l>dev_set_color ('red')</l>
+<l>WidthMappedImage := 652</l>
+<l>HeightMappedImage := 494</l>
+<c>* Transform the image such that a given point appears in the</c>
+<c>* center of the rectified image and the the scale of the rectified image</c>
+<c>* is similar to the scale of the original image (in the surroundings</c>
+<c>* of the given point)</c>
+<c>* Define the point that will appear in the center of the rectified image</c>
+<l>dev_display (Image)</l>
+<l>disp_message (WindowHandle, 'Define the center of the mapped image', 'window', 12, 12, 'white', 'false')</l>
+<l>get_mbutton (WindowHandle, CenterRow, CenterCol, Button)</l>
+<c>* Determine scale and pose such that the given point appears</c>
+<c>* in the center of the rectified image and that the</c>
+<c>* scale of the two images is similar (in the surroundings</c>
+<c>* of the given point).</c>
+<l>parameters_image_to_world_plane_centered (CamParam, Pose, CenterRow, CenterCol, WidthMappedImage, HeightMappedImage, ScaleForCenteredImage, PoseForCenteredImage)</l>
+<c>* Rectify the image</c>
+<l>gen_image_to_world_plane_map (Map, CamParam, PoseForCenteredImage, WidthOriginalImage, HeightOriginalImage, WidthMappedImage, HeightMappedImage, ScaleForCenteredImage, 'bilinear')</l>
+<l>map_image (Image, Map, ImageMapped)</l>
+<l>dev_open_window_fit_image (ImageMapped, 0, 0, WidthMappedImage, HeightMappedImage, WindowHandleMapped)</l>
+<l>set_display_font (WindowHandleMapped, 14, 'mono', 'true', 'false')</l>
+<l>dev_set_color ('red')</l>
+<l>dev_display (ImageMapped)</l>
+<c>* In case, only one image has to be mapped, the operator</c>
+<c>* image_to_world_plane can be used instead of the operators</c>
+<c>* gen_image_to_world_plane_map together with map_image.</c>
+<l>image_to_world_plane (Image, ImageMapped, CamParam, PoseForCenteredImage, WidthMappedImage, HeightMappedImage, ScaleForCenteredImage, 'bilinear')</l>
+<c>* Display the center point</c>
+<l>image_points_to_world_plane (CamParam, PoseForCenteredImage, CenterRow, CenterCol, ScaleForCenteredImage, CenterX, CenterY)</l>
+<l>disp_cross (WindowHandleMapped, CenterY, CenterX, 6, rad(45))</l>
+<l>disp_message (WindowHandleMapped, 'The selected point appears in the center', 'window', 12, 12, 'white', 'false')</l>
+<l>disp_message (WindowHandleMapped, 'of the rectified image', 'window', 36, 12, 'white', 'false')</l>
+<l>disp_continue_message (WindowHandleMapped, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* </c>
+<c>* Now determine scale and pose such that the entire image</c>
+<c>* fits into the rectified image.</c>
+<l>parameters_image_to_world_plane_entire (Image, CamParam, Pose, WidthMappedImage, HeightMappedImage, ScaleForEntireImage, PoseForEntireImage)</l>
+<c>* Rectify the image</c>
+<l>image_to_world_plane (Image, ImageMapped, CamParam, PoseForEntireImage, WidthMappedImage, HeightMappedImage, ScaleForEntireImage, 'bilinear')</l>
+<l>dev_clear_window ()</l>
+<l>dev_display (ImageMapped)</l>
+<l>disp_message (WindowHandleMapped, 'The entire image is visible in the rectified image', 'window', 12, 12, 'white', 'false')</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+<procedure name="parameters_image_to_world_plane_centered">
+<interface>
+<ic>
+<par name="CamParam" base_type="ctrl" dimension="0"/>
+<par name="Pose" base_type="ctrl" dimension="0"/>
+<par name="CenterRow" base_type="ctrl" dimension="0"/>
+<par name="CenterCol" base_type="ctrl" dimension="0"/>
+<par name="WidthMappedImage" base_type="ctrl" dimension="0"/>
+<par name="HeightMappedImage" base_type="ctrl" dimension="0"/>
+</ic>
+<oc>
+<par name="ScaleForCenteredImage" base_type="ctrl" dimension="0"/>
+<par name="PoseForCenteredImage" base_type="ctrl" dimension="0"/>
+</oc>
+</interface>
+<body>
+<c>* Determine the scale for the mapping</c>
+<c>* (here, the scale is determined such that in the</c>
+<c>*   surroundings of the given point  the image scale of the</c>
+<c>*   mapped image is similar to the image scale of the original image)</c>
+<l>Dist_ICS := 1</l>
+<l>image_points_to_world_plane (CamParam, Pose, CenterRow, CenterCol, 1, CenterX, CenterY)</l>
+<l>image_points_to_world_plane (CamParam, Pose, CenterRow + Dist_ICS, CenterCol, 1, BelowCenterX, BelowCenterY)</l>
+<l>image_points_to_world_plane (CamParam, Pose, CenterRow, CenterCol + Dist_ICS, 1, RightOfCenterX, RightOfCenterY)</l>
+<l>distance_pp (CenterY, CenterX, BelowCenterY, BelowCenterX, Dist_WCS_Vertical)</l>
+<l>distance_pp (CenterY, CenterX, RightOfCenterY, RightOfCenterX, Dist_WCS_Horizontal)</l>
+<l>ScaleVertical := Dist_WCS_Vertical / Dist_ICS</l>
+<l>ScaleHorizontal := Dist_WCS_Horizontal / Dist_ICS</l>
+<l>ScaleForCenteredImage := (ScaleVertical + ScaleHorizontal) / 2.0</l>
+<c>* Determine the parameters for set_origin_pose such</c>
+<c>* that the point given via get_mbutton will be in the center of the</c>
+<c>* mapped image</c>
+<l>DX := CenterX - ScaleForCenteredImage * WidthMappedImage / 2.0</l>
+<l>DY := CenterY - ScaleForCenteredImage * HeightMappedImage / 2.0</l>
+<l>DZ := 0</l>
+<l>set_origin_pose (Pose, DX, DY, DZ, PoseForCenteredImage)</l>
+<l>return ()</l>
+</body>
+<docu id="parameters_image_to_world_plane_centered">
+<short lang="en_US">Determines scale and pose for the operator image_to_world_plane such that a given point appears in the center and that the scale of the rectified image is similar to the scale of the original image.</short>
+<parameters>
+<parameter id="CamParam"/>
+<parameter id="CenterCol"/>
+<parameter id="CenterRow"/>
+<parameter id="HeightMappedImage"/>
+<parameter id="Pose"/>
+<parameter id="PoseForCenteredImage"/>
+<parameter id="ScaleForCenteredImage"/>
+<parameter id="WidthMappedImage"/>
+</parameters>
+</docu>
+</procedure>
+<procedure name="parameters_image_to_world_plane_entire">
+<interface>
+<io>
+<par name="Image" base_type="iconic" dimension="0"/>
+</io>
+<ic>
+<par name="CamParam" base_type="ctrl" dimension="0"/>
+<par name="Pose" base_type="ctrl" dimension="0"/>
+<par name="WidthMappedImage" base_type="ctrl" dimension="0"/>
+<par name="HeightMappedImage" base_type="ctrl" dimension="0"/>
+</ic>
+<oc>
+<par name="ScaleForEntireImage" base_type="ctrl" dimension="0"/>
+<par name="PoseForEntireImage" base_type="ctrl" dimension="0"/>
+</oc>
+</interface>
+<body>
+<c>* Transform the image border into the WCS (scale = 1)</c>
+<l>full_domain (Image, ImageFull)</l>
+<l>get_domain (ImageFull, Domain)</l>
+<l>gen_contour_region_xld (Domain, ImageBorder, 'border')</l>
+<l>contour_to_world_plane_xld (ImageBorder, ImageBorderWCS, CamParam, Pose, 1)</l>
+<l>smallest_rectangle1_xld (ImageBorderWCS, MinY, MinX, MaxY, MaxX)</l>
+<c>* Determine the scale of the mapping</c>
+<l>ExtentX := MaxX - MinX</l>
+<l>ExtentY := MaxY - MinY</l>
+<l>ScaleX := ExtentX / WidthMappedImage</l>
+<l>ScaleY := ExtentY / HeightMappedImage</l>
+<l>ScaleForEntireImage := max([ScaleX,ScaleY])</l>
+<c>* Shift the pose by the minimum X and Y coordinates</c>
+<l>set_origin_pose (Pose, MinX, MinY, 0, PoseForEntireImage)</l>
+<l>return ()</l>
+</body>
+<docu id="parameters_image_to_world_plane_entire">
+<short lang="en_US">Determine scale and pose such that the whole image fits into the rectified image.</short>
+<parameters>
+<parameter id="CamParam"/>
+<parameter id="HeightMappedImage"/>
+<parameter id="Image"/>
+<parameter id="Pose"/>
+<parameter id="PoseForEntireImage"/>
+<parameter id="ScaleForEntireImage"/>
+<parameter id="WidthMappedImage"/>
+</parameters>
+</docu>
+</procedure>
+</hdevelop>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.0">
+<procedure name="main">
+<interface/>
+<body>
+<c>* This example program trains a font that consists</c>
+<c>* of the characters A to G. The font is used in</c>
+<c>* the example program classify_characters_ocr.hdev</c>
+<c>* to read the corresponding characters.</c>
+<c>* </c>
+<l>read_image (Image, 'ocr/chars_training_01.png')</l>
+<l>get_image_pointer1 (Image, Pointer, Type, Width, Height)</l>
+<l>dev_close_window ()</l>
+<l>dev_open_window (0, 0, Width, Height, 'white', WindowHandle)</l>
+<l>set_display_font (WindowHandle, 12, 'mono', 'true', 'false')</l>
+<l>dev_set_draw ('margin')</l>
+<l>dev_set_line_width (2)</l>
+<l>dev_display (Image)</l>
+<l>dev_update_window ('off')</l>
+<l>dev_update_pc ('off')</l>
+<l>dev_update_var ('off')</l>
+<c>* </c>
+<c>* Create an SVM classifier for the characters A to G</c>
+<l>ClassNames := ['A','B','C','D','E','F','G']</l>
+<l>create_ocr_class_svm (8, 10, 'constant', ['convexity','num_holes','projection_horizontal','projection_vertical'], ClassNames, 'rbf', 0.02, 0.05, 'one-versus-one', 'normalization', 10, OCRHandle)</l>
+<c>* </c>
+<c>* Read the training images and store the regions</c>
+<c>* of the characters to a training file</c>
+<l>for I := 1 to 7 by 1</l>
+<l>    read_image (Image, 'ocr/chars_training_' + I$'.2d')</l>
+<l>    dev_display (Image)</l>
+<l>    get_regions (Image, SortedRegions)</l>
+<l>    count_obj (SortedRegions, NumberObjects)</l>
+<l>    for J := 1 to NumberObjects by 1</l>
+<l>        select_obj (SortedRegions, ObjectSelected, J)</l>
+<l>        if (I == 1 and J == 1)</l>
+<l>            write_ocr_trainf (ObjectSelected, Image, ClassNames[J - 1], 'train_characters_ocr.trf')</l>
+<l>        else</l>
+<l>            append_ocr_trainf (ObjectSelected, Image, ClassNames[J - 1], 'train_characters_ocr.trf')</l>
+<l>        endif</l>
+<l>        dev_set_color ('gray')</l>
+<l>        dev_display (ObjectSelected)</l>
+<l>        disp_message (WindowHandle, ClassNames[J - 1], 'window', 10, 10 + (J * 20), 'black', 'true')</l>
+<l>*         stop ()</l>
+<l>    endfor</l>
+<l>    disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>    stop ()</l>
+<l>endfor</l>
+<c>* </c>
+<c>* Check if the content of the training file is correct</c>
+<l>read_ocr_trainf (Characters, 'train_characters_ocr.trf', CharacterNames)</l>
+<l>count_obj (Characters, NumberCharacters)</l>
+<l>for I := 1 to NumberCharacters by 1</l>
+<l>    select_obj (Characters, CharacterSelected, I)</l>
+<l>    dev_clear_window ()</l>
+<l>    dev_display (CharacterSelected)</l>
+<l>    disp_message (WindowHandle, CharacterNames[I - 1], 'window', 10, 10, 'black', 'true')</l>
+<l>*     stop ()</l>
+<l>endfor</l>
+<c>* </c>
+<c>* Train the font, write the font to file,</c>
+<c>* and clear the classifier from memory</c>
+<l>trainf_ocr_class_svm (OCRHandle, 'train_characters_ocr.trf', 0.001, 'default')</l>
+<l>reduce_ocr_class_svm (OCRHandle, 'bottom_up', 2, 0.001, OCRHandleReduced)</l>
+<l>write_ocr_class_svm (OCRHandleReduced, 'font_characters_ocr')</l>
+<c>* </c>
+<l>clear_ocr_class_svm (OCRHandle)</l>
+<l>clear_ocr_class_svm (OCRHandleReduced)</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+<procedure name="get_regions">
+<interface>
+<io>
+<par name="Image" base_type="iconic" dimension="0"/>
+</io>
+<oo>
+<par name="SortedRegions" base_type="iconic" dimension="0"/>
+</oo>
+</interface>
+<body>
+<l>dev_set_color ('white')</l>
+<l>threshold (Image, Region, 0, 125)</l>
+<l>connection (Region, ConnectedRegions)</l>
+<l>select_shape (ConnectedRegions, SelectedRegions, 'area', 'and', 50, 999999)</l>
+<l>sort_region (SelectedRegions, SortedRegions, 'character', 'true', 'row')</l>
+<l>return ()</l>
+</body>
+<docu id="get_regions">
+<short lang="en_US">extract the regions of the citrus fruits</short>
+<parameters>
+<parameter id="Image"/>
+<parameter id="SortedRegions"/>
+</parameters>
+</docu>
+</procedure>
+</hdevelop>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.0">
+<procedure name="main">
+<interface/>
+<body>
+<c>* ------------------------------------------------------------------------------------------------</c>
+<c>* This example program shows how to handle errors (here: no ext. trigger -&gt; timeout).</c>
+<c>* NOTE: The example is preconfigured for the uEye image acquisition interface</c>
+<c>*       Please adapt the marked lines for your own image acquisition device.</c>
+<c>* ------------------------------------------------------------------------------------------------</c>
+<c>* general configuration of HDevelop</c>
+<l>set_system ('do_low_error', 'true')</l>
+<l>dev_update_window ('off')</l>
+<l>stop ()</l>
+<c>* step 1: connect to the image acquisition device, enabling the external trigger</c>
+<c>* -&gt; Please adapt the following lines for your own image acquisition device</c>
+<l>AcqName := 'uEye'</l>
+<l>open_framegrabber (AcqName, 1, 1, 0, 0, 0, 0, 'default', -1, 'default', -1, 'true', 'default', 'default', -1, -1, AcqHandle)</l>
+<c>* set the timeout to 2s</c>
+<c>* -&gt; Please adapt this line for your own image acquisition device</c>
+<l>set_framegrabber_param (AcqHandle, 'grab_timeout', 2000)</l>
+<c>* if there is no external trigger, a timeout occurs!   =&gt; Move the PC to the next line manually</c>
+<l>grab_image (Image, AcqHandle)</l>
+<c>* switch on the manual error handling</c>
+<l>dev_error_var (ErrorNum, 1)</l>
+<l>dev_set_check ('~give_error')</l>
+<c>* now the error is "ignored"</c>
+<l>grab_image (Image, AcqHandle)</l>
+<c>* step 2: switch off  the error handling, then check the return value of grab_image</c>
+<l>dev_error_var (ErrorNum, 0)</l>
+<l>dev_set_check ('give_error')</l>
+<l>stop ()</l>
+<l>if (ErrorNum == 5322)</l>
+<c>    * timeout! reopen the connection without trigger and try again</c>
+<c>    * -&gt; Please adapt this line for your own image acquisition device</c>
+<l>    set_framegrabber_param (AcqHandle, 'external_trigger', 'false')</l>
+<l>    dev_error_var (ErrorNum, 1)</l>
+<l>    dev_set_check ('~give_error')</l>
+<l>    grab_image (Image, AcqHandle)</l>
+<l>    dev_error_var (ErrorNum, 0)</l>
+<l>    dev_set_check ('give_error')</l>
+<l>endif</l>
+<c>* everything okay now? otherwise get error text</c>
+<l>if (ErrorNum != H_MSG_TRUE)</l>
+<l>    get_error_text (ErrorNum, ErrorText)</l>
+<l>endif</l>
+<l>stop ()</l>
+<c>* step 3: continue with the application</c>
+<l>get_image_pointer1 (Image, Pointer, Type, Width, Height)</l>
+<l>dev_close_window ()</l>
+<l>dev_open_window (0, 0, Width / 2, Height / 2, 'black', WindowID)</l>
+<l>while (1)</l>
+<l>    grab_image (Image, AcqHandle)</l>
+<l>    dev_display (Image)</l>
+<l>endwhile</l>
+<l>stop ()</l>
+<c>* clean up</c>
+<l>dev_update_window ('on')</l>
+<l>close_framegrabber (AcqHandle)</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>

@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.0">
+<procedure name="main">
+<interface/>
+<body>
+<c>* This example program shows how to apply a general GMM</c>
+<c>* classification to distinguish citrus fruits using the</c>
+<c>* features 'area' and 'circularity'. Additionally, the</c>
+<c>* 2D feature space for the extracted fruits is visualized.</c>
+<c>* </c>
+<l>read_image (Image, 'color/citrus_fruits_01')</l>
+<l>get_image_pointer1 (Image, Pointer, Type, Width, Height)</l>
+<l>dev_close_window ()</l>
+<l>dev_open_window (0, 0, Width, Height, 'white', WindowHandle)</l>
+<l>set_display_font (WindowHandle, 12, 'mono', 'true', 'false')</l>
+<l>dev_set_draw ('margin')</l>
+<l>dev_set_line_width (2)</l>
+<l>dev_display (Image)</l>
+<l>dev_update_window ('off')</l>
+<l>dev_update_pc ('off')</l>
+<l>dev_update_var ('off')</l>
+<c>* </c>
+<l>FeaturesArea := []</l>
+<l>FeaturesCircularity := []</l>
+<l>ClassName := ['orange','lemon']</l>
+<c>* </c>
+<c>* Create a GMM classifier</c>
+<l>create_class_gmm (2, 2, 1, 'spherical', 'normalization', 10, 42, GMMHandle)</l>
+<c>* </c>
+<c>* Add training samples</c>
+<l>for I := 1 to 4 by 1</l>
+<l>    read_image (Image, 'color/citrus_fruits_' + I$'.2d')</l>
+<l>    dev_display (Image)</l>
+<c>    * 'Add Samples'</c>
+<l>    get_regions (Image, SelectedRegions)</l>
+<l>    dev_display (SelectedRegions)</l>
+<l>    count_obj (SelectedRegions, NumberObjects)</l>
+<l>    for J := 1 to NumberObjects by 1</l>
+<l>        select_obj (SelectedRegions, ObjectSelected, J)</l>
+<l>        get_features (ObjectSelected, WindowHandle, Circularity, Area, RowRegionCenter, ColumnRegionCenter)</l>
+<l>        FeaturesArea := [FeaturesArea,Area]</l>
+<l>        FeaturesCircularity := [FeaturesCircularity,Circularity]</l>
+<l>        FeatureVector := real([Circularity,Area])</l>
+<l>        if (I &lt;= 2)</l>
+<l>            add_sample_class_gmm (GMMHandle, FeatureVector, 0, 0)</l>
+<l>            disp_message (WindowHandle, 'Add to Class:' + ClassName[0], 'window', RowRegionCenter, ColumnRegionCenter - 100, 'black', 'true')</l>
+<l>        else</l>
+<l>            add_sample_class_gmm (GMMHandle, FeatureVector, 1, 0)</l>
+<l>            disp_message (WindowHandle, 'Add to Class:' + ClassName[1], 'window', RowRegionCenter, ColumnRegionCenter - 100, 'black', 'true')</l>
+<l>        endif</l>
+<l>    endfor</l>
+<l>    disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>    stop ()</l>
+<l>endfor</l>
+<l>dev_clear_window ()</l>
+<c>* </c>
+<c>* Visualize the feature space</c>
+<l>visualize_2D_feature_space (Cross, Height, Width, WindowHandle, FeaturesArea[0:5], FeaturesCircularity[0:5], 'dim gray', 18)</l>
+<c>* 'oranges', 40, 440</c>
+<l>visualize_2D_feature_space (Cross, Height, Width, WindowHandle, FeaturesArea[6:11], FeaturesCircularity[6:11], 'light gray', 18)</l>
+<c>* 'lemons', 70, 440</c>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* </c>
+<c>* Train the classifier</c>
+<l>train_class_gmm (GMMHandle, 100, 0.001, 'training', 0.0001, Centers, Iter)</l>
+<c>* </c>
+<c>* Classify</c>
+<l>for I := 1 to 15 by 1</l>
+<l>    read_image (Image, 'color/citrus_fruits_' + I$'.2d')</l>
+<l>    dev_display (Image)</l>
+<c>    * 'Classify Image', 10, 10</c>
+<l>    get_regions (Image, SelectedRegions)</l>
+<l>    dev_display (SelectedRegions)</l>
+<l>    count_obj (SelectedRegions, NumberObjects)</l>
+<l>    for J := 1 to NumberObjects by 1</l>
+<l>        select_obj (SelectedRegions, ObjectSelected, J)</l>
+<l>        get_features (ObjectSelected, WindowHandle, Circularity, Area, RowRegionCenter, ColumnRegionCenter)</l>
+<l>        FeaturesArea := [FeaturesArea,Area]</l>
+<l>        FeaturesCircularity := [FeaturesCircularity,Circularity]</l>
+<l>        FeatureVector := real([Circularity,Area])</l>
+<l>        classify_class_gmm (GMMHandle, FeatureVector, 1, ClassID, ClassProb, Density, KSigmaProb)</l>
+<l>        disp_message (WindowHandle, 'Class: ' + ClassName[ClassID], 'window', RowRegionCenter, ColumnRegionCenter - 100, 'black', 'true')</l>
+<l>        disp_message (WindowHandle, 'KSigmaProb: ' + KSigmaProb, 'window', RowRegionCenter + 30, ColumnRegionCenter - 100, 'black', 'true')</l>
+<l>    endfor</l>
+<l>    if (I != 15)</l>
+<l>        disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>    endif</l>
+<l>    stop ()</l>
+<l>endfor</l>
+<c>* </c>
+<c>* Clear the classifier from memory</c>
+<l>clear_class_gmm (GMMHandle)</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+<procedure name="visualize_2D_feature_space">
+<interface>
+<oo>
+<par name="Cross" base_type="iconic" dimension="0"/>
+</oo>
+<ic>
+<par name="Height" base_type="ctrl" dimension="0"/>
+<par name="Width" base_type="ctrl" dimension="0"/>
+<par name="WindowID" base_type="ctrl" dimension="0"/>
+<par name="FeaturesA" base_type="ctrl" dimension="0"/>
+<par name="FeaturesC" base_type="ctrl" dimension="0"/>
+<par name="ColorFeatureVector" base_type="ctrl" dimension="0"/>
+<par name="CrossSize" base_type="ctrl" dimension="0"/>
+</ic>
+</interface>
+<body>
+<c>* </c>
+<c>* Create a coordinate system and draw its axes:</c>
+<l>dev_set_color ('black')</l>
+<l>OriginOfGraph := [Height - 0.1 * Height,0.1 * Width]</l>
+<l>disp_arrow (WindowID, OriginOfGraph[0], OriginOfGraph[1], OriginOfGraph[0], Width - 0.2 * Width, 2)</l>
+<l>disp_arrow (WindowID, OriginOfGraph[0], OriginOfGraph[1], 0.1 * Height, OriginOfGraph[1], 2)</l>
+<l>set_tposition (WindowID, OriginOfGraph[0], Width - 0.2 * Width)</l>
+<l>write_string (WindowID, 'Area')</l>
+<l>set_tposition (WindowID, 0.07 * Height, OriginOfGraph[1])</l>
+<l>write_string (WindowID, 'Circularity')</l>
+<l>dev_set_color (ColorFeatureVector)</l>
+<c>* </c>
+<c>* Define the extent of the graph in image coordinates, the</c>
+<c>* approximated ranges between the minimum and maximum</c>
+<c>* feature values, and calculate the resulting</c>
+<c>* scale factor for each feature axis:</c>
+<l>ExtentOfGraph := Height - 0.3 * Height</l>
+<l>RangeC := 0.5</l>
+<l>RangeA := 24000</l>
+<l>ScaleC := ExtentOfGraph / RangeC</l>
+<l>ScaleA := ExtentOfGraph / RangeA</l>
+<c>* </c>
+<c>* Set the approximated minimum values of the features, which</c>
+<c>* are the feature values at the origin of the graph:</c>
+<l>MinC := 0.5</l>
+<l>MinA := 20000</l>
+<c>* </c>
+<c>* Get the individual feature vectors in image coordinates</c>
+<c>* and visualize them:</c>
+<l>NumberFeatureVectors := |FeaturesA|</l>
+<l>for I := 0 to NumberFeatureVectors - 1 by 1</l>
+<c>    * </c>
+<c>    * Get the distance of the feature i from</c>
+<c>    *  the origin of the graph in pixels:</c>
+<l>    DiffC := ScaleC * (FeaturesC[I] - MinC)</l>
+<l>    DiffA := ScaleA * (FeaturesA[I] - MinA)</l>
+<c>    * </c>
+<c>    * Get the row and column of the feature</c>
+<c>    * vector in image coordinates:</c>
+<l>    RowFeature := OriginOfGraph[0] - DiffC</l>
+<l>    ColumnFeature := OriginOfGraph[1] + DiffA</l>
+<c>    * </c>
+<c>    * Generate a cross contour for the feature vector i:</c>
+<l>    gen_cross_contour_xld (Cross, RowFeature, ColumnFeature, CrossSize, 0.785398)</l>
+<l>    dev_display (Cross)</l>
+<l>endfor</l>
+<l>return ()</l>
+</body>
+<docu id="visualize_2D_feature_space">
+<short lang="en_US">show the graph of the 2D feature space</short>
+<parameters>
+<parameter id="ColorFeatureVector"/>
+<parameter id="Cross"/>
+<parameter id="CrossSize"/>
+<parameter id="FeaturesA"/>
+<parameter id="FeaturesC"/>
+<parameter id="Height"/>
+<parameter id="Width"/>
+<parameter id="WindowID"/>
+</parameters>
+</docu>
+</procedure>
+<procedure name="get_features">
+<interface>
+<io>
+<par name="ObjectSelected" base_type="iconic" dimension="0"/>
+</io>
+<ic>
+<par name="WindowHandle" base_type="ctrl" dimension="0"/>
+</ic>
+<oc>
+<par name="Circularity" base_type="ctrl" dimension="0"/>
+<par name="Area" base_type="ctrl" dimension="0"/>
+<par name="Row" base_type="ctrl" dimension="0"/>
+<par name="Column" base_type="ctrl" dimension="0"/>
+</oc>
+</interface>
+<body>
+<l>circularity (ObjectSelected, Circularity)</l>
+<l>area_center (ObjectSelected, Area, Row, Column)</l>
+<l>dev_set_color ('white')</l>
+<c>* 'Area: '+Area, Row-80, Column-100</c>
+<c>* 'Circularity: '+Circularity, Row-50, Column-100</c>
+<l>return ()</l>
+</body>
+<docu id="get_features">
+<short lang="en_US">extract the features area and circularity</short>
+<parameters>
+<parameter id="Area"/>
+<parameter id="Circularity"/>
+<parameter id="Column"/>
+<parameter id="ObjectSelected"/>
+<parameter id="Row"/>
+<parameter id="WindowHandle"/>
+</parameters>
+</docu>
+</procedure>
+<procedure name="get_regions">
+<interface>
+<io>
+<par name="Image" base_type="iconic" dimension="0"/>
+</io>
+<oo>
+<par name="SelectedRegions" base_type="iconic" dimension="0"/>
+</oo>
+</interface>
+<body>
+<l>decompose3 (Image, ImageRed, ImageGreen, ImageBlue)</l>
+<l>dev_set_color ('white')</l>
+<l>threshold (ImageRed, Region, 50, 255)</l>
+<l>fill_up (Region, RegionFillUp)</l>
+<l>connection (RegionFillUp, ConnectedRegions)</l>
+<l>select_shape (ConnectedRegions, SelectedRegions, 'area', 'and', 50, 999999)</l>
+<l>return ()</l>
+</body>
+<docu id="get_regions">
+<short lang="en_US">extract the regions of the citrus fruits</short>
+<parameters>
+<parameter id="Image"/>
+<parameter id="SelectedRegions"/>
+</parameters>
+</docu>
+</procedure>
+</hdevelop>

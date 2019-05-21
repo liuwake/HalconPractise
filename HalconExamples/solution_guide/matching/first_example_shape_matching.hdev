@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.0">
+<procedure name="main">
+<interface/>
+<body>
+<c>* ------------------------------------------------------------------------------------------------</c>
+<c>* This example program introduces HALCON's shape-based matching.</c>
+<c>* ------------------------------------------------------------------------------------------------</c>
+<c>* general configuration of HDevelop</c>
+<l>dev_update_window ('off')</l>
+<c>* image acquisition and window size</c>
+<l>open_framegrabber ('File', 1, 1, 0, 0, 0, 0, 'default', -1, 'default', -1, 'default', 'board/board.seq', 'default', -1, 1, FGHandle)</l>
+<l>grab_image (ModelImage, FGHandle)</l>
+<l>get_image_pointer1 (ModelImage, Pointer, Type, Width, Height)</l>
+<l>dev_close_window ()</l>
+<l>dev_open_window (0, 0, Width, Height, 'white', WindowHandle)</l>
+<l>dev_set_part (0, 0, Height - 1, Width - 1)</l>
+<l>dev_display (ModelImage)</l>
+<c>* colors and other settings for the visualization</c>
+<l>dev_set_color ('yellow')</l>
+<l>dev_set_draw ('margin')</l>
+<l>dev_set_line_width (2)</l>
+<l>set_display_font (WindowHandle, 14, 'mono', 'true', 'false')</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* -------------------  start of the application  ----------------</c>
+<c>* step 1: select the model object</c>
+<l>Row1 := 188</l>
+<l>Column1 := 182</l>
+<l>Row2 := 298</l>
+<l>Column2 := 412</l>
+<l>gen_rectangle1 (ROI, Row1, Column1, Row2, Column2)</l>
+<l>dev_display (ROI)</l>
+<l>reduce_domain (ModelImage, ROI, ImageROI)</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* step 2: create the model</c>
+<l>inspect_shape_model (ImageROI, ShapeModelImages, ShapeModelRegions, 8, 30)</l>
+<l>dev_clear_window ()</l>
+<l>dev_set_color ('blue')</l>
+<l>dev_display (ShapeModelRegions)</l>
+<l>area_center (ShapeModelRegions, AreaModelRegions, RowModelRegions, ColumnModelRegions)</l>
+<l>count_obj (ShapeModelRegions, HeightPyramid)</l>
+<l>for i := 1 to HeightPyramid by 1</l>
+<l>    if (AreaModelRegions[i - 1] &gt;= 15)</l>
+<l>        NumLevels := i</l>
+<l>    endif</l>
+<l>endfor</l>
+<l>create_shape_model (ImageROI, NumLevels, 0, rad(360), 'auto', 'none', 'use_polarity', 30, 10, ModelID)</l>
+<l>get_shape_model_contours (ShapeModel, ModelID, 1)</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* step 3: find the object in other images</c>
+<l>for i := 1 to 20 by 1</l>
+<l>    grab_image (SearchImage, FGHandle)</l>
+<l>    find_shape_model (SearchImage, ModelID, 0, rad(360), 0.7, 1, 0.5, 'least_squares', 0, 0.7, RowCheck, ColumnCheck, AngleCheck, Score)</l>
+<l>    if (|Score| == 1)</l>
+<l>        dev_set_color ('yellow')</l>
+<l>        vector_angle_to_rigid (0, 0, 0, RowCheck, ColumnCheck, AngleCheck, MovementOfObject)</l>
+<l>        affine_trans_contour_xld (ShapeModel, ModelAtNewPosition, MovementOfObject)</l>
+<l>        dev_display (SearchImage)</l>
+<l>        dev_display (ModelAtNewPosition)</l>
+<l>    endif</l>
+<l>    if (i != 20)</l>
+<l>        disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>    endif</l>
+<l>    stop ()</l>
+<l>endfor</l>
+<c>* -------------------  end of the application  -----------------</c>
+<c>* clean up</c>
+<l>clear_shape_model (ModelID)</l>
+<l>dev_update_window ('on')</l>
+<l>close_framegrabber (FGHandle)</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>

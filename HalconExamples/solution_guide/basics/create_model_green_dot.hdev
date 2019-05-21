@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.0">
+<procedure name="main">
+<interface/>
+<body>
+<c>* This example demonstrates how to create a model for</c>
+<c>* scale invariant shape-based matching.</c>
+<c>* </c>
+<c>* </c>
+<l>dev_update_off ()</l>
+<l>dev_close_window ()</l>
+<c>* </c>
+<c>* Acquire image</c>
+<l>read_image (Image, 'green-dot')</l>
+<l>dev_open_window_fit_image (Image, 0, 0, -1, -1, WindowHandle)</l>
+<l>dev_display (Image)</l>
+<c>* </c>
+<c>* Set display settings</c>
+<l>set_display_font (WindowHandle, 16, 'mono', 'true', 'false')</l>
+<l>dev_set_draw ('margin')</l>
+<l>dev_set_color ('green')</l>
+<l>dev_set_line_width (3)</l>
+<l>Message := 'This example shows how to create a shape model'</l>
+<l>Message[1] := 'for scale invariant matching and how to save'</l>
+<l>Message[2] := 'it in a file.'</l>
+<l>disp_message (WindowHandle, Message, 'window', 12, 12, 'black', 'true')</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* </c>
+<c>* Segment the template region</c>
+<l>threshold (Image, Region, 0, 128)</l>
+<l>connection (Region, ConnectedRegions)</l>
+<l>select_shape (ConnectedRegions, SelectedRegions, 'area', 'and', 10000, 20000)</l>
+<l>fill_up (SelectedRegions, RegionFillUp)</l>
+<l>dilation_circle (RegionFillUp, RegionDilation, 5.5)</l>
+<l>dev_display (Image)</l>
+<l>dev_display (RegionDilation)</l>
+<l>disp_message (WindowHandle, 'Template region', 'window', 12, 12, 'black', 'true')</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* </c>
+<c>* Create the shape model</c>
+<l>reduce_domain (Image, RegionDilation, ImageReduced)</l>
+<l>inspect_shape_model (ImageReduced, ModelImages, ModelRegions, 1, 40)</l>
+<l>create_scaled_shape_model (ImageReduced, 5, rad(-45), rad(90), 0, 0.8, 1.0, 0, ['none','no_pregeneration'], 'ignore_global_polarity', 40, 10, ModelID)</l>
+<l>dev_display (Image)</l>
+<l>dev_display (ModelRegions)</l>
+<l>disp_message (WindowHandle, 'Regions of the shape model', 'window', 12, 12, 'black', 'true')</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* </c>
+<c>* Save the model in a file</c>
+<l>write_shape_model (ModelID, 'green-dot.shm')</l>
+<l>Message := 'The shape model has been saved in the file'</l>
+<l>Message[1] := '\'green-dot.shm\'.'</l>
+<l>disp_message (WindowHandle, Message, 'window', 12, 12, 'black', 'true')</l>
+<l>disp_end_of_program_message (WindowHandle, 'black', 'true')</l>
+<c>* </c>
+<c>* Clear the model</c>
+<l>clear_shape_model (ModelID)</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>

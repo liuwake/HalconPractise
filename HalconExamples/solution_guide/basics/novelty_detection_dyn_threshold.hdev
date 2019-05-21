@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.0">
+<procedure name="main">
+<interface/>
+<body>
+<c>* The task of this example is to detect defects on a</c>
+<c>* web using the operator dyn_threshold. In this way,</c>
+<c>* the operator can be used to find textures that</c>
+<c>* differ from the rest of the image.</c>
+<l>dev_update_window ('off')</l>
+<l>read_image (Image, 'plastic_mesh/plastic_mesh_01')</l>
+<l>dev_close_window ()</l>
+<l>get_image_size (Image, Width, Height)</l>
+<l>dev_open_window_fit_image (Image, 0, 0, Width, Height, WindowHandle)</l>
+<l>set_display_font (WindowHandle, 18, 'mono', 'true', 'false')</l>
+<l>dev_set_draw ('margin')</l>
+<l>dev_set_line_width (3)</l>
+<c>* Each of the images is read and smoothed. Subsequently</c>
+<c>* dyn_threshold is performed and connected regions are</c>
+<c>* looked for. The parameter 'area' of the operator select_shape</c>
+<c>* makes it possible to find regions that differ in the area</c>
+<c>* size. Found errors are finally counted and displayed.</c>
+<l>for J := 1 to 14 by 1</l>
+<l>    read_image (Image, 'plastic_mesh/plastic_mesh_' + J$'02')</l>
+<l>    mean_image (Image, ImageMean, 49, 49)</l>
+<l>    dyn_threshold (Image, ImageMean, RegionDynThresh, 5, 'dark')</l>
+<l>    connection (RegionDynThresh, ConnectedRegions)</l>
+<l>    select_shape (ConnectedRegions, ErrorRegions, 'area', 'and', 500, 99999)</l>
+<l>    count_obj (ErrorRegions, NumErrors)</l>
+<l>    dev_display (Image)</l>
+<l>    dev_set_color ('red')</l>
+<l>    dev_display (ErrorRegions)</l>
+<c>    * If the number of errors exceeds zero, the message 'Mesh not</c>
+<c>    * OK' is displayed. Otherwise the web is undamaged</c>
+<c>    * and 'Mesh OK' is displayed.</c>
+<l>    if (NumErrors &gt; 0)</l>
+<l>        disp_message (WindowHandle, 'Mesh not OK', 'window', 24, 12, 'black', 'true')</l>
+<l>    else</l>
+<l>        disp_message (WindowHandle, 'Mesh OK', 'window', 24, 12, 'black', 'true')</l>
+<l>    endif</l>
+<c>    * If the sequence number of the image to be inspected is</c>
+<c>    * lower than 14, the request to press 'Run' to continue appears.</c>
+<c>    * If the last image is read, pressing 'Run' will clear the SVM.</c>
+<l>    if (J &lt; 14)</l>
+<l>        disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>        stop ()</l>
+<l>    endif</l>
+<l>endfor</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>

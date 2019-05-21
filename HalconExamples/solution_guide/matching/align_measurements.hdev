@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.0">
+<procedure name="main">
+<interface/>
+<body>
+<c>* ------------------------------------------------------------------------------------------------</c>
+<c>* This example program uses shape-based matching to align ROIs for the measure</c>
+<c>* tool, which then inspects individual razor blades.</c>
+<c>* The program can be run in two modes: (1) with the full affine transformation</c>
+<c>*                                                                (2) using translate_measure</c>
+<c>* Modify the next line to switch between the modes.</c>
+<l>USING_TRANSLATE_MEASURE := 0</l>
+<c>* ------------------------------------------------------------------------------------------------</c>
+<c>* general configuration of HDevelop</c>
+<l>dev_update_window ('off')</l>
+<c>* image acquisition and window size</c>
+<l>read_image (ModelImage, 'razors1')</l>
+<l>get_image_pointer1 (ModelImage, Pointer, Type, Width, Height)</l>
+<l>dev_close_window ()</l>
+<l>dev_open_window (0, 0, Width, Height, 'white', WindowHandle)</l>
+<l>dev_set_part (0, 0, Height - 1, Width - 1)</l>
+<l>dev_display (ModelImage)</l>
+<c>* colors and other settings for the visualization</c>
+<l>dev_set_color ('cyan')</l>
+<l>dev_set_draw ('margin')</l>
+<l>dev_set_line_width (2)</l>
+<l>stop ()</l>
+<c>* -------------------  start of the application  ----------------</c>
+<c>* -&gt; select the model object</c>
+<l>Row1 := 46</l>
+<l>Column1 := 57</l>
+<l>Row2 := 79</l>
+<l>Column2 := 94</l>
+<l>gen_rectangle1 (ROIPart1, Row1, Column1, Row2, Column2)</l>
+<l>gen_rectangle1 (ROIPart2, Row1 + 364, Column1 + 13, Row2 + 364, Column2 + 13)</l>
+<l>union2 (ROIPart1, ROIPart2, ModelROI)</l>
+<l>area_center (ModelROI, Area, CenterROIRow, CenterROIColumn)</l>
+<l>dev_display (ModelImage)</l>
+<l>dev_display (ModelROI)</l>
+<l>stop ()</l>
+<c>* -&gt; create the model</c>
+<l>reduce_domain (ModelImage, ModelROI, ImageROI)</l>
+<l>create_shape_model (ImageROI, 4, 0, 0, 'auto', 'none', 'use_polarity', 30, 10, ModelID)</l>
+<l>inspect_shape_model (ImageROI, ShapeModelImage, ShapeModelRegion, 1, 30)</l>
+<l>get_shape_model_contours (ShapeModel, ModelID, 1)</l>
+<l>dev_clear_window ()</l>
+<l>dev_set_color ('blue')</l>
+<l>dev_display (ShapeModelRegion)</l>
+<l>stop ()</l>
+<c>* step 1: create variables describing  the measurement ROIs and display them</c>
+<l>Rect1Row := 244</l>
+<l>Rect1Col := 73</l>
+<l>DistColRect1Rect2 := 17</l>
+<l>Rect2Row := Rect1Row</l>
+<l>Rect2Col := Rect1Col + DistColRect1Rect2</l>
+<l>RectPhi := rad(90)</l>
+<l>RectLength1 := 122</l>
+<l>RectLength2 := 2</l>
+<l>gen_rectangle2 (MeasureROI1, Rect1Row, Rect1Col, RectPhi, RectLength1, RectLength2)</l>
+<l>gen_rectangle2 (MeasureROI2, Rect2Row, Rect2Col, RectPhi, RectLength1, RectLength2)</l>
+<l>dev_display (ModelImage)</l>
+<l>dev_set_color ('yellow')</l>
+<l>dev_display (MeasureROI1)</l>
+<l>dev_display (MeasureROI2)</l>
+<c>* translate measurement ROIs to lie on XLD model (without clipping!)</c>
+<l>get_system ('clip_region', OriginalClipRegion)</l>
+<l>set_system ('clip_region', 'false')</l>
+<l>move_region (MeasureROI1, MeasureROI1Ref, -CenterROIRow, -CenterROIColumn)</l>
+<l>move_region (MeasureROI2, MeasureROI2Ref, -CenterROIRow, -CenterROIColumn)</l>
+<l>set_system ('clip_region', OriginalClipRegion)</l>
+<l>DistRect1CenterRow := Rect1Row - CenterROIRow</l>
+<l>DistRect1CenterCol := Rect1Col - CenterROIColumn</l>
+<l>DistRect2CenterRow := Rect2Row - CenterROIRow</l>
+<l>DistRect2CenterCol := Rect2Col - CenterROIColumn</l>
+<l>if (USING_TRANSLATE_MEASURE != 0)</l>
+<c>    * -&gt; measure objects are created only once in advance and then translated later</c>
+<l>    gen_measure_rectangle2 (Rect1Row, Rect1Col, RectPhi, RectLength1, RectLength2, Width, Height, 'bilinear', MeasureHandle1)</l>
+<l>    gen_measure_rectangle2 (Rect2Row, Rect2Col, RectPhi, RectLength1, RectLength2, Width, Height, 'bilinear', MeasureHandle2)</l>
+<l>endif</l>
+<l>stop ()</l>
+<c>* step 2: find the objects in another image</c>
+<l>read_image (SearchImage, 'razors2')</l>
+<l>dev_display (SearchImage)</l>
+<l>find_shape_model (SearchImage, ModelID, 0, 0, 0.8, 0, 0.5, 'least_squares', 0, 0.7, RowCheck, ColumnCheck, AngleCheck, Score)</l>
+<l>if (|Score| &gt; 0)</l>
+<l>    for i := 0 to |Score| - 1 by 1</l>
+<c>        * step 3: determine the affine transformation</c>
+<l>        vector_angle_to_rigid (0, 0, 0, RowCheck[i], ColumnCheck[i], AngleCheck[i], MovementOfObject)</l>
+<l>        affine_trans_contour_xld (ShapeModel, ModelAtNewPosition, MovementOfObject)</l>
+<l>        dev_display (ModelAtNewPosition)</l>
+<c>        * step 4: measure width and distance of the teeth</c>
+<c>        * -&gt; display the moved ROIs</c>
+<l>        affine_trans_region (MeasureROI1Ref, MeasureROI1AtNewPosition, MovementOfObject, 'constant')</l>
+<l>        affine_trans_region (MeasureROI2Ref, MeasureROI2AtNewPosition, MovementOfObject, 'constant')</l>
+<l>        dev_display (MeasureROI1AtNewPosition)</l>
+<l>        dev_display (MeasureROI2AtNewPosition)</l>
+<l>        affine_trans_pixel (MovementOfObject, DistRect1CenterRow, DistRect1CenterCol, Rect1RowCheck, Rect1ColCheck)</l>
+<l>        affine_trans_pixel (MovementOfObject, DistRect2CenterRow, DistRect2CenterCol, Rect2RowCheck, Rect2ColCheck)</l>
+<l>        if (USING_TRANSLATE_MEASURE != 0)</l>
+<c>            * -&gt; translate the already created measure objects</c>
+<l>            translate_measure (MeasureHandle1, Rect1RowCheck, Rect1ColCheck)</l>
+<l>            translate_measure (MeasureHandle2, Rect2RowCheck, Rect2ColCheck)</l>
+<l>            measure_pairs (SearchImage, MeasureHandle1, 2, 25, 'negative', 'all', RowEdge11, ColEdge11, Amp11, RowEdge21, ColEdge21, Amp21, Width1, Distance1)</l>
+<l>            measure_pairs (SearchImage, MeasureHandle2, 2, 25, 'negative', 'all', RowEdge12, ColEdge12, Amp12, RowEdge22, ColEdge22, Amp22, Width2, Distance2)</l>
+<l>        else</l>
+<c>            * -&gt; create new measure objects and destroy them after the measurement</c>
+<l>            RectPhiCheck := RectPhi + AngleCheck[i]</l>
+<l>            gen_measure_rectangle2 (Rect1RowCheck, Rect1ColCheck, RectPhiCheck, RectLength1, RectLength2, Width, Height, 'bilinear', MeasureHandle1)</l>
+<l>            gen_measure_rectangle2 (Rect2RowCheck, Rect2ColCheck, RectPhiCheck, RectLength1, RectLength2, Width, Height, 'bilinear', MeasureHandle2)</l>
+<c>            * step 5: perform the measurement</c>
+<l>            measure_pairs (SearchImage, MeasureHandle1, 2, 25, 'negative', 'all', RowEdge11, ColEdge11, Amp11, RowEdge21, ColEdge21, Amp21, Width1, Distance1)</l>
+<l>            measure_pairs (SearchImage, MeasureHandle2, 2, 25, 'negative', 'all', RowEdge12, ColEdge12, Amp12, RowEdge22, ColEdge22, Amp22, Width2, Distance2)</l>
+<l>            close_measure (MeasureHandle1)</l>
+<l>            close_measure (MeasureHandle2)</l>
+<l>        endif</l>
+<c>        * step 6: check for too short or missing teeth</c>
+<l>        NumberTeeth1 := |Width1|</l>
+<l>        NumberTeeth2 := |Width2|</l>
+<l>        dev_set_color ('red')</l>
+<l>        if (NumberTeeth1 &lt; 37)</l>
+<l>            for j := 0 to NumberTeeth1 - 2 by 1</l>
+<l>                if (Distance1[j] &gt; 4.0)</l>
+<l>                    RowFault := round(0.5 * (RowEdge11[j + 1] + RowEdge21[j]))</l>
+<l>                    ColFault := round(0.5 * (ColEdge11[j + 1] + ColEdge21[j]))</l>
+<l>                    disp_rectangle2 (WindowHandle, RowFault, ColFault, 0, 4, 4)</l>
+<l>                    dev_open_window (0, Width + 20, 80, 80, 'black', WindowHandleZoom)</l>
+<l>                    dev_set_part (RowFault - 10, ColFault - 10, RowFault + 10, ColFault + 10)</l>
+<l>                    dev_display (SearchImage)</l>
+<l>                    disp_rectangle2 (WindowHandleZoom, RowFault, ColFault, 0, 4, 4)</l>
+<l>                    stop ()</l>
+<l>                    dev_close_window ()</l>
+<l>                    dev_set_part (0, 0, Height - 1, Width - 1)</l>
+<l>                endif</l>
+<l>            endfor</l>
+<l>        endif</l>
+<l>        if (NumberTeeth2 &lt; 37)</l>
+<l>            for j := 0 to NumberTeeth2 - 2 by 1</l>
+<l>                if (Distance2[j] &gt; 4.0)</l>
+<l>                    RowFault := round(0.5 * (RowEdge12[j + 1] + RowEdge22[j]))</l>
+<l>                    ColFault := round(0.5 * (ColEdge12[j + 1] + ColEdge22[j]))</l>
+<l>                    disp_rectangle2 (WindowHandle, RowFault, ColFault, 0, 4, 4)</l>
+<l>                    dev_open_window (0, Width + 20, 80, 80, 'black', WindowHandleZoom)</l>
+<l>                    dev_set_part (RowFault - 10, ColFault - 10, RowFault + 10, ColFault + 10)</l>
+<l>                    dev_display (SearchImage)</l>
+<l>                    disp_rectangle2 (WindowHandleZoom, RowFault, ColFault, 0, 4, 4)</l>
+<l>                    stop ()</l>
+<l>                    dev_close_window ()</l>
+<l>                    dev_set_part (0, 0, Height - 1, Width - 1)</l>
+<l>                endif</l>
+<l>            endfor</l>
+<l>        endif</l>
+<l>        dev_set_color ('yellow')</l>
+<l>        stop ()</l>
+<l>    endfor</l>
+<l>endif</l>
+<c>* -------------------  end of the application  -----------------</c>
+<c>* clean up</c>
+<l>if (USING_TRANSLATE_MEASURE != 0)</l>
+<l>    close_measure (MeasureHandle1)</l>
+<l>    close_measure (MeasureHandle2)</l>
+<l>endif</l>
+<l>dev_update_window ('on')</l>
+<l>clear_shape_model (ModelID)</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>

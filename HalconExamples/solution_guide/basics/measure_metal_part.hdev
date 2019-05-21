@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.0">
+<procedure name="main">
+<interface/>
+<body>
+<c>* measure_metal_part.hdev: inspects metal part by fitting lines and circles</c>
+<c>* </c>
+<l>dev_close_window ()</l>
+<l>dev_update_window ('off')</l>
+<c>* ****</c>
+<c>* step: acquire image</c>
+<c>* ****</c>
+<l>read_image (Image, 'metal-parts/metal-parts-01')</l>
+<l>get_image_size (Image, Width, Height)</l>
+<l>dev_open_window_fit_image (Image, 0, 0, Width, Width, WindowID)</l>
+<l>set_display_font (WindowID, 14, 'mono', 'true', 'false')</l>
+<l>dev_set_draw ('margin')</l>
+<l>dev_set_line_width (3)</l>
+<l>dev_display (Image)</l>
+<l>disp_continue_message (WindowID, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* ****</c>
+<c>* step: create contours</c>
+<c>* ****</c>
+<l>edges_sub_pix (Image, Edges, 'lanser2', 0.5, 40, 90)</l>
+<l>dev_display (Edges)</l>
+<l>disp_continue_message (WindowID, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* ****</c>
+<c>* step: process contours</c>
+<c>* ****</c>
+<l>segment_contours_xld (Edges, ContoursSplit, 'lines_circles', 6, 4, 4)</l>
+<l>sort_contours_xld (ContoursSplit, SortedContours, 'upper_left', 'true', 'column')</l>
+<l>dev_clear_window ()</l>
+<l>dev_set_colored (12)</l>
+<l>dev_display (SortedContours)</l>
+<l>disp_continue_message (WindowID, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* ****</c>
+<c>* step: perform fitting</c>
+<c>* ****</c>
+<l>ROI := [115,225,395,535]</l>
+<l>dev_open_window (0, round(Width / 2), (ROI[3] - ROI[1]) * 2, (ROI[2] - ROI[0]) * 2, 'black', WindowHandleZoom)</l>
+<l>dev_set_part (round(ROI[0]), round(ROI[1]), round(ROI[2]), round(ROI[3]))</l>
+<l>set_display_font (WindowHandleZoom, 14, 'mono', 'true', 'false')</l>
+<l>count_obj (SortedContours, NumSegments)</l>
+<l>dev_display (Image)</l>
+<l>NumCircles := 0</l>
+<l>NumLines := 0</l>
+<l>for i := 1 to NumSegments by 1</l>
+<l>    select_obj (SortedContours, SingleSegment, i)</l>
+<l>    get_contour_global_attrib_xld (SingleSegment, 'cont_approx', Attrib)</l>
+<l>    if (Attrib == 1)</l>
+<l>        NumCircles := NumCircles + 1</l>
+<l>        fit_circle_contour_xld (SingleSegment, 'atukey', -1, 2, 0, 5, 2, Row, Column, Radius, StartPhi, EndPhi, PointOrder)</l>
+<l>        gen_ellipse_contour_xld (ContEllipse, Row, Column, 0, Radius, Radius, 0, rad(360), 'positive', 1.0)</l>
+<l>        dev_set_color ('white')</l>
+<l>        dev_display (ContEllipse)</l>
+<l>        set_tposition (WindowHandleZoom, Row - Radius - 10, Column)</l>
+<l>        write_string (WindowHandleZoom, 'C' + NumCircles)</l>
+<l>        ResultText := 'C' + NumCircles + ': radius = ' + Radius</l>
+<l>    else</l>
+<l>        NumLines := NumLines + 1</l>
+<l>        fit_line_contour_xld (SingleSegment, 'tukey', -1, 0, 5, 2, RowBegin, ColBegin, RowEnd, ColEnd, Nr, Nc, Dist)</l>
+<l>        gen_contour_polygon_xld (Line, [RowBegin,RowEnd], [ColBegin,ColEnd])</l>
+<l>        dev_set_color ('yellow')</l>
+<l>        dev_display (Line)</l>
+<l>        distance_pp (RowBegin, ColBegin, RowEnd, ColEnd, Length)</l>
+<l>        set_tposition (WindowHandleZoom, (RowBegin + RowEnd) / 2 - Nr * 10, (ColBegin + ColEnd) / 2)</l>
+<l>        write_string (WindowHandleZoom, 'L' + NumLines)</l>
+<l>        ResultText := 'L' + NumLines + ': length = ' + Length</l>
+<l>    endif</l>
+<l>    set_tposition (WindowHandleZoom, 275 + i * 10, 230)</l>
+<l>    write_string (WindowHandleZoom, ResultText)</l>
+<l>endfor</l>
+<l>disp_continue_message (WindowID, 'black', 'true')</l>
+<l>stop ()</l>
+<l>dev_set_window (WindowHandleZoom)</l>
+<l>dev_close_window ()</l>
+<l>dev_clear_window ()</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>

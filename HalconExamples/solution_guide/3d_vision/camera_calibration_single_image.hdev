@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.0">
+<procedure name="main">
+<interface/>
+<body>
+<c>* In this example, we measure a ruler whose surface is 2 mm below the</c>
+<c>* surface of the calibration plate used for calibration.</c>
+<c>* </c>
+<c>* When calibrating with a single calibration image, 'focus' and 'Z'</c>
+<c>* (the distance between camera and calibration plate) cannot be</c>
+<c>* determined unambiguously.</c>
+<c>* This leads to systematic measurement errors when measuring</c>
+<c>* outside of the calibration plane, e.g., if 'set_origin_pose' is used.</c>
+<c>* </c>
+<c>* Initialization and introduction</c>
+<c>* </c>
+<l>dev_update_off ()</l>
+<l>read_image (CalibImage, '3d_machine_vision/calib/calib_image_01')</l>
+<l>read_image (MeasureImage, '3d_machine_vision/calib/ruler')</l>
+<l>get_image_size (MeasureImage, Width, Height)</l>
+<l>dev_close_window ()</l>
+<l>dev_open_window_fit_image (MeasureImage, 0, 0, -1, -1, WindowHandle)</l>
+<l>set_display_font (WindowHandle, 16, 'mono', 'true', 'false')</l>
+<l>dev_disp_introduction_text (CalibImage)</l>
+<l>stop ()</l>
+<c>* </c>
+<c>* The systematic error depends on the relative error of 'focus'</c>
+<c>* and the relative offset of the measurement plane compared to the</c>
+<c>* real working distance.</c>
+<c>* </c>
+<c>* In this example, our initial guess for 'focus' is about 3% off</c>
+<c>* from the real value 12.34 mm. Together with the real 'Z' value</c>
+<c>* (obtained with multi-image calibration) of 216 mm, the</c>
+<c>* systematic error in this case is only about 0.025 %.</c>
+<c>* </c>
+<c>* The error can be estimated with the following formula:</c>
+<l>StartFocus := 0.012</l>
+<l>RealFocus := 0.01234</l>
+<l>PlaneOffset := 0.002</l>
+<l>RealCaltabPoseZ := 0.216</l>
+<c>* </c>
+<l>FocusErrorFactor := StartFocus / RealFocus</l>
+<l>OffsetFactor := RealCaltabPoseZ / (RealCaltabPoseZ + PlaneOffset)</l>
+<l>SystematicErrorInPercent := abs(OffsetFactor + (1 - OffsetFactor) / FocusErrorFactor - 1) * 100</l>
+<c>* </c>
+<c>* </c>
+<c>* Single image calibration and measurement</c>
+<c>* </c>
+<c>* First iteration:</c>
+<c>*   Good guess for the 'focus' start parameter.</c>
+<c>*   'focus' is fixed during the calibration.</c>
+<c>*   This leads to good results.</c>
+<c>* Second iteration:</c>
+<c>*   'focus' is NOT fixed.</c>
+<c>*   This leads to a high systematic error outside of the measurement plane.</c>
+<c>* </c>
+<l>assemble_title_text (Title)</l>
+<l>for Index := 0 to 1 by 1</l>
+<c>    * </c>
+<c>    * Single image calibration</c>
+<c>    * </c>
+<c>    * Calculate offset of measurement plane.</c>
+<l>    CalPlateThickness := 0.002</l>
+<l>    MeasurementPlaneZOffset := CalPlateThickness</l>
+<c>    * Set start parameters according to camera and lens data sheet.</c>
+<l>    StartFocus := 0.012</l>
+<l>    gen_cam_par_area_scan_division (0.012, 0, 0.00000375, 0.00000375, 640, 480, 1280, 960, StartCamPar)</l>
+<c>    * Specify calibration plate description file.</c>
+<l>    CalPlateDescr := 'calplate_80mm.cpd'</l>
+<c>    * Create and initialize calibration data.</c>
+<l>    create_calib_data ('calibration_object', 1, 1, CalibHandle)</l>
+<l>    get_cam_par_data (StartCamPar, 'camera_type', CameraType)</l>
+<l>    set_calib_data_cam_param (CalibHandle, 0, CameraType, StartCamPar)</l>
+<l>    set_calib_data_calib_object (CalibHandle, 0, CalPlateDescr)</l>
+<c>    * Perform actual calibration.</c>
+<l>    find_calib_object (CalibImage, CalibHandle, 0, 0, 0, [], [])</l>
+<l>    if (Index != 1)</l>
+<c>        * Excluding focus is highly recommended to bound the systematic error.</c>
+<l>        set_calib_data (CalibHandle, 'camera', 'general', 'excluded_settings', 'focus')</l>
+<l>    endif</l>
+<l>    calibrate_cameras (CalibHandle, Errors)</l>
+<l>    get_calib_data (CalibHandle, 'camera', 0, 'params', CameraParameters)</l>
+<l>    get_calib_data (CalibHandle, 'calib_obj_pose', [0,0], 'pose', CameraPose)</l>
+<c>    * Move origin to measurement plane.</c>
+<l>    set_origin_pose (CameraPose, 0, 0, MeasurementPlaneZOffset, MeasurementPlanePose)</l>
+<c>    * </c>
+<c>    * Measurement</c>
+<c>    * </c>
+<c>    * Segment ruler.</c>
+<l>    threshold (MeasureImage, Region, 75, 255)</l>
+<l>    closing_rectangle1 (Region, RegionClosing, 3, 25)</l>
+<l>    smallest_rectangle2 (RegionClosing, Row1, Column1, Phi, Length1, Length2)</l>
+<c>    * </c>
+<c>    * Measure ruler marks.</c>
+<l>    gen_measure_rectangle2 (Row1 + Length2 * .9, Column1, Phi, Length1, Length2 * .08, Width, Height, 'bicubic', MeasureHandle)</l>
+<l>    AmplitudeThreshold := 5</l>
+<l>    measure_pos (MeasureImage, MeasureHandle, 1, AmplitudeThreshold, 'positive', 'all', RowEdge, ColumnEdge, Amplitude, Distance1)</l>
+<l>    close_measure (MeasureHandle)</l>
+<c>    * </c>
+<c>    * Transform results into world coordinates.</c>
+<l>    image_points_to_world_plane (CameraParameters, MeasurementPlanePose, RowEdge, ColumnEdge, 'mm', X1, Y1)</l>
+<c>    * Calculate the distances between the pitch lines.</c>
+<l>    distance_pp (Y1[0:|Y1| - 2], X1[0:|X1| - 2], Y1[1:|Y1| - 1], X1[1:|X1| - 1], Distance)</l>
+<c>    * </c>
+<c>    * Display calibration results.</c>
+<l>    assemble_result_text (CameraParameters, Errors, StartFocus, MeasurementPlanePose, MeasurementPlaneZOffset, Text)</l>
+<l>    dev_disp_calibration_result (CalibImage, Text, Index, Title)</l>
+<l>    disp_3d_coord_system (WindowHandle, CameraParameters, CameraPose, 0.01)</l>
+<l>    stop ()</l>
+<c>    * Display measurement results.</c>
+<l>    MeanDistance := mean(Distance)</l>
+<l>    ErrorFrom1mm := fabs(1 - MeanDistance)</l>
+<l>    dev_disp_measurement_result (MeasureImage, RowEdge, ColumnEdge, Phi, MeanDistance, ErrorFrom1mm, Text, Index, Title)</l>
+<l>    stop ()</l>
+<l>    clear_calib_data (CalibHandle)</l>
+<l>endfor</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+<procedure name="dev_disp_introduction_text">
+<interface>
+<io>
+<par name="CalibImage" base_type="iconic" dimension="0"/>
+</io>
+</interface>
+<body>
+<l>IntroText := 'When calibrating with a single calibration image, \'focus\' and \'Z\''</l>
+<l>IntroText[1] := '(the distance between camera and calibration plate) cannot be'</l>
+<l>IntroText[2] := 'determined unambiguously.'</l>
+<l>IntroText[3] := 'This leads to systematic measurement errors when measuring'</l>
+<l>IntroText[4] := 'outside of the calibration plane, e.g., if \'set_origin_pose\' is used.'</l>
+<l>IntroText[5] := ''</l>
+<l>IntroText[6] := 'The error can be bounded if the estimated value for \'focus\' is'</l>
+<l>IntroText[7] := 'close to the real value. To achieve this, set the start value of'</l>
+<l>IntroText[8] := '\'focus\' to a plausible value (the focal length of the used lens'</l>
+<l>IntroText[9] := 'plus lens spacers, if any) and exclude it from the calibration with '</l>
+<l>IntroText[10] := '\'set_calib_data (..., \'excluded_settings\', \'focus\')\'.'</l>
+<l>IntroText[11] := 'Look at the code to see how you can estimate the systematic error.'</l>
+<l>IntroText[12] := ''</l>
+<l>IntroText[13] := 'In this example, we measure a ruler whose surface is 2 mm below the'</l>
+<l>IntroText[14] := 'surface of the calibration plate used for calibration.'</l>
+<l>dev_display (CalibImage)</l>
+<l>dev_disp_text (IntroText, 'window', 'top', 'left', 'black', [], [])</l>
+<l>dev_disp_text ('Press Run (F5) to continue', 'window', 'bottom', 'right', 'black', [], [])</l>
+<l>return ()</l>
+</body>
+<docu id="dev_disp_introduction_text">
+<chapters lang="en_US">
+<item>Graphics</item>
+<item>Output</item>
+</chapters>
+<library lang="en_US">MVTec Standard Procedures</library>
+<parameters>
+<parameter id="CalibImage">
+<multichannel>false</multichannel>
+<multivalue>false</multivalue>
+<sem_type>image</sem_type>
+</parameter>
+</parameters>
+</docu>
+</procedure>
+<procedure name="dev_disp_calibration_result">
+<interface>
+<io>
+<par name="CalibImage" base_type="iconic" dimension="0"/>
+</io>
+<ic>
+<par name="Text" base_type="ctrl" dimension="0"/>
+<par name="Index" base_type="ctrl" dimension="0"/>
+<par name="Title" base_type="ctrl" dimension="1"/>
+</ic>
+</interface>
+<body>
+<l>dev_display (CalibImage)</l>
+<l>dev_set_colored (3)</l>
+<l>dev_set_line_width (3)</l>
+<l>dev_disp_text ([(Index + 1) + ') Single image calibration ',Title.at(Index)], 'window', 'top', 'left', 'black', [], [])</l>
+<l>dev_disp_text (Text, 'window', 'bottom', 'left', 'black', [], [])</l>
+<l>dev_disp_text ('Press Run (F5) to continue', 'window', 'bottom', 'right', 'black', [], [])</l>
+<l>return ()</l>
+</body>
+<docu id="dev_disp_calibration_result">
+<parameters>
+<parameter id="CalibImage"/>
+<parameter id="Index"/>
+<parameter id="Text"/>
+<parameter id="Title"/>
+</parameters>
+</docu>
+</procedure>
+<procedure name="assemble_result_text">
+<interface>
+<ic>
+<par name="CameraParameters" base_type="ctrl" dimension="0"/>
+<par name="Errors" base_type="ctrl" dimension="0"/>
+<par name="StartFocus" base_type="ctrl" dimension="0"/>
+<par name="MeasurementPlanePose" base_type="ctrl" dimension="0"/>
+<par name="MeasurementPlaneZOffset" base_type="ctrl" dimension="0"/>
+</ic>
+<oc>
+<par name="Text" base_type="ctrl" dimension="0"/>
+</oc>
+</interface>
+<body>
+<l>get_cam_par_data (CameraParameters, 'focus', CameraParameters)</l>
+<l>Text := 'Back projection error:   ' + Errors$'4.2' + ' px'</l>
+<l>Text[1] := '\'focus\' start value:      ' + (1000 * StartFocus)$'4.3' + ' mm'</l>
+<l>Text[2] := 'Estimated \'focus\':        ' + (1000 * CameraParameters)$'4.3' + ' mm'</l>
+<l>Text[3] := 'Estimated \'Z\':            ' + (1000 * MeasurementPlanePose)[2]$'4.3' + ' mm'</l>
+<l>Text[4] := 'Measurement plane offset: ' + (MeasurementPlaneZOffset * 1000)$'4.1f' + ' mm'</l>
+<l>return ()</l>
+</body>
+<docu id="assemble_result_text">
+<parameters>
+<parameter id="CameraParameters"/>
+<parameter id="Errors"/>
+<parameter id="MeasurementPlanePose"/>
+<parameter id="MeasurementPlaneZOffset"/>
+<parameter id="StartFocus"/>
+<parameter id="Text"/>
+</parameters>
+</docu>
+</procedure>
+<procedure name="dev_disp_measurement_result">
+<interface>
+<io>
+<par name="MeasureImage" base_type="iconic" dimension="0"/>
+</io>
+<ic>
+<par name="RowEdge" base_type="ctrl" dimension="0"/>
+<par name="ColumnEdge" base_type="ctrl" dimension="0"/>
+<par name="Phi" base_type="ctrl" dimension="0"/>
+<par name="MeanDistance" base_type="ctrl" dimension="0"/>
+<par name="ErrorFrom1mm" base_type="ctrl" dimension="0"/>
+<par name="Text" base_type="ctrl" dimension="0"/>
+<par name="Index" base_type="ctrl" dimension="0"/>
+<par name="Title" base_type="ctrl" dimension="1"/>
+</ic>
+</interface>
+<body>
+<l>dev_clear_window ()</l>
+<l>dev_display (MeasureImage)</l>
+<l>dev_set_color ('green')</l>
+<l>dev_set_line_width (1)</l>
+<l>gen_cross_contour_xld (Cross, RowEdge, ColumnEdge, 20, Phi)</l>
+<l>dev_display (Cross)</l>
+<l>Result := 'Mean Distance:              ' + MeanDistance$'7.3f' + ' mm'</l>
+<l>Result[1] := 'Deviation from expected 1 mm: ' + ErrorFrom1mm$'6.5f' + ' mm'</l>
+<l>Result[2] := 'Deviation in %:               ' + (100 * ErrorFrom1mm)$'4.2f' + ' %'</l>
+<l>dev_disp_text ([(Index + 1) + ') Measurement outside of the calibration plane ',Title.at(Index)], 'window', 'top', 'left', 'black', [], [])</l>
+<l>dev_disp_text (Text, 'window', 'bottom', 'left', 'black', [], [])</l>
+<l>BoxColor := ['forest green','red']</l>
+<l>dev_disp_text (Result, 'window', 300, 'left', 'white', 'box_color', BoxColor[Index])</l>
+<l>if (Index &lt; 1)</l>
+<l>    dev_disp_text ('Press Run (F5) to continue', 'window', 'bottom', 'right', 'black', [], [])</l>
+<l>endif</l>
+<l>return ()</l>
+</body>
+<docu id="dev_disp_measurement_result">
+<parameters>
+<parameter id="ColumnEdge"/>
+<parameter id="ErrorFrom1mm"/>
+<parameter id="Index"/>
+<parameter id="MeanDistance"/>
+<parameter id="MeasureImage"/>
+<parameter id="Phi"/>
+<parameter id="RowEdge"/>
+<parameter id="Text"/>
+<parameter id="Title"/>
+</parameters>
+</docu>
+</procedure>
+<procedure name="assemble_title_text">
+<interface>
+<oc>
+<par name="Title" base_type="ctrl" dimension="1"/>
+</oc>
+</interface>
+<body>
+<l>Title.at(0) := '   - Exclude \'focus\' from calibration'</l>
+<l>Title.at(0)[1] := '     -&gt; small systematic error outside of the calibration plane'</l>
+<l>Title.at(1) := '   - \'focus\' NOT fixed'</l>
+<l>Title.at(1)[1] := '   -&gt; low back projection error,'</l>
+<l>Title.at(1)[2] := '      but high systematic measurement error'</l>
+<l>Title.at(1)[3] := '      outside of the calibration plane'</l>
+<l>return ()</l>
+</body>
+<docu id="assemble_title_text">
+<parameters>
+<parameter id="Title"/>
+</parameters>
+</docu>
+</procedure>
+</hdevelop>

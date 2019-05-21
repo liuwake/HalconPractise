@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.0">
+<procedure name="main">
+<interface/>
+<body>
+<c>* ------------------------------------------------------------------------------------------------</c>
+<c>* This example program shows the effect of volatile grabbing.</c>
+<c>* ------------------------------------------------------------------------------------------------</c>
+<c>* ATTENTION: Since HDevelop does not support volatile grabbing, the effect</c>
+<c>*            of volatile grabbing can only be observed after exporting this</c>
+<c>*            program to a progamming language, e.g., C# or C++.</c>
+<c>* NOTE: The example is preconfigured for the BitFlow image acquisition interface.</c>
+<c>*       Please adapt the marked lines for your own image acquisition device.</c>
+<c>* ------------------------------------------------------------------------------------------------</c>
+<c>* general configuration of HDevelop</c>
+<l>set_system ('do_low_error', 'true')</l>
+<l>dev_update_window ('off')</l>
+<l>stop ()</l>
+<c>* -------------------  start of the application  ----------------</c>
+<c>* step 1: open the connection and grab a first image</c>
+<c>* -&gt; Please adapt the following lines for your own image acquisition device.</c>
+<l>AcqName := 'BitFlow'</l>
+<l>open_framegrabber (AcqName, 1, 1, 0, 0, 0, 0, 'default', -1, 'gray', -1, 'false', 'default', 'default', -1, -1, AcqHandle)</l>
+<l>set_framegrabber_param (AcqHandle, 'volatile', 'enable')</l>
+<c>* step 2: grab a first image</c>
+<l>grab_image (FirstImage, AcqHandle)</l>
+<l>get_image_pointer1 (FirstImage, Pointer, Type, Width, Height)</l>
+<l>dev_close_window ()</l>
+<l>dev_open_window (0, 0, Width / 2, Height / 2, 'black', FirstWindow)</l>
+<l>dev_display (FirstImage)</l>
+<l>stop ()</l>
+<c>* step 3: now change the scene and grab a second image</c>
+<l>grab_image (SecondImage, AcqHandle)</l>
+<l>dev_open_window (0, Width / 2 + 8, Width / 2, Height / 2, 'black', SecondWindow)</l>
+<l>dev_display (SecondImage)</l>
+<l>stop ()</l>
+<c>* step 4: grab images in a loop -- please change the scene each time!</c>
+<l>dev_open_window (Height / 2 + 66, Width / 4 + 4, Width / 2, Height / 2, 'black', ThirdWindow)</l>
+<l>for i := 1 to 10 by 1</l>
+<l>    stop ()</l>
+<c>    * -&gt; grab a new image and display it in its own window</c>
+<l>    grab_image (CurrentImage, AcqHandle)</l>
+<l>    dev_set_window (ThirdWindow)</l>
+<l>    dev_display (CurrentImage)</l>
+<l>    stop ()</l>
+<c>    * -&gt; display the "original" two images in their windows</c>
+<l>    dev_set_window (FirstWindow)</l>
+<l>    dev_display (FirstImage)</l>
+<l>    dev_set_window (SecondWindow)</l>
+<l>    dev_display (SecondImage)</l>
+<l>endfor</l>
+<l>stop ()</l>
+<c>* clean up</c>
+<l>dev_update_window ('on')</l>
+<l>dev_set_window (ThirdWindow)</l>
+<l>dev_close_window ()</l>
+<l>dev_set_window (SecondWindow)</l>
+<l>dev_close_window ()</l>
+<l>close_framegrabber (AcqHandle)</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>

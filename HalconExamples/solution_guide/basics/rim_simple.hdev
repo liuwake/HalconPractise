@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.0">
+<procedure name="main">
+<interface/>
+<body>
+<c>* rim_simple.hdev: measures the diameter of drill-holes</c>
+<c>* </c>
+<l>dev_update_off ()</l>
+<c>* ****</c>
+<c>* step: acquire image</c>
+<c>* ****</c>
+<l>read_image (Image, 'rim')</l>
+<l>get_image_size (Image, Width, Height)</l>
+<l>dev_open_window_fit_image (Image, 0, 0, Width, Height, WindowID)</l>
+<l>set_display_font (WindowID, 14, 'mono', 'true', 'false')</l>
+<c>* ****</c>
+<c>* step: determine region of interest (ROI)</c>
+<c>* ****</c>
+<l>threshold (Image, Dark, 0, 128)</l>
+<l>connection (Dark, DarkRegions)</l>
+<l>select_shape (DarkRegions, Circles, ['circularity','area'], 'and', [0.85,50], [1.0,99999])</l>
+<l>boundary (Circles, RegionBorder, 'inner')</l>
+<l>dilation_circle (RegionBorder, RegionDilation, 6.5)</l>
+<l>union1 (RegionDilation, ROIEdges)</l>
+<l>dev_display (Image)</l>
+<l>dev_set_color ('yellow')</l>
+<l>dev_set_draw ('margin')</l>
+<l>dev_display (ROIEdges)</l>
+<l>disp_continue_message (WindowID, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* ****</c>
+<c>* step: extract edges</c>
+<c>* ****</c>
+<l>reduce_domain (Image, ROIEdges, ImageROI)</l>
+<l>edges_sub_pix (ImageROI, Edges, 'lanser2', 0.3, 10, 30)</l>
+<l>sort_contours_xld (Edges, SortedContours, 'upper_left', 'true', 'row')</l>
+<l>dev_display (Image)</l>
+<l>colored_display (SortedContours, ['cyan','white'])</l>
+<l>disp_continue_message (WindowID, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* ****</c>
+<c>* step: process contours</c>
+<c>* ****</c>
+<l>fit_ellipse_contour_xld (Edges, 'ftukey', -1, 2, 0, 200, 3, 2, Row, Column, Phi, Ra, Rb, StartPhi, EndPhi, PointOrder)</l>
+<l>NumHoles := |Ra|</l>
+<l>gen_ellipse_contour_xld (ContEllipse, Row, Column, Phi, Ra, Rb, gen_tuple_const(NumHoles,0), gen_tuple_const(NumHoles,rad(360)), gen_tuple_const(NumHoles,'positive'), 1)</l>
+<l>dev_display (Image)</l>
+<l>sort_contours_xld (ContEllipse, SortedContEllipse, 'upper_left', 'true', 'row')</l>
+<l>colored_display (SortedContEllipse, ['cyan','white'])</l>
+<l>dev_set_color ('yellow')</l>
+<l>for i := 0 to NumHoles - 1 by 1</l>
+<l>    sinPhi := sin(Phi[i])</l>
+<l>    cosPhi := cos(Phi[i])</l>
+<l>    disp_arrow (WindowID, Row[i], Column[i], Row[i] - sinPhi * Ra[i], Column[i] + cosPhi * Ra[i], 1)</l>
+<l>    disp_arrow (WindowID, Row[i], Column[i], Row[i] - cosPhi * Rb[i], Column[i] - sinPhi * Rb[i], 1)</l>
+<l>    disp_arrow (WindowID, Row[i], Column[i], Row[i] + sinPhi * Ra[i], Column[i] - cosPhi * Ra[i], 1)</l>
+<l>    disp_arrow (WindowID, Row[i], Column[i], Row[i] + cosPhi * Rb[i], Column[i] + sinPhi * Rb[i], 1)</l>
+<l>    set_tposition (WindowID, Row[i] - Rb[i] - 50, Column[i] - 85)</l>
+<l>    write_string (WindowID, 'D1=' + 2 * Ra[i])</l>
+<l>    set_tposition (WindowID, Row[i] - Rb[i] - 30, Column[i] - 85)</l>
+<l>    write_string (WindowID, 'D2=' + 2 * Rb[i])</l>
+<l>endfor</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+<procedure name="colored_display">
+<interface>
+<io>
+<par name="Objects" base_type="iconic" dimension="0"/>
+</io>
+<ic>
+<par name="Colors" base_type="ctrl" dimension="0"/>
+</ic>
+</interface>
+<body>
+<l>count_obj (Objects, NumObjects)</l>
+<l>NumColors := |Colors|</l>
+<l>for i := 1 to NumObjects by 1</l>
+<l>    select_obj (Objects, ObjectSelected, i)</l>
+<l>    Color := Colors[(i - 1) % NumColors]</l>
+<l>    dev_set_color (Color)</l>
+<l>    dev_display (ObjectSelected)</l>
+<l>endfor</l>
+<l>return ()</l>
+</body>
+<docu id="colored_display">
+<short lang="en_US">displays iconic objects with definable alternating colors</short>
+<parameters>
+<parameter id="Colors"/>
+<parameter id="Objects"/>
+</parameters>
+</docu>
+</procedure>
+</hdevelop>

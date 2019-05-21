@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.0">
+<procedure name="main">
+<interface/>
+<body>
+<l>set_system ('clip_region', 'false')</l>
+<l>read_image (Image, 'pioneer')</l>
+<l>get_image_pointer1 (Image, Pointer, Type, Width, Height)</l>
+<l>dev_close_window ()</l>
+<l>dev_open_window (0, 0, Width, Height, 'white', WindowHandle)</l>
+<l>rgb1_to_gray (Image, GrayImage)</l>
+<l>gen_cam_par_area_scan_division (0.00219846, -78129.2, 5.46495e-06, 5.5e-06, 318.206, 236.732, 640, 480, CamParOriginal)</l>
+<c>* extract edges in the original image</c>
+<l>dev_set_color ('red')</l>
+<l>edges_sub_pix (GrayImage, Edges, 'lanser2', 0.5, 20, 40)</l>
+<l>dev_set_color ('green')</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* Eliminating radial distortions from the extracted edges</c>
+<c>* Change the radial distortion: set kappa to 0</c>
+<l>CamParVirtualFixed := CamParOriginal</l>
+<l>set_cam_par_data (CamParVirtualFixed, 'kappa', 0, CamParVirtualFixed)</l>
+<c>* Alternatively, the operator change_radial_distortion_cam_par can be used</c>
+<l>change_radial_distortion_cam_par ('fixed', CamParOriginal, 0, CamParVirtualFixed)</l>
+<l>change_radial_distortion_contours_xld (Edges, EdgesRectifiedFixed, CamParOriginal, CamParVirtualFixed)</l>
+<l>dev_display (GrayImage)</l>
+<l>dev_display (EdgesRectifiedFixed)</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* Change the radial distortion: mode 'fullsize'</c>
+<l>change_radial_distortion_cam_par ('fullsize', CamParOriginal, 0, CamParVirtualFullsize)</l>
+<l>change_radial_distortion_contours_xld (Edges, EdgesRectifiedFullsize, CamParOriginal, CamParVirtualFullsize)</l>
+<l>dev_display (GrayImage)</l>
+<l>dev_display (EdgesRectifiedFullsize)</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* Change the radial distortion: mode 'adaptive'</c>
+<l>change_radial_distortion_cam_par ('adaptive', CamParOriginal, 0, CamParVirtualAdaptive)</l>
+<l>change_radial_distortion_contours_xld (Edges, EdgesRectifiedAdaptive, CamParOriginal, CamParVirtualAdaptive)</l>
+<l>dev_display (GrayImage)</l>
+<l>dev_display (EdgesRectifiedAdaptive)</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* Change the radial distortion: mode 'preserve_resolution'</c>
+<l>change_radial_distortion_cam_par ('preserve_resolution', CamParOriginal, 0, CamParVirtualPreservedResolution)</l>
+<l>change_radial_distortion_contours_xld (Edges, EdgesRectifiedPreservedResolution, CamParOriginal, CamParVirtualPreservedResolution)</l>
+<l>dev_display (GrayImage)</l>
+<l>dev_display (EdgesRectifiedPreservedResolution)</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* Eliminating radial distortions from the image</c>
+<c>* Change the radial distortion: set kappa to 0</c>
+<l>gen_radial_distortion_map (MapFixed, CamParOriginal, CamParVirtualFixed, 'bilinear')</l>
+<l>map_image (GrayImage, MapFixed, ImageRectifiedFixed)</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* In case, only one image has to be rectified, the operator</c>
+<c>* change_radial_distortion_image can be used instead of the operators</c>
+<c>* gen_radial_distortion_map together with map_image.</c>
+<l>get_cam_par_data (CamParVirtualFullsize, 'image_width', WidthVirtualFullsize)</l>
+<l>get_cam_par_data (CamParVirtualFullsize, 'image_height', HeightVirtualFullsize)</l>
+<l>gen_rectangle1 (ROI, 0, 0, HeightVirtualFullsize - 1, WidthVirtualFullsize - 1)</l>
+<l>change_radial_distortion_image (GrayImage, ROI, ImageRectifiedFullsize, CamParOriginal, CamParVirtualFullsize)</l>
+<l>dev_clear_window ()</l>
+<l>dev_display (ImageRectifiedFullsize)</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<l>get_cam_par_data (CamParVirtualAdaptive, 'image_width', WidthVirtualAdaptive)</l>
+<l>get_cam_par_data (CamParVirtualAdaptive, 'image_height', HeightVirtualAdaptive)</l>
+<l>gen_rectangle1 (ROI, 0, 0, HeightVirtualAdaptive - 1, WidthVirtualAdaptive - 1)</l>
+<l>change_radial_distortion_image (GrayImage, ROI, ImageRectifiedAdaptive, CamParOriginal, CamParVirtualAdaptive)</l>
+<l>dev_clear_window ()</l>
+<l>dev_display (ImageRectifiedAdaptive)</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<l>get_cam_par_data (CamParVirtualPreservedResolution, 'image_width', WidthVirtualPreservedResolution)</l>
+<l>get_cam_par_data (CamParVirtualPreservedResolution, 'image_height', HeightVirtualPreservedResolution)</l>
+<l>gen_rectangle1 (ROI, 0, 0, HeightVirtualPreservedResolution - 1, WidthVirtualPreservedResolution - 1)</l>
+<l>change_radial_distortion_image (GrayImage, ROI, ImageRectifiedPreservedResolution, CamParOriginal, CamParVirtualPreservedResolution)</l>
+<l>dev_clear_window ()</l>
+<l>dev_display (ImageRectifiedPreservedResolution)</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>

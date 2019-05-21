@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.0">
+<procedure name="main">
+<interface/>
+<body>
+<c>* crystal.hdev: extraction of hexagonally shaped crystals via local thresholding and region post-processing</c>
+<c>* </c>
+<l>dev_close_window ()</l>
+<l>dev_update_window ('off')</l>
+<c>* ****</c>
+<c>* step: acquire image</c>
+<c>* ****</c>
+<l>read_image (Image, 'crystal')</l>
+<l>get_image_size (Image, Width, Height)</l>
+<l>dev_open_window_fit_image (Image, 0, 0, Width, Height, WindowID)</l>
+<l>set_display_font (WindowID, 12, 'mono', 'true', 'false')</l>
+<l>dev_set_draw ('margin')</l>
+<l>dev_set_line_width (2)</l>
+<l>dev_display (Image)</l>
+<l>disp_continue_message (WindowID, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* ****</c>
+<c>* step: segment image</c>
+<c>* ****</c>
+<c>* -&gt; using a local threshold</c>
+<l>mean_image (Image, ImageMean, 21, 21)</l>
+<l>dyn_threshold (Image, ImageMean, RegionDynThresh, 8, 'dark')</l>
+<c>* -&gt; extract connected components</c>
+<l>connection (RegionDynThresh, ConnectedRegions)</l>
+<l>dev_display (ConnectedRegions)</l>
+<l>disp_continue_message (WindowID, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* ****</c>
+<c>* step: process regions</c>
+<c>* ****</c>
+<l>shape_trans (ConnectedRegions, ConvexRegions, 'convex')</l>
+<l>select_shape (ConvexRegions, LargeRegions, 'area', 'and', 600, 2000)</l>
+<l>select_gray (LargeRegions, Image, Crystals, 'entropy', 'and', 1, 5.6)</l>
+<l>dev_display (Image)</l>
+<l>dev_display (Crystals)</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>

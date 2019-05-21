@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.0">
+<procedure name="main">
+<interface/>
+<body>
+<c>* Lead Measurement: Example for the application of the measure object</c>
+<c>* including a lot of visualization operators.</c>
+<c>* First, the length of the leads is measured, then, their width and distance from each other.</c>
+<c>* </c>
+<c>* </c>
+<c>* First, read in the image and initialize the program</c>
+<l>read_image (Image, 'ic_pin')</l>
+<l>get_image_pointer1 (Image, Pointer, Type, Width, Height)</l>
+<l>dev_close_window ()</l>
+<l>dev_open_window_fit_image (Image, 0, 0, 509, 509, WindowHandle)</l>
+<l>set_display_font (WindowHandle, 14, 'mono', 'true', 'false')</l>
+<l>dev_display (Image)</l>
+<l>dev_set_draw ('margin')</l>
+<l>dev_set_line_width (3)</l>
+<c>* </c>
+<c>* Define and display the rectangular ROIs within which the edges will be detected</c>
+<l>Row := 55</l>
+<l>RowBottom := 955</l>
+<l>Column := 200</l>
+<l>Phi := rad(-90)</l>
+<l>Length1 := 50</l>
+<l>Length2 := 35</l>
+<l>dev_set_color ('gray')</l>
+<l>gen_rectangle2 (Rectangle, Row, Column, Phi, Length1, Length2)</l>
+<l>gen_rectangle2 (Rectangle, RowBottom, Column, Phi, Length1, Length2)</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* </c>
+<c>* Create a measure object for the ROI at the top of the image.</c>
+<l>Interpolation := 'nearest_neighbor'</l>
+<l>gen_measure_rectangle2 (Row, Column, Phi, Length1, Length2, Width, Height, Interpolation, MeasureHandle)</l>
+<c>* </c>
+<c>* Determine all edges and calculate the lead height at the top of the image</c>
+<l>Sigma := 1.0</l>
+<l>Threshold := 30</l>
+<l>Transition := 'all'</l>
+<l>Select := 'all'</l>
+<l>measure_pos (Image, MeasureHandle, Sigma, Threshold, Transition, Select, RowEdge, ColumnEdge, Amplitude, Distance)</l>
+<l>LeadLength1 := Distance</l>
+<c>* </c>
+<c>* Display the results</c>
+<l>dev_set_color ('white')</l>
+<l>disp_line (WindowHandle, RowEdge, ColumnEdge - Length2, RowEdge, ColumnEdge + Length2)</l>
+<l>disp_message (WindowHandle, 'Lead Length:  ' + LeadLength1$'.2f', 'window', RowEdge[1] + 40, ColumnEdge[1] + 100, 'yellow', 'false')</l>
+<c>* </c>
+<c>* Shift the measure object and determine the lead height at the bottom of the image</c>
+<l>translate_measure (MeasureHandle, RowBottom, Column)</l>
+<l>measure_pos (Image, MeasureHandle, Sigma, Threshold, Transition, Select, RowEdge, ColumnEdge, Amplitude, Distance)</l>
+<l>LeadLength2 := Distance</l>
+<c>* </c>
+<c>* Display the results</c>
+<l>dev_set_color ('white')</l>
+<l>disp_line (WindowHandle, RowEdge, ColumnEdge - Length2, RowEdge, ColumnEdge + Length2)</l>
+<l>disp_message (WindowHandle, 'Lead Length:  ' + LeadLength2$'.2f', 'window', RowEdge[1] - 120, ColumnEdge[1] + 100, 'yellow', 'false')</l>
+<c>* </c>
+<c>* Close the measure</c>
+<l>close_measure (MeasureHandle)</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* </c>
+<c>* Now, define and display a rectangular ROI perpendicular to the leads and create the measure</c>
+<l>dev_display (Image)</l>
+<l>Row := 47</l>
+<l>Column := 485</l>
+<l>Phi := 0</l>
+<l>Length1 := 420</l>
+<l>Length2 := 8</l>
+<l>Interpolation := 'nearest_neighbor'</l>
+<l>dev_set_color ('black')</l>
+<l>gen_rectangle2 (Rectangle, Row, Column, Phi, Length1, Length2)</l>
+<l>gen_measure_rectangle2 (Row, Column, Phi, Length1, Length2, Width, Height, Interpolation, MeasureHandle)</l>
+<c>* </c>
+<c>* Determine all edge pairs that have a negative transition, i.e., edge pairs</c>
+<c>* that enclose dark regions.</c>
+<l>Sigma := 1.0</l>
+<l>Threshold := 30</l>
+<l>Transition := 'negative'</l>
+<l>Select := 'all'</l>
+<l>measure_pairs (Image, MeasureHandle, Sigma, Threshold, Transition, Select, RowEdgeFirst, ColumnEdgeFirst, AmplitudeFirst, RowEdgeSecond, ColumnEdgeSecond, AmplitudeSecond, IntraDistance, InterDistance)</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<l>dev_set_color ('white')</l>
+<l>disp_line (WindowHandle, RowEdgeFirst, ColumnEdgeFirst, RowEdgeSecond, ColumnEdgeSecond)</l>
+<l>avgLeadWidth := sum(IntraDistance) / |IntraDistance|</l>
+<l>avgLeadDistance := sum(InterDistance) / |InterDistance|</l>
+<l>numLeads := |IntraDistance|</l>
+<l>disp_message (WindowHandle, 'Number of Leads: ' + numLeads, 'window', 200, 100, 'yellow', 'false')</l>
+<l>disp_message (WindowHandle, 'Average Lead Width:  ' + avgLeadWidth$'.2f', 'window', 260, 100, 'yellow', 'false')</l>
+<l>disp_message (WindowHandle, 'Average Lead Distance:  ' + avgLeadDistance$'.2f', 'window', 320, 100, 'yellow', 'false')</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* </c>
+<c>* Zoom in to visualize the measurement results in more detail.</c>
+<c>* First, define and display the zoom window.</c>
+<l>Row1 := 0</l>
+<l>Column1 := 600</l>
+<l>Row2 := 100</l>
+<l>Column2 := 700</l>
+<l>dev_set_color ('blue')</l>
+<l>disp_rectangle1 (WindowHandle, Row1, Column1, Row2, Column2)</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* </c>
+<c>* Then, zoom the image and display the results.</c>
+<l>dev_set_part (Row1, Column1, Row2, Column2)</l>
+<l>dev_display (Image)</l>
+<l>dev_set_color ('black')</l>
+<l>dev_display (Rectangle)</l>
+<l>p_disp_edge_marker (RowEdgeFirst, ColumnEdgeFirst, Phi, 5, 'white', 3, WindowHandle)</l>
+<l>p_disp_edge_marker (RowEdgeSecond, ColumnEdgeSecond, Phi, 5, 'white', 3, WindowHandle)</l>
+<c>* </c>
+<c>* Close the measure</c>
+<l>close_measure (MeasureHandle)</l>
+<c>* </c>
+<c>* Reset the display parameters.</c>
+<l>dev_set_part (0, 0, Height - 1, Width - 1)</l>
+<l>dev_set_draw ('fill')</l>
+<l>dev_set_line_width (1)</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+<procedure name="p_disp_edge_marker">
+<interface>
+<ic>
+<par name="Rows" base_type="ctrl" dimension="0"/>
+<par name="Cols" base_type="ctrl" dimension="0"/>
+<par name="Phi" base_type="ctrl" dimension="0"/>
+<par name="Length" base_type="ctrl" dimension="0"/>
+<par name="Color" base_type="ctrl" dimension="0"/>
+<par name="LineWidth" base_type="ctrl" dimension="0"/>
+<par name="WindowHandle" base_type="ctrl" dimension="0"/>
+</ic>
+</interface>
+<body>
+<c>* Determine the number of edges</c>
+<l>NumRows := |Rows|</l>
+<l>NumCols := |Cols|</l>
+<l>Num := min([NumRows,NumCols])</l>
+<c>* </c>
+<c>* Loop over the edges</c>
+<l>for i := 0 to Num - 1 by 1</l>
+<l>    Row := Rows[i]</l>
+<l>    Col := Cols[i]</l>
+<c>    * </c>
+<c>    * Determine start and end point of the edge marker.</c>
+<l>    RowStart := Row + Length * cos(Phi)</l>
+<l>    RowEnd := Row - Length * cos(Phi)</l>
+<l>    ColStart := Col + Length * sin(Phi)</l>
+<l>    ColEnd := Col - Length * sin(Phi)</l>
+<c>    * </c>
+<c>    * Generate a contour that connects the start and end point.</c>
+<l>    gen_contour_polygon_xld (Marker, [RowStart,RowEnd], [ColStart,ColEnd])</l>
+<c>    * </c>
+<c>    * Display the contour with  the specified style.</c>
+<l>    dev_set_color (Color)</l>
+<l>    dev_set_line_width (LineWidth)</l>
+<l>    dev_display (Marker)</l>
+<l>endfor</l>
+<l>return ()</l>
+</body>
+<docu id="p_disp_edge_marker">
+<short lang="en_US">Displays a marker, which indicates the position of an edge</short>
+<parameters>
+<parameter id="Color"/>
+<parameter id="Cols"/>
+<parameter id="Length"/>
+<parameter id="LineWidth"/>
+<parameter id="Phi"/>
+<parameter id="Rows"/>
+<parameter id="WindowHandle"/>
+</parameters>
+</docu>
+</procedure>
+</hdevelop>

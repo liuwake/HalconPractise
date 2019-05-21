@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.0">
+<procedure name="main">
+<interface/>
+<body>
+<c>* This program gets the deviation between</c>
+<c>* circular contours and their best fitting circles</c>
+<c>* </c>
+<l>dev_update_var ('off')</l>
+<l>dev_update_off ()</l>
+<c>* </c>
+<c>* step: acquire image and initialize the visualization</c>
+<c>* </c>
+<l>read_image (Image, 'pumpe')</l>
+<l>get_image_size (Image, Width, Height)</l>
+<l>dev_close_window ()</l>
+<l>dev_open_window (0, 0, Width, Height, 'light gray', WindowID)</l>
+<l>dev_set_part (0, 0, Height - 1, Width - 1)</l>
+<l>dev_set_line_width (1)</l>
+<l>dev_set_color ('red')</l>
+<l>dev_set_draw ('margin')</l>
+<l>dev_display (Image)</l>
+<l>set_display_font (WindowID, 16, 'mono', 'true', 'false')</l>
+<l>disp_continue_message (WindowID, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* </c>
+<c>* step: create ROI</c>
+<c>* </c>
+<l>fast_threshold (Image, Region, 0, 70, 150)</l>
+<l>dev_set_colored (3)</l>
+<l>connection (Region, ConnectedRegions)</l>
+<l>select_shape (ConnectedRegions, SelectedRegions, ['outer_radius','anisometry','area'], 'and', [5,1,100], [50,1.8,99999])</l>
+<l>shape_trans (SelectedRegions, RegionTrans, 'outer_circle')</l>
+<l>dilation_circle (RegionTrans, RegionDilation, 5.5)</l>
+<l>union1 (RegionDilation, RegionUnion)</l>
+<l>reduce_domain (Image, RegionUnion, ImageReduced)</l>
+<l>dev_clear_window ()</l>
+<l>dev_display (ImageReduced)</l>
+<l>disp_continue_message (WindowID, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* </c>
+<c>* step: create and select relevant contours</c>
+<c>* </c>
+<l>threshold_sub_pix (ImageReduced, Border, 80)</l>
+<l>select_shape_xld (Border, SelectedXLD, ['contlength','outer_radius'], 'and', [70,15], [99999,99999])</l>
+<l>segment_contours_xld (SelectedXLD, ContoursSplit, 'lines_circles', 4, 2, 2)</l>
+<l>select_shape_xld (ContoursSplit, SelectedXLD3, ['outer_radius','contlength'], 'and', [15,30], [45,99999])</l>
+<l>union_cocircular_contours_xld (SelectedXLD3, UnionContours2, 0.5, 0.1, 0.2, 2, 10, 10, 'true', 1)</l>
+<l>sort_contours_xld (UnionContours2, SortedContours, 'upper_left', 'true', 'column')</l>
+<l>dev_clear_window ()</l>
+<l>dev_set_color ('white')</l>
+<l>dev_display (ImageReduced)</l>
+<l>dev_display (SortedContours)</l>
+<l>disp_continue_message (WindowID, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* </c>
+<c>* step: fit circles into the contours and get the</c>
+<c>* average deviation between contour and circle</c>
+<c>* </c>
+<l>count_obj (SortedContours, NumSegments)</l>
+<l>dev_display (Image)</l>
+<l>dev_display (SortedContours)</l>
+<l>NumCircles := 0</l>
+<l>disp_message (WindowID, 'Circle radius and average distance', 'window', 10, 10, 'white', 'false')</l>
+<l>disp_message (WindowID, 'between circle and contour:', 'window', 30, 10, 'white', 'false')</l>
+<l>for i := 1 to NumSegments by 1</l>
+<l>    select_obj (SortedContours, SingleSegment, i)</l>
+<l>    NumCircles := NumCircles + 1</l>
+<l>    fit_circle_contour_xld (SingleSegment, 'atukey', -1, 2, 0, 5, 2, Row, Column, Radius, StartPhi, EndPhi, PointOrder)</l>
+<l>    gen_circle_contour_xld (ContCircle, Row, Column, Radius, 0, rad(360), 'positive', 1)</l>
+<l>    dev_display (ContCircle)</l>
+<l>    dist_ellipse_contour_xld (SingleSegment, 'algebraic', -1, 0, Row, Column, 0, Radius, Radius, MinDist, MaxDist, AvgDist, SigmaDist)</l>
+<l>    disp_message (WindowID, NumCircles, 'window', Row - 10, Column - 5, 'white', 'false')</l>
+<l>    disp_message (WindowID, 'R' + NumCircles + ': ' + Radius$'.3', 'window', (i - 1) * 50 + 30, 450, 'white', 'false')</l>
+<l>    disp_message (WindowID, 'D_avg: ' + AvgDist$'.3', 'window', ((i - 1) * 50) + 50, 450, 'white', 'false')</l>
+<l>endfor</l>
+<c>* </c>
+<l>dev_update_window ('on')</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>

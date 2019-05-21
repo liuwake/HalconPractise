@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.0">
+<procedure name="main">
+<interface/>
+<body>
+<c>* ------------------------------------------------------------------------------------------------</c>
+<c>* This example program determines the achievable frame rates for grabbing and processing.</c>
+<c>* NOTE: The example is preconfigured for the BitFlow image acquisition interface.</c>
+<c>*       Please adapt the marked lines for your own image acquisition device.</c>
+<c>* ------------------------------------------------------------------------------------------------</c>
+<c>* general configuration of HDevelop</c>
+<l>set_system ('do_low_error', 'true')</l>
+<l>dev_update_pc ('off')</l>
+<l>dev_update_window ('off')</l>
+<l>dev_update_var ('off')</l>
+<l>dev_set_color ('blue')</l>
+<l>stop ()</l>
+<c>* -------------------  start of the application  ----------------</c>
+<c>* step 1: open the connection and grab a first image</c>
+<c>* -&gt; Please adapt the following lines for your own image acquisition device.</c>
+<l>AcqName := 'BitFlow'</l>
+<l>open_framegrabber (AcqName, 1, 1, 0, 0, 0, 0, 'default', -1, 'gray', -1, 'false', 'default', 'default', -1, -1, AcqHandle)</l>
+<l>grab_image (BackgroundImage, AcqHandle)</l>
+<l>get_image_pointer1 (BackgroundImage, Pointer, Type, Width, Height)</l>
+<l>dev_close_window ()</l>
+<l>dev_open_window (0, 0, Width / 2, Height / 2, 'black', WindowID)</l>
+<l>dev_set_part (0, 0, Height - 1, Width - 1)</l>
+<l>dev_display (BackgroundImage)</l>
+<l>stop ()</l>
+<c>* step 2: determine the achieved frame rates</c>
+<l>dev_open_window (Height / 2 + 65, 0, 400, 150, 'light gray', MessageWindowID)</l>
+<l>dev_set_part (0, 0, 149, 399)</l>
+<l>write_string (MessageWindowID, 'achieved frame rate for:')</l>
+<l>new_line (MessageWindowID)</l>
+<c>* -&gt; just for grab_image</c>
+<l>count_seconds (Seconds1)</l>
+<l>for i := 1 to 20 by 1</l>
+<l>    grab_image (Image, AcqHandle)</l>
+<l>endfor</l>
+<l>count_seconds (Seconds2)</l>
+<l>TimeJustGrabImage := (Seconds2 - Seconds1) / 20</l>
+<l>FrameRateJustGrabImage := 1 / TimeJustGrabImage</l>
+<l>write_string (MessageWindowID, ' -&gt; just grab_image: ' + FrameRateJustGrabImage + ' f/s')</l>
+<l>new_line (MessageWindowID)</l>
+<l>stop ()</l>
+<c>* -&gt; just for creating a difference image</c>
+<l>count_seconds (Seconds1)</l>
+<l>for i := 1 to 20 by 1</l>
+<l>    sub_image (BackgroundImage, Image, DifferenceImage, 1, 128)</l>
+<l>endfor</l>
+<l>count_seconds (Seconds2)</l>
+<l>TimeJustProcess := (Seconds2 - Seconds1) / 20</l>
+<l>FrameRateJustProcess := 1 / TimeJustProcess</l>
+<l>write_string (MessageWindowID, ' -&gt; just processing: ' + FrameRateJustProcess + ' f/s')</l>
+<l>new_line (MessageWindowID)</l>
+<l>stop ()</l>
+<c>* -&gt; for grab_image &amp; processing</c>
+<l>count_seconds (Seconds1)</l>
+<l>for i := 1 to 20 by 1</l>
+<l>    grab_image (Image, AcqHandle)</l>
+<l>    sub_image (BackgroundImage, Image, DifferenceImage, 1, 128)</l>
+<l>endfor</l>
+<l>count_seconds (Seconds2)</l>
+<l>TimeGrabImage := (Seconds2 - Seconds1) / 20</l>
+<l>FrameRateGrabImage := 1 / TimeGrabImage</l>
+<l>write_string (MessageWindowID, ' -&gt; grab_image + processing: ' + FrameRateGrabImage + ' f/s')</l>
+<l>new_line (MessageWindowID)</l>
+<l>stop ()</l>
+<c>* -&gt; just for grab_image_async</c>
+<l>count_seconds (Seconds1)</l>
+<l>for i := 1 to 20 by 1</l>
+<l>    grab_image_async (Image, AcqHandle, -1)</l>
+<l>endfor</l>
+<l>count_seconds (Seconds2)</l>
+<l>TimeJustGrabAsync := (Seconds2 - Seconds1) / 20</l>
+<l>FrameRateJustGrabAsync := 1 / TimeJustGrabAsync</l>
+<l>write_string (MessageWindowID, ' -&gt; just grab_image_async: ' + FrameRateJustGrabAsync + ' f/s')</l>
+<l>new_line (MessageWindowID)</l>
+<l>stop ()</l>
+<c>* -&gt; for grab_image_async with continuous grabbing (if provided)</c>
+<l>dev_error_var (ErrorNum, 1)</l>
+<l>dev_set_check ('~give_error')</l>
+<l>set_framegrabber_param (AcqHandle, 'continuous_grabbing', 'enable')</l>
+<l>dev_error_var (ErrorNum, 0)</l>
+<l>dev_set_check ('give_error')</l>
+<l>if (ErrorNum == H_MSG_TRUE)</l>
+<l>    count_seconds (Seconds1)</l>
+<l>    for i := 1 to 20 by 1</l>
+<l>        grab_image_async (Image, AcqHandle, -1)</l>
+<l>    endfor</l>
+<l>    count_seconds (Seconds2)</l>
+<l>    TimeJustGrabAsyncCont := (Seconds2 - Seconds1) / 20</l>
+<l>    FrameRateJustGrabAsyncCont := 1 / TimeJustGrabAsyncCont</l>
+<l>    write_string (MessageWindowID, ' -&gt; async + cont. grabbing: ' + FrameRateJustGrabAsyncCont + ' f/s')</l>
+<l>    new_line (MessageWindowID)</l>
+<l>endif</l>
+<l>stop ()</l>
+<c>* -&gt; for grab_image_async &amp; processing</c>
+<l>count_seconds (Seconds1)</l>
+<l>for i := 1 to 20 by 1</l>
+<l>    grab_image_async (Image, AcqHandle, -1)</l>
+<l>    sub_image (BackgroundImage, Image, DifferenceImage, 1, 128)</l>
+<l>endfor</l>
+<l>count_seconds (Seconds2)</l>
+<l>TimeGrabImageAsync := (Seconds2 - Seconds1) / 20</l>
+<l>FrameRateGrabImageAsync := 1 / TimeGrabImageAsync</l>
+<l>write_string (MessageWindowID, ' -&gt; grab_image_async + processing: ' + FrameRateGrabImageAsync + ' f/s')</l>
+<l>new_line (MessageWindowID)</l>
+<l>stop ()</l>
+<c>* clean up</c>
+<l>dev_update_window ('on')</l>
+<l>dev_update_pc ('on')</l>
+<l>dev_update_var ('on')</l>
+<l>dev_set_window (MessageWindowID)</l>
+<l>dev_close_window ()</l>
+<l>close_framegrabber (AcqHandle)</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>

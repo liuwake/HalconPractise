@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.0">
+<procedure name="main">
+<interface/>
+<body>
+<c>* This program inspects a metal part for missing or deviating parts.</c>
+<c>* For this, the corresponding parts of the object to</c>
+<c>* be checked and a reference object are compared.</c>
+<c>* </c>
+<l>dev_update_off ()</l>
+<c>* </c>
+<c>* step: acquire image</c>
+<c>* </c>
+<l>Imagefiles := ['metal-parts/metal-part-model-01','metal-parts/metal-parts-01','metal-parts/metal-part-distorted-01','metal-parts/metal-part-distorted-02','metal-parts/metal-part-distorted-03']</l>
+<l>for K := 0 to |Imagefiles| - 1 by 1</l>
+<l>    read_image (Image, Imagefiles[K])</l>
+<l>    get_image_size (Image, Width, Height)</l>
+<l>    dev_close_window ()</l>
+<l>    dev_open_window (0, 0, Width, Height, 'light gray', WindowID)</l>
+<l>    dev_set_part (0, 0, Height - 1, Width - 1)</l>
+<l>    dev_set_line_width (2)</l>
+<l>    dev_set_draw ('margin')</l>
+<l>    dev_display (Image)</l>
+<l>    set_display_font (WindowID, 16, 'mono', 'true', 'false')</l>
+<l>    disp_message (WindowID, 'Image ' + K, 'window', 10, 10, 'white', 'false')</l>
+<l>    stop ()</l>
+<c>    * </c>
+<c>    * step: create ROI and extract contours</c>
+<c>    * </c>
+<l>    dev_set_draw ('fill')</l>
+<l>    threshold (Image, Region, 90, 255)</l>
+<l>    dilation_rectangle1 (Region, RegionDilation, 10, 10)</l>
+<l>    reduce_domain (Image, RegionDilation, ImageReduced)</l>
+<l>    threshold_sub_pix (ImageReduced, Edges, 75)</l>
+<c>    * </c>
+<c>    * step: transform contours to become horizontal</c>
+<c>    * </c>
+<l>    orientation_region (Region, OrientationRegion)</l>
+<l>    area_center (Region, Area, RowCenter, ColumnCenter)</l>
+<l>    vector_angle_to_rigid (RowCenter, ColumnCenter, OrientationRegion, RowCenter, ColumnCenter, 0, HomMat2DRotate)</l>
+<l>    affine_trans_contour_xld (Edges, ContoursAffineTrans, HomMat2DRotate)</l>
+<c>    * </c>
+<c>    * step: apply contour processing</c>
+<c>    * </c>
+<l>    segment_contours_xld (ContoursAffineTrans, ContoursSplit, 'lines_circles', 6, 4, 4)</l>
+<l>    sort_contours_xld (ContoursSplit, SortedContours, 'upper_left', 'true', 'column')</l>
+<l>    dev_clear_window ()</l>
+<l>    disp_message (WindowID, 'Circles in a local coordinate system', 'window', 10, 10, 'white', 'false')</l>
+<l>    dev_set_color ('black')</l>
+<l>    dev_display (SortedContours)</l>
+<l>    dev_set_color ('white')</l>
+<l>    count_obj (SortedContours, NumberSegments)</l>
+<l>    RowsE := []</l>
+<l>    ColsE := []</l>
+<l>    RadiiE := []</l>
+<l>    gen_empty_obj (Lines)</l>
+<l>    for I := 1 to NumberSegments by 1</l>
+<l>        select_obj (SortedContours, ObjectSelected, I)</l>
+<l>        get_contour_global_attrib_xld (ObjectSelected, 'cont_approx', Attrib)</l>
+<c>        * </c>
+<c>        * step: get circle data in image coordinate system</c>
+<c>        * </c>
+<l>        if (Attrib == 1)</l>
+<l>            fit_circle_contour_xld (ObjectSelected, 'algebraic', -1, 0, 0, 3, 2, Row, Column, Radius, StartPhi, EndPhi, PointOrder)</l>
+<l>            gen_circle_contour_xld (ContCircle, Row, Column, Radius, StartPhi, EndPhi, PointOrder, 1.5)</l>
+<l>            RowsE := [RowsE,Row]</l>
+<l>            ColsE := [ColsE,Column]</l>
+<l>            RadiiE := [RadiiE,Radius]</l>
+<l>            dev_display (ContCircle)</l>
+<l>        else</l>
+<c>            * </c>
+<c>            * step: get line data in image coordinate system</c>
+<c>            * </c>
+<l>            fit_line_contour_xld (ObjectSelected, 'tukey', -1, 0, 5, 2, RowBegin, ColBegin, RowEnd, ColEnd, Nr, Nc, Dist)</l>
+<l>            gen_contour_polygon_xld (Line, [RowBegin,RowEnd], [ColBegin,ColEnd])</l>
+<l>            concat_obj (Lines, Line, Lines)</l>
+<l>        endif</l>
+<l>    endfor</l>
+<c>    * </c>
+<c>    * step: use line data to determine the origin of a local coordinate system</c>
+<c>    * </c>
+<l>    dev_set_color ('white')</l>
+<l>    count_obj (Lines, NumberLines)</l>
+<l>    select_contours_xld (Lines, LinesVertical, 'direction', rad(88), rad(92), 0, 0)</l>
+<l>    count_obj (LinesVertical, NumberLV)</l>
+<l>    select_contours_xld (Lines, LinesHorizontal, 'direction', rad(-2), rad(2), 0, 0)</l>
+<l>    count_obj (LinesHorizontal, NumberLH)</l>
+<c>    * </c>
+<c>    * step: get end points of vertical line with the lowest column coordinate</c>
+<c>    * </c>
+<l>    ColVmin := 0</l>
+<l>    RowHmax := 0</l>
+<l>    for I := 1 to NumberLV by 1</l>
+<l>        select_obj (LinesVertical, SelectedV, I)</l>
+<l>        get_contour_xld (SelectedV, RowV, ColV)</l>
+<l>        if (I == 1)</l>
+<l>            ColVmin := ColV[0]</l>
+<l>            RowA1 := RowV[0]</l>
+<l>            ColA1 := ColV[0]</l>
+<l>            RowA2 := RowV[1]</l>
+<l>            ColA2 := ColV[1]</l>
+<l>        else</l>
+<l>            if (ColV[0] &lt; ColVmin)</l>
+<l>                ColVmin := ColV[0]</l>
+<l>                RowA1 := RowV[0]</l>
+<l>                ColA1 := ColV[0]</l>
+<l>                RowA2 := RowV[1]</l>
+<l>                ColA2 := ColV[1]</l>
+<l>            endif</l>
+<l>        endif</l>
+<l>    endfor</l>
+<c>    * </c>
+<c>    * step: get end points of horizontal line with the largest row coordinate</c>
+<c>    * </c>
+<l>    for J := 1 to NumberLH by 1</l>
+<l>        select_obj (LinesHorizontal, SelectedH, J)</l>
+<l>        get_contour_xld (SelectedH, RowH, ColH)</l>
+<l>        if (RowH[0] &gt; RowHmax)</l>
+<l>            RowHmax := RowH[0]</l>
+<l>            RowB1 := RowH[0]</l>
+<l>            ColB1 := ColH[0]</l>
+<l>            RowB2 := RowH[1]</l>
+<l>            ColB2 := ColH[1]</l>
+<l>        endif</l>
+<l>    endfor</l>
+<c>    * </c>
+<c>    * step: get intersection point, i.e., the origin of the local coordinate system</c>
+<c>    * </c>
+<l>    intersection_lines (RowA1, ColA1, RowA2, ColA2, RowB1, ColB1, RowB2, ColB2, RowO, ColO, IsOverlapping)</l>
+<l>    gen_cross_contour_xld (Cross, RowO, ColO, 10, 0.785398)</l>
+<l>    dev_display (Cross)</l>
+<l>    disp_arrow (WindowID, RowO, ColO, RowO - 100, ColO, 2)</l>
+<l>    disp_arrow (WindowID, RowO, ColO, RowO, ColO + 100, 2)</l>
+<c>    * </c>
+<c>    * step: transform the circle data into the local coordiante system</c>
+<c>    * </c>
+<l>    hom_mat2d_identity (HomMat2DIdentityResults)</l>
+<l>    hom_mat2d_slant (HomMat2DIdentityResults, rad(180), 'x', 0, 0, HomMat2DSlantResults)</l>
+<l>    hom_mat2d_translate (HomMat2DSlantResults, RowO, -ColO, HomMat2DTranslateResults)</l>
+<l>    affine_trans_pixel (HomMat2DTranslateResults, RowsE, ColsE, RowsELocal, ColsELocal)</l>
+<c>    * </c>
+<c>    * step: define the plate of the first image as reference object</c>
+<c>    * </c>
+<l>    if (K == 0)</l>
+<l>        RowsELocalRef := RowsELocal</l>
+<l>        ColsELocalRef := ColsELocal</l>
+<l>        RadiiERef := RadiiE</l>
+<l>        NumberRowsERef := |RowsELocal|</l>
+<l>        disp_message (WindowID, I + 1, 'window', RowsE + 10, ColsE + RadiiE, 'white', 'false')</l>
+<l>        disp_message (WindowID, 'Reference Object', 'window', 50, 10, 'white', 'false')</l>
+<c>        * </c>
+<c>        * step:compare the circle centers of the other images</c>
+<c>        * with the circle data of the reference and store</c>
+<c>        * the indices of missing or deviating circles</c>
+<c>        * </c>
+<l>    else</l>
+<l>        ID_Deviation := []</l>
+<l>        ID_Missing := []</l>
+<l>        NumberRowsE := |RowsE|</l>
+<l>        if (NumberRowsE == NumberRowsERef)</l>
+<l>            distance_pp (RowsELocalRef, ColsELocalRef, RowsELocal, ColsELocal, DistanceEllipseCenters)</l>
+<l>            DiffRadius := abs(RadiiE - RadiiERef)</l>
+<l>            for I := 0 to |DistanceEllipseCenters| - 1 by 1</l>
+<l>                if (DistanceEllipseCenters[I] &gt; 2 or DiffRadius[I] &gt; 2)</l>
+<l>                    ID_Deviation := [ID_Deviation,I + 1]</l>
+<l>                endif</l>
+<l>            endfor</l>
+<l>        endif</l>
+<l>        if (NumberRowsE &lt; NumberRowsERef)</l>
+<l>            J := 0</l>
+<l>            for I := 0 to NumberRowsE - 1 by 1</l>
+<l>                OK := 0</l>
+<l>                while (OK == 0)</l>
+<l>                    distance_pp (RowsELocalRef[J], ColsELocalRef[J], RowsELocal[I], ColsELocal[I], Distance)</l>
+<l>                    DiffRadius := abs(RadiiE[I] - RadiiERef[J])</l>
+<l>                    if ((Distance &lt; 10) and (DiffRadius &lt; 10))</l>
+<l>                        if (Distance &gt; 2 or DiffRadius &gt; 2)</l>
+<l>                            ID_Deviation := [ID_Deviation,J + 1]</l>
+<l>                        endif</l>
+<l>                        OK := 1</l>
+<l>                    else</l>
+<l>                        ID_Missing := [ID_Missing,J + 1]</l>
+<l>                    endif</l>
+<l>                    if (J == NumberRowsERef - 1)</l>
+<l>                        OK := 1</l>
+<l>                    endif</l>
+<l>                    J := J + 1</l>
+<l>                endwhile</l>
+<l>            endfor</l>
+<l>        endif</l>
+<l>        if (NumberRowsE &gt; NumberRowsERef)</l>
+<l>            disp_message (WindowID, 'There are more circles than in the reference model!', 'window', 350, 150, 'white', 'false')</l>
+<l>        endif</l>
+<c>        * </c>
+<c>        * step: Visualize errors, i.e., in case of missing or deviating</c>
+<c>        * circles, display the corresponding circles of the reference</c>
+<c>        * </c>
+<l>        dev_set_draw ('margin')</l>
+<l>        NumCircleDeviation := |ID_Deviation|</l>
+<l>        NumCircleMissing := |ID_Missing|</l>
+<l>        Counter := 0</l>
+<l>        hom_mat2d_invert (HomMat2DTranslateResults, HomMat2DInvert)</l>
+<l>        for I := 0 to NumCircleDeviation - 1 by 1</l>
+<l>            Index := ID_Deviation[I]</l>
+<l>            Counter := Counter + 1</l>
+<l>            disp_message (WindowID, 'Deviation (&gt;2 pixels) for circle with index ' + Index, 'window', 30 + Counter * 20, 10, 'red', 'false')</l>
+<l>            affine_trans_pixel (HomMat2DInvert, RowsELocalRef[Index - 1], ColsELocalRef[Index - 1], RowsEVis, ColsEVis)</l>
+<l>            gen_circle (Circle, RowsEVis, ColsEVis, RadiiERef[Index - 1])</l>
+<l>            dev_display (Circle)</l>
+<l>        endfor</l>
+<l>        for I := 0 to NumCircleMissing - 1 by 1</l>
+<l>            Index := ID_Missing[I]</l>
+<l>            Counter := Counter + 1</l>
+<l>            disp_message (WindowID, 'Missing: circle with index ' + Index, 'window', 30 + Counter * 20, 10, 'red', 'false')</l>
+<l>            affine_trans_pixel (HomMat2DInvert, RowsELocalRef[Index - 1], ColsELocalRef[Index - 1], RowsEVis, ColsEVis)</l>
+<l>            gen_circle (Circle, RowsEVis, ColsEVis, RadiiERef[Index - 1])</l>
+<l>            dev_display (Circle)</l>
+<l>        endfor</l>
+<l>    endif</l>
+<l>    stop ()</l>
+<l>endfor</l>
+<c>* </c>
+<l>dev_update_window ('on')</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>

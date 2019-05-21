@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.0">
+<procedure name="main">
+<interface/>
+<body>
+<c>* ------------------------------------------------------------------------------------------------</c>
+<c>* This example program searches for nuts of different scales and determines.</c>
+<c>* "grasping points" on the contour.</c>
+<c>* ------------------------------------------------------------------------------------------------</c>
+<c>* general configuration of HDevelop</c>
+<l>dev_update_window ('off')</l>
+<c>* image acquisition and window size</c>
+<l>read_image (ModelImage, 'rings_and_nuts')</l>
+<l>get_image_pointer1 (ModelImage, Pointer, Type, Width, Height)</l>
+<l>dev_close_window ()</l>
+<l>dev_open_window (0, 0, Width, Height, 'white', WindowHandle)</l>
+<l>dev_set_part (0, 0, Height - 1, Width - 1)</l>
+<l>dev_display (ModelImage)</l>
+<c>* colors and other settings for the visualization</c>
+<l>dev_set_color ('cyan')</l>
+<l>dev_set_draw ('margin')</l>
+<l>dev_set_line_width (2)</l>
+<l>set_display_font (WindowHandle, 14, 'mono', 'true', 'false')</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* -------------------  start of the application  ----------------</c>
+<c>* step 1: select the model object</c>
+<l>Row := 324</l>
+<l>Column := 279</l>
+<l>Radius := 60</l>
+<l>gen_circle (ROI1, Row, Column, Radius)</l>
+<l>gen_circle (ROI2, Row, Column, 0.5 * Radius)</l>
+<l>difference (ROI1, ROI2, ModelROI)</l>
+<l>dev_display (ModelImage)</l>
+<l>dev_display (ModelROI)</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* step 2: select "grasping points"</c>
+<l>RowUpperPoint := 284</l>
+<l>ColUpperPoint := 278</l>
+<l>RowLowerPoint := 362</l>
+<l>ColLowerPoint := 278</l>
+<l>area_center (ModelROI, Area, CenterROIRow, CenterROIColumn)</l>
+<c>* translate grasping points so that they lie on XLD model</c>
+<l>RowUpperPointRef := RowUpperPoint - CenterROIRow</l>
+<l>ColUpperPointRef := ColUpperPoint - CenterROIColumn</l>
+<l>RowLowerPointRef := RowLowerPoint - CenterROIRow</l>
+<l>ColLowerPointRef := ColLowerPoint - CenterROIColumn</l>
+<l>dev_display (ModelImage)</l>
+<l>dev_set_color ('blue')</l>
+<l>disp_arrow (WindowHandle, RowUpperPoint - 25, ColUpperPoint, RowUpperPoint, ColUpperPoint, 2)</l>
+<l>disp_arrow (WindowHandle, RowLowerPoint + 25, ColLowerPoint, RowLowerPoint, ColLowerPoint, 2)</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* step 3: create the model</c>
+<l>reduce_domain (ModelImage, ModelROI, ImageROI)</l>
+<l>inspect_shape_model (ImageROI, ShapeModelImage, ShapeModelRegion, 1, 30)</l>
+<l>dev_clear_window ()</l>
+<l>dev_display (ShapeModelRegion)</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<l>create_scaled_shape_model (ImageROI, 'auto', -rad(30), rad(60), 'auto', 0.6, 1.4, 'auto', 'none', 'use_polarity', 60, 10, ModelID)</l>
+<l>get_shape_model_contours (ShapeModel, ModelID, 1)</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* step 4: find all objects</c>
+<l>copy_image (ModelImage, SearchImage)</l>
+<l>dev_display (SearchImage)</l>
+<l>find_scaled_shape_model (SearchImage, ModelID, -rad(30), rad(60), 0.6, 1.4, 0.65, 0, 0, 'least_squares', 0, 0.8, RowCheck, ColumnCheck, AngleCheck, ScaleCheck, Score)</l>
+<l>for i := 0 to |Score| - 1 by 1</l>
+<c>    * step 5: determine the transformation</c>
+<l>    vector_angle_to_rigid (0, 0, 0, RowCheck[i], ColumnCheck[i], AngleCheck[i], MovementOfObject)</l>
+<l>    hom_mat2d_scale (MovementOfObject, ScaleCheck[i], ScaleCheck[i], RowCheck[i], ColumnCheck[i], MoveAndScalingOfObject)</l>
+<l>    affine_trans_contour_xld (ShapeModel, ModelAtNewPosition, MoveAndScalingOfObject)</l>
+<l>    dev_set_color ('cyan')</l>
+<l>    dev_display (ModelAtNewPosition)</l>
+<l>    dev_set_color ('blue')</l>
+<c>    * step 6: transform grasping points</c>
+<l>    affine_trans_pixel (MoveAndScalingOfObject, RowUpperPointRef, ColUpperPointRef, RowUpperPointCheck, ColUpperPointCheck)</l>
+<l>    affine_trans_pixel (MoveAndScalingOfObject, RowLowerPointRef, ColLowerPointRef, RowLowerPointCheck, ColLowerPointCheck)</l>
+<l>    disp_arrow (WindowHandle, RowUpperPointCheck - 25 * cos(AngleCheck[i]), ColUpperPointCheck - 25 * sin(AngleCheck[i]), RowUpperPointCheck, ColUpperPointCheck, 2)</l>
+<l>    disp_arrow (WindowHandle, RowLowerPointCheck + 25 * cos(AngleCheck[i]), ColLowerPointCheck + 25 * sin(AngleCheck[i]), RowLowerPointCheck, ColLowerPointCheck, 2)</l>
+<l>    disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>    stop ()</l>
+<l>endfor</l>
+<c>* -------------------  end of the application  -----------------</c>
+<c>* clean up</c>
+<l>dev_update_window ('on')</l>
+<l>clear_shape_model (ModelID)</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>

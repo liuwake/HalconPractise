@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.0">
+<procedure name="main">
+<interface/>
+<body>
+<c>* This program checks a BGA for missing balls, deformations, and</c>
+<c>* deviations of the balls from a regular grid defined by a reference BGA</c>
+<c>* </c>
+<c>* Read and initialize image and visualization</c>
+<c>* </c>
+<l>read_image (Image, 'bga_14x14_model')</l>
+<l>get_image_pointer1 (Image, Pointer, Type, Width, Height)</l>
+<l>dev_update_off ()</l>
+<l>dev_close_window ()</l>
+<l>dev_open_window (0, 0, Width, Height, 'light gray', WindowHandle)</l>
+<l>set_display_font (WindowHandle, 16, 'mono', 'true', 'false')</l>
+<l>dev_set_part (0, 0, Height - 1, Width - 1)</l>
+<l>dev_display (Image)</l>
+<l>dev_set_line_width (1)</l>
+<l>dev_set_color ('green')</l>
+<l>VisualizeIntermediate := true</l>
+<c>* </c>
+<c>* Build the model for the BGA.</c>
+<c>* </c>
+<c>* Segment the BGAs.</c>
+<c>* </c>
+<l>fast_threshold (Image, Region, 95, 255, 3)</l>
+<l>connection (Region, ConnectedRegions)</l>
+<l>select_shape (ConnectedRegions, SelectedRegions, ['area','anisometry'], 'and', [20,1.0], [100,1.7])</l>
+<l>dilation_rectangle1 (SelectedRegions, RegionDilation, 3, 3)</l>
+<c>* </c>
+<c>* get volume and center position of each BGA</c>
+<c>* volume: sum of the gray values for all pixels</c>
+<c>* </c>
+<l>area_center_gray (RegionDilation, Image, Volume, Row, Column)</l>
+<c>* </c>
+<c>* Sort the BGA centers line by line.</c>
+<c>* </c>
+<c>* get smallest rectangle for the 2D transformation</c>
+<c>* </c>
+<l>gen_region_points (RegionBGACenters, Row, Column)</l>
+<l>smallest_rectangle2 (RegionBGACenters, RowBGARect, ColumnBGARect, PhiBGARect, Length1BGARect, Length2BGARect)</l>
+<l>if (VisualizeIntermediate)</l>
+<l>    dev_display (Image)</l>
+<l>    dev_set_color ('red')</l>
+<l>    dev_display (RegionBGACenters)</l>
+<l>    dev_set_color ('green')</l>
+<l>    dev_set_draw ('margin')</l>
+<l>    gen_rectangle2 (BGARect, RowBGARect, ColumnBGARect, PhiBGARect, Length1BGARect, Length2BGARect)</l>
+<l>    dev_display (BGARect)</l>
+<l>    dev_set_draw ('fill')</l>
+<l>endif</l>
+<l>disp_message (WindowHandle, 'Reference BGA', 'window', 10, 10, 'black', 'false')</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* </c>
+<c>* Determine the maximum number of balls per row and column.  We assume</c>
+<c>* that this is known.  If not, this could also be determined automatically.</c>
+<c>* </c>
+<l>BallsPerRow := 14</l>
+<l>BallsPerCol := 14</l>
+<c>* </c>
+<c>* 2D transformation and normalization of the center points, i.e., make it</c>
+<c>* horizontal, move it into the left upper corner, and scale it so that</c>
+<c>* the distance between the balls becomes 1</c>
+<c>* </c>
+<l>BallDistCol := 2 * Length1BGARect / (BallsPerCol - 1)</l>
+<l>BallDistRow := 2 * Length2BGARect / (BallsPerRow - 1)</l>
+<l>hom_mat2d_identity (HomMat2DIdentity)</l>
+<l>hom_mat2d_rotate (HomMat2DIdentity, -PhiBGARect, RowBGARect, ColumnBGARect, HomMat2DRotate)</l>
+<l>hom_mat2d_translate (HomMat2DRotate, -RowBGARect + Length2BGARect, -ColumnBGARect + Length1BGARect, HomMat2DTranslate)</l>
+<l>hom_mat2d_scale (HomMat2DTranslate, 1 / BallDistRow, 1 / BallDistCol, 0, 0, HomMat2DScale)</l>
+<l>affine_trans_point_2d (HomMat2DScale, Row, Column, RowNormalized, ColNormalized)</l>
+<c>* </c>
+<c>* now you have a still unsorted set of point coordinates:</c>
+<c>* </c>
+<l>BGARowIndex := round(RowNormalized)</l>
+<l>BGAColIndex := round(ColNormalized)</l>
+<l>NumBalls := |Row|</l>
+<c>* </c>
+<c>* visualize normalized matrix of bgas</c>
+<l>dev_set_color ('black')</l>
+<l>if (VisualizeIntermediate)</l>
+<l>    dev_clear_window ()</l>
+<l>    dev_set_draw ('margin')</l>
+<l>    for i := 0 to NumBalls - 1 by 1</l>
+<l>        disp_cross (WindowHandle, 10 + BGARowIndex[i] * 10, 10 + BGAColIndex[i] * 10, 6, 0)</l>
+<l>    endfor</l>
+<l>    dev_set_draw ('fill')</l>
+<l>endif</l>
+<c>* </c>
+<c>* create tuple with 14*14 elements, all with the value -1</c>
+<c>* </c>
+<l>BallMatrix := gen_tuple_const(BallsPerRow * BallsPerCol,-1)</l>
+<c>* </c>
+<c>* sort indices of the point coordinates so that</c>
+<c>* BallMatrix[index of point coordinates in a sorted grid]=</c>
+<c>* index of corresponding point coordinates in unsorted grid</c>
+<c>* or -1 for positions in the grid that contain no ball</c>
+<c>* </c>
+<l>for i := 0 to NumBalls - 1 by 1</l>
+<l>    BallMatrix[BGARowIndex[i] * BallsPerCol + BGAColIndex[i]] := i</l>
+<l>endfor</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* </c>
+<c>* read and segment images with BGAs that have to be checked</c>
+<c>* </c>
+<l>read_image (Image, 'bga_14x14_defects')</l>
+<l>dev_display (Image)</l>
+<l>disp_message (WindowHandle, 'BGA to be checked', 'window', 10, 10, 'black', 'false')</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<l>fast_threshold (Image, Region, 95, 255, 3)</l>
+<l>connection (Region, ConnectedRegions)</l>
+<l>select_shape (ConnectedRegions, SelectedRegions, ['area','anisometry'], 'and', [20,1.0], [100,1.7])</l>
+<l>dilation_rectangle1 (SelectedRegions, RegionDilation, 3, 3)</l>
+<c>* </c>
+<c>* for each region, get the volume, center position, the elliptic axis and orientation</c>
+<c>* of the ellipse with the same moments than the regions</c>
+<c>* </c>
+<l>area_center_gray (RegionDilation, Image, VolumeCheck, RowCheck, ColumnCheck)</l>
+<l>elliptic_axis_gray (RegionDilation, Image, RaCheck, RbCheck, PhiCheck)</l>
+<l>AnisometryCheck := RaCheck / RbCheck</l>
+<c>* </c>
+<c>* Sort the BGA centers line by line.</c>
+<c>* </c>
+<c>* get smallest rectangle for the 2D transformation</c>
+<c>* </c>
+<l>gen_region_points (RegionBGACenters, RowCheck, ColumnCheck)</l>
+<l>smallest_rectangle2 (RegionBGACenters, RowBGACheck, ColumnBGACheck, PhiBGACheck, Length1BGACheck, Length2BGACheck)</l>
+<l>if (VisualizeIntermediate)</l>
+<l>    dev_display (Image)</l>
+<l>    dev_set_color ('red')</l>
+<l>    dev_display (RegionBGACenters)</l>
+<l>    dev_set_color ('green')</l>
+<l>    dev_set_draw ('margin')</l>
+<l>    gen_rectangle2 (BGARect, RowBGACheck, ColumnBGACheck, PhiBGACheck, Length1BGACheck, Length2BGACheck)</l>
+<l>    dev_display (BGARect)</l>
+<l>    dev_set_draw ('fill')</l>
+<l>endif</l>
+<c>* </c>
+<c>* 2D transformation and normalization of the center points</c>
+<c>* </c>
+<l>BallDistCol := 2 * Length1BGACheck / (BallsPerCol - 1)</l>
+<l>BallDistRow := 2 * Length2BGACheck / (BallsPerRow - 1)</l>
+<l>hom_mat2d_identity (HomMat2DIdentity)</l>
+<l>hom_mat2d_rotate (HomMat2DIdentity, -PhiBGACheck, RowBGACheck, ColumnBGACheck, HomMat2DRotate)</l>
+<l>hom_mat2d_translate (HomMat2DRotate, -RowBGACheck + Length2BGACheck, -ColumnBGACheck + Length1BGACheck, HomMat2DTranslate)</l>
+<l>hom_mat2d_scale (HomMat2DTranslate, 1 / BallDistRow, 1 / BallDistCol, 0, 0, HomMat2DScale)</l>
+<l>affine_trans_point_2d (HomMat2DScale, RowCheck, ColumnCheck, RowNormalized, ColNormalized)</l>
+<l>BGARowIndex := round(RowNormalized)</l>
+<l>BGAColIndex := round(ColNormalized)</l>
+<l>NumBalls := |RowCheck|</l>
+<c>* </c>
+<c>* visualize normalized matrix of bgas</c>
+<l>dev_set_color ('black')</l>
+<l>if (VisualizeIntermediate)</l>
+<l>    dev_clear_window ()</l>
+<l>    dev_set_draw ('margin')</l>
+<l>    for i := 0 to NumBalls - 1 by 1</l>
+<l>        disp_cross (WindowHandle, 10 + BGARowIndex[i] * 10, 10 + BGAColIndex[i] * 10, 6, 0)</l>
+<l>    endfor</l>
+<l>    dev_set_draw ('fill')</l>
+<l>endif</l>
+<c>* </c>
+<c>* sort indices like described above</c>
+<c>* </c>
+<l>BallMatrixCheck := gen_tuple_const(BallsPerRow * BallsPerCol,-1)</l>
+<l>for i := 0 to NumBalls - 1 by 1</l>
+<l>    BallMatrixCheck[BGARowIndex[i] * BallsPerCol + BGAColIndex[i]] := i</l>
+<l>endfor</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* </c>
+<c>* now compare the positions of the bgas and</c>
+<c>* get the shape features of the second one..</c>
+<c>* </c>
+<c>* Construct the coordinates of the points for the determination of the transformation.</c>
+<c>* </c>
+<l>Rows1 := gen_tuple_const(NumBalls,0)</l>
+<l>Cols1 := gen_tuple_const(NumBalls,0)</l>
+<l>Rows2 := gen_tuple_const(NumBalls,0)</l>
+<l>Cols2 := gen_tuple_const(NumBalls,0)</l>
+<l>Phi2 := gen_tuple_const(NumBalls,0)</l>
+<l>Ra2 := gen_tuple_const(NumBalls,0)</l>
+<l>Rb2 := gen_tuple_const(NumBalls,0)</l>
+<l>Anisometry2 := gen_tuple_const(NumBalls,0)</l>
+<l>Volume2 := gen_tuple_const(NumBalls,0)</l>
+<l>j := 0</l>
+<c>* </c>
+<c>* Assign the sorted row and column coordinates for the reference BGA</c>
+<c>* and the checked BGA to new tuples, which contain only the ball</c>
+<c>* positions and not the missing balls (i.e., no -1 values)</c>
+<c>* </c>
+<l>for i := 0 to BallsPerRow * BallsPerCol - 1 by 1</l>
+<l>    if (BallMatrix[i] &gt;= 0 and BallMatrixCheck[i] &gt;= 0)</l>
+<l>        Rows1[j] := Row[BallMatrix[i]]</l>
+<l>        Cols1[j] := Column[BallMatrix[i]]</l>
+<l>        Rows2[j] := RowCheck[BallMatrixCheck[i]]</l>
+<l>        Cols2[j] := ColumnCheck[BallMatrixCheck[i]]</l>
+<l>        Phi2[j] := PhiCheck[BallMatrixCheck[i]]</l>
+<l>        Ra2[j] := RaCheck[BallMatrixCheck[i]]</l>
+<l>        Rb2[j] := RbCheck[BallMatrixCheck[i]]</l>
+<l>        Anisometry2[j] := AnisometryCheck[BallMatrixCheck[i]]</l>
+<l>        Volume2[j] := VolumeCheck[BallMatrixCheck[i]]</l>
+<l>        j := j + 1</l>
+<l>    endif</l>
+<l>endfor</l>
+<c>* </c>
+<c>* transform the coordinate set of the reference bga</c>
+<c>* to lie approximately over the bgas to be checked</c>
+<c>* </c>
+<l>vector_to_rigid (Rows1, Cols1, Rows2, Cols2, HomMat2D)</l>
+<l>affine_trans_point_2d (HomMat2D, Rows1, Cols1, RowTrans, ColumnTrans)</l>
+<l>affine_trans_point_2d (HomMat2D, Row, Column, RowTransFull, ColumnTransFull)</l>
+<l>if (VisualizeIntermediate)</l>
+<l>    dev_clear_window ()</l>
+<l>    for i := 0 to |Rows2| - 1 by 1</l>
+<l>        gen_contour_polygon_xld (Lines, [Rows2[i],RowTrans[i]], [Cols2[i],ColumnTrans[i]])</l>
+<l>        dev_display (Lines)</l>
+<l>    endfor</l>
+<l>endif</l>
+<c>* </c>
+<c>* compare (get the distance between) the bgas to be checked</c>
+<c>* and the tranformed reference bgas</c>
+<c>* </c>
+<l>distance_pp (Rows2, Cols2, RowTrans, ColumnTrans, Distance)</l>
+<l>MaxDistance := max(Distance)</l>
+<c>* </c>
+<c>* check for shape features</c>
+<c>* </c>
+<l>dev_display (Image)</l>
+<l>dev_set_draw ('margin')</l>
+<l>gen_empty_obj (EllipseCorrect)</l>
+<l>gen_empty_obj (EllipseDeviation)</l>
+<l>gen_empty_obj (EllipseDeformation)</l>
+<l>gen_empty_obj (EllipseVolume)</l>
+<l>gen_empty_obj (Missing)</l>
+<l>dev_set_color ('white')</l>
+<l>VolumeMean := mean(Volume)</l>
+<l>VolumeMin := min(Volume)</l>
+<l>VolumeMax := max(Volume)</l>
+<l>VolumecheckMean := mean(VolumeCheck)</l>
+<l>VolumeCheckMin := min(VolumeCheck)</l>
+<l>VolumeCheckMax := max(VolumeCheck)</l>
+<l>j := 0</l>
+<l>for i := 0 to BallsPerRow * BallsPerCol - 1 by 1</l>
+<l>    if (BallMatrix[i] &gt;= 0 and BallMatrixCheck[i] &gt;= 0)</l>
+<l>        gen_ellipse (Ellipse, Rows2[j], Cols2[j], Phi2[j], Ra2[j], Rb2[j])</l>
+<l>        if (Distance[j] &gt; 0.05)</l>
+<l>            concat_obj (EllipseDeviation, Ellipse, EllipseDeviation)</l>
+<l>        else</l>
+<l>            if (Anisometry2[j] &gt; 1.2)</l>
+<l>                concat_obj (EllipseDeformation, Ellipse, EllipseDeformation)</l>
+<l>            else</l>
+<l>                if (Volume2[j] &lt; 5500 or Volume2[j] &gt; 10000)</l>
+<l>                    concat_obj (EllipseVolume, Ellipse, EllipseVolume)</l>
+<l>                else</l>
+<l>                    concat_obj (EllipseCorrect, Ellipse, EllipseCorrect)</l>
+<l>                endif</l>
+<l>            endif</l>
+<l>        endif</l>
+<l>        j := j + 1</l>
+<l>    else</l>
+<l>        if (BallMatrix[i] &gt;= 0)</l>
+<l>            gen_cross_contour_xld (Cross, RowTransFull[BallMatrix[i]], ColumnTransFull[BallMatrix[i]], 10, 0.785398)</l>
+<l>            concat_obj (Missing, Cross, Missing)</l>
+<l>        endif</l>
+<l>    endif</l>
+<l>endfor</l>
+<c>* </c>
+<c>* visualize the differently classified balls</c>
+<c>* </c>
+<l>dev_set_line_width (2)</l>
+<l>dev_display (Image)</l>
+<l>disp_message (WindowHandle, 'White cross: segmentation of ball failed', 'window', 10, 10, 'black', 'false')</l>
+<l>dev_set_color ('white')</l>
+<l>dev_display (Missing)</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* </c>
+<l>dev_display (Image)</l>
+<l>disp_message (WindowHandle, 'Ellipse: center positions deviate', 'window', 10, 10, 'black', 'false')</l>
+<l>dev_set_color ('white')</l>
+<l>dev_display (EllipseDeviation)</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* </c>
+<l>dev_display (Image)</l>
+<l>disp_message (WindowHandle, 'Ellipse: deformed balls', 'window', 10, 10, 'black', 'false')</l>
+<l>dev_set_color ('white')</l>
+<l>dev_display (EllipseDeformation)</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* </c>
+<l>dev_display (Image)</l>
+<l>disp_message (WindowHandle, 'Ellipse: gray value volume out of range', 'window', 10, 10, 'black', 'false')</l>
+<l>dev_set_color ('white')</l>
+<l>dev_display (EllipseVolume)</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>

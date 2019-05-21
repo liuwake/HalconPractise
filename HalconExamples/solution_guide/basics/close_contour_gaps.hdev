@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.0">
+<procedure name="main">
+<interface/>
+<body>
+<c>* close_contour_gaps.hdev: closes gaps in extracted straight contours</c>
+<c>* </c>
+<l>dev_close_window ()</l>
+<l>dev_update_window ('off')</l>
+<c>* ****</c>
+<c>* step: create synthetic image</c>
+<c>* ****</c>
+<l>gen_rectangle1 (Rectangle, 30, 20, 100, 100)</l>
+<l>region_to_bin (Rectangle, BinImage, 130, 100, 120, 130)</l>
+<l>rectangle1_domain (BinImage, ImageReduced, 20, 48, 40, 52)</l>
+<l>mean_image (ImageReduced, SmoothedImage, 15, 15)</l>
+<l>paint_gray (SmoothedImage, BinImage, Image)</l>
+<l>get_image_size (Image, Width, Height)</l>
+<l>dev_open_window_fit_image (Image, 0, 0, Width, Height, WindowID)</l>
+<l>dev_set_draw ('margin')</l>
+<l>dev_set_line_width (3)</l>
+<l>dev_display (Image)</l>
+<l>stop ()</l>
+<c>* ****</c>
+<c>* step: create contours</c>
+<c>* ****</c>
+<l>rectangle1_domain (Image, ImageReduced, 5, 5, 125, 115)</l>
+<l>edges_sub_pix (ImageReduced, Edges, 'lanser2', 1.1, 22, 30)</l>
+<l>dev_display (Image)</l>
+<l>dev_display (Edges)</l>
+<l>stop ()</l>
+<c>* ****</c>
+<c>* step: process contours</c>
+<c>* ****</c>
+<l>segment_contours_xld (Edges, LineSegments, 'lines', 5, 4, 2)</l>
+<l>regress_contours_xld (LineSegments, RegressContours, 'no', 1)</l>
+<l>union_collinear_contours_xld (RegressContours, UnionContours, 10, 1, 2, 0.1, 'attr_keep')</l>
+<l>sort_contours_xld (UnionContours, SortedContours, 'upper_left', 'true', 'column')</l>
+<l>dev_display (Image)</l>
+<l>colored_display (SortedContours, ['yellow','white','white','yellow'])</l>
+<l>dev_update_window ('on')</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+<procedure name="colored_display">
+<interface>
+<io>
+<par name="Objects" base_type="iconic" dimension="0"/>
+</io>
+<ic>
+<par name="Colors" base_type="ctrl" dimension="0"/>
+</ic>
+</interface>
+<body>
+<l>count_obj (Objects, NumObjects)</l>
+<l>NumColors := |Colors|</l>
+<l>for i := 1 to NumObjects by 1</l>
+<l>    select_obj (Objects, ObjectSelected, i)</l>
+<l>    Color := Colors[(i - 1) % NumColors]</l>
+<l>    dev_set_color (Color)</l>
+<l>    dev_display (ObjectSelected)</l>
+<l>endfor</l>
+<l>return ()</l>
+</body>
+<docu id="colored_display">
+<short lang="en_US">displays iconic objects with definable alternating colors</short>
+<parameters>
+<parameter id="Colors"/>
+<parameter id="Objects"/>
+</parameters>
+</docu>
+</procedure>
+</hdevelop>

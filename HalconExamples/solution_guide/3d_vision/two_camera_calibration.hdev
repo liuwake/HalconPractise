@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.0">
+<procedure name="main">
+<interface/>
+<body>
+<c>* This example program shows how high precision mosaicking</c>
+<c>* can be performed with calibrated cameras.</c>
+<c>* </c>
+<c>* Further information can be found in the</c>
+<c>* Solution Guide III-C 3D Vision, Chapters 9 and 10.</c>
+<c>* This example program is used in chapter 9 to</c>
+<c>* illustrate calibrated mosaicking.</c>
+<c>* </c>
+<l>dev_update_off ()</l>
+<l>ImgPath := '3d_machine_vision/multiple_cameras/'</l>
+<c>* </c>
+<c>* Open two windows for the left and the right image.</c>
+<l>dev_close_window ()</l>
+<l>read_image (Image1, ImgPath + 'camera1_ref')</l>
+<l>get_image_size (Image1, Width, Height)</l>
+<l>WindowScale := 0.66</l>
+<l>dev_open_window (0, 0, Width * WindowScale, Height * WindowScale, 'black', WindowHandle1)</l>
+<l>dev_open_window (0, Width * WindowScale + 6, Width * WindowScale, Height * WindowScale, 'black', WindowHandle2)</l>
+<c>* </c>
+<c>* Set some parameters for both windows.</c>
+<l>dev_set_window (WindowHandle1)</l>
+<l>dev_set_color ('green')</l>
+<l>dev_set_draw ('margin')</l>
+<l>dev_set_line_width (2)</l>
+<l>dev_set_part (0, 0, Height - 1, Width - 1)</l>
+<l>set_display_font (WindowHandle1, 16, 'mono', 'true', 'false')</l>
+<c>* </c>
+<l>dev_set_window (WindowHandle2)</l>
+<l>dev_set_color ('green')</l>
+<l>dev_set_draw ('margin')</l>
+<l>dev_set_line_width (2)</l>
+<l>dev_set_part (0, 0, Height - 1, Width - 1)</l>
+<l>set_display_font (WindowHandle2, 16, 'mono', 'true', 'false')</l>
+<c>* </c>
+<c>* We assume that the two cameras are already calibrated</c>
+<c>* (we know the internal camera parameters).</c>
+<l>gen_cam_par_area_scan_division (0.01619, -734.789, 7.402e-006, 7.4e-006, 324.911, 256.894, 640, 480, CamParam1)</l>
+<l>gen_cam_par_area_scan_division (0.0162584, -763.35, 7.39842e-006, 7.4e-006, 324.176, 245.371, 640, 480, CamParam2)</l>
+<c>* </c>
+<c>* Read the images and display them.</c>
+<l>read_image (Image1, ImgPath + 'camera1_ref')</l>
+<l>read_image (Image2, ImgPath + 'camera2_ref')</l>
+<l>dev_set_window (WindowHandle1)</l>
+<l>dev_display (Image1)</l>
+<l>dev_set_window (WindowHandle2)</l>
+<l>dev_display (Image2)</l>
+<c>* </c>
+<c>* Prepare the camera calibration.</c>
+<l>CaltabName := 'caltab_30mm.descr'</l>
+<l>create_calib_data ('calibration_object', 2, 1, CalibDataID)</l>
+<l>set_calib_data_calib_object (CalibDataID, 0, CaltabName)</l>
+<l>set_calib_data_cam_param (CalibDataID, 0, [], CamParam1)</l>
+<l>set_calib_data_cam_param (CalibDataID, 1, [], CamParam2)</l>
+<c>* </c>
+<c>* Find and display the calibration plate in the images.</c>
+<l>dev_set_window (WindowHandle1)</l>
+<l>find_calib_object (Image1, CalibDataID, 0, 0, 0, [], [])</l>
+<l>get_calib_data_observ_points (CalibDataID, 0, 0, 0, RowCoord1, ColumnCoord1, Index1, Pose1)</l>
+<l>get_calib_data_observ_contours (Caltab1, CalibDataID, 'caltab', 0, 0, 0)</l>
+<l>dev_display (Caltab1)</l>
+<c>* </c>
+<l>dev_set_window (WindowHandle2)</l>
+<l>find_calib_object (Image2, CalibDataID, 1, 0, 0, [], [])</l>
+<l>get_calib_data_observ_points (CalibDataID, 1, 0, 0, RowCoord2, ColumnCoord2, Index2, Pose2)</l>
+<l>get_calib_data_observ_contours (Caltab2, CalibDataID, 'caltab', 1, 0, 0)</l>
+<l>dev_display (Caltab2)</l>
+<c>* </c>
+<l>disp_message (WindowHandle1, 'Calibration successful', 'window', 12, 12, 'black', 'true')</l>
+<l>disp_continue_message (WindowHandle1, 'black', 'true')</l>
+<l>stop ()</l>
+<l>clear_calib_data (CalibDataID)</l>
+<c>* </c>
+<c>* Determine the offset between the calibration plate surface</c>
+<c>* and the object surface</c>
+<l>ThicknessCaliper := 2.9 / 1000.0</l>
+<l>ThicknessPlate := 5.65 / 1000.0</l>
+<l>DiffHeight := ThicknessPlate - ThicknessCaliper</l>
+<l>DistancePlates := 0.06488</l>
+<c>* </c>
+<c>* Define the pixel size of the mosaic image (in meters).</c>
+<l>PixelSize := 0.0001</l>
+<c>* </c>
+<c>* For the first (left) image, the determination</c>
+<c>* of the necessary shift of the pose is straightforward.</c>
+<c>* You can define the upper left corner of the rectified image</c>
+<c>* in image coordinates</c>
+<c>* based on a preselected border width.</c>
+<l>BorderInPercent := 7</l>
+<l>get_image_size (Image1, WidthImage1, HeightImage1)</l>
+<l>UpperRow := HeightImage1 * BorderInPercent / 100.0</l>
+<l>LeftColumn := WidthImage1 * BorderInPercent / 100.0</l>
+<c>* </c>
+<c>* Then, this point must be transformed into world coordinates.</c>
+<l>image_points_to_world_plane (CamParam1, Pose1, UpperRow, LeftColumn, 'm', LeftX, UpperY)</l>
+<c>* </c>
+<c>* For the determination of the height of the rectified image</c>
+<c>* we need to define a point that lies near the lower border</c>
+<c>* of the first image.</c>
+<l>LowerRow := HeightImage1 * (100 - BorderInPercent) / 100.0</l>
+<c>* </c>
+<c>* Again, this point must be transformed</c>
+<c>* into the world coordinate system.</c>
+<l>image_points_to_world_plane (CamParam1, Pose1, LowerRow, LeftColumn, 'm', X1, LowerY)</l>
+<c>* </c>
+<c>* The height can be determined as the vertical distance</c>
+<c>* between the upper left point and the point near the</c>
+<c>* lower image border, expressed in pixels of the rectified image.</c>
+<l>HeightRect := int((LowerY - UpperY) / PixelSize)</l>
+<c>* </c>
+<c>* Analogously, the width can be determined from a point t</c>
+<c>* hat lies in the overlapping area of the two images,</c>
+<c>* i.e., near the right border of the first image.</c>
+<l>OverlapInPercent := 20</l>
+<l>RightColumn := WidthImage1 * (100 - OverlapInPercent / 2.0) / 100.0</l>
+<l>image_points_to_world_plane (CamParam1, Pose1, UpperRow, RightColumn, 'm', RightX, Y1)</l>
+<l>WidthRect := int((RightX - LeftX) / PixelSize)</l>
+<c>* </c>
+<c>* With the shifted pose and the size of the rectified image,</c>
+<c>* the rectification map for the first image can be derived.</c>
+<l>set_origin_pose (Pose1, LeftX, UpperY, DiffHeight, PoseNewOrigin1)</l>
+<l>gen_image_to_world_plane_map (MapSingle1, CamParam1, PoseNewOrigin1, Width, Height, WidthRect, HeightRect, PixelSize, 'bilinear')</l>
+<c>* </c>
+<c>* Generate a new homogeneous transformation matrix.</c>
+<l>hom_mat3d_identity (HomMat3DIdentity)</l>
+<c>* </c>
+<c>* The second image must be rectified such that it fits exactly</c>
+<c>* to the right of the first rectified image. This means that the</c>
+<c>* upper left corner of the second rectified image must be identical</c>
+<c>* with the upper right corner of the first rectified image.</c>
+<c>* Therefore, we need to know the coordinates of the upper right corner</c>
+<c>* of the first rectified image in the coordinate system that is defined</c>
+<c>* by the calibration plate in the second image.</c>
+<c>* First, we express the upper right corner of the first rectified image</c>
+<c>* in the world coordinate system that is defined by the calibration plate</c>
+<c>* in the first image. It can be determined by a transformation from</c>
+<c>* the origin into the upper left corner of the</c>
+<c>* first rectified image (a translation) followed by a translation along</c>
+<c>* the upper border of the first rectified image. Together with the shift</c>
+<c>* that compensates the thickness of the calibration plate, this</c>
+<c>* transformation is represented by the homogeneous transformation matrix:</c>
+<l>hom_mat3d_translate_local (HomMat3DIdentity, LeftX + PixelSize * WidthRect, UpperY, DiffHeight, cp1Hur1)</l>
+<l>hom_mat3d_translate_local (HomMat3DIdentity, DistancePlates, 0, 0, cp1Hcp2)</l>
+<c>* </c>
+<c>* Then, we need the transformation between the two calibration plates of</c>
+<c>* the calibration object. The homogeneous transformation matrix cp1Hcp2</c>
+<c>* describes how the world coordinate system defined by the calibration plate</c>
+<c>* in the first image is transformed into the world coordinate system</c>
+<c>* defined by the calibration plate in the second image. This transformation</c>
+<c>* must be known beforehand from a precise measurement of the calibration object.</c>
+<c>* From these two transformations, it is easy to derive</c>
+<c>* the transformation that transforms the world coordinate system</c>
+<c>* of the second image such that its origin lies in the upper left corner</c>
+<c>* of the second rectified image. For this, the two transformations</c>
+<c>* have to be combined appropriately.</c>
+<l>hom_mat3d_invert (cp1Hcp2, cp2Hcp1)</l>
+<l>hom_mat3d_compose (cp2Hcp1, cp1Hur1, cp2Hul2)</l>
+<c>* </c>
+<c>* With this, the pose of the calibration plate in the second image</c>
+<c>* can be modified such that the origin of the world coordinate system</c>
+<c>* lies in the upper left corner of the second rectified image.</c>
+<l>pose_to_hom_mat3d (Pose2, cam2Hcp2)</l>
+<l>hom_mat3d_compose (cam2Hcp2, cp2Hul2, cam2Hul2)</l>
+<l>hom_mat3d_to_pose (cam2Hul2, PoseNewOrigin2)</l>
+<c>* </c>
+<c>* With the resulting new pose and the size of the rectified image,</c>
+<c>* which can be the same as for the first rectified image,</c>
+<c>* the rectification map for the second image can be derived.</c>
+<l>gen_image_to_world_plane_map (MapSingle2, CamParam2, PoseNewOrigin2, Width, Height, WidthRect, HeightRect, PixelSize, 'bilinear')</l>
+<c>* </c>
+<c>* Open a new Graphics Window for the merged image.</c>
+<l>dev_open_window (Height * WindowScale, 0, Width * 2 * WindowScale, Height * WindowScale, 'black', WindowHandleCombined)</l>
+<l>set_display_font (WindowHandleCombined, 16, 'mono', 'true', 'false')</l>
+<l>dev_set_color ('green')</l>
+<l>dev_set_draw ('margin')</l>
+<l>ScalePlot := 200</l>
+<l>RowPlot := 400</l>
+<l>Coord := [0:2000]</l>
+<c>* </c>
+<c>*  Process all image pairs in a loop.</c>
+<l>for I := 1 to 3 by 1</l>
+<c>    * </c>
+<c>    * Display both images.</c>
+<l>    dev_set_window (WindowHandle1)</l>
+<l>    read_image (Image1, ImgPath + 'camera1_' + I$'02d')</l>
+<l>    get_image_size (Image1, WidthImage1, HeightImage1)</l>
+<l>    dev_set_part (0, 0, HeightImage1 - 1, WidthImage1 - 1)</l>
+<l>    dev_display (Image1)</l>
+<l>    dev_set_window (WindowHandle2)</l>
+<l>    read_image (Image2, ImgPath + 'camera2_' + I$'02d')</l>
+<l>    get_image_size (Image2, WidthImage2, HeightImage2)</l>
+<l>    dev_set_part (0, 0, HeightImage2 - 1, WidthImage2 - 1)</l>
+<l>    dev_display (Image2)</l>
+<c>    * </c>
+<c>    * Start the time measurement.</c>
+<l>    count_seconds (TimeStart1)</l>
+<c>    * </c>
+<c>    * Rectify the image pair from the two-camera setup with map_image.</c>
+<l>    map_image (Image1, MapSingle1, RectifiedImage1)</l>
+<l>    map_image (Image2, MapSingle2, RectifiedImage2)</l>
+<l>    concat_obj (RectifiedImage1, RectifiedImage2, Concat)</l>
+<c>    * End the time measurement and calculate the difference.</c>
+<l>    count_seconds (TimeEnd1)</l>
+<l>    Time1 := TimeEnd1 - TimeStart1</l>
+<c>    * </c>
+<l>    dev_set_window (WindowHandleCombined)</l>
+<c>    * Start the time measurement again.</c>
+<l>    count_seconds (TimeStart2)</l>
+<c>    * </c>
+<c>    * Tile both images into one large image.</c>
+<l>    tile_images (Concat, Combined, 2, 'vertical')</l>
+<c>    * </c>
+<c>    * End the time measurement again and calculate the difference.</c>
+<l>    count_seconds (TimeEnd2)</l>
+<l>    Time2 := TimeEnd2 - TimeStart2</l>
+<c>    * </c>
+<c>    * Display the combined image and the time measurement.</c>
+<l>    get_image_size (Combined, WidthComb, HeightComb)</l>
+<l>    dev_set_part (0, 0, HeightComb - 1, WidthComb - 1)</l>
+<l>    dev_display (Combined)</l>
+<l>    disp_message (WindowHandle1, 'Merge cameras: ' + (1000 * (Time1 + Time2))$'.3' + ' ms', 'window', 12, 12, 'black', 'true')</l>
+<c>    * </c>
+<c>    * In addition, we plot the accuracy of the mosaicking with a procedure.</c>
+<l>    plot_mosaicking_accuracy (Combined, WidthRect, HeightRect, WindowHandleCombined, Coord, ScalePlot, RowPlot)</l>
+<l>    if (I &lt; 3)</l>
+<l>        disp_continue_message (WindowHandleCombined, 'black', 'true')</l>
+<l>        stop ()</l>
+<l>    endif</l>
+<l>endfor</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+<procedure name="plot_mosaicking_accuracy">
+<interface>
+<io>
+<par name="Combined" base_type="iconic" dimension="0"/>
+</io>
+<ic>
+<par name="MapWidth" base_type="ctrl" dimension="0"/>
+<par name="MapHeight" base_type="ctrl" dimension="0"/>
+<par name="WindowHandleCombined" base_type="ctrl" dimension="0"/>
+<par name="Coord" base_type="ctrl" dimension="0"/>
+<par name="ScalePlot" base_type="ctrl" dimension="0"/>
+<par name="RowPlot" base_type="ctrl" dimension="0"/>
+</ic>
+</interface>
+<body>
+<c>* Segment graduation lines in combined image</c>
+<l>full_domain (Combined, Combined)</l>
+<l>mean_image (Combined, ImageMean, 9, 9)</l>
+<l>dyn_threshold (Combined, ImageMean, RegionDynThresh, 6, 'dark')</l>
+<l>connection (RegionDynThresh, ConnectedRegions)</l>
+<l>select_shape (ConnectedRegions, SelectedRegions, ['anisometry','anisometry'], 'or', [10,0], [70,0])</l>
+<l>select_shape (SelectedRegions, SelectedRegions3, 'area', 'and', 10, 300)</l>
+<l>count_obj (SelectedRegions3, Number)</l>
+<l>if (Number &gt; 10)</l>
+<l>    elliptic_axis (SelectedRegions3, Ra, Rb, Phi)</l>
+<l>    Angle := sort(Phi)[|Phi| / 2]</l>
+<l>    select_shape (SelectedRegions3, SelectedRegions1, ['phi','phi'], 'or', [Angle - rad(5),Angle - rad(185)], [Angle + rad(5),Angle - rad(175)])</l>
+<c>    * Generate measure rectangle and measure distances</c>
+<c>    * between graduation lines.</c>
+<l>    union1 (SelectedRegions1, RegionUnion)</l>
+<l>    gen_rectangle2 (Morph, 20, 20, Angle + rad(90), 20, 3)</l>
+<l>    closing (RegionUnion, Morph, RegionClosing)</l>
+<l>    connection (RegionClosing, ConnectedRegions1)</l>
+<l>    select_shape_std (ConnectedRegions1, SelectedRegions2, 'max_area', 0)</l>
+<l>    smallest_rectangle2 (SelectedRegions2, Row, Column, Phi1, Length1, Length2)</l>
+<l>    gen_rectangle2 (Rectangle, Row, Column, Phi1, max([min([Length1 - 15,700]),5]), Length2 / 2)</l>
+<l>    gen_measure_rectangle2 (Row, Column, Phi1, max([min([Length1 - 15,700]),5]), Length2 / 2, MapWidth * 2, MapHeight, 'bilinear', MeasureHandle)</l>
+<l>    measure_pairs (Combined, MeasureHandle, 1, 5, 'negative', 'all', RowEdgeFirst, ColumnEdgeFirst, AmplitudeFirst, RowEdgeSecond, ColumnEdgeSecond, AmplitudeSecond, IntraDistance, InterDistance)</l>
+<l>    close_measure (MeasureHandle)</l>
+<c>    * Plot measurement error</c>
+<l>    if (|RowEdgeFirst| &gt; 10)</l>
+<l>        Dist := (IntraDistance[0:|IntraDistance| - 2] + InterDistance) / 10.0</l>
+<l>        dev_display (Combined)</l>
+<l>        dev_set_color ('green')</l>
+<l>        dev_set_line_width (2)</l>
+<l>        dev_display (Rectangle)</l>
+<l>        Mean := mean(Dist)</l>
+<l>        Deviation := deviation(Dist)</l>
+<l>        Message := 'Mean Distance: ' + Mean$'.4' + ' mm'</l>
+<l>        Message[1] := 'Deviation:     ' + (Deviation * 1000)$'.4' + ' µm'</l>
+<l>        Message[2] := 'Max. Error:    ' + (max(abs(Dist - 1)) * 1000)$'.4' + ' µm'</l>
+<l>        disp_message (WindowHandleCombined, Message, 'window', 12, 12, 'black', 'true')</l>
+<l>        Coord2 := ColumnEdgeFirst[0:|ColumnEdgeFirst| - 2] / 10</l>
+<l>        if (abs(max(Dist - 1)) &lt; 0.09)</l>
+<l>            gen_contour_polygon_xld (ErrorFunction, (Dist - 1) * 10 * ScalePlot + RowPlot, Coord2 * 10)</l>
+<l>            gen_contour_polygon_xld (ErrorZero, Dist * 0 + RowPlot, Coord2 * 10)</l>
+<l>            gen_contour_polygon_xld (ErrorMin01mm, Dist * 0 - 0.1 * ScalePlot + RowPlot, Coord2 * 10)</l>
+<l>            gen_contour_polygon_xld (ErrorPlus01mm, Dist * 0 + 0.1 * ScalePlot + RowPlot, Coord2 * 10)</l>
+<l>            for I := 0 to |ColumnEdgeSecond| - 1 by 1</l>
+<l>                if (ColumnEdgeSecond[I] &gt; MapWidth)</l>
+<l>                    break</l>
+<l>                endif</l>
+<l>            endfor</l>
+<l>            gen_contour_polygon_xld (UpperMarkForSeem, [-0.1 * ScalePlot + RowPlot,-0.15 * ScalePlot + RowPlot], [659.5,659.5])</l>
+<l>            gen_contour_polygon_xld (LowerMarkForSeem, [0.1 * ScalePlot + RowPlot,0.15 * ScalePlot + RowPlot], [659.5,659.5])</l>
+<l>            dev_set_color ('cyan')</l>
+<l>            dev_display (ErrorZero)</l>
+<l>            dev_display (ErrorPlus01mm)</l>
+<l>            dev_display (ErrorMin01mm)</l>
+<l>            dev_display (UpperMarkForSeem)</l>
+<l>            dev_display (LowerMarkForSeem)</l>
+<l>            if (RowEdgeFirst[0] &lt; RowEdgeFirst[|RowEdgeFirst| - 1])</l>
+<l>                ColumnText := ColumnEdgeFirst[0]</l>
+<l>            else</l>
+<l>                ColumnText := ColumnEdgeFirst[|ColumnEdgeFirst| - 1] - 120</l>
+<l>            endif</l>
+<l>            disp_message (WindowHandleCombined, '+0.01mm', 'image', RowPlot - 51, ColumnText, 'cyan', 'false')</l>
+<l>            disp_message (WindowHandleCombined, '-0.01mm', 'image', RowPlot + 18, ColumnText, 'cyan', 'false')</l>
+<l>            dev_set_color ('yellow')</l>
+<l>            dev_set_line_width (2)</l>
+<l>            dev_display (ErrorFunction)</l>
+<l>*             dev_set_line_width (1)</l>
+<l>*             dev_set_color ('white')</l>
+<l>*             gen_arrow_contour_xld (Arrow, RowEdgeSecond[I - 1], 659.5, -0.16 * ScalePlot + RowPlot, 659.5, 5, 5)</l>
+<l>*             dev_display (Arrow)</l>
+<l>        endif</l>
+<l>    else</l>
+<l>        dev_display (Combined)</l>
+<l>    endif</l>
+<l>else</l>
+<l>    dev_display (Combined)</l>
+<l>endif</l>
+<l>return ()</l>
+</body>
+<docu id="plot_mosaicking_accuracy">
+<short lang="en_US">Tests the accuracy of the mosaic image by measuring the distance between the scale lines.</short>
+<parameters>
+<parameter id="Combined"/>
+<parameter id="Coord"/>
+<parameter id="MapHeight"/>
+<parameter id="MapWidth"/>
+<parameter id="RowPlot"/>
+<parameter id="ScalePlot"/>
+<parameter id="WindowHandleCombined"/>
+</parameters>
+</docu>
+</procedure>
+</hdevelop>

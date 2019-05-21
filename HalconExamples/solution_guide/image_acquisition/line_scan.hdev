@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.0">
+<procedure name="main">
+<interface/>
+<body>
+<c>* ------------------------------------------------------------------------------------------------</c>
+<c>* This example program simulates grabbing from a line scan camera and shows</c>
+<c>* how to merge images and extracted regions.</c>
+<c>* ------------------------------------------------------------------------------------------------</c>
+<c>* general configuration of HDevelop</c>
+<l>dev_update_window ('off')</l>
+<l>dev_set_color ('red')</l>
+<c>* -------------------  start of the application  ----------------</c>
+<l>open_framegrabber ('File', 1, 1, 0, 0, 0, 0, 'default', -1, 'default', -1, 'default', 'clips/clips.seq', 'default', -1, -1, AcqHandle)</l>
+<l>grab_image (Image, AcqHandle)</l>
+<l>get_image_pointer1 (Image, Pointer, Type, ImageWidth, ImageHeight)</l>
+<c>* step 1: initial configuration before starting the loop</c>
+<c>* -&gt; the clips can extend over 4 images</c>
+<l>MaxImagesRegions := 4</l>
+<c>* -&gt; create an empty image to which grabbed images are tiled later</c>
+<l>gen_image_const (TiledImage, 'byte', ImageWidth, ImageHeight * MaxImagesRegions)</l>
+<c>* -&gt; so far no regions have been extracted</c>
+<l>gen_empty_region (PrevRegions)</l>
+<l>ClipsProcessedSofar := 0</l>
+<c>* -&gt; open a window large enough for the current and the previous 4 images</c>
+<l>dev_close_window ()</l>
+<l>dev_open_window (0, 0, ImageWidth / 2, ImageHeight * (MaxImagesRegions + 1) / 2, 'gray', WindowHandle)</l>
+<c>* step 2: process images in a loop</c>
+<l>while (1)</l>
+<c>    * -&gt; the current image is displayed at the bottom of the window</c>
+<l>    dev_set_part (-MaxImagesRegions * ImageHeight, 0, ImageHeight - 1, ImageWidth - 1)</l>
+<l>    grab_image (Image, AcqHandle)</l>
+<l>    threshold (Image, CurrRegions, 0, 80)</l>
+<c>    * -&gt; after this operator, PrevMergedRegions are "finished" and can be processed</c>
+<l>    merge_regions_line_scan (CurrRegions, PrevRegions, CurrMergedRegions, PrevMergedRegions, ImageHeight, 'top', MaxImagesRegions)</l>
+<l>    connection (PrevMergedRegions, ClipCandidates)</l>
+<l>    select_shape (ClipCandidates, FinishedClips, 'area', 'and', 4500, 7000)</l>
+<c>    * -&gt; if the clips are to be displayed together with the unfinished regions, they</c>
+<c>    *     must be moved to the coordinate system of the current image</c>
+<l>    move_region (FinishedClips, ClipsInCurrentImageCoordinates, -ImageHeight, 0)</l>
+<c>    * =&gt; enable the following lines to display the "finished" and current regions together</c>
+<l>*     dev_clear_window ()</l>
+<l>*     dev_display (Image)</l>
+<l>*     dev_set_color ('blue')</l>
+<l>*     dev_display (CurrMergedRegions)</l>
+<l>*     dev_set_color ('yellow')</l>
+<l>*     dev_display (ClipsInCurrentImageCoordinates)</l>
+<l>*     stop ()</l>
+<c>    * -&gt; the tiled image is displayed at the top of the window</c>
+<l>    dev_set_part (0, 0, (MaxImagesRegions + 1) * ImageHeight - 1, ImageWidth - 1)</l>
+<c>    * -&gt; move the clips from the coordinates of the most recent image to those of the tiled image</c>
+<l>    move_region (FinishedClips, ClipsInTiledImageCoordinates, (MaxImagesRegions - 1) * ImageHeight, 0)</l>
+<l>    count_obj (FinishedClips, NumberClips)</l>
+<l>    ClipsProcessedSofar := ClipsProcessedSofar + NumberClips</l>
+<c>    * -&gt; determine position and orientation</c>
+<l>    area_center (ClipsInTiledImageCoordinates, AreaClips, RowClips, ColumnClips)</l>
+<l>    orientation_region (ClipsInTiledImageCoordinates, PhiClips)</l>
+<c>    * -&gt; add gray values of the surrounding rectangles</c>
+<l>    shape_trans (ClipsInTiledImageCoordinates, AroundClips, 'rectangle1')</l>
+<l>    add_channels (AroundClips, TiledImage, GrayValuesAroundClips)</l>
+<c>    * visualization</c>
+<l>    dev_clear_window ()</l>
+<l>    dev_display (GrayValuesAroundClips)</l>
+<l>    for i := 0 to NumberClips - 1 by 1</l>
+<l>        disp_arrow (WindowHandle, RowClips[i], ColumnClips[i], RowClips[i] - sin(PhiClips[i]) * 140, ColumnClips[i] + cos(PhiClips[i]) * 140, 2)</l>
+<l>    endfor</l>
+<l>    set_tposition (WindowHandle, 10, 12)</l>
+<l>    if (ClipsProcessedSofar == 13)</l>
+<l>        ClipsProcessedSofar := 0</l>
+<l>        write_string (WindowHandle, 'All 13 clips have been processed')</l>
+<l>    else</l>
+<l>        write_string (WindowHandle, 'Clips processed so far: ' + ClipsProcessedSofar)</l>
+<l>    endif</l>
+<c>    * -&gt; the current image is displayed at the bottom of the window</c>
+<l>    dev_set_part (-MaxImagesRegions * ImageHeight, 0, ImageHeight - 1, ImageWidth - 1)</l>
+<l>    dev_display (Image)</l>
+<l>    dev_set_color ('blue')</l>
+<l>    dev_display (CurrMergedRegions)</l>
+<l>    stop ()</l>
+<c>    * prepare for the next iteration</c>
+<l>    copy_obj (CurrMergedRegions, PrevRegions, 1, -1)</l>
+<c>    * -&gt; the tiled image is displayed at the top of the window</c>
+<l>    dev_set_part (0, 0, (MaxImagesRegions + 1) * ImageHeight - 1, ImageWidth - 1)</l>
+<c>    * -&gt; cut off the oldest image from the top of the tiled image ...</c>
+<l>    crop_part (TiledImage, TiledImageMinusOldest, ImageHeight, 0, ImageWidth, (MaxImagesRegions - 1) * ImageHeight)</l>
+<c>    * -&gt; ... and add the current image at the bottom</c>
+<l>    concat_obj (TiledImageMinusOldest, Image, ImagesToTile)</l>
+<l>    tile_images_offset (ImagesToTile, TiledImage, [0,(MaxImagesRegions - 1) * ImageHeight], [0,0], [-1,-1], [-1,-1], [-1,-1], [-1,-1], ImageWidth, MaxImagesRegions * ImageHeight)</l>
+<l>endwhile</l>
+<l>stop ()</l>
+<c>* -------------------  end of the application  -----------------</c>
+<c>* clean up</c>
+<l>dev_update_window ('on')</l>
+<l>close_framegrabber (AcqHandle)</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>

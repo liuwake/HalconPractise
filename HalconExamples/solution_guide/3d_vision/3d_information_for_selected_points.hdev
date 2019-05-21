@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.0">
+<procedure name="main">
+<interface/>
+<body>
+<c>* This program calculates the world coordinates for</c>
+<c>* a point in a stereo image pair.</c>
+<c>* The program extracts 2D calibration marks from an image pair that</c>
+<c>* was rectified using previously computed rectification maps.</c>
+<c>* After determining the disparities and the matching score of the</c>
+<c>* rectified image pair, the minimal and maximal distances to the</c>
+<c>* rectified camera system are computed.</c>
+<c>* The program then determines first the 3D coordinates of the marked</c>
+<c>* points in the camera coordinate system and then the corresponding</c>
+<c>* 3D coordinates in the world coordinate system using a</c>
+<c>* homogeneous transformation matrix.</c>
+<c>* </c>
+<l>dev_update_off ()</l>
+<l>dev_close_window ()</l>
+<l>ImagePath := '3d_machine_vision/stereo/'</l>
+<c>* </c>
+<c>* Set the camera parameters and the relative pose of</c>
+<c>* the second camera in relation to the first camera.</c>
+<l>gen_cam_par_area_scan_division (0.0130704, -587.305, 7.4031e-006, 7.4e-006, 317.075, 256.466, 640, 480, CamParamL)</l>
+<l>gen_cam_par_area_scan_division (0.0130259, -668.299, 7.39892e-006, 7.4e-006, 343.467, 232.588, 640, 480, CamParamR)</l>
+<l>create_pose (0.135844, 0.0419082, 0.0592888, 10.5695, 330.805, 45.478, 'Rp+T', 'gba', 'point', RelPose)</l>
+<c>* </c>
+<c>* Generate transformation maps (MapL, MapR) that are needed for</c>
+<c>* the rectification of the stereo images. They describe the mapping</c>
+<c>* of the original images to a common rectified image plane. The</c>
+<c>* parameters of the virtual, rectified cameras are also computed.</c>
+<l>gen_binocular_rectification_map (MapL, MapR, CamParamL, CamParamR, RelPose, 1, 'viewing_direction', 'bilinear', RectCamParL, RectCamParR, CamPoseRectL, CamPoseRectR, RectLPosRectR)</l>
+<c>* </c>
+<c>* Open the window in an appropriate size</c>
+<l>get_image_size (MapL, Width, Height)</l>
+<l>dev_open_window (0, 0, Width * (2.0 / 3.0), Height * (2.0 / 3.0), 'black', WindowHandle)</l>
+<l>set_display_font (WindowHandle, 16, 'mono', 'true', 'false')</l>
+<l>dev_set_line_width (2)</l>
+<c>* </c>
+<c>* Display a short description</c>
+<l>Message := 'This program demonstrates how to compute the'</l>
+<l>Message[1] := 'world coordinates of points in a stereo'</l>
+<l>Message[2] := 'image pair. Therefore the 3D coordinates'</l>
+<l>Message[3] := 'of the points in the camera coordinate system'</l>
+<l>Message[4] := 'are determined and then transformed into a'</l>
+<l>Message[5] := 'world coordinate system.'</l>
+<l>disp_message (WindowHandle, Message, 'window', 12, 12, 'black', 'true')</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* </c>
+<c>* Open new window to display information</c>
+<l>dev_open_window (0, Width * (2.0 / 3.0) + 10, 400, 300, 'black', InfoWindow)</l>
+<l>set_display_font (InfoWindow, 16, 'mono', 'true', 'false')</l>
+<l>dev_set_window (WindowHandle)</l>
+<c>* </c>
+<c>* Create and initialize a calibration data model for the rectified</c>
+<c>* stereo images.</c>
+<l>create_calib_data ('calibration_object', 2, 1, CalibDataID)</l>
+<l>set_calib_data_cam_param (CalibDataID, 0, [], RectCamParL)</l>
+<l>set_calib_data_cam_param (CalibDataID, 1, [], RectCamParR)</l>
+<l>set_calib_data_calib_object (CalibDataID, 0, 'caltab_30mm.descr')</l>
+<c>* </c>
+<c>* For all stereo image pairs acquired with the stereo camera system,</c>
+<c>* determine the world coordinates of given points in the camera</c>
+<c>* coordinate system</c>
+<l>for Index := 0 to 10 by 1</l>
+<l>    read_image (ImageL, ImagePath + 'calib_distorted_l_' + Index$'03d')</l>
+<l>    read_image (ImageR, ImagePath + 'calib_distorted_r_' + Index$'03d')</l>
+<c>    * </c>
+<c>    * Rectify the stereo images using the respective rectification maps</c>
+<l>    map_image (ImageL, MapL, ImageRectifiedL)</l>
+<l>    map_image (ImageR, MapR, ImageRectifiedR)</l>
+<c>    * </c>
+<c>    * Search for the region of the calibration plate that corresponds</c>
+<c>    * to a standard calibration plate described in 'caltab_30mm.descr'</c>
+<c>    * and extract the pose of the calibration plate in the camera</c>
+<c>    * coordinate system (PoseL, PoseR) as well as the observed point</c>
+<c>    * coordinates of the marks of the calibration plate (RCoordL,</c>
+<c>    * CCoordL, RCoordR, CCoordR).</c>
+<l>    find_calib_object (ImageRectifiedL, CalibDataID, 0, 0, 0, [], [])</l>
+<l>    find_calib_object (ImageRectifiedR, CalibDataID, 1, 0, 0, [], [])</l>
+<l>    get_calib_data_observ_points (CalibDataID, 0, 0, 0, RCoordL, CCoordL, IndexLnew, PoseL)</l>
+<l>    get_calib_data_observ_points (CalibDataID, 1, 0, 0, RCoordR, CCoordR, IndexRnew, PoseR)</l>
+<c>    * </c>
+<c>    * Speed up the calculation of the disparities by reducing the domain</c>
+<c>    * of the first rectified image to a region of interest.</c>
+<l>    get_calib_data_observ_contours (ContoursL, CalibDataID, 'caltab', 0, 0, 0)</l>
+<l>    gen_region_contour_xld (ContoursL, CaltabL, 'filled')</l>
+<l>    reduce_domain (ImageRectifiedL, CaltabL, ImageRectifiedLROI)</l>
+<c>    * </c>
+<c>    * Determine the disparities and the matching score of the rectified</c>
+<c>    * image pair. The disparity image specifies for each pixel of the</c>
+<c>    * image ImageRectifiedLROI a suitable matching pixel of ImageRectifiedR.</c>
+<l>    binocular_disparity (ImageRectifiedLROI, ImageRectifiedR, Disparity, Score, 'ncc', 31, 31, 0, -60, 20, 1, 0.2, 'none', 'interpolation')</l>
+<c>    * </c>
+<c>    * Coordinates of the image points which are transformed</c>
+<c>    * into 3D coordinates in the camera coordinate system CCS</c>
+<l>    PointsToUse := [42,36]</l>
+<l>    RowL := subset(RCoordL,PointsToUse)</l>
+<l>    ColumnL := subset(CCoordL,PointsToUse)</l>
+<l>    RowR := subset(RCoordR,PointsToUse)</l>
+<l>    ColumnR := subset(CCoordR,PointsToUse)</l>
+<c>    * Get the gray value of the image point for the computation of the 3D coordinates</c>
+<l>    get_grayval (Disparity, RowL, ColumnL, DisparityOfSelectedPoints)</l>
+<c>    * Get the distance of the marked points to the camera system</c>
+<l>    disparity_to_distance (RectCamParL, RectCamParR, RectLPosRectR, DisparityOfSelectedPoints, DistanceOfPoints)</l>
+<c>    * </c>
+<c>    * 3D coordinates in the camera coordinate system (CCS)</c>
+<c>    * ----------------------------------------------------</c>
+<c>    * Determine the 3D coordinates of the image points (RowL, ColumnL)</c>
+<c>    * in the camera coordinate system (CCS) with two different methods</c>
+<c>    * </c>
+<c>    * Method 1: Disparity to point</c>
+<c>    * Determine the coordinates from the image point and its disparity</c>
+<l>    disparity_to_point_3d (RectCamParL, RectCamParR, RectLPosRectR, RowL, ColumnL, DisparityOfSelectedPoints, X_CCS_FromDisparity, Y_CCS_FromDisparity, Z_CCS_FromDisparity)</l>
+<c>    * </c>
+<c>    * Method 2: Intersect lines of sight</c>
+<c>    * Determine the coordinates from the intersection of two lines of</c>
+<c>    * sight specified by their image points.</c>
+<l>    intersect_lines_of_sight (RectCamParL, RectCamParR, RectLPosRectR, RowL, ColumnL, RowR, ColumnR, X_CCS_FromIntersect, Y_CCS_FromIntersect, Z_CCS_FromIntersect, Dist)</l>
+<c>    * </c>
+<c>    * Homogeneous transformation matrix</c>
+<c>    * ---------------------------------</c>
+<c>    * Compute a homogeneous transformation matrix needed for</c>
+<c>    * the transformation of the coordinates into world coordinates.</c>
+<c>    * It describes the transformation between the two coordinate systems.</c>
+<c>    * </c>
+<c>    * Define 'Method' to select how to compute the homogeneous</c>
+<c>    * transformation matrix.</c>
+<l>    Method := 'calib_plate_pose'</l>
+<l>*     Method := '3_given_points'</l>
+<c>    * </c>
+<c>    * Determine the transformation matrix from the pose of the</c>
+<c>    * calibration plate in the rectified image</c>
+<l>    if (Method == 'calib_plate_pose')</l>
+<c>        * First convert a 3D pose into a homogeneous transformation matrix</c>
+<c>        * that represents the transformation from the WCS to the CCS</c>
+<l>        pose_to_hom_mat3d (PoseL, HomMat3D_WCS_to_RectCCS)</l>
+<c>        * </c>
+<c>        * Optionally: Adapt the transformation matrix</c>
+<l>        hom_mat3d_translate_local (HomMat3D_WCS_to_RectCCS, 0.01125, -0.01125, 0, HomMat3DTranslate)</l>
+<l>        hom_mat3d_rotate_local (HomMat3DTranslate, rad(180), 'y', HomMat3D_WCS_to_RectCCS)</l>
+<c>        * </c>
+<c>        * Now obtain the homogeneous transformation matrix that represents</c>
+<c>        * the transformation from the CCS into the WCS by inverting the</c>
+<c>        * hom. transf. matrix that was computed from the 3D pose</c>
+<l>        hom_mat3d_invert (HomMat3D_WCS_to_RectCCS, HomMat3D_RectCCS_to_WCS)</l>
+<c>        * </c>
+<c>        * Determine the transformation matrix from three given points,</c>
+<c>        * which define a given world coordinate system</c>
+<l>    elseif (Method == '3_given_points')</l>
+<c>        * </c>
+<c>        * Coordinates of the given points (in CCS)</c>
+<l>        PointsDefiningTheCS := [6,0,48]</l>
+<l>        RL_DefiningTheCS := subset(RCoordL,PointsDefiningTheCS)</l>
+<l>        CL_DefiningTheCS := subset(CCoordL,PointsDefiningTheCS)</l>
+<l>        RR_DefiningTheCS := subset(RCoordR,PointsDefiningTheCS)</l>
+<l>        CR_DefiningTheCS := subset(CCoordR,PointsDefiningTheCS)</l>
+<c>        * </c>
+<c>        * First determine the 3D coordinates of the origin and two points</c>
+<c>        * on the x and y axis from the intersection of two lines of sight,</c>
+<c>        * that were specified by the defined points</c>
+<l>        intersect_lines_of_sight (RectCamParL, RectCamParR, RectLPosRectR, RL_DefiningTheCS, CL_DefiningTheCS, RR_DefiningTheCS, CR_DefiningTheCS, XCP, YCP, ZCP, Dist)</l>
+<c>        * </c>
+<c>        * Define the origin and two points on the x and y axis</c>
+<l>        Origin := [XCP[0],YCP[0],ZCP[0]]</l>
+<l>        PointOnXAxis := [XCP[1],YCP[1],ZCP[1]]</l>
+<l>        PointInXYPlane := [XCP[2],YCP[2],ZCP[2]]</l>
+<c>        * </c>
+<c>        * Now obtain the hom. transformation matrix that represents</c>
+<c>        * the transformation from the CCS into the WCS from the origin</c>
+<c>        * and the two computed 3d points.</c>
+<l>        gen_hom_mat3d_from_three_points (Origin, PointOnXAxis, PointInXYPlane, HomMat3D_RectCCS_to_WCS)</l>
+<l>    endif</l>
+<c>    * </c>
+<c>    * 3D coordinates in the world coordinate system (WCS)</c>
+<c>    * ---------------------------------------------------</c>
+<c>    * Transform the 3D coordinates from the CCS</c>
+<c>    * into a the given world coordinate system (WCS).</c>
+<l>    affine_trans_point_3d (HomMat3D_RectCCS_to_WCS, X_CCS_FromIntersect, Y_CCS_FromIntersect, Z_CCS_FromIntersect, X_WCS, Y_WCS, Z_WCS)</l>
+<c>    * </c>
+<c>    * Display the results</c>
+<c>    * -------------------</c>
+<l>    dev_clear_window ()</l>
+<l>    dev_display (ImageRectifiedL)</l>
+<l>    disp_message (WindowHandle, 'Image ' + (Index + 1) + ' of 11', 'window', 12, 12, 'black', 'true')</l>
+<c>    * </c>
+<c>    * Invert the homogeneous transformation matrix and convert</c>
+<c>    * it into a 3D pose for the 3D coordinate system.</c>
+<l>    hom_mat3d_invert (HomMat3D_RectCCS_to_WCS, HomMat3D_WCS_to_RectCCS)</l>
+<l>    hom_mat3d_to_pose (HomMat3D_WCS_to_RectCCS, Pose)</l>
+<c>    * </c>
+<c>    * Display the 3D coordinate system</c>
+<l>    set_rgb (WindowHandle, [255,0,0], [0,255,0], [0,0,255])</l>
+<l>    disp_3d_coord_system (WindowHandle, RectCamParL, Pose, 0.02)</l>
+<c>    * </c>
+<c>    * Display the results:</c>
+<c>    * Crosses of the marked points, the 3D coordinates in the CCS, the</c>
+<c>    * 3D coordinates in the WCS and the minimal and maximal distance of an</c>
+<c>    * object point to the rectified camera system</c>
+<l>    disp_results (WindowHandle, InfoWindow, RowL, ColumnL, DistanceOfPoints, X_CCS_FromIntersect, Y_CCS_FromIntersect, Z_CCS_FromIntersect, X_WCS, Y_WCS, Z_WCS)</l>
+<c>    * </c>
+<c>    * Display continue message</c>
+<l>    if (Index &lt; 10)</l>
+<l>        set_display_font (WindowHandle, 16, 'mono', 'true', 'false')</l>
+<l>        disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>        stop ()</l>
+<l>        dev_set_window (InfoWindow)</l>
+<l>        dev_clear_window ()</l>
+<l>        dev_set_window (WindowHandle)</l>
+<l>    endif</l>
+<l>endfor</l>
+<l>clear_calib_data (CalibDataID)</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+<procedure name="gen_hom_mat3d_from_three_points">
+<interface>
+<ic>
+<par name="Origin" base_type="ctrl" dimension="0"/>
+<par name="PointOnXAxis" base_type="ctrl" dimension="0"/>
+<par name="PointInXYPlane" base_type="ctrl" dimension="0"/>
+</ic>
+<oc>
+<par name="HomMat3d" base_type="ctrl" dimension="0"/>
+</oc>
+</interface>
+<body>
+<l>XAxis := [PointOnXAxis[0] - Origin[0],PointOnXAxis[1] - Origin[1],PointOnXAxis[2] - Origin[2]]</l>
+<l>XAxisNorm := XAxis / sqrt(sum(XAxis * XAxis))</l>
+<l>VectorInXYPlane := [PointInXYPlane[0] - Origin[0],PointInXYPlane[1] - Origin[1],PointInXYPlane[2] - Origin[2]]</l>
+<l>cross_product (XAxisNorm, VectorInXYPlane, ZAxis)</l>
+<l>ZAxisNorm := ZAxis / sqrt(sum(ZAxis * ZAxis))</l>
+<l>cross_product (ZAxisNorm, XAxisNorm, YAxisNorm)</l>
+<l>HomMat3d_WCS_to_RectCCS := [XAxisNorm[0],YAxisNorm[0],ZAxisNorm[0],Origin[0],XAxisNorm[1],YAxisNorm[1],ZAxisNorm[1],Origin[1],XAxisNorm[2],YAxisNorm[2],ZAxisNorm[2],Origin[2]]</l>
+<l>hom_mat3d_invert (HomMat3d_WCS_to_RectCCS, HomMat3d)</l>
+<l>return ()</l>
+</body>
+<docu id="gen_hom_mat3d_from_three_points">
+<short lang="en_US">Determines the 3d transformation matrix from the origin and two points on the x and y axes, respectively</short>
+<parameters>
+<parameter id="HomMat3d"/>
+<parameter id="Origin"/>
+<parameter id="PointInXYPlane"/>
+<parameter id="PointOnXAxis"/>
+</parameters>
+</docu>
+</procedure>
+<procedure name="cross_product">
+<interface>
+<ic>
+<par name="V1" base_type="ctrl" dimension="0"/>
+<par name="V2" base_type="ctrl" dimension="0"/>
+</ic>
+<oc>
+<par name="CrossProduct" base_type="ctrl" dimension="0"/>
+</oc>
+</interface>
+<body>
+<l>CrossProduct := [V1[1] * V2[2] - V1[2] * V2[1],V1[2] * V2[0] - V1[0] * V2[2],V1[0] * V2[1] - V1[1] * V2[0]]</l>
+<l>return ()</l>
+</body>
+<docu id="cross_product">
+<short lang="en_US">Calculates the cross product of the two vectors given in V1 and V2</short>
+<parameters>
+<parameter id="CrossProduct"/>
+<parameter id="V1"/>
+<parameter id="V2"/>
+</parameters>
+</docu>
+</procedure>
+<procedure name="disp_results">
+<interface>
+<ic>
+<par name="WindowHandle" base_type="ctrl" dimension="0"/>
+<par name="InfoWindow" base_type="ctrl" dimension="0"/>
+<par name="RowL" base_type="ctrl" dimension="0"/>
+<par name="ColumnL" base_type="ctrl" dimension="0"/>
+<par name="DistanceOfPoints" base_type="ctrl" dimension="0"/>
+<par name="X_CCS_FromIntersect" base_type="ctrl" dimension="0"/>
+<par name="Y_CCS_FromIntersect" base_type="ctrl" dimension="0"/>
+<par name="Z_CCS_FromIntersect" base_type="ctrl" dimension="0"/>
+<par name="X_WCS" base_type="ctrl" dimension="0"/>
+<par name="Y_WCS" base_type="ctrl" dimension="0"/>
+<par name="Z_WCS" base_type="ctrl" dimension="0"/>
+</ic>
+</interface>
+<body>
+<c>* Display crosses at the marked point(s)</c>
+<l>gen_cross_contour_xld (Cross1, RowL[0], ColumnL[0], 15, 0)</l>
+<l>dev_set_color ('cyan')</l>
+<l>dev_display (Cross1)</l>
+<l>gen_cross_contour_xld (Cross2, RowL[1], ColumnL[1], 15, 0)</l>
+<l>dev_set_color ('magenta')</l>
+<l>dev_display (Cross2)</l>
+<l>disp_message (WindowHandle, 'P1', 'image', RowL[0], ColumnL[0], 'cyan', 'false')</l>
+<l>disp_message (WindowHandle, 'P2', 'image', RowL[1], ColumnL[1], 'magenta', 'false')</l>
+<c>* </c>
+<c>* Display the 3D coordinates of the marked points in</c>
+<c>* the CCS and the WCS</c>
+<l>disp_message (WindowHandle, '3D coordinates of marked points', 'window', 40, 12, 'black', 'true')</l>
+<l>set_display_font (WindowHandle, 14, 'mono', 'true', 'false')</l>
+<c>* </c>
+<c>* Display the 3D coordinates in the CCS (from intersect lines of sight)</c>
+<l>MessageP1 := sum('P1: (' + (1000 * X_CCS_FromIntersect[0])$'7.2f' + ',' + (1000 * Y_CCS_FromIntersect[0])$'6.2f' + ',' + (1000 * Z_CCS_FromIntersect[0])$'7.2f' + ' )\n')</l>
+<l>MessageP2 := sum('P2: (' + (1000 * X_CCS_FromIntersect[1])$'7.2f' + ',' + (1000 * Y_CCS_FromIntersect[1])$'6.2f' + ',' + (1000 * Z_CCS_FromIntersect[1])$'7.2f' + ' )\n')</l>
+<l>disp_message (InfoWindow, 'Camera coordinate system [mm]:', 'window', 12, 12, 'white', 'false')</l>
+<l>disp_message (InfoWindow, MessageP1, 'image', 40, 12, 'cyan', 'false')</l>
+<l>disp_message (InfoWindow, MessageP2, 'image', 60, 12, 'magenta', 'false')</l>
+<c>* </c>
+<c>* Display the 3D coordinates in the WCS</c>
+<l>MessageP1 := sum('P1: (' + (1000 * X_WCS[0])$'7.2f' + ',' + (1000 * Y_WCS[0])$'6.2f' + ',' + (1000 * Z_WCS[0])$'7.2f' + ' )')</l>
+<l>MessageP2 := sum('P2: (' + (1000 * X_WCS[1])$'7.2f' + ',' + (1000 * Y_WCS[1])$'6.2f' + ',' + (1000 * Z_WCS[1])$'7.2f' + ' )')</l>
+<l>disp_message (InfoWindow, 'World coordinate system [mm]:', 'image', 100, 12, 'white', 'false')</l>
+<l>disp_message (InfoWindow, MessageP1, 'image', 130, 12, 'cyan', 'false')</l>
+<l>disp_message (InfoWindow, MessageP2, 'image', 150, 12, 'magenta', 'false')</l>
+<c>* </c>
+<c>* Display the minimal and maximal distance of an object</c>
+<c>* point to the rectified camera system</c>
+<l>Message := 'Distances to the camera system:'</l>
+<l>disp_message (InfoWindow, Message, 'window', 200, 12, 'white', 'false')</l>
+<l>Color := ['cyan','magenta']</l>
+<l>Message := 'P1: ' + (DistanceOfPoints[0] * 1000)$'.2f' + ' mm'</l>
+<l>Message[1] := 'P2: ' + (DistanceOfPoints[1] * 1000)$'.2f' + ' mm'</l>
+<l>disp_message (InfoWindow, Message, 'window', 230, 12, Color, 'false')</l>
+<l>return ()</l>
+</body>
+<docu id="disp_results">
+<parameters>
+<parameter id="ColumnL"/>
+<parameter id="DistanceOfPoints"/>
+<parameter id="InfoWindow"/>
+<parameter id="RowL"/>
+<parameter id="WindowHandle"/>
+<parameter id="X_CCS_FromIntersect"/>
+<parameter id="X_WCS"/>
+<parameter id="Y_CCS_FromIntersect"/>
+<parameter id="Y_WCS"/>
+<parameter id="Z_CCS_FromIntersect"/>
+<parameter id="Z_WCS"/>
+</parameters>
+</docu>
+</procedure>
+</hdevelop>

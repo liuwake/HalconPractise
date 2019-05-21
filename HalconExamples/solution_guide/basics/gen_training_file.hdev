@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.0">
+<procedure name="main">
+<interface/>
+<body>
+<c>* gen_training_file.hdev: create a training file for OCR</c>
+<c>* </c>
+<l>dev_update_off ()</l>
+<l>dev_close_window ()</l>
+<c>* ****</c>
+<c>* step: acquire image</c>
+<c>* ****</c>
+<l>read_image (Image, 'numbers_scale')</l>
+<l>get_image_pointer1 (Image, Pointer, Type, Width, Height)</l>
+<l>dev_open_window (0, 0, Width, Height, 'black', WindowID)</l>
+<l>dev_set_part (0, 0, Height - 1, Width - 1)</l>
+<l>dev_set_line_width (2)</l>
+<l>dev_set_color ('yellow')</l>
+<l>dev_set_draw ('margin')</l>
+<l>dev_display (Image)</l>
+<l>disp_continue_message (WindowID, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* ****</c>
+<c>* step: specify character names</c>
+<c>* ****</c>
+<l>Chars := ['0','1','2','3','4','5','6','7','8','9']</l>
+<c>* index of the line used for the training (1..5)</c>
+<l>TrainingLine := 3</l>
+<l>disp_continue_message (WindowID, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* ****</c>
+<c>* step: segment image</c>
+<c>* ****</c>
+<l>threshold (Image, Region, 0, 125)</l>
+<l>closing_rectangle1 (Region, RegionClosing, 70, 10)</l>
+<l>connection (RegionClosing, Lines)</l>
+<l>select_obj (Lines, Training, TrainingLine)</l>
+<l>intersection (Training, Region, TrainingChars)</l>
+<l>connection (TrainingChars, ConnectedRegions)</l>
+<l>sort_region (ConnectedRegions, SortedRegions, 'first_point', 'true', 'column')</l>
+<c>* visualize result</c>
+<l>dev_display (SortedRegions)</l>
+<l>dev_display (Training)</l>
+<l>smallest_rectangle1 (TrainingChars, Row1, Column1, Row2, Column2)</l>
+<l>RowROI1 := Row1 - 5</l>
+<l>ColROI1 := Column1 - 5</l>
+<l>RowROI2 := Row2 + 5</l>
+<l>ColROI2 := Column2 + 5</l>
+<l>ZoomFactor := 2</l>
+<l>dev_open_window (20, 0, (ColROI2 - ColROI1) * ZoomFactor, (RowROI2 - RowROI1) * ZoomFactor, 'black', WindowHandleZoom)</l>
+<l>dev_set_part (round(RowROI1), round(ColROI1), round(RowROI2), round(ColROI2))</l>
+<l>dev_display (Image)</l>
+<l>dev_display (SortedRegions)</l>
+<l>disp_continue_message (WindowID, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* ****</c>
+<c>* step: write regions into training file</c>
+<c>* ****</c>
+<l>TrainFile := 'numbers.trf'</l>
+<c>* clear file first</c>
+<l>dev_set_check ('~give_error')</l>
+<l>delete_file (TrainFile)</l>
+<l>dev_set_check ('give_error')</l>
+<l>for i := 1 to 10 by 1</l>
+<l>    select_obj (SortedRegions, TrainSingle, i)</l>
+<l>    append_ocr_trainf (TrainSingle, Image, Chars[i - 1], TrainFile)</l>
+<l>endfor</l>
+<l>disp_continue_message (WindowID, 'black', 'true')</l>
+<l>stop ()</l>
+<l>dev_close_window ()</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>

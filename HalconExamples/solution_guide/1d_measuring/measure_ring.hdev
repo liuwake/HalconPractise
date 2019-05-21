@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.0">
+<procedure name="main">
+<interface/>
+<body>
+<c>* This example program demonstrates the basic usage of a circular measure object.</c>
+<c>* Here, the task is to determine the width of the cogs.</c>
+<c>* </c>
+<c>* First, read in the image and initialize the program.</c>
+<l>read_image (Image, 'rings_and_nuts')</l>
+<l>dev_close_window ()</l>
+<l>dev_open_window_fit_image (Image, 0, 0, 640, 640, WindowHandle)</l>
+<l>set_display_font (WindowHandle, 14, 'mono', 'true', 'false')</l>
+<l>get_image_size (Image, Width, Height)</l>
+<c>* </c>
+<c>* Extract the rings.</c>
+<l>binary_threshold (Image, Region, 'max_separability', 'dark', UsedThreshold)</l>
+<l>connection (Region, ConnectedRegions)</l>
+<l>fill_up (ConnectedRegions, RegionFillUp)</l>
+<l>compactness (RegionFillUp, Compactness)</l>
+<l>for i := 0 to |Compactness| - 1 by 1</l>
+<l>    if (Compactness[i] &gt; 1.5 and Compactness[i] &lt; 2.5)</l>
+<l>        select_obj (RegionFillUp, ObjectSelected, i + 1)</l>
+<c>        * </c>
+<c>        * Determine the size and position of the rings.</c>
+<l>        smallest_circle (ObjectSelected, Row, Column, RadiusMax)</l>
+<l>        inner_circle (ObjectSelected, CenterRow, CenterCol, RadiusMin)</l>
+<l>        Radius := (RadiusMax + RadiusMin) / 2.0</l>
+<l>        AnnulusRadius := (RadiusMax - RadiusMin) / 4.0</l>
+<c>        * </c>
+<c>        * Determine the position between two cogs.</c>
+<c>        * This position is then used as the start angle for the circular ROI.</c>
+<l>        get_region_polygon (ObjectSelected, AnnulusRadius, RowsBorder, ColumnsBorder)</l>
+<l>        SqrDistanceBorder := (RowsBorder - CenterRow) * (RowsBorder - CenterRow) + (ColumnsBorder - CenterCol) * (ColumnsBorder - CenterCol)</l>
+<l>        tuple_sort_index (SqrDistanceBorder, Indices)</l>
+<l>        line_orientation (CenterRow, CenterCol, RowsBorder[Indices[0]], ColumnsBorder[Indices[0]], AngleStart)</l>
+<l>        AngleExtent := rad(360)</l>
+<c>        * </c>
+<c>        * Create the measure for a circular ROI.</c>
+<l>        Interpolation := 'bilinear'</l>
+<l>        gen_measure_arc (CenterRow, CenterCol, Radius, AngleStart, AngleExtent, AnnulusRadius, Width, Height, Interpolation, MeasureHandle)</l>
+<c>        * </c>
+<c>        * Determine all edge pairs that have a negative transition, i.e., edge pairs</c>
+<c>        * that enclose dark regions.</c>
+<c>        * Note that the output parameters IntraDistance and InterDistance are given as arc lengths.</c>
+<l>        Sigma := 1.0</l>
+<l>        Threshold := 30</l>
+<l>        Transition := 'negative'</l>
+<l>        Select := 'all'</l>
+<l>        measure_pairs (Image, MeasureHandle, Sigma, Threshold, Transition, Select, RowEdgeFirst, ColumnEdgeFirst, AmplitudeFirst, RowEdgeSecond, ColumnEdgeSecond, AmplitudeSecond, IntraDistance, InterDistance)</l>
+<c>        * </c>
+<c>        * Determine the number of cogs.</c>
+<l>        NumCogs := |RowEdgeFirst|</l>
+<c>        * </c>
+<c>        * Determine the linear distance between the two edges of each edge pair ('Linear cog size')</c>
+<c>        * as well as the angular distance of the edge pairs ('Angular cog size').</c>
+<l>        distance_pp (RowEdgeFirst, ColumnEdgeFirst, RowEdgeSecond, ColumnEdgeSecond, LinearDistance)</l>
+<l>        AngularDistance := deg(IntraDistance / Radius)</l>
+<c>        * </c>
+<c>        * Visualize the determined edges</c>
+<l>        gen_empty_obj (Crosses)</l>
+<l>        for J := 0 to |RowEdgeFirst| - 1 by 1</l>
+<l>            gen_cross_contour_xld (Cross1, RowEdgeFirst[J], ColumnEdgeFirst[J], 12, atan2(CenterRow - RowEdgeFirst[J],ColumnEdgeFirst[J] - CenterCol))</l>
+<l>            gen_cross_contour_xld (Cross2, RowEdgeSecond[J], ColumnEdgeSecond[J], 12, atan2(CenterRow - RowEdgeSecond[J],ColumnEdgeSecond[J] - CenterCol))</l>
+<l>            concat_obj (Crosses, Cross1, Crosses)</l>
+<l>            concat_obj (Crosses, Cross2, Crosses)</l>
+<l>        endfor</l>
+<l>        dev_display (Image)</l>
+<l>        dev_set_line_width (2)</l>
+<l>        dev_set_color ('green')</l>
+<l>        dev_display (Crosses)</l>
+<c>        * </c>
+<c>        * Display the measured size of the cogs</c>
+<l>        Message := 'Number of cogs: ' + |RowEdgeFirst|</l>
+<l>        Message[1] := 'Mean cog size:'</l>
+<l>        Message[2] := '- Arc length: ' + mean(IntraDistance)$'.2f' + ' +/- ' + deviation(IntraDistance)$'.2f' + ' pixel'</l>
+<l>        Message[3] := '- Linear:     ' + mean(LinearDistance)$'.2f' + ' +/- ' + deviation(LinearDistance)$'.2f' + ' pixel'</l>
+<l>        Message[4] := '- Angular:    ' + mean(AngularDistance)$'.2f' + ' +/- ' + deviation(AngularDistance)$'.2f' + ' deg'</l>
+<l>        disp_message (WindowHandle, Message, 'window', 260, 10, 'black', 'true')</l>
+<c>        * </c>
+<c>        * Close the measure</c>
+<l>        close_measure (MeasureHandle)</l>
+<l>        disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>        stop ()</l>
+<l>    endif</l>
+<l>endfor</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>

@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.0">
+<procedure name="main">
+<interface/>
+<body>
+<c>* Set image path and name</c>
+<l>ImgPath := '3d_machine_vision/pose/'</l>
+<l>ImgName := 'metal_part'</l>
+<c>* Read reference image</c>
+<l>read_image (ImageRef, ImgPath + 'calib')</l>
+<c>* Define camera parameters (the external camera parameters define the world coordinate system)</c>
+<l>gen_cam_par_area_scan_division (1.222445e-002, -2.610410e+003, 7.395958e-006, 7.400000e-006, 3.031241e+002, 2.341259e+002, 640, 480, CamParam)</l>
+<c>* Reopen the window to get the WindowHandle</c>
+<l>dev_close_window ()</l>
+<l>get_image_size (ImageRef, Width, Height)</l>
+<l>dev_open_window (0, 0, Width, Height, 'black', WindowHandle)</l>
+<l>set_display_font (WindowHandle, 16, 'mono', 'true', 'false')</l>
+<c>* Define WCS</c>
+<l>find_caltab (ImageRef, Caltab, 'caltab_30mm.descr', 3, 112, 5)</l>
+<l>find_marks_and_pose (ImageRef, Caltab, 'caltab_30mm.descr', CamParam, 128, 10, 18, 0.9, 15, 100, RCoord, CCoord, PoseOfWCS)</l>
+<c>* </c>
+<c>* Modify the pose of the WCS in order to modify the world coordinate system</c>
+<c>* </c>
+<l>if (true)</l>
+<c>    * If the pose is only to be shifted, you can use set_origin_pose</c>
+<l>    set_origin_pose (PoseOfWCS, -0.0568, 0.0372, 0, PoseOfWCS)</l>
+<c>    * But you may also rotate the respective coordinate system, or apply other transformations.</c>
+<c>    * This can be done based on homogenous transformation matrices</c>
+<l>    pose_to_hom_mat3d (PoseOfWCS, camHwcs)</l>
+<l>    hom_mat3d_rotate_local (camHwcs, rad(180), 'x', camHwcs)</l>
+<l>    hom_mat3d_to_pose (camHwcs, PoseOfWCS)</l>
+<l>endif</l>
+<l>dev_display (ImageRef)</l>
+<l>hom_mat3d_to_pose (camHwcs, Pose)</l>
+<l>disp_3d_coord_system (WindowHandle, CamParam, Pose, 0.02)</l>
+<c>* </c>
+<c>* Select an image (1, 2, or 3)</c>
+<c>* </c>
+<l>ImgNum := 1</l>
+<c>* </c>
+<l>read_image (Image, ImgPath + ImgName + '_' + ImgNum$'02d')</l>
+<c>* Define object coordinates of control points</c>
+<l>ShiftXObj := 5.5 / 1000.0</l>
+<l>ShiftYObj := 5.15 / 1000.0</l>
+<l>ControlX := [18.73,-5.35,13.05,0.00] / 1000.0 + ShiftXObj</l>
+<l>ControlY := [27.52,27.68,0.00,0.00] / 1000.0 + ShiftYObj</l>
+<l>ControlZ := [0.00,0.00,0.00,0.00]</l>
+<l>dev_set_color ('green')</l>
+<c>* Determine the image coordinates of the control points (here: via find_caltab and find_marks_and_pose)</c>
+<l>determine_control_points (Image, Intersection, RowCenter, ColCenter)</l>
+<c>* Visualize control point</c>
+<l>disp_message (WindowHandle, 'Extracted control points', 'window', 12, 12, 'green', 'false')</l>
+<l>gen_cross_contour_xld (Cross, RowCenter, ColCenter, 6, 0.785398)</l>
+<l>dev_display (Cross)</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* Determine the pose of the object ...</c>
+<l>vector_to_pose (ControlX, ControlY, ControlZ, RowCenter, ColCenter, CamParam, 'iterative', 'error', PoseOfObject, Errors)</l>
+<c>* Transform the poses into homogeneous transformation matrices</c>
+<l>pose_to_hom_mat3d (PoseOfWCS, camHwcs)</l>
+<l>pose_to_hom_mat3d (PoseOfObject, camHobj)</l>
+<c>* Determine the transformation matrix from object coordinates into world coordinates</c>
+<l>hom_mat3d_invert (camHwcs, wcsHcam)</l>
+<l>hom_mat3d_compose (wcsHcam, camHobj, wcsHobj)</l>
+<c>* Visualize the results</c>
+<l>dev_clear_window ()</l>
+<l>dev_display (Image)</l>
+<l>dev_set_color ('green')</l>
+<l>disp_coordinate_system_3d (WindowHandle, CamParam, camHwcs, 'WCS')</l>
+<l>dev_set_color ('red')</l>
+<l>disp_coordinate_system_3d (WindowHandle, CamParam, camHobj, 'OBJ')</l>
+<c>* Define some 3D object coordinates of points (here: the four corners of the rectangular hole)</c>
+<l>CornersXObj := [0.89,0.77,12.12,12.18] / 1000.0 + ShiftXObj</l>
+<l>CornersYObj := [21.63,8.47,8.45,21.51] / 1000.0 + ShiftYObj</l>
+<l>CornersZObj := [0,0,0,0]</l>
+<c>* Transform the 3D object coordinates into the world coordinate system</c>
+<l>affine_trans_point_3d (wcsHobj, CornersXObj, CornersYObj, CornersZObj, CornersXWCS, CornersYWCS, CornersZWCS)</l>
+<c>* Transform the 3D object coordinates into the image coordinate system and display the respective points</c>
+<l>affine_trans_point_3d (camHobj, CornersXObj, CornersYObj, CornersZObj, CornersXCam, CornersYCam, CornersZCam)</l>
+<l>project_3d_point (CornersXCam, CornersYCam, CornersZCam, CamParam, CornersRow, CornersCol)</l>
+<l>dev_set_color ('blue')</l>
+<l>gen_cross_contour_xld (Cross, CornersRow, CornersCol, 6, 0.785398)</l>
+<l>dev_display (Cross)</l>
+<c>* Display the 3D object coordinates and the 3D coordinates in the world coordinate system</c>
+<l>CornersXObjmm := CornersXObj * 1000.0</l>
+<l>CornersYObjmm := CornersYObj * 1000.0</l>
+<l>CornersZObjmm := CornersZObj * 1000.0</l>
+<l>CornersXWCSmm := CornersXWCS * 1000.0</l>
+<l>CornersYWCSmm := CornersYWCS * 1000.0</l>
+<l>CornersZWCSmm := CornersZWCS * 1000.0</l>
+<l>ObjectCoordinates := ['Object coordinates:',' ',[1:|CornersRow|] + ': (' + CornersXObjmm$'.2f' + ',' + CornersYObjmm$'.2f' + ',' + CornersZObjmm$'.2f' + ') mm']</l>
+<l>WorldCoordinates := ['World coordinates:',' ',[1:|CornersRow|] + ': (' + CornersXWCSmm$'.2f' + ',' + CornersYWCSmm$'.2f' + ',' + CornersZWCSmm$'.2f' + ') mm']</l>
+<l>disp_message (WindowHandle, ObjectCoordinates, 'window', 12, 12, 'red', 'false')</l>
+<l>disp_message (WindowHandle, WorldCoordinates, 'window', 12, 300, 'green', 'false')</l>
+<l>disp_message (WindowHandle, [1:|CornersRow|], 'window', CornersRow, CornersCol, 'blue', 'false')</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+<procedure name="determine_control_points">
+<interface>
+<io>
+<par name="Image" base_type="iconic" dimension="0"/>
+</io>
+<oo>
+<par name="Intersections" base_type="iconic" dimension="0"/>
+</oo>
+<oc>
+<par name="RowCenter" base_type="ctrl" dimension="0"/>
+<par name="ColCenter" base_type="ctrl" dimension="0"/>
+</oc>
+</interface>
+<body>
+<l>threshold (Image, Region, 128, 255)</l>
+<l>connection (Region, ConnectedRegions)</l>
+<l>select_shape_std (ConnectedRegions, SelectedRegions, 'max_area', 70)</l>
+<l>fill_up (SelectedRegions, RegionFillUp)</l>
+<l>difference (RegionFillUp, SelectedRegions, Holes)</l>
+<l>connection (Holes, SeparateHoles)</l>
+<l>area_center (SeparateHoles, Area, Row1, Column)</l>
+<l>IndicesArea := sort_index(Area)</l>
+<c>* Determine the coordinates of the centers of the three holes</c>
+<l>RowCenter := []</l>
+<l>ColCenter := []</l>
+<c>* Get the corners by intersecting the detected sides</c>
+<l>fill_up (SelectedRegions, ElementFull)</l>
+<l>dilation_circle (ElementFull, RegionDilation, 3.5)</l>
+<l>erosion_circle (ElementFull, RegionErosion, 3.5)</l>
+<l>difference (RegionDilation, RegionErosion, ROI)</l>
+<l>reduce_domain (Image, ROI, ImageReduced)</l>
+<l>edges_sub_pix (ImageReduced, Edges, 'lanser2', 0.5, 10, 40)</l>
+<l>segment_contours_xld (Edges, Contours, 'lines', 3, 7, 7)</l>
+<l>fit_line_contour_xld (Contours, 'tukey', -1, 10, 5, 1, RowBegin, ColBegin, RowEnd, ColEnd, Nr, Nc, Dist)</l>
+<l>intersection_lines (RowBegin[0], ColBegin[0], RowEnd[0], ColEnd[0], RowBegin[2], ColBegin[2], RowEnd[2], ColEnd[2], RowC1, ColC1, IsOverlappingS1)</l>
+<l>intersection_lines (RowBegin[4], ColBegin[4], RowEnd[4], ColEnd[4], RowBegin[2], ColBegin[2], RowEnd[2], ColEnd[2], RowC2, ColC2, IsOverlappingS1)</l>
+<c>* Prepare visualisation of the intersection</c>
+<l>gen_empty_obj (Intersections)</l>
+<l>calc_directions_norm (RowEnd[0] - RowBegin[0], ColEnd[0] - ColBegin[0], DRow, DCol)</l>
+<l>gen_contour_polygon_xld (LineFragment, RowEnd[0] + DRow * [0,-60], ColEnd[0] + DCol * [0,-60])</l>
+<l>concat_obj (Intersections, LineFragment, Intersections)</l>
+<l>gen_contour_polygon_xld (LineFragment, RowEnd[0] + DRow * [40,70], ColEnd[0] + DCol * [40,70])</l>
+<l>concat_obj (Intersections, LineFragment, Intersections)</l>
+<l>calc_directions_norm (RowEnd[2] - RowBegin[2], ColEnd[2] - ColBegin[2], DRow, DCol)</l>
+<l>gen_contour_polygon_xld (LineFragment, RowBegin[2] + DRow * [-40,-70], ColBegin[2] + DCol * [-40,-70])</l>
+<l>concat_obj (Intersections, LineFragment, Intersections)</l>
+<l>gen_contour_polygon_xld (LineFragment, [RowBegin[2],RowEnd[2]], [ColBegin[2],ColEnd[2]])</l>
+<l>concat_obj (Intersections, LineFragment, Intersections)</l>
+<l>gen_contour_polygon_xld (LineFragment, RowEnd[2] + DRow * [40,70], ColEnd[2] + DCol * [40,70])</l>
+<l>concat_obj (Intersections, LineFragment, Intersections)</l>
+<l>calc_directions_norm (RowEnd[4] - RowBegin[4], ColEnd[4] - ColBegin[4], DRow, DCol)</l>
+<l>gen_contour_polygon_xld (LineFragment, RowBegin[4] + DRow * [-40,-70], ColBegin[4] + DCol * [-40,-70])</l>
+<l>concat_obj (Intersections, LineFragment, Intersections)</l>
+<l>gen_contour_polygon_xld (LineFragment, RowBegin[4] + DRow * [0,60], ColBegin[4] + DCol * [0,60])</l>
+<l>concat_obj (Intersections, LineFragment, Intersections)</l>
+<l>RowCenter := [RowCenter,RowC1,RowC2]</l>
+<l>ColCenter := [ColCenter,ColC1,ColC2]</l>
+<c>* Get the second and third largest hole</c>
+<l>for i := |IndicesArea| - 2 to |IndicesArea| - 3 by -1</l>
+<l>    select_obj (SeparateHoles, CircularHole, IndicesArea[i] + 1)</l>
+<l>    dilation_circle (CircularHole, RegionDilation, 3.5)</l>
+<l>    erosion_circle (CircularHole, RegionErosion, 3.5)</l>
+<l>    difference (RegionDilation, RegionErosion, ROI)</l>
+<l>    reduce_domain (Image, ROI, ImageReduced)</l>
+<l>    edges_sub_pix (ImageReduced, Edges, 'lanser2', 0.7, 20, 40)</l>
+<l>    longest_closed_contour (Edges, LongestClosedContour)</l>
+<l>    fit_ellipse_contour_xld (LongestClosedContour, 'fitzgibbon', -1, 1, 0, 200, 3, 1, Row, Col, Phi, Radius1, Radius2, StartPhi, EndPhi, PointOrder)</l>
+<l>    RowCenter := [RowCenter,Row]</l>
+<l>    ColCenter := [ColCenter,Col]</l>
+<l>endfor</l>
+<l>gen_contour_polygon_xld (ThreeCenterPoints, RowCenter[1:3], ColCenter[1:3])</l>
+<l>area_center_xld (ThreeCenterPoints, Area1, Row2, Column1, PointOrder)</l>
+<l>if (PointOrder == 'positive')</l>
+<l>    RowCenter := subset(RowCenter,[0,1,3,2])</l>
+<l>    ColCenter := subset(ColCenter,[0,1,3,2])</l>
+<l>endif</l>
+<c>* </c>
+<l>return ()</l>
+</body>
+<docu id="determine_control_points">
+<short lang="en_US">Determines the coordinates of the centers of two circular holes and of one rectangular hole.</short>
+<parameters>
+<parameter id="ColCenter"/>
+<parameter id="Image"/>
+<parameter id="Intersections"/>
+<parameter id="RowCenter"/>
+</parameters>
+</docu>
+</procedure>
+<procedure name="longest_closed_contour">
+<interface>
+<io>
+<par name="Edges" base_type="iconic" dimension="0"/>
+</io>
+<oo>
+<par name="LongestClosedContour" base_type="iconic" dimension="0"/>
+</oo>
+</interface>
+<body>
+<l>select_contours_xld (Edges, ClosedContours, 'closed', 0.5, 200, -0.5, 0.5)</l>
+<l>length_xld (ClosedContours, Length)</l>
+<l>IndicesLength := sort_index(Length)</l>
+<l>IndexOfLongestClosedContour := IndicesLength[|IndicesLength| - 1]</l>
+<l>select_obj (ClosedContours, LongestClosedContour, IndexOfLongestClosedContour + 1)</l>
+<l>return ()</l>
+</body>
+<docu id="longest_closed_contour">
+<short lang="en_US">Returns the longest closed contour.</short>
+<parameters>
+<parameter id="Edges"/>
+<parameter id="LongestClosedContour"/>
+</parameters>
+</docu>
+</procedure>
+<procedure name="disp_coordinate_system_3d">
+<interface>
+<ic>
+<par name="WindowHandle" base_type="ctrl" dimension="0"/>
+<par name="CamPar" base_type="ctrl" dimension="0"/>
+<par name="HomMat_WCS_to_CCS" base_type="ctrl" dimension="0"/>
+<par name="NameCS" base_type="ctrl" dimension="0"/>
+</ic>
+</interface>
+<body>
+<l>dev_set_window (WindowHandle)</l>
+<l>ArrowLength := 0.02</l>
+<l>ArrowX_WCS := [0,ArrowLength,0,0]</l>
+<l>ArrowY_WCS := [0,0,ArrowLength,0]</l>
+<l>ArrowZ_WCS := [0,0,0,ArrowLength]</l>
+<l>affine_trans_point_3d (HomMat_WCS_to_CCS, ArrowX_WCS, ArrowY_WCS, ArrowZ_WCS, ArrowX_CCS, ArrowY_CCS, ArrowZ_CCS)</l>
+<l>project_3d_point (ArrowX_CCS, ArrowY_CCS, ArrowZ_CCS, CamPar, ArrowRow, ArrowColumn)</l>
+<l>disp_arrow (WindowHandle, ArrowRow[0], ArrowColumn[0], ArrowRow[1], ArrowColumn[1], 1)</l>
+<l>disp_arrow (WindowHandle, ArrowRow[0], ArrowColumn[0], ArrowRow[2], ArrowColumn[2], 1)</l>
+<l>disp_arrow (WindowHandle, ArrowRow[0], ArrowColumn[0], ArrowRow[3], ArrowColumn[3], 1)</l>
+<l>set_tposition (WindowHandle, ArrowRow[0], ArrowColumn[0])</l>
+<l>write_string (WindowHandle, NameCS)</l>
+<l>set_tposition (WindowHandle, ArrowRow[1], ArrowColumn[1])</l>
+<l>write_string (WindowHandle, 'x')</l>
+<l>set_tposition (WindowHandle, ArrowRow[2], ArrowColumn[2])</l>
+<l>write_string (WindowHandle, 'y')</l>
+<l>set_tposition (WindowHandle, ArrowRow[3], ArrowColumn[3])</l>
+<l>write_string (WindowHandle, 'z')</l>
+<l>return ()</l>
+</body>
+<docu id="disp_coordinate_system_3d">
+<parameters>
+<parameter id="CamPar"/>
+<parameter id="HomMat_WCS_to_CCS"/>
+<parameter id="NameCS"/>
+<parameter id="WindowHandle"/>
+</parameters>
+</docu>
+</procedure>
+<procedure name="calc_directions_norm">
+<interface>
+<ic>
+<par name="DRow" base_type="ctrl" dimension="0"/>
+<par name="DCol" base_type="ctrl" dimension="0"/>
+</ic>
+<oc>
+<par name="DRowNorm" base_type="ctrl" dimension="0"/>
+<par name="DColNorm" base_type="ctrl" dimension="0"/>
+</oc>
+</interface>
+<body>
+<l>Norm := 1.0 / sqrt(DRow * DRow + DCol * DCol)</l>
+<l>DRowNorm := Norm * DRow</l>
+<l>DColNorm := Norm * DCol</l>
+<l>return ()</l>
+</body>
+<docu id="calc_directions_norm">
+<parameters>
+<parameter id="DCol"/>
+<parameter id="DColNorm"/>
+<parameter id="DRow"/>
+<parameter id="DRowNorm"/>
+</parameters>
+</docu>
+</procedure>
+</hdevelop>

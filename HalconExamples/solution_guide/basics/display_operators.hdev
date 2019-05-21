@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.0">
+<procedure name="main">
+<interface/>
+<body>
+<c>* display_operators.hdev: shows the different ways of visualizing</c>
+<c>* </c>
+<l>read_image (Image, 'fabrik')</l>
+<l>open_graphics_window (Image, WindowHandle)</l>
+<l>display_image (Image, WindowHandle)</l>
+<l>regiongrowing (Image, Regions, 1, 1, 3, 100)</l>
+<l>display_regions (Image, Regions, WindowHandle)</l>
+<l>edges_sub_pix (Image, Edges, 'lanser2', 0.5, 10, 30)</l>
+<l>display_xld (Image, Edges, WindowHandle)</l>
+<l>display_text (Image, Regions, WindowHandle)</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+<procedure name="open_graphics_window">
+<interface>
+<io>
+<par name="Image" base_type="iconic" dimension="0"/>
+</io>
+<oc>
+<par name="WindowHandle" base_type="ctrl" dimension="0"/>
+</oc>
+</interface>
+<body>
+<l>get_image_size (Image, Width, Height)</l>
+<l>dev_close_window ()</l>
+<l>dev_open_window (0, 0, Width, Height, 'white', WindowHandle)</l>
+<l>dev_set_part (0, 0, Height - 1, Width - 1)</l>
+<l>dev_update_window ('off')</l>
+<l>dev_set_paint ('default')</l>
+<l>dev_set_lut ('default')</l>
+<l>dev_set_shape ('original')</l>
+<l>dev_set_line_width (2)</l>
+<l>dev_set_part (0, 0, Height - 1, Width - 1)</l>
+<l>return ()</l>
+</body>
+<docu id="open_graphics_window">
+<short lang="en_US">Open an HDevelop graphics window that fits to a given image</short>
+<parameters>
+<parameter id="Image"/>
+<parameter id="WindowHandle"/>
+</parameters>
+</docu>
+</procedure>
+<procedure name="display_image">
+<interface>
+<io>
+<par name="Image" base_type="iconic" dimension="0"/>
+</io>
+<ic>
+<par name="WindowHandle" base_type="ctrl" dimension="0"/>
+</ic>
+</interface>
+<body>
+<l>dev_set_window (WindowHandle)</l>
+<l>dev_display (Image)</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<l>dev_set_lut ('temperature')</l>
+<l>dev_display (Image)</l>
+<l>gen_rectangle1 (Rectangle, 358, 298, 387, 329)</l>
+<l>dev_set_draw ('margin')</l>
+<l>dev_set_color ('yellow')</l>
+<l>dev_display (Rectangle)</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<l>dev_clear_window ()</l>
+<l>dev_set_part (358, 298, 387, 329)</l>
+<l>dev_set_lut ('twenty_four')</l>
+<l>dev_set_paint ('3d_plot')</l>
+<l>dev_display (Image)</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<l>get_image_size (Image, Width, Height)</l>
+<l>dev_set_part (0, 0, Height - 1, Width - 1)</l>
+<l>dev_set_paint ('default')</l>
+<l>dev_set_lut ('default')</l>
+<l>return ()</l>
+</body>
+<docu id="display_image">
+<short lang="en_US">Procedure showing various ways of displaying image data</short>
+<parameters>
+<parameter id="Image"/>
+<parameter id="WindowHandle"/>
+</parameters>
+</docu>
+</procedure>
+<procedure name="display_regions">
+<interface>
+<io>
+<par name="Image" base_type="iconic" dimension="0"/>
+<par name="Regions" base_type="iconic" dimension="0"/>
+</io>
+<ic>
+<par name="WindowHandle" base_type="ctrl" dimension="0"/>
+</ic>
+</interface>
+<body>
+<l>dev_set_window (WindowHandle)</l>
+<l>dev_display (Image)</l>
+<l>dev_set_draw ('margin')</l>
+<l>dev_set_colored (6)</l>
+<l>dev_display (Regions)</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<l>dev_display (Image)</l>
+<l>dev_set_shape ('ellipse')</l>
+<l>dev_display (Regions)</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<l>dev_set_shape ('original')</l>
+<l>return ()</l>
+</body>
+<docu id="display_regions">
+<short lang="en_US">Procedure to demonstrate various display operators for regions</short>
+<parameters>
+<parameter id="Image"/>
+<parameter id="Regions"/>
+<parameter id="WindowHandle"/>
+</parameters>
+</docu>
+</procedure>
+<procedure name="display_xld">
+<interface>
+<io>
+<par name="Image" base_type="iconic" dimension="0"/>
+<par name="Contours" base_type="iconic" dimension="0"/>
+</io>
+<ic>
+<par name="WindowHandle" base_type="ctrl" dimension="0"/>
+</ic>
+</interface>
+<body>
+<l>dev_set_window (WindowHandle)</l>
+<l>dev_display (Image)</l>
+<l>dev_set_colored (6)</l>
+<l>dev_display (Contours)</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<l>dev_display (Image)</l>
+<l>gen_rectangle1 (Rectangle, 239, 197, 239 + 17, 197 + 17)</l>
+<l>dev_set_draw ('margin')</l>
+<l>dev_set_color ('yellow')</l>
+<l>dev_display (Rectangle)</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<l>dev_clear_window ()</l>
+<l>dev_display (Image)</l>
+<l>dev_set_part (239, 197, 239 + 17, 197 + 17)</l>
+<l>dev_display (Image)</l>
+<l>dev_set_color ('cyan')</l>
+<l>dev_display (Contours)</l>
+<l>dev_set_color ('yellow')</l>
+<l>select_shape_xld (Contours, SelectedXLD, 'area', 'and', 2000, 3000)</l>
+<l>count_obj (SelectedXLD, Number)</l>
+<l>dev_update_pc ('off')</l>
+<l>dev_update_var ('off')</l>
+<l>for k := 1 to Number by 1</l>
+<l>    select_obj (SelectedXLD, SingleContour, k)</l>
+<l>    get_contour_xld (SingleContour, Row, Col)</l>
+<l>    for i := 0 to |Row| - 1 by 1</l>
+<l>        gen_cross_contour_xld (Cross, Row[i], Col[i], 0.8, rad(45))</l>
+<l>        dev_display (Cross)</l>
+<l>    endfor</l>
+<l>endfor</l>
+<l>get_image_size (Image, Width, Height)</l>
+<l>dev_set_part (0, 0, Height - 1, Width - 1)</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<l>return ()</l>
+</body>
+<docu id="display_xld">
+<short lang="en_US">Procedure that shows various ways of displaying XLDs</short>
+<parameters>
+<parameter id="Contours"/>
+<parameter id="Image"/>
+<parameter id="WindowHandle"/>
+</parameters>
+</docu>
+</procedure>
+<procedure name="display_text">
+<interface>
+<io>
+<par name="Image" base_type="iconic" dimension="0"/>
+<par name="Regions" base_type="iconic" dimension="0"/>
+</io>
+<ic>
+<par name="WindowHandle" base_type="ctrl" dimension="0"/>
+</ic>
+</interface>
+<body>
+<l>dev_set_window (WindowHandle)</l>
+<l>set_display_font (WindowHandle, 16, 'mono', 'true', 'false')</l>
+<l>dev_set_draw ('margin')</l>
+<l>dev_set_colored (6)</l>
+<l>dev_display (Image)</l>
+<l>dev_display (Regions)</l>
+<l>Button := 0</l>
+<l>while (Button != 4)</l>
+<l>    dev_set_color ('white')</l>
+<l>    set_tposition (WindowHandle, 30, 10)</l>
+<l>    write_string (WindowHandle, 'Click into a region')</l>
+<l>    set_tposition (WindowHandle, 50, 10)</l>
+<l>    write_string (WindowHandle, 'Terminate with right mouse button')</l>
+<l>    get_mbutton (WindowHandle, Row, Column, Button)</l>
+<l>    dev_display (Image)</l>
+<l>    dev_set_colored (6)</l>
+<l>    dev_display (Regions)</l>
+<l>    select_region_point (Regions, DestRegions, Row, Column)</l>
+<l>    area_center (DestRegions, Area, RowCenter, ColumnCenter)</l>
+<l>    if (|Area| &gt; 0)</l>
+<l>        set_tposition (WindowHandle, Row, Column)</l>
+<l>        dev_set_color ('yellow')</l>
+<l>        write_string (WindowHandle, '(' + RowCenter + ',' + ColumnCenter + ') = ' + Area)</l>
+<l>    endif</l>
+<l>endwhile</l>
+<l>return ()</l>
+</body>
+<docu id="display_text">
+<short lang="en_US">Procedure to demonstrate how to display text</short>
+<parameters>
+<parameter id="Image"/>
+<parameter id="Regions"/>
+<parameter id="WindowHandle"/>
+</parameters>
+</docu>
+</procedure>
+</hdevelop>

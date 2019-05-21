@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.0">
+<procedure name="main">
+<interface/>
+<body>
+<c>* This program determines the junctions of</c>
+<c>* the grid separating the keys of a keypad</c>
+<c>* </c>
+<l>dev_update_off ()</l>
+<c>* </c>
+<c>* step: acquire image</c>
+<c>* </c>
+<l>read_image (Image, 'keypad')</l>
+<l>get_image_pointer1 (Image, Pointer, Type, Width, Height)</l>
+<l>dev_close_window ()</l>
+<l>dev_open_window (0, 0, Width, Height, 'white', WindowHandle)</l>
+<l>set_display_font (WindowHandle, 16, 'mono', 'true', 'false')</l>
+<l>dev_display (Image)</l>
+<c>* </c>
+<c>* step: initialize visualization</c>
+<c>* </c>
+<l>dev_set_colored (3)</l>
+<l>dev_set_draw ('fill')</l>
+<c>* </c>
+<c>* step:extract the region of the grid</c>
+<c>* </c>
+<l>mean_image (Image, ImageMean, 7, 7)</l>
+<l>dyn_threshold (Image, ImageMean, RegionDynThresh, 4, 'dark')</l>
+<l>connection (RegionDynThresh, ConnectedRegions)</l>
+<l>select_shape (ConnectedRegions, SelectedRegions, ['max_diameter','contlength'], 'and', [200,800], [99999,99999])</l>
+<l>closing_circle (SelectedRegions, RegionClosing, 1.5)</l>
+<l>dev_display (Image)</l>
+<l>dev_display (RegionClosing)</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* </c>
+<c>* step:extract the contours of the grid</c>
+<c>* </c>
+<l>skeleton (RegionClosing, Skeleton)</l>
+<l>gen_contours_skeleton_xld (Skeleton, ContoursSkeleton, 1, 'filter')</l>
+<l>segment_contours_xld (ContoursSkeleton, ContoursSplitSkeleton, 'lines', 5, 2, 1)</l>
+<l>select_contours_xld (ContoursSplitSkeleton, SelectedContours, 'contour_length', 30, 1000, -0.5, 0.5)</l>
+<l>union_collinear_contours_xld (SelectedContours, UnionCollinearContours, 100, 10, 20, rad(10), 'attr_keep')</l>
+<l>dev_display (Image)</l>
+<l>dev_display (UnionCollinearContours)</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* </c>
+<c>* step:fit lines to the contours</c>
+<c>* </c>
+<l>count_obj (UnionCollinearContours, NumberContours)</l>
+<l>gen_empty_obj (LinesHorizontal)</l>
+<l>gen_empty_obj (LinesVertical)</l>
+<l>for i := 1 to NumberContours by 1</l>
+<l>    select_obj (UnionCollinearContours, ObjectSelected, i)</l>
+<l>    fit_line_contour_xld (ObjectSelected, 'tukey', -1, 0, 5, 2, RowBegin, ColBegin, RowEnd, ColEnd, Nr, Nc, Dist)</l>
+<l>    gen_contour_polygon_xld (Contour, [RowBegin,RowEnd], [ColBegin,ColEnd])</l>
+<l>    Phi := atan2(-Nr,Nc)</l>
+<l>    if (abs(Phi) &lt; rad(5))</l>
+<l>        concat_obj (LinesVertical, Contour, LinesVertical)</l>
+<l>    endif</l>
+<l>    if (rad(85) &lt; abs(Phi) and abs(Phi) &lt; rad(95))</l>
+<l>        concat_obj (LinesHorizontal, Contour, LinesHorizontal)</l>
+<l>    endif</l>
+<l>endfor</l>
+<l>dev_display (Image)</l>
+<l>dev_set_color ('red')</l>
+<l>dev_display (LinesVertical)</l>
+<l>dev_set_color ('yellow')</l>
+<l>dev_display (LinesHorizontal)</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* </c>
+<c>* step:extract junction points of the grid</c>
+<c>* </c>
+<l>RowJunction := []</l>
+<l>ColJunction := []</l>
+<l>RowRealJunction := []</l>
+<l>ColRealJunction := []</l>
+<l>count_obj (LinesHorizontal, NumberLH)</l>
+<l>count_obj (LinesVertical, NumberLV)</l>
+<l>for i := 1 to NumberLH by 1</l>
+<l>    select_obj (LinesHorizontal, HorizontalLine, i)</l>
+<l>    get_contour_xld (HorizontalLine, RowHorizontal, ColHorizontal)</l>
+<l>    for j := 1 to NumberLV by 1</l>
+<l>        select_obj (LinesVertical, VerticalLine, j)</l>
+<l>        get_contour_xld (VerticalLine, RowVertical, ColVertical)</l>
+<l>        intersection_lines (RowHorizontal[0], ColHorizontal[0], RowHorizontal[1], ColHorizontal[1], RowVertical[0], ColVertical[0], RowVertical[1], ColVertical[1], Row, Column, IsOverlapping)</l>
+<l>        distance_ps (Row, Column, RowHorizontal[0], ColHorizontal[0], RowHorizontal[1], ColHorizontal[1], DistanceH, DistanceHMax)</l>
+<l>        distance_ps (Row, Column, RowVertical[0], ColVertical[0], RowVertical[1], ColVertical[1], DistanceV, DistanceVMax)</l>
+<l>        RowJunction := [RowJunction,Row]</l>
+<l>        ColJunction := [ColJunction,Column]</l>
+<l>        if ((DistanceH &lt;= 30) and (DistanceV &lt;= 30))</l>
+<l>            RowRealJunction := [RowRealJunction,Row]</l>
+<l>            ColRealJunction := [ColRealJunction,Column]</l>
+<l>        endif</l>
+<l>    endfor</l>
+<l>endfor</l>
+<l>dev_set_color ('white')</l>
+<l>gen_cross_contour_xld (Cross, RowJunction, ColJunction, 12, 0.785398)</l>
+<l>dev_display (Cross)</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<l>dev_display (Image)</l>
+<l>dev_set_color ('gray')</l>
+<l>dev_display (LinesHorizontal)</l>
+<l>dev_display (LinesVertical)</l>
+<l>dev_set_color ('white')</l>
+<l>gen_cross_contour_xld (Cross, RowRealJunction, ColRealJunction, 12, 0.785398)</l>
+<l>dev_display (Cross)</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* </c>
+<c>* or via region processing, starting with the</c>
+<c>* skeleton obtained above</c>
+<c>* </c>
+<l>set_display_font (WindowHandle, 14, 'mono', 'true', 'false')</l>
+<l>dev_display (Image)</l>
+<l>junctions_skeleton (Skeleton, EndPoints, JuncPoints)</l>
+<l>get_region_points (JuncPoints, RowJunctionRegionProcessing, ColumnJunctionRegionProcessing)</l>
+<l>gen_cross_contour_xld (CrossCenter, RowJunctionRegionProcessing, ColumnJunctionRegionProcessing, 12, 0.785398)</l>
+<l>dev_set_color ('gray')</l>
+<l>dev_display (Skeleton)</l>
+<l>dev_set_color ('white')</l>
+<l>dev_display (CrossCenter)</l>
+<l>disp_message (WindowHandle, 'Result of corresponding', 'window', 40, 10, 'white', 'false')</l>
+<l>disp_message (WindowHandle, 'region processing', 'window', 90, 10, 'white', 'false')</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>

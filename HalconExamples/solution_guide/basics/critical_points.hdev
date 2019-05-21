@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.0">
+<procedure name="main">
+<interface/>
+<body>
+<c>* critical_points.hdev: locate saddle point markers in an image</c>
+<c>* </c>
+<l>dev_update_window ('off')</l>
+<c>* ****</c>
+<c>* step: acquire image</c>
+<c>* ****</c>
+<l>read_image (Image, 'landmarks')</l>
+<l>get_image_size (Image, Width, Height)</l>
+<l>dev_close_window ()</l>
+<l>dev_open_window (0, 0, Width, Height, 'black', WindowHandle)</l>
+<l>dev_set_part (0, 0, Height - 1, Width - 1)</l>
+<l>dev_set_line_width (3)</l>
+<l>dev_set_color ('blue')</l>
+<l>dev_set_draw ('margin')</l>
+<l>dev_display (Image)</l>
+<l>set_display_font (WindowHandle, 20, 'mono', 'true', 'false')</l>
+<c>* ****</c>
+<c>* step: draw region</c>
+<c>* ****</c>
+<l>disp_message (WindowHandle, 'Draw with the mouse the region of interest', 'window', 12, 12, 'blue', 'false')</l>
+<l>dev_set_color ('white')</l>
+<l>draw_region (Region, WindowHandle)</l>
+<l>dev_display (Region)</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* ****</c>
+<c>* step: create ROI</c>
+<c>* ****</c>
+<l>reduce_domain (Image, Region, ImageReduced)</l>
+<l>disp_continue_message (WindowHandle, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* ****</c>
+<c>* step: process image within ROI</c>
+<c>* ****</c>
+<l>critical_points_sub_pix (ImageReduced, 'facet', 1.5, 8, RowMin, ColumnMin, RowMax, ColumnMax, RowSaddle, ColSaddle)</l>
+<l>dev_clear_window ()</l>
+<l>dev_display (ImageReduced)</l>
+<l>dev_set_color ('yellow')</l>
+<l>for i := 0 to |RowSaddle| - 1 by 1</l>
+<l>    gen_cross_contour_xld (Cross, RowSaddle[i], ColSaddle[i], 25, 0.785398)</l>
+<l>    dev_display (Cross)</l>
+<l>endfor</l>
+<l>stop ()</l>
+<l>dev_update_window ('on')</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>

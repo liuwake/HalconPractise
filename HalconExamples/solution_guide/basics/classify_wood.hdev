@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.0">
+<procedure name="main">
+<interface/>
+<body>
+<c>* The object of this example is to classify different</c>
+<c>* kinds of wood according to their surface texture.</c>
+<l>file_exists ('classify_wood.gmc', FileExists)</l>
+<l>if (FileExists)</l>
+<l>    USE_STORED_CLASSIFIER := 1</l>
+<l>else</l>
+<l>    USE_STORED_CLASSIFIER := 0</l>
+<l>endif</l>
+<c>* First, the path to the images is set, the initial image</c>
+<c>* is read and the settings are specified.</c>
+<l>get_system ('image_dir', HalconImages)</l>
+<l>get_system ('operating_system', OS)</l>
+<l>if (OS{0:2} == 'Win')</l>
+<l>    tuple_split (HalconImages, ';', HalconImages)</l>
+<l>else</l>
+<l>    tuple_split (HalconImages, ':', HalconImages)</l>
+<l>endif</l>
+<l>ImagePath := '/wood/'</l>
+<l>ReadOK := false</l>
+<l>for k := 0 to |HalconImages| - 1 by 1</l>
+<l>    try</l>
+<l>        read_image (Image, HalconImages[k] + ImagePath + 'apple/apple_01')</l>
+<l>        ReadPath := HalconImages[k] + ImagePath</l>
+<l>        ReadOK := true</l>
+<l>        break</l>
+<l>    catch (Exception)</l>
+<l>    endtry</l>
+<l>endfor</l>
+<l>if (not ReadOK)</l>
+<l>    disp_message (WindowID, 'Could not find the images in $HALCONIMAGES', 'window', 12, 12, 'black', 'true')</l>
+<l>    stop ()</l>
+<l>endif</l>
+<l>read_image (Image, ImagePath + 'apple/apple_01')</l>
+<l>get_image_size (Image, Width, Height)</l>
+<l>dev_close_window ()</l>
+<l>dev_open_window_fit_image (Image, 0, 0, Width, Height, WindowID)</l>
+<l>set_display_font (WindowID, 16, 'mono', 'true', 'false')</l>
+<l>dev_display (Image)</l>
+<l>dev_update_off ()</l>
+<c>* Now the different wood classes are specified.</c>
+<l>Classes := ['apple','beech','cherry','maple','oak','walnut']</l>
+<c>* The program uses by default a stored classifier. If you, however,</c>
+<c>* want to perform the training, set USE_STORED_CLASSIFIER to 0.</c>
+<c>* If the classifier can not be found, USE_STORED_CLASSIFIER</c>
+<c>* is set to 0 automatically.</c>
+<l>if (USE_STORED_CLASSIFIER == 1)</l>
+<l>    read_class_mlp ('classify_wood.gmc', MLPHandle)</l>
+<l>    NumClasses := |Classes|</l>
+<l>else</l>
+<l>    gen_features (Image, FeatureVector)</l>
+<l>    NumFeatures := |FeatureVector|</l>
+<l>    NumClasses := |Classes|</l>
+<l>    NumHidden := 15</l>
+<l>    create_class_mlp (NumFeatures, NumHidden, NumClasses, 'softmax', 'normalization', 10, 42, MLPHandle)</l>
+<l>    for CorrectClassID := 0 to NumClasses - 1 by 1</l>
+<l>        list_files (ReadPath + Classes[CorrectClassID], 'files', Files)</l>
+<l>        for k := 0 to |Files| - 1 by 2</l>
+<l>            read_image (Image, Files[k])</l>
+<l>            dev_display (Image)</l>
+<l>            gen_features (Image, FeatureVector)</l>
+<l>            add_sample_class_mlp (MLPHandle, FeatureVector, CorrectClassID)</l>
+<l>        endfor</l>
+<l>    endfor</l>
+<l>    train_class_mlp (MLPHandle, 200, 1, 0.0001, Error, ErrorLog)</l>
+<l>    write_class_mlp (MLPHandle, 'classify_wood.gmc')</l>
+<l>    disp_message (WindowID, 'Training of wood textures completed\nPress \'Run\' to continue', 'window', 12, 12, 'black', 'true')</l>
+<l>    stop ()</l>
+<l>endif</l>
+<l>Errors := 0</l>
+<l>Count := 0</l>
+<l>for CorrectClassID := 0 to NumClasses - 1 by 1</l>
+<l>    list_files (ReadPath + Classes[CorrectClassID], 'files', Files)</l>
+<l>    for k := 0 to |Files| - 1 by 1</l>
+<l>        Count := Count + 1</l>
+<l>        read_image (Image, Files[k])</l>
+<l>        gen_features (Image, FeatureVector)</l>
+<l>        classify_class_mlp (MLPHandle, FeatureVector, 2, FoundClassIDs, Confidence)</l>
+<l>        dev_display (Image)</l>
+<l>        dev_set_color ('blue')</l>
+<l>        disp_message (WindowID, 'correct class: ' + Classes[CorrectClassID], 'window', 12, 12, 'black', 'true')</l>
+<l>        if (CorrectClassID == FoundClassIDs[0])</l>
+<l>            disp_message (WindowID, 'found class:   ' + Classes[FoundClassIDs[0]], 'window', 42, 12, 'forest green', 'true')</l>
+<l>        else</l>
+<l>            Errors := Errors + 1</l>
+<l>            disp_message (WindowID, 'found class:   ' + Classes[FoundClassIDs[0]], 'window', 42, 12, 'red', 'true')</l>
+<l>            disp_continue_message (WindowID, 'black', 'true')</l>
+<l>            stop ()</l>
+<l>        endif</l>
+<l>        wait_seconds (0.1)</l>
+<l>    endfor</l>
+<l>endfor</l>
+<l>ErrorRate := real(Errors) / Count * 100.0</l>
+<l>disp_message (WindowID, 'ErrorRate = ' + ErrorRate + '%', 'window', 72, 12, 'black', 'true')</l>
+<l>disp_end_of_program_message (WindowID, 'black', 'true')</l>
+<l>clear_class_mlp (MLPHandle)</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+<procedure name="gen_features">
+<interface>
+<io>
+<par name="Image" base_type="iconic" dimension="0"/>
+</io>
+<oc>
+<par name="FeatureVector" base_type="ctrl" dimension="0"/>
+</oc>
+</interface>
+<body>
+<l>FeatureVector := []</l>
+<c>* Compute features.</c>
+<l>gen_sobel_features (Image, FeatureVector, FeatureVector)</l>
+<c>* Downscale the image (image pyramid) and compute features.</c>
+<l>zoom_image_factor (Image, Zoomed1, 0.5, 0.5, 'constant')</l>
+<l>gen_sobel_features (Zoomed1, FeatureVector, FeatureVector)</l>
+<c>* Uncomment lines to use further pyramid levels:</c>
+<l>* zoom_image_factor (Zoomed1, Zoomed2, 0.5, 0.5, 'constant')</l>
+<l>* gen_sobel_features (Zoomed2, FeatureVector, FeatureVector)</l>
+<l>* zoom_image_factor (Zoomed2, Zoomed3, 0.5, 0.5, 'constant')</l>
+<l>* gen_sobel_features (Zoomed3, FeatureVector, FeatureVector)</l>
+<l>* zoom_image_factor (Zoomed3, Zoomed4, 0.5, 0.5, 'constant')</l>
+<l>* gen_sobel_features (Zoomed4, FeatureVector, FeatureVector)</l>
+<l>FeatureVector := real(FeatureVector)</l>
+<l>return ()</l>
+</body>
+<docu id="gen_features">
+<short lang="en_US">compute texture features on multiple pyramid levels</short>
+<parameters>
+<parameter id="FeatureVector"/>
+<parameter id="Image"/>
+</parameters>
+</docu>
+</procedure>
+<procedure name="gen_sobel_features">
+<interface>
+<io>
+<par name="Image" base_type="iconic" dimension="0"/>
+</io>
+<ic>
+<par name="Features" base_type="ctrl" dimension="0"/>
+</ic>
+<oc>
+<par name="FeaturesExtended" base_type="ctrl" dimension="0"/>
+</oc>
+</interface>
+<body>
+<c>* Coocurrence matrix for 90 deg:</c>
+<l>cooc_feature_image (Image, Image, 6, 90, Energy, Correlation, Homogeneity, Contrast)</l>
+<c>* Absolute histogram of edge amplitudes:</c>
+<l>sobel_amp (Image, EdgeAmplitude, 'sum_abs', 3)</l>
+<l>gray_histo_abs (EdgeAmplitude, EdgeAmplitude, 8, AbsoluteHistoEdgeAmplitude)</l>
+<c>* </c>
+<c>* You could of course compute more features:</c>
+<c>* Entropy and anisotropy:</c>
+<l>* entropy_gray (Image, Image, Entropy, Anisotropy)</l>
+<c>* Absolute histogram of gray values:</c>
+<l>* gray_histo_abs (Image, Image, 8, AbsoluteHistoImage)</l>
+<c>* Add features to feature vector:</c>
+<l>FeaturesExtended := [Features,Energy,Correlation,Homogeneity,Contrast]</l>
+<l>FeaturesExtended := [FeaturesExtended,AbsoluteHistoEdgeAmplitude]</l>
+<c>* Activate the following lines to add the additional features you activated:</c>
+<l>* FeaturesExtended := [FeaturesExtended,Entropy,Anisotropy]</l>
+<l>* FeaturesExtended := [FeaturesExtended,AbsoluteHistoImage]</l>
+<l>return ()</l>
+</body>
+<docu id="gen_sobel_features">
+<short lang="en_US">compute various texture features and append them to input feature vector</short>
+<parameters>
+<parameter id="Features"/>
+<parameter id="FeaturesExtended"/>
+<parameter id="Image"/>
+</parameters>
+</docu>
+</procedure>
+</hdevelop>

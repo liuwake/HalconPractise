@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.0">
+<procedure name="main">
+<interface/>
+<body>
+<c>* This program measures the length of scratches in world</c>
+<c>* coordinates in a perspectively distorted image</c>
+<c>* </c>
+<l>dev_close_window ()</l>
+<l>dev_close_window ()</l>
+<l>dev_update_off ()</l>
+<l>dev_set_draw ('margin')</l>
+<l>read_image (Image, 'scratch/scratch_perspective')</l>
+<l>get_image_pointer1 (Image, Pointer, Type, Width, Height)</l>
+<l>dev_open_window (0, 0, Width, Height, 'black', WindowHandle1)</l>
+<l>set_display_font (WindowHandle1, 14, 'mono', 'true', 'false')</l>
+<l>dev_display (Image)</l>
+<l>dev_set_line_width (2)</l>
+<l>disp_continue_message (WindowHandle1, 'black', 'true')</l>
+<l>stop ()</l>
+<c>* </c>
+<c>* Step: calibrate the camera</c>
+<c>* </c>
+<l>CaltabName := 'caltab_30mm.descr'</l>
+<c>* Make sure that the file 'CaltabDescrName' is in the current directory,</c>
+<c>* the HALCONROOT/calib directory, or use an absolut path</c>
+<l>gen_cam_par_area_scan_division (0.012, 0, 0.0000055, 0.0000055, Width / 2, Height / 2, Width, Height, StartCamPar)</l>
+<l>create_calib_data ('calibration_object', 1, 1, CalibDataID)</l>
+<l>set_calib_data_cam_param (CalibDataID, 0, [], StartCamPar)</l>
+<l>set_calib_data_calib_object (CalibDataID, 0, CaltabName)</l>
+<l>NumImages := 12</l>
+<l>for I := 1 to NumImages by 1</l>
+<l>    read_image (Image, 'scratch/scratch_calib_' + I$'02d')</l>
+<l>    dev_display (Image)</l>
+<l>    find_calib_object (Image, CalibDataID, 0, 0, I, [], [])</l>
+<l>    get_calib_data_observ_contours (Caltab, CalibDataID, 'caltab', 0, 0, I)</l>
+<l>*     find_caltab (Image, Caltab, CaltabName, 3, 112, 5)</l>
+<l>    dev_set_color ('green')</l>
+<l>    dev_display (Caltab)</l>
+<l>    get_calib_data_observ_points (CalibDataID, 0, 0, I, RCoord, CCoord, Index, StartPose)</l>
+<l>*     find_marks_and_pose (Image, Caltab, CaltabName, StartCamPar, 128, 10, 18, 0.9, 15, 100, RCoord, CCoord, StartPose)</l>
+<l>    dev_set_color ('red')</l>
+<l>    disp_circle (WindowHandle1, RCoord, CCoord, gen_tuple_const(|RCoord|,2.5))</l>
+<l>    dev_set_part (0, 0, Height - 1, Width - 1)</l>
+<l>*     set_calib_data_observ_points (CalibDataID, 0, 0, i, RCoord, CCoord, 'all', StartPose)</l>
+<l>endfor</l>
+<l>dev_update_time ('on')</l>
+<l>disp_continue_message (WindowHandle1, 'black', 'true')</l>
+<l>stop ()</l>
+<l>calibrate_cameras (CalibDataID, Error)</l>
+<l>get_calib_data (CalibDataID, 'camera', 0, 'params', CamParam)</l>
+<l>get_calib_data (CalibDataID, 'calib_obj_pose', [0,1], 'pose', PoseCalib)</l>
+<c>* </c>
+<c>* Step: transform images</c>
+<c>* </c>
+<l>dev_open_window (0, Width + 5, Width, Height, 'black', WindowHandle2)</l>
+<l>set_display_font (WindowHandle2, 14, 'mono', 'true', 'false')</l>
+<l>tuple_replace (PoseCalib, 5, PoseCalib[5] - 90, PoseCalibRot)</l>
+<l>set_origin_pose (PoseCalibRot, -0.04, -0.03, 0.00075, Pose)</l>
+<l>PixelDist := 0.00013</l>
+<l>pose_to_hom_mat3d (Pose, HomMat3D)</l>
+<l>gen_image_to_world_plane_map (Map, CamParam, Pose, Width, Height, Width, Height, PixelDist, 'bilinear')</l>
+<l>Imagefiles := ['scratch/scratch_calib_01','scratch/scratch_perspective']</l>
+<l>for I := 1 to 2 by 1</l>
+<l>    read_image (Image, Imagefiles[I - 1])</l>
+<l>    dev_set_window (WindowHandle1)</l>
+<l>    dev_display (Image)</l>
+<l>    dev_set_window (WindowHandle2)</l>
+<l>    map_image (Image, Map, ModelImageMapped)</l>
+<l>    dev_display (ModelImageMapped)</l>
+<l>    if (I == 1)</l>
+<l>        gen_contour_polygon_xld (Polygon, [230,230], [189,189 + 0.03 / PixelDist])</l>
+<l>        disp_message (WindowHandle2, '3cm', 'window', 205, 195, 'red', 'false')</l>
+<l>        dev_display (Polygon)</l>
+<l>        disp_continue_message (WindowHandle2, 'black', 'true')</l>
+<l>        stop ()</l>
+<l>    endif</l>
+<l>endfor</l>
+<c>* </c>
+<c>* Step: measure in world coordinates in the transformed (rectified) image</c>
+<c>* </c>
+<l>dev_set_draw ('fill')</l>
+<l>fast_threshold (ModelImageMapped, Region, 0, 80, 20)</l>
+<l>fill_up (Region, RegionFillUp)</l>
+<l>erosion_rectangle1 (RegionFillUp, RegionErosion, 5, 5)</l>
+<l>reduce_domain (ModelImageMapped, RegionErosion, ImageReduced)</l>
+<l>fast_threshold (ImageReduced, Region1, 55, 100, 20)</l>
+<l>dilation_circle (Region1, RegionDilation1, 2.0)</l>
+<l>erosion_circle (RegionDilation1, RegionErosion1, 1.0)</l>
+<l>connection (RegionErosion1, ConnectedRegions)</l>
+<l>select_shape (ConnectedRegions, SelectedRegions, ['area','ra'], 'and', [40,15], [2000,1000])</l>
+<l>count_obj (SelectedRegions, NumScratches)</l>
+<l>dev_display (ModelImageMapped)</l>
+<l>for I := 1 to NumScratches by 1</l>
+<l>    dev_set_color ('yellow')</l>
+<l>    select_obj (SelectedRegions, ObjectSelected, I)</l>
+<l>    skeleton (ObjectSelected, Skeleton)</l>
+<l>    gen_contours_skeleton_xld (Skeleton, Contours, 1, 'filter')</l>
+<l>    dev_display (Contours)</l>
+<l>    length_xld (Contours, ContLength)</l>
+<l>    area_center_points_xld (Contours, Area, Row, Column)</l>
+<l>    disp_message (WindowHandle2, 'L= ' + (ContLength * PixelDist * 100)$'.4' + ' cm', 'window', Row - 10, Column + 20, 'yellow', 'false')</l>
+<l>    disp_continue_message (WindowHandle2, 'black', 'true')</l>
+<l>    stop ()</l>
+<l>endfor</l>
+<l>dev_close_window ()</l>
+<l>clear_calib_data (CalibDataID)</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>
