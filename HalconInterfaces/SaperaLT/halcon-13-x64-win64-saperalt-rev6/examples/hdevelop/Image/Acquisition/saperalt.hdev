@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.0.0">
+<procedure name="main">
+<interface/>
+<body>
+<c>* </c>
+<c>* Example for the usage of the SaperaLT interface</c>
+<c>* (performance evaluation to show the speed difference between grab_img (sync) and grab_img_async (async))</c>
+<c>* </c>
+<l>info_framegrabber ('SaperaLT', 'info_boards', InfoBoardsInfo, InfoBoardsValues)</l>
+<l>info_framegrabber ('SaperaLT', 'camera_type', CameraTypeInfo, CameraTypeValues)</l>
+<l>info_framegrabber ('SaperaLT', 'defaults', DefaultsInfo, DefaultsValues)</l>
+<l>info_framegrabber ('SaperaLT', 'device', DeviceInfo, DeviceValues)</l>
+<l>info_framegrabber ('SaperaLT', 'parameters', ParametersInfo, ParametersValues)</l>
+<l>info_framegrabber ('SaperaLT', 'ports', PortInfo, PortValues)</l>
+<l>info_framegrabber ('SaperaLT', 'revision', RevisionInfo, RevisionValues)</l>
+<c>* </c>
+<c>* Adapt the following settings according to your configuration!</c>
+<l>MyDevice := 'X64-CL_iPro_1'</l>
+<l>MyCameraConfigFilename := 'T_CSB1100CL_10-bits_Default.ccf'</l>
+<l>MyCameraConfigFileDir := 'C:\\Program files\\Teledyne DALSA\\Sapera\\CamFiles\\User\\'</l>
+<l>MyCameraType := MyCameraConfigFileDir + MyCameraConfigFilename</l>
+<c>* </c>
+<l>open_framegrabber ('SaperaLT', 1, 1, 0, 0, 0, 0, 'default', -1, 'default', -1, 'false', MyCameraType, MyDevice, -1, -1, AcqHandle)</l>
+<l>* open_framegrabber ('SaperaLT', 1, 1, 0, 0, 0, 0, 'default', -1, 'default', -1, 'false', MyCameraType, DeviceValues[0], -1, -1, AcqHandle)</l>
+<c>* </c>
+<c>* select synchronous or asynchronous grabbing</c>
+<l>GrabAsync := true</l>
+<l>* GrabAsync := false</l>
+<l>NumImages := 50</l>
+<c>* </c>
+<l>dev_close_window ()</l>
+<l>dev_open_window (0, 0, 640, 480, 'black', WindowID)</l>
+<l>grab_image (Image, AcqHandle)</l>
+<c>* </c>
+<l>dev_update_window ('off')</l>
+<l>dev_update_pc ('off')</l>
+<l>dev_update_var ('off')</l>
+<c>* </c>
+<c>* starting the time measurement</c>
+<l>grab_image_start (AcqHandle, -1)</l>
+<l>count_seconds (Seconds1)</l>
+<l>for i := 1 to NumImages by 1</l>
+<l>    if (GrabAsync)</l>
+<l>        grab_image_async (Image, AcqHandle, -1)</l>
+<l>    else</l>
+<l>        grab_image (Image, AcqHandle)</l>
+<l>    endif</l>
+<l>endfor</l>
+<l>count_seconds (Seconds2)</l>
+<l>count_seconds (Seconds3)</l>
+<l>for i := 1 to NumImages by 1</l>
+<l>    access_channel (Image, ImageChannel1, 1)</l>
+<l>    sobel_amp (ImageChannel1, EdgeAmplitude, 'sum_abs', 5)</l>
+<l>endfor</l>
+<l>count_seconds (Seconds4)</l>
+<l>count_seconds (Seconds5)</l>
+<l>for i := 1 to NumImages by 1</l>
+<l>    if (GrabAsync)</l>
+<l>        grab_image_async (Image, AcqHandle, -1)</l>
+<l>    else</l>
+<l>        grab_image (Image, AcqHandle)</l>
+<l>    endif</l>
+<l>    access_channel (Image, ImageChannel1, 1)</l>
+<l>    sobel_amp (ImageChannel1, EdgeAmplitude, 'sum_abs', 5)</l>
+<l>endfor</l>
+<l>count_seconds (Seconds6)</l>
+<c>* </c>
+<l>dev_update_window ('on')</l>
+<l>dev_update_pc ('on')</l>
+<l>dev_update_var ('on')</l>
+<l>TimeGrab := (Seconds2 - Seconds1) / NumImages</l>
+<l>TimeSobel := (Seconds4 - Seconds3) / NumImages</l>
+<l>TimeAll := (Seconds6 - Seconds5) / NumImages</l>
+<l>Overhead := TimeAll - TimeSobel</l>
+<l>stop ()</l>
+<c>* </c>
+<l>close_framegrabber (AcqHandle)</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>
