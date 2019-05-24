@@ -1,0 +1,1987 @@
+<!DOCTYPE HTML> 
+<html> 
+  <head> 
+  <meta id='acqdump-id' name='acqdump-id' content='halcon-acq-pylon-rev13.0.3'> 
+  <title>pylon / HALCON / MVTec Software GmbH</title> 
+      <style type="text/css"> 
+      body { 
+        color: #000000; 
+        background-color: #ffffff; 
+        margin-top: 0px; 
+        margin-bottom: 0px; 
+        margin-left: 20px; 
+        margin-right: 20px; 
+        font-family: Arial,Helvetica,sans-serif; 
+      } 
+      a:link { 
+        color: #0044cc; 
+      } 
+      a:link,a:visited { 
+        text-decoration: none; 
+      } 
+      a:link:hover,a:visited:hover { 
+        text-decoration: underline; 
+      } 
+      th { 
+        text-align: left; 
+      } 
+      h1,h2,h3,h4,h5,h6 { 
+        text-rendering: optimizeLegibility; 
+        color: #666666; 
+      } 
+      tt { 
+        font-family: monospace,monospace; 
+      } 
+      h1 a.halconoperator { 
+        font-family: Arial,Helvetica,sans-serif; 
+        color: #666666; 
+      } 
+      h2 a.halconoperator { 
+        font-family: Arial,Helvetica,sans-serif; 
+        color: #666666; 
+      } 
+      hr { 
+        border: 0; 
+        border-top: solid 1px #f28d26; 
+      } 
+      pre { 
+        font-family: monospace,monospace; 
+        padding: 1ex; 
+        white-space: pre-wrap; 
+      } 
+      .toc { 
+        font-size: 80%; 
+        border-top: 1px dashed #f28d26; 
+        border-bottom: 1px dashed #f28d26; 
+        padding-top: 5px; 
+        padding-bottom: 5px; 
+      } 
+      .inv { 
+        margin: 0; 
+        border: 0; 
+        padding: 0; 
+      } 
+      .banner { 
+        color: #666666; 
+        padding-left: 1em; 
+      } 
+      .logo { 
+        background-color: white; 
+      } 
+      .keyboard { 
+        font-size: 80%; 
+        padding-left: 3px; 
+        padding-right: 3px; 
+        border-radius: 5px; 
+        border-width: 1px; 
+        border-style: solid; 
+        border-color: #f28d26; 
+        background-color: #f3f3f3; 
+      } 
+      .warning { 
+        margin-top: 2ex; 
+        margin-bottom: 1ex; 
+        padding: 10px; 
+        text-align: center; 
+        border: 1px solid; 
+        color: #bb0000; 
+        background-color: #fff7f7 
+      } 
+      .imprint { 
+        margin-top: 1ex; 
+        font-size: 80%; 
+        color: #666666; 
+      } 
+      .imprinthead { 
+        font-weight: bolder; 
+        color: #666666; 
+      } 
+      .postscript { 
+        margin-top: 2ex; 
+        font-size: 80%; 
+        color: #666666 
+      } 
+      .evenrow { 
+        background-color: #e7e7ef; 
+        vertical-align: top; 
+      } 
+      .oddrow { 
+        background-color: #f7f7ff; 
+        vertical-align: top; 
+      } 
+      .headrow { 
+        background-color: #97979f; 
+        color: #ffffff; 
+        vertical-align: top; 
+      } 
+      .logorow { 
+        vertical-align: top; 
+      } 
+      .error { 
+        color: red; 
+      } 
+      .var { 
+        font-style: italic 
+      } 
+      .halconoperator { 
+        font-family: monospace,monospace; 
+      } 
+      .halconprocedure { 
+        font-family: Consolas,Inconsolata,"DejaVu Sans Mono",monospace; 
+      } 
+      span.operator { 
+        font-family: monospace,monospace; 
+      } 
+      span.procedure { 
+        font-family: monospace,monospace; 
+      } 
+      span.operation { 
+        font-family: monospace,monospace; 
+      } 
+      span.feature { 
+        font-family: Arial,Helvetica,Homerton,sans-serif; 
+      } 
+      ul { 
+        padding-left: 1.2em; 
+      } 
+      li.dot { 
+        list-style-type: square; 
+        color: #f28d26; 
+      } 
+      .breadcrumb { 
+        font-size: 80%; 
+        color: white; 
+        background-color: #062d64; 
+        margin-left: -20px; 
+        margin-right: -20px; 
+        margin-bottom: 20px; 
+        padding-left: 20px; 
+        padding-right: 20px; 
+        padding-bottom: 15px; 
+      } 
+      .webbar { 
+        font-size: 80%; 
+        background-color: #dddddd; 
+        margin-top: 0px; 
+        margin-left: -20px; 
+        margin-right: -20px; 
+        margin-bottom: 0px; 
+        padding-top: 5px; 
+        padding-left: 20px; 
+        padding-right: 20px; 
+        padding-bottom: 5px; 
+      } 
+      .footer { 
+        border-top: 1px dashed #f28d26; 
+        font-size: 80%; 
+        color: #666666; 
+        margin-left: -20px; 
+        margin-right: -20px; 
+        margin-top: 0px; 
+        padding-left: 20px; 
+        padding-right: 20px; 
+        padding-top: 10px; 
+        padding-bottom: 15px; 
+      } 
+      .breadcrumb a { 
+        color: #ffffff; 
+        border-bottom: 1px solid white; 
+      } 
+      .breadcrumb a:link:hover,.breadcrumb a:visited:hover { 
+        text-decoration: none; 
+        border-bottom: none; 
+      } 
+      .heading { 
+        margin-top: 1ex; 
+        font-size: 110%; 
+        font-weight: bold; 
+        color: #666666; 
+      } 
+      .text { 
+        color: black; 
+      } 
+      .example { 
+        font-size: 80%; 
+        background-color: #f3f3f3; 
+        border: 1px dashed #666666; 
+        padding: 10px; 
+      } 
+      .math { 
+      } 
+      .displaymath { 
+        text-align: center; 
+        margin-top: 1ex; 
+        margin-bottom: 1ex; 
+      } 
+      </style> 
+  </head> 
+  <body><div class="breadcrumb"> 
+<br class="inv"/> 
+<a href="../../../../documentation.html">HALCON</a> / <a href="acq-overview.html">Image Acquisition Interfaces</a> 
+<br class="inv"/> 
+</div> 
+<h1> Image Acquisition Interface for Basler Cameras via pylon Camera Software Suite</h1> 
+<table summary=" Image Acquisition Interface for Basler Cameras via pylon Camera Software Suite"> 
+  <tr> 
+    <td> 
+      Interface: 
+    </td> 
+    <td> 
+      pylon 
+    </td> 
+  </tr> 
+  <tr> 
+    <td> 
+      Revision: 
+    </td> 
+    <td> 
+      13.0.3 
+    </td> 
+  </tr> 
+  <tr> 
+    <td> 
+      Date: 
+    </td> 
+    <td> 
+      2018-11-30 
+    </td> 
+  </tr> 
+</table>
+<ul class="toc">
+<li><a href="#GENERAL">General</a></li>
+<li><a href="#SYSTEM_REQUIREMENTS">System Requirements</a></li>
+<li><a href="#INSTALLATION">Installation</a></li>
+<li><a href="#FEATURES">Features</a></li>
+<li><a href="#LIMITATIONS">Limitations</a></li>
+<li><a href="#ACQUISITIONMODE">AcquisitionMode</a></li>
+<li><a href="#SEC_SFNC">Standard Feature Naming Convention</a></li>
+<li><a href="#USING_COLOR_CONVERSION">Using Internal Color Conversion</a></li>
+<li><a href="#INFO_FRAMEGRABBER">Parameters for info_framegrabber</a></li>
+<li><a href="#OPEN_FRAMEGRABBER">Parameters for open_framegrabber</a></li>
+<li><a href="#SET_FRAMEGRABBER_PARAM">Parameters for set_framegrabber_param</a></li>
+<li><a href="#GET_FRAMEGRABBER_PARAM">Parameters for get_framegrabber_param</a></li>
+<li><a href="#SET_FRAMEGRABBER_LUT">Operator set_framegrabber_lut</a></li>
+<li><a href="#GET_FRAMEGRABBER_LUT">Operator get_framegrabber_lut</a></li>
+<li><a href="#SET_FRAMEGRABBER_CALLBACK">Operator set_framegrabber_callback</a></li>
+<li><a href="#GET_FRAMEGRABBER_CALLBACK">Operator get_framegrabber_callback</a></li>
+<li><a href="#GRAB_IMAGE_START">Operator grab_image_start</a></li>
+<li><a href="#GRAB_IMAGE">Operator grab_image</a></li>
+<li><a href="#GRAB_IMAGE_ASYNC">Operator grab_image_async</a></li>
+<li><a href="#GRAB_DATA">Operator grab_data</a></li>
+<li><a href="#GRAB_DATA_ASYNC">Operator grab_data_async</a></li>
+<li><a href="#CLOSE_FRAMEGRABBER">Operator close_framegrabber</a></li>
+<li><a href="#HDEVELOP_EXAMPLES">HDevelop Examples</a></li>
+<li><a href="#CPP_EXAMPLES">C++ Examples</a></li>
+<li><a href="#CS_EXAMPLES">C# Examples</a></li>
+<li><a href="#RELEASENOTES">Release Notes</a></li>
+</ul>
+  <!-- toc start -->
+<h2 id="GENERAL">General</h2><div> This page provides the documentation of the HALCON pylon  interface. Currently, all <a href="http://www.baslerweb.com/">Basler</a> area and line scan cameras 
+ via Camera Link, GigE Vision, USB3 Vision and IEEE 1394a/b are supported 
+ by this interface. Note that the network cameras (IP fixed cameras) are 
+ not supported. 
+ <a href="http://www.mvtec.com/download/registration">Registered</a> customers can download the 
+ <a href="http://www.mvtec.com/download/halcon/">latest revision</a> of this interface from the 
+ <a href="http://www.mvtec.com/">MVTec WWW server</a>.
+</div>
+<h2 id="SYSTEM_REQUIREMENTS">System Requirements</h2><div>
+<ul>
+<li>Intel compatible PC with Windows    7 (32-bit or 64-bit) 
+   or newer that is also supported by the vendor-specific SDK, 
+   also WoW64 (using 32-bit HALCON on 64-bit Windows). 
+</li>
+<li>Successfully installed pylon SDK 5.1. 
+</li>
+<li><b>GigE Vision:</b> Successfully installed pylon GigE Vision 
+   Streaming Filter or High Performance driver.<br> 
+   <b>IEEE 1394a/b:</b> 
+   Successfully installed pylon 1394 driver.<br> 
+   <b>Camera Link:</b> Successfully installed pylon Camera Link driver.<br> 
+   <b>USB3 Vision:</b> Successfully installed pylon USB3 Vision driver. 
+</li>
+<li>HALCON image acquisition interface <b>hAcqpylon.dll</b> or 
+   <b>hAcqpylonxl.dll</b>, respectively. If you have properly installed the 
+   interface, both DLLs should reside in <tt>bin\%HALCONARCH%</tt> within 
+   the HALCON base directory %HALCONROOT% you have chosen during the 
+   installation of HALCON. 
+</li>
+<li>Please note that you need administrator privileges to access the GigE 
+   Transport Layer of the network. So even your application needs these 
+   settings to access the camera. 
+</li>
+<li>If you are using a firewall, 
+   please 
+   make sure that your firewall settings allow connecting to the camera, 
+   otherwise the grabbing fails.
+</li>
+</ul></div>
+<h2 id="INSTALLATION">Installation</h2><div>Only when installing or updating the interface manually follow these steps: <br> 
+
+<ul>
+<li><b>Windows:</b> Extract the archive containing the interface files to the 
+  HALCON base directory %HALCONROOT% (Note: Administrator privileges may be 
+  required for this step). Additionally, you have to move the interface 
+  examples to the directory %HALCONEXAMPLES% manually.
+</li>
+</ul></div>
+<h2 id="FEATURES">Features</h2><div>
+<ul>
+<li>Multiple device support. </li>
+<li>Generic parameter access. 
+</li>
+<li>Synchronous and asynchronous grabbing. 
+</li>
+<li>Cropping of image parts. 
+</li>
+<li>Decimation. 
+</li>
+<li>External trigger. 
+</li>
+<li>Software control of all acquisition parameters directly from the HALCON 
+   application. 
+</li>
+<li>Support of user-specific callback functions. 
+</li>
+<li>Support of ace and aviator cameras over Camera Link (no grabbing!).
+</li>
+</ul></div>
+<h2 id="LIMITATIONS">Limitations</h2><div>
+<ul>
+<li>IEEE 1394 (FireWire) cameras are not supported under Windows 8. </li>
+<li>Sequencer feature: Parameters, which change the Payload size (e.g., Width, 
+   PixelFormat, ...) and are changed via loading a different sequencer set, 
+   are not supported by the interface. Other parameters should work with the 
+   sequencer feature. 
+</li>
+<li>No support of planar pixel formats.
+</li>
+</ul></div>
+<h2 id="ACQUISITIONMODE">AcquisitionMode</h2><div> 'AcquisitionMode' is one of the standard parameters of GigE Vision cameras.  The HALCON pylon interface reads the current value of the 
+ camera in <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>. If you need high frame rates it is recommended 
+ to set 'AcquisitionMode' to 'Continuous'.
+</div>
+<h2 id="SEC_SFNC">Standard Feature Naming Convention</h2><div>All GenICam compliant devices contain a XML file which describes the features of the device. The Standard Features Naming Convention (available 
+<a href="http://www.genicam.org/">here</a>) lists all features a device must or can have. Because every 
+device provides different parameters, we don't list them here. To get a list 
+of supported parameters of your device call 
+<a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a><tt>(..., 'available_param_names', ...)</tt>. 
+<p></p> 
+We strongly recommend not to use the following parameters since they are 
+handled internally: 'AcquisitionStart', 'AcquisitionStop', and 
+'TLParamsLocked'.
+</div>
+<h2 id="USING_COLOR_CONVERSION">Using Internal Color Conversion</h2><div> The HALCON pylon interface supports an internal color conversion performed in software. The conversion is automatically applied for PFNC (Pixel Format Naming Convention) compatible cameras, when the color format delivered by the camera differs from the user defined format if set via the parameter 'color_space'. The used transformation algorithms are basic and optimized for speed.<br>  <p> 
+ Following transformations from the camera color space (see also PFNC) to the interface color space (see also 'color_space' parameter in this document) are supported:<br> 
+ <p> 
+
+<ul>
+<li>Bayer pattern to 'rgb':<br> 
+ <p> 
+  <table> 
+  <tr> 
+    <td> 
+   	  <table> 
+   		<tr> 
+   	  <td align="center">Bayer_LMMN</td> 
+<td></td> 
+<td></td> 
+   		</tr> 
+      <tr> 
+   	  <td align="center"> 
+ 		<table border="1px" cellpadding="5%"> 
+   	  <tr> 
+   	  <td align="center"><code>R</code></td> 
+     		<td><code>G1</code></td> 
+   	  </tr> 
+ 		<tr> 
+   	  <td><code>G2</code></td> 
+ 		<td align="center"><code>B</code></td> 
+</tr> 
+  	  </table> 
+  		</td> 
+<td> 
+  	  <font size="6">&#x21FE;</font> 
+  		</td> 
+  		<td> 
+  <table border="1px" cellpadding="5%"> 
+		  	  <tr> 
+  		  	  <td><code>[R,G,B]</code></td> 
+  					<td><code>[R,G,B]</code></td> 
+		  		</tr> 
+					<tr> 
+  		  	  <td><code>[R,G,B]</code></td> 
+  					<td><code>[R,G,B]</code></td> 
+ 					</tr> 
+</table> 
+        </td> 
+</tr> 
+    	</table> 
+</td> 
+</tr> 
+<tr> 
+<td> 
+   	  <table> 
+   		<tr> 
+   	  <td align="center">Bayer_NMML</td> 
+<td></td> 
+<td></td> 
+   		</tr> 
+      <tr> 
+   	  <td align="center"> 
+ 		<table border="1px" cellpadding="5%"> 
+   	  <tr> 
+   	  <td align="center"><code>B</code></td> 
+     		<td><code>G1</code></td> 
+   	  </tr> 
+ 		<tr> 
+   	  <td><code>G2</code></td> 
+ 		<td align="center"><code>R</code></td> 
+</tr> 
+  	  </table> 
+  		</td> 
+<td> 
+  	  <font size="6">&#x21FE;</font> 
+  		</td> 
+  		<td> 
+  <table border="1px" cellpadding="5%"> 
+		  	  <tr> 
+  		  	  <td><code>[R,G,B]</code></td> 
+  					<td><code>[R,G,B]</code></td> 
+		  		</tr> 
+					<tr> 
+  		  	  <td><code>[R,G,B]</code></td> 
+  					<td><code>[R,G,B]</code></td> 
+ 					</tr> 
+</table> 
+        </td> 
+</tr> 
+    	</table> 
+</td> 
+</tr> 
+  </table> 
+  with <code>G = (G1 + G2) / 2</code>. 
+  </p> 
+ </p> 
+ <p> 
+</li>
+<li>Y'CbCr to 'rgb' (Note: gamma correction is not considered):<br> 
+  <p> 
+   <code> 
+    R = Y' + 1.4020 * (Cr- M)<br> 
+    G = Y' - 0.34414 * (Cb- M) -0.71414 * (Cr- M)<br> 
+    B = Y' + 1.7720 * (Cb - M) 
+   </code> 
+  </p> 
+ </p> 
+ <p> 
+</li>
+<li>RGB to 'yuv' ('yuv' corresponds to Y'CbCr of PFNC, Note: gamma correction is not considered):<br> 
+  <p> 
+   <code> 
+    Y' = 0.299 * R + 0.587 * G + 0.114 * B<br> 
+    Cb = -0.16874 * R - 0.33126 * G + 0.5 * B + M<br> 
+    Cr = 0.5 * R - 0.41869 * G - 0.08131 * B + M 
+   </code> 
+  </p> 
+ </p> 
+ <p> 
+</li>
+<li>RGB to 'gray':<br> 
+  <p> 
+   <code> 
+    Y' = 0.299 * R + 0.587 * G + 0.114 * B 
+   </code> 
+  </p> 
+ </p> 
+</li>
+</ul>with <code>M = 128</code> for 8 bit raw data, and <code>M = 32768</code> for 16 bit raw data.<br> 
+ The accuracy of the results is limited due to internal 16.16 fix-point arithmetic for 8 bit ( 0...255), and 24.8 fix-point arithmetic for 16 bit raw data. 
+ </p>
+</div>
+<h2 id="INFO_FRAMEGRABBER">Parameters for <a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a></h2><div></div>
+<table summary="Parameters for info_framegrabber" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Parameter</th>
+<th>Value List</th>
+<th>Type</th>
+<th>Kind</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><b>'bits_per_channel'</b></td>
+<td>[8, 10, 12, 16]</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Values for bits per channel.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'camera_type'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unused.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'color_space'</b></td>
+<td>['gray', 'raw', 'rgb', 'yuv']</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Values for color space.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'defaults'</b></td>
+<td>[0, 0, 0, 0, 0, 0, 'progressive', 8, 'gray', -1.0, 'false', 'auto',  '0', 0, 0]
+</td>
+<td>mixed</td>
+<td>pre-defined</td>
+<td>Default values for <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'device'</b></td>
+<td>['<span class="var">&lt;unique_device_id&gt;</span>']</td>
+<td>string</td>
+<td>dynamic</td>
+<td>Device names of the available devices.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'external_trigger'</b></td>
+<td>['false', 'true']</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Values for the external trigger.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'field'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unused.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'general'</b></td>
+<td>[]</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Information about the HALCON pylon interface.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'generic'</b></td>
+<td>['', 'num_buffers=<span class="var">&lt;num&gt;</span>', 'tl_type=<span class="var">&lt;type&gt;</span>']</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Value list for the Generic parameter.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'horizontal_resolution'</b></td>
+<td>[0, 1, 2, 4]</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Value list for horizontal resolution.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'image_height'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unsupported query.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'image_width'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unsupported query.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'info_boards'</b></td>
+<td>[' | device:<span class="var">&lt;device id&gt;</span> | friendly_name:<span class="var">&lt;friendly name&gt;</span>   user_name:<span class="var">&lt;user name&gt;</span> serial_number:<span class="var">&lt;serial number&gt;</span> 
+  device_class:<span class="var">&lt;device class&gt;</span>']
+</td>
+<td>string</td>
+<td>dynamic</td>
+<td>A list of the available devices.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'parameters'</b></td>
+<td>['<span class="var">&lt;parameters&gt;</span>']</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Pre-defined parameters of the HALCON interface.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'parameters_readonly'</b></td>
+<td>['<span class="var">&lt;parameters&gt;</span>']</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Pre-defined read-only parameters of the HALCON interface.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'parameters_writeonly'</b></td>
+<td>['<span class="var">&lt;parameters&gt;</span>']</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Pre-defined write-only parameters of the HALCON interface.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'port'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unused.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'revision'</b></td>
+<td>'<span class="var">&lt;revision&gt;</span>'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Revision number of the pylon interface.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'start_column'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unsupported query.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'start_row'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unsupported query.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'vertical_resolution'</b></td>
+<td>[0, 1, 2, 4]</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Value list for vertical resolution.</td>
+</tr></table>
+<h2 id="OPEN_FRAMEGRABBER">Parameters for <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a></h2><div> Note that in case of an IEEE 1394 camera, the parameter 'PacketSize' is set  to the maximum value during <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>.
+</div>
+<table summary="Parameters for open_framegrabber" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Parameter</th>
+<th>Values</th>
+<th>Default</th>
+<th>Type</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><b>Name</b></td>
+<td>'pylon'</td>
+<td></td>
+<td>string</td>
+<td>Name of the HALCON interface.</td>
+</tr>
+<tr class="evenrow">
+<td><b>HorizontalResolution</b></td>
+<td>0, 1, 2, 4, <span class="var">resolution</span></td>
+<td>0</td>
+<td>integer</td>
+<td> The desired horizontal image resolution. 
+<ul>
+<li>0: current setting 
+</li>
+<li>1: full resolution 
+</li>
+<li>2: half resolution 
+</li>
+<li>4: quarter resolution 
+</li>
+<li><i>resolution</i>: User defined horizontal resolution is set 
+</li>
+</ul> 
+The desired horizontal image resolution. Use '0' to keep current 
+settings, '1' for full resolution, '2' for half resolution and 
+'4' for quarter resolution. Note that setting the horizontal 
+resolution to a user-defined value smaller than 4 pixels is only possible 
+via <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a>.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>VerticalResolution</b></td>
+<td>0, 1, 2, 4, <span class="var">resolution</span></td>
+<td>0</td>
+<td>integer</td>
+<td> The desired vertical image resolution. 
+<ul>
+<li>0: current setting 
+</li>
+<li>1: full resolution 
+</li>
+<li>2: half resolution 
+</li>
+<li>4: quarter resolution 
+</li>
+<li><i>resolution</i>: User defined vertical resolution is set 
+</li>
+</ul> 
+The desired vertical image resolution. Use '0' to keep current 
+settings, '1' for full resolution, '2' for half resolution and 
+'4' for quarter resolution. Note that setting the vertical 
+resolution to a user-defined value smaller than 4 lines is only possible 
+via <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a>.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>ImageWidth</b></td>
+<td>0, <span class="var">&lt;width&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>Width of the desired image part ('0' stands for the complete image).
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>ImageHeight</b></td>
+<td>0, <span class="var">&lt;height&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>Height of the desired image part ('0' stands for the complete image).
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>StartRow</b></td>
+<td>0, <span class="var">&lt;row&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>Row coordinate of the upper left pixel within the desired image part.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>StartColumn</b></td>
+<td>0, <span class="var">&lt;column&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>Column coordinate of the upper left pixel within the desired image part.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>Field</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr>
+<tr class="oddrow">
+<td><b>BitsPerChannel</b></td>
+<td>-1, 8, 10, 12, 16</td>
+<td>8</td>
+<td>integer</td>
+<td>Number of bits per channel of the resulting HALCON image. In case of -1 the current bit depth of the camera is used. By specifying a value greater than 8 the 
+grabbed images are delivered as uint2 images.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>ColorSpace</b></td>
+<td>'gray', 'raw', 'rgb', 'yuv'</td>
+<td>'gray'</td>
+<td>string</td>
+<td>Desired color space and thus the number of image channels of the resulting HALCON image.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>Generic</b></td>
+<td>'', ['num_buffers=<span class="var">&lt;num&gt;</span>', 'tl_type=<span class="var">&lt;type&gt;</span>'], -1</td>
+<td>-1</td>
+<td>mixed</td>
+<td> With the Generic parameter some important values can be set before the camera  is initialized. Note that the parameter names including the values must be 
+ strings, e.g., 'num_buffers=5' sets the number of buffers to 5. 
+ The following parameters are available: 
+
+<ul>
+<li><b>num_buffers</b>: To set the maximum number of buffers used in the HALCON 
+   acquisition interface. A value greater than 1 has to be used. Note that 
+   depending on the image size of the used camera a high number of buffers can 
+   exceed the available memory size of your computer. We recommend to use at 
+   least 2 buffers. Default: 2. 
+</li>
+<li><b>tl_type</b>: With this parameter the type of the desired Transport Layer 
+   can be set. Valid values are 'gev' for GigE Vision, 'iidc' for 1394IIDC, 
+   'u3v' for USB3 Vision, and 'cl' for Camera Link. Note: If 'tl_type' is set 
+   to another value than 'cl', <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a> can be accelerated in 
+   contrast to the case that it is not set at all. If a device index is used 
+   as device name, the value of tl_type is ignored and the index is used 
+   with the list over all available devices.
+</li>
+</ul></td>
+</tr>
+<tr class="evenrow">
+<td><b>ExternalTrigger</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td> Ignored. The external trigger can be activated by  <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a>  via the parameter 'TriggerMode'.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>CameraType</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr>
+<tr class="evenrow">
+<td><b>Device</b></td>
+<td> <span class="var">&lt;unique_device_id&gt;</span>, <span class="var">&lt;ip_address&gt;</span>, <span class="var">&lt;device_user_id&gt;</span>, <span class="var">&lt;serial_number&gt;</span>, <span class="var">&lt;index&gt;</span></td>
+<td>'0'</td>
+<td>string</td>
+<td> To open a specific camera the device name as shown in  <a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a><tt>(.., 'device', ..)</tt> has to be set. Alternatively, the 
+ IP address, the DeviceUserID or the serial number can be used. These values 
+ can be queried by calling <a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a><tt>(.., 'info_boards', ..)'</tt>. 
+ Another possibility is the increasing device index, e.g., the first camera is 
+ specified by '0', the second camera by '1', etc.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>Port</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr>
+<tr class="evenrow">
+<td><b>LineIn</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr></table>
+<h2 id="SET_FRAMEGRABBER_PARAM">Parameters for <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a></h2><div> The parameters of all cameras are based on the GenApi, so they can be  different for each camera. A call of 
+ <a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a><tt>(...'parameters'...)</tt> 
+ returns a tuple containing all available parameters of the connected 
+ camera.<br> 
+ Additionally to the GenApi parameters of the camera the following 
+ HALCON parameters are supported:
+</div>
+<table summary="Parameters for set_framegrabber_param" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Parameter</th>
+<th>Values</th>
+<th>Default</th>
+<th>Type</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><b>'bits_per_channel'</b></td>
+<td>8, 10, 12, 14, 16</td>
+<td></td>
+<td>integer</td>
+<td>Number of bits per channel of the resulting HALCON image. In case of -1 the current bit depth of the camera is used. By specifying a value greater than 8 the 
+grabbed images are delivered as uint2 images.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'color_space'</b></td>
+<td>'gray', 'raw', 'rgb', 'yuv'</td>
+<td></td>
+<td>string</td>
+<td> Specify the desired color space of the image. You can also adapt this  setting with the generic parameter 'PixelFormat'.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'do_abort_grab'</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td> Cancel current grab.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'do_unlock_parameters'</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td> After grabbing an image the parameters regarding the image size and  position are locked. This parameter unlocks them.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'external_trigger'</b></td>
+<td>'false', 'true'</td>
+<td></td>
+<td>string</td>
+<td>The feature 'TriggerMode' is set to 'On' ('true') or 'Off' ('false'). If 'TriggerSource' is set to 'Software' the feature 'TriggerMode' is not 
+enabled. Otherwise the buffer queue is reset to avoid receiving old 
+images without an incoming trigger signal. We recommend the usage of 
+the features 'TriggerMode' and 'TriggerSource' instead of the 
+parameter 'external_trigger'.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'grab_timeout'</b></td>
+<td><span class="var">&lt;milliseconds&gt;</span></td>
+<td>5000</td>
+<td>integer</td>
+<td>Specify the desired timeout (milliseconds) for aborting a pending grab. If -1 is specified, the timeout is set to infinite. Please note, 
+that in case of an infinite, the highest possible value is (2^31-1).
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'image_height'</b></td>
+<td><span class="var">&lt;height&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td> Height of the HALCON image (software cropping). Please note that the  value of this parameter is overwritten, if 'Height' is set afterwards.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'image_width'</b></td>
+<td><span class="var">&lt;width&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td> Width of the HALCON image (software cropping). Please note that the  value of this parameter is overwritten, if 'Width' is set afterwards.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'start_async_after_grab_async'</b></td>
+<td>'disable', 'enable'</td>
+<td>'enable'</td>
+<td>string</td>
+<td>By default a new asynchronous grab command is automatically given to the acquisition device at the end of <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a>. If the parameter 
+'start_async_after_grab_async' is set to 'disable', this new grab command 
+is omitted.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'start_column'</b></td>
+<td><span class="var">&lt;column&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>Column coordinate of the upper left pixel within the desired image part.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'start_row'</b></td>
+<td><span class="var">&lt;row&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>Row coordinate of the upper left pixel within the desired image part.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'volatile'</b></td>
+<td>'disable', 'enable'</td>
+<td>'disable'</td>
+<td>string</td>
+<td> <b>Grayscale only.</b> In the volatile mode the two image acquisition  interface buffers are used directly to store HALCON images. This is the 
+ fastest mode avoiding to copy raw images in memory. However, be aware that 
+ older images are overwritten again and again as a side-effect. Thus, you 
+ can only process one image while you grab another image. Older images are 
+ invalid!
+</td>
+</tr></table>
+<h2 id="GET_FRAMEGRABBER_PARAM">Parameters for <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a></h2><div>There may exist additional read-only parameters with the following postfixes: 
+<ul>
+<li><b>'_access'</b>: These parameters provide the access permissions of 
+    the corresponding parameter as a string. Possible values are 
+     <tt>'ro'</tt> (read-only), <tt>'wo'</tt> (write-only), and 
+     <tt>'rw'</tt> (read/write). 
+</li>
+<li><b>'_category'</b>: These parameters provide the category of the 
+    corresponding parameter as a string. 
+</li>
+<li><b>'_description'</b>: These parameters provide the tool-tip of the 
+    corresponding parameter as a string. 
+</li>
+<li><b>'_range'</b>: These parameters provide the minimum, maximum, 
+    step width, and default values for the corresponding integer or float 
+    parameter as a tuple with 4 elements, e.g., 
+    <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a><tt>(.., 'Shutter_range', ..)</tt> will return 
+    the output tuple <tt>[<i>min, max, step, default</i>]</tt>. 
+</li>
+<li><b>'_values'</b>: These parameters provide the valid value list for 
+    the corresponding parameter as a tuple, e.g., 
+    <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a><tt>(.., 'volatile_values', ..)</tt> will return 
+    the output tuple <tt>['enable', 'disable']</tt>. 
+</li>
+<li><b>'_visibility'</b>: These parameters provide the visibility of the 
+    corresponding parameter as a string. Possible values are 
+    <tt>'beginner'</tt>, <tt>'expert'</tt>, and <tt>'guru'</tt>. 
+</li>
+</ul> 
+<p> 
+All these postfixed parameter names are not returned when calling 
+<a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a><tt>(.., 'parameters', ..)</tt> and are used 
+to enable the easy parameterization via a generic graphical user 
+interface, particularly the HDevelop Image Acquisition Assistant. 
+</p>
+</div>
+<table summary="Parameters for get_framegrabber_param" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Parameter</th>
+<th>Values</th>
+<th>Default</th>
+<th>Type</th>
+<th>Kind</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><b>'available_callback_types'</b></td>
+<td>['<span class="var">&lt;callback_type&gt;</span>']</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td> Query all callback types which are supported by this interface.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'available_param_descriptions'</b></td>
+<td>['<span class="var">&lt;descriptions&gt;</span>']</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td> Returns a list containing additional information about all parameters. The  order of the entries is equal to the order of the parameter names returned 
+ by 'available_param_names'.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'available_param_names'</b></td>
+<td>['<span class="var">&lt;parameters&gt;</span>']</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td>The list contains the names of all available parameters.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'bits_per_channel'</b></td>
+<td>-1, 8, 10, 12, 14, 16</td>
+<td>8</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Number of bits per channel of the resulting HALCON image. In case of -1 the current bit depth of the camera is used. By specifying a value greater than 8 the 
+grabbed images are delivered as uint2 images.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'camera_type'</b></td>
+<td>'<span class="var">&lt;default&gt;</span>'</td>
+<td>'auto'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>The value is not used, so a default value is returned.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'color_space'</b></td>
+<td>'gray', 'raw', 'rgb', 'yuv'</td>
+<td>'gray'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Desired color space and thus the number of image channels of the resulting HALCON image.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'device'</b></td>
+<td><span class="var">&lt;device&gt;</span></td>
+<td>'0'</td>
+<td>string</td>
+<td>dynamic</td>
+<td>Device names of the available devices.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'external_trigger'</b></td>
+<td><span class="var">&lt;default&gt;</span></td>
+<td>'false'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Status of the external trigger.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'field'</b></td>
+<td>'<span class="var">&lt;default&gt;</span>'</td>
+<td>'progressive'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>The value is not used, so a default value is returned.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'generic'</b></td>
+<td>'', ['num_buffers=<span class="var">&lt;num&gt;</span>', 'tl_type=<span class="var">&lt;type&gt;</span>'], -1</td>
+<td>-1</td>
+<td>mixed</td>
+<td>pre-defined</td>
+<td>Values of the Generic parameter.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'grab_timeout'</b></td>
+<td><span class="var">&lt;milliseconds&gt;</span></td>
+<td>5000</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Current grab timeout in milliseconds.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'horizontal_resolution'</b></td>
+<td>0, 1, 2, 4, <span class="var">resolution</span></td>
+<td></td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Current value of horizontal resolution.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'image_available'</b></td>
+<td>0, 1</td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td>Status of the last asynchronous grab command. The value 1 means that the image is already acquired and thus can be fetched by <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a> without 
+delay. Note that this parameter is especially useful in combination with 
+external triggering.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'image_height'</b></td>
+<td><span class="var">&lt;height&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Height of the desired image part ('0' stands for the complete image).
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'image_width'</b></td>
+<td><span class="var">&lt;width&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Width of the desired image part ('0' stands for the complete image).
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'line_in'</b></td>
+<td><span class="var">&lt;default&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>The value is not used, so a default value is returned.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'name'</b></td>
+<td>'pylon'</td>
+<td></td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Name of the HALCON interface.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'num_buffers'</b></td>
+<td><span class="var">&lt;number&gt;</span></td>
+<td>2</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td> Number of buffers used for the image acquisition.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'port'</b></td>
+<td><span class="var">&lt;default&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>The value is not used, so a default value is returned.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'revision'</b></td>
+<td>'<span class="var">&lt;revision&gt;</span>'</td>
+<td></td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Revision number of the pylon interface.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'start_async_after_grab_async'</b></td>
+<td>'disable', 'enable'</td>
+<td>'enable'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Status of 'start_async_after_grab_async'.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'start_column'</b></td>
+<td><span class="var">&lt;column&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Returns the current start column of the HALCON image.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'start_row'</b></td>
+<td><span class="var">&lt;row&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Returns the current start row of the HALCON image.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'tl_type'</b></td>
+<td>'cl', 'iidc', 'gev', 'u3v'</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td> Used Transport Layer of the device: 
+<ul>
+<li>'cl': Camera Link TL 
+</li>
+<li>'iidc': 1394IIDC TL 
+</li>
+<li>'gev': GigE Vision TL 
+</li>
+<li>'u3v': USB3 Vision TL
+</li>
+</ul></td>
+</tr>
+<tr class="oddrow">
+<td><b>'vertical_resolution'</b></td>
+<td>0, 1, 2, 4, <span class="var">resolution</span></td>
+<td></td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Current value of vertical resolution.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'volatile'</b></td>
+<td>'disable', 'enable'</td>
+<td>'disable'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td> <b>Grayscale only.</b> In the volatile mode the two image acquisition  interface buffers are used directly to store HALCON images. This is the 
+ fastest mode avoiding to copy raw images in memory. However, be aware that 
+ older images are overwritten again and again as a side-effect. Thus, you 
+ can only process one image while you grab another image. Older images are 
+ invalid!
+</td>
+</tr></table>
+<h2 id="SET_FRAMEGRABBER_LUT">Operator <a class="halconoperator" href="../operators/set_framegrabber_lut.html">set_framegrabber_lut</a></h2><div>Not supported by this interface.</div>
+<h2 id="GET_FRAMEGRABBER_LUT">Operator <a class="halconoperator" href="../operators/get_framegrabber_lut.html">get_framegrabber_lut</a></h2><div>Not supported by this interface.</div>
+<h2 id="SET_FRAMEGRABBER_CALLBACK">Operator <a class="halconoperator" href="../operators/set_framegrabber_callback.html">set_framegrabber_callback</a></h2><div> This interface supports device specific events via the operators  <a class="halconoperator" href="../operators/set_framegrabber_callback.html">set_framegrabber_callback</a> and <a class="halconoperator" href="../operators/get_framegrabber_callback.html">get_framegrabber_callback</a>.<br><br> 
+ All actually supported callback types of a specific image acquisition 
+ device can be queried by calling <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a> with the parameter 
+ 'available_callback_types'.  Once the callback is registered and the 
+ underlying event is activated, on every occurrence of the event 
+ (e.g., the notification that the exposure has finished) the specified 
+ callback function will be called. If the callback function is set to 
+ NULL, the corresponding callback will be unregistered. Please remember to 
+ deactivate the underlying event first.<br><br> 
+ <b>Attention:</b> To activate or deactivate the device-specific callbacks, 
+ the corresponding device-specific event has to enabled or disabled, too. 
+ This can be done by setting the GenApi parameter 'EventSelector' to the 
+ specific event type, and the 'EventNotification' parameter to 
+ 'GenICamEvent'.<br><br> 
+ The signature of the callback function is 
+ <tt>Herror (__stdcall *HAcqCallback)(void *AcqHandle, void *Context, 
+     void *UserContext)</tt> and uses the following parameters: 
+
+<ul>
+<li><b>AcqHandle</b> 
+    Acquisition handle of the corresponding image acquisition instance. 
+</li>
+<li><b>Context</b> 
+    Optional context data of the specific callback. In case of the 
+    'device_removal' callback, this parameter returns a device-specific 
+    string to identify the device that has been lost. In case of the 
+    'exposure_end' callback, this parameter is not used, i.e., Context is 
+    set to NULL. 
+</li>
+<li><b>UserContext</b> 
+    User context as set via <a class="halconoperator" href="../operators/set_framegrabber_callback.html">set_framegrabber_callback</a>. 
+</li>
+</ul> 
+<p> 
+<b>Using user-callback functions</b><br> 
+ Note that the execution time of a user-specific callback function must 
+ always be as short as possible since during the execution of a callback 
+ function the handling of further internal callbacks might be blocked or 
+ ignored. This can be achieved by removing the current processing from the 
+ user-specific callback function to a separate thread that is controlled 
+ via signals or events. The callback function is executed in the context 
+ of the underlying interface or driver. 
+</p>
+</div>
+<table summary="Operator set_framegrabber_callback" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Type</th>
+<th>Description</th>
+<tr class="oddrow">
+<td>'device_removal'</td>
+<td> Corresponds to the device removal notification as described in the  pylon documentation.
+</td>
+</tr>
+<tr class="evenrow">
+<td>'exposure_end'</td>
+<td> Corresponds to the 'ExposureEndEventTimestamp' GenApi node. If this GenApi  node is updated the user-specific function will be called. Note that 
+ calling <a class="halconoperator" href="../operators/grab_image.html">grab_image</a> or <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a> is not allowed inside the 
+ user-specific function. Please create a separate thread to actually acquire 
+ the images, otherwise a dead-lock situation will occur.<br>
+</td>
+</tr></table>
+<h2 id="GET_FRAMEGRABBER_CALLBACK">Operator <a class="halconoperator" href="../operators/get_framegrabber_callback.html">get_framegrabber_callback</a></h2><div> This interface supports device specific events via the operators  <a class="halconoperator" href="../operators/set_framegrabber_callback.html">set_framegrabber_callback</a> and <a class="halconoperator" href="../operators/get_framegrabber_callback.html">get_framegrabber_callback</a>. For more 
+ information see <a class="halconoperator" href="../operators/set_framegrabber_callback.html">set_framegrabber_callback</a>.
+</div>
+<h2 id="GRAB_IMAGE_START">Operator <a class="halconoperator" href="../operators/grab_image_start.html">grab_image_start</a></h2><div>Starts a new asynchronous grab. See also <a class="halconoperator" href="../operators/grab_image_start.html">grab_image_start</a>.</div>
+<h2 id="GRAB_IMAGE">Operator <a class="halconoperator" href="../operators/grab_image.html">grab_image</a></h2><div><a class="halconoperator" href="../operators/grab_image.html">grab_image</a> starts a new synchronous grab. See also <a class="halconoperator" href="../operators/grab_image.html">grab_image</a>. Note that 
+the interface converts the image from the device to the desired image format 
+specified by the parameters 'image_width', 'image_height', 'start_row', 
+'start_column', 'bits_per_channel', and 'color_space'.
+</div>
+<h2 id="GRAB_IMAGE_ASYNC">Operator <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a></h2><div><a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a> returns an image and starts the next asynchronous grab. See also <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a>. 
+Note that 
+the interface converts the image from the device to the desired image format 
+specified by the parameters 'image_width', 'image_height', 'start_row', 
+'start_column', 'bits_per_channel', and 'color_space'.
+</div>
+<h2 id="GRAB_DATA">Operator <a class="halconoperator" href="../operators/grab_data.html">grab_data</a></h2><div>Not supported by this interface.</div>
+<h2 id="GRAB_DATA_ASYNC">Operator <a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a></h2><div>Not supported by this interface.</div>
+<h2 id="CLOSE_FRAMEGRABBER">Operator <a class="halconoperator" href="../operators/close_framegrabber.html">close_framegrabber</a></h2><div>This operator closes the device. See also <a class="halconoperator" href="../operators/close_framegrabber.html">close_framegrabber</a>.</div>
+<h2 id="HDEVELOP_EXAMPLES">HDevelop Examples</h2><div>For this interface there are the following examples available: 
+<ul>
+<li>pylon_crop.hdev - 
+    Shows grabbing images with image cropping. 
+</li>
+<li>pylon.hdev - Benchmark. 
+</li>
+<li>pylon_parameters.hdev - 
+    Lists all parameters of a device. 
+</li>
+<li>pylon_simple.hdev - 
+    A simple example to show the usage of the interface. 
+</li>
+<li>pylon_2cameras.hdev - 
+    A simple example to show the simultaneous usage of two cameras.
+</li>
+</ul></div>
+<h2 id="CPP_EXAMPLES">C++ Examples</h2><div> For this interface there is also a further C++ Visual Studio Project to  demonstrate the usage of the operators <a class="halconoperator" href="../operators/get_framegrabber_callback.html">get_framegrabber_callback</a> and 
+ <a class="halconoperator" href="../operators/set_framegrabber_callback.html">set_framegrabber_callback</a>. Please check the directory 
+ %HALCONEXAMPLES%\cpp\console\vs2005\. If you prefer building the example via 
+ the console, please check the following folder %HALCONEXAMPLES%\cpp\console\. 
+ With a Linux OS please use $HALCONEXAMPLES/cpp/console/.
+</div>
+<h2 id="CS_EXAMPLES">C# Examples</h2><div> For this interface there is also a further C# Visual Studio Project to  demonstrate the usage of the operators <a class="halconoperator" href="../operators/get_framegrabber_callback.html">get_framegrabber_callback</a> and 
+ <a class="halconoperator" href="../operators/set_framegrabber_callback.html">set_framegrabber_callback</a>. Please check the directory 
+ %HALCONEXAMPLES%\cpp\console\vs2005\.
+</div>
+<h2 id="RELEASENOTES">Release Notes</h2><div>
+<ul>
+<li><b>Revision 13.0.3</b> (Nov 30, 2018): 
+<ul>
+<li>Adapted to pylon SDK 5.1.0. 
+</li>
+<li>The technical dependency from the HALCON Library has been removed. 
+</li>
+<li>Added support for the 'Mono4p' pixel format. 
+</li>
+<li>Added support for the 'YCbCr411_8' pixel format. 
+</li>
+<li>If you tried opening a camera using only the device name the interface 
+      would throw an exception. This problem has been fixed. 
+</li>
+</ul></li>
+<li><b>Revision 13.0.2</b> (Apr 06, 2017): 
+
+<ul>
+<li>If <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a> was called several times without calling 
+      <a class="halconoperator" href="../operators/grab_image_start.html">grab_image_start</a> before, each <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a> call was executed 
+      like a synchronous call. As result the performance of the image 
+      grabbing decreased. This problem has been fixed. 
+</li>
+</ul></li>
+<li><b>Revision 13.0.1</b> (Oct 28, 2016): 
+
+<ul>
+<li>HALCON 13 version of the interface. 
+</li>
+</ul></li>
+<li><b>Revision 6.6</b> (Feb 15, 2016): 
+
+<ul>
+<li>Added support for the 'Mono10p' and 'Mono12p' pixel formats. 
+</li>
+<li>Added paragraph 'Using internal color conversion' into this document. 
+</li>
+<li><a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a> crashed with some device-specific parameters 
+      when setting an empty tuple. This problem has been fixed. 
+</li>
+</ul></li>
+<li><b>Revision 6.5</b> (Dec 10, 2015): 
+
+<ul>
+<li>Adapted to pylon SDK 5.0. 
+</li>
+<li>Pylon GigEVision Transport Layer library always had to be installed to 
+      use the HALCON pylon interface. This dependency has been removed. 
+</li>
+</ul></li>
+<li><b>Revision 6.4</b> (Oct 28, 2015): 
+
+<ul>
+<li>If the range of a queried parameter value contained a large maximum value, 
+      only the current value of the parameter was returned. This issue has 
+      been fixed. 
+</li>
+<li>This documentation did not list all available callback types. 
+      This issue has been fixed. 
+</li>
+</ul></li>
+<li><b>Revision 6.3</b> (Jul 24, 2015): 
+
+<ul>
+<li>In case of an incomplete image the buffer was not put back into the 
+      acquisition queue. This problem has been fixed. 
+</li>
+</ul></li>
+<li><b>Revision 6.2</b> (May 28, 2015): 
+
+<ul>
+<li>Some operations crashed if GenICam exceptions were thrown 
+      (e.g., if the device was unplugged). This problem has been fixed. 
+</li>
+<li>Improved error handling of Generic parameter in <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>. 
+</li>
+</ul></li>
+<li><b>Revision 6.1</b> (Feb 27, 2015): 
+
+<ul>
+<li>Fixed bug using the parameter 'do_abort_grab' inside a 
+      multithreaded application. 
+</li>
+<li>Fixed bug in <a class="halconoperator" href="../operators/close_framegrabber.html">close_framegrabber</a>. In case of an error 
+      not everything was closed properly. 
+</li>
+<li>Fixed behaviour in case of grab timeout. The internal 
+      system state remains untouched now. 
+</li>
+<li>Fixed bug when trying to use USB3 Vision cameras with 
+     'exposure_end' callback. 
+</li>
+<li>Revised section about SFNC parameters in this document. 
+</li>
+</ul></li>
+<li><b>Revision 6.0</b> (Oct 31, 2014): 
+
+<ul>
+<li>HALCON 12 version of the interface. 
+</li>
+</ul></li>
+<li><b>Revision 5.12</b> (Oct 24, 2014): 
+
+<ul>
+<li>Adapted to support pylon SDK 4.2. 
+</li>
+</ul></li>
+<li><b>Revision 5.11</b> (Sep 12, 2014): 
+
+<ul>
+<li>Fixed bug with user-defined callback functionality. 
+      <a class="halconoperator" href="../operators/set_framegrabber_callback.html">set_framegrabber_callback</a> and <a class="halconoperator" href="../operators/get_framegrabber_callback.html">get_framegrabber_callback</a> didn't work 
+      in the last revision. 
+</li>
+<li>Fixed bug in <a class="halconoperator" href="../operators/close_framegrabber.html">close_framegrabber</a>. In case of an error, the cleanup 
+      of the 'exposure_end' callback was done incompletely. 
+</li>
+<li>Removed dynamic parameter query in <a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a> 
+      <tt>(.., 'parameters', ..)</tt>. Now only the static list of parameters 
+      is returned. To query the dynamic parameters 
+      <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a><tt>(..., 'available_param_names', ..)</tt> has to 
+      be used. 
+</li>
+</ul></li>
+<li><b>Revision 5.10</b> (May 23, 2014): 
+
+<ul>
+<li>Adapted to support pylon SDK 4.1. 
+</li>
+<li>Fixed bug when preparing the buffers after disabling the volatile 
+      mode. 
+</li>
+<li>Fixed bug in <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a> when trying to set a parameter 
+      without specifying a value. 
+</li>
+<li>Improved the low-level messages in case of failure in 
+      <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a><tt>(..., 'volatile', 'enable')</tt>. 
+</li>
+<li>Fixed bug in <a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a><tt>(..., 'parameters', ...)</tt>. The last 
+      parameter in the returned parameters list was missing. 
+</li>
+</ul></li>
+<li><b>Revision 5.9</b> (Jan 27, 2014): 
+
+<ul>
+<li>Fixed grab timeout in case of using software trigger and switching 
+      between acquisition modes 'Continuous' and 'SingleFrame'. 
+</li>
+<li>Fixed bug in <a class="halconoperator" href="../operators/set_framegrabber_callback.html">set_framegrabber_callback</a> regarding the internal memory 
+      allocation during the initialization of the callback function. 
+</li>
+</ul></li>
+<li><b>Revision 5.8</b> (Oct 11, 2013): 
+
+<ul>
+<li>Fixed bug in 'available_param_names' and 'available_param_descriptions' 
+      to list also the write-only parameters. 
+</li>
+<li>Fixed bug in <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a> if 'horizontal_resolution' or 
+      'vertical_resolution' is set to 0. Now the image sizes are left 
+      as set in the device. 
+</li>
+<li>Added category 'HALCON interface' for HALCON parameters. 
+</li>
+<li>Added missing parameter 'start_async_after_grab_async' to this 
+      documentation. 
+</li>
+<li>Added sequencer limitation to this documentation. 
+</li>
+<li>Added note to parameters 'horizontal_resolution' and 
+      'vertical_resolution' in this documentation. 
+</li>
+<li>Added description of <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a> for 'external_trigger'. 
+</li>
+</ul></li>
+<li><b>Revision 5.7</b> (Jul 26, 2013): 
+
+<ul>
+<li>Adapted to support pylon SDK 4.0. 
+</li>
+<li>Fixed bug in querying the pixel format. In case of an unknown pixel 
+      format, the result was not determinable. 
+</li>
+<li>Fixed bug in <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a> in case of 'Generic' parameter 
+      with empty string values. 
+</li>
+<li>Fixed bug in <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a> to enable opening a device also 
+      by its unique device index number. 
+</li>
+<li>Added value 'u3v' to parameter 'tl_type'. 
+</li>
+</ul></li>
+<li><b>Revision 5.6</b> (Mar 25, 2013): 
+
+<ul>
+<li>Fixed bug if an unsupported parameter was set to an IEEE 1394 camera. 
+</li>
+<li>Fixed bug in <a class="halconoperator" href="../operators/grab_image_start.html">grab_image_start</a>. A pending grab was not aborted. 
+</li>
+<li>Fixed bug in <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a> if hardware trigger mode or software 
+      trigger mode was used. In case of a timeout further trigger signals 
+      were ignored. 
+</li>
+<li>Fixed documentation of the Generic parameter in <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>. 
+</li>
+</ul></li>
+<li><b>Revision 5.5</b> (Feb 14, 2013): 
+
+<ul>
+<li>Fixed bug in <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a> in case of Camera Link devices. 
+</li>
+</ul></li>
+<li><b>Revision 5.4</b> (Jan 8, 2013): 
+
+<ul>
+<li>Fixed bug in <a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a>. The number of read-only parameters 
+      was erroneously set to 6 instead of 7. 
+</li>
+</ul></li>
+<li><b>Revision 5.3</b> (Dec 12, 2012): 
+
+<ul>
+<li>Fixed bug when calling <a class="halconoperator" href="../operators/grab_image.html">grab_image</a>. If the parameter 'AcquisitionMode' 
+      was set to 'Continuous' old images were returned. 
+</li>
+</ul></li>
+<li><b>Revision 5.2</b> (Nov 22, 2012): 
+
+<ul>
+<li>Adapted to support also pylon SDK 3.2. 
+</li>
+<li>Fixed bug when setting the 'grab_timeout' parameter to -1. 
+</li>
+<li>Fixed small memory leaks during initialization and in 
+      <a class="halconoperator" href="../operators/close_framegrabber.html">close_framegrabber</a>. 
+</li>
+<li>Changed default settings of 'horizontal_resolution' and 
+      'vertical_resolution' from full resolution (1) to current camera 
+      setting (0). This affects the default behavior of <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>, 
+      now the full resolution will not be enforced by default anymore. 
+</li>
+<li>Adapted all HDevelop example programs so that <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a> 
+      now uses the new default for 'horizontal_resolution' and 
+      'vertical_resolution'. 
+</li>
+</ul></li>
+<li><b>Revision 5.1</b> (Jul 9, 2012): 
+
+<ul>
+<li>Adapted to support also pylon SDK 3.1. 
+</li>
+<li>Added HDevelop example program pylon_2cameras.hdev. 
+</li>
+</ul></li>
+<li><b>Revision 5.0</b> (May 15, 2012): 
+
+<ul>
+<li>HALCON 11 version of the interface (included in HALCON 11 DVD). 
+</li>
+</ul></li>
+<li><b>Revision 4.14 </b>(Apr 30, 2012): 
+
+<ul>
+<li>Adapted to pylon SDK 3.0 
+</li>
+<li>Improved error handling in cleaning up the acquisition callbacks. 
+</li>
+</ul></li>
+<li><b>Revision 4.13 </b>(Feb 6, 2012): 
+
+<ul>
+<li>Fixed bug in <tt><a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a></tt>. The wrong image was 
+      returned, if the grabbed image was too old regarding the parameter 
+      <i>MaxDelay</i> (maximum tolerated delay between the start of the 
+      asynchronous grab and the delivery of the image). 
+</li>
+</ul></li>
+<li><b>Revision 4.12 </b>(Nov 29, 2011): 
+
+<ul>
+<li>Added Generic parameter 'tl_type' to accelerate <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>, if no 
+      Camera Link device is used. 
+</li>
+<li>Added read-only parameter 'tl_type'. 
+</li>
+</ul></li>
+<li><b>Revision 4.11 </b>(Nov 11, 2011): 
+
+<ul>
+<li>Fixed problem in <a class="halconoperator" href="../operators/close_framegrabber.html">close_framegrabber</a> if the 'exposure_end' callback 
+      function was registered. 
+</li>
+<li>Fixed overwritten memory in <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a> if the device was opened 
+      with a serial number. 
+</li>
+<li>Fixed problem when trying to open a device via a device number. 
+</li>
+<li>Fixed color conversion of >8 bit/pixel Bayer formats, which could also 
+      lead to a crash. 
+</li>
+</ul></li>
+<li><b>Revision 4.10 </b>(Sep 12, 2011): 
+
+<ul>
+<li>Added support for Basler Camera Link cameras. Please note that it is not 
+      possible to grab images, just the configuration of the camera parameters 
+      is supported. 
+</li>
+<li>Removed setting of external trigger parameters in <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>. 
+</li>
+</ul></li>
+<li><b>Revision 4.9</b> (Jul 25, 2011): 
+
+<ul>
+<li>Added functionality to handle 'device_removal' and 'exposure_end' 
+      callbacks. 
+</li>
+<li>Fixed wrong return value of parameter 'image_available'. 
+</li>
+<li>Fixed bug when changing the AOI of the camera by setting the 
+      'Width' and 'Height' parameters. If the size was set to a larger 
+      value the size of the returned HALCON image remained small. 
+</li>
+<li>Fixed problem when trying to open an IEEE 1394 camera with its 
+      full name. 
+</li>
+<li>Changed behavior of the Horizontal/VerticalResolution parameters 
+      in <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>. Now, the maximum of the parameter 
+      'Width'/'Height' is also queried for determining the maximum 
+      image size. 
+</li>
+</ul></li>
+<li><b>Revision 4.8</b> (Apr 14, 2011): 
+
+<ul>
+<li>Fixed crash in <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a> with pylon SDK 2.3.3 
+      which occurred if a Camera Link board was installed. 
+</li>
+<li>Added possibility to open a device via its IP address, 
+      DeviceUserID or serial number. In this context the returned output 
+      parameters of <a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a><tt>(..., 'info_boards', ...)</tt> 
+      and <a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a><tt>(..., 'device', ...)</tt> have been adapted 
+      accordingly. 
+</li>
+<li>Added missing read-only parameters with postfix '_description' to 
+      query the tooltip for each parameter. 
+</li>
+<li>Improved software cropping via parameters 'image_width' and 
+      'image_height'. 
+</li>
+</ul></li>
+<li><b>Revision 4.7</b> (Mar 15, 2011): 
+
+<ul>
+<li>Fixed general problem when reading TransportLayer or StreamGrabber 
+      parameters. 
+</li>
+<li>Added version check for correct pylon version. 
+</li>
+<li>Improved color conversion for YUV pixel formats. 
+</li>
+</ul></li>
+<li><b>Revision 4.6</b> (Oct 25, 2010): 
+
+<ul>
+<li>Adapted to pylon SDK 2.3. 
+</li>
+<li>Fixed crash of application if an error occurs when trying to grab an 
+      image. 
+</li>
+<li>Fixed problem regarding querying the parameter descriptions, 
+      in particular to ensure the correct display of parameter tooltips 
+      in the HDevelop Image Acquisition Assistant. 
+</li>
+<li>Added access to non-integer parameters for the TransportLayer and 
+      StreamGrabber node map. 
+</li>
+</ul></li>
+<li><b>Revision 4.5</b> (Sep 10, 2010): 
+
+<ul>
+<li>Fixed problem when changing image size after setting parameter 
+      'do_unlock_parameters', which in some cases caused a crash. 
+</li>
+<li>Added support for parameter 'UserSetLoad'. 
+</li>
+<li>Added parameter 'num_buffers'. 
+</li>
+<li>Improved re-allocating of the image buffers, which is now only done 
+      if necessary. 
+</li>
+<li>Changed behavior regarding the parameter 'AcquisitionMode'. 
+      In older versions, <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a> set this value to 'SingleFrame'. 
+      Now the current value of the camera is used instead. 
+</li>
+<li>HALCON 10 version of the interface (included in HALCON 10 DVD). 
+</li>
+</ul></li>
+<li><b>Revision 4.4</b> (Apr 28, 2010): 
+
+<ul>
+<li>Adapted to pylon SDK 2.2. 
+</li>
+<li>Fixed problem with setting the parameter 'AcquisitionMode' to 
+      'SingleFrame', when this mode was already set. 
+</li>
+<li>If acquisition mode was set to 'SingleFrame', <a class="halconoperator" href="../operators/grab_image.html">grab_image</a> and 
+      <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a> returned old images. This problem has been solved. 
+</li>
+<li>Added implementation of <a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a><tt>(.., 'generic', ...)</tt> to 
+      query all supported values for the Generic parameter in 
+      <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>. 
+</li>
+</ul></li>
+<li><b>Revision 4.3</b> (Feb 12, 2010): 
+
+<ul>
+<li>Fixed crashes caused by wrong device names. 
+</li>
+<li>When using an external trigger in continuous grabbing mode, the first 
+      call of <a class="halconoperator" href="../operators/grab_image.html">grab_image</a> or <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a> always returned an image 
+      even if there was no trigger signal. This bug has been fixed. 
+</li>
+</ul></li>
+<li><b>Revision 4.2</b> (May 25, 2009): 
+
+<ul>
+<li>Adapted to pylon SDK 2.1. 
+</li>
+<li>Added additional parameters with postfixes '_access', 
+      '_category', and '_visibility' to query access mode, 
+      category name, and visibility of a specific parameter. 
+</li>
+</ul></li>
+<li><b>Revision 4.1</b> (Mar 5, 2009): 
+
+<ul>
+<li>Bug fix in Generic parameter 'num_buffers'. 
+</li>
+<li>Bug fix regarding mutex and parameter 'do_abort_grab', which could have 
+      caused a deadlock. Furthermore, the parameter now also works, if no 
+      image was grabbed before. 
+</li>
+<li>Bug fix in parameter 'volatile' in case of enabling it twice. 
+</li>
+<li>Adapted <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a> to allow also integer values for 
+      parameters with float values and vice versa. 
+</li>
+</ul></li>
+<li><b>Revision 4.0</b> (Dec 10, 2008): 
+
+<ul>
+<li>HALCON 9.0 version of the interface (included in HALCON 9.0 DVD). 
+</li>
+<li>Support of Windows XP x64. 
+</li>
+<li>Bug fix in <a class="halconoperator" href="../operators/grab_image.html">grab_image</a> and <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a> for multiple camera 
+      configurations. Furthermore, the error message "Wrong color space" 
+      now only appears, if there is no valid color space conversion 
+      available. 
+</li>
+<li>Bug fix in <a class="halconoperator" href="../operators/grab_image.html">grab_image</a> and <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a> in case of errors during 
+      the image acquisition (not in all cases the buffer was re-queued 
+      correctly). 
+</li>
+<li>Added a mutex to protect the buffer queue during image acquisition 
+      in multi-thread applications. 
+</li>
+</ul></li>
+<li><b>Revision 3.7</b> (Jul 15, 2008): 
+
+<ul>
+<li>Bug fix in <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a> regarding the device names. 
+</li>
+<li>Bug fix using multiple devices. 
+</li>
+<li>Added parameter 'bits_per_channel'. 
+</li>
+</ul></li>
+<li><b>Revision 3.6</b> (May 30, 2008): 
+
+<ul>
+<li>Bug fix in color transformation. 
+</li>
+<li>Bug fix in <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>. Now the device name can also be the full 
+      name of the device. 
+</li>
+<li>Bug fix in <a class="halconoperator" href="../operators/close_framegrabber.html">close_framegrabber</a>. Now the device is also closed correctly 
+      when no image was acquired so far. 
+</li>
+<li>Bug fix in <a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a>. If using multiple Basler cameras, the 
+      HDevelop Image Acquisition Assistant now lists all of them. 
+</li>
+<li>Bug fix regarding GenICam enumeration values. Now only the actually 
+      supported values are listed. 
+</li>
+<li>Added software cropping functionality. Thus, the behavior of the 
+      parameters 'image_width', 'image_height', 'start_row', and 
+      'start_column' in <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a> changed. These parameters now are 
+      only used for specifying the size and position of the resulting HALCON 
+      image and can also be used dynamically via <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a> or 
+      <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a>. 
+</li>
+<li>Removed parameter 'available_param_types'. 
+</li>
+<li>Added categories for the generic parameters. 
+</li>
+</ul></li>
+<li><b>Revision 3.5</b> (Apr 22, 2008): 
+
+<ul>
+<li>Adapted to pylon SDK 2.0. 
+</li>
+<li>Added color transformation functionality, i.e., depending on the 
+      parameter ColorType the resulting HALCON image of each grab is 
+      converted accordingly. 
+</li>
+<li>Bug fix in continuous grabbing mode. 
+</li>
+</ul></li>
+<li><b>Revision 3.4 </b> (Oct 15, 2007): 
+
+<ul>
+<li>Bug fix in <a class="halconoperator" href="../operators/grab_image_start.html">grab_image_start</a> and <a class="halconoperator" href="../operators/grab_image.html">grab_image</a>. 
+</li>
+</ul></li>
+<li><b>Revision 3.3 </b> (Sep 20, 2007): 
+
+<ul>
+<li>Bug fix in <a class="halconoperator" href="../operators/grab_image.html">grab_image</a> and <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a>. 
+</li>
+<li>Bug fix in software trigger function. 
+</li>
+<li>Bug fix in 'raw' color space. 
+</li>
+</ul></li>
+<li><b>Revision 3.2 </b> (Sep 5, 2007): 
+
+<ul>
+<li>Bug fix in first usage of <a class="halconoperator" href="../operators/grab_image_start.html">grab_image_start</a>. 
+</li>
+<li>Improved buffer handling for external triggering. 
+</li>
+</ul></li>
+<li><b>Revision 3.1</b> (Jul 27, 2007): 
+
+<ul>
+<li>Adapted to pylon SDK 1.0. 
+</li>
+<li>Bug fix in <a class="halconoperator" href="../operators/grab_image.html">grab_image</a> / <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a> in case of incomplete images. 
+</li>
+<li>Bug fix in <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a> regarding external triggering and maximum 
+      image size. 
+</li>
+<li>Removed setting of the parameter 'ExposureTimeRaw' during 
+      <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>. 
+</li>
+</ul></li>
+<li><b>Revision 3.0</b> (May 15, 2007): 
+
+<ul>
+<li>HALCON 8.0 version of the interface (included in HALCON 8.0 DVD). 
+</li>
+</ul></li>
+<li><b>Revision 2.2</b> (Mar 28, 2007): 
+
+<ul>
+<li>Added access to the parameters of the TransportLayer and StreamGrabber 
+      node map. 
+</li>
+<li>Added string prefix 'device:' to 
+      <a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a><tt>(..., 'info_boards', ...)</tt>. 
+</li>
+<li>Added parameter 'start_async_after_grab_async'. 
+</li>
+</ul></li>
+<li><b>Revision 2.1</b> (Feb 21, 2007): 
+
+<ul>
+<li>Adapted to pylon SDK 0.9. 
+</li>
+<li>Added support of the scout IEEE 1394a/b cameras. 
+</li>
+<li>Added support of color images. 
+</li>
+<li>Added parameters 'color_space', 'color_space_values', and 
+      'volatile_values'. 
+</li>
+<li>Fixed bug in <a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a> and <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a> which led to 
+      problems if a device was closed and reopened again. 
+</li>
+<li>Fixed bug in <a class="halconoperator" href="../operators/grab_image.html">grab_image</a>(_async) which caused a black image after 
+      changing image-specific parameters. 
+</li>
+</ul></li>
+<li><b>Revision 2.0 </b> (Nov 3, 2006): 
+
+<ul>
+<li>First official release.
+</li>
+</ul></li>
+</ul></div>
+  <!-- toc end -->  <hr> 
+  <div class="imprint"> 
+    <span class="imprinthead">Legal disclaimer regarding hyperlinks</span>: 
+    This page may provide users with access by hypertext links to external, non-MVTec websites. 
+Any such access is provided with the understanding that the contents 
+of non-MVTec sites are beyond the control of MVTec Software GmbH, that 
+MVTec Software GmbH makes no representations whatsoever about such 
+sites, and that users shall proceed at their own risk. 
+MVTec Software GmbH is not responsible for the privacy practices or 
+the content of external, non-MVTec websites.
+ 
+  </div> 
+  <div class="imprint"> 
+    <span class="imprinthead">Copyright notes</span>: 
+    &copy; Copyright MVTec Software GmbH. All rights reserved. 
+Unless otherwise stated, the copyright and similar rights in the 
+contents of this page, including but not limited to all text, designs 
+and images appearing herein, are copyrighted works owned by MVTec 
+Software GmbH. 
+"MVTec Software GmbH" and "HALCON" are registered trademarks of MVTec 
+Software GmbH. 
+All other brand names, designs, service marks and trademarks (whether 
+or not registered) referenced or used herein are the property of their 
+respective owners.
+ 
+  </div> 
+  <div class="footer"> 
+    acqdump 1.5 / hdoc 1.2 / Generated: Fri Nov  2 15:49:19 CET 2018 
+  </div> 
+  </body> 
+</html>

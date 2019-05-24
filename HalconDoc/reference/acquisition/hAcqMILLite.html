@@ -1,0 +1,1772 @@
+<!DOCTYPE HTML> 
+<html> 
+  <head> 
+  <meta id='acqdump-id' name='acqdump-id' content='halcon-13.0-acq-MILLite-rev13.0.2'> 
+  <title>MILLite / HALCON 13.0 / MVTec Software GmbH</title> 
+      <style type="text/css"> 
+      body { 
+        color: #000000; 
+        background-color: #ffffff; 
+        margin-top: 0px; 
+        margin-bottom: 0px; 
+        margin-left: 20px; 
+        margin-right: 20px; 
+        font-family: Arial,Helvetica,sans-serif; 
+      } 
+      a:link { 
+        color: #0044cc; 
+      } 
+      a:link,a:visited { 
+        text-decoration: none; 
+      } 
+      a:link:hover,a:visited:hover { 
+        text-decoration: underline; 
+      } 
+      th { 
+        text-align: left; 
+      } 
+      h1,h2,h3,h4,h5,h6 { 
+        text-rendering: optimizeLegibility; 
+        color: #666666; 
+      } 
+      tt { 
+        font-family: monospace,monospace; 
+      } 
+      h1 a.halconoperator { 
+        font-family: Arial,Helvetica,sans-serif; 
+        color: #666666; 
+      } 
+      h2 a.halconoperator { 
+        font-family: Arial,Helvetica,sans-serif; 
+        color: #666666; 
+      } 
+      hr { 
+        border: 0; 
+        border-top: solid 1px #f28d26; 
+      } 
+      pre { 
+        font-family: monospace,monospace; 
+        padding: 1ex; 
+        white-space: pre-wrap; 
+      } 
+      .toc { 
+        font-size: 80%; 
+        border-top: 1px dashed #f28d26; 
+        border-bottom: 1px dashed #f28d26; 
+        padding-top: 5px; 
+        padding-bottom: 5px; 
+      } 
+      .inv { 
+        margin: 0; 
+        border: 0; 
+        padding: 0; 
+      } 
+      .banner { 
+        color: #666666; 
+        padding-left: 1em; 
+      } 
+      .logo { 
+        background-color: white; 
+      } 
+      .keyboard { 
+        font-size: 80%; 
+        padding-left: 3px; 
+        padding-right: 3px; 
+        border-radius: 5px; 
+        border-width: 1px; 
+        border-style: solid; 
+        border-color: #f28d26; 
+        background-color: #f3f3f3; 
+      } 
+      .warning { 
+        margin-top: 2ex; 
+        margin-bottom: 1ex; 
+        padding: 10px; 
+        text-align: center; 
+        border: 1px solid; 
+        color: #bb0000; 
+        background-color: #fff7f7 
+      } 
+      .imprint { 
+        margin-top: 1ex; 
+        font-size: 80%; 
+        color: #666666; 
+      } 
+      .imprinthead { 
+        font-weight: bolder; 
+        color: #666666; 
+      } 
+      .postscript { 
+        margin-top: 2ex; 
+        font-size: 80%; 
+        color: #666666 
+      } 
+      .evenrow { 
+        background-color: #e7e7ef; 
+        vertical-align: top; 
+      } 
+      .oddrow { 
+        background-color: #f7f7ff; 
+        vertical-align: top; 
+      } 
+      .headrow { 
+        background-color: #97979f; 
+        color: #ffffff; 
+        vertical-align: top; 
+      } 
+      .logorow { 
+        vertical-align: top; 
+      } 
+      .error { 
+        color: red; 
+      } 
+      .var { 
+        font-style: italic 
+      } 
+      .halconoperator { 
+        font-family: monospace,monospace; 
+      } 
+      .halconprocedure { 
+        font-family: Consolas,Inconsolata,"DejaVu Sans Mono",monospace; 
+      } 
+      span.operator { 
+        font-family: monospace,monospace; 
+      } 
+      span.procedure { 
+        font-family: monospace,monospace; 
+      } 
+      span.operation { 
+        font-family: monospace,monospace; 
+      } 
+      span.feature { 
+        font-family: Arial,Helvetica,Homerton,sans-serif; 
+      } 
+      ul { 
+        padding-left: 1.2em; 
+      } 
+      li.dot { 
+        list-style-type: square; 
+        color: #f28d26; 
+      } 
+      .breadcrumb { 
+        font-size: 80%; 
+        color: white; 
+        background-color: #062d64; 
+        margin-left: -20px; 
+        margin-right: -20px; 
+        margin-bottom: 20px; 
+        padding-left: 20px; 
+        padding-right: 20px; 
+        padding-bottom: 15px; 
+      } 
+      .webbar { 
+        font-size: 80%; 
+        background-color: #dddddd; 
+        margin-top: 0px; 
+        margin-left: -20px; 
+        margin-right: -20px; 
+        margin-bottom: 0px; 
+        padding-top: 5px; 
+        padding-left: 20px; 
+        padding-right: 20px; 
+        padding-bottom: 5px; 
+      } 
+      .footer { 
+        border-top: 1px dashed #f28d26; 
+        font-size: 80%; 
+        color: #666666; 
+        margin-left: -20px; 
+        margin-right: -20px; 
+        margin-top: 0px; 
+        padding-left: 20px; 
+        padding-right: 20px; 
+        padding-top: 10px; 
+        padding-bottom: 15px; 
+      } 
+      .breadcrumb a { 
+        color: #ffffff; 
+        border-bottom: 1px solid white; 
+      } 
+      .breadcrumb a:link:hover,.breadcrumb a:visited:hover { 
+        text-decoration: none; 
+        border-bottom: none; 
+      } 
+      .heading { 
+        margin-top: 1ex; 
+        font-size: 110%; 
+        font-weight: bold; 
+        color: #666666; 
+      } 
+      .text { 
+        color: black; 
+      } 
+      .example { 
+        font-size: 80%; 
+        background-color: #f3f3f3; 
+        border: 1px dashed #666666; 
+        padding: 10px; 
+      } 
+      .math { 
+      } 
+      .displaymath { 
+        text-align: center; 
+        margin-top: 1ex; 
+        margin-bottom: 1ex; 
+      } 
+      </style> 
+  </head> 
+  <body><div class="breadcrumb"> 
+<br class="inv"/> 
+<a href="../../../../documentation.html">HALCON 13.0</a> / <a href="acq-overview.html">Image Acquisition Interfaces</a> 
+<br class="inv"/> 
+</div> 
+<h1> Image Acquisition Interface for Matrox Morphis, Radient, Solios, and Vio Boards</h1> 
+<table summary=" Image Acquisition Interface for Matrox Morphis, Radient, Solios, and Vio Boards"> 
+  <tr> 
+    <td> 
+      Interface: 
+    </td> 
+    <td> 
+      MILLite 
+    </td> 
+  </tr> 
+  <tr> 
+    <td> 
+      Revision: 
+    </td> 
+    <td> 
+      13.0.2 
+    </td> 
+  </tr> 
+  <tr> 
+    <td> 
+      Date: 
+    </td> 
+    <td> 
+      2017-10-26 
+    </td> 
+  </tr> 
+  <tr> 
+    <td> 
+      HALCON Version: 
+    </td> 
+    <td> 
+      13.0 
+    </td> 
+  </tr> 
+</table>
+<ul class="toc">
+<li><a href="#GENERAL">General</a></li>
+<li><a href="#SYSTEM_REQUIREMENTS">System Requirements</a></li>
+<li><a href="#INSTALLATION">Installation</a></li>
+<li><a href="#FEATURES">Features</a></li>
+<li><a href="#LIMITATIONS">Limitations</a></li>
+<li><a href="#INFO_FRAMEGRABBER">Parameters for info_framegrabber</a></li>
+<li><a href="#OPEN_FRAMEGRABBER">Parameters for open_framegrabber</a></li>
+<li><a href="#SET_FRAMEGRABBER_PARAM">Parameters for set_framegrabber_param</a></li>
+<li><a href="#GET_FRAMEGRABBER_PARAM">Parameters for get_framegrabber_param</a></li>
+<li><a href="#SET_FRAMEGRABBER_LUT">Operator set_framegrabber_lut</a></li>
+<li><a href="#GET_FRAMEGRABBER_LUT">Operator get_framegrabber_lut</a></li>
+<li><a href="#SET_FRAMEGRABBER_CALLBACK">Operator set_framegrabber_callback</a></li>
+<li><a href="#GET_FRAMEGRABBER_CALLBACK">Operator get_framegrabber_callback</a></li>
+<li><a href="#GRAB_IMAGE_START">Operator grab_image_start</a></li>
+<li><a href="#GRAB_IMAGE">Operator grab_image</a></li>
+<li><a href="#GRAB_IMAGE_ASYNC">Operator grab_image_async</a></li>
+<li><a href="#GRAB_DATA">Operator grab_data</a></li>
+<li><a href="#GRAB_DATA_ASYNC">Operator grab_data_async</a></li>
+<li><a href="#CLOSE_FRAMEGRABBER">Operator close_framegrabber</a></li>
+<li><a href="#TRIGGER_ARM_CHARACTERISTICS">Trigger Arm Characteristics</a></li>
+<li><a href="#HDEVELOP_EXAMPLES">HDevelop Examples</a></li>
+<li><a href="#CPP_EXAMPLES">C++ Examples</a></li>
+<li><a href="#CS_EXAMPLES">C# Examples</a></li>
+<li><a href="#RELEASENOTES">Release Notes</a></li>
+</ul>
+  <!-- toc start -->
+<h2 id="GENERAL">General</h2><div> This page provides the documentation of the HALCON MILLite  interface for the <a href="http://www.matrox.com">Matrox</a> 
+ <a href="http://www.matrox.com/imaging/products/frame_grabbers.cfm">Morphis, Radient, Solios, and Vio</a> 
+ frame grabber boards. 
+ <a href="http://www.mvtec.com/download/registration.html">Registered</a> customers can download the 
+ <a href="http://www.mvtec.com/halcon/download/">latest revision</a> of this interface from the 
+ <a href="http://www.mvtec.com">MVTec WWW server</a>.
+</div>
+<h2 id="SYSTEM_REQUIREMENTS">System Requirements</h2><div>
+<ul>
+<li>Intel compatible PC with Windows    7 (32-bit or 64-bit) 
+   or newer that is also supported by the vendor-specific SDK, 
+   also WoW64 (using 32-bit HALCON on 64-bit Windows). 
+</li>
+<li>Successfully installed Matrox board driver. 
+</li>
+<li>Matrox DLLs <b>mil.dll</b>, <b>milmet2.dll</b>, <b>milsolios.dll</b>.<br> 
+   These DLLs must be within your search path %PATH% (typically, they reside 
+   in the directory <tt>C:\Windows\system32</tt>). If you do not have these 
+   DLLs, please contact Matrox or the vendor from which you bought the frame 
+   grabber board. <b>Note that this interface requires the Matrox DLLs 
+   version 10.0, i.e., MIL-Lite 10.0.</b>. 
+</li>
+<li>HALCON image acquisition interface <b>hAcqMILLite.dll</b> or 
+   <b>hAcqMILLitexl.dll</b>, respectively.<br> 
+   If you have properly installed the interface, both DLLs should reside in 
+   <tt>bin\%HALCONARCH%</tt> within the HALCON base directory %HALCONROOT% 
+   you have chosen during the installation of HALCON.
+</li>
+</ul></div>
+<h2 id="INSTALLATION">Installation</h2><div>Only when installing or updating the interface manually follow these steps: <br> 
+
+<ul>
+<li><b>Windows:</b> Extract the archive containing the interface files to the 
+  HALCON base directory %HALCONROOT% (Note: Administrator privileges may be 
+  required for this step). Additionally, you have to move the interface 
+  examples to the directory %HALCONEXAMPLES% manually. 
+</li>
+<li><b>Linux:</b> Extract the archive containing the interface files to the 
+  HALCON base directory $HALCONROOT.
+</li>
+</ul></div>
+<h2 id="FEATURES">Features</h2><div>
+<ul>
+<li>Support of Morphis, Radient eV-CL, Radient eV-CLHS,    Radient eV-CXP Solios eA/XA, Solios eCL/XCL, Solios eCL/XCL-B, 
+   Solios eV-CL, and Vio frame grabber boards. 
+</li>
+<li>Synchronous and asynchronous grabbing. 
+</li>
+<li>External trigger (with software override of the camera configuration 
+   file). 
+</li>
+<li>Support of multiple analog and digital cameras based on camera 
+   configuration files. 
+</li>
+<li>Support of user-specific callback functions.
+</li>
+</ul></div>
+<h2 id="LIMITATIONS">Limitations</h2><div>
+<ul>
+<li>No support of Solios GigE boards. </li>
+<li>No support of onboard image preprocessing capabilities. 
+</li>
+<li>No support of JPEG and JPEG2000 video compression. 
+</li>
+<li>No support of GenICam user callbacks. 
+</li>
+<li>No support of setting special register GenICam parameters.
+</li>
+</ul></div>
+<h2 id="INFO_FRAMEGRABBER">Parameters for <a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a></h2><div></div>
+<table summary="Parameters for info_framegrabber" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Parameter</th>
+<th>Value List</th>
+<th>Type</th>
+<th>Kind</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><b>'bits_per_channel'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'camera_type'</b></td>
+<td> ['CAMFILE:',   'dcf',  <span class="var">&lt;camera_path&gt;</span> 
+ 'M_CCIR',     'M_CCIR_VIA_RGB', 
+ 'M_DEFAULT',  'M_NTSC', 
+ 'M_NTSC_RGB', 'M_NTSC_YC', 
+ 'M_PAL',      'M_PAL_RGB', 
+ 'M_PAL_YC',   'M_RS170', 
+ 'M_RS170_VIA_RGB']
+</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Syntax for camera configuration file and possible values for camera type.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'color_space'</b></td>
+<td>['gray', 'rgb']</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Values for color space.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'defaults'</b></td>
+<td>[1, 1, 0, 0, 0, 0, 'interlaced', 8,               'gray', -1.0, 'false', 'M_DEFAULT', '0', -1, 0]
+</td>
+<td>mixed</td>
+<td>pre-defined</td>
+<td>Default values for <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'device'</b></td>
+<td>['<span class="var">&lt;BoardType&gt;</span>:<span class="var">&lt;nr&gt;</span>[:DIG:<span class="var">&lt;nr&gt;</span>]']</td>
+<td>string</td>
+<td>pre-defined</td>
+<td> Type ( 'MORPHIS', 'RADIENT', 'SOLIOS', or 'VIO') and number ('0',  '1', '2' ...) of the frame grabber board, optionally plus ':DIG:' and the 
+ number ('0', '1', '2' ...) of the independent digitizer (passed as one 
+ string!), e.g., 'SOLIOS:0'. If no digitizer is specified, the first 
+ digitizer (i.e., number '0') is chosen. The installed boards can be 
+ inquired calling <a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a><tt>(..., 'info_boards', ...)</tt>.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'external_trigger'</b></td>
+<td>['false', 'true']</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Values for the external trigger.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'field'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unused.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'general'</b></td>
+<td>[]</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Information about the HALCON MILLite interface.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'generic'</b></td>
+<td>['', 'num_buffers=<span class="var">&lt;num&gt;</span>']</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Value list for the Generic parameter.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'horizontal_resolution'</b></td>
+<td>1</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Value list for horizontal resolution.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'image_height'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unsupported query.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'image_width'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unsupported query.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'info_boards'</b></td>
+<td>['<span class="var">&lt;BoardType&gt;</span>:<span class="var">&lt;nr&gt;</span>[:DIG:<span class="var">&lt;nr&gt;</span>]']</td>
+<td>string</td>
+<td>dynamic</td>
+<td>A list of the available devices.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'parameters'</b></td>
+<td>[]</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Ignored</td>
+</tr>
+<tr class="oddrow">
+<td><b>'parameters_readonly'</b></td>
+<td>[]</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Ignored</td>
+</tr>
+<tr class="evenrow">
+<td><b>'parameters_writeonly'</b></td>
+<td>[]</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Ignored</td>
+</tr>
+<tr class="oddrow">
+<td><b>'port'</b></td>
+<td>[]</td>
+<td></td>
+<td>pre-defined</td>
+<td>Unused.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'revision'</b></td>
+<td>'<span class="var">&lt;revision&gt;</span>'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Revision number of the MILLite interface.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'start_column'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unsupported query.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'start_row'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unsupported query.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'vertical_resolution'</b></td>
+<td>1</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Value list for vertical resolution.</td>
+</tr></table>
+<h2 id="OPEN_FRAMEGRABBER">Parameters for <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a></h2><div></div>
+<table summary="Parameters for open_framegrabber" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Parameter</th>
+<th>Values</th>
+<th>Default</th>
+<th>Type</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><b>Name</b></td>
+<td>'MILLite'</td>
+<td></td>
+<td>string</td>
+<td>Name of the HALCON interface.</td>
+</tr>
+<tr class="evenrow">
+<td><b>HorizontalResolution</b></td>
+<td>---</td>
+<td>1</td>
+<td></td>
+<td>Ignored.</td>
+</tr>
+<tr class="oddrow">
+<td><b>VerticalResolution</b></td>
+<td>---</td>
+<td>1</td>
+<td></td>
+<td>Ignored.</td>
+</tr>
+<tr class="evenrow">
+<td><b>ImageWidth</b></td>
+<td>0, <span class="var">&lt;width&gt;</span></td>
+<td>0</td>
+<td></td>
+<td> The width of the desired image part ('0' stands for the  complete image). Default: 0.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>ImageHeight</b></td>
+<td>0, <span class="var">&lt;height&gt;</span></td>
+<td>0</td>
+<td></td>
+<td> The height of the desired image part ('0' stands for the  complete image). Default: 0.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>StartRow</b></td>
+<td>0, <span class="var">&lt;row&gt;</span></td>
+<td>0</td>
+<td></td>
+<td>The row coordinate of the upper left pixel within the desired image part ('0' obviously results in delivering the complete image). 
+Default: 0.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>StartColumn</b></td>
+<td>0, <span class="var">&lt;column&gt;</span></td>
+<td>0</td>
+<td></td>
+<td>The column coordinate of the upper left pixel within the desired  0 image part ('0' obviously results in delivering the complete image). 
+Default: 0.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>Field</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr>
+<tr class="oddrow">
+<td><b>BitsPerChannel</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr>
+<tr class="evenrow">
+<td><b>ColorSpace</b></td>
+<td>'gray', 'rgb'</td>
+<td>'gray'</td>
+<td>string</td>
+<td>Desired color space and thus the number of image channels of the resulting HALCON image.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>Generic</b></td>
+<td>'', 'num_buffers=<span class="var">&lt;num&gt;</span>', -1</td>
+<td>-1</td>
+<td>mixed</td>
+<td> With the Generic parameter 'num_buffers' the current number of image buffers  used in the HALCON acquisition interface can be set before the camera is 
+ initialized. Note that the parameter must be specified as a string, e.g., 
+ 'num_buffers=5'. The specified value for num_buffers has to be a positive 
+ integer (Default: 2). Note that depending on the image size of the used camera 
+ a high number of buffers can exceed the available memory size of your computer, 
+ see also the non-paged memory size settings with the Matrox MILConfig 
+ configuration tool.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>ExternalTrigger</b></td>
+<td>'false', 'true'</td>
+<td>'false'</td>
+<td>string</td>
+<td>Enable/disable external trigger.</td>
+</tr>
+<tr class="oddrow">
+<td><b>CameraType</b></td>
+<td>'<span class="var">&lt;configuration&gt;</span>'</td>
+<td>'M_DEFAULT'</td>
+<td>string</td>
+<td> Specify the name (including the full path name) of the desired camera  configuration file (e.g., 'c:\\MyFolder\\rs170.dcf') or a predefined 
+ configuration (e.g., 'M_DEFAULT', 'M_RS170'). 
+ For possible values, please see the documentation of your board.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>Device</b></td>
+<td>'<span class="var">&lt;BoardType&gt;</span>:<span class="var">&lt;nr&gt;</span>[:DIG:<span class="var">&lt;nr&gt;</span>]'</td>
+<td>'0'</td>
+<td>string</td>
+<td> Type ( 'MORPHIS', 'RADIENT', 'SOLIOS', or 'VIO') and number ('0',  '1', '2' ...) of the frame grabber board, optionally plus ':DIG:' and the 
+ number ('0', '1', '2' ...) of the independent digitizer (passed as one 
+ string!), e.g., 'SOLIOS:0'. If no digitizer is specified, the first 
+ digitizer (i.e., number '0') is chosen. The installed boards can be 
+ inquired calling <a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a><tt>(..., 'info_boards', ...)</tt>.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>Port</b></td>
+<td><span class="var">&lt;port&gt;</span></td>
+<td>-1</td>
+<td>integer</td>
+<td>Unused.</td>
+</tr>
+<tr class="evenrow">
+<td><b>LineIn</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr></table>
+<h2 id="SET_FRAMEGRABBER_PARAM">Parameters for <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a></h2><div> The GenICam parameters are based on GenApi, so they can be different for  each camera. A call of 
+ <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a><tt>(..., 'available_param_names', ...)</tt> returns 
+ a tuple containing all available parameters of the connected camera. To 
+ read e.g.  the current gain of the camera <i>AcqHandle</i> refers to (after 
+ calling <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>), the user can call 
+ <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a><tt>(..., 'GainRaw', ...)</tt>.<br> 
+ Additionally to the GenApi parameters of the camera, the following 
+ HALCON and GTL (GigE Vision Transport Layer) parameters are supported:
+</div>
+<table summary="Parameters for set_framegrabber_param" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Parameter</th>
+<th>Values</th>
+<th>Default</th>
+<th>Type</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><b>'cc1_select'</b></td>
+<td> 'default', 'grab_exposure', 'pixclk', 'user_bit_cc_a',  'user_bit_cc_b', 'hsync', 'vsync'
+</td>
+<td></td>
+<td>string</td>
+<td>Assign a particular signal to Camera Link cc1 line.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'cc2_select'</b></td>
+<td> 'default', 'grab_exposure', 'pixclk', 'user_bit_cc_a',  'user_bit_cc_b', 'hsync', 'vsync'
+</td>
+<td></td>
+<td>string</td>
+<td>Assign a particular signal to Camera Link cc2 line.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'cc3_select'</b></td>
+<td> 'default', 'grab_exposure', 'pixclk', 'user_bit_cc_a',  'user_bit_cc_b', 'hsync', 'vsync'
+</td>
+<td></td>
+<td>string</td>
+<td>Assign a particular signal to Camera Link cc3 line.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'cc4_select'</b></td>
+<td> 'default', 'grab_exposure', 'pixclk', 'user_bit_cc_a',  'user_bit_cc_b', 'hsync', 'vsync'
+</td>
+<td></td>
+<td>string</td>
+<td>Assign a particular signal to Camera Link cc4 line.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'continuous_grabbing'</b></td>
+<td>'disable', 'enable'</td>
+<td>'disable'</td>
+<td>string</td>
+<td> Enables/disables the continuous grabbing mode. If the continuous grabbing  mode is enabled, the camera grabs all the time. Note that in this mode the 
+ <a class="halconoperator" href="../operators/grab_image.html">grab_image</a> and <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a> calls will always deliver the most recent 
+ image! The continuous grabbing mode is not supported in combination with 
+ software trigger.<br> 
+ Note that in combination with the continuous grabbing mode you can exploit 
+ the specific Trigger Arm Characteristics settings which can be configured 
+ in the used DCF file, see also below for more information.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'current_buffer_index'</b></td>
+<td>0 ... <span class="var">&lt;num_buffers&gt;</span>-1</td>
+<td></td>
+<td>integer</td>
+<td>Index of the current image buffer.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'do_abort_grab'</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td> Cancel current grab.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'do_force_trigger'</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td> Forces an event trigger from the application, when using the external  trigger. This might be useful for testing purposes. Note, that 
+ 'do_force_trigger' requires an already pending asynchronous grab. 
+ Please, see also the 'trigger_mode' parameter, to see how this action 
+ can be controlled.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'do_gpio_write:XX'</b></td>
+<td>0, 1</td>
+<td></td>
+<td>integer</td>
+<td> Functional state of a specific GPIO line (with XX = 0, 1, ..., 15 as  unique index of the desired GPIO line).
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'do_reset_rotary_counter'</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Resets the rotary counter to zero.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'exposure_time'</b></td>
+<td><span class="var">&lt;nanoseconds&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td> Time (in nanoseconds) for the active portion of the exposure signal  (that is, the exposure time). By specifying 0, exposure is disabled and 
+ the grab is performed immediately. Note, that an error is returned if the 
+ specified exposure time cannot be generated.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'exposure_time_delay'</b></td>
+<td><span class="var">&lt;nanoseconds&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td> Delay (in nanoseconds) between the trigger and the start of exposure.  Note, that an error is returned if the specified delay cannot be generated.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'external_trigger'</b></td>
+<td>'false', 'true'</td>
+<td></td>
+<td>string</td>
+<td>Enable/disable external trigger.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'gpio_format:XX'</b></td>
+<td> 'default', 'disable', 'enable', 'lvds', 'opto', 'tri-state', 'ttl'</td>
+<td></td>
+<td>string</td>
+<td> Format of the specified GPIO signal (with XX = 0, 1, ..., 15 as unique  index of the desired GPIO line).
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'gpio_mode:XX'</b></td>
+<td>'default', 'input', 'output'</td>
+<td></td>
+<td>string</td>
+<td> Controls the direction of the specified GPIO signal (with XX = 0, 1, ..., 15  as unique index of the desired GPIO line).
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'grab_timeout'</b></td>
+<td><span class="var">&lt;milliseconds&gt;</span></td>
+<td>5000</td>
+<td>integer</td>
+<td>Desired timeout (milliseconds) for aborting a pending grab. If -1 is specified, the timeout is set to INFINITE.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'image_height'</b></td>
+<td><span class="var">&lt;height&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td> Dynamically change the current image height of the grabbed image.  Note that by changing this value, all active image grabs are 
+ cancelled.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'image_width'</b></td>
+<td><span class="var">&lt;width&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>Dynamically change the current image width of the grabbed image. Note that by changing this value, all active image grabs are 
+cancelled.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'rotary_counter'</b></td>
+<td>'false', 'true'</td>
+<td>'false'</td>
+<td>string</td>
+<td>Activate/deactivate the rotary counter.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'rotary_counter_direction'</b></td>
+<td>'backward', 'forward'</td>
+<td>'forward'</td>
+<td>string</td>
+<td> Direction of the rotary counter, i.e. the rotary counter gets  incremented for a value of 'forward', or decremented for a value of 
+ 'backward', respectively.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'rotary_counter_trigger_position'</b></td>
+<td>0, ..., 65535</td>
+<td></td>
+<td>integer</td>
+<td> Rotary counter value upon which a trigger is generated.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'start_async_after_grab_async'</b></td>
+<td>'disable', 'enable'</td>
+<td>'enable'</td>
+<td>string</td>
+<td>By default a new asynchronous grab command is automatically given to the acquisition device at the end of <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a>. If the parameter 
+'start_async_after_grab_async' is set to 'disable', this new grab command 
+is omitted.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'start_column'</b></td>
+<td>0, <span class="var">&lt;max_column&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td> Sets the column coordinate of the upper left corner of the  resulting HALCON image part.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'start_field'</b></td>
+<td>'default', 'even', 'next', 'odd'</td>
+<td>'default'</td>
+<td>string</td>
+<td> Specifies the field that the grabbing of a frame starts with. 
+<ul>
+<li>'even': the grabbing starts with the even field 
+</li>
+<li>'odd': the grabbing starts with the odd field 
+</li>
+<li>'next': the grabbing starts with the next field 
+</li>
+<li>'default': the grabbing starts with the board-specific default. 
+</li>
+</ul> 
+ For the actual default start field, please see the documentation of your 
+ Matrox frame grabber board.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'start_row'</b></td>
+<td>0, <span class="var">&lt;max_row&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td> Sets the row coordinate of the upper left corner of the  resulting HALCON image part.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'trigger_mode'</b></td>
+<td>'software', 'exposure'</td>
+<td></td>
+<td>string, integer</td>
+<td> The parameter 'trigger_mode' specifies the mode of the trigger signal  released by the parameter 'do_force_trigger'. If the option 'software' is 
+ selected, a signal to trigger the grab of an image will be released. With 
+ the option 'exposure' an exposure trigger signal for the specified exposure 
+ timer will be released when calling parameter 'do_force_trigger'. It's 
+ also possible to pass an integer value in case that a special trigger mode 
+ should be used. For the supported integer values (defines), please have a 
+ look at the chapter 'MdigControl' in the MIL Help documentaion. Any mode 
+ that has to be enabled with 'M_ACTIVE' is supported.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'trigger_signal'</b></td>
+<td>'default', 'falling', 'high', 'low', 'rising'</td>
+<td></td>
+<td>string</td>
+<td> Defines the expected type of input trigger. 
+<ul>
+<li>'rising' ('falling'): requires the external trigger to go low (high) 
+   and high (low) again before the next image can be acquired 
+</li>
+<li>'high' ('low'): an image can be acquired during the whole time the 
+   trigger is high (low). 
+</li>
+<li>'default': specifies the trigger mode in the DCF file or, if none, 
+   'rising'.
+</li>
+</ul></td>
+</tr>
+<tr class="evenrow">
+<td><b>'trigger_source'</b></td>
+<td> 'default', 'hw_port_camera', 'hw_port0', ..., 'hw_port11', 'none',  'rotary_counter', 'software', 'timer1', 'timer2'
+</td>
+<td></td>
+<td>string</td>
+<td> Defines the source of the input trigger. For details, please see the  documentation of your frame grabber board.
+</td>
+</tr></table>
+<h2 id="GET_FRAMEGRABBER_PARAM">Parameters for <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a></h2><div>There may exist additional read-only parameters with the following postfixes: 
+<ul>
+<li><b>'_access'</b>: These parameters provide the access permissions of 
+    the corresponding parameter as a string. Possible values are 
+     <tt>'ro'</tt> (read-only), <tt>'wo'</tt> (write-only), and 
+     <tt>'rw'</tt> (read/write). 
+</li>
+<li><b>'_category'</b>: These parameters provide the category of the 
+    corresponding parameter as a string. 
+</li>
+<li><b>'_description'</b>: These parameters provide the tool-tip of the 
+    corresponding parameter as a string. 
+</li>
+<li><b>'_displayname'</b>: These parameters provide the displayname of the 
+    corresponding parameter as a string. 
+</li>
+<li><b>'_longdescription'</b>: These parameters provide the description of the 
+    corresponding parameter as a string. 
+</li>
+<li><b>'_range'</b>: These parameters provide the minimum, maximum, 
+    step width, and current values for the corresponding integer or float 
+    parameter as a tuple with 4 elements, e.g., 
+    <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a><tt>(.., 'Shutter_range', ..)</tt> will return 
+    the output tuple <tt>[<i>min, max, step, current</i>]</tt>. 
+</li>
+<li><b>'_type'</b>: These parameters provide the type of the corresponding 
+    parameter as string. 
+</li>
+<li><b>'_values'</b>: These parameters provide the valid value list for 
+    the corresponding parameter as a tuple, e.g., 
+    <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a><tt>(.., 'volatile_values', ..)</tt> will return 
+    the output tuple <tt>['enable', 'disable']</tt>. 
+</li>
+<li><b>'_visibility'</b>: These parameters provide the visibility of the 
+    corresponding parameter as a string. Possible values are 
+    <tt>'beginner'</tt>, <tt>'expert'</tt>, and <tt>'guru'</tt>. 
+</li>
+</ul> 
+<p> 
+All these postfixed parameter names are not returned when calling 
+<a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a><tt>(.., 'parameters', ..)</tt> and are used 
+to enable the easy parameterization via a generic graphical user 
+interface, particularly the HDevelop Image Acquisition Assistant. 
+</p>
+</div>
+<table summary="Parameters for get_framegrabber_param" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Parameter</th>
+<th>Values</th>
+<th>Default</th>
+<th>Type</th>
+<th>Kind</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><b>'available_param_descriptions'</b></td>
+<td>['<span class="var">&lt;parameters&gt;</span>']</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td> A list containing additional information about all parameters. The order of  the entries is equal to the order of the parameter names returned by 
+ 'available_param_names'.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'available_param_names'</b></td>
+<td>['<span class="var">&lt;parameters&gt;</span>']</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td>The list contains the names of all available parameters.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'bits_per_channel'</b></td>
+<td><span class="var">&lt;default&gt;</span></td>
+<td>8</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>The value is not used, so a default value is returned.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'board_type'</b></td>
+<td><span class="var">&lt;board_type&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td>Current board type.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'camera_type'</b></td>
+<td>'<span class="var">&lt;configuration&gt;</span>'</td>
+<td>'M_DEFAULT'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Current camera type.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'cc1_select'</b></td>
+<td> 'default', 'grab_exposure', 'pixclk', 'user_bit_cc_a',  'user_bit_cc_b', 'hsync', 'vsync'
+</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td>Assign a particular signal to Camera Link cc1 line.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'cc2_select'</b></td>
+<td> 'default', 'grab_exposure', 'pixclk', 'user_bit_cc_a',  'user_bit_cc_b', 'hsync', 'vsync'
+</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td>Assign a particular signal to Camera Link cc2 line.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'cc3_select'</b></td>
+<td> 'default', 'grab_exposure', 'pixclk', 'user_bit_cc_a',  'user_bit_cc_b', 'hsync', 'vsync'
+</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td>Assign a particular signal to Camera Link cc3 line.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'cc4_select'</b></td>
+<td> 'default', 'grab_exposure', 'pixclk', 'user_bit_cc_a',  'user_bit_cc_b', 'hsync', 'vsync'
+</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td>Assign a particular signal to Camera Link cc4 line.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'color_space'</b></td>
+<td>'gray', 'rgb'</td>
+<td>'gray'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Desired color space and thus the number of image channels of the resulting HALCON image.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'continuous_grabbing'</b></td>
+<td>'disable', 'enable'</td>
+<td>'disable'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td> Continuous grabbing mode.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'current_buffer_index'</b></td>
+<td>0 ... <span class="var">&lt;num_buffers&gt;</span>-1</td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td>Index of the current image buffer.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'device'</b></td>
+<td>'<span class="var">&lt;BoardType&gt;</span>:<span class="var">&lt;nr&gt;</span>[:DIG:<span class="var">&lt;nr&gt;</span>]'</td>
+<td>'0'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Current type of the frame grabber board.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'exposure_time'</b></td>
+<td><span class="var">&lt;nanoseconds&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td> Time (in nanoseconds) for the active portion of the exposure signal  (that is, the exposure time).
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'exposure_time_delay'</b></td>
+<td><span class="var">&lt;nanoseconds&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td> Delay (in nanoseconds) between the trigger and the start of exposure.  Note, that an error is returned if the specified delay cannot be generated.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'external_trigger'</b></td>
+<td>'false', 'true'</td>
+<td>'false'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Status of the external trigger.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'field'</b></td>
+<td>'<span class="var">&lt;default&gt;</span>'</td>
+<td>'interlaced'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>The value is not used, so a default value is returned.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'generic'</b></td>
+<td>'', 'num_buffers=<span class="var">&lt;num&gt;</span>', -1</td>
+<td>-1</td>
+<td>mixed</td>
+<td>pre-defined</td>
+<td>Values of the Generic parameter.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'gpio_format:XX'</b></td>
+<td> 'default', 'disable', 'enable', 'lvds', 'opto', 'tri-state', 'ttl'</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td> Format of the specified GPIO signal (with XX = 0, 1, ..., 15 as unique  index of the desired GPIO line).
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'gpio_mode:XX'</b></td>
+<td>'default', 'input', 'output'</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td> Controls the direction of the specified GPIO signal (with XX = 0, 1, ..., 15  as unique index of the desired GPIO line).
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'gpio_read:XX'</b></td>
+<td>0, 1</td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td> Current state of the specified GPIO input (with XX = 0, 1, ..., 15  as unique index of the desired GPIO line).
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'grab_timeout'</b></td>
+<td><span class="var">&lt;milliseconds&gt;</span></td>
+<td>5000</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Current grab timeout in milliseconds.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'horizontal_resolution'</b></td>
+<td><span class="var">&lt;resolution&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Current value of horizontal resolution.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'image_height'</b></td>
+<td><span class="var">&lt;height&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>pre-defined</td>
+<td> Dynamically change the current image height of the grabbed image.  Note that by changing this value, all active image grabs are 
+ cancelled.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'image_width'</b></td>
+<td><span class="var">&lt;width&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Dynamically change the current image width of the grabbed image. Note that by changing this value, all active image grabs are 
+cancelled.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'line_in'</b></td>
+<td><span class="var">&lt;default&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>The value is not used, so a default value is returned.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'name'</b></td>
+<td>'MILLite'</td>
+<td></td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Name of the HALCON interface.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'port'</b></td>
+<td><span class="var">&lt;port&gt;</span></td>
+<td>-1</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Current port number.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'revision'</b></td>
+<td>'<span class="var">&lt;revision&gt;</span>'</td>
+<td></td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Revision number of the MILLite interface.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'rotary_counter'</b></td>
+<td>'false', 'true'</td>
+<td>'false'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Activate/deactivate the rotary counter.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'rotary_counter_direction'</b></td>
+<td>'backward', 'forward'</td>
+<td>'forward'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td> Direction of the rotary counter, i.e. the rotary counter gets  incremented for a value of 'forward', or decremented for a value of 
+ 'backward', respectively.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'rotary_counter_position'</b></td>
+<td><span class="var">&lt;position&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td>Current value of the rotary counter.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'rotary_counter_trigger_position'</b></td>
+<td>0, ..., 65535</td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td> Rotary counter value upon which a trigger is generated.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'start_async_after_grab_async'</b></td>
+<td>'disable', 'enable'</td>
+<td>'enable'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Status of 'start_async_after_grab_async'.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'start_column'</b></td>
+<td>0, <span class="var">&lt;max_column&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Returns the current start column of the HALCON image.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'start_field'</b></td>
+<td>'default', 'even', 'next', 'odd'</td>
+<td>'default'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td> Field that the grabbing of a frame starts with.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'start_row'</b></td>
+<td>0, <span class="var">&lt;max_row&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Returns the current start row of the HALCON image.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'trigger_mode'</b></td>
+<td>'software', 'exposure'</td>
+<td></td>
+<td>string, integer</td>
+<td>dynamic</td>
+<td> The parameter 'trigger_mode' specifies the mode of the trigger signal  released by the parameter 'do_force_trigger'. If the option 'software' is 
+ selected, a signal to trigger the grab of an image will be released. With 
+ the option 'exposure' an exposure trigger signal for the specified exposure 
+ timer will be released when calling parameter 'do_force_trigger'. It's 
+ also possible to pass an integer value in case that a special trigger mode 
+ should be used. For the supported integer values (defines), please have a 
+ look at the chapter 'MdigControl' in the MIL Help documentaion. Any mode 
+ that has to be enabled with 'M_ACTIVE' is supported.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'trigger_signal'</b></td>
+<td>'default', 'falling', 'high', 'low', 'rising'</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td> Type of input trigger.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'trigger_source'</b></td>
+<td> 'default', 'hw_port_camera', 'hw_port0', ..., 'hw_port11', 'none',  'rotary_counter', 'software', 'timer1', 'timer2'
+</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td> Defines the source of the input trigger. For details, please see the  documentation of your frame grabber board.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'vertical_resolution'</b></td>
+<td><span class="var">&lt;resolution&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Current value of vertical resolution.</td>
+</tr></table>
+<h2 id="SET_FRAMEGRABBER_LUT">Operator <a class="halconoperator" href="../operators/set_framegrabber_lut.html">set_framegrabber_lut</a></h2><div>Not supported by this interface.</div>
+<h2 id="GET_FRAMEGRABBER_LUT">Operator <a class="halconoperator" href="../operators/get_framegrabber_lut.html">get_framegrabber_lut</a></h2><div>Not supported by this interface.</div>
+<h2 id="SET_FRAMEGRABBER_CALLBACK">Operator <a class="halconoperator" href="../operators/set_framegrabber_callback.html">set_framegrabber_callback</a></h2><div> All actually supported callback types of a specific image acquisition  device can be queried by calling <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a> with the parameter 
+ 'available_callback_types'. Once the callback is registered, on every 
+ occurrence of the underlying event (e.g., the notification that the 
+ exposure has finished) the specified callback function will be called. If 
+ the callback function is set to NULL, the corresponding callback will be 
+ unregistered.<br><br> 
+ The signature of the callback function is 
+ <tt>Herror (__stdcall *HAcqCallback)(void *AcqHandle, void *Context, 
+   void *UserContext)</tt> and uses the following parameters: 
+
+<ul>
+<li><b>AcqHandle</b> 
+    Acquisition handle of the corresponding image acquisition instance. 
+</li>
+<li><b>Context</b> 
+    Optional context data of the specific callback. In the 
+    MILLite interface, this parameter is not used, i.e., Context 
+    is set to NULL. 
+</li>
+<li><b>UserContext</b> 
+    User context as set via <a class="halconoperator" href="../operators/set_framegrabber_callback.html">set_framegrabber_callback</a>. 
+</li>
+</ul> 
+<p> 
+<b>Using user-callback functions</b><br> 
+Note that the execution time of a user-specific callback function should 
+always be as short as possible since during the execution of a callback 
+function the handling of further internal callbacks might be blocked. 
+This can be achieved by removing the current processing from the 
+user-specific callback function to a separate thread that is controlled via 
+signals or events. 
+</p>
+</div>
+<table summary="Operator set_framegrabber_callback" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Type</th>
+<th>Description</th>
+<tr class="oddrow">
+<td>'frame_end'</td>
+<td>Corresponds to the M_GRAB_FRAME_END hook function inside MIL-Lite.</td>
+</tr>
+<tr class="evenrow">
+<td>'frame_start'</td>
+<td>Corresponds to the M_GRAB_FRAME_START hook function inside MIL-Lite.</td>
+</tr>
+<tr class="oddrow">
+<td>'transfer_end'</td>
+<td>Corresponds to the M_GRAB_END hook function inside MIL-Lite.</td>
+</tr></table>
+<h2 id="GET_FRAMEGRABBER_CALLBACK">Operator <a class="halconoperator" href="../operators/get_framegrabber_callback.html">get_framegrabber_callback</a></h2><div> This interface supports device specific events via the operators  <a class="halconoperator" href="../operators/set_framegrabber_callback.html">set_framegrabber_callback</a> and <a class="halconoperator" href="../operators/get_framegrabber_callback.html">get_framegrabber_callback</a>. For more 
+ information see <a class="halconoperator" href="../operators/set_framegrabber_callback.html">set_framegrabber_callback</a>.
+</div>
+<h2 id="GRAB_IMAGE_START">Operator <a class="halconoperator" href="../operators/grab_image_start.html">grab_image_start</a></h2><div>Starts a new asynchronous grab. See also <a class="halconoperator" href="../operators/grab_image_start.html">grab_image_start</a>.</div>
+<h2 id="GRAB_IMAGE">Operator <a class="halconoperator" href="../operators/grab_image.html">grab_image</a></h2><div><a class="halconoperator" href="../operators/grab_image.html">grab_image</a> starts a new synchronous grab. See also <a class="halconoperator" href="../operators/grab_image.html">grab_image</a>. Note that 
+the interface converts the image from the device to the desired image format 
+specified by the parameters 'image_width', 'image_height', 'start_row', 
+'start_column', 'bits_per_channel', and 'color_space'.
+</div>
+<h2 id="GRAB_IMAGE_ASYNC">Operator <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a></h2><div><a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a> returns an image and starts the next asynchronous grab. See also <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a>. 
+Note that 
+the interface converts the image from the device to the desired image format 
+specified by the parameters 'image_width', 'image_height', 'start_row', 
+'start_column', 'bits_per_channel', and 'color_space'.
+</div>
+<h2 id="GRAB_DATA">Operator <a class="halconoperator" href="../operators/grab_data.html">grab_data</a></h2><div>Not supported by this interface.</div>
+<h2 id="GRAB_DATA_ASYNC">Operator <a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a></h2><div>Not supported by this interface.</div>
+<h2 id="CLOSE_FRAMEGRABBER">Operator <a class="halconoperator" href="../operators/close_framegrabber.html">close_framegrabber</a></h2><div>This operator closes the device. See also <a class="halconoperator" href="../operators/close_framegrabber.html">close_framegrabber</a>.</div>
+<h2 id="TRIGGER_ARM_CHARACTERISTICS">Trigger Arm Characteristics</h2><div> The so-called Trigger Arm Characteristics (like <i>Frame Retrigger</i>,  <i>Software Ignore Frame Retrigger</i>, 
+ <i>Hardware Ignore Frame Retrigger</i>, and 
+ <i>Frame Retrigger Latched</i>) is specified inside the Matrox DCF files. 
+ To use this functionality within the HALCON MILLite interface, 
+ both the continuous grabbing mode and external triggering has to be 
+ enabled, see the parameters 'continuous_grabbing' and 'external_trigger'. 
+ Please make sure that your MIL-Lite version already supports this feature!
+</div>
+<h2 id="HDEVELOP_EXAMPLES">HDevelop Examples</h2><div>For this interface there are the following examples available: 
+<ul>
+<li>millite.hdev - Benchmark. 
+</li>
+<li>millite_parameters.hdev - 
+    Lists all parameters of a device. 
+</li>
+<li>millite_simple.hdev - 
+    A simple example to show the usage of the interface. 
+</li>
+<li>millite_trigger.hdev - 
+    Shows the usage of a Matrox frame grabber board with external triggering.
+</li>
+</ul></div>
+<h2 id="CPP_EXAMPLES">C++ Examples</h2><div> For this interface there is also a further C++ Visual Studio Project to  demonstrate the usage of the operators <a class="halconoperator" href="../operators/get_framegrabber_callback.html">get_framegrabber_callback</a> and 
+ <a class="halconoperator" href="../operators/set_framegrabber_callback.html">set_framegrabber_callback</a>. Please check the directory 
+ %HALCONEXAMPLES%\cpp\console\vs2005\. If you prefer building the example via 
+ the console, please check the following folder %HALCONEXAMPLES%\cpp\console\. 
+ With a Linux OS please use $HALCONEXAMPLES/cpp/console/.
+</div>
+<h2 id="CS_EXAMPLES">C# Examples</h2><div> For this interface there is also a further C# Visual Studio Project to  demonstrate the usage of the operators <a class="halconoperator" href="../operators/get_framegrabber_callback.html">get_framegrabber_callback</a> and 
+ <a class="halconoperator" href="../operators/set_framegrabber_callback.html">set_framegrabber_callback</a>. Please check the directory 
+ %HALCONEXAMPLES%\cpp\console\vs2005\.
+</div>
+<h2 id="RELEASENOTES">Release Notes</h2><div>
+<ul>
+<li><b>Revision 13.0.2</b> (Oct 26, 2017): 
+<ul>
+<li>With Hotfix 569 of MILLite 10 this HALCON interface became incompatible. 
+      This problem has been fixed. 
+</li>
+</ul></li>
+<li><b>Revision 13.0.1</b> (Oct 28, 2016): 
+
+<ul>
+<li>HALCON 13 version of the interface. 
+</li>
+</ul></li>
+<li><b>Revision 6.1</b> (Jul 14, 2016): 
+
+<ul>
+<li>Adapted to Matrox MIL-Lite 10.0. 
+</li>
+<li>Support of Radient framegrabber series. 
+</li>
+<li>Support of GenICam parameter handling. The interface supports 
+      access to a GenICam compatible device via <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a> 
+      and <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a>. Further, the following atribute are 
+      supported, '_access', '_category', '_tooltip', '_description', 
+      '_long_description', '_displayname', '_range', '_type', '_values', 
+      and '_visibility'. 
+</li>
+<li>Added attributes for non GenICam parameters '_access', '_description', 
+      '_values' and '_range'. 
+</li>
+<li>Added parameters 'available_param_names' and 'available_param_descriptions'. 
+</li>
+<li><a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a> crashed when setting 'do_reset_rotary_counter', 
+      'do_force_trigger', 'do_gpio_write' or 'do_abort_grab' with an empty tuple. 
+      This problem has been fixed. 
+</li>
+<li>The framgrabber boards 'METEOR_II', 'METEOR_II_1394', 'METEOR_II_CL', 
+      'METEOR_II_DIG', 'HELIOS', 'ODYSSEY' and 'MORPHIS_EVO' are no longer 
+      supported by this interface. 
+</li>
+<li>Remove the query 'parameters', 'parameters_readonly' and 
+     'parameters_writeonly' from <a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a>. 
+</li>
+</ul></li>
+<li><b>Revision 6.0</b> (Oct 31, 2014): 
+
+<ul>
+<li>HALCON 12 version of the interface. 
+</li>
+</ul></li>
+<li><b>Revision 5.2</b> (Jul 26, 2013): 
+
+<ul>
+<li>Added parameter 'trigger_mode' to improve the software 
+      trigger functionality. 
+</li>
+<li>Fixed bug in case of an unsupported parameter setting during 
+      <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>. Allocated memory needed by the digitizer 
+      was not released in case of an error. 
+</li>
+<li>Fixed bug in <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a> in case of 'Generic' parameter 
+      with empty string values. 
+</li>
+</ul></li>
+<li><b>Revision 5.1</b> (Jan 8, 2013): 
+
+<ul>
+<li>Improved error handling in <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>. If an already used 
+      digitizer was specified via the Device parameter with a value greater 
+      than 0, no HALCON error was returned. 
+</li>
+</ul></li>
+<li><b>Revision 5.0</b> (May 15, 2012): 
+
+<ul>
+<li>HALCON 11 version of the interface (included in HALCON 11 DVD). 
+</li>
+<li>Fixed thread safety problem in <a class="halconoperator" href="../operators/grab_image.html">grab_image</a> and <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a> 
+      that could occur if a pending grab was aborted via the 'do_abort_grab' 
+      parameter of <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a>. 
+</li>
+<li>Fixed bug in <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>: Prevent to open an already 
+      used digitizer a second time. 
+</li>
+</ul></li>
+<li><b>Revision 4.9</b> (Jan 24, 2012): 
+
+<ul>
+<li>Added support of parameters <i>ImageWidth</i>, <i>ImageHeight</i>, 
+      <i>StartRow</i>, and <i>StartColumn</i> in <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a> 
+      to allow specifying a certain image part. 
+</li>
+<li>Added parameters 'image_width', 'image_height', 'start_row', 
+      and 'start_column' to dynamically change the current image 
+      size during runtime. 
+</li>
+</ul></li>
+<li><b>Revision 4.8</b> (May 30, 2011): 
+
+<ul>
+<li>Support also of Morphis boards. 
+</li>
+</ul></li>
+<li><b>Revision 4.7</b> (Dec 13, 2010): 
+
+<ul>
+<li>Added parameters 'gpio_read:XX', 'do_gpio_write:XX', 'gpio_mode:XX', 
+      'gpio_format:XX', 'cc1_select', 'cc2_select', 'cc3_select' and 
+      'cc4_select' to control the GPIO lines of the Helios, Odyssey and 
+      Solios frame grabber boards. 
+</li>
+</ul></li>
+<li><b>Revision 4.6</b> (Aug 25, 2010): 
+
+<ul>
+<li>Removed obsolete internal parameter queries in <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>. 
+</li>
+<li>Fixed bug regarding error handling in continuous grabbing mode. 
+</li>
+<li>HALCON 10 version of the interface (included in HALCON 10 DVD). 
+</li>
+</ul></li>
+<li><b>Revision 4.5 Erratum</b> (May 19, 2010): 
+
+<ul>
+<li>Re-added the support of Meteor-II boards in the documentation. This 
+      information was deleted in the original release of revision 4.5 by 
+      mistake. 
+</li>
+</ul></li>
+<li><b>Revision 4.5</b> (Mar 16, 2010): 
+
+<ul>
+<li>Adapted to Matrox MIL-Lite 9.0. 
+</li>
+<li>Support also of Windows XP/Vista x64 Editions. 
+</li>
+<li>Added Generic parameter 'num_buffers' in <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a> to allow to 
+      set the number of internally used buffers. 
+</li>
+<li>New read-only parameter 'num_buffers' to query the number of 
+      internally used buffers. 
+</li>
+<li>Added implementation of <a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a><tt>(.., 'generic', ...)</tt> 
+      to query all supported values for the Generic parameter 
+      in <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>. 
+</li>
+<li>Decreased the default number of allocated images buffers for each 
+      initialized camera from 5 to 2. 
+</li>
+<li>New expert parameter 'current_buffer_index' to manually control the 
+      buffer ordering. 
+</li>
+</ul></li>
+<li><b>Revision 4.4</b> (Jan 22, 2010): 
+
+<ul>
+<li>New parameter 'continuous_grabbing' to enable the use of the 
+      continuous grabbing mode. 
+</li>
+<li>Increased the number of allocated images buffers for each 
+      initialized camera from 2 to 5. 
+</li>
+<li>Added section "Trigger Arm Characteristics" in this documentation. 
+</li>
+</ul></li>
+<li><b>Revision 4.3</b> (Nov 11, 2009): 
+
+<ul>
+<li>Support also of Solios eCL/XCL-B boards. 
+</li>
+<li>Adapted <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a> to enable the use of boards with multiple 
+      input channels in general. 
+</li>
+</ul></li>
+<li><b>Revision 4.2</b> (Sep 18, 2009): 
+
+<ul>
+<li>Bug fix in <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a><tt>(..'do_abort_grab'..)</tt> to 
+      ensure the proper behavior also in case that no corresponding grab 
+      operator is called concurrently. 
+</li>
+<li>Bug fix regarding the order of the parameters when calling the 
+      user-specific callback functions: Erroneously, the parameters 
+      <i>UserContext</i> and <i>Context</i> were swapped, i.e., 
+      the parameter <i>UserContext</i> now is used as third parameter. 
+</li>
+<li>Bug fix regarding the AcqHandle parameter when calling the 
+      user-specific callback functions: In case of multiple instances, the 
+      wrong acquisition handle was returned. 
+</li>
+<li>Added note in documentation that Solios GigE boards are not supported. 
+</li>
+</ul></li>
+<li><b>Revision 4.1</b> (Aug 31, 2009): 
+
+<ul>
+<li>Bug fix in <a class="halconoperator" href="../operators/close_framegrabber.html">close_framegrabber</a> to enable the cleanup of all resources 
+      also in case of external triggering. 
+</li>
+<li>Bug fix in <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>, <a class="halconoperator" href="../operators/grab_image.html">grab_image</a>, <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a>, and 
+      <a class="halconoperator" href="../operators/grab_image_start.html">grab_image_start</a> regarding the use of multiple cameras connected to 
+      the same physical board. 
+</li>
+<li>Bug fix in <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a><tt>(..'do_abort_grab'..)</tt>. 
+</li>
+</ul></li>
+<li><b>Revision 4.0</b> (Dec 1, 2008): 
+
+<ul>
+<li>HALCON 9.0 version of the interface (included in HALCON 9.0 DVD). 
+</li>
+<li>Bug fix in <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a> to reach the full frame rate in case of 
+      free-running analog cameras. 
+</li>
+<li>Bug fix in <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a> for software triggering. 
+</li>
+<li>Support also of Vio boards. 
+</li>
+<li>Add functionality to handle 'frame_start', 'frame_end', and 
+      'transfer_end' callbacks. 
+</li>
+</ul></li>
+<li><b>Revision 3.3</b> (Apr 22, 2008): 
+
+<ul>
+<li>Added read-only parameters with postfix '_description', '_range', and 
+      '_values' to enable the easy parameterization via a generic 
+      graphical user interface. 
+</li>
+</ul></li>
+<li><b>Revision 3.2</b> (Sep 5, 2007): 
+
+<ul>
+<li>Bug fix in buffer handling. 
+</li>
+<li>New parameter 'board_type'. 
+</li>
+</ul></li>
+<li><b>Revision 3.1</b> (Jul 27, 2007): 
+
+<ul>
+<li>Bug fix in <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a> when accessing the current board type. 
+</li>
+</ul></li>
+<li><b>Revision 3.0</b> (May 15, 2007): 
+
+<ul>
+<li>HALCON 8.0 version of the interface (included in HALCON 8.0 DVD). 
+</li>
+</ul></li>
+<li><b>Revision 2.3 </b> (Mar 20, 2007): 
+
+<ul>
+<li>Bug fix in <a class="halconoperator" href="../operators/grab_image.html">grab_image</a> and <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a> (grab_timeout). 
+</li>
+<li>Bug fix in buffer handling (M_GRAB_FRAME_END no longer used for buffer 
+      switching). 
+</li>
+</ul></li>
+<li><b>Revision 2.2 </b> (Aug 14, 2006): 
+
+<ul>
+<li>Improved use of double buffering. 
+</li>
+<li>New parameter 'start_field'. 
+</li>
+<li>Improved error messages. 
+</li>
+<li>M_GRAB_END event used for image transfer. 
+</li>
+</ul></li>
+<li><b>Revision 2.1 </b> (Apr 19, 2006): 
+
+<ul>
+<li>Change of semantics of parameters Device and Port in <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>. 
+</li>
+<li>Bug fix to enable setting of the grab timeout. 
+</li>
+</ul></li>
+<li><b>Revision 2.0 </b> (Dec 06, 2005): 
+
+<ul>
+<li>First official release.
+</li>
+</ul></li>
+</ul></div>
+  <!-- toc end -->  <hr> 
+  <div class="imprint"> 
+    <span class="imprinthead">Legal disclaimer regarding hyperlinks</span>: 
+    This page may provide users with access by hypertext links to external, non-MVTec websites. 
+Any such access is provided with the understanding that the contents 
+of non-MVTec sites are beyond the control of MVTec Software GmbH, that 
+MVTec Software GmbH makes no representations whatsoever about such 
+sites, and that users shall proceed at their own risk. 
+MVTec Software GmbH is not responsible for the privacy practices or 
+the content of external, non-MVTec websites.
+ 
+  </div> 
+  <div class="imprint"> 
+    <span class="imprinthead">Copyright notes</span>: 
+    &copy; Copyright MVTec Software GmbH. All rights reserved. 
+Unless otherwise stated, the copyright and similar rights in the 
+contents of this page, including but not limited to all text, designs 
+and images appearing herein, are copyrighted works owned by MVTec 
+Software GmbH. 
+"MVTec Software GmbH" and "HALCON" are registered trademarks of MVTec 
+Software GmbH. 
+All other brand names, designs, service marks and trademarks (whether 
+or not registered) referenced or used herein are the property of their 
+respective owners.
+ 
+  </div> 
+  <div class="footer"> 
+    acqdump 1.4 / hdoc 1.2 / Generated: Thu Nov  2 17:12:42 CET 2017 
+  </div> 
+  </body> 
+</html>

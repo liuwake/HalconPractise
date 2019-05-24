@@ -1,0 +1,1673 @@
+<!DOCTYPE HTML> 
+<html> 
+  <head> 
+  <meta id='acqdump-id' name='acqdump-id' content='halcon-acq-DirectShow-rev13.0.2'> 
+  <title>DirectShow / HALCON / MVTec Software GmbH</title> 
+      <style type="text/css"> 
+      body { 
+        color: #000000; 
+        background-color: #ffffff; 
+        margin-top: 0px; 
+        margin-bottom: 0px; 
+        margin-left: 20px; 
+        margin-right: 20px; 
+        font-family: Arial,Helvetica,sans-serif; 
+      } 
+      a:link { 
+        color: #0044cc; 
+      } 
+      a:link,a:visited { 
+        text-decoration: none; 
+      } 
+      a:link:hover,a:visited:hover { 
+        text-decoration: underline; 
+      } 
+      th { 
+        text-align: left; 
+      } 
+      h1,h2,h3,h4,h5,h6 { 
+        text-rendering: optimizeLegibility; 
+        color: #666666; 
+      } 
+      tt { 
+        font-family: monospace,monospace; 
+      } 
+      h1 a.halconoperator { 
+        font-family: Arial,Helvetica,sans-serif; 
+        color: #666666; 
+      } 
+      h2 a.halconoperator { 
+        font-family: Arial,Helvetica,sans-serif; 
+        color: #666666; 
+      } 
+      hr { 
+        border: 0; 
+        border-top: solid 1px #f28d26; 
+      } 
+      pre { 
+        font-family: monospace,monospace; 
+        padding: 1ex; 
+        white-space: pre-wrap; 
+      } 
+      .toc { 
+        font-size: 80%; 
+        border-top: 1px dashed #f28d26; 
+        border-bottom: 1px dashed #f28d26; 
+        padding-top: 5px; 
+        padding-bottom: 5px; 
+      } 
+      .inv { 
+        margin: 0; 
+        border: 0; 
+        padding: 0; 
+      } 
+      .banner { 
+        color: #666666; 
+        padding-left: 1em; 
+      } 
+      .logo { 
+        background-color: white; 
+      } 
+      .keyboard { 
+        font-size: 80%; 
+        padding-left: 3px; 
+        padding-right: 3px; 
+        border-radius: 5px; 
+        border-width: 1px; 
+        border-style: solid; 
+        border-color: #f28d26; 
+        background-color: #f3f3f3; 
+      } 
+      .warning { 
+        margin-top: 2ex; 
+        margin-bottom: 1ex; 
+        padding: 10px; 
+        text-align: center; 
+        border: 1px solid; 
+        color: #bb0000; 
+        background-color: #fff7f7 
+      } 
+      .imprint { 
+        margin-top: 1ex; 
+        font-size: 80%; 
+        color: #666666; 
+      } 
+      .imprinthead { 
+        font-weight: bolder; 
+        color: #666666; 
+      } 
+      .postscript { 
+        margin-top: 2ex; 
+        font-size: 80%; 
+        color: #666666 
+      } 
+      .evenrow { 
+        background-color: #e7e7ef; 
+        vertical-align: top; 
+      } 
+      .oddrow { 
+        background-color: #f7f7ff; 
+        vertical-align: top; 
+      } 
+      .headrow { 
+        background-color: #97979f; 
+        color: #ffffff; 
+        vertical-align: top; 
+      } 
+      .logorow { 
+        vertical-align: top; 
+      } 
+      .error { 
+        color: red; 
+      } 
+      .var { 
+        font-style: italic 
+      } 
+      .halconoperator { 
+        font-family: monospace,monospace; 
+      } 
+      .halconprocedure { 
+        font-family: Consolas,Inconsolata,"DejaVu Sans Mono",monospace; 
+      } 
+      span.operator { 
+        font-family: monospace,monospace; 
+      } 
+      span.procedure { 
+        font-family: monospace,monospace; 
+      } 
+      span.operation { 
+        font-family: monospace,monospace; 
+      } 
+      span.feature { 
+        font-family: Arial,Helvetica,Homerton,sans-serif; 
+      } 
+      ul { 
+        padding-left: 1.2em; 
+      } 
+      li.dot { 
+        list-style-type: square; 
+        color: #f28d26; 
+      } 
+      .breadcrumb { 
+        font-size: 80%; 
+        color: white; 
+        background-color: #062d64; 
+        margin-left: -20px; 
+        margin-right: -20px; 
+        margin-bottom: 20px; 
+        padding-left: 20px; 
+        padding-right: 20px; 
+        padding-bottom: 15px; 
+      } 
+      .webbar { 
+        font-size: 80%; 
+        background-color: #dddddd; 
+        margin-top: 0px; 
+        margin-left: -20px; 
+        margin-right: -20px; 
+        margin-bottom: 0px; 
+        padding-top: 5px; 
+        padding-left: 20px; 
+        padding-right: 20px; 
+        padding-bottom: 5px; 
+      } 
+      .footer { 
+        border-top: 1px dashed #f28d26; 
+        font-size: 80%; 
+        color: #666666; 
+        margin-left: -20px; 
+        margin-right: -20px; 
+        margin-top: 0px; 
+        padding-left: 20px; 
+        padding-right: 20px; 
+        padding-top: 10px; 
+        padding-bottom: 15px; 
+      } 
+      .breadcrumb a { 
+        color: #ffffff; 
+        border-bottom: 1px solid white; 
+      } 
+      .breadcrumb a:link:hover,.breadcrumb a:visited:hover { 
+        text-decoration: none; 
+        border-bottom: none; 
+      } 
+      .heading { 
+        margin-top: 1ex; 
+        font-size: 110%; 
+        font-weight: bold; 
+        color: #666666; 
+      } 
+      .text { 
+        color: black; 
+      } 
+      .example { 
+        font-size: 80%; 
+        background-color: #f3f3f3; 
+        border: 1px dashed #666666; 
+        padding: 10px; 
+      } 
+      .math { 
+      } 
+      .displaymath { 
+        text-align: center; 
+        margin-top: 1ex; 
+        margin-bottom: 1ex; 
+      } 
+      </style> 
+  </head> 
+  <body><div class="breadcrumb"> 
+<br class="inv"/> 
+<a href="../../../../documentation.html">HALCON</a> / <a href="acq-overview.html">Image Acquisition Interfaces</a> 
+<br class="inv"/> 
+</div> 
+<h1>Image Acquisition Interface for DirectShow</h1> 
+<table summary="Image Acquisition Interface for DirectShow"> 
+  <tr> 
+    <td> 
+      Interface: 
+    </td> 
+    <td> 
+      DirectShow 
+    </td> 
+  </tr> 
+  <tr> 
+    <td> 
+      Revision: 
+    </td> 
+    <td> 
+      13.0.2 
+    </td> 
+  </tr> 
+  <tr> 
+    <td> 
+      Date: 
+    </td> 
+    <td> 
+      2018-08-13 
+    </td> 
+  </tr> 
+</table>
+<ul class="toc">
+<li><a href="#GENERAL">General</a></li>
+<li><a href="#SYSTEM_REQUIREMENTS">System Requirements</a></li>
+<li><a href="#INSTALLATION">Installation</a></li>
+<li><a href="#FEATURES">Features</a></li>
+<li><a href="#LIMITATIONS">Limitations</a></li>
+<li><a href="#INFO_FRAMEGRABBER">Parameters for info_framegrabber</a></li>
+<li><a href="#OPEN_FRAMEGRABBER">Parameters for open_framegrabber</a></li>
+<li><a href="#SET_FRAMEGRABBER_PARAM">Parameters for set_framegrabber_param</a></li>
+<li><a href="#GET_FRAMEGRABBER_PARAM">Parameters for get_framegrabber_param</a></li>
+<li><a href="#SET_FRAMEGRABBER_LUT">Operator set_framegrabber_lut</a></li>
+<li><a href="#GET_FRAMEGRABBER_LUT">Operator get_framegrabber_lut</a></li>
+<li><a href="#SET_FRAMEGRABBER_CALLBACK">Operator set_framegrabber_callback</a></li>
+<li><a href="#GET_FRAMEGRABBER_CALLBACK">Operator get_framegrabber_callback</a></li>
+<li><a href="#GRAB_IMAGE_START">Operator grab_image_start</a></li>
+<li><a href="#GRAB_IMAGE">Operator grab_image</a></li>
+<li><a href="#GRAB_IMAGE_ASYNC">Operator grab_image_async</a></li>
+<li><a href="#GRAB_DATA">Operator grab_data</a></li>
+<li><a href="#GRAB_DATA_ASYNC">Operator grab_data_async</a></li>
+<li><a href="#CLOSE_FRAMEGRABBER">Operator close_framegrabber</a></li>
+<li><a href="#HDEVELOP_EXAMPLES">HDevelop Examples</a></li>
+<li><a href="#RELEASENOTES">Release Notes</a></li>
+</ul>
+  <!-- toc start -->
+<h2 id="GENERAL">General</h2><div> This page provides the documentation about the HALCON DirectShow  image acquisition interface for the <a href="http://www.microsoft.com">Microsoft</a> 
+ DirectShow application programming interface. 
+ <a href="http://www.mvtec.com/download/registration">Registered</a> customers can download the 
+ <a href="http://www.mvtec.com/download/halcon/">latest revision</a> of this interface from the 
+ <a href="http://www.mvtec.com">MVTec WWW server</a>.
+</div>
+<h2 id="SYSTEM_REQUIREMENTS">System Requirements</h2><div>
+<ul>
+<li>Intel compatible PC with Windows    7 (32-bit or 64-bit) or newer 
+   and <a href="https://www.microsoft.com/en-US/download">DirectX 8.1</a> or later installed. You can check 
+   your installed DirectX version by running the <b>dxdiag</b> diagnosis 
+   program. 
+</li>
+<li>A DirectShow compatible capture device and a successfully installed 
+   DirectShow driver for that device. As Windows provides a generic USB 
+   VideoClass (UVC) DirectShow driver most UVC devices will work without 
+   extra driver, but this depends on the required UVC version and the 
+   capabilities of the provided driver. 
+</li>
+<li>HALCON image acquisition interface <b>hAcqDirectShow.dll</b> or 
+   <b>hAcqDirectShowxl.dll</b>, respectively.<br> 
+   If you have properly installed the interface, this DLL should reside 
+   in <tt>bin\%HALCONARCH%</tt> within the HALCON base directory 
+   %HALCONROOT% you have chosen during the installation of HALCON. 
+   You don't need to register this DLL manually. Instead, the DLL checks the 
+   current registration and performs the necessary steps itself if necessary. 
+   If it does not have sufficient permissions to do this it will run 
+   regsvr32.exe with elevated privileges which will usually require user 
+   interaction.
+</li>
+</ul></div>
+<h2 id="INSTALLATION">Installation</h2><div>Only when installing or updating the interface manually follow these steps: <br> 
+
+<ul>
+<li><b>Windows:</b> Extract the archive containing the interface files to the 
+  HALCON base directory %HALCONROOT% (Note: Administrator privileges may be 
+  required for this step). Additionally, you have to move the interface 
+  examples to the directory %HALCONEXAMPLES% manually.
+</li>
+</ul></div>
+<h2 id="FEATURES">Features</h2><div>
+<ul>
+<li>Multiple capture devices. </li>
+<li>Synchronous and asynchronous grabbing. 
+</li>
+<li>External trigger. 
+</li>
+<li>Real-time grabbing (e.g., 30 frames per second for NTSC). 
+</li>
+<li>Software control of a variety of camera parameters.
+</li>
+</ul></div>
+<h2 id="LIMITATIONS">Limitations</h2><div>
+<ul>
+<li>Only RGB8, RGB555, RGB565, RGB24, RGB32, Y800, UYVY, Y411, and Y41P    video subtypes supported (see below for the usage for FOURCC codes), 
+   other formats may work in case all necessary codecs are available, 
+   see also 
+   <a href="http://msdn.microsoft.com/en-us/library/windows/desktop/aa370819%28v=vs.85%29.aspx"> 
+     Microsoft DirectShow documentation: Video Subtypes</a>. 
+</li>
+<li>Software image scaling and cropping not supported.
+</li>
+</ul></div>
+<h2 id="INFO_FRAMEGRABBER">Parameters for <a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a></h2><div></div>
+<table summary="Parameters for info_framegrabber" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Parameter</th>
+<th>Value List</th>
+<th>Type</th>
+<th>Kind</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><b>'bits_per_channel'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unused.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'camera_type'</b></td>
+<td>[]</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Unused.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'color_space'</b></td>
+<td>['gray', 'rgb']</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Values for color space.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'defaults'</b></td>
+<td>[1, 1, 0, 0, 0, 0, 'default', 8,               'rgb', -1.0, 'false', 'default', '0', -1, 1]
+</td>
+<td>mixed</td>
+<td>pre-defined</td>
+<td>Default values for <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'device'</b></td>
+<td>['[[<span class="var">&lt;index&gt;</span>]] <span class="var">&lt;device_name&gt;</span>']</td>
+<td>string</td>
+<td>dynamic</td>
+<td>List of available device IDs. The device ID is formed by the               index of the device and the device name. This is necessary to 
+              use multiple devices with the same device name. 
+              name.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'external_trigger'</b></td>
+<td>['false', 'true']</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Values for the external trigger.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'field'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unused.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'general'</b></td>
+<td>[]</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Information about the HALCON DirectShow interface.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'generic'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unsupported query.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'horizontal_resolution'</b></td>
+<td>1</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Value list for horizontal resolution.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'image_height'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unsupported query.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'image_width'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unsupported query.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'info_boards'</b></td>
+<td>['device:<span class="var">&lt;device index&gt;</span> port:<span class="var">&lt;port number&gt;</span> camera_type:<span class="var">&lt;camera type&gt;</span>']</td>
+<td>string</td>
+<td>dynamic</td>
+<td>A list of available devices with corresponding ports and               camera types, i.e. formats with resolution.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'parameters'</b></td>
+<td>['<span class="var">&lt;parameters&gt;</span>']</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Pre-defined parameters of the HALCON interface.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'parameters_readonly'</b></td>
+<td>['<span class="var">&lt;parameters&gt;</span>']</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Pre-defined read-only parameters of the HALCON interface.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'parameters_writeonly'</b></td>
+<td>['<span class="var">&lt;parameters&gt;</span>']</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Pre-defined write-only parameters of the HALCON interface.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'port'</b></td>
+<td>-1</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Returns the values for port.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'revision'</b></td>
+<td>'<span class="var">&lt;revision&gt;</span>'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Revision number of the DirectShow interface.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'start_column'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unsupported query.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'start_row'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unsupported query.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'vertical_resolution'</b></td>
+<td>1</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Value list for vertical resolution.</td>
+</tr></table>
+<h2 id="OPEN_FRAMEGRABBER">Parameters for <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a></h2><div></div>
+<table summary="Parameters for open_framegrabber" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Parameter</th>
+<th>Values</th>
+<th>Default</th>
+<th>Type</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><b>Name</b></td>
+<td>'DirectShow'</td>
+<td></td>
+<td>string</td>
+<td>Name of the HALCON interface.</td>
+</tr>
+<tr class="evenrow">
+<td><b>HorizontalResolution</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr>
+<tr class="oddrow">
+<td><b>VerticalResolution</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr>
+<tr class="evenrow">
+<td><b>ImageWidth</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr>
+<tr class="oddrow">
+<td><b>ImageHeight</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr>
+<tr class="evenrow">
+<td><b>StartRow</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr>
+<tr class="oddrow">
+<td><b>StartColumn</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr>
+<tr class="evenrow">
+<td><b>Field</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr>
+<tr class="oddrow">
+<td><b>BitsPerChannel</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr>
+<tr class="evenrow">
+<td><b>ColorSpace</b></td>
+<td>'gray', 'rgb'</td>
+<td>'rgb'</td>
+<td>string</td>
+<td>Desired color space and thus the number of image channels of the resulting HALCON image.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>Generic</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr>
+<tr class="evenrow">
+<td><b>ExternalTrigger</b></td>
+<td>'false', 'true'</td>
+<td>'false'</td>
+<td>string</td>
+<td>Status of the external trigger.</td>
+</tr>
+<tr class="oddrow">
+<td><b>CameraType</b></td>
+<td>'[[<span class="var">&lt;index&gt;</span>]] [<span class="var">&lt;video norm&gt;</span>] <span class="var">&lt;type&gt;</span> (<span class="var">&lt;widthxheight&gt;</span>)', 'default'</td>
+<td>'default'</td>
+<td>string</td>
+<td> The desired video format, e.g., 'NTSC RGB24 (640x480)'. 
+<ul>
+<li><i>[index]</i> is used to allow a mapping of the available devices 
+   to the available formats, this is especially useful if more than one 
+   device is connected, this parameter can be omitted. 
+</li>
+<li><i>video norm</i> can be one of the following: 'PAL', 'NTSC'. 
+   <i>video norm</i> is omitted, if the device does not support analog video. 
+</li>
+<li><i>type</i> can be one of the following: RGB8, RGB555, RGB565, RGB24, 
+   RGB32, Y800, UYVY, Y411, or Y41P. Other formats like mjpg, yuv or 
+   unknown ones, which are displayed using their GUID, might work if all 
+   necessary codecs are available. 
+</li>
+<li><i>width</i> and <i>height</i> specify the used image dimensions. 
+</li>
+</ul> 
+ Alternatively, you can pass 'default'. Then the first generally 
+ acceptable video format that the capture device proposes is chosen.<br><br> 
+ <b>Note</b> that when the video source (i.e., the capture device) and the 
+ video destination (i.e., the HALCON DirectShow interface) do not 
+ agree on a video format, DirectShow automatically tries to 
+ establish a connection via a transformation filter (e.g., a codec). This 
+ behavior is used by the HALCON DirectShow interface for all 
+ unsupported formats or if you specify 'default'.<br> <br> 
+ Additionally, <i>type</i> can also be a four-character code (FOURCC). In 
+ that case, the output data of the capture device is decoded by a suitable 
+ codec, which, of course, has to be installed properly (see also 
+ <a href="http://msdn.microsoft.com/en-us/library/windows/hardware/ms783788%28v=vs.85%29.aspx"> 
+   Microsoft DirectShow documentation: Working with Codecs</a>).<br> 
+ <b>Attention:</b> MVTec does by no means encourage the use of FOURCC video 
+ formats, and also does not guarantee that the HALCON DirectShow 
+ interface works correctly with all FOURCC video formats. To obtain the 
+ available FOURCC video formats you have to use, e.g., the 
+ <a href="http://www.microsoft.com">Microsoft</a> amcap.exe example application.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>Device</b></td>
+<td>'0', '1', '2', ..., '9', '[[<span class="var">&lt;index&gt;</span>]] <span class="var">&lt;device name&gt;</span>', 'default'</td>
+<td>'0'</td>
+<td>string</td>
+<td> The index of the capture device (passed as a string!). Alternatively, you  can pass the name of the capture device as it is returned by 
+ <a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a><tt>(..., 'info_boards', ...)</tt>. Note that it is 
+ sufficient to provide only the beginning of this string, the device which 
+ matches first is then used.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>Port</b></td>
+<td><span class="var">&lt;port&gt;</span></td>
+<td>-1</td>
+<td>integer</td>
+<td> Number of the capture device's output pin as it is returned by  <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a><tt>(..., 'available_pins', ...)</tt>. 
+ If you pass -1, the system automatically selects a suitable pin.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>LineIn</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr></table>
+<h2 id="SET_FRAMEGRABBER_PARAM">Parameters for <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a></h2><div> Note that most of the following parameters (and also the valid parameter  values!) depend on the capabilities of the used capture device and/or 
+ connected camera. <br> 
+ Many parameters (like 'brightness' and 'white_balance') can be set by 
+ either a valid integer value or by specifying one of the following strings: 
+
+<ul>
+<li>'auto' means that the device/camera controls the value automatically by 
+   itself 
+</li>
+<li>'off' disables the specified property 
+</li>
+<li>'on' enables the specified property
+</li>
+</ul></div>
+<table summary="Parameters for set_framegrabber_param" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Parameter</th>
+<th>Values</th>
+<th>Default</th>
+<th>Type</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><b>'backlight_compensation'</b></td>
+<td>'off', 'on'</td>
+<td></td>
+<td>string</td>
+<td> Backlight compensation. If the capture device does not support backlight  compensation, <tt>H_ERR_FGPARAM</tt> is returned.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'brightness'</b></td>
+<td><span class="var">&lt;brightness&gt;</span>, 'auto'</td>
+<td></td>
+<td>mixed</td>
+<td> Brightness. 'auto' indicates that the brightness is adjusted automatically.  If the capture device does not support brightness adjustment, H_ERR_FGPARAM 
+ is returned.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'color_enable'</b></td>
+<td>'off', 'on'</td>
+<td></td>
+<td>string</td>
+<td> Color enable. If the capture device does not support color enable,  H_ERR_FGPARAM is returned.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'connector'</b></td>
+<td><span class="var">&lt;number&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td> Physical connector. If the capture device does not support physical  connectors, H_ERR_FGPARAM is returned. A list of 
+ the available physical connectors can be obtained by calling 
+ <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a><tt>(..., 'available_connectors', ...)</tt>.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'contrast'</b></td>
+<td><span class="var">&lt;contrast&gt;</span>, 'auto'</td>
+<td></td>
+<td>mixed</td>
+<td> Contrast. 'auto' indicates that the contrast is adjusted automatically. If  the capture device does not support contrast adjustment, H_ERR_FGPARAM is 
+ returned.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'disconnect_graph'</b></td>
+<td>'false', 'true'</td>
+<td>'false'</td>
+<td>string</td>
+<td> Activate/deactivate automatic disconnection of the filter graph when  setting camera parameters. By default (i.e. upon opening of the capture 
+ device) the filter graph stays connected while setting camera 
+ parameters to speed up the execution of <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a>. 
+ <b>Note</b>, however, that numerous capture devices do not allow the setting 
+ of camera parameters while the filter graph is still connected. The 
+ behaviour of such devices is not predictable and might range from simply 
+ ignoring the new settings to crashes of your application! For these 
+ devices you <b>must</b> set 'disconnect_graph' to 'true' before setting 
+ parameters.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'do_force_trigger'</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td> Forces an event trigger from the application, when using the external  trigger. This might be useful for testing purposes.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'do_open_dialog'</b></td>
+<td><span class="var">&lt;dialog&gt;</span></td>
+<td></td>
+<td>string</td>
+<td> Opens a dialog (property page) provided by the capture device. If the  capture device does not support the specified (or any) dialog, 
+ H_ERR_FGPARAM is returned. A list of the available dialogs can be obtained 
+ by calling  <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a><tt>(..., 'available_dialogs', ...)</tt>.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'do_stop_grabbing'</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td> Stops the continuous grabbing of images. <b>Note</b> that stopping of  grabbing inevitably results in the termination of the capture thread (and 
+ restarting grabbing in creating a new one respectively), which is a rather 
+ time consuming operation and might slow down your application considerably!
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'exposure'</b></td>
+<td><span class="var">&lt;exposure&gt;</span>, 'auto'</td>
+<td></td>
+<td>mixed</td>
+<td> Exposure time. 'auto' indicates that the exposure time is adjusted  automatically. If the capture device does not support the setting of the 
+ exposure time, H_ERR_FGPARAM is returned.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'external_trigger'</b></td>
+<td>'false', 'true'</td>
+<td></td>
+<td>string</td>
+<td>Status of the external trigger.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'flip_horizontal'</b></td>
+<td>'false', 'true'</td>
+<td></td>
+<td>string</td>
+<td> Horizontal image flipping. If the capture device does not support  horizontal flipping, H_ERR_FGPARAM is returned.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'flip_vertical'</b></td>
+<td>'false', 'true'</td>
+<td></td>
+<td>string</td>
+<td> Vertical image flipping. If the capture device does not support  vertical flipping, H_ERR_FGPARAM is returned.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'focus'</b></td>
+<td><span class="var">&lt;focus&gt;</span>, 'auto'</td>
+<td></td>
+<td>mixed</td>
+<td> Focus. 'auto' indicates that the focus is adjusted automatically. If the  capture device does not support focus adjustment, H_ERR_FGPARAM is returned.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'frame_rate'</b></td>
+<td>0.0 ... 60.0</td>
+<td>15.0</td>
+<td>float</td>
+<td> Desired frame rate in frames per second (as a float value!). A list of  available frame rates can be obtained by calling 
+ <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a><tt>(..., 'available_frame_rates', ...)</tt>.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'gamma'</b></td>
+<td><span class="var">&lt;gamma&gt;</span>, 'auto'</td>
+<td></td>
+<td>mixed</td>
+<td> Gamma. 'auto' indicates that the gamma is adjusted automatically. If the  capture device does not support gamma adjustment, H_ERR_FGPARAM is returned.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'grab_timeout'</b></td>
+<td><span class="var">&lt;milliseconds&gt;</span></td>
+<td>5000</td>
+<td>integer</td>
+<td>Desired timeout (milliseconds) for aborting a pending grab. If -1 is specified, the timeout is set to INFINITE.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'hue'</b></td>
+<td><span class="var">&lt;hue&gt;</span>, 'auto'</td>
+<td></td>
+<td>mixed</td>
+<td> Hue. 'auto' indicates that the hue is adjusted automatically. If the  capture device does not support hue adjustment, H_ERR_FGPARAM is returned.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'iris'</b></td>
+<td><span class="var">&lt;iris&gt;</span>, 'auto'</td>
+<td></td>
+<td>mixed</td>
+<td> Iris. 'auto' indicates that the iris is adjusted automatically. If the  capture device does not support iris adjustment, H_ERR_FGPARAM is returned.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'pan'</b></td>
+<td><span class="var">&lt;pan&gt;</span>, 'auto'</td>
+<td></td>
+<td>mixed</td>
+<td> Pan. 'auto' indicates that the pan setting is adjusted automatically. If  the capture device does not support pan setting, H_ERR_FGPARAM is returned.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'roll'</b></td>
+<td><span class="var">&lt;roll&gt;</span>, 'auto'</td>
+<td></td>
+<td>mixed</td>
+<td> Roll. 'auto' indicates that the roll setting is adjusted automatically. If  the capture device does not support roll setting, H_ERR_FGPARAM is returned.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'saturation'</b></td>
+<td><span class="var">&lt;saturation&gt;</span>, 'auto'</td>
+<td></td>
+<td>mixed</td>
+<td> Saturation. 'auto' indicates that the saturation is adjusted automatically.  If the capture device does not support saturation adjustment, H_ERR_FGPARAM 
+ is returned.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'sharpness'</b></td>
+<td><span class="var">&lt;sharpness&gt;</span>, 'auto'</td>
+<td></td>
+<td>mixed</td>
+<td> Sharpness. 'auto' indicates that the sharpness is adjusted automatically.  If the capture device does not support sharpness adjustment, H_ERR_FGPARAM 
+ is returned.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'tilt'</b></td>
+<td><span class="var">&lt;tilt&gt;</span>, 'auto'</td>
+<td></td>
+<td>mixed</td>
+<td> Tilt. 'auto' indicates that the tilt setting is adjusted automatically. If  the capture device does not support tilt setting, H_ERR_FGPARAM is returned.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'video_gain'</b></td>
+<td><span class="var">&lt;gain&gt;</span>, 'auto'</td>
+<td></td>
+<td>mixed</td>
+<td> Gain. 'auto' indicates that the gain is adjusted automatically. If the  capture device does not support gain adjustment, H_ERR_FGPARAM is returned.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'white_balance'</b></td>
+<td><span class="var">&lt;white_balance&gt;</span>, 'auto'</td>
+<td></td>
+<td>mixed</td>
+<td> White balance. 'auto' indicates that the white balance is adjusted  automatically. If the capture device does not support white balance 
+ adjustment, H_ERR_FGPARAM is returned.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'zoom'</b></td>
+<td><span class="var">&lt;zoom&gt;</span>, 'auto'</td>
+<td></td>
+<td>mixed</td>
+<td> Zoom. 'auto' indicates that the zoom setting is adjusted automatically. If  the capture device does not support zoom setting, H_ERR_FGPARAM is returned.
+</td>
+</tr></table>
+<h2 id="GET_FRAMEGRABBER_PARAM">Parameters for <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a></h2><div>There may exist additional read-only parameters with the following postfixes: 
+<ul>
+<li><b>'_description'</b>: These parameters provide the tool-tip of the 
+   corresponding parameter as a string. 
+</li>
+<li><b>'_range'</b>: These parameters provide the minimum, maximum, 
+    step width, and default values for the corresponding integer or float 
+    parameter as a tuple with 4 elements, e.g., 
+    <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a><tt>(.., 'Shutter_range', ..)</tt> will return 
+    the output tuple <tt>[<i>min, max, step, default</i>]</tt>. 
+</li>
+<li><b>'_values'</b>: These parameters provide the valid value list for 
+    the corresponding parameter as a tuple, e.g., 
+    <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a><tt>(.., 'volatile_values', ..)</tt> will return 
+    the output tuple <tt>['enable', 'disable']</tt>. 
+</li>
+</ul> 
+<p> 
+All these postfixed parameter names are not returned when calling 
+<a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a><tt>(.., 'parameters', ..)</tt> and are used 
+to enable the easy parameterization via a generic graphical user 
+interface, particularly the HDevelop Image Acquisition Assistant. 
+</p>
+</div>
+<table summary="Parameters for get_framegrabber_param" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Parameter</th>
+<th>Values</th>
+<th>Default</th>
+<th>Type</th>
+<th>Kind</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><b>'available_connectors'</b></td>
+<td>[<span class="var">&lt;connector_type_1&gt;</span>, <span class="var">&lt;connector_type_2&gt;</span>, ...]</td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td>Types of the physical connectors of the device.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'available_dialogs'</b></td>
+<td>['<span class="var">&lt;dialog_1&gt;</span>', '<span class="var">&lt;dialog_2&gt;</span>', ...]</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td>Dialogs (property pages) provided by the device.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'available_frame_rates'</b></td>
+<td>[<span class="var">&lt;frame_rate_1&gt;</span>, <span class="var">&lt;frame_rate_2&gt;</span>, ...]</td>
+<td></td>
+<td>float</td>
+<td>dynamic</td>
+<td> Currently available frame rates in frames per second (as float values!).  This list will be empty, if the current device does not support the 
+ setting of frame rates.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'available_media_types'</b></td>
+<td>[<span class="var">&lt;format (WxH)&gt;</span>, <span class="var">&lt;format (WxH)&gt;</span>, ...]</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td> List of the available formats and associated resolutions for the current  device.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'available_pin_names'</b></td>
+<td>[<span class="var">&lt;pin_name_1&gt;</span>, <span class="var">&lt;pin_name_2&gt;</span>, ...]</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td> Names of the connectable pins of the source filter. Note that only pins  will be displayed which deliver video data.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'available_pins'</b></td>
+<td>[<span class="var">&lt;pin_index_1&gt;</span>, <span class="var">&lt;pin_index_2&gt;</span>, ...]</td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td> Indices of the connectable pins of the source filter (as to be passed to  <tt>Port</tt> in <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>). Note that only pins will be 
+ displayed which deliver video data.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'backlight_compensation'</b></td>
+<td>'off', 'on'</td>
+<td></td>
+<td>string</td>
+<td>pre-defined</td>
+<td> Backlight compensation. If the capture device does not support backlight  compensation, an empty tuple is returned.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'bits_per_channel'</b></td>
+<td><span class="var">&lt;default&gt;</span></td>
+<td>-1</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>The value is not used, so a default value is returned.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'brightness'</b></td>
+<td><span class="var">&lt;brightness&gt;</span>, 'auto'</td>
+<td></td>
+<td>mixed</td>
+<td>dynamic</td>
+<td> Brightness. If the capture device does not support brightness adjustment,  an empty tuple is returned.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'camera_type'</b></td>
+<td>'[<span class="var">&lt;video norm&gt;</span>] <span class="var">&lt;type&gt;</span> (<span class="var">&lt;widthxheight&gt;</span>)'</td>
+<td>'default'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Current camera type.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'color_enable'</b></td>
+<td>'off', 'on'</td>
+<td></td>
+<td>string</td>
+<td>pre-defined</td>
+<td> Color enable. If the capture device does not support color enable,  an empty tuple is returned.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'color_space'</b></td>
+<td>'gray', 'rgb'</td>
+<td>'rgb'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Desired color space and thus the number of image channels of the resulting HALCON image.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'connector'</b></td>
+<td><span class="var">&lt;number&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td> Physical connector. If the capture device does not support physical  connectors, an empty tuple is returned.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'contrast'</b></td>
+<td><span class="var">&lt;contrast&gt;</span>, 'auto'</td>
+<td></td>
+<td>mixed</td>
+<td>dynamic</td>
+<td> Contrast. If the capture device does not support contrast adjustment,  an empty tuple is returned.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'device'</b></td>
+<td>'<span class="var">&lt;index&gt;</span>'</td>
+<td>'0'</td>
+<td>string</td>
+<td>dynamic</td>
+<td>Current capture device index.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'disconnect_graph'</b></td>
+<td>'false', 'true'</td>
+<td>'false'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td> Status of the automatic disconnection of the filter graph when  setting camera parameters.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'exposure'</b></td>
+<td><span class="var">&lt;exposure&gt;</span>, 'auto'</td>
+<td></td>
+<td>mixed</td>
+<td>dynamic</td>
+<td> Exposure time. If the capture device does not support exposure time,  an empty tuple is returned.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'external_trigger'</b></td>
+<td>'false', 'true'</td>
+<td>'false'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Status of the external trigger.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'field'</b></td>
+<td>'<span class="var">&lt;default&gt;</span>'</td>
+<td>'default'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>The value is not used, so a default value is returned.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'flip_horizontal'</b></td>
+<td>'false', 'true'</td>
+<td></td>
+<td>string</td>
+<td>pre-defined</td>
+<td> Horizontal image flipping. If the capture device does not support  horizontal flipping, an empty tuple is returned.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'flip_vertical'</b></td>
+<td>'false', 'true'</td>
+<td></td>
+<td>string</td>
+<td>pre-defined</td>
+<td> Vertical image flipping. If the capture device does not support  vertical flipping, an empty tuple is returned.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'focus'</b></td>
+<td><span class="var">&lt;focus&gt;</span>, 'auto'</td>
+<td></td>
+<td>mixed</td>
+<td>pre-defined</td>
+<td> Focus. If the capture device does not support focus, an empty tuple is  returned.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'frame_rate'</b></td>
+<td><span class="var">&lt;fps&gt;</span></td>
+<td>15.0</td>
+<td>float</td>
+<td>dynamic</td>
+<td> Frame rate in frames per second (as a float value!).</td>
+</tr>
+<tr class="evenrow">
+<td><b>'gamma'</b></td>
+<td><span class="var">&lt;gamma&gt;</span>, 'auto'</td>
+<td></td>
+<td>mixed</td>
+<td>dynamic</td>
+<td> Gamma. If the capture device does not support gamma adjustment, an empty tuple  is returned
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'generic'</b></td>
+<td><span class="var">&lt;default&gt;</span></td>
+<td>-1</td>
+<td>mixed</td>
+<td>pre-defined</td>
+<td>The value is not used, so a default value is returned.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'grab_timeout'</b></td>
+<td><span class="var">&lt;milliseconds&gt;</span></td>
+<td>5000</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Current grab timeout in milliseconds.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'horizontal_resolution'</b></td>
+<td><span class="var">&lt;resolution&gt;</span></td>
+<td>1</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Current value of horizontal resolution.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'hue'</b></td>
+<td><span class="var">&lt;hue&gt;</span>, 'auto'</td>
+<td></td>
+<td>mixed</td>
+<td>dynamic</td>
+<td> Hue. If the capture device does not support hue adjustment, an empty tuple  is returned
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'image_height'</b></td>
+<td><span class="var">&lt;height&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Height of the desired image part ('0' stands for the complete image).
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'image_width'</b></td>
+<td><span class="var">&lt;width&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Width of the desired image part ('0' stands for the complete image).
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'iris'</b></td>
+<td><span class="var">&lt;iris&gt;</span>, 'auto'</td>
+<td></td>
+<td>mixed</td>
+<td>dynamic</td>
+<td> Iris. If the capture device does not support iris adjustment, an empty tuple  is returned
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'line_in'</b></td>
+<td><span class="var">&lt;default&gt;</span></td>
+<td>1</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>The value is not used, so a default value is returned.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'name'</b></td>
+<td>'DirectShow'</td>
+<td></td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Name of the HALCON interface.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'pan'</b></td>
+<td><span class="var">&lt;pan&gt;</span>, 'auto'</td>
+<td></td>
+<td>mixed</td>
+<td>dynamic</td>
+<td> Pan. If the capture device does not support pan adjustment, an empty tuple  is returned
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'port'</b></td>
+<td><span class="var">&lt;port&gt;</span></td>
+<td>-1</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Current port number.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'revision'</b></td>
+<td>'<span class="var">&lt;revision&gt;</span>'</td>
+<td></td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Revision number of the DirectShow interface.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'roll'</b></td>
+<td><span class="var">&lt;roll&gt;</span>, 'auto'</td>
+<td></td>
+<td>mixed</td>
+<td>dynamic</td>
+<td> Roll. If the capture device does not support roll setting, an empty tuple  is returned
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'saturation'</b></td>
+<td><span class="var">&lt;saturation&gt;</span>, 'auto'</td>
+<td></td>
+<td>mixed</td>
+<td>dynamic</td>
+<td> Saturation. If the capture device does not support saturation adjustment,  an empty tuple is returned
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'sharpness'</b></td>
+<td><span class="var">&lt;sharpness&gt;</span>, 'auto'</td>
+<td></td>
+<td>mixed</td>
+<td>dynamic</td>
+<td> Sharpness. If the capture device does not support sharpness adjustment,  an empty tuple is returned
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'start_column'</b></td>
+<td><span class="var">&lt;column&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Returns the current start column of the HALCON image.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'start_row'</b></td>
+<td><span class="var">&lt;row&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Returns the current start row of the HALCON image.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'tilt'</b></td>
+<td><span class="var">&lt;tilt&gt;</span>, 'auto'</td>
+<td></td>
+<td>mixed</td>
+<td>dynamic</td>
+<td> Tilt. If the capture device does not support tilt setting, an empty tuple  is returned
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'vertical_resolution'</b></td>
+<td><span class="var">&lt;resolution&gt;</span></td>
+<td>1</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Current value of vertical resolution.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'video_gain'</b></td>
+<td><span class="var">&lt;gain&gt;</span>, 'auto'</td>
+<td></td>
+<td>mixed</td>
+<td>dynamic</td>
+<td> Gain. If the capture device does not support gain adjustment, an empty tuple  is returned
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'white_balance'</b></td>
+<td><span class="var">&lt;white_balance&gt;</span>, 'auto'</td>
+<td></td>
+<td>mixed</td>
+<td>dynamic</td>
+<td> White balance. If the capture device does not support white balance  adjustment, an empty tuple is returned
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'zoom'</b></td>
+<td><span class="var">&lt;zoom&gt;</span>, 'auto'</td>
+<td></td>
+<td>mixed</td>
+<td>dynamic</td>
+<td> Zoom. If the capture device does not support zoom setting, an empty tuple  is returned
+</td>
+</tr></table>
+<h2 id="SET_FRAMEGRABBER_LUT">Operator <a class="halconoperator" href="../operators/set_framegrabber_lut.html">set_framegrabber_lut</a></h2><div>Not supported by this interface.</div>
+<h2 id="GET_FRAMEGRABBER_LUT">Operator <a class="halconoperator" href="../operators/get_framegrabber_lut.html">get_framegrabber_lut</a></h2><div>Not supported by this interface.</div>
+<h2 id="SET_FRAMEGRABBER_CALLBACK">Operator <a class="halconoperator" href="../operators/set_framegrabber_callback.html">set_framegrabber_callback</a></h2><div>Not supported by this interface.</div>
+<h2 id="GET_FRAMEGRABBER_CALLBACK">Operator <a class="halconoperator" href="../operators/get_framegrabber_callback.html">get_framegrabber_callback</a></h2><div>Not supported by this interface.</div>
+<h2 id="GRAB_IMAGE_START">Operator <a class="halconoperator" href="../operators/grab_image_start.html">grab_image_start</a></h2><div>Starts a new asynchronous grab. See also <a class="halconoperator" href="../operators/grab_image_start.html">grab_image_start</a>.</div>
+<h2 id="GRAB_IMAGE">Operator <a class="halconoperator" href="../operators/grab_image.html">grab_image</a></h2><div><a class="halconoperator" href="../operators/grab_image.html">grab_image</a> starts a new synchronous grab. See also <a class="halconoperator" href="../operators/grab_image.html">grab_image</a>. Note that 
+the interface converts the image from the device to the desired image format 
+specified by the parameters 'image_width', 'image_height', 'start_row', 
+'start_column', 'bits_per_channel', and 'color_space'.
+</div>
+<h2 id="GRAB_IMAGE_ASYNC">Operator <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a></h2><div><a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a> returns an image and starts the next asynchronous grab. See also <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a>. 
+Note that 
+the interface converts the image from the device to the desired image format 
+specified by the parameters 'image_width', 'image_height', 'start_row', 
+'start_column', 'bits_per_channel', and 'color_space'.
+</div>
+<h2 id="GRAB_DATA">Operator <a class="halconoperator" href="../operators/grab_data.html">grab_data</a></h2><div>Not supported by this interface.</div>
+<h2 id="GRAB_DATA_ASYNC">Operator <a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a></h2><div>Not supported by this interface.</div>
+<h2 id="CLOSE_FRAMEGRABBER">Operator <a class="halconoperator" href="../operators/close_framegrabber.html">close_framegrabber</a></h2><div>This operator closes the device. See also <a class="halconoperator" href="../operators/close_framegrabber.html">close_framegrabber</a>.</div>
+<h2 id="HDEVELOP_EXAMPLES">HDevelop Examples</h2><div>For this interface there are the following examples available: 
+<ul>
+<li>directshow_2cameras.hdev - 
+    Example for grabbing images from two capture devices. 
+</li>
+<li>directshow_camera_types.hdev - 
+    Shows grabbing images from all available camera types. 
+</li>
+<li>directshow_exposure.hdev - 
+    Shows the usage of exposure parameter. 
+</li>
+<li>directshow_frame_rates.hdev - 
+    Example for grabbing images with different frame rates. 
+</li>
+<li>directshow.hdev - 
+    Benchmark 
+</li>
+<li>directshow_parameters.hdev - 
+    Lists all parameters of a device. 
+</li>
+<li>directshow_simple.hdev - 
+    A simple example to show the usage of the interface.
+</li>
+</ul></div>
+<h2 id="RELEASENOTES">Release Notes</h2><div>
+<ul>
+<li><b>Revision 13.0.2</b> (Aug 13, 2018): 
+<ul>
+<li>The technical dependency from the HALCON Library has been removed. 
+</li>
+<li>If the device name contained UNICODE characters this was not handled 
+      correctly. This problem has been fixed. 
+</li>
+</ul></li>
+<li><b>Revision 13.0.1</b> (Oct 28, 2016): 
+
+<ul>
+<li>HALCON 13 version of the interface. 
+</li>
+</ul></li>
+<li><b>Revision 6.2</b> (Jun 15, 2015): 
+
+<ul>
+<li>When a faulty DirectShow driver was registered the interface did not 
+      work correctly even for other devices and crashed when trying to open 
+      any device. This problem has been fixed. 
+</li>
+<li>The documentation has been modified to show more accurate device 
+      requirements. 
+</li>
+</ul></li>
+<li><b>Revision 6.1</b> (May 28, 2015): 
+
+<ul>
+<li>Trying to open an unknown device has led to a crash. 
+      This problem has been fixed. 
+</li>
+<li>Setting an empty value in <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a> has led to a crash. 
+      This problem has been fixed. 
+</li>
+</ul></li>
+<li><b>Revision 6.0</b> (Oct 31, 2014): 
+
+<ul>
+<li>HALCON 12 version of the interface. 
+</li>
+</ul></li>
+<li><b>Revision 5.3</b> (Sep 12, 2014): 
+
+<ul>
+<li>Fixed bug in <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a> to prevent opening the same device 
+      a second time. 
+</li>
+</ul></li>
+<li><b>Revision 5.2</b> (Sep 6, 2013): 
+
+<ul>
+<li>Improved internal memory allocation to avoid stack overflow. 
+</li>
+</ul></li>
+<li><b>Revision 5.1</b> (Sep 28, 2012): 
+
+<ul>
+<li>Enhanced device enumeration to enable the use of multiple cameras 
+      with the same name. For this the index of the device is displayed in 
+      front of the name to form an unique identifier. 
+</li>
+<li>Extended the allowed formats for devices, previously hidden 
+      formats and resolutions can be chosen for some cameras, also 
+      it is not guaranteed that they can be used. 
+</li>
+<li>Relaxed the matching of device names and camera types (i.e. formats) 
+      when opening a device. 
+</li>
+<li>Improved DLL registration process in case the interface is not 
+      already registered correctly. This might need user interaction to 
+      gain elevated privileges. 
+</li>
+<li>Added parameter 'available_media_types' to <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a>. 
+</li>
+<li>Changed default of 'disconnect_graph' to FALSE to speed up 
+      setting of parameters and most devices support it nicely. Relaxed 
+      checking of expected filter name when reconnecting a device. 
+</li>
+<li>Removed unnecessary low-level warnings, improved wording of 
+      important ones. 
+</li>
+<li>Fixed bug which led to crashes due to heap corruption with some 
+      devices. 
+</li>
+<li>Various other small bugfixes. 
+</li>
+</ul></li>
+<li><b>Revision 5.0</b> (May 15, 2012): 
+
+<ul>
+<li>HALCON 11 version of the interface (included in HALCON 11 DVD). 
+</li>
+</ul></li>
+<li><b>Revision 4.2</b> (Aug 20, 2010): 
+
+<ul>
+<li>In certain cases the image buffer size was calculated too large by a 
+      factor of 8. This bug has been fixed. 
+</li>
+<li>HALCON 10 version of the interface (included in HALCON 10 DVD). 
+</li>
+</ul></li>
+<li><b>Revision 4.1</b> (Jan 22, 2010): 
+
+<ul>
+<li>Skipped query of the actual connector settings. 
+</li>
+<li>Adapted order within the device initialization to ensure a valid 
+      crossbar instance. 
+</li>
+</ul></li>
+<li><b>Revision 4.0</b> (Nov 28, 2008): 
+
+<ul>
+<li>HALCON 9.0 version of the interface (included in HALCON 9.0 DVD). 
+</li>
+</ul></li>
+<li><b>Revision 3.3</b> (Apr 22, 2008): 
+
+<ul>
+<li>Added read-only parameters with postfix '_description', '_range', 
+      and '_values' to enable the easy parameterization via a generic 
+      graphical user interface. 
+</li>
+</ul></li>
+<li><b>Revision 3.2</b> (Aug 3, 2007): 
+
+<ul>
+<li>Ignore Leutron Vision Video Capture and VfW driver to prevent 
+      conflicts with using the HALCON Leutron interface simultaneously. 
+</li>
+</ul></li>
+<li><b>Revision 3.1</b> (Jun 29, 2007): 
+
+<ul>
+<li>Bug fix in the internal memory allocation. 
+</li>
+</ul></li>
+<li><b>Revision 3.0</b> (May 15, 2007): 
+
+<ul>
+<li>HALCON 8.0 version of the interface (included in HALCON 8.0 DVD). 
+</li>
+</ul></li>
+<li><b>Revision 2.10</b> (Jun 29, 2006): 
+
+<ul>
+<li>Bug fix in <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>. 
+</li>
+<li>New parameter 'disconnect_graph' for faster setting of parameters. 
+</li>
+</ul></li>
+<li><b>Revision 2.9</b> (Jan 17, 2006): 
+
+<ul>
+<li>Bug fix in <a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a><tt>(..., 'camera_type', ...)</tt>. 
+</li>
+<li>Allow usage of FOURCC codes for the <i>CameraType</i> parameter 
+      in <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>. 
+</li>
+</ul></li>
+<li><b>Revision 2.8</b> (Sep 9, 2005): 
+
+<ul>
+<li>64 bit Windows version available. 
+</li>
+<li>Manual registration of hAcqDirectShow.dll or parhAcqDirectShow.dll 
+      no longer necessary. 
+</li>
+<li>Bug fix in <a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a><tt>(..., 'camera_type', ...)</tt>. 
+</li>
+</ul></li>
+<li><b>Revision 2.7</b> (Jul 27, 2005): 
+
+<ul>
+<li>HALCON 7.1 version of the interface (included in HALCON 7.1 CD). 
+</li>
+<li>Speed-up for acquisition of RGB images (avoiding cache alignment 
+      failures when converting the interleaved image data into HALCON image 
+      objects). 
+</li>
+</ul></li>
+<li><b>Revision 2.6</b> (Jul 19, 2004): 
+
+<ul>
+<li>Parallel version available. 
+</li>
+</ul></li>
+<li><b>Revision 2.5</b> (Jul 7, 2004): 
+
+<ul>
+<li>Extension to allow top-down bitmaps for RGB8, RGB15, RGB16, RGB24, 
+      and RGB32 video subtypes. 
+</li>
+<li>Bug fix: Faulty reference count corrected. 
+</li>
+</ul></li>
+<li><b>Revision 2.4</b> (Dec 3, 2003): 
+
+<ul>
+<li>Bug fix in <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a>. 
+</li>
+</ul></li>
+<li><b>Revision 2.3</b> (Sep 15, 2003): 
+
+<ul>
+<li>HALCON 7.0 version of the interface (included in HALCON 7.0 CD). 
+</li>
+<li>New video subtypes UYVY, Y411, and Y41P supported. 
+</li>
+<li>New parameters 'available_dialogs' and 'do_open_dialog' for using the 
+      property pages provided by a capture device. 
+</li>
+<li>Extension to allow setting of parameters for capture devices that 
+      change their settings only if the source filter is not connected. 
+</li>
+</ul></li>
+<li><b>Revision 2.2</b> (May 23, 2003): 
+
+<ul>
+<li>Extension to allow enabling the external trigger for capture devices 
+      that change the IAMVideoControl interface settings only if the source 
+      filter is not yet connected. 
+</li>
+</ul></li>
+<li><b>Revision 2.1</b> (Dec 4, 2002): 
+
+<ul>
+<li>New video subtype Y800 supported. 
+</li>
+<li>New parameters 'external_trigger', 'external_trigger_range' and 
+      'do_force_trigger' for external triggering. 
+</li>
+<li>New parameters 'connector', and 'available_connectors' for video 
+      input selection. 
+</li>
+<li>New parameters 'pan', 'tilt', 'roll', 'zoom', 'exposure', 'iris', 
+      'focus', 'pan_range', 'tilt_range', 'roll_range', 'zoom_range', 
+      'exposure_range', 'iris_range', and 'focus_range' for further 
+      control of the camera. 
+</li>
+<li>New parameters 'flip_horizontal', 'flip_vertical', 
+      'flip_horizontal_range' and 'flip_vertical_range' for image flipping. 
+</li>
+</ul></li>
+<li><b>Revision 2.0</b> (Sep 30, 2002): 
+
+<ul>
+<li>First official release.
+</li>
+</ul></li>
+</ul></div>
+  <!-- toc end -->  <hr> 
+  <div class="imprint"> 
+    <span class="imprinthead">Legal disclaimer regarding hyperlinks</span>: 
+    This page may provide users with access by hypertext links to external, non-MVTec websites. 
+Any such access is provided with the understanding that the contents 
+of non-MVTec sites are beyond the control of MVTec Software GmbH, that 
+MVTec Software GmbH makes no representations whatsoever about such 
+sites, and that users shall proceed at their own risk. 
+MVTec Software GmbH is not responsible for the privacy practices or 
+the content of external, non-MVTec websites.
+ 
+  </div> 
+  <div class="imprint"> 
+    <span class="imprinthead">Copyright notes</span>: 
+    &copy; Copyright MVTec Software GmbH. All rights reserved. 
+Unless otherwise stated, the copyright and similar rights in the 
+contents of this page, including but not limited to all text, designs 
+and images appearing herein, are copyrighted works owned by MVTec 
+Software GmbH. 
+"MVTec Software GmbH" and "HALCON" are registered trademarks of MVTec 
+Software GmbH. 
+All other brand names, designs, service marks and trademarks (whether 
+or not registered) referenced or used herein are the property of their 
+respective owners.
+ 
+  </div> 
+  <div class="footer"> 
+    acqdump 1.5 / hdoc 1.2 / Generated: Thu Nov 15 09:47:05 CET 2018 
+  </div> 
+  </body> 
+</html>

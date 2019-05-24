@@ -1,0 +1,1095 @@
+<!DOCTYPE HTML> 
+<html> 
+  <head> 
+  <meta id='acqdump-id' name='acqdump-id' content='halcon-acq-DirectFile-rev13.0.2'> 
+  <title>DirectFile / HALCON / MVTec Software GmbH</title> 
+      <style type="text/css"> 
+      body { 
+        color: #000000; 
+        background-color: #ffffff; 
+        margin-top: 0px; 
+        margin-bottom: 0px; 
+        margin-left: 20px; 
+        margin-right: 20px; 
+        font-family: Arial,Helvetica,sans-serif; 
+      } 
+      a:link { 
+        color: #0044cc; 
+      } 
+      a:link,a:visited { 
+        text-decoration: none; 
+      } 
+      a:link:hover,a:visited:hover { 
+        text-decoration: underline; 
+      } 
+      th { 
+        text-align: left; 
+      } 
+      h1,h2,h3,h4,h5,h6 { 
+        text-rendering: optimizeLegibility; 
+        color: #666666; 
+      } 
+      tt { 
+        font-family: monospace,monospace; 
+      } 
+      h1 a.halconoperator { 
+        font-family: Arial,Helvetica,sans-serif; 
+        color: #666666; 
+      } 
+      h2 a.halconoperator { 
+        font-family: Arial,Helvetica,sans-serif; 
+        color: #666666; 
+      } 
+      hr { 
+        border: 0; 
+        border-top: solid 1px #f28d26; 
+      } 
+      pre { 
+        font-family: monospace,monospace; 
+        padding: 1ex; 
+        white-space: pre-wrap; 
+      } 
+      .toc { 
+        font-size: 80%; 
+        border-top: 1px dashed #f28d26; 
+        border-bottom: 1px dashed #f28d26; 
+        padding-top: 5px; 
+        padding-bottom: 5px; 
+      } 
+      .inv { 
+        margin: 0; 
+        border: 0; 
+        padding: 0; 
+      } 
+      .banner { 
+        color: #666666; 
+        padding-left: 1em; 
+      } 
+      .logo { 
+        background-color: white; 
+      } 
+      .keyboard { 
+        font-size: 80%; 
+        padding-left: 3px; 
+        padding-right: 3px; 
+        border-radius: 5px; 
+        border-width: 1px; 
+        border-style: solid; 
+        border-color: #f28d26; 
+        background-color: #f3f3f3; 
+      } 
+      .warning { 
+        margin-top: 2ex; 
+        margin-bottom: 1ex; 
+        padding: 10px; 
+        text-align: center; 
+        border: 1px solid; 
+        color: #bb0000; 
+        background-color: #fff7f7 
+      } 
+      .imprint { 
+        margin-top: 1ex; 
+        font-size: 80%; 
+        color: #666666; 
+      } 
+      .imprinthead { 
+        font-weight: bolder; 
+        color: #666666; 
+      } 
+      .postscript { 
+        margin-top: 2ex; 
+        font-size: 80%; 
+        color: #666666 
+      } 
+      .evenrow { 
+        background-color: #e7e7ef; 
+        vertical-align: top; 
+      } 
+      .oddrow { 
+        background-color: #f7f7ff; 
+        vertical-align: top; 
+      } 
+      .headrow { 
+        background-color: #97979f; 
+        color: #ffffff; 
+        vertical-align: top; 
+      } 
+      .logorow { 
+        vertical-align: top; 
+      } 
+      .error { 
+        color: red; 
+      } 
+      .var { 
+        font-style: italic 
+      } 
+      .halconoperator { 
+        font-family: monospace,monospace; 
+      } 
+      .halconprocedure { 
+        font-family: Consolas,Inconsolata,"DejaVu Sans Mono",monospace; 
+      } 
+      span.operator { 
+        font-family: monospace,monospace; 
+      } 
+      span.procedure { 
+        font-family: monospace,monospace; 
+      } 
+      span.operation { 
+        font-family: monospace,monospace; 
+      } 
+      span.feature { 
+        font-family: Arial,Helvetica,Homerton,sans-serif; 
+      } 
+      ul { 
+        padding-left: 1.2em; 
+      } 
+      li.dot { 
+        list-style-type: square; 
+        color: #f28d26; 
+      } 
+      .breadcrumb { 
+        font-size: 80%; 
+        color: white; 
+        background-color: #062d64; 
+        margin-left: -20px; 
+        margin-right: -20px; 
+        margin-bottom: 20px; 
+        padding-left: 20px; 
+        padding-right: 20px; 
+        padding-bottom: 15px; 
+      } 
+      .webbar { 
+        font-size: 80%; 
+        background-color: #dddddd; 
+        margin-top: 0px; 
+        margin-left: -20px; 
+        margin-right: -20px; 
+        margin-bottom: 0px; 
+        padding-top: 5px; 
+        padding-left: 20px; 
+        padding-right: 20px; 
+        padding-bottom: 5px; 
+      } 
+      .footer { 
+        border-top: 1px dashed #f28d26; 
+        font-size: 80%; 
+        color: #666666; 
+        margin-left: -20px; 
+        margin-right: -20px; 
+        margin-top: 0px; 
+        padding-left: 20px; 
+        padding-right: 20px; 
+        padding-top: 10px; 
+        padding-bottom: 15px; 
+      } 
+      .breadcrumb a { 
+        color: #ffffff; 
+        border-bottom: 1px solid white; 
+      } 
+      .breadcrumb a:link:hover,.breadcrumb a:visited:hover { 
+        text-decoration: none; 
+        border-bottom: none; 
+      } 
+      .heading { 
+        margin-top: 1ex; 
+        font-size: 110%; 
+        font-weight: bold; 
+        color: #666666; 
+      } 
+      .text { 
+        color: black; 
+      } 
+      .example { 
+        font-size: 80%; 
+        background-color: #f3f3f3; 
+        border: 1px dashed #666666; 
+        padding: 10px; 
+      } 
+      .math { 
+      } 
+      .displaymath { 
+        text-align: center; 
+        margin-top: 1ex; 
+        margin-bottom: 1ex; 
+      } 
+      </style> 
+  </head> 
+  <body><div class="breadcrumb"> 
+<br class="inv"/> 
+<a href="../../../../documentation.html">HALCON</a> / <a href="acq-overview.html">Image Acquisition Interfaces</a> 
+<br class="inv"/> 
+</div> 
+<h1>Image Acquisition Interface for DirectShow File Reader</h1> 
+<table summary="Image Acquisition Interface for DirectShow File Reader"> 
+  <tr> 
+    <td> 
+      Interface: 
+    </td> 
+    <td> 
+      DirectFile 
+    </td> 
+  </tr> 
+  <tr> 
+    <td> 
+      Revision: 
+    </td> 
+    <td> 
+      13.0.2 
+    </td> 
+  </tr> 
+  <tr> 
+    <td> 
+      Date: 
+    </td> 
+    <td> 
+      2018-08-13 
+    </td> 
+  </tr> 
+</table>
+<ul class="toc">
+<li><a href="#GENERAL">General</a></li>
+<li><a href="#SYSTEM_REQUIREMENTS">System Requirements</a></li>
+<li><a href="#INSTALLATION">Installation</a></li>
+<li><a href="#LIMITATIONS">Limitations</a></li>
+<li><a href="#INFO_FRAMEGRABBER">Parameters for info_framegrabber</a></li>
+<li><a href="#OPEN_FRAMEGRABBER">Parameters for open_framegrabber</a></li>
+<li><a href="#SET_FRAMEGRABBER_PARAM">Parameters for set_framegrabber_param</a></li>
+<li><a href="#GET_FRAMEGRABBER_PARAM">Parameters for get_framegrabber_param</a></li>
+<li><a href="#SET_FRAMEGRABBER_LUT">Operator set_framegrabber_lut</a></li>
+<li><a href="#GET_FRAMEGRABBER_LUT">Operator get_framegrabber_lut</a></li>
+<li><a href="#SET_FRAMEGRABBER_CALLBACK">Operator set_framegrabber_callback</a></li>
+<li><a href="#GET_FRAMEGRABBER_CALLBACK">Operator get_framegrabber_callback</a></li>
+<li><a href="#GRAB_IMAGE_START">Operator grab_image_start</a></li>
+<li><a href="#GRAB_IMAGE">Operator grab_image</a></li>
+<li><a href="#GRAB_IMAGE_ASYNC">Operator grab_image_async</a></li>
+<li><a href="#GRAB_DATA">Operator grab_data</a></li>
+<li><a href="#GRAB_DATA_ASYNC">Operator grab_data_async</a></li>
+<li><a href="#CLOSE_FRAMEGRABBER">Operator close_framegrabber</a></li>
+<li><a href="#HDEVELOP_EXAMPLES">HDevelop Examples</a></li>
+<li><a href="#THIRDPARTY">Usage of 3rd party libraries</a></li>
+<li><a href="#RELEASENOTES">Release Notes</a></li>
+</ul>
+  <!-- toc start -->
+<h2 id="GENERAL">General</h2><div> This page provides the documentation about the HALCON DirectFile  interface for the <a href="http://www.microsoft.com">Microsoft</a> DirectShow File Reader 
+ application programming interface. 
+ <a href="http://www.mvtec.com/download/registration">Registered</a> customers can download the 
+ <a href="http://www.mvtec.com/download/halcon/">latest revision</a> of this interface from the 
+ <a href="http://www.mvtec.com">MVTec WWW server</a>.
+</div>
+<h2 id="SYSTEM_REQUIREMENTS">System Requirements</h2><div>
+<ul>
+<li>Intel compatible PC with Windows    7 (32-bit or 64-bit) or newer 
+   and <a href="http://www.microsoft.com/download">DirectX 8.1</a> or later installed. You can check 
+   your installed DirectX version by running the <b>dxdiag</b> diagnosis 
+   program. 
+</li>
+<li>HALCON image acquisition interface <b>hAcqDirectFile.dll</b> or 
+   <b>hAcqDirectFilexl.dll</b>, respectively.<br> 
+   If you have properly installed the interface, these DLLs should reside 
+   in <tt>%HALCONROOT%\bin\%HALCONARCH%</tt>. 
+   You don't need to register this DLL manually. Instead, the DLL checks the 
+   current registration and performs the necessary steps itself if necessary. 
+   If it does not have sufficient permissions to do this it will run 
+   regsvr32.exe with elevated privileges which will usually require user 
+   interaction. 
+</li>
+<li>Third-party library <b>MediaInfo.dll</b> version 0.7.87.0 which should 
+   also reside in <tt>%HALCONROOT%\bin\%HALCONARCH%</tt> 
+   if you have properly installed the interface. 
+   Note that this DLL is not crucial for image acquisition, it is only 
+   required for calling <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a><tt>(..., 'media_info', ...)</tt>.
+</li>
+</ul></div>
+<h2 id="INSTALLATION">Installation</h2><div>Only when installing or updating the interface manually follow these steps: <br> 
+
+<ul>
+<li><b>Windows:</b> Extract the archive containing the interface files to the 
+  HALCON base directory %HALCONROOT% (Note: Administrator privileges may be 
+  required for this step). Additionally, you have to move the interface 
+  examples to the directory %HALCONEXAMPLES% manually.
+</li>
+</ul></div>
+<h2 id="LIMITATIONS">Limitations</h2><div> In general, whether a file can be opened with the HALCON DirectFile  interface or not strongly depends on the configuration of the system your 
+ application is running on. Typically, it is necessary that a suitable codec 
+ is installed. As a rule of thumb, when you can replay a file with 
+ <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/dd407274.aspx">GraphEdit</a> it is most likely 
+ that you can also open it with the 
+ HALCON DirectFile interface. On a 64 bit operating system the 
+ HALCON architecture (32 or 64 bit) must match the architecture of the codec. 
+ For detailed information about the codecs on your system, see the 
+ Technical Support Information at the About dialog of Windows Media Player. 
+
+<ul>
+<li>Only files that allow frame based positioning supported. 
+</li>
+<li>Image scaling and cropping not supported.
+</li>
+</ul></div>
+<h2 id="INFO_FRAMEGRABBER">Parameters for <a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a></h2><div></div>
+<table summary="Parameters for info_framegrabber" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Parameter</th>
+<th>Value List</th>
+<th>Type</th>
+<th>Kind</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><b>'bits_per_channel'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unused.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'camera_type'</b></td>
+<td>'CAMFILE:'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Syntax for camera configuration file.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'color_space'</b></td>
+<td>['gray', 'rgb']</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Values for color space.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'defaults'</b></td>
+<td>[1, 1, 0, 0, 0, 0, 'default', 8,               'rgb', -1.0, 'false', 'default', '0', -1, 1]
+</td>
+<td>mixed</td>
+<td>pre-defined</td>
+<td>Default values for <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'device'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unused.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'external_trigger'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unused.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'field'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unused.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'general'</b></td>
+<td>[]</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Information about the HALCON DirectFile interface.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'generic'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unsupported query.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'horizontal_resolution'</b></td>
+<td>1</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Value list for horizontal resolution.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'image_height'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unsupported query.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'image_width'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unsupported query.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'info_boards'</b></td>
+<td>'filter:<span class="var">&lt;filter&gt;</span> | merit:<span class="var">&lt;merit&gt;</span> | file:<span class="var">&lt;file&gt;</span> |                type:<span class="var">&lt;type&gt;</span> | subtype:<span class="var">&lt;subtype&gt;</span>'
+</td>
+<td>string</td>
+<td>dynamic</td>
+<td>Info about installed DirectShow filters: 
+<ul>
+<li><b>filter</b> is the name of this DirectShow filter. 
+</li>
+<li><b>merit</b> is a value that defines which filters are 
+                preferred to build the capture filter graph. 
+                <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/dd390674.aspx">Standard values</a> are shown by their name. 
+</li>
+<li><b>file</b> is the DLL that contains this filter. 
+</li>
+<li><b>type</b> and <b>subtype</b> list the 
+                <a href="https://msdn.microsoft.com/de-de/library/windows/desktop/dd390670.aspx">media types</a> of all input pins 
+                of this filter. Known media types are shown by their name, 
+                others by their GUID.
+</li>
+</ul></td>
+</tr>
+<tr class="evenrow">
+<td><b>'parameters'</b></td>
+<td>['<span class="var">&lt;parameters&gt;</span>']</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Pre-defined parameters of the HALCON interface.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'parameters_readonly'</b></td>
+<td>['<span class="var">&lt;parameters&gt;</span>']</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Pre-defined read-only parameters of the HALCON interface.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'parameters_writeonly'</b></td>
+<td>['<span class="var">&lt;parameters&gt;</span>']</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Pre-defined write-only parameters of the HALCON interface.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'port'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unused.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'revision'</b></td>
+<td>'<span class="var">&lt;revision&gt;</span>'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Revision number of the DirectFile interface.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'start_column'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unsupported query.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'start_row'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unsupported query.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'vertical_resolution'</b></td>
+<td>1</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Value list for vertical resolution.</td>
+</tr></table>
+<h2 id="OPEN_FRAMEGRABBER">Parameters for <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a></h2><div></div>
+<table summary="Parameters for open_framegrabber" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Parameter</th>
+<th>Values</th>
+<th>Default</th>
+<th>Type</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><b>Name</b></td>
+<td>'DirectFile'</td>
+<td></td>
+<td>string</td>
+<td>Name of the HALCON interface.</td>
+</tr>
+<tr class="evenrow">
+<td><b>HorizontalResolution</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr>
+<tr class="oddrow">
+<td><b>VerticalResolution</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr>
+<tr class="evenrow">
+<td><b>ImageWidth</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr>
+<tr class="oddrow">
+<td><b>ImageHeight</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr>
+<tr class="evenrow">
+<td><b>StartRow</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr>
+<tr class="oddrow">
+<td><b>StartColumn</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr>
+<tr class="evenrow">
+<td><b>Field</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr>
+<tr class="oddrow">
+<td><b>BitsPerChannel</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr>
+<tr class="evenrow">
+<td><b>ColorSpace</b></td>
+<td>'gray', 'rgb'</td>
+<td>'rgb'</td>
+<td>string</td>
+<td>Desired color space and thus the number of image channels of the resulting HALCON image.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>Generic</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr>
+<tr class="evenrow">
+<td><b>ExternalTrigger</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr>
+<tr class="oddrow">
+<td><b>CameraType</b></td>
+<td>'<span class="var">&lt;filename&gt;</span>'</td>
+<td>'default'</td>
+<td>string</td>
+<td> The camera type parameter is used to specify the name of the  video file to be opened. The name of the video file can either be 
+ given <b>absolutely</b> (e.g., "C:\\MyImages\\MyAVIFile.avi") or 
+ <b>relatively</b> to your environment setting %HALCONIMAGES%.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>Device</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr>
+<tr class="oddrow">
+<td><b>Port</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr>
+<tr class="evenrow">
+<td><b>LineIn</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr></table>
+<h2 id="SET_FRAMEGRABBER_PARAM">Parameters for <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a></h2><div></div>
+<table summary="Parameters for set_framegrabber_param" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Parameter</th>
+<th>Values</th>
+<th>Default</th>
+<th>Type</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><b>'frame_number'</b></td>
+<td><span class="var">&lt;number&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td> Number of the next frame to be grabbed by <a class="halconoperator" href="../operators/grab_image.html">grab_image</a>  or <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a>.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'grab_timeout'</b></td>
+<td><span class="var">&lt;milliseconds&gt;</span></td>
+<td>5000</td>
+<td>integer</td>
+<td>Desired timeout (milliseconds) for aborting a pending grab. If -1 is specified, the timeout is set to INFINITE.
+</td>
+</tr></table>
+<h2 id="GET_FRAMEGRABBER_PARAM">Parameters for <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a></h2><div>There may exist additional read-only parameters with the following postfixes: 
+<ul>
+<li><b>'_description'</b>: These parameters provide the tool-tip of the 
+   corresponding parameter as a string. 
+</li>
+<li><b>'_range'</b>: These parameters provide the minimum, maximum, 
+    step width, and default values for the corresponding integer or float 
+    parameter as a tuple with 4 elements, e.g., 
+    <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a><tt>(.., 'Shutter_range', ..)</tt> will return 
+    the output tuple <tt>[<i>min, max, step, default</i>]</tt>. 
+</li>
+<li><b>'_values'</b>: These parameters provide the valid value list for 
+    the corresponding parameter as a tuple, e.g., 
+    <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a><tt>(.., 'volatile_values', ..)</tt> will return 
+    the output tuple <tt>['enable', 'disable']</tt>. 
+</li>
+</ul> 
+<p> 
+All these postfixed parameter names are not returned when calling 
+<a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a><tt>(.., 'parameters', ..)</tt> and are used 
+to enable the easy parameterization via a generic graphical user 
+interface, particularly the HDevelop Image Acquisition Assistant. 
+</p>
+</div>
+<table summary="Parameters for get_framegrabber_param" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Parameter</th>
+<th>Values</th>
+<th>Default</th>
+<th>Type</th>
+<th>Kind</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><b>'bits_per_channel'</b></td>
+<td><span class="var">&lt;default&gt;</span></td>
+<td>-1</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>The value is not used, so a default value is returned.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'camera_type'</b></td>
+<td>'<span class="var">&lt;filename&gt;</span>'</td>
+<td>'default'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Name of the camera configuration file.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'color_space'</b></td>
+<td>'gray', 'rgb'</td>
+<td>'rgb'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Desired color space and thus the number of image channels of the resulting HALCON image.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'device'</b></td>
+<td><span class="var">&lt;default&gt;</span></td>
+<td>'0'</td>
+<td>integer</td>
+<td>dynamic</td>
+<td>The value is not used, so a default value is returned.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'external_trigger'</b></td>
+<td><span class="var">&lt;default&gt;</span></td>
+<td>'false'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>The value is not used, so a default value is returned.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'field'</b></td>
+<td>'<span class="var">&lt;default&gt;</span>'</td>
+<td>'default'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>The value is not used, so a default value is returned.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'filter_graph'</b></td>
+<td>'filter:<span class="var">&lt;filter&gt;</span> | merit:<span class="var">&lt;merit&gt;</span> | file:<span class="var">&lt;file&gt;</span> |                type:<span class="var">&lt;type&gt;</span> | subtype:<span class="var">&lt;subtype&gt;</span>'
+</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td>Info about connected DirectShow filters: 
+<ul>
+<li><b>filter</b> is the name of this DirectShow filter. 
+</li>
+<li><b>merit</b> is a value that defines which filters are 
+                preferred to build the capture filter graph. 
+                <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/dd390674.aspx">Standard values</a> are shown by their name. 
+</li>
+<li><b>file</b> is the DLL that contains this filter. 
+</li>
+<li><b>type</b> and <b>subtype</b> list the 
+                <a href="https://msdn.microsoft.com/de-de/library/windows/desktop/dd390670.aspx">media types</a> of all input pins 
+                of this filter. Known media types are shown by their name, 
+                others by their GUID.
+</li>
+</ul></td>
+</tr>
+<tr class="evenrow">
+<td><b>'first_frame'</b></td>
+<td><span class="var">&lt;number&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td> Number of the first frame of the video stream.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'frame_number'</b></td>
+<td><span class="var">&lt;number&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td> Number of the next frame to be grabbed by <a class="halconoperator" href="../operators/grab_image.html">grab_image</a>  or <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a>.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'generic'</b></td>
+<td><span class="var">&lt;default&gt;</span></td>
+<td>-1</td>
+<td>mixed</td>
+<td>pre-defined</td>
+<td>The value is not used, so a default value is returned.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'grab_timeout'</b></td>
+<td><span class="var">&lt;milliseconds&gt;</span></td>
+<td>5000</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Current grab timeout in milliseconds.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'horizontal_resolution'</b></td>
+<td><span class="var">&lt;resolution&gt;</span></td>
+<td>1</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Current value of horizontal resolution.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'image_height'</b></td>
+<td><span class="var">&lt;default&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>The value is not used, so a default value is returned.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'image_width'</b></td>
+<td><span class="var">&lt;default&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>The value is not used, so a default value is returned.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'last_frame'</b></td>
+<td><span class="var">&lt;number&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td> Number of the last frame of the video stream.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'line_in'</b></td>
+<td><span class="var">&lt;default&gt;</span></td>
+<td>1</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>The value is not used, so a default value is returned.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'media_info'</b></td>
+<td><span class="var">&lt;media_info&gt;</span></td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td>Info about the source file retrieved               by the third-party library MediaInfo 
+              (see the <a href="#SYSTEM_REQUIREMENTS">System Requirements</a>).
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'name'</b></td>
+<td>'DirectFile'</td>
+<td></td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Name of the HALCON interface.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'port'</b></td>
+<td><span class="var">&lt;default&gt;</span></td>
+<td>-1</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>The value is not used, so a default value is returned.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'revision'</b></td>
+<td>'<span class="var">&lt;revision&gt;</span>'</td>
+<td></td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Revision number of the DirectFile interface.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'start_column'</b></td>
+<td><span class="var">&lt;column&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Returns the current start column of the HALCON image.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'start_row'</b></td>
+<td><span class="var">&lt;row&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Returns the current start row of the HALCON image.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'vertical_resolution'</b></td>
+<td><span class="var">&lt;resolution&gt;</span></td>
+<td>1</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Current value of vertical resolution.</td>
+</tr></table>
+<h2 id="SET_FRAMEGRABBER_LUT">Operator <a class="halconoperator" href="../operators/set_framegrabber_lut.html">set_framegrabber_lut</a></h2><div>Not supported by this interface.</div>
+<h2 id="GET_FRAMEGRABBER_LUT">Operator <a class="halconoperator" href="../operators/get_framegrabber_lut.html">get_framegrabber_lut</a></h2><div>Not supported by this interface.</div>
+<h2 id="SET_FRAMEGRABBER_CALLBACK">Operator <a class="halconoperator" href="../operators/set_framegrabber_callback.html">set_framegrabber_callback</a></h2><div>Not supported by this interface.</div>
+<h2 id="GET_FRAMEGRABBER_CALLBACK">Operator <a class="halconoperator" href="../operators/get_framegrabber_callback.html">get_framegrabber_callback</a></h2><div>Not supported by this interface.</div>
+<h2 id="GRAB_IMAGE_START">Operator <a class="halconoperator" href="../operators/grab_image_start.html">grab_image_start</a></h2><div>Starts a new asynchronous grab. See also <a class="halconoperator" href="../operators/grab_image_start.html">grab_image_start</a>.</div>
+<h2 id="GRAB_IMAGE">Operator <a class="halconoperator" href="../operators/grab_image.html">grab_image</a></h2><div><a class="halconoperator" href="../operators/grab_image.html">grab_image</a> starts a new synchronous grab. See also <a class="halconoperator" href="../operators/grab_image.html">grab_image</a>. Note that 
+the interface converts the image from the device to the desired image format 
+specified by the parameters 'image_width', 'image_height', 'start_row', 
+'start_column', 'bits_per_channel', and 'color_space'.
+</div>
+<h2 id="GRAB_IMAGE_ASYNC">Operator <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a></h2><div><a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a> returns an image and starts the next asynchronous grab. See also <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a>. 
+Note that 
+the interface converts the image from the device to the desired image format 
+specified by the parameters 'image_width', 'image_height', 'start_row', 
+'start_column', 'bits_per_channel', and 'color_space'.
+</div>
+<h2 id="GRAB_DATA">Operator <a class="halconoperator" href="../operators/grab_data.html">grab_data</a></h2><div>Not supported by this interface.</div>
+<h2 id="GRAB_DATA_ASYNC">Operator <a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a></h2><div>Not supported by this interface.</div>
+<h2 id="CLOSE_FRAMEGRABBER">Operator <a class="halconoperator" href="../operators/close_framegrabber.html">close_framegrabber</a></h2><div>This operator closes the device. See also <a class="halconoperator" href="../operators/close_framegrabber.html">close_framegrabber</a>.</div>
+<h2 id="HDEVELOP_EXAMPLES">HDevelop Examples</h2><div>For this interface there are the following examples available: 
+<ul>
+<li>directfile.hdev - Benchmark
+</li>
+</ul></div>
+<h2 id="THIRDPARTY">Usage of 3rd party libraries</h2><div>This interface depends on the following 3rd party libraries. See the files <tt>third_party_copyrights.html</tt> and <tt>third_party_licenses.txt</tt> 
+in the HALCON base directory for copyright and license information. 
+
+<ul>
+<li><a href="https://mediaarea.net/en/MediaInfo">MediaInfo</a> - used without 
+   modifications 
+</li>
+</ul>
+</div>
+<h2 id="RELEASENOTES">Release Notes</h2><div>
+<ul>
+<li><b>Revision 13.0.2</b> (Aug 13, 2018): 
+<ul>
+<li>The technical dependency from the HALCON Library has been removed. 
+</li>
+<li>When calling the parameter 'media_info' if the information of the file 
+      contained UNICODE characters this was not handled correctly. This 
+      problem has been fixed. 
+</li>
+</ul></li>
+<li><b>Revision 13.0.1</b> (Oct 28, 2016): 
+
+<ul>
+<li>HALCON 13 version of the interface. 
+</li>
+<li>On Windows systems the maximum length for a path was limited to 260 
+      characters. This problem has been fixed. Now, the maximum total 
+      path length on Windows systems is 32,767 characters. 
+</li>
+</ul></li>
+<li><b>Revision 6.3</b> (Aug 26, 2016): 
+
+<ul>
+<li><a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a><tt>(..., 'info_boards', ...)</tt> now returns 
+      a list of all DirectShow filters installed on the system. 
+</li>
+<li><a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a><tt>(..., 'filter_graph', ...)</tt> now returns 
+      a list of the DirectShow filters used by the active filter graph. 
+</li>
+<li><a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a><tt>(..., 'media_info', ...)</tt> now returns 
+      information about the source file retrieved by the third-party library 
+      MediaInfo (see the <a href="#SYSTEM_REQUIREMENTS">System Requirements</a>). 
+</li>
+<li><a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a> now succeeds as soon as the source file 
+      has been loaded. If no working filter graph can be built, 
+      <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a><tt>(..., 'media_info', ...)</tt> 
+      can serve to query useful information about the file in order to 
+      find and install a suitable codec. 
+</li>
+<li>If <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a> was called with a nonexistent file, it returned 
+      with H_ERR_FGNV (#5304) instead of H_ERR_FNF (#5200). 
+      This problem has been fixed. 
+</li>
+<li>File paths containing multi-byte characters 
+      could not be opened on Asian systems. This problem has been fixed. 
+</li>
+<li>Setting an empty value in <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a> led to a crash. 
+      This problem has been fixed. 
+</li>
+</ul></li>
+<li><b>Revision 6.2</b> (Jul 22, 2015): 
+
+<ul>
+<li>First call of <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a> failed. 
+      This problem has been fixed. 
+</li>
+<li>The call of <a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a><tt>(..., 'general', ...)</tt> crashed 
+      if quartz.dll was available. This problem has been fixed. 
+</li>
+</ul></li>
+<li><b>Revision 6.1</b> (Feb 23, 2015): 
+
+<ul>
+<li>Fixed bug reading UTF8 encoded file names. 
+</li>
+</ul></li>
+<li><b>Revision 6.0</b> (Oct 31, 2014): 
+
+<ul>
+<li>HALCON 12 version of the interface. 
+</li>
+<li>Improved DLL registration process in case the interface is not 
+      already registered correctly. 
+</li>
+</ul></li>
+<li><b>Revision 5.0</b> (May 15, 2012): 
+
+<ul>
+<li>HALCON 11 version of the interface (included in HALCON 11 DVD). 
+</li>
+</ul></li>
+<li><b>Revision 4.2</b> (Aug 20, 2010): 
+
+<ul>
+<li>The image buffer size was calculated too large by a factor of 8. 
+      This bug has been fixed. 
+</li>
+<li>HALCON 10 version of the interface (included in HALCON 10 DVD). 
+</li>
+</ul></li>
+<li><b>Revision 4.1</b> (Sep 9, 2009): 
+
+<ul>
+<li>Fixed bug in parameter 'frame_number' in case that multiple 
+      DirectFile acquisition handles are used simultaneously. 
+</li>
+</ul></li>
+<li><b>Revision 4.0</b> (Nov 28, 2008): 
+
+<ul>
+<li>HALCON 9.0 version of the interface (included in HALCON 9.0 DVD). 
+</li>
+</ul></li>
+<li><b>Revision 3.1</b> (Apr 22, 2008): 
+
+<ul>
+<li>Added read-only parameters with postfix '_description', '_range', 
+      and '_values' to enable the easy parameterization via a generic 
+      graphical user interface. 
+</li>
+</ul></li>
+<li><b>Revision 3.0</b> (May 15, 2007): 
+
+<ul>
+<li>HALCON 8.0 version of the interface (included in HALCON 8.0 DVD). 
+</li>
+</ul></li>
+<li><b>Revision 2.3</b> (Apr 27, 2007): 
+
+<ul>
+<li>Bug fix regarding the padding of images with an odd image width. 
+</li>
+</ul></li>
+<li><b>Revision 2.2</b> (Aug 14, 2006): 
+
+<ul>
+<li>Bug fix in <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a><tt>(..., 'frame_number', ...)</tt> 
+      in case of the last frame of the video stream. 
+</li>
+</ul></li>
+<li><b>Revision 2.1</b> (Sep 12, 2005): 
+
+<ul>
+<li>64 bit Windows version available. 
+</li>
+<li>Manual registration of hAcqDirectFile.dll or parhAcqDirectFile.dll 
+      no longer necessary. 
+</li>
+</ul></li>
+<li><b>Revision 2.0</b> (Sep 1, 2005): 
+
+<ul>
+<li>First official release (included in HALCON 7.1 CD).
+</li>
+</ul></li>
+</ul></div>
+  <!-- toc end -->  <hr> 
+  <div class="imprint"> 
+    <span class="imprinthead">Legal disclaimer regarding hyperlinks</span>: 
+    This page may provide users with access by hypertext links to external, non-MVTec websites. 
+Any such access is provided with the understanding that the contents 
+of non-MVTec sites are beyond the control of MVTec Software GmbH, that 
+MVTec Software GmbH makes no representations whatsoever about such 
+sites, and that users shall proceed at their own risk. 
+MVTec Software GmbH is not responsible for the privacy practices or 
+the content of external, non-MVTec websites.
+ 
+  </div> 
+  <div class="imprint"> 
+    <span class="imprinthead">Copyright notes</span>: 
+    &copy; Copyright MVTec Software GmbH. All rights reserved. 
+Unless otherwise stated, the copyright and similar rights in the 
+contents of this page, including but not limited to all text, designs 
+and images appearing herein, are copyrighted works owned by MVTec 
+Software GmbH. 
+"MVTec Software GmbH" and "HALCON" are registered trademarks of MVTec 
+Software GmbH. 
+All other brand names, designs, service marks and trademarks (whether 
+or not registered) referenced or used herein are the property of their 
+respective owners.
+ 
+  </div> 
+  <div class="footer"> 
+    acqdump 1.5 / hdoc 1.2 / Generated: Fri Nov  9 14:51:21 CET 2018 
+  </div> 
+  </body> 
+</html>

@@ -1,0 +1,2323 @@
+<!DOCTYPE HTML> 
+<html> 
+  <head> 
+  <meta id='acqdump-id' name='acqdump-id' content='halcon-13.0-acq-MultiCam-rev13.0.1'> 
+  <title>MultiCam / HALCON 13.0 / MVTec Software GmbH</title> 
+      <style type="text/css"> 
+      body { 
+        color: #000000; 
+        background-color: #ffffff; 
+        margin-top: 0px; 
+        margin-bottom: 0px; 
+        margin-left: 20px; 
+        margin-right: 20px; 
+        font-family: Arial,Helvetica,sans-serif; 
+      } 
+      a:link { 
+        color: #0044cc; 
+      } 
+      a:link,a:visited { 
+        text-decoration: none; 
+      } 
+      a:link:hover,a:visited:hover { 
+        text-decoration: underline; 
+      } 
+      th { 
+        text-align: left; 
+      } 
+      h1,h2,h3,h4,h5,h6 { 
+        text-rendering: optimizeLegibility; 
+        color: #666666; 
+      } 
+      tt { 
+        font-family: monospace,monospace; 
+      } 
+      h1 a.halconoperator { 
+        font-family: Arial,Helvetica,sans-serif; 
+        color: #666666; 
+      } 
+      h2 a.halconoperator { 
+        font-family: Arial,Helvetica,sans-serif; 
+        color: #666666; 
+      } 
+      hr { 
+        border: 0; 
+        border-top: solid 1px #f28d26; 
+      } 
+      pre { 
+        font-family: monospace,monospace; 
+        padding: 1ex; 
+        white-space: pre-wrap; 
+      } 
+      .toc { 
+        font-size: 80%; 
+        border-top: 1px dashed #f28d26; 
+        border-bottom: 1px dashed #f28d26; 
+        padding-top: 5px; 
+        padding-bottom: 5px; 
+      } 
+      .inv { 
+        margin: 0; 
+        border: 0; 
+        padding: 0; 
+      } 
+      .banner { 
+        color: #666666; 
+        padding-left: 1em; 
+      } 
+      .logo { 
+        background-color: white; 
+      } 
+      .keyboard { 
+        font-size: 80%; 
+        padding-left: 3px; 
+        padding-right: 3px; 
+        border-radius: 5px; 
+        border-width: 1px; 
+        border-style: solid; 
+        border-color: #f28d26; 
+        background-color: #f3f3f3; 
+      } 
+      .warning { 
+        margin-top: 2ex; 
+        margin-bottom: 1ex; 
+        padding: 10px; 
+        text-align: center; 
+        border: 1px solid; 
+        color: #bb0000; 
+        background-color: #fff7f7 
+      } 
+      .imprint { 
+        margin-top: 1ex; 
+        font-size: 80%; 
+        color: #666666; 
+      } 
+      .imprinthead { 
+        font-weight: bolder; 
+        color: #666666; 
+      } 
+      .postscript { 
+        margin-top: 2ex; 
+        font-size: 80%; 
+        color: #666666 
+      } 
+      .evenrow { 
+        background-color: #e7e7ef; 
+        vertical-align: top; 
+      } 
+      .oddrow { 
+        background-color: #f7f7ff; 
+        vertical-align: top; 
+      } 
+      .headrow { 
+        background-color: #97979f; 
+        color: #ffffff; 
+        vertical-align: top; 
+      } 
+      .logorow { 
+        vertical-align: top; 
+      } 
+      .error { 
+        color: red; 
+      } 
+      .var { 
+        font-style: italic 
+      } 
+      .halconoperator { 
+        font-family: monospace,monospace; 
+      } 
+      .halconprocedure { 
+        font-family: Consolas,Inconsolata,"DejaVu Sans Mono",monospace; 
+      } 
+      span.operator { 
+        font-family: monospace,monospace; 
+      } 
+      span.procedure { 
+        font-family: monospace,monospace; 
+      } 
+      span.operation { 
+        font-family: monospace,monospace; 
+      } 
+      span.feature { 
+        font-family: Arial,Helvetica,Homerton,sans-serif; 
+      } 
+      ul { 
+        padding-left: 1.2em; 
+      } 
+      li.dot { 
+        list-style-type: square; 
+        color: #f28d26; 
+      } 
+      .breadcrumb { 
+        font-size: 80%; 
+        color: white; 
+        background-color: #062d64; 
+        margin-left: -20px; 
+        margin-right: -20px; 
+        margin-bottom: 20px; 
+        padding-left: 20px; 
+        padding-right: 20px; 
+        padding-bottom: 15px; 
+      } 
+      .webbar { 
+        font-size: 80%; 
+        background-color: #dddddd; 
+        margin-top: 0px; 
+        margin-left: -20px; 
+        margin-right: -20px; 
+        margin-bottom: 0px; 
+        padding-top: 5px; 
+        padding-left: 20px; 
+        padding-right: 20px; 
+        padding-bottom: 5px; 
+      } 
+      .footer { 
+        border-top: 1px dashed #f28d26; 
+        font-size: 80%; 
+        color: #666666; 
+        margin-left: -20px; 
+        margin-right: -20px; 
+        margin-top: 0px; 
+        padding-left: 20px; 
+        padding-right: 20px; 
+        padding-top: 10px; 
+        padding-bottom: 15px; 
+      } 
+      .breadcrumb a { 
+        color: #ffffff; 
+        border-bottom: 1px solid white; 
+      } 
+      .breadcrumb a:link:hover,.breadcrumb a:visited:hover { 
+        text-decoration: none; 
+        border-bottom: none; 
+      } 
+      .heading { 
+        margin-top: 1ex; 
+        font-size: 110%; 
+        font-weight: bold; 
+        color: #666666; 
+      } 
+      .text { 
+        color: black; 
+      } 
+      .example { 
+        font-size: 80%; 
+        background-color: #f3f3f3; 
+        border: 1px dashed #666666; 
+        padding: 10px; 
+      } 
+      .math { 
+      } 
+      .displaymath { 
+        text-align: center; 
+        margin-top: 1ex; 
+        margin-bottom: 1ex; 
+      } 
+      </style> 
+  </head> 
+  <body><div class="breadcrumb"> 
+<br class="inv"/> 
+<a href="../../../../documentation.html">HALCON 13.0</a> / <a href="acq-overview.html">Image Acquisition Interfaces</a> 
+<br class="inv"/> 
+</div> 
+<h1> Image Acquisition Interface for Euresys DOMINO, GRABLINK, PICOLO, and QUICKPACK Boards</h1> 
+<table summary=" Image Acquisition Interface for Euresys DOMINO, GRABLINK, PICOLO, and QUICKPACK Boards"> 
+  <tr> 
+    <td> 
+      Interface: 
+    </td> 
+    <td> 
+      MultiCam 
+    </td> 
+  </tr> 
+  <tr> 
+    <td> 
+      Revision: 
+    </td> 
+    <td> 
+      13.0.1 
+    </td> 
+  </tr> 
+  <tr> 
+    <td> 
+      Date: 
+    </td> 
+    <td> 
+      2016-10-28 
+    </td> 
+  </tr> 
+  <tr> 
+    <td> 
+      HALCON Version: 
+    </td> 
+    <td> 
+      13.0 
+    </td> 
+  </tr> 
+</table>
+<ul class="toc">
+<li><a href="#GENERAL">General</a></li>
+<li><a href="#SYSTEM_REQUIREMENTS">System Requirements</a></li>
+<li><a href="#FEATURES">Features</a></li>
+<li><a href="#LIMITATIONS">Limitations</a></li>
+<li><a href="#INFO_FRAMEGRABBER">Parameters for info_framegrabber</a></li>
+<li><a href="#OPEN_FRAMEGRABBER">Parameters for open_framegrabber</a></li>
+<li><a href="#SET_FRAMEGRABBER_PARAM">Parameters for set_framegrabber_param</a></li>
+<li><a href="#GET_FRAMEGRABBER_PARAM">Parameters for get_framegrabber_param</a></li>
+<li><a href="#SPECIAL_SET_FRAMEGRABBER_PARAM"> Additional parameters for set_framegrabber_param:<br> 
+ Line Scan, Strobe, Digital Input/Output, 
+ DOMINO and PICOLO, DOMINO and GRABLINK, 
+ PICOLO and QUICKPACK Parameters</a></li>
+<li><a href="#SPECIAL_GET_FRAMEGRABBER_PARAM"> Additional parameters for get_framegrabber_param:<br> 
+ Line Scan, Strobe, Digital Input/Output, 
+ DOMINO and PICOLO, DOMINO and GRABLINK, 
+ PICOLO and QUICKPACK Parameters</a></li>
+<li><a href="#SET_FRAMEGRABBER_LUT">Operator set_framegrabber_lut</a></li>
+<li><a href="#GET_FRAMEGRABBER_LUT">Operator get_framegrabber_lut</a></li>
+<li><a href="#SET_FRAMEGRABBER_CALLBACK">Operator set_framegrabber_callback</a></li>
+<li><a href="#GET_FRAMEGRABBER_CALLBACK">Operator get_framegrabber_callback</a></li>
+<li><a href="#GRAB_IMAGE_START">Operator grab_image_start</a></li>
+<li><a href="#GRAB_IMAGE">Operator grab_image</a></li>
+<li><a href="#GRAB_IMAGE_ASYNC">Operator grab_image_async</a></li>
+<li><a href="#GRAB_DATA">Operator grab_data</a></li>
+<li><a href="#GRAB_DATA_ASYNC">Operator grab_data_async</a></li>
+<li><a href="#CLOSE_FRAMEGRABBER">Operator close_framegrabber</a></li>
+<li><a href="#HDEVELOP_EXAMPLES">HDevelop Examples</a></li>
+<li><a href="#CPP_EXAMPLES">C++ Examples</a></li>
+<li><a href="#CS_EXAMPLES">C# Examples</a></li>
+<li><a href="#RELEASENOTES">Release Notes</a></li>
+</ul>
+  <!-- toc start -->
+<h2 id="GENERAL">General</h2><div> This page provides the documentation of the HALCON MultiCam image  acquisition interface. This interface is based on the <a href="http://www.euresys.com">Euresys</a> 
+ MultiCam driver and supports the DOMINO Iota/Alpha/Gamma/Delta, 
+ the DOMINO Melody/Harmony/Symphony, the GRABLINK Avenue/Base/DualBase/Expert 
+ /Express/Full/Value and PICOLO frame grabber boards. 
+ <a href="http://www.mvtec.com/download/registration.html">Registered</a> customers can download the 
+ <a href="http://www.mvtec.com/halcon/download">latest revision</a> of this interface from the 
+ <a href="http://www.mvtec.com">MVTec WWW server</a>.
+</div>
+<h2 id="SYSTEM_REQUIREMENTS">System Requirements</h2><div>
+<ul>
+<li>Intel compatible PC with Windows    7 (32-bit or 64-bit) 
+   or newer that is also supported by the vendor-specific SDK. 
+</li>
+<li>Successfully installed Euresys device driver (version 6.7 or higher). 
+</li>
+<li>Euresys DLL <b>multicam.dll</b> (version 6.7 or higher).<br> 
+   This DLL must be within your search path %PATH%. If you do not have this 
+   DLL, please contact Euresys or the vendor from which you bought the 
+   board. 
+</li>
+<li>HALCON image acquisition interface <b>hAcqMultiCam.dll</b> or 
+   <b>hAcqMultiCamxl.dll</b>, respectively. 
+   If you have properly installed the interface, both DLLs should reside in 
+   <tt>bin\%HALCONARCH%</tt> within the HALCON base directory 
+   %HALCONROOT% you have chosen during the installation of HALCON.
+</li>
+</ul></div>
+<h2 id="FEATURES">Features</h2><div>
+<ul>
+<li>Support of the volatile mode for multi-channel images. </li>
+<li>Synchronous and asynchronous grabbing. 
+</li>
+<li>Multiple cameras connected to multiple boards. 
+</li>
+<li>Support of line scan cameras (GRABLINK only). 
+</li>
+<li>Support of rgb line scan cameras (QUICKPACK and GRABLINK only). 
+</li>
+<li>Support of <i>StereoVision</i> for DOMINO Alpha boards. 
+</li>
+<li>Support of different board topologies for DOMINO boards. 
+</li>
+<li>External trigger, asynchronous camera reset. 
+</li>
+<li>Software control of strobe and exposure. 
+</li>
+<li>Software control of digital input and output lines. 
+</li>
+<li>Support of user-specific callback functions.
+</li>
+</ul></div>
+<h2 id="LIMITATIONS">Limitations</h2><div>
+<ul>
+<li>LUTs only for QUICKPACK ColorScan boards. </li>
+<li>No cropping of image parts.
+</li>
+</ul></div>
+<h2 id="INFO_FRAMEGRABBER">Parameters for <a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a></h2><div></div>
+<table summary="Parameters for info_framegrabber" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Parameter</th>
+<th>Value List</th>
+<th>Type</th>
+<th>Kind</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><b>'bits_per_channel'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unused.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'camera_type'</b></td>
+<td> 'CAMFILE:', 'cam', <span class="var">&lt;camera_path&gt;</span>,  'Alpha_STEREOXY', 'Alpha_X', 'Alpha_XBIS', 'Alpha_Y', 'Alpha_YBIS', 
+ 'Avenue', 'Base', 'ColorScan', 
+ 'Delta_X1', 'Delta_X2', 'Delta_Y1', 'Delta_Y2', 
+ 'DualBase_A', 'DualBase_B', 
+ 'Expert_A', 'Expert_B', 'Expert_M', 'Express', 
+ 'Full', 
+ 'Gamma_X', 'Gamma_XBIS', 'Gamma_Y', 'Gamma_YBIS', 'Gamma_Z', 'Gamma_ZBIS', 
+ 'Harmony_X', 'Harmony_Y', 'Symphony_A', 'Symphony_B', 'Symphony_C', 
+ 'Symphony_D', 'Iota', 
+ 'Melody', 
+ 'Picolo_VID1', 'Picolo_VID2', 'Picolo_VID3', 
+ 'Picolo_Yc', 'ScanMonoCam', 
+ 'SyncMonoCam', 'Value', 'VcamMonoCam'
+</td>
+<td>string</td>
+<td>pre-defined</td>
+<td> Syntax for the camera configuration file and possible values for camera type.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'color_space'</b></td>
+<td>'default', 'gray', 'rgb'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Values for color space.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'defaults'</b></td>
+<td>[1, 1, 0, 0, 0, 0, 'interlaced', 8,               'default', -1.0, 'false', 'Alpha_X:CS8530_P30SM', '0', 1, 1]
+</td>
+<td>mixed</td>
+<td>pre-defined</td>
+<td>Default values for <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'device'</b></td>
+<td>'0', '1', '2', '3'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Returns a pre-defined list of possible device numbers.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'external_trigger'</b></td>
+<td>['false', 'true']</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Values for the external trigger.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'field'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'general'</b></td>
+<td>[]</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Information about the HALCON MultiCam interface.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'generic'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unsupported query.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'horizontal_resolution'</b></td>
+<td>1</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Value list for horizontal resolution.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'image_height'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unsupported query.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'image_width'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unsupported query.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'info_boards'</b></td>
+<td>['device:board_id identifier:<span class="var">&lt;identifier&gt;</span> boardName:<span class="var">&lt;name&gt;</span>               serial:<span class="var">&lt;serial_number&gt;</span> boardType:<span class="var">&lt;type&gt;</span>']
+</td>
+<td>string</td>
+<td>dynamic</td>
+<td>A list of the available devices.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'parameters'</b></td>
+<td>['<span class="var">&lt;parameters&gt;</span>']</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Pre-defined parameters of the HALCON interface.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'parameters_readonly'</b></td>
+<td>['<span class="var">&lt;parameters&gt;</span>']</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Pre-defined read-only parameters of the HALCON interface.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'parameters_writeonly'</b></td>
+<td>['<span class="var">&lt;parameters&gt;</span>']</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Pre-defined write-only parameters of the HALCON interface.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'port'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unused.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'revision'</b></td>
+<td>'<span class="var">&lt;revision&gt;</span>'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Revision number of the MultiCam interface.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'start_column'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unsupported query.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'start_row'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unsupported query.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'vertical_resolution'</b></td>
+<td>1</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Value list for vertical resolution.</td>
+</tr></table>
+<h2 id="OPEN_FRAMEGRABBER">Parameters for <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a></h2><div></div>
+<table summary="Parameters for open_framegrabber" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Parameter</th>
+<th>Values</th>
+<th>Default</th>
+<th>Type</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><b>Name</b></td>
+<td>'MultiCam'</td>
+<td></td>
+<td>string</td>
+<td>Name of the HALCON interface.</td>
+</tr>
+<tr class="evenrow">
+<td><b>HorizontalResolution</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr>
+<tr class="oddrow">
+<td><b>VerticalResolution</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr>
+<tr class="evenrow">
+<td><b>ImageWidth</b></td>
+<td>---</td>
+<td></td>
+<td>integer</td>
+<td> The image size values must be defined in the .cam camera file. In  <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a> the parameter image_width is ignored. The width has to be 
+ equal or smaller than the maximum image width but at least 8 pixels. 
+ Furthermore, the image widht should be divisable by 4, otherwise the value 
+ will be adapted to the next higher value divisable by 4 (see the also the 
+ MULTICAM documentation).
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>ImageHeight</b></td>
+<td>---</td>
+<td></td>
+<td>integer</td>
+<td> The image size values must be defined in the .cam camera file. In  <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a> the parameter image_height is ignored. When accessing 
+ an area scan camera, the height has to be equal or smaller than the maximum 
+ image height but at least 8 pixels. Furthermore, the image height should be 
+ divisable by 4, otherwise the value will be adapted to the next higher value 
+ divisable by 4. Using a line scan camera, the height defines the page length 
+ (see the also the MULTICAM documentation).
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>StartRow</b></td>
+<td>0, <span class="var">&lt;row&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>Row coordinate of the upper left pixel within the desired image part.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>StartColumn</b></td>
+<td>0, <span class="var">&lt;column&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>Column coordinate of the upper left pixel within the desired image part.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>Field</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr>
+<tr class="oddrow">
+<td><b>BitsPerChannel</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr>
+<tr class="evenrow">
+<td><b>ColorSpace</b></td>
+<td>'default', 'rgb', 'rg', 'rb', 'gb', 'r', 'g', 'b', 'gray'</td>
+<td>'gray'</td>
+<td>string</td>
+<td> Select special color channels for the output image. This parameter is only  important for color images with planar storage (not in volatile mode). 
+ <b>PICOLO only:</b> 
+ Specifies a gray value image with 1 channel.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>Generic</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr>
+<tr class="evenrow">
+<td><b>ExternalTrigger</b></td>
+<td>'false', 'true'</td>
+<td>'false'</td>
+<td>string</td>
+<td> Activate/deactivate external triggering. When accessing a line scan camera,  'true' enables an external page trigger with page delay 0.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>CameraType</b></td>
+<td>
+<ul>
+<li>'<span class="var">&lt;mpf_file:cam_file&gt;</span>' </li>
+<li>'<span class="var">&lt;mpf_file:topology:cam_file&gt;</span>'
+</li>
+</ul></td>
+<td>'Alpha_X:CS8530_P30SM'</td>
+<td>string</td>
+<td> This parameter specifies the mpf and camera file, separated by a ':' (e.g.,  'Alpha_Y:Generic_I50SA', 
+ 'Alpha_STEREOXY:CS8530_P30SM', 
+ 'Alpha_YBIS:11_11:InterlaceFR_IxxSA', 
+ 'Iota:InterlaceFR_IxxSA', 
+ 'Picolo_VID1:PAL', 
+ 'Picolo_Diligent_VID4:NTSC', 
+ 'Value:CV-M4CL_P24SC' or 'Expert_A:L101k_L2048RG'). 
+ The frame grabber needs these auxiliary files to specify a proper camera 
+ and to define the mode to run it.<br> 
+ For further information and a listing of camera file names or valid 
+ topologies please refer to your MULTICAM documentation.<br> 
+ <b>Valid values for <i>mpf_file</i>:</b> 
+ 'Alpha_X', 'Alpha_Y', 'Alpha_XBIS', 'Alpha_YBIS', 'Alpha_STEREOXY', 
+ 'Delta_X1', 'Delta_X2', 'Delta_Y1', Delta_Y2', 
+ 'Gamma_X', 'Gamma_Y', 'Gamma_Z', 'Gamma_XBIS', 'Gamma_YBIS', 
+ 'Gamma_ZBIS', 'Harmony_X', 'Harmony_Y', 'Symphony_A', 'Symphony_B', 
+ 'Symphony_C', 'Symphony_D', 'Iota', 'Melody', 
+ 'Avenue', 'Base', 'DualBase_A', 'DualBase_B', 
+ 'Expert_A', 'Expert_B', 'Expert_M', 'Express', 'Full', 'Value', 
+ 'Picolo_VID1', 'Picolo_VID2', 'Picolo_VID3', ... 'Picolo_VID16', 
+ 'Picolo_YC', 'ColorScan', <br> 
+ <b>Valid values for <i>cam_file</i> in case of PICOLO:</b> 
+ 'PAL', 'NTSC'.<br> 
+ <b>GRABLINK Full only:</b> To use 10 taps, the following board topology can 
+ be set with the first call of <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>: 'MONO_DECA'(default 
+ topology: 'MONO').<br> 
+ <b>DOMINO Alpha/Gamma/Harmony only:</b> Optionally, the board topology can 
+ be set with the first call of <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a> (default topology: 
+ '1_1'/'1_1_1').
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>Device</b></td>
+<td>
+<ul>
+<li>'0', '1', ... </li>
+<li>'<span class="var">&lt;identifier&gt;</span>'
+</li>
+</ul></td>
+<td>'0'</td>
+<td>string</td>
+<td> There are two possibilities to address a specific board: the number  assigned by the MultiCam driver (passed as a string!) or the 
+ identifier string of the frame grabber board. You can yield the number and 
+ identifier of the installed boards by the 'info_boards' parameter of the 
+ <a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a> operator.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>Port</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr>
+<tr class="evenrow">
+<td><b>LineIn</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr></table>
+<h2 id="SET_FRAMEGRABBER_PARAM">Parameters for <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a></h2><div>Attention: The specified default values might be overwritten by the used camera file!
+</div>
+<table summary="Parameters for set_framegrabber_param" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Parameter</th>
+<th>Values</th>
+<th>Default</th>
+<th>Type</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><b>'channel_state'</b></td>
+<td>'active', 'idle', 'free', 'ready'</td>
+<td></td>
+<td>string</td>
+<td> State of the channel. When channel_state  is set to 'idle', the channel is not currently used by the application.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'color_space'</b></td>
+<td>'rgb', 'rg', 'rb', 'gb', 'r', 'g', 'b'</td>
+<td>'rgb'</td>
+<td></td>
+<td> Select special color channels for the output image. This parameter is only  important for color images with planar storage (not in volatile mode).
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'continuous_grabbing'</b></td>
+<td>'disable', 'enable'</td>
+<td>'disable'</td>
+<td>string</td>
+<td>If the continuous grabbing mode is enabled, the camera grabs all the time. In this mode the operator 
+<a class="halconoperator" href="../operators/grab_image.html">grab_image</a> does not grab synchronously, but behaves similar to 
+<a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a>. Using this mode you can achieve full frame rate. If the 
+continuous grabbing mode is disabled, the camera is set to single frame 
+capture.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'do_abort_grab'</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td> Cancel current grab.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'do_force_trigger'</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td> Forces an event trigger from the application, when external_trigger='true'.  This might be useful for testing purposes.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'external_trigger'</b></td>
+<td>'false', 'true'</td>
+<td></td>
+<td></td>
+<td> For backward compatibility only: Enables/disables the frame/page trigger  mode for area scan/line scan cameras. If line scan cameras are used, no 
+ 'delayed' triggering can be specified. See also 'external_frame_trigger' 
+ and 'external_page_trigger'.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'grab_timeout'</b></td>
+<td><span class="var">&lt;milliseconds&gt;</span></td>
+<td>10000</td>
+<td>integer</td>
+<td>Desired timeout (milliseconds) for aborting a pending grab. If -1 is specified, the timeout is set to INFINITE.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'line_period'</b></td>
+<td>1, ..., 1047552</td>
+<td>10000</td>
+<td>integer</td>
+<td> Area/line scan cameras: The parameter specifies the desired line period in  TCU (Timing Clock Unit= 1/channel clock frequency). Line scan cameras: the 
+ real line period can be slightly different, because it is adjusted by the 
+ driver to meet technical constraints. This only applies when 
+ 'external_line_trigger' is set to 'false'.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'num_buffers'</b></td>
+<td><span class="var">&lt;number&gt;</span></td>
+<td>3</td>
+<td>integer</td>
+<td> Number of image buffers holding the grabbed images  of the frame grabber. See also 'max_buffers'.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'start_async_after_grab_async'</b></td>
+<td>'disable', 'enable'</td>
+<td>'enable'</td>
+<td>string</td>
+<td>By default a new asynchronous grab command is automatically given to the acquisition device at the end of <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a>. If the parameter 
+'start_async_after_grab_async' is set to 'disable', this new grab command 
+is omitted.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'trigger_filter'</b></td>
+<td>0, 1, ...</td>
+<td>16</td>
+<td>integer</td>
+<td> Applies an edge cleaner to external frame/line trigger signal on line 8.  <b>DOMINO/GRABLINK:</b> You can only enable (0) or disable (>0) the 
+ electrical noise removal filter. For further details see also your frame 
+ grabber documentation.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'trigger_signal'</b></td>
+<td>'12V_falling', '12V_rising', 'ttl_falling', 'ttl_rising'</td>
+<td>'ttl_falling'</td>
+<td>string</td>
+<td> Selection of the style of the external frame/line trigger on line 8 (A8 or  B8). 
+
+<ul>
+<li>'12V_rising', '12V_falling' has respectively meaning whereas the 
+   line is 12 V compliant with a 2000 Ohm pull-down resistor. 
+   <b>Note</b>: DOMINO Iota/Alpha/Gamma and GRABLINK Value/Expert boards don't 
+   support these two values (TTL compliant with a 4700 Ohm pull-up resistor). 
+</li>
+<li>'ttl_rising', 'ttl_falling' means a frame/line is acquired when the 
+   hardware line 8 goes high/low (TTL compliant with a 3000 Ohm pull-up 
+   resistor). 
+</li>
+</ul> 
+For details see also your frame grabber documentation.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'volatile'</b></td>
+<td>'disable', 'enable'</td>
+<td>'disable'</td>
+<td>string</td>
+<td> <b>Grayscale only.</b> In the volatile mode the two image acquisition  interface buffers are used directly to store HALCON images. This is the 
+ fastest mode avoiding to copy raw images in memory. However, be aware that 
+ older images are overwritten again and again as a side-effect. Thus, you 
+ can only process one image while you grab another image. Older images are 
+ invalid!
+</td>
+</tr></table>
+<h2 id="GET_FRAMEGRABBER_PARAM">Parameters for <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a></h2><div>There may exist additional read-only parameters with the following postfixes: 
+<ul>
+<li><b>'_description'</b>: These parameters provide the tool-tip of the 
+   corresponding parameter as a string. 
+</li>
+<li><b>'_range'</b>: These parameters provide the minimum, maximum, 
+    step width, and default values for the corresponding integer or float 
+    parameter as a tuple with 4 elements, e.g., 
+    <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a><tt>(.., 'Shutter_range', ..)</tt> will return 
+    the output tuple <tt>[<i>min, max, step, default</i>]</tt>. 
+</li>
+<li><b>'_values'</b>: These parameters provide the valid value list for 
+    the corresponding parameter as a tuple, e.g., 
+    <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a><tt>(.., 'volatile_values', ..)</tt> will return 
+    the output tuple <tt>['enable', 'disable']</tt>. 
+</li>
+</ul> 
+<p> 
+All these postfixed parameter names are not returned when calling 
+<a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a><tt>(.., 'parameters', ..)</tt> and are used 
+to enable the easy parameterization via a generic graphical user 
+interface, particularly the HDevelop Image Acquisition Assistant. 
+</p>
+</div>
+<table summary="Parameters for get_framegrabber_param" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Parameter</th>
+<th>Values</th>
+<th>Default</th>
+<th>Type</th>
+<th>Kind</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><b>'available_callback_types'</b></td>
+<td>['<span class="var">&lt;callback_type&gt;</span>']</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td> Query all callback types which are supported by this interface.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'bits_per_channel'</b></td>
+<td>'<span class="var">&lt;default&gt;</span>'</td>
+<td>8</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>The value is not used, so a default value is returned.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'camera_type'</b></td>
+<td>'<span class="var">&lt;camera_type&gt;</span>'</td>
+<td>'Alpha_X:CS8530_P30SM'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Current camera type.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'channel_state'</b></td>
+<td>'active', 'idle', 'free', 'ready'</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td> State of the channel. When channel_state  is set to 'idle', the channel is not currently used by the application.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'color_space'</b></td>
+<td>'rgb', 'rg', 'rb', 'gb', 'r', 'g', 'b', 'gray'</td>
+<td>'gray'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Desired color space and thus the number of image channels of the resulting HALCON image.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'continuous_grabbing'</b></td>
+<td>'disable', 'enable'</td>
+<td>'disable'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>If the continuous grabbing mode is enabled, the camera grabs all the time. In this mode the operator 
+<a class="halconoperator" href="../operators/grab_image.html">grab_image</a> does not grab synchronously, but behaves similar to 
+<a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a>. Using this mode you can achieve full frame rate. If the 
+continuous grabbing mode is disabled, the camera is set to single frame 
+capture.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'device'</b></td>
+<td>'<span class="var">&lt;device&gt;</span>'</td>
+<td>'0'</td>
+<td>string</td>
+<td>dynamic</td>
+<td>Returns the current device id.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'elapsed_images'</b></td>
+<td>0, 1 (, 2, ...)</td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td> Number of grabbed images. The value 1 means that the image is already  acquired and thus can be fetched by <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a> without delay. Note 
+ that this parameter is especially useful in combination of continuous mode 
+ with external triggering to check if you missed a trigger. Note that in 
+ continuous mode the value does not toggle between 0 and 1, but increases 
+ with every acquired image!
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'exposure_width'</b></td>
+<td><span class="var">&lt;exp_width&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td> Effective exposure width expressed in TCU (Timing Clock Unit= 1/channel  clock frequency).
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'external_trigger'</b></td>
+<td>'false', 'true'</td>
+<td>'false'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Status of the external trigger.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'field'</b></td>
+<td>'<span class="var">&lt;default&gt;</span>'</td>
+<td>'interlaced'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>The value is not used, so a default value is returned.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'generic'</b></td>
+<td><span class="var">&lt;default&gt;</span></td>
+<td>-1</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>The value is not used, so a default value is returned.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'grab_timeout'</b></td>
+<td><span class="var">&lt;milliseconds&gt;</span></td>
+<td>10000</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Current grab timeout in milliseconds.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'horizontal_resolution'</b></td>
+<td><span class="var">&lt;resolution&gt;</span></td>
+<td>1</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Current value of horizontal resolution.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'image_available'</b></td>
+<td>0, 1</td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td>Status of the last asynchronous grab command. The value 1 means that the image is already acquired and thus can be fetched by <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a> without 
+delay. Note that this parameter is especially useful in combination with 
+external triggering.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'image_height'</b></td>
+<td><span class="var">&lt;height&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Height of the desired image part ('0' stands for the complete image).
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'image_width'</b></td>
+<td><span class="var">&lt;width&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Width of the desired image part ('0' stands for the complete image).
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'line_in'</b></td>
+<td><span class="var">&lt;default&gt;</span></td>
+<td>1</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>The value is not used, so a default value is returned.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'line_period'</b></td>
+<td>1, ..., 1047552</td>
+<td>10000</td>
+<td>integer</td>
+<td>dynamic</td>
+<td> Area/line scan cameras: The parameter specifies the desired line period in  TCU (Timing Clock Unit= 1/channel clock frequency). Line scan cameras: the 
+ real line period can be slightly different, because it is adjusted by the 
+ driver to meet technical constraints. This only applies when 
+ 'external_line_trigger' is set to 'false'.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'max_buffers'</b></td>
+<td><span class="var">&lt;number&gt;</span></td>
+<td>10</td>
+<td>integer</td>
+<td>dynamic</td>
+<td> Maximal settable number of destination image buffers for the frame  grabber. See also 'num_buffers'.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'max_image_height'</b></td>
+<td><span class="var">&lt;max_height&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td> Using area scan cameras the parameter returns the maximal settable height  of the desired image part. For line scan cameras this means the maximal 
+ settable page length.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'max_image_width'</b></td>
+<td><span class="var">&lt;max_width&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td>Maximal settable width of the desired image part.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'min_encoder_freqency'</b></td>
+<td><span class="var">&lt;Hz&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td> Indicates the computed minimum encoder frequency in the application  (in Hz). See 'max_line_frequency' and your MULTICAM documentation.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'min_line_freqency'</b></td>
+<td><span class="var">&lt;Hz&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td> Indicates the computed minimum line frequency of the camera in the  application (in Hz). See 'max_line_frequency' and your MULTICAM 
+ documentation.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'name'</b></td>
+<td>'MultiCam'</td>
+<td></td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Name of the HALCON interface.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'num_buffers'</b></td>
+<td><span class="var">&lt;number&gt;</span></td>
+<td>3</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td> Number of image buffers holding the grabbed images  of the frame grabber. See also 'max_buffers'.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'port'</b></td>
+<td><span class="var">&lt;default&gt;</span></td>
+<td>1</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>The value is not used, so a default value is returned.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'reset_width'</b></td>
+<td><span class="var">&lt;TCU&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td> Effective reset width expressed in TCU (Timing Clock Unit= 1/channel  clock frequency).
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'revision'</b></td>
+<td>'<span class="var">&lt;revision&gt;</span>'</td>
+<td></td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Revision number of the MultiCam interface.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'start_async_after_grab_async'</b></td>
+<td>'disable', 'enable'</td>
+<td>'enable'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Status of 'start_async_after_grab_async'.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'start_column'</b></td>
+<td><span class="var">&lt;column&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Returns the current start column of the HALCON image.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'start_row'</b></td>
+<td><span class="var">&lt;row&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Returns the current start row of the HALCON image.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'surface_index'</b></td>
+<td>0 .. <span class="var">&lt;num_buffers&gt;</span>-1</td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td> Index of the destination image buffer of the last grab command.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'trigger_filter'</b></td>
+<td>0, 1, ...</td>
+<td>16</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td> Applies an edge cleaner to external frame/line trigger signal on line 8.  <b>DOMINO/GRABLINK:</b> You can only enable (0) or disable (>0) the 
+ electrical noise removal filter. For further details see also your frame 
+ grabber documentation.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'trigger_signal'</b></td>
+<td>'12V_falling', '12V_rising', 'ttl_falling', 'ttl_rising'</td>
+<td>'ttl_falling'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Style of the external frame/line trigger on line 8 (A8 or B8).</td>
+</tr>
+<tr class="evenrow">
+<td><b>'vertical_resolution'</b></td>
+<td><span class="var">&lt;resolution&gt;</span></td>
+<td>1</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Current value of vertical resolution.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'volatile'</b></td>
+<td>'disable', 'enable'</td>
+<td>'disable'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td> <b>Grayscale only.</b> In the volatile mode the two image acquisition  interface buffers are used directly to store HALCON images. This is the 
+ fastest mode avoiding to copy raw images in memory. However, be aware that 
+ older images are overwritten again and again as a side-effect. Thus, you 
+ can only process one image while you grab another image. Older images are 
+ invalid!
+</td>
+</tr></table>
+<h2 id="SPECIAL_SET_FRAMEGRABBER_PARAM"> Additional parameters for <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a>:<br>  Line Scan, Strobe, Digital Input/Output, 
+ DOMINO and PICOLO, DOMINO and GRABLINK, 
+ PICOLO and QUICKPACK Parameters
+</h2><div> <b>Line Scan Parameters</b><br>  These parameters are only supported by line scan cameras which are 
+ connected to a GRABLINK/QUICKPACK board<br> 
+ <b>Strobe Parameters</b><br> 
+ A pulse can be generated over the hardware line 9 (A9 or B9) to control an 
+ illumination device during the expose period. The strobe may be used only 
+ when the page trigger for line scan cameras is not used, i.e. 
+ 'external_page_trigger' is 'false'. The following parameters use the 
+ expose timer as the time basis for the strobe pulse timing. Note that the 
+ QUICKPACK and PICOLO boards do not support any strobe parameters.<br> 
+ <b>Digital Input/Output Parameters</b><br> 
+ The digital input and output lines are configured and controlled by the 
+ following parameters. Each input/output line has a unique index, as 
+ described in the MULTICAM documentation.<br><br>
+</div>
+<table summary=" Additional parameters for set_framegrabber_param:<br> 
+ Line Scan, Strobe, Digital Input/Output, 
+ DOMINO and PICOLO, DOMINO and GRABLINK, 
+ PICOLO and QUICKPACK Parameters" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Parameter</th>
+<th>Values</th>
+<th>Default</th>
+<th>Type</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><b>'cross_pitch'</b></td>
+<td>1...10000</td>
+<td></td>
+<td>integer</td>
+<td> <b>Line Scan Parameter</b>  QUICKPACK only: The cross pitch parameter controls the crossweb resolution 
+ in arbitrary length units. This is the distance between two locations 
+ focusing on adjacent pixel on the CCD sensor.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'encoder_pitch'</b></td>
+<td>1...1000</td>
+<td>100</td>
+<td>integer</td>
+<td> <b>Line Scan Parameter</b>  The encoder pitch parameter controls the rate converter. It is expressed in 
+ arbitrary length unit. The length unit has to be the same as the one of the 
+ 'line_pitch' parameter. This parameter is only used when 
+ 'external_line_trigger' is set to 'rate_converted'. See your MULTICAM 
+ documentation (especially the 'Programming the Rate Converter' chapter) for 
+ details.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'line_pitch'</b></td>
+<td>1...1000</td>
+<td>500</td>
+<td>integer</td>
+<td> <b>Line Scan Parameter</b>  The line pitch parameter controls the rate converter. It is expressed in 
+ arbitrary length unit. The length unit has to be the same as the one of 
+ the 'encoder_pitch' parameter. This parameter is only used when 
+ 'external_line_trigger' is set to 'rate_converted'. See your MULTICAM 
+ documentation (especially the 'Programming the Rate Converter' chapter) 
+ for details.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'page_delay'</b></td>
+<td>0...65535</td>
+<td>10</td>
+<td>integer</td>
+<td> <b>Line Scan Parameter</b>  A delay programmable as a line count can be inserted between the page 
+ trigger detection and the effective start of page acquisition. The page 
+ trigger can occur while the previous page is not yet fully acquired. This 
+ parameter is only used when 'external_page_trigger' parameter is set on 
+ 'delayed'.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'strobe_duration'</b></td>
+<td>0...100</td>
+<td>50</td>
+<td>integer</td>
+<td> <b>Strobe Parameter</b><br>  Duration of the strobe pulse relative to the full exposure window 
+ duration (a value of 50% means that the duration of the strobe pulse is 
+ half the duration of the exposure window).
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'strobe_level'</b></td>
+<td>'disable', 'ittl', 'open_collector', 'open_emitter', 'ttl'</td>
+<td>'ttl'</td>
+<td>string</td>
+<td><b>Strobe Parameter</b><br> GRABLINK only: Selection of the digital level of the strobe output line 9 
+(A9 or B9). 
+
+<ul>
+<li>'disable' uses line 9 not as an output. 
+</li>
+<li>'ittl' provides an isolated TTL compliant signal. 
+</li>
+<li>'open_collector' provides a TTL compliant signal, actively tied to the 
+  low state and passively tied to the high state through a 3000 Ohm pull-up 
+  resistor. 
+</li>
+<li>'open_emitter' a TTL compliant signal actively tied to the high state and 
+  passively tied to the low state through a 2000 Ohm pull-down resistor 
+  according to the 'strobe_type' parameter. 
+</li>
+<li>'ttl' provides a TTL compliant signal, actively tied to the high or low 
+  state.
+</li>
+</ul></td>
+</tr>
+<tr class="oddrow">
+<td><b>'strobe_line'</b></td>
+<td> 'alt1', 'alt2', 'alt3', 'alt4', 'io1', 'io2', 'io3', 'io4',  'isoa1', 'isoa2', 'nom', 'st', 'sta', 'stx', 'sty', 'stz'
+</td>
+<td>'nom'</td>
+<td>string</td>
+<td> <b>Strobe Parameter</b><br>  DOMINO/GRABLINK only: Selection of the line of the strobe output. See your 
+ MULTICAM documentation for more details.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'strobe_position'</b></td>
+<td>0...100</td>
+<td>50</td>
+<td>integer</td>
+<td> <b>Strobe Parameter</b><br>  Position of the middle of the strobe pulse relative to the full 
+ exposure window (a value of 50% means that the strobe pulse is situated 
+ in the middle of the exposure window).
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'strobe_type'</b></td>
+<td>'high_pulse', 'low_pulse'</td>
+<td>'high_pulse'</td>
+<td>string</td>
+<td> <b>Strobe Parameter</b><br>  Selection of the style of the strobe output line 9 (A9 or B9). 
+
+<ul>
+<li>'low_pulse' provides a negative going pulse strobe. 
+</li>
+<li>'high_pulse' provides a positive going pulse strobe.
+</li>
+</ul></td>
+</tr>
+<tr class="evenrow">
+<td><b>'digital_input_config:XX'</b></td>
+<td>'free', 'soft'</td>
+<td></td>
+<td>string</td>
+<td> <b>Digital Input/Output Parameter</b><br>  Configures the input line (with XX = 1, 2, .. 39 as unique index of the 
+ input line, i.e., XX = 28 for a GRABLINK Value board).
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'digital_output_config:XX'</b></td>
+<td>'free', 'soft'</td>
+<td></td>
+<td>string</td>
+<td> <b>Digital Input/Output Parameter</b><br>  Configures the output line (with XX = 1, 2, .. 39 as unique index of the 
+ output line, i.e., XX = 28 for a GRABLINK Value board).
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'digital_input_style'</b></td>
+<td> '5V', '12V', 'auto', 'channellink', 'cmos', 'diff', 'dttl', 'iso', 'ittl',  'i12V', 'lvds', 'powerstate', 'relay', 'rs485', 'ttl', 'ttlpd'
+</td>
+<td></td>
+<td>string</td>
+<td> <b>Digital Input/Output Parameter</b><br>  Electrical style of input lines. See your MULTICAM 
+ documentation for the board specific values.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'digital_output_style'</b></td>
+<td> 'ioc', 'ioe', 'ittl', 'lvds', 'oc', 'opto', 'relay', 'ssrly', 'ttl'</td>
+<td></td>
+<td>string</td>
+<td> <b>Digital Input/Output Parameter</b><br>  Electrical style of output lines. See your MULTICAM 
+ documentation for the board specific values.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'digital_output:XX'</b></td>
+<td>'low', 'high', 'toggle'</td>
+<td></td>
+<td>string</td>
+<td><b>Digital Input/Output Parameter</b><br> State of one of the digital output lines (with XX = 1, 2, .. 39 as unique 
+index of the output line, i.e., XX = 28 for a GRABLINK Value board). Note 
+that you have to set 'digital_output_config:XX' and 'digital_output_style' 
+for this line before!
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'gain_control'</b></td>
+<td> 'linear', '+3db', '+2db', '+1db', '0db', '-1db', '-2db', '-3db'</td>
+<td>'0db'</td>
+<td>string</td>
+<td> <b>DOMINO and PICOLO Parameters</b><br>  Selection between linear and logarithmical gain control for all camera 
+ channels.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'gain_value'</b></td>
+<td></td>
+<td>1000</td>
+<td>integer</td>
+<td><b>DOMINO and PICOLO Parameters</b><br> Gain adjustment for all camera channels.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'offset'</b></td>
+<td>-500...500</td>
+<td>0</td>
+<td>integer</td>
+<td> <b>DOMINO and PICOLO Parameters</b><br>  Establishing the linear common offset for all camera channels.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'gain_color'</b></td>
+<td>0...2000</td>
+<td>1000</td>
+<td>integer</td>
+<td><b>PICOLO Parameters</b><br> Control of the color saturation for all camera channels.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'exposure_trim'</b></td>
+<td>-6...12</td>
+<td>0</td>
+<td>integer</td>
+<td> <b>DOMINO and GRABLINK Parameter</b><br>  Trimming of the exposure time, expressed in dB (adding 6 dB doubles the 
+ value, subtracting 6dB divides it by two and subtracting 12 dB divides it 
+ by four).
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'exposure_us'</b></td>
+<td><span class="var">&lt;microseconds&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td> <b>DOMINO and GRABLINK Parameter</b><br>  Desired frame exposure time expressed in microseconds. The value 0 means 
+ permanent exposure condition.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'activate_lut'</b></td>
+<td>0...4</td>
+<td>0</td>
+<td>integer</td>
+<td> <b>QUICKPACK Parameters</b><br>  Activate the LUT with the specified index. Note that up to four different 
+ LUTs can be stored per image acquisition handle, see parameter 
+ 'do_generate_lut'. If index is set to 0, no LUT is used.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'activate_shc'</b></td>
+<td>0...4</td>
+<td>0</td>
+<td>integer</td>
+<td> <b>QUICKPACK Parameters</b><br>  Activate the shading correction with the specified index. Note that up to 
+ four different shading corrections can be stored per image acquisition 
+ handle, see parameter 'do_calibrate_shc'. If index is set to 0, no shading 
+ correction is used.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'do_calibrate_shc'</b></td>
+<td> [<span class="var">&lt;index, dark_ptr_red, dark_ptr_green, dark_ptr_blue, light_ptr_red,    light_ptr_green, light_ptr_blue&gt;</span>]
+</td>
+<td></td>
+<td>integer</td>
+<td> <b>QUICKPACK Parameters</b><br>  Computes a specific shading correction and stores it with the given index. 
+ The shading corrector applies a multiplicative (gain) and an additive 
+ (offset) correction individually to each pixel issued in the scanned image. 
+ For more details please see the MultiCam documentation. 
+ Note that the six image pointers must point to actual image buffers that 
+ contain the desired dark or light data. Typically, these pointers can be 
+ provided by grabbing an image and calling get_image_pointer3 afterwards. 
+ Note that you can also specify 0 for either all the dark or all the light 
+ pointers if you don't want to make use of them.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'do_generate_lut'</b></td>
+<td> [<span class="var">&lt;index, contrast_r, contrast_g, contrast_b, brightness_r, brightness_g,    brightness_b, visibility_r, visibility_g, visibility_b, negative_r, 
+   negative_g, negative_b&gt;</span>]
+</td>
+<td></td>
+<td>mixed</td>
+<td> <b>QUICKPACK Parameters</b><br>  Generate a look-up table with the specified index. 
+ Note that up to four different LUTs can be stored 
+ per image acquisition handle. To (de-)activate a pre-generated 
+ LUT the parameter 'activate_lut' has to be called. 
+ The generation of the LUT is controlled by the following 13 parameters: 
+ <br> 
+
+<ul>
+<li>1 &lt;    index &lt; 4 
+</li>
+<li>0.0 &lt;  contrast_r/g/b &lt; 2.0 
+</li>
+<li>-1.0 &lt; brightness_r/g/b &lt; 1.0 
+</li>
+<li>0.0 &lt;  visibility_r/g/b &lt; 1.0 
+</li>
+<li>0 &lt;    negative_r/g/b &lt; 1 
+</li>
+</ul> 
+For more details about the semantics of all parameters please see the 
+MultiCam documentation.
+</td>
+</tr></table>
+<h2 id="SPECIAL_GET_FRAMEGRABBER_PARAM"> Additional parameters for <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a>:<br>  Line Scan, Strobe, Digital Input/Output, 
+ DOMINO and PICOLO, DOMINO and GRABLINK, 
+ PICOLO and QUICKPACK Parameters
+</h2><div> <b>Line Scan Parameters</b><br>  These parameters are only supported by line scan cameras which are 
+ connected to a GRABLINK/QUICKPACK board<br> 
+ <b>Strobe Parameters</b><br> 
+ A pulse can be generated over the hardware line 9 (A9 or B9) to control an 
+ illumination device during the expose period. The strobe may be used only 
+ when the page trigger for line scan cameras is not used, i.e. 
+ 'external_page_trigger' is 'false'. The following parameters use the 
+ expose timer as the time basis for the strobe pulse timing. Note that the 
+ QUICKPACK and PICOLO boards do not support any strobe parameters.<br> 
+ <b>Digital Input/Output Parameters</b><br> 
+ The digital input and output lines are configured and controlled by the 
+ following parameters. Each input/output line has an unique index, as 
+ described in the MULTICAM documentation.<br><br>
+</div>
+<table summary=" Additional parameters for get_framegrabber_param:<br> 
+ Line Scan, Strobe, Digital Input/Output, 
+ DOMINO and PICOLO, DOMINO and GRABLINK, 
+ PICOLO and QUICKPACK Parameters" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Parameter</th>
+<th>Values</th>
+<th>Default</th>
+<th>Type</th>
+<th>Kind</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><b>'cross_pitch'</b></td>
+<td>1...10000</td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td> <b>Line Scan Parameter</b>  QUICKPACK only: The cross pitch parameter controls the crossweb resolution 
+ in arbitrary length units. This is the distance between two locations 
+ focusing on adjacent pixel on the CCD sensor.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'encoder_pitch'</b></td>
+<td>1...1000</td>
+<td>100</td>
+<td>integer</td>
+<td>dynamic</td>
+<td> <b>Line Scan Parameter</b>  The encoder pitch parameter controls the rate converter. It is expressed in 
+ arbitrary length unit. The length unit has to be the same as the one of the 
+ 'line_pitch' parameter. This parameter is only used when 
+ 'external_line_trigger' is set to 'rate_converted'. See your MULTICAM 
+ documentation (especially the 'Programming the Rate Converter' chapter) for 
+ details.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'line_pitch'</b></td>
+<td>1...1000</td>
+<td>500</td>
+<td>integer</td>
+<td>dynamic</td>
+<td> <b>Line Scan Parameter</b>  The line pitch parameter controls the rate converter. It is expressed in 
+ arbitrary length unit. The length unit has to be the same as the one of 
+ the 'encoder_pitch' parameter. This parameter is only used when 
+ 'external_line_trigger' is set to 'rate_converted'. See your MULTICAM 
+ documentation (especially the 'Programming the Rate Converter' chapter) 
+ for details.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'page_delay'</b></td>
+<td>0...65535</td>
+<td>10</td>
+<td>integer</td>
+<td>dynamic</td>
+<td> <b>Line Scan Parameter</b>  A delay programmable as a line count can be inserted between the page 
+ trigger detection and the effective start of page acquisition. The page 
+ trigger can occur while the previous page is not yet fully acquired. This 
+ parameter is only used when 'external_page_trigger' parameter is set on 
+ 'delayed'.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'strobe_duration'</b></td>
+<td>0...100</td>
+<td>50</td>
+<td>integer</td>
+<td>dynamic</td>
+<td> <b>Strobe Parameter</b><br>  Duration of the strobe pulse relative to the full exposure window 
+ duration (a value of 50% means that the duration of the strobe pulse is 
+ half the duration of the exposure window).
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'strobe_level'</b></td>
+<td>'disable', 'ittl', 'open_collector', 'open_emitter', 'ttl'</td>
+<td>'ttl'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td><b>Strobe Parameter</b><br> GRABLINK only: Digital level of the strobe output line 9 (A9 or B9).
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'strobe_line'</b></td>
+<td> 'alt1', 'alt2', 'alt3', 'alt4', 'io1', 'io2', 'io3', 'io4',  'isoa1', 'isoa2', 'nom', 'st', 'sta', 'stx', 'sty', 'stz'
+</td>
+<td>'nom'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td> <b>Strobe Parameter</b><br>  DOMINO/GRABLINK only: Selection of the line of the strobe output. See your 
+ MULTICAM documentation for more details.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'strobe_position'</b></td>
+<td>0...100</td>
+<td>50</td>
+<td>integer</td>
+<td>dynamic</td>
+<td> <b>Strobe Parameter</b><br>  Position of the middle of the strobe pulse relative to the full 
+ exposure window (a value of 50% means that the strobe pulse is situated 
+ in the middle of the exposure window).
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'strobe_type'</b></td>
+<td>'high_pulse', 'low_pulse'</td>
+<td>'high_pulse'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td> <b>Strobe Parameter</b><br>  Style of the strobe output line 9 (A9 or B9).
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'digital_input_config:XX'</b></td>
+<td>'free', 'soft'</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td> <b>Digital Input/Output Parameter</b><br>  Configures the input line (with XX = 1, 2, .. 39 as unique index of the 
+ input line, i.e., XX = 28 for a GRABLINK Value board).
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'digital_output_config:XX'</b></td>
+<td>'free', 'soft'</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td> <b>Digital Input/Output Parameter</b><br>  Configures the output line (with XX = 1, 2, .. 39 as unique index of the 
+ output line, i.e., XX = 28 for a GRABLINK Value board).
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'digital_input_style'</b></td>
+<td> '5V', '12V', 'auto', 'channellink', 'cmos', 'diff', 'dttl', 'iso', 'ittl',  'i12V', 'lvds', 'powerstate', 'relay', 'rs485', 'ttl', 'ttlpd'
+</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td> <b>Digital Input/Output Parameter</b><br>  Electrical style of input lines. See your MULTICAM 
+ documentation for the board specific values.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'digital_output_style'</b></td>
+<td> 'ioc', 'ioe', 'ittl', 'lvds', 'oc', 'opto', 'relay', 'ssrly', 'ttl'</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td> <b>Digital Input/Output Parameter</b><br>  Electrical style of output lines. See your MULTICAM 
+ documentation for the board specific values.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'digital_input:XX'</b></td>
+<td>'high', 'low', 'none', 'wenthigh', 'wentlow'</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td><b>Digital Input/Output Parameter</b><br> State of one of the digital input lines (with XX = 1, 2, .. 39 as unique 
+index of the input line, i.e., XX = 28 for a GRABLINK Value board). Note that 
+you have to set 'digital_input_config:XX' and 'digital_input_style' for this 
+line before!
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'gain_control'</b></td>
+<td> 'linear', '+3db', '+2db', '+1db', '0db', '-1db', '-2db', '-3db'</td>
+<td>'0db'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td> <b>DOMINO and PICOLO Parameters</b><br>  Selection between linear and logarithmical gain control for all camera 
+ channels.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'gain_value'</b></td>
+<td></td>
+<td>1000</td>
+<td>integer</td>
+<td>dynamic</td>
+<td><b>DOMINO and PICOLO Parameters</b><br> Gain adjustment for all camera channels.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'offset'</b></td>
+<td>-500...500</td>
+<td>0</td>
+<td>integer</td>
+<td>dynamic</td>
+<td> <b>DOMINO and PICOLO Parameters</b><br>  Establishing the linear common offset for all camera channels.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'gain_color'</b></td>
+<td>0...2000</td>
+<td>1000</td>
+<td>integer</td>
+<td>dynamic</td>
+<td><b>PICOLO Parameters</b><br> Control of the color saturation for all camera channels.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'exposure_trim'</b></td>
+<td>-6...12</td>
+<td>0</td>
+<td>integer</td>
+<td>dynamic</td>
+<td> <b>DOMINO and GRABLINK Parameter</b><br>  Trimming of the exposure time, expressed in dB (adding 6 dB doubles the 
+ value, subtracting 6dB divides it by two and subtracting 12 dB divides it 
+ by four).
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'exposure_us'</b></td>
+<td><span class="var">&lt;microseconds&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>dynamic</td>
+<td> <b>DOMINO and GRABLINK Parameter</b><br>  Desired frame exposure time expressed in microseconds. The value 0 means 
+ permanent exposure condition.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'activate_lut'</b></td>
+<td>0...4</td>
+<td>0</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td> <b>QUICKPACK Parameters</b><br>  Activate the LUT with the specified index. Note that up to four different 
+ LUTs can be stored per image acquisition handle, see parameter 
+ 'do_generate_lut'. If index is set to 0, no LUT is used.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'activate_shc'</b></td>
+<td>0...4</td>
+<td>0</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td> <b>QUICKPACK Parameters</b><br>  Activate the shading correction with the specified index. Note that up to 
+ four different shading corrections can be stored per image acquisition 
+ handle, see parameter 'do_calibrate_shc'. If index is set to 0, no shading 
+ correction is used.
+</td>
+</tr></table>
+<h2 id="SET_FRAMEGRABBER_LUT">Operator <a class="halconoperator" href="../operators/set_framegrabber_lut.html">set_framegrabber_lut</a></h2><div> This operator is only valid for QUICKPACK ColorScan boards.  Set the look-up table values, which must be 256 values.
+</div>
+<h2 id="GET_FRAMEGRABBER_LUT">Operator <a class="halconoperator" href="../operators/get_framegrabber_lut.html">get_framegrabber_lut</a></h2><div>Not supported by this interface.</div>
+<h2 id="SET_FRAMEGRABBER_CALLBACK">Operator <a class="halconoperator" href="../operators/set_framegrabber_callback.html">set_framegrabber_callback</a></h2><div> All actually supported callback types of a specific image acquisition  device can be queried by calling <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a> with the parameter 
+ 'available_callback_types'. Once the callback is registered, on every 
+ occurrence of the underlying event (e.g., the notification that the 
+ exposure has finished) the specified callback function will be called. If 
+ the callback function is set to NULL, the corresponding callback will be 
+ unregistered. <br><br> 
+ The signature of the callback function is 
+ <tt>Herror (__stdcall *HAcqCallback)(void *AcqHandle, void *Context, 
+     void *UserContext)</tt> and uses the following parameters: 
+
+<ul>
+<li><b>AcqHandle</b> 
+    Acquisition handle of the corresponding image acquisition instance. 
+</li>
+<li><b>Context</b> 
+    Optional context data of the specific callback. In the 
+    MultiCam interface this parameter is not used, i.e., Context 
+    is set to NULL. 
+</li>
+<li><b>UserContext</b> 
+    User context as set via <a class="halconoperator" href="../operators/set_framegrabber_callback.html">set_framegrabber_callback</a>. 
+</li>
+</ul> 
+<p> 
+<b>Using user-callback functions</b><br> 
+Note that the execution time of a user-specific callback function should 
+always be as short as possible since during the execution of a callback 
+function the handling of further internal callbacks might be blocked. 
+This can be achieved by removing the current processing from the 
+user-specific callback function to a separate thread that is controlled 
+via signals or events. 
+</p>
+</div>
+<table summary="Operator set_framegrabber_callback" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Type</th>
+<th>Description</th>
+<tr class="oddrow">
+<td>'exposure_end'</td>
+<td> Corresponds to the MC_SIG_END_EXPOSURE signal function inside  MultiCam.
+</td>
+</tr>
+<tr class="evenrow">
+<td>'exposure_start'</td>
+<td> Corresponds to the MC_SIG_START_EXPOSURE signal function inside  MultiCam.
+</td>
+</tr>
+<tr class="oddrow">
+<td>'transfer_end'</td>
+<td> Corresponds to the MC_SIG_SURFACE_FILLED signal function inside  MultiCam.
+</td>
+</tr></table>
+<h2 id="GET_FRAMEGRABBER_CALLBACK">Operator <a class="halconoperator" href="../operators/get_framegrabber_callback.html">get_framegrabber_callback</a></h2><div> This interface supports device specific events via the operators  <a class="halconoperator" href="../operators/set_framegrabber_callback.html">set_framegrabber_callback</a> and <a class="halconoperator" href="../operators/get_framegrabber_callback.html">get_framegrabber_callback</a>. For more 
+ information see <a class="halconoperator" href="../operators/set_framegrabber_callback.html">set_framegrabber_callback</a>.
+</div>
+<h2 id="GRAB_IMAGE_START">Operator <a class="halconoperator" href="../operators/grab_image_start.html">grab_image_start</a></h2><div>Starts a new asynchronous grab. See also <a class="halconoperator" href="../operators/grab_image_start.html">grab_image_start</a>.</div>
+<h2 id="GRAB_IMAGE">Operator <a class="halconoperator" href="../operators/grab_image.html">grab_image</a></h2><div><a class="halconoperator" href="../operators/grab_image.html">grab_image</a> starts a new synchronous grab. See also <a class="halconoperator" href="../operators/grab_image.html">grab_image</a>. Note that 
+the interface converts the image from the device to the desired image format 
+specified by the parameters 'image_width', 'image_height', 'start_row', 
+'start_column', 'bits_per_channel', and 'color_space'.
+</div>
+<h2 id="GRAB_IMAGE_ASYNC">Operator <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a></h2><div><a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a> returns an image and starts the next asynchronous grab. See also <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a>. 
+Note that 
+the interface converts the image from the device to the desired image format 
+specified by the parameters 'image_width', 'image_height', 'start_row', 
+'start_column', 'bits_per_channel', and 'color_space'.
+</div>
+<h2 id="GRAB_DATA">Operator <a class="halconoperator" href="../operators/grab_data.html">grab_data</a></h2><div>Not supported by this interface.</div>
+<h2 id="GRAB_DATA_ASYNC">Operator <a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a></h2><div>Not supported by this interface.</div>
+<h2 id="CLOSE_FRAMEGRABBER">Operator <a class="halconoperator" href="../operators/close_framegrabber.html">close_framegrabber</a></h2><div>This operator closes the device. See also <a class="halconoperator" href="../operators/close_framegrabber.html">close_framegrabber</a>.</div>
+<h2 id="HDEVELOP_EXAMPLES">HDevelop Examples</h2><div>For this interface there are the following examples available: 
+<ul>
+<li>multicam_2cameras.hdev - 
+    Example for the usage of an Euresys MultiCam board with 2 
+    cameras (DOMINO Alpha/Gamma/Harmony, GRABLINK Expert). 
+</li>
+<li>multicam.hdev - 
+    Benchmark. 
+</li>
+<li>multicam_parameters.hdev - 
+    Lists all parameters of a device. 
+</li>
+<li>multicam_picolo.hdev - 
+    Simple example for the usage of an Euresys PICOLO board. 
+</li>
+<li>multicam_quickpack.hdev - 
+    Shows usage of an Euresys QUICKPACK board. 
+</li>
+<li>multicam_simple.hdev - 
+    A simple example to show the usage of the interface. 
+</li>
+<li>multicam_split_cable.hdev - 
+    Split cable example for the usage of an Euresys MultiCam board 
+    DOMINO Alpha/Gamma. 
+</li>
+<li>multicam_stereo.hdev - 
+    Stereo vision example for the usage of an Euresys MultiCam 
+    board DOMINO Alpha/Alpha2.
+</li>
+</ul></div>
+<h2 id="CPP_EXAMPLES">C++ Examples</h2><div> For this interface there is also a further C++ Visual Studio Project to  demonstrate the usage of the operators <a class="halconoperator" href="../operators/get_framegrabber_callback.html">get_framegrabber_callback</a> and 
+ <a class="halconoperator" href="../operators/set_framegrabber_callback.html">set_framegrabber_callback</a>. Please check the directory 
+ %HALCONEXAMPLES%\cpp\console\vs2005\. If you prefer building the example via 
+ the console, please check the following folder %HALCONEXAMPLES%\cpp\console\. 
+ With a Linux OS please use $HALCONEXAMPLES/cpp/console/.
+</div>
+<h2 id="CS_EXAMPLES">C# Examples</h2><div> For this interface there is also a further C# Visual Studio Project to  demonstrate the usage of the operators <a class="halconoperator" href="../operators/get_framegrabber_callback.html">get_framegrabber_callback</a> and 
+ <a class="halconoperator" href="../operators/set_framegrabber_callback.html">set_framegrabber_callback</a>. Please check the directory 
+ %HALCONEXAMPLES%\cpp\console\vs2005\.
+</div>
+<h2 id="RELEASENOTES">Release Notes</h2><div>
+<ul>
+<li><b>Revision 13.0.1</b> (Oct 28, 2016): 
+<ul>
+<li>HALCON 13 version of the interface. 
+</li>
+</ul></li>
+<li><b>Revision 6.5</b> (Sep 26, 2016): 
+
+<ul>
+<li>Grabbing images crashed when using 64-bit on Windows 8.0 or higher. 
+      This problem has been fixed. 
+</li>
+<li>Setting an empty value in <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a> led to a crash. 
+      This problem has been fixed. 
+</li>
+</ul></li>
+<li><b>Revision 6.4</b> (Jul 13, 2016): 
+
+<ul>
+<li>If the board identifier contained more than one underscore it 
+      was not possible to use the device identifier as device string 
+      in <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>. The call of <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a> failed with 
+      error 5302. This problem has been fixed. 
+</li>
+<li>The call of <a class="halconoperator" href="../operators/set_framegrabber_callback.html">set_framegrabber_callback</a> might have crashed when 
+      a callback function was de-registered. This problem has been fixed. 
+</li>
+<li>In rare cases the call of <a class="halconoperator" href="../operators/close_framegrabber.html">close_framegrabber</a> might have crashed 
+      when a callback was registered previously. This problem has 
+      been fixed. 
+</li>
+</ul></li>
+<li><b>Revision 6.3</b> (Oct 20, 2015): 
+
+<ul>
+<li>In case of timeout in combination with hardware trigger, every 
+      succeeding call of <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a> returned a timeout. 
+      This problem has been fixed. 
+</li>
+<li>The call of <a class="halconoperator" href="../operators/grab_image.html">grab_image</a> and <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a> might have crashed when 
+      the parameter 'num_buffers' had been set to a value greater than 10. 
+      This problem has been fixed. 
+</li>
+<li>This documentation did not list all available callback types. 
+      This problem has been fixed. 
+</li>
+</ul></li>
+<li><b>Revision 6.2</b> (Feb 26, 2015): 
+
+<ul>
+<li>Camera configurations specifying unsupported color formats crashed on 
+      GRABLINK series. This problem has been fixed, an appropriate error 
+      message is returned now. 
+</li>
+</ul></li>
+<li><b>Revision 6.1</b> (Jan 30, 2015): 
+
+<ul>
+<li>Improved performance of color format conversion function. 
+</li>
+<li>Removed beta tag in the file properties of the interface DLLs 
+      which was erroneously added in the last revision. 
+</li>
+</ul></li>
+<li><b>Revision 6.0</b> (Oct 31, 2014): 
+
+<ul>
+<li>HALCON 12 version of the interface. 
+</li>
+</ul></li>
+<li><b>Revision 5.3</b> (Jan 27, 2014): 
+
+<ul>
+<li>Bug fix with multiple framegrabbers. In case of a grab timeout 
+      the wrong configuration data was read. In rare cases this bug 
+      led into a dead-lock situation. 
+</li>
+<li>Bug fix with multiple frame grabber boards. After a grab timeout the internal 
+      used channel state was reset twice. This bug could cause a crash 
+      after several iterations. 
+</li>
+<li>Bug fix with multiple frame grabber boards. If <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a> was called 
+      with the board identifier as device parameter, the last opened 
+      frame grabber board was configured 
+</li>
+</ul></li>
+<li><b>Revision 5.2</b> (Mar 25, 2013): 
+
+<ul>
+<li>Bug fix in setting the board topology to MONO_DECA for GRABLINK 
+      Full boards during <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>. 
+</li>
+<li>Bug fix in <a class="halconoperator" href="../operators/grab_image_start.html">grab_image_start</a>. A pending grab was not aborted. 
+</li>
+<li>Bug fix in <a class="halconoperator" href="../operators/grab_image.html">grab_image</a>. A previously started grab was not aborted. 
+</li>
+<li>Bug fix in using an image height or image width smaller than 64 inside 
+      the configuration file. Now, the smallest possible value is 8. 
+</li>
+<li>Review and update of the documentation, in particular the description 
+      of the image width and image height parameters. 
+</li>
+</ul></li>
+<li><b>Revision 5.1</b> (Nov 15, 2012): 
+
+<ul>
+<li>Bug fix in determining the used image size in case of a 
+      bit-depth greater than 8. 
+</li>
+</ul></li>
+<li><b>Revision 5.0</b> (May 15, 2012): 
+
+<ul>
+<li>HALCON 11 version of the interface (included in HALCON 11 DVD). 
+</li>
+</ul></li>
+<li><b>Revision 4.5</b> (Apr 30, 2012): 
+
+<ul>
+<li>Fixed thread safety problem in <a class="halconoperator" href="../operators/grab_image.html">grab_image</a> and <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a> 
+      that could occur if a pending grab was aborted via the 'do_abort_grab' 
+      parameter of <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a>. 
+</li>
+</ul></li>
+<li><b>Revision 4.4</b> (Dec 5, 2011): 
+
+<ul>
+<li>Support of DOMINO Symphony boards. 
+</li>
+<li>Added new board topology MONO_DECA for GRABLINK Full boards to support 
+      devices with 10 taps. 
+</li>
+<li>Bug fix in setting the image width in <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a> by the use of 
+      the configuration file. In case of analog cameras and an incomplete 
+      configuration file, the wrong alignment was set. 
+</li>
+<li>Bug fix in clean up a previous registered callback function during 
+      <a class="halconoperator" href="../operators/close_framegrabber.html">close_framegrabber</a>. 
+</li>
+</ul></li>
+<li><b>Revision 4.3</b> (Aug 30, 2011): 
+
+<ul>
+<li>Bug fix in <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a> if an analog frame grabber was used in 
+      combination with a color camera. 
+</li>
+</ul></li>
+<li><b>Revision 4.2</b> (Jun 9, 2011): 
+
+<ul>
+<li>Adaptation to MultiCam driver version 6.7.0.1456. 
+</li>
+<li>Support of GRABLINK Base/DualBase/Full boards. 
+</li>
+<li>Added functionality to handle 'exposure_end', 'exposure_start', and 
+      'transfer_end' callbacks. 
+</li>
+</ul></li>
+<li><b>Revision 4.1</b> (Dec 14, 2010): 
+
+<ul>
+<li>Support also of Windows XP/Vista/7 x64 Editions. 
+</li>
+<li>Adaptation to MultiCam driver version 6.4.3.686. 
+</li>
+<li>New buffer memory management to support more than 4GB system memory. 
+</li>
+<li>Bug fix in <a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a><tt>(...'info_boards'...)</tt>. 
+</li>
+<li>Extended HTML documentation about how to handle bayer decoding. 
+</li>
+</ul></li>
+<li><b>Revision 4.0</b> (Dec 1, 2008): 
+
+<ul>
+<li>HALCON 10 version of the interface (included in HALCON 10 DVD). 
+</li>
+<li>HALCON 9.0 version of the interface (included in HALCON 9.0 DVD). 
+</li>
+</ul></li>
+<li><b>Revision 3.2</b> (Apr 22, 2008): 
+
+<ul>
+<li>Added read-only parameters with postfix '_description', '_range', 
+      and '_values' to enable the easy parameterization via a generic 
+      graphical user interface. 
+</li>
+</ul></li>
+<li><b>Revision 3.1</b> (Nov 20, 2007): 
+
+<ul>
+<li>Support of GRABLINK Express boards. 
+</li>
+<li>Adaptation to MultiCam driver version 6.0. 
+</li>
+<li>New parameters for digital input/output control: 
+      'digital_input_config:XX', 'digital_input_style', 
+      'digital_output_config:XX', 'digital_output_style', 
+      'digital_input:XX', and 'digital_output:XX'. 
+</li>
+</ul></li>
+<li><b>Revision 3.0</b> (May 15, 2007): 
+
+<ul>
+<li>HALCON 8.0 version of the interface (included in HALCON 8.0 DVD). 
+</li>
+</ul></li>
+<li><b>Revision 2.17</b> (May 3, 2007): 
+
+<ul>
+<li>Support of absolute paths in camera file names. 
+</li>
+<li>After a channel initialization in continuous mode the channel remains 
+      now in continuous mode. 
+</li>
+<li>New parameter 'elapsed_images' to get the number of grabbed images in 
+      continuous mode. 
+</li>
+<li>Adaptation to MultiCam driver version 5.5. 
+</li>
+</ul></li>
+<li><b>Revision 2.16</b> (Nov 28, 2006): 
+
+<ul>
+<li>Support of the PICOLO board family. 
+</li>
+<li>Adaptation to MultiCam driver version 5.0. 
+</li>
+</ul></li>
+<li><b>Revision 2.15</b> (Dec 6, 2005): 
+
+<ul>
+<li>Support of planar mode for color images. 
+</li>
+<li>New parameter 'color_space' to select specific color channels. 
+</li>
+<li>More accurate image timestamp: The call of <a class="halconoperator" href="../operators/get_image_time.html">get_image_time</a> now returns 
+      the time at which the image was transmitted to the host 
+      (instead of time at which the HALCON image object was created). 
+</li>
+</ul></li>
+<li><b>Revision 2.14</b> (Apr 29, 2005): 
+
+<ul>
+<li>HALCON 7.1 version of the interface (included in HALCON 7.1 CD). 
+</li>
+<li>Adaptation to MultiCam driver version 4.5. 
+</li>
+<li>Support of the DOMINO Melody/Harmony, DOMINO Delta, and GRABLINK 
+      Avenue boards. 
+</li>
+<li>Support of QUICKPACK ColorScan boards. To support the special 
+      functionality of these boards new parameters 
+      'cross_pitch', 'activate_lut', 'activate_shc', 
+      'do_calibrate_shc', and 'do_generate_lut' are provided. 
+</li>
+<li>New parameter 'do_abort_grab' to cancel a pending grab command. 
+</li>
+<li>New parameter 'image_available' to query the status of the ongoing 
+      asynchronous grab command. 
+</li>
+<li>Speed-up for acquisition of RGB images (faster algorithm to convert 
+      the interleaved image data into HALCON image objects). 
+</li>
+</ul></li>
+<li><b>Revision 2.13</b> (Dec 8, 2004): 
+
+<ul>
+<li>Color storage changed from BGR to RGB for color images. 
+</li>
+<li>Support of blanks in camera file names. 
+</li>
+<li>The query types 'bits_per_channel', 'camera_type', 'color_space', 
+      'device', 'external_trigger', 'field', and 'port' for 
+      <a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a> provide now specific value lists for the 
+      corresponding parameters in <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>. 
+</li>
+</ul></li>
+<li><b>Revision 2.12</b> (September 3, 2004): 
+
+<ul>
+<li>Adaptation to MultiCam driver version 4.2. 
+</li>
+</ul></li>
+<li><b>Revision 2.11</b> (Jul 7, 2004): 
+
+<ul>
+<li>Minor improvements for DOMINO Alpha/Gamma boards. 
+</li>
+</ul></li>
+<li><b>Revision 2.10</b> (April 28, 2004): 
+
+<ul>
+<li>Support of <i>StereoVision</i> for Domino Alpha boards. 
+</li>
+<li>Support of different board topologies for DOMINO Alpha/Gamma boards. 
+</li>
+<li>Adaptation to MultiCam driver version 4.1.2. 
+</li>
+</ul></li>
+<li><b>Revision 2.9</b> (Jun 27, 2003): 
+
+<ul>
+<li>HALCON 7.0 version of the interface (included in HALCON 7.0 CD). 
+</li>
+<li>Bug fix in <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a> for Multi boards. 
+</li>
+<li>Bug fix in <a class="halconoperator" href="../operators/grab_image.html">grab_image</a> to prevent time-out problems. 
+</li>
+<li>Adaptation to MultiCam driver version 2.9.2. 
+</li>
+</ul></li>
+<li><b>Revision 2.8</b> (May 14, 2003): 
+
+<ul>
+<li>Adaptation to MultiCam driver version 2.9.1. 
+</li>
+</ul></li>
+<li><b>Revision 2.7</b> (Mar 13, 2003): 
+
+<ul>
+<li>Supports now also the Domino Iota/Alpha2 boards 
+      (Alpha2 board is treated as Alpha board). 
+</li>
+<li>Adaptation to MultiCam driver version 2.9. 
+</li>
+</ul></li>
+<li><b>Revision 2.6</b> (Aug 21, 2002): 
+
+<ul>
+<li>Bug fix in grabbing images with more than 8 bits per channel 
+      (GRABLINK boards only). 
+</li>
+</ul></li>
+<li><b>Revision 2.5</b> (Jul 17, 2002): 
+
+<ul>
+<li>Supports now also the GRABLINK Value/Expert boards. 
+</li>
+<li>Adaptation to MultiCam driver version 2.8.2. 
+</li>
+</ul></li>
+<li><b>Revision 2.4</b> (Jun 28, 2002): 
+
+<ul>
+<li>New parameter for channel state. 
+</li>
+<li>Enabling parameter control during runtime in continuous mode. 
+</li>
+<li>Renaming parameter 'force_trigger' to 'do_force_trigger'. 
+</li>
+</ul></li>
+<li><b>Revision 2.3</b> (Mar 27, 2002): 
+
+<ul>
+<li>HALCON 6.1 version of the interface (included in HALCON 6.1 CD). 
+</li>
+<li>Enabling trigger control during runtime in continuous mode. 
+</li>
+</ul></li>
+<li><b>Revision 2.2</b> (Jan 9, 2002): 
+
+<ul>
+<li>Renaming from 'Multi' into 'MultiCam' (supports now also the Domino 
+      Alpha and Domino Gamma boards). 
+</li>
+<li>Adaptation to MultiCam driver version 2.6. 
+</li>
+<li>Renaming of several strobe, trigger, and exposure parameters to ensure 
+      uniform prefixes. 
+</li>
+<li>New parameters for strobe and exposure control. 
+</li>
+<li>New parameters for gain and offset (Domino only). 
+</li>
+</ul></li>
+<li><b>Revision 2.1</b> (Nov 28, 2001): 
+
+<ul>
+<li>Support of line scan cameras. 
+</li>
+<li>Support of strobe functionality. 
+</li>
+<li>Bug fix in support of more than 8 bits per channel. 
+</li>
+<li>Bug fix in volatile grabbing. 
+</li>
+</ul></li>
+<li><b>Revision 2.0 </b>(Jun 18, 2001): 
+
+<ul>
+<li>First official version of the interface.
+</li>
+</ul></li>
+</ul></div>
+  <!-- toc end -->  <hr> 
+  <div class="imprint"> 
+    <span class="imprinthead">Legal disclaimer regarding hyperlinks</span>: 
+    This page may provide users with access by hypertext links to external, non-MVTec websites. 
+Any such access is provided with the understanding that the contents 
+of non-MVTec sites are beyond the control of MVTec Software GmbH, that 
+MVTec Software GmbH makes no representations whatsoever about such 
+sites, and that users shall proceed at their own risk. 
+MVTec Software GmbH is not responsible for the privacy practices or 
+the content of external, non-MVTec websites.
+ 
+  </div> 
+  <div class="imprint"> 
+    <span class="imprinthead">Copyright notes</span>: 
+    &copy; Copyright MVTec Software GmbH. All rights reserved. 
+Unless otherwise stated, the copyright and similar rights in the 
+contents of this page, including but not limited to all text, designs 
+and images appearing herein, are copyrighted works owned by MVTec 
+Software GmbH. 
+"MVTec Software GmbH" and "HALCON" are registered trademarks of MVTec 
+Software GmbH. 
+All other brand names, designs, service marks and trademarks (whether 
+or not registered) referenced or used herein are the property of their 
+respective owners.
+ 
+  </div> 
+  <div class="footer"> 
+    acqdump 1.4 / hdoc 1.2 / Generated: Thu Oct 27 18:11:57 CEST 2016 
+  </div> 
+  </body> 
+</html>

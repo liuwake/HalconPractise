@@ -1,0 +1,2746 @@
+<!DOCTYPE HTML> 
+<html> 
+  <head> 
+  <meta id='acqdump-id' name='acqdump-id' content='halcon-acq-SiliconSoftware-rev13.0.6'> 
+  <title>SiliconSoftware / HALCON / MVTec Software GmbH</title> 
+      <style type="text/css"> 
+      body { 
+        color: #000000; 
+        background-color: #ffffff; 
+        margin-top: 0px; 
+        margin-bottom: 0px; 
+        margin-left: 20px; 
+        margin-right: 20px; 
+        font-family: Arial,Helvetica,sans-serif; 
+      } 
+      a:link { 
+        color: #0044cc; 
+      } 
+      a:link,a:visited { 
+        text-decoration: none; 
+      } 
+      a:link:hover,a:visited:hover { 
+        text-decoration: underline; 
+      } 
+      th { 
+        text-align: left; 
+      } 
+      h1,h2,h3,h4,h5,h6 { 
+        text-rendering: optimizeLegibility; 
+        color: #666666; 
+      } 
+      tt { 
+        font-family: monospace,monospace; 
+      } 
+      h1 a.halconoperator { 
+        font-family: Arial,Helvetica,sans-serif; 
+        color: #666666; 
+      } 
+      h2 a.halconoperator { 
+        font-family: Arial,Helvetica,sans-serif; 
+        color: #666666; 
+      } 
+      hr { 
+        border: 0; 
+        border-top: solid 1px #f28d26; 
+      } 
+      pre { 
+        font-family: monospace,monospace; 
+        padding: 1ex; 
+        white-space: pre-wrap; 
+      } 
+      .toc { 
+        font-size: 80%; 
+        border-top: 1px dashed #f28d26; 
+        border-bottom: 1px dashed #f28d26; 
+        padding-top: 5px; 
+        padding-bottom: 5px; 
+      } 
+      .inv { 
+        margin: 0; 
+        border: 0; 
+        padding: 0; 
+      } 
+      .banner { 
+        color: #666666; 
+        padding-left: 1em; 
+      } 
+      .logo { 
+        background-color: white; 
+      } 
+      .keyboard { 
+        font-size: 80%; 
+        padding-left: 3px; 
+        padding-right: 3px; 
+        border-radius: 5px; 
+        border-width: 1px; 
+        border-style: solid; 
+        border-color: #f28d26; 
+        background-color: #f3f3f3; 
+      } 
+      .warning { 
+        margin-top: 2ex; 
+        margin-bottom: 1ex; 
+        padding: 10px; 
+        text-align: center; 
+        border: 1px solid; 
+        color: #bb0000; 
+        background-color: #fff7f7 
+      } 
+      .imprint { 
+        margin-top: 1ex; 
+        font-size: 80%; 
+        color: #666666; 
+      } 
+      .imprinthead { 
+        font-weight: bolder; 
+        color: #666666; 
+      } 
+      .postscript { 
+        margin-top: 2ex; 
+        font-size: 80%; 
+        color: #666666 
+      } 
+      .evenrow { 
+        background-color: #e7e7ef; 
+        vertical-align: top; 
+      } 
+      .oddrow { 
+        background-color: #f7f7ff; 
+        vertical-align: top; 
+      } 
+      .headrow { 
+        background-color: #97979f; 
+        color: #ffffff; 
+        vertical-align: top; 
+      } 
+      .logorow { 
+        vertical-align: top; 
+      } 
+      .error { 
+        color: red; 
+      } 
+      .var { 
+        font-style: italic 
+      } 
+      .halconoperator { 
+        font-family: monospace,monospace; 
+      } 
+      .halconprocedure { 
+        font-family: Consolas,Inconsolata,"DejaVu Sans Mono",monospace; 
+      } 
+      span.operator { 
+        font-family: monospace,monospace; 
+      } 
+      span.procedure { 
+        font-family: monospace,monospace; 
+      } 
+      span.operation { 
+        font-family: monospace,monospace; 
+      } 
+      span.feature { 
+        font-family: Arial,Helvetica,Homerton,sans-serif; 
+      } 
+      ul { 
+        padding-left: 1.2em; 
+      } 
+      li.dot { 
+        list-style-type: square; 
+        color: #f28d26; 
+      } 
+      .breadcrumb { 
+        font-size: 80%; 
+        color: white; 
+        background-color: #062d64; 
+        margin-left: -20px; 
+        margin-right: -20px; 
+        margin-bottom: 20px; 
+        padding-left: 20px; 
+        padding-right: 20px; 
+        padding-bottom: 15px; 
+      } 
+      .webbar { 
+        font-size: 80%; 
+        background-color: #dddddd; 
+        margin-top: 0px; 
+        margin-left: -20px; 
+        margin-right: -20px; 
+        margin-bottom: 0px; 
+        padding-top: 5px; 
+        padding-left: 20px; 
+        padding-right: 20px; 
+        padding-bottom: 5px; 
+      } 
+      .footer { 
+        border-top: 1px dashed #f28d26; 
+        font-size: 80%; 
+        color: #666666; 
+        margin-left: -20px; 
+        margin-right: -20px; 
+        margin-top: 0px; 
+        padding-left: 20px; 
+        padding-right: 20px; 
+        padding-top: 10px; 
+        padding-bottom: 15px; 
+      } 
+      .breadcrumb a { 
+        color: #ffffff; 
+        border-bottom: 1px solid white; 
+      } 
+      .breadcrumb a:link:hover,.breadcrumb a:visited:hover { 
+        text-decoration: none; 
+        border-bottom: none; 
+      } 
+      .heading { 
+        margin-top: 1ex; 
+        font-size: 110%; 
+        font-weight: bold; 
+        color: #666666; 
+      } 
+      .text { 
+        color: black; 
+      } 
+      .example { 
+        font-size: 80%; 
+        background-color: #f3f3f3; 
+        border: 1px dashed #666666; 
+        padding: 10px; 
+      } 
+      .math { 
+      } 
+      .displaymath { 
+        text-align: center; 
+        margin-top: 1ex; 
+        margin-bottom: 1ex; 
+      } 
+      </style> 
+  </head> 
+  <body><div class="breadcrumb"> 
+<br class="inv"/> 
+<a href="../../../../documentation.html">HALCON</a> / <a href="acq-overview.html">Image Acquisition Interfaces</a> 
+<br class="inv"/> 
+</div> 
+<h1>Image Acquisition Interface for Silicon Software Boards</h1> 
+<table summary="Image Acquisition Interface for Silicon Software Boards"> 
+  <tr> 
+    <td> 
+      Interface: 
+    </td> 
+    <td> 
+      SiliconSoftware 
+    </td> 
+  </tr> 
+  <tr> 
+    <td> 
+      Revision: 
+    </td> 
+    <td> 
+      13.0.6 
+    </td> 
+  </tr> 
+  <tr> 
+    <td> 
+      Date: 
+    </td> 
+    <td> 
+      2018-11-30 
+    </td> 
+  </tr> 
+</table>
+<ul class="toc">
+<li><a href="#GENERAL">General</a></li>
+<li><a href="#SYSTEM_REQUIREMENTS">System Requirements</a></li>
+<li><a href="#INSTALLATION">Installation</a></li>
+<li><a href="#FEATURES">Features</a></li>
+<li><a href="#LIMITATIONS">Limitations</a></li>
+<li><a href="#INFO_FRAMEGRABBER">Parameters for info_framegrabber</a></li>
+<li><a href="#OPEN_FRAMEGRABBER">Parameters for open_framegrabber</a></li>
+<li><a href="#SET_FRAMEGRABBER_PARAM">Parameters for set_framegrabber_param</a></li>
+<li><a href="#GET_FRAMEGRABBER_PARAM">Parameters for get_framegrabber_param</a></li>
+<li><a href="#SET_FRAMEGRABBER_LUT">Operator set_framegrabber_lut</a></li>
+<li><a href="#GET_FRAMEGRABBER_LUT">Operator get_framegrabber_lut</a></li>
+<li><a href="#SET_FRAMEGRABBER_CALLBACK">Operator set_framegrabber_callback</a></li>
+<li><a href="#GET_FRAMEGRABBER_CALLBACK">Operator get_framegrabber_callback</a></li>
+<li><a href="#GRAB_IMAGE_START">Operator grab_image_start</a></li>
+<li><a href="#GRAB_IMAGE">Operator grab_image</a></li>
+<li><a href="#GRAB_IMAGE_ASYNC">Operator grab_image_async</a></li>
+<li><a href="#GRAB_DATA">Operator grab_data</a></li>
+<li><a href="#GRAB_DATA_ASYNC">Operator grab_data_async</a></li>
+<li><a href="#CLOSE_FRAMEGRABBER">Operator close_framegrabber</a></li>
+<li><a href="#PARAMETERIZATION_OF_GIGE_VISION_CAMERAS">Parameterization of GigE Vision Cameras</a></li>
+<li><a href="#PARAMETERIZATION_OF_GENICAM_CAMERAS">Parameterization of GenICam Cameras</a></li>
+<li><a href="#SUPPORT_OF_BINARIZATION_SMARTAPPLET_FAMILY">Support of Binarization SmartApplet Family</a></li>
+<li><a href="#SUPPORT_OF_SEGMENTATION_SMARTAPPLET_FAMILY">Support of Segmentation SmartApplet Family</a></li>
+<li><a href="#SUPPORT_OF_TRIANGULATION_SMARTAPPLET_FAMILY">Support of 3D Triangulation SmartApplet Family</a></li>
+<li><a href="#SUPPORT_OF_MULTI_ROI_VISUAL_APPLET_MODULES">Support of Multi RoI Visual Applet Modules</a></li>
+<li><a href="#HDEVELOP_EXAMPLES">HDevelop Examples</a></li>
+<li><a href="#RELEASENOTES">Release Notes</a></li>
+</ul>
+  <!-- toc start -->
+<h2 id="GENERAL">General</h2><div> This page provides the documentation of the HALCON SiliconSoftware  interface for accessing frame grabbers of the following product series: 
+ microEnable III, microEnable IV A series, microEnable IV V series, 
+ microEnable 5 A series (marathon and ironman), and microEnable 5 V series 
+ (marathon and ironman) from <a href="http://www.silicon-software.com">Silicon Software GmbH</a>. 
+ <a href="http://www.mvtec.com/download/registration">Registered</a> customers can download the 
+ <a href="http://www.mvtec.com/download/halcon/">latest revision</a> of this interface from the 
+ <a href="http://www.mvtec.com/">MVTec WWW server</a>.
+</div>
+<h2 id="SYSTEM_REQUIREMENTS">System Requirements</h2><div>
+<ul>
+<li>Intel compatible PC with Windows    7 (32-bit or 64-bit) 
+   or newer that is also supported by the vendor-specific SDK, 
+   also WoW64 (using 32-bit HALCON on 64-bit Windows). 
+</li>
+<li>Successfully installed Silicon Software driver (<b>version 5.4.4</b> or 
+   higher). Make sure the environment variable %SISODIR5% is set correctly 
+   to the Silicon Software base directory. 
+</li>
+<li>Suitable hardware applet, e.g., an acquisition applet, SmartApplet or a 
+   specific applet generated by Silicon Software VisualApplets together with 
+   the corresponding mcf-file. This configuration file can be easily created 
+   via the Silicon Software microDisplay application. 
+</li>
+<li>HALCON image acquisition interface <b>hAcqSiliconSoftware.dll</b> or 
+   <b>hAcqSiliconSoftwarexl.dll</b>, respectively. If you have properly 
+   installed the interface, both DLLs should reside in 
+   <tt>bin\%HALCONARCH%</tt> within the HALCON base directory %HALCONROOT% you 
+   have chosen during the installation of HALCON.
+</li>
+</ul></div>
+<h2 id="INSTALLATION">Installation</h2><div>Only when installing or updating the interface manually follow these steps: <br> 
+
+<ul>
+<li><b>Windows:</b> Extract the archive containing the interface files to the 
+  HALCON base directory %HALCONROOT% (Note: Administrator privileges may be 
+  required for this step). Additionally, you have to move the interface 
+  examples to the directory %HALCONEXAMPLES% manually.
+</li>
+</ul></div>
+<h2 id="FEATURES">Features</h2><div>
+<ul>
+<li>Support of microEnable frame grabber boards from Silicon Software with    Camera Link, CoaXPress, Camera Link HS and GigE Vision interface. 
+</li>
+<li>Support of acquisition applets with more than one DMA channel. 
+</li>
+<li>Approach of multiple frame grabber boards. 
+</li>
+<li>Support of pre-processing functionality via SmartApplets and VisualApplets. 
+</li>
+<li>Support of Segmentation SmartApplets via <a class="halconoperator" href="../operators/grab_data.html">grab_data</a> and <a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a> to 
+   get also the pre-processed blob data. 
+</li>
+<li>Support of Binarization SmartApplets via <a class="halconoperator" href="../operators/grab_image.html">grab_image</a> and <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a> 
+   to get the gray-value and the binary image. 
+</li>
+<li>Support of 3D Triangulation SmartApplets via <a class="halconoperator" href="../operators/grab_data.html">grab_data</a> and <a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a> 
+   to get a disparity image that is calculated on the base of a laser line. 
+</li>
+<li>Support of coprocessor functionality with microEnable IV-V and V-V frame 
+   grabber boards. 
+</li>
+<li>Synchronous and asynchronous grabbing. 
+</li>
+<li>External and software trigger. 
+</li>
+<li>Cropping of image parts. 
+</li>
+<li>Software control of the digital input and output lines.
+</li>
+</ul></div>
+<h2 id="LIMITATIONS">Limitations</h2><div>
+<ul>
+<li>Simultaneous independent grabbing of a single camera source that is divided    into a second DMA channel is not supported. In this case the internal read 
+   out of further channels will be done sequentially. 
+</li>
+<li>The microEnable 5 V and A series no longer supports the Silicon Software 
+   SmartApplets family.
+</li>
+</ul></div>
+<h2 id="INFO_FRAMEGRABBER">Parameters for <a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a></h2><div></div>
+<table summary="Parameters for info_framegrabber" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Parameter</th>
+<th>Value List</th>
+<th>Type</th>
+<th>Kind</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><b>'bits_per_channel'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'camera_type'</b></td>
+<td>['CAMFILE:', 'mcf', 'C:\\']</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Syntax for the camera configuration file.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'color_space'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'defaults'</b></td>
+<td>[1, 1, 0, 0, 0, 0, 'interlaced', 8,               'gray', -1.0, 'false', '', '0', 0, 0]
+</td>
+<td>mixed</td>
+<td>pre-defined</td>
+<td>Default values for <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'device'</b></td>
+<td>['<span class="var">&lt;device_id&gt;</span>']</td>
+<td>string</td>
+<td>dynamic</td>
+<td>A list of available devices.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'external_trigger'</b></td>
+<td>['false', 'true']</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Values for the external trigger.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'field'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unused.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'general'</b></td>
+<td>[]</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Information about the HALCON SiliconSoftware interface.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'generic'</b></td>
+<td>['', 'discovery_timeout=<span class="var">&lt;ms&gt;</span>', 'genicam_xml_file=<span class="var">&lt;filepath&gt;</span>', 'num_buffers=<span class="var">&lt;num&gt;</span>', 'num_dma_channels=<span class="var">&lt;num&gt;</span>', 'slave=1']</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Value list for the Generic parameter.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'horizontal_resolution'</b></td>
+<td>1</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Value list for horizontal resolution.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'image_height'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unsupported query.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'image_width'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unsupported query.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'info_boards'</b></td>
+<td>['device:<span class="var">&lt;device_id&gt;</span> board_type:<span class="var">&lt;board_type&gt;</span>']</td>
+<td>string</td>
+<td>dynamic</td>
+<td>A list of the available devices.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'parameters'</b></td>
+<td>['<span class="var">&lt;parameters&gt;</span>']</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Pre-defined parameters of the HALCON interface.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'parameters_readonly'</b></td>
+<td>['<span class="var">&lt;parameters&gt;</span>']</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Pre-defined read-only parameters of the HALCON interface.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'parameters_writeonly'</b></td>
+<td>['<span class="var">&lt;parameters&gt;</span>']</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Pre-defined write-only parameters of the HALCON interface.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'port'</b></td>
+<td>[0, 1, 2, 3]</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Pre-defined list of possible port numbers.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'revision'</b></td>
+<td>'<span class="var">&lt;revision&gt;</span>'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Revision number of the SiliconSoftware interface.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'start_column'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unsupported query.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'start_row'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unsupported query.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'vertical_resolution'</b></td>
+<td>1</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Value list for vertical resolution.</td>
+</tr></table>
+<h2 id="OPEN_FRAMEGRABBER">Parameters for <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a></h2><div></div>
+<table summary="Parameters for open_framegrabber" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Parameter</th>
+<th>Values</th>
+<th>Default</th>
+<th>Type</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><b>Name</b></td>
+<td>'SiliconSoftware'</td>
+<td></td>
+<td>string</td>
+<td>Name of the HALCON interface.</td>
+</tr>
+<tr class="evenrow">
+<td><b>HorizontalResolution</b></td>
+<td>1</td>
+<td>1</td>
+<td>integer</td>
+<td> Ignored (the desired image resolution is set via the microEnable  configuration file specified in the <i>CameraType</i> parameter!).
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>VerticalResolution</b></td>
+<td>1</td>
+<td>1</td>
+<td>integer</td>
+<td> Ignored (the desired image resolution is set via the microEnable  configuration file specified in the <i>CameraType</i> parameter!).
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>ImageWidth</b></td>
+<td>0, <span class="var">&lt;width&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td> Width of the desired image part ('0' stands for the maximum image  height). This value has to be equal or smaller than the maximum image 
+ height. If the value does not fit in the step width, it is rounded to 
+ next valid value.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>ImageHeight</b></td>
+<td>0, <span class="var">&lt;height&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td> Height of the desired image part ('0' stands for the maximum image  height). This value has to be equal or smaller than the maximum image 
+ height. If the value does not fit in the step width, it is rounded to 
+ next valid value.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>StartRow</b></td>
+<td><span class="var">&lt;row&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>Row coordinate of the upper left pixel within the desired image part.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>StartColumn</b></td>
+<td><span class="var">&lt;column&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>Column coordinate of the upper left pixel within the desired image part.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>Field</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr>
+<tr class="oddrow">
+<td><b>BitsPerChannel</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td> Ignored (the desired pixel depth will be set accordingly to the parameter  settings in the microEnable configuration file).
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>ColorSpace</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td> Ignored (the desired color space will be set accordingly to the parameter  settings in the microEnable configuration file).
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>Generic</b></td>
+<td>'', ['discovery_timeout=<span class="var">&lt;ms&gt;</span>', 'genicam_xml_file=<span class="var">&lt;filepath&gt;</span>', 'num_buffers=<span class="var">&lt;num&gt;</span>', 'num_dma_channels=<span class="var">&lt;num&gt;</span>', 'slave=<span class="var">&lt;0/1&gt;</span>], -1</td>
+<td>-1</td>
+<td>mixed</td>
+<td>
+<ul>
+<li><b>discovery_timeout</b><br>    With the Generic parameter 'discovery_timeout' a time in ms can be 
+   specified to detect the devices connected to a Silicon Software GigE 
+   Vision board. Default: 2000. 
+</li>
+<li><b>genicam_xml_file</b><br> 
+   With the Generic parameter 'genicam_xml_file' a CoaXPress xml file with 
+   the needed configuration could be passed. Please use the GenICam Explorer 
+   tool provided by Silicon Software to generate a proper xml file. 
+</li>
+<li><b>num_buffers</b><br> 
+   With the Generic parameter 'num_buffers' the actual number of image 
+   buffers used in the HALCON acquisition interface can be set before the 
+   camera is initialized. Note that the parameter must be specified as a 
+   string, e.g., 'num_buffers=5'. Note that depending on the image size of 
+   the used camera a large number of buffers can exceed the available 
+   memory size of your computer. Default: 2. 
+</li>
+<li><b>num_dma_channels</b><br> 
+   With the Generic parameter 'num_dma_channels' the user can specify the 
+   number of actual used DMA channels supported by the applet (see also the 
+   use of DmaToPC or SmartApplets). If an applet uses multiple DMA channels, 
+   the parameter 'num_dma_channels' has to match this number, e.g., if a 
+   SmartApplet with two output DMA channels is used, the user must set 
+   'num_dma_channels=2'. With the Port parameter value set to 0, the HALCON 
+   SiliconSoftware interface will provide a multi-channel image on the 
+   microEnable DMA channels 0 and 1 on every call of <a class="halconoperator" href="../operators/grab_image.html">grab_image</a> or 
+   <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a>. 
+   Default: 1. 
+</li>
+<li><b>slave</b><br> 
+   With the Generic parameter 'slave' the user can activate master/slave 
+   mode of the board. First a master connection has to be established. 
+   Therefor no Generic parameter is needed. Then several slaves can 
+   connect to the same port and configuration file, change parameters or 
+   grab images. 
+   Default: 0.
+</li>
+</ul></td>
+</tr>
+<tr class="evenrow">
+<td><b>ExternalTrigger</b></td>
+<td>'false', 'true'</td>
+<td>'false'</td>
+<td>string</td>
+<td> If set to 'true', the trigger mode will be set to 'async_trigger',  otherwise the configuration of the camera file will be used.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>CameraType</b></td>
+<td>'<span class="var">&lt;mcf_file&gt;</span>'</td>
+<td>''</td>
+<td>string</td>
+<td> Specify the name (including the full path name) of the desired camera  configuration file (mcf file). To configure a specific camera setup please 
+ use the <b>microDisplay</b> program which is part of microEnable software. 
+ In case of a board with multiple ports, each port will obtain his own 
+ acquisition handle by calling <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>(). Please note, that the 
+ first <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>() call to a device will initialise all provided 
+ ports. Further passed configuration files to an already initialized board 
+ will be ignored.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>Device</b></td>
+<td>'<span class="var">&lt;device_id&gt;</span>'</td>
+<td></td>
+<td>string</td>
+<td>Opens the device with the specific device id.</td>
+</tr>
+<tr class="oddrow">
+<td><b>Port</b></td>
+<td>0, 1, 2, 3</td>
+<td>0</td>
+<td>integer</td>
+<td> Specify the port the camera is connected to. Corresponds to the internally  used DMA channel (0 for Port A, 1 for Port B, ...)
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>LineIn</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr></table>
+<h2 id="SET_FRAMEGRABBER_PARAM">Parameters for <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a></h2><div> Note that most parameters of this interface are generic, i.e. all  implemented HALCON parameters can be queried by calling 
+ <a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a><tt>(..., 'parameters', ...)</tt>. All actually available 
+ parameters and also the generic applet parameters can be queried by calling 
+ <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a><tt>(..., 'available_param_names', ...)</tt>.
+</div>
+<table summary="Parameters for set_framegrabber_param" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Parameter</th>
+<th>Values</th>
+<th>Default</th>
+<th>Type</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><b>'acquisition_mode'</b></td>
+<td>'select_next_image', 'select_act_image', 'select_new_image'</td>
+<td>'select_next_image'</td>
+<td>string</td>
+<td>
+<ul>
+<li><b>select_next_image</b><br>    The 'select_next_image' acquisition mode is the 'default' acquisition 
+   mode. The buffer index will be incremented to acquire all existing buffers. 
+   If a buffer is grabbed, the buffer will be automatically removed from the queue. 
+   If all buffers are filled the next grabbed image will not be buffered and will be lost. 
+   In this case, the 'num_block_lost_images'  parameter will be increased. 
+   Every query will return the oldest image (FIFO). 
+</li>
+<li><b>select_new_image</b><br> 
+   With 'select_new_image' the last grabbed image will be returned. 
+   In case a new buffer is being filled in this moment, the grab will wait 
+   until it is completely filled and then it will return this buffer (LIFO) . 
+</li>
+<li><b>select_act_image</b><br> 
+   In contrast the 'select_act_image'  does not take care about unfilled 
+   buffers, and will always return the last filled buffer. In both cases, a new 
+   acquired image will overwrite the last buffer (LIFO).
+</li>
+</ul></td>
+</tr>
+<tr class="evenrow">
+<td><b>'blob_area'</b></td>
+<td>'disable', 'enable'</td>
+<td>'enable'</td>
+<td>string</td>
+<td> Controls the <a class="halconoperator" href="../operators/grab_data.html">grab_data</a>/<a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a> data tuple. The area represents the  number of pixels from a detected blob. If this feature is disabled the 
+ information is not present. Note that this functionality is only available 
+ in combination with a Segmentation SmartApplet (Blob).
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'blob_bounding_box'</b></td>
+<td>'disable', 'enable'</td>
+<td>'disable'</td>
+<td>string</td>
+<td> Controls the <a class="halconoperator" href="../operators/grab_data.html">grab_data</a>/<a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a> data tuple. The bounding box is  represented by the upper-left row, upper-left column, lower-left row, 
+ and lower-left column of each blob. If this feature is disabled the four 
+ coordinates are not present. Note that this functionality is only available 
+ in combination with a Segmentation SmartApplet (Blob).
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'blob_center_of_gravity'</b></td>
+<td>'disable', 'enable'</td>
+<td>'enable'</td>
+<td>string</td>
+<td> Controls the <a class="halconoperator" href="../operators/grab_data.html">grab_data</a>/<a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a> data tuple. Returns the coordinate  row and coordinate column from the center of gravity of each blob. If this 
+ feature is disabled the two coordinates are not present. Note that this 
+ functionality is only available in combination with a Segmentation 
+ SmartApplet (Blob).
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'blob_contour_length'</b></td>
+<td>'disable', 'enable'</td>
+<td>'enable'</td>
+<td>string</td>
+<td> Controls the <a class="halconoperator" href="../operators/grab_data.html">grab_data</a>/<a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a> data tuple. The contour length is  divided into a orthogonal and diagonal contour length. If this feature 
+ is disabled the two contour length values are not present. Note that this 
+ functionality is only available in combination with a Segmentation 
+ SmartApplet (Blob).
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'blob_region'</b></td>
+<td>'disable', 'enable'</td>
+<td>'enable'</td>
+<td>string</td>
+<td> Controls the <a class="halconoperator" href="../operators/grab_data.html">grab_data</a>/<a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a> HALCON regions. The region  information is derived by the bounding box given by the Segmentation 
+ SmartApplet. If this feature is disabled the HALCON regions are not 
+ present. Note that this functionality is only available in combination with 
+ a Segmentation SmartApplet (Blob).
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'cc0_select'</b></td>
+<td> 'clk', 'exsync', '!exsync', 'exsync2', '!exsync2',  'flash', '!flash', 'gnd', 'vcc'
+</td>
+<td></td>
+<td>string</td>
+<td>Assign a particular signal to Camera Link's CC0 line.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'cc1_select'</b></td>
+<td> 'clk', 'exsync', '!exsync', 'exsync2', '!exsync2',  'flash', '!flash', 'gnd', 'vcc'
+</td>
+<td></td>
+<td>string</td>
+<td>Assign a particular signal to Camera Link's CC1 line.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'cc2_select'</b></td>
+<td> 'clk', 'exsync', '!exsync', 'exsync2', '!exsync2',  'flash', '!flash', 'gnd', 'vcc'
+</td>
+<td></td>
+<td>string</td>
+<td>Assign a particular signal to Camera Link's CC2 line.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'cc3_select'</b></td>
+<td> 'clk', 'exsync', '!exsync', 'exsync2', '!exsync2',  'flash', '!flash', 'gnd', 'vcc'
+</td>
+<td></td>
+<td>string</td>
+<td>Assign a particular signal to Camera Link's CC3 line.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'continuous_grabbing'</b></td>
+<td>'disable', 'enable'</td>
+<td>'disable'</td>
+<td>string</td>
+<td> Activate or deactivate the continuous grabbing mode.  If the continuous mode is enabled, the frame grabber board will 
+ grab all the time and the images will queued in the internal given 
+ buffers (see parameter 'num_buffers'). Note that in this mode you 
+ can acquire images also from line scan cameras without losing any 
+ image data.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'coprocessor'</b></td>
+<td>'disable', 'enable'</td>
+<td>'disable'</td>
+<td>string</td>
+<td> Activate or deactivate the coprocessor mode. If the coprocessor mode is  active the parameter 'do_process_image' can be used to send an image to 
+ the frame grabber. The frame grabber specific applet will process the image 
+ immediately. The processed image must be fetched via <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a>. 
+ During the activation of the coprocessor mode the current image processing 
+ will be stopped to adapt the buffer settings accordingly. Please check the 
+ Silicon Software documentation to get further information about generating 
+ an applet containing the coprocessor functionality. Up to now this 
+ functionality is only available with microEnable IV fx1/VD1 frame grabber.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'digital_output'</b></td>
+<td>0, 1, 2, 3</td>
+<td></td>
+<td>integer</td>
+<td>Combination of the two digital output signals.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'do_abort_grab'</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td> Cancel current grab.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'do_exsync'</b></td>
+<td>'disable', 'enable'</td>
+<td></td>
+<td>string</td>
+<td>Switch on/off the exsync signal to the camera.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'do_flash'</b></td>
+<td>'disable', 'enable'</td>
+<td></td>
+<td>string</td>
+<td>Switch on/off the flash signal to the camera.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'do_force_trigger'</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td> Send a software trigger from the application to the camera. This action  parameter is only applicable when the trigger mode is set to 
+ 'async_software_trigger'.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'do_process_image'</b></td>
+<td><span class="var">&lt;surrogate&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td> Sends a HALCON image surrogate to the frame grabber for processing, see  also parameter 'coprocessor'. This surrogate should be generated by calling 
+ the operator <a class="halconoperator" href="../operators/obj_to_integer.html">obj_to_integer</a>.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'exposure'</b></td>
+<td>20 ... 1000000</td>
+<td>4000</td>
+<td>integer</td>
+<td>Exposure time in microseconds.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'exposure_signal'</b></td>
+<td>'high_active', 'low_active'</td>
+<td>'low_active'</td>
+<td>string</td>
+<td>Polarity of the exposure signal.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'flash_signal'</b></td>
+<td>'high_active', 'low_active'</td>
+<td>'low_active'</td>
+<td>string</td>
+<td>Polarity of the flash signal.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'frame_rate'</b></td>
+<td>0.5 ... 20000.0</td>
+<td></td>
+<td>float</td>
+<td>Number of images per second.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'grab_timeout'</b></td>
+<td><span class="var">&lt;milliseconds&gt;</span></td>
+<td>5000</td>
+<td>integer</td>
+<td>Specify the desired timeout in milliseconds for aborting a pending grab. Only values divisible by 1000 are accepted. In any other case 
+the value will be rounded to the next lower value. If -1 is specified, 
+the timeout is set to to the maximum value of 2^32-1 milliseconds. 
+Default: 5000.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'image_height'</b></td>
+<td><span class="var">&lt;height&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td> Height of the desired image part. Note that due to image buffer  re-allocation this setting may take some time.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'image_trigger'</b></td>
+<td>'disable', 'enable'</td>
+<td></td>
+<td>string</td>
+<td>Enable or disable the image trigger.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'image_trigger_input'</b></td>
+<td>0, 1, 2, 3</td>
+<td></td>
+<td>integer</td>
+<td>Input source, if the image trigger is in external mode.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'image_trigger_mode'</b></td>
+<td>'async_gated', 'async_trigger', 'free_run'</td>
+<td></td>
+<td>string</td>
+<td> Image trigger for line scan cameras generates a so-called Image Gate,  which groups all lines to a valid frame, if it is active. Specify the 
+ desired image trigger mode: 
+
+<ul>
+<li>'async_gated': Image Gate is as long active as the external trigger 
+   source is active. 
+</li>
+<li>'async_trigger': Image Gate is started by an external trigger signal. 
+</li>
+<li>'free run': Image Gate is valid all the time. 
+</li>
+</ul> 
+ In all modes the Image Gate becomes inactive after reaching an image height 
+ of N lines.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'image_trigger_signal'</b></td>
+<td>'falling', 'rising'</td>
+<td></td>
+<td>string</td>
+<td>Input signal of the image trigger, in case external mode.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'image_width'</b></td>
+<td><span class="var">&lt;width&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td> Width of the desired image part. Note that due to image buffer  re-allocation this setting may take some time.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'line_downscale'</b></td>
+<td>1 ... 255</td>
+<td></td>
+<td>integer</td>
+<td> If your external trigger signal is too fast, you can set the value of how  often the frequency of the trigger signal has to be divided.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'line_downscale_phase'</b></td>
+<td>1 ... 255</td>
+<td></td>
+<td>integer</td>
+<td> In additional to the downscale value you can set the phase position. For  example, a value of 4 means to turn the phase position about 90&ordm;.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'line_exposure'</b></td>
+<td>0 ... 20000</td>
+<td></td>
+<td>integer</td>
+<td>Line exposure.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'line_period'</b></td>
+<td>0 ... 4369.05</td>
+<td></td>
+<td>float</td>
+<td>Line period.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'line_trigger_delay'</b></td>
+<td>0 ... 2184.517</td>
+<td></td>
+<td>float</td>
+<td>Delay of the line trigger.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'line_trigger_input'</b></td>
+<td>0, 1, 2, 3</td>
+<td></td>
+<td>integer</td>
+<td>Input source of the line trigger.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'line_trigger_mode'</b></td>
+<td> 'grabber_controlled', 'async_trigger', 'grabber_controlled_gated'</td>
+<td></td>
+<td>string</td>
+<td> Specify the line trigger mode: 'grabber_controlled' means that a periodical  signal is created, which defines the line frequency. In 'async_trigger' 
+ mode the signal is created by an external trigger. 
+ 'grabber_controlled_gated' is similar to the 'grabber_controlled' mode, 
+ except that it is only active, if the Image Gate is active.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'line_trigger_signal'</b></td>
+<td>'falling', 'rising'</td>
+<td></td>
+<td>string</td>
+<td>Polarity of the line trigger signal.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'multi_roi_module_name'</b></td>
+<td><span class="var">&lt;string&gt;</span></td>
+<td></td>
+<td>string</td>
+<td>Specifies the base name of the RoI module.               This functionality is only supported if a RoI 
+              module from VisualApplets is used.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'multi_roi_num'</b></td>
+<td>1 ... <span class="var">&lt;num&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>Specifies the number of RoIs to request.               This functionality is only supported if a RoI 
+              module from VisualApplets is used.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'multi_roi_xlength'</b></td>
+<td>1 ... <span class="var">&lt;image_width&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>Specifies the xlength (width) for each RoI.               In case of multiple RoIs, the parameter values 
+              are specified as tuple. This functionality is only 
+              supported if a RoI module from VisualApplets is used.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'multi_roi_xoffset'</b></td>
+<td>1 ... <span class="var">&lt;image_width&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>Specifies the xoffset (start column) for each RoI.               In case of multiple RoIs, the parameter values 
+              are specified as tuple. This functionality is only 
+              supported if a RoI module from VisualApplets is used.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'multi_roi_ylength'</b></td>
+<td>1 ... <span class="var">&lt;image_height&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>Specifies the ylength (height) for each RoI.               In case of multiple RoIs, the parameter values 
+              are specified as tuple.  This functionality is only 
+              supported if a RoI module from VisualApplets is used.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'multi_roi_yoffset'</b></td>
+<td>1 ... <span class="var">&lt;image_height&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>Specifies the yoffset (start row) for each RoI               In case of multiple RoIs, the parameter values 
+              are specified as tuple. This functionality is only 
+              supported if a RoI module from VisualApplets is used.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'num_field_parameter'</b></td>
+<td>1 ... <span class="var">&lt;num&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td> Some generic applet parameter values are provided as parameter fields. To  readout the parameter fields the number of parameter values has to set 
+ in advance since querying this information internally is currently 
+ not supported by the Silicon Software SDK. The number of field parameters 
+ can be determined by querying the generic parameter which contains the number 
+ of field parameters. It is also sufficient to remember the number of parameters 
+ if the values were set before. Please note that in case of a erroneously set 
+ number, e.g., a to height value, a misleading result will be returned.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'num_scans'</b></td>
+<td>1 ... <span class="var">&lt;num&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td> Controls the number of scans to define the height of the disparity image.  This parameter is only needed by the 3D Triangulation SmartApplets in 
+ combination with the operators <a class="halconoperator" href="../operators/grab_data.html">grab_data</a> and <a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a>. In any 
+ other case this parameter is ignored. 
+ Per default the 'num_scans' parameter is 1. In this case only one disparity 
+ image with one disparity line and one camera image will be created. Please note 
+ that the 'num_scans' parameter affects the number of internal grabbed images. 
+ In case of a slow camera a high number of scans needs time to achieve the 
+ images. See also the section "Support of 3D Triangulation SmartApplet Family" below.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'port'</b></td>
+<td>0, 1</td>
+<td></td>
+<td>integer</td>
+<td> Switch to the camera with the specified number (0 for Port A, 1 for Port  B).
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'shaft_encoder'</b></td>
+<td>'disable', 'enable'</td>
+<td></td>
+<td>string</td>
+<td> Switch the shaft encoder on/off. By enabling it the encoder compensation is reset.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'shaft_encoder_input'</b></td>
+<td>0, 1, 2, 3</td>
+<td></td>
+<td>integer</td>
+<td>Selects the input signal for source B of the shaft encoder.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'shaft_encoder_leading_source'</b></td>
+<td>0, 1, 2, 3</td>
+<td></td>
+<td>integer</td>
+<td> Determines the leading signal (direction) of the shaft encoder filter.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'start_async_after_grab_async'</b></td>
+<td>'disable', 'enable'</td>
+<td>'enable'</td>
+<td>string</td>
+<td>By default a new asynchronous grab command is automatically given to the acquisition device at the end of <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a>. If the parameter 
+'start_async_after_grab_async' is set to 'disable', this new grab command 
+is omitted.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'start_column'</b></td>
+<td><span class="var">&lt;column&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>Column coordinate of the upper left pixel within the desired image part.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'start_row'</b></td>
+<td><span class="var">&lt;row&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>Row coordinate of the upper left pixel within the desired image part.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'strobe_delay'</b></td>
+<td><span class="var">&lt;microseconds&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>Strobe pulse delay in microseconds.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'trigger_input'</b></td>
+<td>0, 1, 2, 3</td>
+<td></td>
+<td>integer</td>
+<td>Channel of the trigger input signal.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'trigger_mode'</b></td>
+<td> 'async_software_trigger', 'async_trigger', 'free_run', 'grabber_controlled'</td>
+<td></td>
+<td>string</td>
+<td> Specify the desired trigger mode: 
+<ul>
+<li>'async_software_trigger': the image acquisition is performed by software 
+   via the action parameter 'do_force_trigger'. 
+</li>
+<li>'async_trigger': the image acquisition is forced by an external trigger 
+   signal. 
+</li>
+<li>'free_run': no signals are sent to the camera. 
+</li>
+<li>'grabber_controlled': the frame grabber sends a signal to the camera in 
+   order to control the image acquisition.
+</li>
+</ul></td>
+</tr>
+<tr class="evenrow">
+<td><b>'trigger_signal'</b></td>
+<td>'falling', 'rising'</td>
+<td>'falling'</td>
+<td>string</td>
+<td>Polarity of the trigger signal.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'volatile'</b></td>
+<td>'disable', 'enable'</td>
+<td>'disable'</td>
+<td>string</td>
+<td> <b>Grayscale only.</b> In the volatile mode the two image acquisition  interface buffers are used directly to store HALCON images. This is the 
+ fastest mode avoiding to copy raw images in memory. However, be aware that 
+ older images are overwritten again and again as a side-effect. Thus, you 
+ can only process one image while you grab another image. Older images are 
+ invalid!
+</td>
+</tr></table>
+<h2 id="GET_FRAMEGRABBER_PARAM">Parameters for <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a></h2><div>There may exist additional read-only parameters with the following postfixes: 
+<ul>
+<li><b>'_description'</b>: These parameters provide the tool-tip of the 
+   corresponding parameter as a string. 
+</li>
+<li><b>'_range'</b>: These parameters provide the minimum, maximum, 
+    step width, and default values for the corresponding integer or float 
+    parameter as a tuple with 4 elements, e.g., 
+    <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a><tt>(.., 'Shutter_range', ..)</tt> will return 
+    the output tuple <tt>[<i>min, max, step, default</i>]</tt>. 
+</li>
+<li><b>'_values'</b>: These parameters provide the valid value list for 
+    the corresponding parameter as a tuple, e.g., 
+    <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a><tt>(.., 'volatile_values', ..)</tt> will return 
+    the output tuple <tt>['enable', 'disable']</tt>. 
+</li>
+</ul> 
+<p> 
+All these postfixed parameter names are not returned when calling 
+<a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a><tt>(.., 'parameters', ..)</tt> and are used 
+to enable the easy parameterization via a generic graphical user 
+interface, particularly the HDevelop Image Acquisition Assistant. 
+</p>
+</div>
+<table summary="Parameters for get_framegrabber_param" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Parameter</th>
+<th>Values</th>
+<th>Default</th>
+<th>Type</th>
+<th>Kind</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><b>'acquisition_mode'</b></td>
+<td>'select_next_image', 'select_act_image', 'select_new_image'</td>
+<td>'select_next_image'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>
+<ul>
+<li><b>select_next_image</b><br>    The 'select_next_image' acquisition mode is the 'default' acquisition 
+   mode. The buffer index will be incremented to acquire all existing buffers. 
+   If a buffer is grabbed, the buffer will be automatically removed from the queue. 
+   If all buffers are filled the next grabbed image will not be buffered and will be lost. 
+   In this case, the 'num_block_lost_images'  parameter will be increased. 
+   Every query will return the oldest image (FIFO). 
+</li>
+<li><b>select_new_image</b><br> 
+   With 'select_new_image' the last grabbed image will be returned. 
+   In case a new buffer is being filled in this moment, the grab will wait 
+   until it is completely filled and then it will return this buffer (LIFO) . 
+</li>
+<li><b>select_act_image</b><br> 
+   In contrast the 'select_act_image'  does not take care about unfilled 
+   buffers, and will always return the last filled buffer. In both cases, a new 
+   acquired image will overwrite the last buffer (LIFO).
+</li>
+</ul></td>
+</tr>
+<tr class="evenrow">
+<td><b>'applet_type'</b></td>
+<td>'<span class="var">&lt;type&gt;</span>'</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td> Type of the used applet if this parameter is actually supported by the  used applet.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'available_param_names'</b></td>
+<td>['<span class="var">&lt;names&gt;</span>']</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td> A tuple containing the names of all available parameters. In contrast to  this, the call of <a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a><tt>(...'parameters', ...)'</tt> 
+ returns only the  pre-defined list of parameters, without the additional 
+ applet-specific parameters.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'bits_per_channel'</b></td>
+<td><span class="var">&lt;default&gt;</span></td>
+<td>8</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>The value is not used, so a default value is returned.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'blob_area'</b></td>
+<td>'disable', 'enable'</td>
+<td>'enable'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td> Controls the <a class="halconoperator" href="../operators/grab_data.html">grab_data</a>/<a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a> data tuple. The area represents the  number of pixels from a detected blob. If this feature is disabled the 
+ information is not present. Note that this functionality is only available 
+ in combination with a Segmentation SmartApplet (Blob).
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'blob_bounding_box'</b></td>
+<td>'disable', 'enable'</td>
+<td>'disable'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td> Controls the <a class="halconoperator" href="../operators/grab_data.html">grab_data</a>/<a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a> data tuple. The bounding box is  represented by the upper-left row, upper-left column, lower-left row, 
+ and lower-left column of each blob. If this feature is disabled the four 
+ coordinates are not present. Note that this functionality is only available 
+ in combination with a Segmentation SmartApplet (Blob).
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'blob_center_of_gravity'</b></td>
+<td>'disable', 'enable'</td>
+<td>'enable'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td> Controls the <a class="halconoperator" href="../operators/grab_data.html">grab_data</a>/<a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a> data tuple. Returns the coordinate  row and coordinate column from the center of gravity of each blob. If this 
+ feature is disabled the two coordinates are not present. Note that this 
+ functionality is only available in combination with a Segmentation 
+ SmartApplet (Blob).
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'blob_contour_length'</b></td>
+<td>'disable', 'enable'</td>
+<td>'enable'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td> Controls the <a class="halconoperator" href="../operators/grab_data.html">grab_data</a>/<a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a> data tuple. The contour length is  divided into a orthogonal and diagonal contour length. If this feature 
+ is disabled the two contour length values are not present. Note that this 
+ functionality is only available in combination with a Segmentation 
+ SmartApplet (Blob).
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'blob_region'</b></td>
+<td>'disable', 'enable'</td>
+<td>'enable'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td> Controls the <a class="halconoperator" href="../operators/grab_data.html">grab_data</a>/<a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a> HALCON regions. The region  information is derived by the bounding box given by the Segmentation 
+ SmartApplet. If this feature is disabled the HALCON regions are not 
+ present. Note that this functionality is only available in combination with 
+ a Segmentation SmartApplet (Blob).
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'board_type'</b></td>
+<td>'<span class="var">&lt;type&gt;</span>'</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td>Actual board type.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'camera_status'</b></td>
+<td><span class="var">&lt;status&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td> Camera status on the used port: If the return value is 1 an active  camera on the specified port is found, otherwise the return value is 0.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'camera_type'</b></td>
+<td>'<span class="var">&lt;mcf_file&gt;</span>'</td>
+<td>'&lt;mcf_file&gt;'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Current camera type.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'cc0_select'</b></td>
+<td> 'clk', 'exsync', '!exsync', 'exsync2', '!exsync2',  'flash', '!flash', 'gnd', 'vcc'
+</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td>Assign a particular signal to Camera Link's CC0 line.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'cc1_select'</b></td>
+<td> 'clk', 'exsync', '!exsync', 'exsync2', '!exsync2',  'flash', '!flash', 'gnd', 'vcc'
+</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td>Assign a particular signal to Camera Link's CC1 line.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'cc2_select'</b></td>
+<td> 'clk', 'exsync', '!exsync', 'exsync2', '!exsync2',  'flash', '!flash', 'gnd', 'vcc'
+</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td>Assign a particular signal to Camera Link's CC2 line.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'cc3_select'</b></td>
+<td> 'clk', 'exsync', '!exsync', 'exsync2', '!exsync2',  'flash', '!flash', 'gnd', 'vcc'
+</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td>Assign a particular signal to Camera Link's CC3 line.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'color_space'</b></td>
+<td>'<span class="var">&lt;color_space&gt;</span>'</td>
+<td>'gray'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>The value is not used, so a default value is returned.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'continuous_grabbing'</b></td>
+<td>'disable', 'enable'</td>
+<td>'disable'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td> Activate or deactivate the continuous grabbing mode.  If the continuous mode is enabled, the frame grabber board will 
+ grab all the time and the images will queued in the internal given 
+ buffers (see parameter 'num_buffers'). Note that in this mode you 
+ can acquire images also from line scan cameras without losing any 
+ image data.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'coprocessor'</b></td>
+<td>'disable', 'enable'</td>
+<td>'disable'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td> Activate or deactivate the coprocessor mode. If the coprocessor mode is  active the parameter 'do_process_image' can be used to send an image to 
+ the frame grabber. The frame grabber specific applet will process the image 
+ immediately. The processed image must be fetched via <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a>. 
+ During the activation of the coprocessor mode the current image processing 
+ will be stopped to adapt the buffer settings accordingly. Please check the 
+ Silicon Software documentation to get further information about generating 
+ an applet containing the coprocessor functionality. Up to now this 
+ functionality is only available with microEnable IV fx1/VD1 frame grabber.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'device'</b></td>
+<td>'<span class="var">&lt;device_id&gt;</span>'</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td>Returns the device id of the current device.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'digital_input'</b></td>
+<td><span class="var">&lt;digin&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td>Read the current status of the digital input lines.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'digital_output'</b></td>
+<td>0, 1, 2, 3</td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td>Combination of the two digital output signals.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'discovery_timeout'</b></td>
+<td><span class="var">&lt;ms&gt;</span></td>
+<td>2000</td>
+<td>integer</td>
+<td>dynamic</td>
+<td> Value of the Generic parameter 'discovery_timeout'.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'exposure'</b></td>
+<td><span class="var">&lt;microseconds&gt;</span></td>
+<td>4000</td>
+<td>integer</td>
+<td>dynamic</td>
+<td>Exposure time in microseconds.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'exposure_signal'</b></td>
+<td>'high_active', 'low_active'</td>
+<td>'low_active'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Polarity of the exposure signal.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'external_trigger'</b></td>
+<td>'false', 'true'</td>
+<td>'false'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Status of the external trigger.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'field'</b></td>
+<td>'<span class="var">&lt;default&gt;</span>'</td>
+<td>'interlaced'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>The value is not used, so a default value is returned.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'flash_signal'</b></td>
+<td>'high_active', 'low_active'</td>
+<td>'low_active'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Polarity of the flash signal.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'frame_rate'</b></td>
+<td>0.5 ... 20000.0</td>
+<td></td>
+<td>float</td>
+<td>dynamic</td>
+<td>Number of images per second.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'generic'</b></td>
+<td>'', ['discovery_timeout=<span class="var">&lt;ms&gt;</span>', 'genicam_xml_file=<span class="var">&lt;filepath&gt;</span>', 'num_buffers=<span class="var">&lt;num&gt;</span>', 'num_dma_channels=<span class="var">&lt;num&gt;</span>', 'slave=<span class="var">&lt;0/1&gt;</span>], -1</td>
+<td>-1</td>
+<td>mixed</td>
+<td>pre-defined</td>
+<td>Values of the Generic parameter.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'genicam_xml_file'</b></td>
+<td><span class="var">&lt;filepath&gt;</span></td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td> Value of the Generic parameter 'genicam_xml_file'.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'grab_timeout'</b></td>
+<td><span class="var">&lt;milliseconds&gt;</span></td>
+<td>5000</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Current grab timeout in milliseconds.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'horizontal_resolution'</b></td>
+<td><span class="var">&lt;resolution&gt;</span></td>
+<td>1</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Current value of horizontal resolution.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'image_available'</b></td>
+<td>0, 1</td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td>Status of the last asynchronous grab command. The value 1 means that the image is already acquired and thus can be fetched by <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a> without 
+delay. Note that this parameter is especially useful in combination with 
+external triggering.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'image_height'</b></td>
+<td><span class="var">&lt;height&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Height of the desired image part ('0' stands for the complete image).
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'image_tag'</b></td>
+<td><span class="var">&lt;number&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td>Image tag of the most recently grabbed image.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'image_trigger'</b></td>
+<td>'disable', 'enable'</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td>Enable or disable the image trigger.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'image_trigger_input'</b></td>
+<td>0, 1, 2, 3</td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td>Input source, if the image trigger is in external mode.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'image_trigger_mode'</b></td>
+<td>'async_gated', 'async_trigger', 'free_run'</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td> Image trigger mode.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'image_trigger_signal'</b></td>
+<td>'falling', 'rising'</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td>Input signal of the image trigger, in case external mode.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'image_width'</b></td>
+<td><span class="var">&lt;width&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Width of the desired image part ('0' stands for the complete image).
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'internal_device_pointer'</b></td>
+<td><span class="var">&lt;pointer&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td> Pointer to the device which enables direct device access.  <b>Use at your own risk!</b>
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'line_downscale'</b></td>
+<td>1 ... 255</td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td> If your external trigger signal is too fast, you can set the value of how  often the frequency of the trigger signal has to be divided.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'line_downscale_phase'</b></td>
+<td>1 ... 255</td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td> In additional to the downscale value you can set the phase position. For  example, a value of 4 means to turn the phase position about 90&ordm;.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'line_exposure'</b></td>
+<td>0 ... 20000</td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td>Line exposure.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'line_in'</b></td>
+<td><span class="var">&lt;default&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>The value is not used, so a default value is returned.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'line_period'</b></td>
+<td>0 ... 4369.05</td>
+<td></td>
+<td>float</td>
+<td>dynamic</td>
+<td>Line period.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'line_trigger_delay'</b></td>
+<td>0 ... 2184.517</td>
+<td></td>
+<td>float</td>
+<td>dynamic</td>
+<td>Delay of the line trigger.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'line_trigger_input'</b></td>
+<td>0, 1, 2, 3</td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td>Input source of the line trigger.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'line_trigger_mode'</b></td>
+<td> 'grabber_controlled', 'async_trigger', 'grabber_controlled_gated'</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td> Specify the line trigger mode: 'grabber_controlled' means that a periodical  signal is created, which defines the line frequency. In 'async_trigger' 
+ mode the signal is created by an external trigger. 
+ 'grabber_controlled_gated' is similar to the 'grabber_controlled' mode, 
+ except that it is only active, if the Image Gate is active.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'line_trigger_signal'</b></td>
+<td>'falling', 'rising'</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td>Polarity of the line trigger signal.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'multi_roi_module_name'</b></td>
+<td><span class="var">&lt;string&gt;</span></td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td>Specifies the base name of the RoI module.               This functionality is only supported if a RoI 
+              module from VisualApplets is used.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'multi_roi_num'</b></td>
+<td>1 ... <span class="var">&lt;num&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td>Specifies the number of RoIs to request.               This functionality is only supported if a RoI 
+              module from VisualApplets is used.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'multi_roi_xlength'</b></td>
+<td>1 ... <span class="var">&lt;image_width&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td>Specifies the xlength (width) for each RoI.               In case of multiple RoIs, the parameter values 
+              are specified as tuple. This functionality is only 
+              supported if a RoI module from VisualApplets is used.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'multi_roi_xoffset'</b></td>
+<td>1 ... <span class="var">&lt;image_width&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td>Specifies the xoffset (start column) for each RoI.               In case of multiple RoIs, the parameter values 
+              are specified as tuple. This functionality is only 
+              supported if a RoI module from VisualApplets is used.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'multi_roi_ylength'</b></td>
+<td>1 ... <span class="var">&lt;image_height&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td>Specifies the ylength (height) for each RoI.               In case of multiple RoIs, the parameter values 
+              are specified as tuple.  This functionality is only 
+              supported if a RoI module from VisualApplets is used.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'multi_roi_yoffset'</b></td>
+<td>1 ... <span class="var">&lt;image_height&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td>Specifies the yoffset (start row) for each RoI               In case of multiple RoIs, the parameter values 
+              are specified as tuple. This functionality is only 
+              supported if a RoI module from VisualApplets is used.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'name'</b></td>
+<td>'SiliconSoftware'</td>
+<td></td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Name of the HALCON interface.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'num_block_lost_images'</b></td>
+<td><span class="var">&lt;number&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td>Number of all images, which are lost by blocking of the               internal buffer. Only useful with continuous grabbing.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'num_blocked_images'</b></td>
+<td><span class="var">&lt;number&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td>Number of blocked images.               Only useful with continuous grabbing.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'num_buffers'</b></td>
+<td><span class="var">&lt;number&gt;</span></td>
+<td>2</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td> Number of buffers used for the image acquisition.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'num_dma_channels'</b></td>
+<td><span class="var">&lt;number&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td>Number of internally used DMA channels.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'num_field_parameter'</b></td>
+<td>1 ... <span class="var">&lt;num&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td> Some generic applet parameter values are provided as parameter fields. To  readout the parameter fields the number of parameter values has to set 
+ in advance since querying this information internally is currently 
+ not supported by the Silicon Software SDK. The number of field parameters 
+ can be determined by querying the generic parameter which contains the number 
+ of field parameters. It is also sufficient to remember the number of parameters 
+ if the values were set before. Please note that in case of a erroneously set 
+ number, e.g., a to height value, a misleading result will be returned.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'num_grabbed_images'</b></td>
+<td><span class="var">&lt;number&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td>Number of all acquired images.               Only useful with continuous grabbing.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'num_images_in_progress'</b></td>
+<td><span class="var">&lt;number&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td>Number of images which haven't been received, yet.               It's the Number of buffers in the queue available to 
+              receive with <a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a> or grab_image_asnyc. 
+              This parameter is in particular useful in case 
+              that continuous grabbing is enabled. In this case a 
+              real queuing is possible and the buffer queue could 
+              be set to a value higher than two. See the parameter 
+              'num_buffers'.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'num_last_image'</b></td>
+<td><span class="var">&lt;number&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td>Number of the last grabbed image.               The num_last_image parameter always iterates between 1 and 
+              the maximum number of buffers. Before grabbing the first image, 
+              the value is 0.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'num_next_image'</b></td>
+<td><span class="var">&lt;number&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td>Number of next image after last grabbed image.               Only useful with continuous grabbing.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'num_scans'</b></td>
+<td>1 ... <span class="var">&lt;num&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td> Controls the number of scans to define the height of the disparity image.  This parameter is only needed by the 3D Triangulation SmartApplets in 
+ combination with the operators <a class="halconoperator" href="../operators/grab_data.html">grab_data</a> and <a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a>. In any 
+ other case this parameter is ignored. 
+ Per default the 'num_scans' parameter is 1. In this case only one disparity 
+ image with one disparity line and one camera image will be created. Please note 
+ that the 'num_scans' parameter affects the number of internal grabbed images. 
+ In case of a slow camera a high number of scans needs time to achieve the 
+ images. See also the section "Support of 3D Triangulation SmartApplet Family" below.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'port'</b></td>
+<td>0, 1, 2, 3</td>
+<td>0</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Port number.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'revision'</b></td>
+<td>'<span class="var">&lt;revision&gt;</span>'</td>
+<td></td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Revision number of the SiliconSoftware interface.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'serial_number'</b></td>
+<td>'<span class="var">&lt;serial&gt;</span>'</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td>Serial number of the board.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'shaft_encoder'</b></td>
+<td>'disable', 'enable'</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td> Switch the shaft encoder on/off. By enabling it the encoder compensation is reset.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'shaft_encoder_input'</b></td>
+<td>0, 1, 2, 3</td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td>Selects the input signal for source B of the shaft encoder.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'shaft_encoder_leading_source'</b></td>
+<td>0, 1, 2, 3</td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td> Determines the leading signal (direction) of the shaft encoder filter.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'slave'</b></td>
+<td>0, 1</td>
+<td></td>
+<td>integer</td>
+<td>static</td>
+<td>Returns the status of the slave mode. If it is active,               this value is 1.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'start_async_after_grab_async'</b></td>
+<td>'disable', 'enable'</td>
+<td>'enable'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Status of 'start_async_after_grab_async'.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'start_column'</b></td>
+<td><span class="var">&lt;column&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td> Column coordinate of the upper left pixel of the desired image part.  If the value does not fit in the step width, it is rounded to next valid 
+ value.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'start_row'</b></td>
+<td><span class="var">&lt;row&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td> Row coordinate of the upper left pixel of the desired image part.  If the value does not fit in the step width, it is rounded to next valid 
+ value.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'strobe_delay'</b></td>
+<td><span class="var">&lt;microseconds&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>dynamic</td>
+<td>Strobe pulse delay in microseconds.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'timestamp'</b></td>
+<td><span class="var">&lt;microseconds&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td> Gets the timestamp (32bit) from the previously grabbed image in  microseconds. If 'continuous_grabbing' is enabled, the parameter returns 
+ always the most recent timestamp.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'trigger_input'</b></td>
+<td>0, 1, 2, 3</td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td>Channel of the trigger input signal.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'trigger_mode'</b></td>
+<td> 'async_software_trigger', 'async_trigger', 'free_run', 'grabber_controlled'</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td> Specify the desired trigger mode: 
+<ul>
+<li>'async_software_trigger': the image acquisition is performed by software 
+   via the action parameter 'do_force_trigger'. 
+</li>
+<li>'async_trigger': the image acquisition is forced by an external trigger 
+   signal. 
+</li>
+<li>'free_run': no signals are sent to the camera. 
+</li>
+<li>'grabber_controlled': the frame grabber sends a signal to the camera in 
+   order to control the image acquisition.
+</li>
+</ul></td>
+</tr>
+<tr class="oddrow">
+<td><b>'trigger_signal'</b></td>
+<td>'falling', 'rising'</td>
+<td>'falling'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Polarity of the trigger signal.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'vertical_resolution'</b></td>
+<td><span class="var">&lt;resolution&gt;</span></td>
+<td>1</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Current value of vertical resolution.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'volatile'</b></td>
+<td>'disable', 'enable'</td>
+<td>'disable'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td> <b>Grayscale only.</b> In the volatile mode the two image acquisition  interface buffers are used directly to store HALCON images. This is the 
+ fastest mode avoiding to copy raw images in memory. However, be aware that 
+ older images are overwritten again and again as a side-effect. Thus, you 
+ can only process one image while you grab another image. Older images are 
+ invalid!
+</td>
+</tr></table>
+<h2 id="SET_FRAMEGRABBER_LUT">Operator <a class="halconoperator" href="../operators/set_framegrabber_lut.html">set_framegrabber_lut</a></h2><div>Not supported by this interface.</div>
+<h2 id="GET_FRAMEGRABBER_LUT">Operator <a class="halconoperator" href="../operators/get_framegrabber_lut.html">get_framegrabber_lut</a></h2><div>Not supported by this interface.</div>
+<h2 id="SET_FRAMEGRABBER_CALLBACK">Operator <a class="halconoperator" href="../operators/set_framegrabber_callback.html">set_framegrabber_callback</a></h2><div>Not supported by this interface.</div>
+<h2 id="GET_FRAMEGRABBER_CALLBACK">Operator <a class="halconoperator" href="../operators/get_framegrabber_callback.html">get_framegrabber_callback</a></h2><div>Not supported by this interface.</div>
+<h2 id="GRAB_IMAGE_START">Operator <a class="halconoperator" href="../operators/grab_image_start.html">grab_image_start</a></h2><div>Starts a new asynchronous grab. See also <a class="halconoperator" href="../operators/grab_image_start.html">grab_image_start</a>.</div>
+<h2 id="GRAB_IMAGE">Operator <a class="halconoperator" href="../operators/grab_image.html">grab_image</a></h2><div><a class="halconoperator" href="../operators/grab_image.html">grab_image</a> starts a new synchronous grab. See also <a class="halconoperator" href="../operators/grab_image.html">grab_image</a>. Note that 
+the interface converts the image from the device to the desired image format 
+specified by the parameters 'image_width', 'image_height', 'start_row', 
+'start_column', 'bits_per_channel', and 'color_space'.
+</div>
+<h2 id="GRAB_IMAGE_ASYNC">Operator <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a></h2><div><a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a> returns an image and starts the next asynchronous grab. See also <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a>. 
+Note that 
+the interface converts the image from the device to the desired image format 
+specified by the parameters 'image_width', 'image_height', 'start_row', 
+'start_column', 'bits_per_channel', and 'color_space'.
+</div>
+<h2 id="GRAB_DATA">Operator <a class="halconoperator" href="../operators/grab_data.html">grab_data</a></h2><div> The behavior of the operator depends on the used SmartApplets family.  The operator is needed to work with the Segmentation and Triangulation 
+ SmartApplets family. Please see the section 
+ "Support of Segmentation SmartApplets Family" or 
+ "Support of Binarization SmartApplets Family" to get further information.
+</div>
+<h2 id="GRAB_DATA_ASYNC">Operator <a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a></h2><div> Same return values as <a class="halconoperator" href="../operators/grab_data.html">grab_data</a>, but here an asynchronous grab is started.</div>
+<h2 id="CLOSE_FRAMEGRABBER">Operator <a class="halconoperator" href="../operators/close_framegrabber.html">close_framegrabber</a></h2><div>This operator closes the device. See also <a class="halconoperator" href="../operators/close_framegrabber.html">close_framegrabber</a>.</div>
+<h2 id="PARAMETERIZATION_OF_GIGE_VISION_CAMERAS">Parameterization of GigE Vision Cameras</h2><div> The generic parameters of a GigE Vision camera can also be handled via the  HALCON operators <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a> and <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a>. In this 
+ case the user has to add the prefix 'gbe:' to the parameter name, e.g., use 
+ <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a><tt>(..., 'gbe:Gain', 42)</tt> to set the camera 
+ parameter "Gain" to the value 42 or 
+ <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a><tt>(..., 'gbe:Gain', ...)</tt> to query the current 
+ value.<br><br> 
+ To execute a write-only GigE Vision command parameter via the operator 
+ <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a>,  the user has to add the prefix 'gbex:' to the 
+ parameter name, e.g., use 
+ <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a><tt>(..., 'gbex:TriggerSoftware', -1)</tt> to send a 
+ software trigger to a GigE Vision camera. The value of the parameter will 
+ be ignored.<br><br> 
+ Note that the list of available camera parameters can not be queried in 
+ advance, e.g., by calling 
+ <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a><tt>(...'available_param_names'...)</tt> 
+ or <a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a><tt>(..., 'parameters', ...)</tt>. To list all 
+ actually available camera parameters you can use the Silicon Software 
+ <b>GigE Explorer</b> application.<br><br>
+</div>
+<h2 id="PARAMETERIZATION_OF_GENICAM_CAMERAS">Parameterization of GenICam Cameras</h2><div> The generic parameters of GigE Vision, CoaXPress and Camera Link HS  cameras can be accessed by using the GenICam interface and can also be 
+ handled via the HALCON operators <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a> and 
+ <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a>. In this case the user must add the prefix 'sgc:' 
+ to the parameter name, e.g., use <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a><tt>(..., 'sgc:Gain', 42)</tt> 
+ to set the camera parameter "Gain" to the value 42 or 
+ <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a><tt>(..., 'sgc:Gain', ...)</tt> to query the current 
+ value.<br><br> 
+ To execute a write-only GenICam command parameter via the operator 
+ <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a>,  the user has to add the prefix 'sgcx:' to the 
+ parameter name, e.g., use 
+ <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a><tt>(..., 'sgcx:TriggerSoftware', -1)</tt> to send a 
+ software trigger to a GenICam camera. The value of the parameter will 
+ be ignored.<br><br> 
+ Note that the list of available camera parameters can't be queried in 
+ advance, e.g., by calling 
+ <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a><tt>(...'available_param_names'...)</tt> 
+ or <a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a><tt>(..., 'parameters', ...)</tt>. To list all 
+ actually available camera parameters you can use the Silicon Software 
+ <b>GenICam Explorer</b> application.<br><br>
+</div>
+<h2 id="SUPPORT_OF_BINARIZATION_SMARTAPPLET_FAMILY">Support of Binarization SmartApplet Family</h2><div> With the Binarization SmartApplets family, the HALCON SiliconSoftware  interface will deliver also a binary image which is calculated by the FPGA. 
+ With the Port parameter value set to 0, the interface will provide for each 
+ call of <a class="halconoperator" href="../operators/grab_image.html">grab_image</a> or <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a> a multi-channel image corresponding 
+ to the microEnable DMA channels 0 and 1. The first channel contains the 
+ standard image data. The second channel provides the calculated binary 
+ image. The specific settings (e.g., the threshold) ca be adjusted in the 
+ configuration file or by setting the generic Binarization SmartApplets 
+ parameters via <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a>.
+</div>
+<h2 id="SUPPORT_OF_SEGMENTATION_SMARTAPPLET_FAMILY">Support of Segmentation SmartApplet Family</h2><div> With the Segmentation SmartApplets family, the user has the possibility to  get preprocessed blob information by calling <a class="halconoperator" href="../operators/grab_data.html">grab_data</a> or <a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a>. 
+ <br><br> 
+ A Segmentation SmartApplet will find blobs which are based on a user 
+ specific parameterisation. The specific settings can be adjusted in the 
+ the configuration file or by setting the generic Segmentation SmartApplets 
+ parameter via <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a>.<br><br> 
+ To accelerate the call of <a class="halconoperator" href="../operators/grab_data.html">grab_data</a>/<a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a> the calculation of 
+ these features can be disabled via the parameters 'blob_region', 
+ 'blob_center_of_gravity', 'blob_contour_length', 'blob_area', and 
+ 'blob_bounding_box'. By default, all features except the integer values 
+ for the bounding box are enabled.  If all features are enabled, the 
+ region tuple will return the detected blobs and the data tuple will 
+ return the following integer values for each blob: 
+ cogx, cogy, conto, contd, area, bbx0, bby0, bbx1, bby1.
+</div>
+<table summary="Support of Segmentation SmartApplet Family" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Parameter</th>
+<th>Type</th>
+<th>Count</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><b>'image'</b></td>
+<td></td>
+<td>1</td>
+<td> Returns the grabbed image from DMA channel 0.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'contours'</b></td>
+<td></td>
+<td></td>
+<td> not used</td>
+</tr>
+<tr class="oddrow">
+<td><b>'region'</b></td>
+<td></td>
+<td></td>
+<td> HALCON regions which are based on the bounding boxes of the blobs which  are delivered by the Segmentation SmartApplets.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'data'</b></td>
+<td>tuple with integers</td>
+<td></td>
+<td> Special data about each blob. The provided information about each blob  will be delivered successively by one HALCON Tuple. Each blob provides 
+ the following information: 
+
+<ul>
+<li>Center of gravity (cogx, cogy) 
+</li>
+<li>Contour length of the blob (conto, contd) 
+</li>
+<li>Area size of the blob (area) 
+</li>
+<li>Bounding box (bbx0, bby0, bbx1, bby1).
+</li>
+</ul></td>
+</tr></table>
+<h2 id="SUPPORT_OF_TRIANGULATION_SMARTAPPLET_FAMILY">Support of 3D Triangulation SmartApplet Family</h2><div>  With the 3D Triangulation SmartApplets family, the HALCON SiliconSoftware   interface will deliver also a disparity image that is calculated 
+  by the FPGA. The user has the possibility to receive this pre-processed image 
+  by calling <a class="halconoperator" href="../operators/grab_data.html">grab_data</a> or <a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a>. 
+  <br> 
+  To receive an image with multiple disparity lines at once, the number of disparity 
+  lines can be set via set_framerabber_param(..., 'num_scans', ...). The default is 1. 
+  <br> 
+  Please use the generic 3D Triangulation SmartApplets parameter 'FG_3D_IMAGE_OUTPUT' 
+  to enable or disable the output of images which correspond to the calculated 
+  disparity image lines. By default, the parameter 'FG_3D_IMAGE_OUTPUT' is 
+  enabled, and <a class="halconoperator" href="../operators/grab_data.html">grab_data</a> or <a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a> returns 
+  multiple images. The first image is always the disparity image. Please 
+  note, if you change the parameter 'FG_3D_IMAGE_OUTPUT' after calling 
+  <a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a>, a current pending grab will be aborted. 
+  <br> 
+  Please use the generic 3D Triangulation SmartApplets parameter 'FG_3D_THRESHOLD' 
+  to set the threshold parameter that influences the detection of the laser 
+  line. The default value for this parameter is 155. 
+  <br> 
+  The image width of the camera and the corresponding disparity image is 
+  always aligned (reduced) to a divisible value of 8 pixels.
+</div>
+<table summary="Support of 3D Triangulation SmartApplet Family" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Parameter</th>
+<th>Type</th>
+<th>Count</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><b>'image'</b></td>
+<td>float</td>
+<td><num_scans></td>
+<td> Contains the disparity information in the first channel of the image parameter.  The content of the image parameter is controlled by the HALCON parameter 
+ 'num_scans' and the generic SmartApplets parameter 'FG_3D_IMAGE_OUTPUT'. 
+ If the 'FG_3D_IMAGE_OUTPUT' parameter is set to 0 (laserline and image), the 
+ image parameter provides a multichannel image.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'contours'</b></td>
+<td></td>
+<td></td>
+<td> not used</td>
+</tr>
+<tr class="oddrow">
+<td><b>'region'</b></td>
+<td></td>
+<td></td>
+<td> not used</td>
+</tr>
+<tr class="evenrow">
+<td><b>'data'</b></td>
+<td></td>
+<td></td>
+<td> not used</td>
+</tr></table>
+<h2 id="SUPPORT_OF_MULTI_ROI_VISUAL_APPLET_MODULES">Support of Multi RoI Visual Applet Modules</h2><div>  With the Multi RoI module provided by VisualApplets the HALCON   SiliconSoftware image acquisition interface supports the request of 
+  multiple Region of Interests (RoI) for each buffered image. 
+  The RoIs are accessible via images returned by <a class="halconoperator" href="../operators/grab_data.html">grab_data</a> and 
+  <a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a>. The configuration of the RoI module can be done by 
+  using the parameters listed in the table below. Please use the 
+  set_parameter_param and <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a> operators as usual. 
+  To get further information about the RoI functionality, please read 
+  the module section provided in the VisualApplets documentation. 
+  Please use the following parameters to configure the RoI module: 
+  <table> 
+    <tr><td></td><td></td><td></td></tr> 
+    <tr> 
+      <td><b>multi_roi_module_name</b>:</td> 
+      <td>Specifies the base name of the RoI module</td> 
+      <td>string</td> 
+    </tr> 
+    <tr> 
+      <td><b>multi_roi_num</b>:</td> 
+      <td>Specifies the number of RoIs to request</td> 
+      <td>integer</td> 
+    </tr> 
+    <tr> 
+      <td><b>multi_roi_xlength</b>:</td> 
+      <td>Specifies the xlength (width) for each RoI</td> 
+      <td>integer tuple</td> 
+    </tr> 
+    <tr> 
+      <td><b>multi_roi_xoffset</b>:</td> 
+      <td>Specifies the xoffset (start column) for each RoI</td> 
+      <td>integer tuple</td> 
+    </tr> 
+    <tr> 
+      <td><b>multi_roi_ylength</b>:</td> 
+      <td>Specifies the ylength (height) for each RoI</td> 
+      <td>integer tuple</td> 
+    </tr> 
+    <tr> 
+      <td><b>multi_roi_yoffset</b>:</td> 
+      <td>Specifies the yoffset (start row) for each RoI</td> 
+      <td>integer tuple</td> 
+    </tr> 
+    <tr><td></td><td></td><td></td></tr> 
+  </table> 
+  Please note, if you have trouble setting the parameter 'multi_roi_num', 
+  please check the maximum number of RoIs provided by the RoI module. 
+  The maximum number can only be changed before the applet is generated. 
+  If an applet with RoI functionality is used, the parameter 'continuous_grabbing' 
+  is not supported. The multi RoI parameters are not accessible by the HALCON 
+  Image Acquisition Assistant.
+</div>
+<h2 id="HDEVELOP_EXAMPLES">HDevelop Examples</h2><div>For this interface there are the following examples available: 
+<ul>
+<li>siliconsoftware_continuous.hdev - 
+    Grabbing images with continuous grabbing. 
+</li>
+<li>siliconsoftware_gige_vision.hdev - 
+    Shows usage of a Silicon Software GigE Vision frame grabber. 
+</li>
+<li>siliconsoftware.hdev - Benchmark 
+</li>
+<li>siliconsoftware_parameters.hdev - Lists all parameters of a device. 
+</li>
+<li>siliconsoftware_simple.hdev - 
+    A simple example to show the usage of the interface. 
+</li>
+<li>siliconsoftware_smartapplets.hdev - 
+    Shows usage of Silicon Software SmartApplets. 
+</li>
+<li>siliconsoftware_multiroi.hdev - 
+    Shows usage of Silicon Software VisualApplets' RoI functionality. 
+</li>
+<li>siliconsoftware_fieldparameter.hdev - 
+    Shows how to access the Silicon Software generic field parameter. 
+</li>
+<li>siliconsoftware_objectmodel3d.hdev - 
+    Shows usage of Silicon Software Triangulation SmartApplets, and how to 
+    create a HALCON 3D object model.
+</li>
+</ul></div>
+<h2 id="RELEASENOTES">Release Notes</h2><div>
+<ul>
+<li><b>Revision 13.0.6 </b> (Nov 30, 2018): 
+<ul>
+<li>A problem during the buffer allocation could lead to a speed 
+      reduction, when changing the following parameters via 
+      <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a>: 'start_row', 'start_column', 
+      'image_width' and 'image_height'. This problem has been fixed. 
+</li>
+<li>The value of the Generic parameter 'genicam_xml_file' could not be 
+      queried via <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a>. This problem has been fixed. 
+</li>
+<li>The parameters 'applet_type_description', 'do_exsync_description', 
+      'num_buffers_description', 'slave_description' and 
+      'genicam_xml_file_description' were not implemented. This problem has 
+      been fixed. 
+</li>
+</ul></li>
+<li><b>Revision 13.0.5 </b> (Apr 13, 2018): 
+
+<ul>
+<li>The technical dependency from the HALCON Library has been removed. 
+</li>
+<li>After aborting an asynchronous grab with the parameter 'do_abort_grab' 
+      an error occurred. This problem has been fixed. 
+</li>
+<li>When opening a device a lot of low-level error messages occurred. 
+      This problem has been fixed. 
+</li>
+<li>Added support of extended error info. 
+</li>
+<li>Added support of master/slave mode. Therefor the new parameter 
+      'slave' has been added to <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a> and <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a> 
+      (Generic). 
+</li>
+<li>Added support for the 'Mono4p' pixel format. 
+</li>
+<li>Added support for the 'YCbCr411_8' pixel format. 
+</li>
+<li>The range of the parameter 'exposure' was not correct in the documentation. 
+      This problem has been fixed. 
+</li>
+<li>Added information about accessing cameras with the GenICam interface 
+      directly from HALCON. 
+</li>
+<li>Improved error messages in case of sgc and gce parameters. 
+</li>
+</ul></li>
+<li><b>Revision 13.0.4</b> (Jun 12, 2017): 
+
+<ul>
+<li>The generic applet parameters could not be accessed when using 
+      Silicon Software driver version 5.5.0. This problem has been fixed. 
+</li>
+</ul></li>
+<li><b>Revision 13.0.3</b> (May 3, 2017): 
+
+<ul>
+<li>The mE5 marathon VCX QP board runs into a timeout error during 
+      <a class="halconoperator" href="../operators/grab_image.html">grab_image</a> and <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a>. Internally the AcquisitionStart 
+      command was not executed. This problem has been fixed. 
+</li>
+<li>A call of <a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a> with the parameter 'info_boards' does not 
+      list a mE5 marathon VCX QP board. This problem has been fixed. 
+</li>
+</ul></li>
+<li><b>Revision 13.0.2</b> (Mar 7, 2017): 
+
+<ul>
+<li>Adapted to Silicon Software SDK 5.4.4. 
+</li>
+<li>Support of new frame grabber models mE5 marathon ACL, mE5 marathon VCL, 
+      mE5 marathon AF2, and mE5 marathon ACX QP. 
+</li>
+</ul></li>
+<li><b>Revision 13.0.1</b> (Oct 28, 2016): 
+
+<ul>
+<li>HALCON 13 version of the interface. 
+</li>
+</ul></li>
+<li><b>Revision 6.6</b> (Sep 26, 2016): 
+
+<ul>
+<li>Adapted range of maximum possible timeout value to 2^32-1 
+      milliseconds. With -1 the maximum possible value will be set. 
+</li>
+<li>Improved error handling of Generic parameter in <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>. 
+</li>
+</ul></li>
+<li><b>Revision 6.5</b> (Jul 27, 2016): 
+
+<ul>
+<li>If a generic visual applets field parameter was queried, the 
+      last value of the list was not returned. This problem has been fixed. 
+</li>
+</ul></li>
+<li><b>Revision 6.4</b> (May 13, 2016): 
+
+<ul>
+<li><a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a> failed with error 5312 when the Generic parameter 
+      'genicam_xml_file' was used. This problem has been fixed. 
+</li>
+<li><a class="halconoperator" href="../operators/close_framegrabber.html">close_framegrabber</a> in rare cases crashed when using more than one 
+      GenICam device. This problem has been fixed. 
+</li>
+</ul></li>
+<li><b>Revision 6.3</b> (Apr 27, 2016): 
+
+<ul>
+<li><a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a> crashed when setting 'do_exsync' or 
+      'do_flash' with an empty tuple. This problem has been fixed. 
+</li>
+<li>Fixed memory leak in <a class="halconoperator" href="../operators/close_framegrabber.html">close_framegrabber</a> which led to a crash in rare 
+      cases. 
+      This problem has been fixed. 
+</li>
+<li>In continuous mode the synchronous call <a class="halconoperator" href="../operators/grab_image.html">grab_image</a> always returned 
+      a timeout. This problem has been fixed. 
+</li>
+<li>If a generic float parameter was set with an integer value a later 
+      call with <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a> returned the wrong result. 
+      This problem has been fixed. 
+</li>
+<li>The description of the parameters 'num_last_image' and 
+      'num_images_in_progress' has been improved. 
+</li>
+<li>The legacy parameter 'current_buffer_index' has been removed from 
+      this documentation. This parameter is no longer supported. 
+      Please use the parameters 'num_blocked_images', 
+      'num_block_lost_images', 'num_grabbed_images', 'num_last_image', 
+      'num_next_image', and 'num_images_in_progress' instead. 
+</li>
+</ul></li>
+<li><b>Revision 6.2</b> (Feb 15, 2016): 
+
+<ul>
+<li>Grabbing images with microEnable GigE Vision boards failed. Any 
+      attempt at grabbing returned with a timeout and it was not possible 
+      to get or set the GenICam parameters. This problem has been fixed. 
+</li>
+<li>If the parameter 'multi_roi_xlength', 'multi_roi_xoffset', 
+      'multi_roi_ylength' and 'multi_roi_yoffset' were not supported by 
+      the used hardware applet, the call of <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a> and 
+      <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a> with these parameters might have crashed. 
+      This problem has been fixed. 
+</li>
+</ul></li>
+<li><b>Revision 6.1</b> (Oct 20, 2015): 
+
+<ul>
+<li>Adapted to Silicon Software SDK 5.4. 
+</li>
+<li>Added support of microEnable V frame grabber family. 
+</li>
+<li>Added new parameters 'num_blocked_images', 'num_block_lost_images', 
+      'num_grabbed_images', 'num_last_image', 'num_next_image', and 
+      'num_images_in_progress' to get a status information of the buffer 
+      queue. 
+</li>
+<li>Added new parameter 'acquisition_mode' to control the behaviour of the 
+      buffer queue. 
+</li>
+<li>A call of <a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a> with the parameter 'device' returned a 
+      static list with possible device values. Now the dynamic values 
+      of connected devices are returned. 
+</li>
+<li>Added generic parameter 'genicam_xml_file' to pass a predefined 
+      configuration in case of a microEnable CoaXPress frame grabber. 
+</li>
+<li>Removed limitation of 'num_buffers'. Previously it was only possible 
+      to use up to 255 buffers. 
+</li>
+<li>In case of an error, the information of some low level errors is not 
+      sufficient. Detailed information is not available. This problem has 
+      been fixed. 
+</li>
+<li>Every DMA channel on a micro enable board is controlled by its own 
+      acquisition handle. The initialization of the board for all DMA 
+      channels will be done by the first call of <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>. 
+      There is no low level error to notify the user that the 
+      second <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a> call on the same board will ignore the 
+      passed configuration file. This problem has been fixed. 
+</li>
+</ul></li>
+<li><b>Revision 6.0</b> (Oct 31, 2014): 
+
+<ul>
+<li>HALCON 12 version of the interface. 
+</li>
+</ul></li>
+<li><b>Revision 5.5</b> (Jan 27, 2014): 
+
+<ul>
+<li>Fixed bug in parameter 'grab_timeout'. If the parameter was set via 
+      <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a>, also the DMA timeout of the frame grabber was 
+      adapted. This setting could lead to unexpected timeout errors. 
+</li>
+<li>Corrected documentation by adding support of WoW64. 
+</li>
+</ul></li>
+<li><b>Revision 5.4</b> (Jun 12, 2013): 
+
+<ul>
+<li>Fixed bug in continuous grabbing mode. In case of a Standard Acquisition 
+      Applet with a single camera that is not connected to Camera Link port A, 
+      a wrong DMA channel was internally selected. 
+</li>
+<li>Fixed bug in buffer allocation during the activation of continuous grabbing. 
+</li>
+<li>Added missing parameter 'do_process_image_values'. 
+</li>
+<li>Fixed bug in <a class="halconoperator" href="../operators/close_framegrabber.html">close_framegrabber</a>. 
+</li>
+</ul></li>
+<li><b>Revision 5.3</b> (May 24, 2013): 
+
+<ul>
+<li>Adapted to Silicon Software SDK 5.2.1. 
+</li>
+<li>Added support of VisualApplets modules with RoI functionality. 
+      Now also the CoaXPress frame grabbers are supported. 
+</li>
+<li>Improved the 'generic' Silicon Software parameter configuration 
+      by adding access to field parameters. 
+</li>
+<li>Added parameters 'multi_roi_module_name', 'multi_roi_num', 
+      'multi_roi_xlength', 'multi_roi_xoffset', 'multi_roi_ylength', 
+      'multi_roi_yoffset', and 'num_field_parameter'. 
+</li>
+<li>Added new HDevelop example programs 'siliconsoftware_multiroi.hdev' 
+      and 'siliconsoftware_fieldparameter.hdev'. 
+</li>
+<li>Fixed bug if an unknown 'description' parameter was used. 
+</li>
+<li>Corrected documentation of the Generic parameter. 
+</li>
+<li>Fixed bug in <a class="halconoperator" href="../operators/close_framegrabber.html">close_framegrabber</a> when using more than one camera in 
+      case of Silicon Software GigE Vision boards. 
+</li>
+<li>Fixed bug in <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>: The horizontal_resolution and 
+      vertical_resolution parameters are now ignored as documented. 
+</li>
+<li>Adapted and unified all existing HDevelop example programs. 
+</li>
+</ul></li>
+<li><b>Revision 5.2</b> (Oct 29, 2012): 
+
+<ul>
+<li>Fixed bug in parameter 'available_param_names'. 
+</li>
+<li>Adapted evaluation of 'applet_type' parameter inside HDevelop 
+      example 'siliconsoftware_smartapplets.hdev'. 
+</li>
+<li>Added generic parameter 'discovery_timeout'. 
+</li>
+<li>Fixed bug in <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>. Cleanup the already 
+      opened device handles, if the initialization of a connected 
+      device or the initialization of the Silicon Software 
+      GigE Vision board fails. 
+</li>
+<li>Added new example 'siliconsoftware_objectmodel3d.hdev'. 
+</li>
+</ul></li>
+<li><b>Revision 5.1</b> (Jul 18, 2012): 
+
+<ul>
+<li>Extended <a class="halconoperator" href="../operators/grab_data.html">grab_data</a> and <a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a> to support the 
+      3D Triangulation SmartApplets family. 
+</li>
+<li>Added parameter 'num_scans' to control the number of disparity lines. 
+</li>
+</ul></li>
+<li><b>Revision 5.0</b> (May 15, 2012): 
+
+<ul>
+<li>HALCON 11 version of the interface (included in HALCON 11 DVD). 
+</li>
+<li>Fixed thread safety problem in <a class="halconoperator" href="../operators/grab_image.html">grab_image</a> and <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a> 
+      that can occur if grabbing was aborted via the 'do_abort_grab' 
+      parameter of <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a>. 
+</li>
+<li>Adapted return value if <a class="halconoperator" href="../operators/grab_image.html">grab_image</a> or <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a> was aborted 
+      by the user. The return value now is H_ERR_FGF ("Failed grabbing of 
+      an image"). 
+</li>
+</ul></li>
+<li><b>Revision 4.4</b> (Feb 4, 2012): 
+
+<ul>
+<li>Fixed bug in the continuous grabbing mode. If a timeout occurred 
+      the internal used acquisition engine was erroneously restarted and 
+      the previously queued images were discarded. 
+</li>
+<li>Added parameter 'image_available'. 
+</li>
+<li>Improved error handling in <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>. 
+</li>
+</ul></li>
+<li><b>Revision 4.3</b> (May 30, 2011): 
+
+<ul>
+<li>Improved continuous grabbing mode: Now, this mode supports to queue 
+      an arbitrary number of trigger signals (corresponding to the parameter 
+      'num_buffers'). 
+</li>
+<li>Added parameter 'image_tag'. 
+</li>
+<li>Added support of GigE Vision command parameters. 
+</li>
+</ul></li>
+<li><b>Revision 4.2</b> (Mar 15, 2011): 
+
+<ul>
+<li>Implemented <a class="halconoperator" href="../operators/grab_data.html">grab_data</a> and <a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a> to enable the use of 
+      Segmentation SmartApplets (Blob). 
+</li>
+<li>Added parameters 'blob_contour_length', 'blob_center_of_gravity', 
+      'blob_area', 'blob_bounding_box', and 'blob_region' to control the 
+      Data and Region output parameters of <a class="halconoperator" href="../operators/grab_data.html">grab_data</a> and <a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a>. 
+</li>
+<li>Added parameter 'applet_type'. 
+</li>
+<li>Fixed bug in 'continuous_grabbing'. 
+</li>
+</ul></li>
+<li><b>Revision 4.1</b> (Sep 8, 2010): 
+
+<ul>
+<li>Adapted to Silicon Software SDK 5.1. 
+</li>
+<li>Support of Silicon Software GigE Vision boards including generic 
+      parameterization. 
+</li>
+<li>Added functionality to use the SmartApplets or other applets with 
+      multiple DMA channels. 
+</li>
+<li>Updated error handling in coprocessor mode, i.e., in this mode 
+      <a class="halconoperator" href="../operators/grab_image.html">grab_image</a> and <a class="halconoperator" href="../operators/grab_image_start.html">grab_image_start</a> will return the error H_ERR_FNS. 
+</li>
+<li>Adapted the board names to new Silicon Software product names. 
+</li>
+<li>HALCON 10 version of the interface (included in HALCON 10 DVD). 
+</li>
+</ul></li>
+<li><b>Revision 4.0</b> (Mar 16, 2010): 
+
+<ul>
+<li>First official release.
+</li>
+</ul></li>
+</ul></div>
+  <!-- toc end -->  <hr> 
+  <div class="imprint"> 
+    <span class="imprinthead">Legal disclaimer regarding hyperlinks</span>: 
+    This page may provide users with access by hypertext links to external, non-MVTec websites. 
+Any such access is provided with the understanding that the contents 
+of non-MVTec sites are beyond the control of MVTec Software GmbH, that 
+MVTec Software GmbH makes no representations whatsoever about such 
+sites, and that users shall proceed at their own risk. 
+MVTec Software GmbH is not responsible for the privacy practices or 
+the content of external, non-MVTec websites.
+ 
+  </div> 
+  <div class="imprint"> 
+    <span class="imprinthead">Copyright notes</span>: 
+    &copy; Copyright MVTec Software GmbH. All rights reserved. 
+Unless otherwise stated, the copyright and similar rights in the 
+contents of this page, including but not limited to all text, designs 
+and images appearing herein, are copyrighted works owned by MVTec 
+Software GmbH. 
+"MVTec Software GmbH" and "HALCON" are registered trademarks of MVTec 
+Software GmbH. 
+All other brand names, designs, service marks and trademarks (whether 
+or not registered) referenced or used herein are the property of their 
+respective owners.
+ 
+  </div> 
+  <div class="footer"> 
+    acqdump 1.5 / hdoc 1.2 / Generated: Wed Oct 31 11:03:21 CET 2018 
+  </div> 
+  </body> 
+</html>

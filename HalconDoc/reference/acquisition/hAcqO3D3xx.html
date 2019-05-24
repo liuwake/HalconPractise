@@ -1,0 +1,1380 @@
+<!DOCTYPE HTML> 
+<html> 
+  <head> 
+  <meta id='acqdump-id' name='acqdump-id' content='halcon-acq-O3D3xx-rev13.0.4'> 
+  <title>O3D3xx / HALCON / MVTec Software GmbH</title> 
+      <style type="text/css"> 
+      body { 
+        color: #000000; 
+        background-color: #ffffff; 
+        margin-top: 0px; 
+        margin-bottom: 0px; 
+        margin-left: 20px; 
+        margin-right: 20px; 
+        font-family: Arial,Helvetica,sans-serif; 
+      } 
+      a:link { 
+        color: #0044cc; 
+      } 
+      a:link,a:visited { 
+        text-decoration: none; 
+      } 
+      a:link:hover,a:visited:hover { 
+        text-decoration: underline; 
+      } 
+      th { 
+        text-align: left; 
+      } 
+      h1,h2,h3,h4,h5,h6 { 
+        text-rendering: optimizeLegibility; 
+        color: #666666; 
+      } 
+      tt { 
+        font-family: monospace,monospace; 
+      } 
+      h1 a.halconoperator { 
+        font-family: Arial,Helvetica,sans-serif; 
+        color: #666666; 
+      } 
+      h2 a.halconoperator { 
+        font-family: Arial,Helvetica,sans-serif; 
+        color: #666666; 
+      } 
+      hr { 
+        border: 0; 
+        border-top: solid 1px #f28d26; 
+      } 
+      pre { 
+        font-family: monospace,monospace; 
+        padding: 1ex; 
+        white-space: pre-wrap; 
+      } 
+      .toc { 
+        font-size: 80%; 
+        border-top: 1px dashed #f28d26; 
+        border-bottom: 1px dashed #f28d26; 
+        padding-top: 5px; 
+        padding-bottom: 5px; 
+      } 
+      .inv { 
+        margin: 0; 
+        border: 0; 
+        padding: 0; 
+      } 
+      .banner { 
+        color: #666666; 
+        padding-left: 1em; 
+      } 
+      .logo { 
+        background-color: white; 
+      } 
+      .keyboard { 
+        font-size: 80%; 
+        padding-left: 3px; 
+        padding-right: 3px; 
+        border-radius: 5px; 
+        border-width: 1px; 
+        border-style: solid; 
+        border-color: #f28d26; 
+        background-color: #f3f3f3; 
+      } 
+      .warning { 
+        margin-top: 2ex; 
+        margin-bottom: 1ex; 
+        padding: 10px; 
+        text-align: center; 
+        border: 1px solid; 
+        color: #bb0000; 
+        background-color: #fff7f7 
+      } 
+      .imprint { 
+        margin-top: 1ex; 
+        font-size: 80%; 
+        color: #666666; 
+      } 
+      .imprinthead { 
+        font-weight: bolder; 
+        color: #666666; 
+      } 
+      .postscript { 
+        margin-top: 2ex; 
+        font-size: 80%; 
+        color: #666666 
+      } 
+      .evenrow { 
+        background-color: #e7e7ef; 
+        vertical-align: top; 
+      } 
+      .oddrow { 
+        background-color: #f7f7ff; 
+        vertical-align: top; 
+      } 
+      .headrow { 
+        background-color: #97979f; 
+        color: #ffffff; 
+        vertical-align: top; 
+      } 
+      .logorow { 
+        vertical-align: top; 
+      } 
+      .error { 
+        color: red; 
+      } 
+      .var { 
+        font-style: italic 
+      } 
+      .halconoperator { 
+        font-family: monospace,monospace; 
+      } 
+      .halconprocedure { 
+        font-family: Consolas,Inconsolata,"DejaVu Sans Mono",monospace; 
+      } 
+      span.operator { 
+        font-family: monospace,monospace; 
+      } 
+      span.procedure { 
+        font-family: monospace,monospace; 
+      } 
+      span.operation { 
+        font-family: monospace,monospace; 
+      } 
+      span.feature { 
+        font-family: Arial,Helvetica,Homerton,sans-serif; 
+      } 
+      ul { 
+        padding-left: 1.2em; 
+      } 
+      li.dot { 
+        list-style-type: square; 
+        color: #f28d26; 
+      } 
+      .breadcrumb { 
+        font-size: 80%; 
+        color: white; 
+        background-color: #062d64; 
+        margin-left: -20px; 
+        margin-right: -20px; 
+        margin-bottom: 20px; 
+        padding-left: 20px; 
+        padding-right: 20px; 
+        padding-bottom: 15px; 
+      } 
+      .webbar { 
+        font-size: 80%; 
+        background-color: #dddddd; 
+        margin-top: 0px; 
+        margin-left: -20px; 
+        margin-right: -20px; 
+        margin-bottom: 0px; 
+        padding-top: 5px; 
+        padding-left: 20px; 
+        padding-right: 20px; 
+        padding-bottom: 5px; 
+      } 
+      .footer { 
+        border-top: 1px dashed #f28d26; 
+        font-size: 80%; 
+        color: #666666; 
+        margin-left: -20px; 
+        margin-right: -20px; 
+        margin-top: 0px; 
+        padding-left: 20px; 
+        padding-right: 20px; 
+        padding-top: 10px; 
+        padding-bottom: 15px; 
+      } 
+      .breadcrumb a { 
+        color: #ffffff; 
+        border-bottom: 1px solid white; 
+      } 
+      .breadcrumb a:link:hover,.breadcrumb a:visited:hover { 
+        text-decoration: none; 
+        border-bottom: none; 
+      } 
+      .heading { 
+        margin-top: 1ex; 
+        font-size: 110%; 
+        font-weight: bold; 
+        color: #666666; 
+      } 
+      .text { 
+        color: black; 
+      } 
+      .example { 
+        font-size: 80%; 
+        background-color: #f3f3f3; 
+        border: 1px dashed #666666; 
+        padding: 10px; 
+      } 
+      .math { 
+      } 
+      .displaymath { 
+        text-align: center; 
+        margin-top: 1ex; 
+        margin-bottom: 1ex; 
+      } 
+      </style> 
+  </head> 
+  <body><div class="breadcrumb"> 
+<br class="inv"/> 
+<a href="../../../../documentation.html">HALCON</a> / <a href="acq-overview.html">Image Acquisition Interfaces</a> 
+<br class="inv"/> 
+</div> 
+<h1>Image Acquisition Interface for ifm 3D Time of Flight Cameras (O3D3xx)</h1> 
+<table summary="Image Acquisition Interface for ifm 3D Time of Flight Cameras (O3D3xx)"> 
+  <tr> 
+    <td> 
+      Interface: 
+    </td> 
+    <td> 
+      O3D3xx 
+    </td> 
+  </tr> 
+  <tr> 
+    <td> 
+      Revision: 
+    </td> 
+    <td> 
+      13.0.4 
+    </td> 
+  </tr> 
+  <tr> 
+    <td> 
+      Date: 
+    </td> 
+    <td> 
+      2018-05-04 
+    </td> 
+  </tr> 
+</table>
+<ul class="toc">
+<li><a href="#GENERAL">General</a></li>
+<li><a href="#SYSTEM_REQUIREMENTS">System Requirements</a></li>
+<li><a href="#INSTALLATION">Installation</a></li>
+<li><a href="#DESCRIPTION">Description</a></li>
+<li><a href="#LIMITATIONS">Limitations</a></li>
+<li><a href="#INFO_FRAMEGRABBER">Parameters for info_framegrabber</a></li>
+<li><a href="#OPEN_FRAMEGRABBER">Parameters for open_framegrabber</a></li>
+<li><a href="#SET_FRAMEGRABBER_PARAM">Parameters for set_framegrabber_param</a></li>
+<li><a href="#GET_FRAMEGRABBER_PARAM">Parameters for get_framegrabber_param</a></li>
+<li><a href="#SET_FRAMEGRABBER_LUT">Operator set_framegrabber_lut</a></li>
+<li><a href="#GET_FRAMEGRABBER_LUT">Operator get_framegrabber_lut</a></li>
+<li><a href="#SET_FRAMEGRABBER_CALLBACK">Operator set_framegrabber_callback</a></li>
+<li><a href="#GET_FRAMEGRABBER_CALLBACK">Operator get_framegrabber_callback</a></li>
+<li><a href="#GRAB_IMAGE_START">Operator grab_image_start</a></li>
+<li><a href="#GRAB_IMAGE">Operator grab_image</a></li>
+<li><a href="#GRAB_IMAGE_ASYNC">Operator grab_image_async</a></li>
+<li><a href="#GRAB_DATA">Operator grab_data</a></li>
+<li><a href="#GRAB_DATA_ASYNC">Operator grab_data_async</a></li>
+<li><a href="#CLOSE_FRAMEGRABBER">Operator close_framegrabber</a></li>
+<li><a href="#HDEVELOP_EXAMPLES">HDevelop Examples</a></li>
+<li><a href="#RELEASENOTES">Release Notes</a></li>
+</ul>
+  <!-- toc start -->
+<h2 id="GENERAL">General</h2><div> This page provides the documentation of the HALCON image acquisition  interface for ifm 3D time of flight cameras (O3D3xx). 
+ <a href="http://www.mvtec.com/download/registration">Registered</a> customers can download the 
+ <a href="http://www.mvtec.com/download/halcon/">latest revision</a> of this interface from the 
+ <a href="http://www.mvtec.com/">MVTec WWW server</a>.
+</div>
+<h2 id="SYSTEM_REQUIREMENTS">System Requirements</h2><div>
+<ul>
+<li>Intel compatible PC with Windows    7 (32-bit or 64-bit) 
+   or newer that is also supported by the vendor-specific SDK, 
+   also WoW64 (using 32-bit HALCON on 64-bit Windows), or Linux with kernel 
+   2.6 (or higher). 
+</li>
+<li><b>Windows:</b> HALCON image acquisition interface <b>hAcqO3D3xx.dll</b> 
+   or <b>hAcqO3D3xxxl.dll</b>, respectively. If you have properly installed 
+   the interface, all these DLLs should reside in 
+   <tt>bin\%HALCONARCH%</tt> within the HALCON base directory 
+   %HALCONROOT% you have chosen during the installation of HALCON.<br> 
+   <b>Linux:</b> HALCON image acquisition interface <b>hAcqO3D3xx.so</b> or 
+   <b>hAcqO3D3xxxl.so</b>, respectively. 
+   If you have properly installed the interface, the shared objects 
+   should reside in <tt>lib\$HALCONARCH</tt> within the HALCON base 
+   directory $HALCONROOT you have chosen during the installation of HALCON.
+</li>
+</ul></div>
+<h2 id="INSTALLATION">Installation</h2><div>Only when installing or updating the interface manually follow these steps: <br> 
+
+<ul>
+<li><b>Windows:</b> Extract the archive containing the interface files to the 
+  HALCON base directory %HALCONROOT% (Note: Administrator privileges may be 
+  required for this step). Additionally, you have to move the interface 
+  examples to the directory %HALCONEXAMPLES% manually. 
+</li>
+<li><b>Linux:</b> Extract the archive containing the interface files to the 
+  HALCON base directory $HALCONROOT.
+</li>
+</ul></div>
+<h2 id="DESCRIPTION">Description</h2><div>
+<ul>
+<li>Synchronous and asynchronous grabbing of x, y, and z images, amplitude    and distance image, and some diagnostic data. 
+</li>
+<li>Grabbing of the data delivered by the 3D time of flight camera (O3D3xx) 
+   using the 'halcon_application' inside the camera. Synchronous grabs  can 
+   switch the trigger mode of the application. If the camera is currently in 
+   'free_run' mode, it is switched to the trigger mode 'process_interface'. 
+   Before each synchronous grab, a software trigger is implicitly sent and 
+   ignores all images stored in the camera buffer. This can cause a delay if 
+   the synchronous grab has to switch the trigger mode since then possibly 
+   the complete buffer of the camera has to be flushed. In case that a 
+   synchronous grab changed the trigger mode, this setting is reverted by the 
+   next call of an asynchronous grab or <a class="halconoperator" href="../operators/close_framegrabber.html">close_framegrabber</a>. An asynchronous 
+   grab gets the next image on the camera if it is set to 'free_run' or to an 
+   external trigger source. In case that the trigger mode is set to 
+   'process_interface', <a class="halconoperator" href="../operators/grab_image_start.html">grab_image_start</a> performs a software trigger and 
+   after each asynchronous grab a software trigger is performed, too. 
+   Nevertheless, if a manual software trigger was executed before grabbing 
+   asynchronously, the image from this trigger is received. 
+</li>
+<li>If the camera is opened for the first time from HALCON, a new application 
+   ('halcon_application') will be created on the camera so that all settings 
+   that are made do not influence other applications. In case that the 
+   'halcon_application' already exists and is not active it will be 
+   activated. 
+</li>
+<li>Get and set parameters of the camera. 
+</li>
+<li>XMLRPC fault messages are returned as Low Level Errors in HALCON.
+</li>
+</ul></div>
+<h2 id="LIMITATIONS">Limitations</h2><div>
+<ul>
+<li>Switching from 'trigger_mode' 'free_run' to any other mode flushes the    camera buffers. This might take up to 1.5s and is implicitly done when 
+   using synchronous grabs after asynchronous grabbing. 
+</li>
+<li>Automatic discovery of the camera on the network is not supported. You 
+   need to know the camera's IP address. Also you cannot switch the camera's 
+   IP address from within HALCON. 
+</li>
+<li>The password protection has to be turned off on the camera in order to 
+   use the camera in HALCON. 
+</li>
+<li>Creation and modification of camera applications other than 
+   'halcon_application' is not possible. 
+</li>
+<li>Automatic optimization of the parameters 'exposure_time' and 
+   'exposure_time_ratio' is not possible. 
+</li>
+<li>The interface only supports process interface version 3. 
+</li>
+<li>Settings and applications cannot be imported or exported. 
+</li>
+<li>It is not possible to choose which images should be returned by the 
+   sensor. 
+</li>
+<li>The parameter 'binning' is only available with firmware version 1.3.1001 
+   or higher. 
+</li>
+<li>The ability for setting the 'binning' value to 1 is disabled since firmware 
+   version 1.6.2038.
+</li>
+</ul></div>
+<h2 id="INFO_FRAMEGRABBER">Parameters for <a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a></h2><div></div>
+<table summary="Parameters for info_framegrabber" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Parameter</th>
+<th>Value List</th>
+<th>Type</th>
+<th>Kind</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><b>'defaults'</b></td>
+<td>[0, 0, 0, 0, 0, 0, 'default', 0, 'default', -1, 'false', 'default', 'default', -1, 0]
+</td>
+<td>mixed</td>
+<td>pre-defined</td>
+<td>Default values for <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'general'</b></td>
+<td>[]</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Information about the HALCON O3D3xx interface.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'parameters'</b></td>
+<td>['<span class="var">&lt;parameters&gt;</span>']</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Pre-defined parameters of the HALCON interface.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'parameters_readonly'</b></td>
+<td>['<span class="var">&lt;parameters&gt;</span>']</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Pre-defined read-only parameters of the HALCON interface.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'parameters_writeonly'</b></td>
+<td>['<span class="var">&lt;parameters&gt;</span>']</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Pre-defined write-only parameters of the HALCON interface.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'revision'</b></td>
+<td>'<span class="var">&lt;revision&gt;</span>'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Revision number of the O3D3xx interface.</td>
+</tr></table>
+<h2 id="OPEN_FRAMEGRABBER">Parameters for <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a></h2><div>The interface checks if the application 'halcon_application' exists on the camera. Otherwise it will be created and set as active application. If this 
+application already exists, it is checked if it is active and if 
+necessary, it will be activated. The timeout for connecting with the camera 
+can be set by a generic parameter.
+</div>
+<table summary="Parameters for open_framegrabber" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Parameter</th>
+<th>Values</th>
+<th>Default</th>
+<th>Type</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><b>Name</b></td>
+<td>'O3D3xx'</td>
+<td>'O3D3xx'</td>
+<td>string</td>
+<td>Name of the HALCON interface.</td>
+</tr>
+<tr class="evenrow">
+<td><b>HorizontalResolution</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Unused.</td>
+</tr>
+<tr class="oddrow">
+<td><b>VerticalResolution</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Unused.</td>
+</tr>
+<tr class="evenrow">
+<td><b>ImageWidth</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Unused.</td>
+</tr>
+<tr class="oddrow">
+<td><b>ImageHeight</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Unused.</td>
+</tr>
+<tr class="evenrow">
+<td><b>StartRow</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Unused.</td>
+</tr>
+<tr class="oddrow">
+<td><b>StartColumn</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Unused.</td>
+</tr>
+<tr class="evenrow">
+<td><b>Field</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr>
+<tr class="oddrow">
+<td><b>BitsPerChannel</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Unused.</td>
+</tr>
+<tr class="evenrow">
+<td><b>ColorSpace</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Unused.</td>
+</tr>
+<tr class="oddrow">
+<td><b>Generic</b></td>
+<td>'', 'connect_timeout=<span class="var">&lt;milliseconds&gt;</span>', -1</td>
+<td>-1</td>
+<td>mixed</td>
+<td>With the generic parameter, the timeout that is used during the connection with the camera can be specified.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>ExternalTrigger</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Unused.</td>
+</tr>
+<tr class="oddrow">
+<td><b>CameraType</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Unused.</td>
+</tr>
+<tr class="evenrow">
+<td><b>Device</b></td>
+<td>'default', '<span class="var">&lt;ip_address&gt;</span>'</td>
+<td>default</td>
+<td>string</td>
+<td>The device has to be identified by the IP address. If default is chosen, the standard IP address '192.168.0.69' is used to identify the camera.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>Port</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Unused.</td>
+</tr>
+<tr class="evenrow">
+<td><b>LineIn</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Unused.</td>
+</tr></table>
+<h2 id="SET_FRAMEGRABBER_PARAM">Parameters for <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a></h2><div>Read the camera manual for further details of the parameters.</div>
+<table summary="Parameters for set_framegrabber_param" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Parameter</th>
+<th>Values</th>
+<th>Default</th>
+<th>Type</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><b>'binning'</b></td>
+<td>1, 2</td>
+<td>2</td>
+<td>integer</td>
+<td>Enable or disable binning on the camera. If the binning is set to 2 the resulting resolution is 176x132. Otherwise the sensor will 
+return the full resolution of 352x264.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'camera_name'</b></td>
+<td>'<span class="var">&lt;camera_name&gt;</span>'</td>
+<td>'New Sensor'</td>
+<td>string</td>
+<td>Name of the camera (max. 64 characters).</td>
+</tr>
+<tr class="oddrow">
+<td><b>'channel'</b></td>
+<td>0, 1, 2, 3</td>
+<td>0</td>
+<td>integer</td>
+<td>Frequency channel.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'description'</b></td>
+<td>'<span class="var">&lt;description&gt;</span>'</td>
+<td>''</td>
+<td>string</td>
+<td>Description of the camera (max. 500 characters).</td>
+</tr>
+<tr class="oddrow">
+<td><b>'distance_unit'</b></td>
+<td>'millimeter','meter'</td>
+<td>'millimeter'</td>
+<td>string</td>
+<td>If the parameter 'pixel_format' is set to 'Mono32F', this parameter specifies the unit of distance for the X-, Y-, Z- and distance 
+image.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'do_software_trigger'</b></td>
+<td>any</td>
+<td>1</td>
+<td>any</td>
+<td>Action parameter that performs a software trigger. In order to perform a software trigger, the parameter 'trigger_mode' has to be set to 
+'process_interface'. The forwarded value will be ignored and can be set 
+arbitrarily.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'exposure_time'</b></td>
+<td>1...10000</td>
+<td>1000</td>
+<td>integer</td>
+<td>Exposure time of the long exposure in milliseconds. This parameter is only available if the parameter 'imager_configuration_type' is set to a 
+value ending with '_low' or '_moderate'.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'exposure_time_ratio'</b></td>
+<td>2...50</td>
+<td>40</td>
+<td>integer</td>
+<td>Ratio of the long exposure time to the short exposure time. This parameter is only available if the parameter 'imager_configuration_type' is 
+set to a value ending with '_moderate'.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'frame_rate'</b></td>
+<td>0.0167 ... 30</td>
+<td>5</td>
+<td>float</td>
+<td>Frame rate of the camera in frames per second.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'grab_timeout'</b></td>
+<td><span class="var">&lt;milliseconds&gt;</span></td>
+<td>5000</td>
+<td>integer</td>
+<td>Desired timeout (milliseconds) for aborting a pending grab. If -1 is specified, the timeout is set to INFINITE.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'imager_configuration_type'</b></td>
+<td>'under5m_low', 'under5m_moderate', 'under5m_high', 'upto30m_low', 'upto30m_moderate', 'upto30m_high', 
+'morethan30m_low', 'morethan30m_moderate'
+</td>
+<td>'under5m_low'</td>
+<td>string</td>
+<td>Configuration type of the imager. This parameter also specifies the availability of the parameters 'exposure_time' and 
+'exposure_time_ratio'.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'mask_size'</b></td>
+<td>'3x3', '5x5'</td>
+<td>'3x3'</td>
+<td>string</td>
+<td>Mask size of the spatial filter. This parameter is only available if the parameter 'spatial_filter_type' is not set to 'off'.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'number_of_images'</b></td>
+<td>2...25</td>
+<td>2</td>
+<td>integer</td>
+<td>Number of images used for the temporal mean filter. This parameter is only available if the parameter 'temporal_filter_type' is set 
+to 'temporal_mean_filter'.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'pixel_format'</b></td>
+<td>'Raw16','Mono32F'</td>
+<td>'Raw16'</td>
+<td>string</td>
+<td>The format of the returned images is switched with this parameter. If Raw16 is used, the images will be returned in the format as 
+given by the sensor (X, Y and Z as int2 images, distance and amplitude image 
+as uint2 images). If 'Mono32F' is chosen all images, except the confidence 
+image, will be internally converted into a real image. In both cases the 
+confidence image is returned as byte image. For 'Raw16' the parameter 
+'distance_unit' is ignored.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'spatial_filter_type'</b></td>
+<td>'off', 'median_filter', 'mean_filter', 'bilateral_filter'</td>
+<td>'off'</td>
+<td>string</td>
+<td>Spatial filter that is used on the camera after acquisition. This parameter also specifies the availability of the parameter 'mask_size'.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'temporal_filter_type'</b></td>
+<td>'off', 'temporal_mean_filter', 'adaptive_exponential_filter'</td>
+<td>'off'</td>
+<td>string</td>
+<td>Temporal filter that is used on the camera after acquisition. This parameter also specifies the availability of the parameter 
+'number_of_images'.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'temporary_channel'</b></td>
+<td>0, 1, 2, 3</td>
+<td>0</td>
+<td>integer</td>
+<td>Temporarily set the frequency channel. This parameter can be set while the camera is in run mode, however, this parameter is not 
+persistent and is lost when setting any non-temporary parameter.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'temporary_exposure_time'</b></td>
+<td>1...10000</td>
+<td>1000</td>
+<td>integer</td>
+<td>Temporarily set the value of the exposure time of the long exposure in milliseconds. This parameter can be set while the camera is in run mode. 
+However, this parameter is only available if the parameter 
+'imager_configuration_type' is set to a value ending with '_low' or '_moderate'. 
+This parameter is not persistent and is lost when setting any non-temporary 
+parameter.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'temporary_exposure_time_ratio'</b></td>
+<td>2...50</td>
+<td>40</td>
+<td>integer</td>
+<td>Temporarily set the value of the ratio of the long exposure time to the short exposure time. This parameter can be set while the camera is in run 
+mode. However, this parameter is only available if the parameter 
+'imager_configuration_type' is set to a value ending with '_moderate'. 
+This parameter is not persistent and is lost when setting any non-temporary 
+parameter.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'trigger_mode'</b></td>
+<td>'free_run', 'process_interface', 'positive_edge', 'negative_edge', 'positive_and_negative_edge'
+</td>
+<td>'free_run'</td>
+<td>string</td>
+<td>Triggered mode. In 'free_run' mode the camera  continuously captures images (and buffers up to 50 images on the 
+internal camera storage). If set to 'process_interface' the camera only 
+captures an image if a software trigger is send (this feature is not yet 
+implemented). The last three modes correspond to the hardware trigger.
+</td>
+</tr></table>
+<h2 id="GET_FRAMEGRABBER_PARAM">Parameters for <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a></h2><div>There may exist additional read-only parameters with the following postfixes: 
+<ul>
+<li><b>'_description'</b>: These parameters provide the tool-tip of the 
+   corresponding parameter as a string. 
+</li>
+<li><b>'_range'</b>: These parameters provide the minimum, maximum, 
+    step width, and default values for the corresponding integer or float 
+    parameter as a tuple with 4 elements, e.g., 
+    <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a><tt>(.., 'Shutter_range', ..)</tt> will return 
+    the output tuple <tt>[<i>min, max, step, default</i>]</tt>. 
+</li>
+<li><b>'_values'</b>: These parameters provide the valid value list for 
+    the corresponding parameter as a tuple, e.g., 
+    <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a><tt>(.., 'volatile_values', ..)</tt> will return 
+    the output tuple <tt>['enable', 'disable']</tt>. 
+</li>
+</ul> 
+<p> 
+All these postfixed parameter names are not returned when calling 
+<a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a><tt>(.., 'parameters', ..)</tt> and are used 
+to enable the easy parameterization via a generic graphical user 
+interface, particularly the HDevelop Image Acquisition Assistant. 
+</p>
+</div>
+<table summary="Parameters for get_framegrabber_param" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Parameter</th>
+<th>Values</th>
+<th>Default</th>
+<th>Type</th>
+<th>Kind</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><b>'article_number'</b></td>
+<td>'<span class="var">&lt;article_number&gt;</span>'</td>
+<td>'O3D300'</td>
+<td>string</td>
+<td>dynamic</td>
+<td>Article number of the camera.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'binning'</b></td>
+<td>1, 2</td>
+<td>2</td>
+<td>integer</td>
+<td>dynamic</td>
+<td>Enable or disable binning on the camera. If the binning is set to 2 the resulting resolution is 176x132. Otherwise the sensor will 
+return the full resolution of 352x264.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'camera_name'</b></td>
+<td>'<span class="var">&lt;camera_name&gt;</span>'</td>
+<td>'New Sensor'</td>
+<td>string</td>
+<td>dynamic</td>
+<td>Name of the camera (max. 64 characters).</td>
+</tr>
+<tr class="evenrow">
+<td><b>'channel'</b></td>
+<td>0, 1, 2, 3</td>
+<td>0</td>
+<td>integer</td>
+<td>dynamic</td>
+<td>Frequency channel.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'connect_timeout'</b></td>
+<td><span class="var">&lt;milliseconds&gt;</span></td>
+<td>5000</td>
+<td>long</td>
+<td>dynamic</td>
+<td>Timeout for connecting to the camera in milliseconds.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'description'</b></td>
+<td>'<span class="var">&lt;description&gt;</span>'</td>
+<td>''</td>
+<td>string</td>
+<td>dynamic</td>
+<td>Description of the camera (max. 500 characters).</td>
+</tr>
+<tr class="oddrow">
+<td><b>'device'</b></td>
+<td>'<span class="var">&lt;ip_address&gt;</span>'</td>
+<td>'192.168.0.69'</td>
+<td>string</td>
+<td>dynamic</td>
+<td>IP address of the camera.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'device_port'</b></td>
+<td><span class="var">&lt;device_port&gt;</span></td>
+<td>50010</td>
+<td>integer</td>
+<td>dynamic</td>
+<td>Port number of the PCIC socket as documented in the ifm manual.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'distance_unit'</b></td>
+<td>'millimeter','meter'</td>
+<td>'millimeter'</td>
+<td>string</td>
+<td>dynamic</td>
+<td>If the parameter 'pixel_format' is set to 'Mono32F', this parameter specifies the unit of distance for the X-, Y-, Z- and distance 
+image.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'exposure_time'</b></td>
+<td>1...10000</td>
+<td>1000</td>
+<td>integer</td>
+<td>dynamic</td>
+<td>Exposure time of the long exposure in milliseconds. This parameter is only available if the parameter 'imager_configuration_type' is set to a 
+value ending with '_low' or '_moderate'.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'exposure_time_ratio'</b></td>
+<td>2...50</td>
+<td>40</td>
+<td>integer</td>
+<td>dynamic</td>
+<td>Ratio of the long exposure time to the short exposure time. This parameter is only available if the parameter 'imager_configuration_type' is 
+set to a value ending with '_moderate'.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'firmware_version'</b></td>
+<td>'<span class="var">&lt;firmware_version&gt;</span>'</td>
+<td>'<firmware_version>'</td>
+<td>string</td>
+<td>dynamic</td>
+<td>Firmware version installed on the camera.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'frame_rate'</b></td>
+<td><span class="var">&lt;fps&gt;</span></td>
+<td>5</td>
+<td>float</td>
+<td>dynamic</td>
+<td>Frame rate of the camera in frames per second.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'grab_timeout'</b></td>
+<td><span class="var">&lt;milliseconds&gt;</span></td>
+<td>5000</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Current grab timeout in milliseconds.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'image_height'</b></td>
+<td><span class="var">&lt;image_height&gt;</span></td>
+<td>132</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Current image height.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'image_width'</b></td>
+<td><span class="var">&lt;image_width&gt;</span></td>
+<td>176</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Current image width.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'imager_configuration_type'</b></td>
+<td>'under5m_low', 'under5m_moderate', 'under5m_high', 'upto30m_low', 'upto30m_moderate', 'upto30m_high', 
+'morethan30m_low', 'morethan30m_moderate'
+</td>
+<td>'under5m_low'</td>
+<td>string</td>
+<td>dynamic</td>
+<td>Configuration type of the imager. This parameter also specifies the availability of the parameters 'exposure_time' and 
+'exposure_time_ratio'.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'mask_size'</b></td>
+<td>'3x3', '5x5'</td>
+<td>'3x3'</td>
+<td>string</td>
+<td>dynamic</td>
+<td>Mask size of the spatial filter. This parameter is only available if the parameter 'spatial_filter_type' is not set to 'off'.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'name'</b></td>
+<td>'O3D3xx'</td>
+<td>'O3D3xx'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Name of the HALCON interface.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'number_of_images'</b></td>
+<td>2...25</td>
+<td>2</td>
+<td>integer</td>
+<td>dynamic</td>
+<td>Number of images used for the temporal mean filter. This parameter is only available if the parameter 'temporal_filter_type' is set 
+to 'temporal_mean_filter'.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'pixel_format'</b></td>
+<td>'Raw16','Mono32F'</td>
+<td>'Raw16'</td>
+<td>string</td>
+<td>dynamic</td>
+<td>The format of the returned images is switched with this parameter. If Raw16 is used, the images will be returned in the format as 
+given by the sensor (X, Y and Z as int2 images, distance and amplitude image 
+as uint2 images). If 'Mono32F' is chosen all images, except the confidence 
+image, will be internally converted into a real image. In both cases the 
+confidence image is returned as byte image. For 'Raw16' the parameter 
+'distance_unit' is ignored.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'revision'</b></td>
+<td>'<span class="var">&lt;revision&gt;</span>'</td>
+<td></td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Revision number of the O3D3xx interface.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'spatial_filter_type'</b></td>
+<td>'off', 'median_filter', 'mean_filter', 'bilateral_filter'</td>
+<td>'off'</td>
+<td>string</td>
+<td>dynamic</td>
+<td>Spatial filter that is used on the camera after acquisition. This parameter also specifies the availability of the parameter 'mask_size'.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'temporal_filter_type'</b></td>
+<td>'off', 'temporal_mean_filter', 'adaptive_exponential_filter'</td>
+<td>'off'</td>
+<td>string</td>
+<td>dynamic</td>
+<td>Temporal filter that is used on the camera after acquisition. This parameter also specifies the availability of the parameter 
+'number_of_images'.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'trigger_mode'</b></td>
+<td>'free_run', 'process_interface', 'positive_edge', 'negative_edge', 'positive_and_negative_edge'
+</td>
+<td>'free_run'</td>
+<td>string</td>
+<td>dynamic</td>
+<td>Current state of the triggered mode. In 'free_run' mode the camera  continuously captures images (and buffers up to 50 images on the 
+internal camera storage. If set to 'process_interface' the camera only 
+captures an image if a software trigger is send (this feature is not yet 
+implemented). The last three modes correspond to the hardware trigger.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'xmlrpc_port'</b></td>
+<td><span class="var">&lt;xmlrpc_port&gt;</span></td>
+<td>80</td>
+<td>integer</td>
+<td>dynamic</td>
+<td>Port number of the socket used for the XMLRPC communication.</td>
+</tr></table>
+<h2 id="SET_FRAMEGRABBER_LUT">Operator <a class="halconoperator" href="../operators/set_framegrabber_lut.html">set_framegrabber_lut</a></h2><div>Not supported by this interface.</div>
+<h2 id="GET_FRAMEGRABBER_LUT">Operator <a class="halconoperator" href="../operators/get_framegrabber_lut.html">get_framegrabber_lut</a></h2><div>Not supported by this interface.</div>
+<h2 id="SET_FRAMEGRABBER_CALLBACK">Operator <a class="halconoperator" href="../operators/set_framegrabber_callback.html">set_framegrabber_callback</a></h2><div>Not supported by this interface.</div>
+<h2 id="GET_FRAMEGRABBER_CALLBACK">Operator <a class="halconoperator" href="../operators/get_framegrabber_callback.html">get_framegrabber_callback</a></h2><div>Not supported by this interface.</div>
+<h2 id="GRAB_IMAGE_START">Operator <a class="halconoperator" href="../operators/grab_image_start.html">grab_image_start</a></h2><div>Starts a new asynchronous grab. See also <a class="halconoperator" href="../operators/grab_image_start.html">grab_image_start</a>. If a synchronous grab changed the trigger mode this setting is reverted. 
+In case that the trigger mode is set to 'process_interface' <a class="halconoperator" href="../operators/grab_image_start.html">grab_image_start</a> 
+sends a software trigger in order to start an asynchronous grab. However, 
+if a software trigger is send via <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a> the image captured 
+with this trigger will be returned by the next asynchronous grab.
+</div>
+<h2 id="GRAB_IMAGE">Operator <a class="halconoperator" href="../operators/grab_image.html">grab_image</a></h2><div><a class="halconoperator" href="../operators/grab_image.html">grab_image</a> starts a new synchronous grab. See also <a class="halconoperator" href="../operators/grab_image.html">grab_image</a>. In case of the trigger mode set to 'free_run' it will be implicitly changed 
+to 'process_interface'. The image buffer on the camera is flushed to 
+ensure that a new image is captured. 
+The z-image is returned in Cartesian coordinates as int2 or real, depending 
+on the value of the 'pixel_format'. 
+The unit is millimeter, but if the 'pixel_format' is set to 'Mono32F', the 
+unit can be changed to meter using the 'distance_unit' parameter.
+</div>
+<h2 id="GRAB_IMAGE_ASYNC">Operator <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a></h2><div><a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a> starts a new asynchronous grab. See also <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a>. If a synchronous grab changed the trigger mode this setting is reverted. 
+In case that the trigger mode is set to 'process_interface' manually a 
+software trigger is performed after retrieving the image from the camera. 
+The parameter 'MaxDelay' is ignored. 
+The z-image is returned in Cartesian coordinates as int2 or real, depending 
+on the value of the 'pixel_format'. 
+The unit is millimeter, but if the 'pixel_format' is set to 'Mono32F', the 
+unit can be changed to meter using the 'distance_unit' parameter.
+</div>
+<h2 id="GRAB_DATA">Operator <a class="halconoperator" href="../operators/grab_data.html">grab_data</a></h2><div><a class="halconoperator" href="../operators/grab_data.html">grab_data</a> returns six images synchronously. In case of the trigger mode set to 'free_run' it will be implicitly changed to 'process_interface'. The 
+image buffer on the camera is flushed to ensure that a new image is captured. 
+In addition the tuple Data holds some diagnostic data that is provided with 
+the images and the exposure times for this frame.
+</div>
+<table summary="Operator grab_data" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Parameter</th>
+<th>Type</th>
+<th>Count</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><b>'image'</b></td>
+<td></td>
+<td>6</td>
+<td>This parameter returns all six images delivered by the camera during the acquisition. 
+
+<ul>
+<li>x-image in Cartesian coordinates (int2 in millimeter or real in 
+    millimeter or meter) 
+</li>
+<li>y-image in Cartesian coordinates (int2 in millimeter or real in 
+    millimeter or meter) 
+</li>
+<li>z-image in Cartesian coordinates (int2 in millimeter or real in 
+    millimeter or meter) 
+</li>
+<li>normalized amplitude image (uint2 or real) 
+</li>
+<li>distance image (uint2 in millimeter or real in millimeter or meter) 
+</li>
+<li>confidence image (byte)
+</li>
+</ul></td>
+</tr>
+<tr class="evenrow">
+<td><b>'data'</b></td>
+<td></td>
+<td>12</td>
+<td>This tuple holds the diagnostic data delivered during the grab of the current images. 
+
+<ul>
+<li>illumination temperature in 0.1 degree Celsius 
+</li>
+<li>frontend temperature 1 in 0.1 degree Celsius 
+</li>
+<li>frontend temperature 2 in 0.1 degree Celsius 
+</li>
+<li>i.mx6 temperature in 0.1 degree Celsius 
+</li>
+<li>processing time in ms 
+</li>
+<li>framecount of the data 
+</li>
+<li>timestamp of the data in µs (deprecated) 
+</li>
+<li>timestamp of the data in s 
+</li>
+<li>timestamp of the data in ns 
+</li>
+<li>exposure time 1 of the frame 
+</li>
+<li>exposure time 2 of the frame 
+</li>
+<li>exposure time 3 of the frame
+</li>
+</ul></td>
+</tr></table>
+<h2 id="GRAB_DATA_ASYNC">Operator <a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a></h2><div><a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a> returns six images asynchronously. If a synchronous grab changed the trigger mode this setting is reverted. 
+In case that the trigger mode is set to 'process_interface' manually a 
+software trigger is performed after retrieving the image from the camera. 
+The parameter 'MaxDelay' is ignored. 
+In addition the tuple Data holds some diagnostic data that is provided with 
+the images.
+</div>
+<table summary="Operator grab_data_async" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Parameter</th>
+<th>Type</th>
+<th>Count</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><b>'image'</b></td>
+<td></td>
+<td>6</td>
+<td>This parameter returns all six images delivered by the camera during the acquisition. 
+
+<ul>
+<li>x-image in Cartesian coordinates (int2 in millimeter or real in 
+    millimeter or meter) 
+</li>
+<li>y-image in Cartesian coordinates (int2 in millimeter or real in 
+    millimeter or meter) 
+</li>
+<li>z-image in Cartesian coordinates (int2 in millimeter or real in 
+    millimeter or meter) 
+</li>
+<li>normalized amplitude image (uint2 or real) 
+</li>
+<li>distance image (uint2 in millimeter or real in millimeter or meter) 
+</li>
+<li>confidence image (byte)
+</li>
+</ul></td>
+</tr>
+<tr class="evenrow">
+<td><b>'data'</b></td>
+<td></td>
+<td>12</td>
+<td>This tuple holds the diagnostic data delivered during the grab of the current images. 
+
+<ul>
+<li>illumination temperature in 0.1 degree Celsius 
+</li>
+<li>frontend temperature 1 in 0.1 degree Celsius 
+</li>
+<li>frontend temperature 2 in 0.1 degree Celsius 
+</li>
+<li>i.mx6 temperature in 0.1 degree Celsius 
+</li>
+<li>processing time in ms 
+</li>
+<li>framecount of the data 
+</li>
+<li>timestamp of the data in µs (deprecated) 
+</li>
+<li>timestamp of the data in s 
+</li>
+<li>timestamp of the data in ns 
+</li>
+<li>exposure time 1 of the frame 
+</li>
+<li>exposure time 2 of the frame 
+</li>
+<li>exposure time 3 of the frame
+</li>
+</ul></td>
+</tr></table>
+<h2 id="CLOSE_FRAMEGRABBER">Operator <a class="halconoperator" href="../operators/close_framegrabber.html">close_framegrabber</a></h2><div>This operator closes the device. See also <a class="halconoperator" href="../operators/close_framegrabber.html">close_framegrabber</a>.</div>
+<h2 id="HDEVELOP_EXAMPLES">HDevelop Examples</h2><div>For this interface there are the following examples available: 
+<ul>
+<li>o3d3xx_simple.hdev - A simple example to show the usage 
+  of the interface. 
+</li>
+<li>o3d3xx_parameters.hdev - Lists all parameters of a device. 
+</li>
+<li>o3d3xx_objectmodel3d.hdev - Shows how to generate an object 
+  model 3D from the retrieved data. 
+</li>
+<li>o3d3xx_valid_data.hdev - Shows how to use the confidence 
+  image in order to find out which data points are valid. 
+</li>
+<li>o3d3xx_temporary_parameters.hdev - Shows how to use the 
+  temporary parameters.
+</li>
+</ul></div>
+<h2 id="RELEASENOTES">Release Notes</h2><div>
+<ul>
+<li><b>Revision 13.0.4</b> (May 4, 2018): 
+<ul>
+<li>When getting <a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a> 'parameters' and <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a> 
+      'available_param_names' returned an error. This problem 
+      has been fixed. 
+</li>
+<li>Removed unnecessary checking on o3d3xx_parameters.hdev 
+      example. 
+ 
+</li>
+</ul></li>
+<li><b>Revision 13.0.3</b> (Feb 1, 2018): 
+
+<ul>
+<li>The technical dependency from the HALCON Library has been removed. 
+</li>
+<li>With firmware version 1.20.67 the compatibility was broken. This 
+      problem has been fixed. 	 
+</li>
+<li>Added parameter 'connect_timeout' to <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a>. 
+</li>
+</ul></li>
+<li><b>Revision 13.0.2 Addendum</b> (Jun 19, 2017): 
+
+<ul>
+<li>This documentation was inconsistent about the additional values 
+      returned by <a class="halconoperator" href="../operators/grab_data.html">grab_data</a>. This problem has been fixed. 
+</li>
+</ul></li>
+<li><b>Revision 13.0.2</b> (Apr 27, 2017): 
+
+<ul>
+<li>When using a firmware version higher than 1.5.x grabbing images led 
+      to a crash. This problem has been fixed. 
+</li>
+<li>The operator <a class="halconoperator" href="../operators/grab_data.html">grab_data</a> returns five additional values in the Data 
+      tuple. These values are the exposure times used for this frame. If 
+      the camera is used in a mode with only one or two exposures, the 
+      remaining exposure times will be zero. Please note, that this feature 
+      is only available with firmware version 1.8.x or higher. When using 
+      a lower firmware version the returned values will be zero. 
+</li>
+<li>Three temporary parameters have been added that can be set while the 
+      camera is in run mode. These changes are not persistent and are lost 
+      when entering edit mode, i.e. when changing any non-temporary parameter 
+      using <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a>. The three new parameters are 
+      'temporary_exposure_time', 'temporary_exposure_time_ratio' and 
+      'temporary_channel'. Please note, that this feature is only available 
+      with firmware version 1.8.x or higher. 
+</li>
+<li>The example o3d3xx_temporary_parameters.hdev has been 
+      added that shows how to use the new temporary parameters. 
+</li>
+</ul></li>
+<li><b>Revision 13.0.1</b> (Oct 28, 2016): 
+
+<ul>
+<li>HALCON 13 version of the interface. 
+</li>
+</ul></li>
+<li><b>Revision 6.5</b> (Mar 29, 2016): 
+
+<ul>
+<li>If binning was disabled, the values of the image size were not set 
+      correctly. This problem has been fixed. 
+</li>
+<li>Querying the possible values of the parameter 'binning' returned zero 
+      as a possible value, which isn't correct. The list has been corrected. 
+</li>
+</ul></li>
+<li><b>Revision 6.4</b> (Mar 2, 2016): 
+
+<ul>
+<li>The minimum value expected by the parameter 'exposure_time' was 0, 
+      but the correct minimum value is 1. This problem has been fixed. 
+</li>
+<li>The 'imager_configuration_type_values' parameter returned the 
+      unsupported value 'morethan30m_high'. This value has been removed. 
+</li>
+</ul></li>
+<li><b>Revision 6.3</b> (Feb 15, 2016): 
+
+<ul>
+<li>The parameters 'pixel_format' and 'distance_unit' have been added to 
+      specify the output type of the images as well as the distance unit of 
+      the X, Y, Z and distance images, respectively. 
+</li>
+<li>The HDevelop example o3d3xx_objectmodel3d.hdev and 
+      o3d3xx_simple.hdev have been improved by using the new 
+      parameters 'pixel_format' and 'distance_unit'. 
+</li>
+<li>The binning mode could not be switched off. The parameter 'binning' 
+      has been added to enable this option. Note that it is only available 
+      with firmware version 1.3.1001 or higher. 
+</li>
+<li>The HDevelop example o3d3xx_valid_data.hdev has been 
+      added. 
+</li>
+<li>When setting the parameters 'exposure_time' and 'exposure_time_ratio', 
+      incorrect limits values were used. This caused that, in some cases, 
+      these parameters could not be set. This problem has been 
+      fixed. 
+</li>
+<li>The parameter 'reduce_motion_artifacts' had no impact. This parameter 
+      has been removed. 
+</li>
+<li>The HDevelop example o3d3xx_parameters.hdev has been 
+      improved to show the range and values of the available parameters. 
+</li>
+<li>The parameters list returned by 'available_param_names' (via 
+      <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a>) and 'parameters', 'parameters_readonly', and 
+      'parameters_writeonly' (via <a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a>) were not returned in 
+      alphabetical order. This problem has been fixed. 
+</li>
+<li>The O3D3xx interface was available for Linux, but not 
+      mentioned in this documentation. The Linux support has been added to 
+      the <a href="#SYSTEM_REQUIREMENTS">'System Requirements'</a> section. 
+</li>
+</ul></li>
+<li><b>Revision 6.2 Addendum</b> (Sep 17, 2015): 
+
+<ul>
+<li>The imager configuration type 'morethan30m_high' is not supported. This 
+      value option has been removed from the parameter 
+      'imager_configuration_type' documentation. 
+</li>
+</ul></li>
+<li><b>Revision 6.2</b> (Jun 15, 2015): 
+
+<ul>
+<li>First official release. 
+</li>
+<li>In case that there is no application on the sensor <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a> 
+      crashed. This problem has been fixed. 
+</li>
+<li>Minor internal fixes. 
+</li>
+</ul></li>
+<li><b>Revision 6.1</b> (May 29, 2015): 
+
+<ul>
+<li>Using <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a> with the parameter 'exposure_time' 
+      led to a crash in most cases. This problem has been fixed. 
+</li>
+</ul></li>
+<li><b>Revision 6.0</b> (Apr 10, 2015): 
+
+<ul>
+<li>HALCON 12 version of the interface.
+</li>
+</ul></li>
+</ul></div>
+  <!-- toc end -->  <hr> 
+  <div class="imprint"> 
+    <span class="imprinthead">Legal disclaimer regarding hyperlinks</span>: 
+    This page may provide users with access by hypertext links to external, non-MVTec websites. 
+Any such access is provided with the understanding that the contents 
+of non-MVTec sites are beyond the control of MVTec Software GmbH, that 
+MVTec Software GmbH makes no representations whatsoever about such 
+sites, and that users shall proceed at their own risk. 
+MVTec Software GmbH is not responsible for the privacy practices or 
+the content of external, non-MVTec websites.
+ 
+  </div> 
+  <div class="imprint"> 
+    <span class="imprinthead">Copyright notes</span>: 
+    &copy; Copyright MVTec Software GmbH. All rights reserved. 
+Unless otherwise stated, the copyright and similar rights in the 
+contents of this page, including but not limited to all text, designs 
+and images appearing herein, are copyrighted works owned by MVTec 
+Software GmbH. 
+"MVTec Software GmbH" and "HALCON" are registered trademarks of MVTec 
+Software GmbH. 
+All other brand names, designs, service marks and trademarks (whether 
+or not registered) referenced or used herein are the property of their 
+respective owners.
+ 
+  </div> 
+  <div class="footer"> 
+    acqdump 1.5 / hdoc 1.2 / Generated: Fri May  4 09:50:32 CEST 2018 
+  </div> 
+  </body> 
+</html>

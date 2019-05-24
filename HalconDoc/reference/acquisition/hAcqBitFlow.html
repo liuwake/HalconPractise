@@ -1,0 +1,2260 @@
+<!DOCTYPE HTML> 
+<html> 
+  <head> 
+  <meta id='acqdump-id' name='acqdump-id' content='halcon-acq-BitFlow-rev13.0.3'> 
+  <title>BitFlow / HALCON / MVTec Software GmbH</title> 
+      <style type="text/css"> 
+      body { 
+        color: #000000; 
+        background-color: #ffffff; 
+        margin-top: 0px; 
+        margin-bottom: 0px; 
+        margin-left: 20px; 
+        margin-right: 20px; 
+        font-family: Arial,Helvetica,sans-serif; 
+      } 
+      a:link { 
+        color: #0044cc; 
+      } 
+      a:link,a:visited { 
+        text-decoration: none; 
+      } 
+      a:link:hover,a:visited:hover { 
+        text-decoration: underline; 
+      } 
+      th { 
+        text-align: left; 
+      } 
+      h1,h2,h3,h4,h5,h6 { 
+        text-rendering: optimizeLegibility; 
+        color: #666666; 
+      } 
+      tt { 
+        font-family: monospace,monospace; 
+      } 
+      h1 a.halconoperator { 
+        font-family: Arial,Helvetica,sans-serif; 
+        color: #666666; 
+      } 
+      h2 a.halconoperator { 
+        font-family: Arial,Helvetica,sans-serif; 
+        color: #666666; 
+      } 
+      hr { 
+        border: 0; 
+        border-top: solid 1px #f28d26; 
+      } 
+      pre { 
+        font-family: monospace,monospace; 
+        padding: 1ex; 
+        white-space: pre-wrap; 
+      } 
+      .toc { 
+        font-size: 80%; 
+        border-top: 1px dashed #f28d26; 
+        border-bottom: 1px dashed #f28d26; 
+        padding-top: 5px; 
+        padding-bottom: 5px; 
+      } 
+      .inv { 
+        margin: 0; 
+        border: 0; 
+        padding: 0; 
+      } 
+      .banner { 
+        color: #666666; 
+        padding-left: 1em; 
+      } 
+      .logo { 
+        background-color: white; 
+      } 
+      .keyboard { 
+        font-size: 80%; 
+        padding-left: 3px; 
+        padding-right: 3px; 
+        border-radius: 5px; 
+        border-width: 1px; 
+        border-style: solid; 
+        border-color: #f28d26; 
+        background-color: #f3f3f3; 
+      } 
+      .warning { 
+        margin-top: 2ex; 
+        margin-bottom: 1ex; 
+        padding: 10px; 
+        text-align: center; 
+        border: 1px solid; 
+        color: #bb0000; 
+        background-color: #fff7f7 
+      } 
+      .imprint { 
+        margin-top: 1ex; 
+        font-size: 80%; 
+        color: #666666; 
+      } 
+      .imprinthead { 
+        font-weight: bolder; 
+        color: #666666; 
+      } 
+      .postscript { 
+        margin-top: 2ex; 
+        font-size: 80%; 
+        color: #666666 
+      } 
+      .evenrow { 
+        background-color: #e7e7ef; 
+        vertical-align: top; 
+      } 
+      .oddrow { 
+        background-color: #f7f7ff; 
+        vertical-align: top; 
+      } 
+      .headrow { 
+        background-color: #97979f; 
+        color: #ffffff; 
+        vertical-align: top; 
+      } 
+      .logorow { 
+        vertical-align: top; 
+      } 
+      .error { 
+        color: red; 
+      } 
+      .var { 
+        font-style: italic 
+      } 
+      .halconoperator { 
+        font-family: monospace,monospace; 
+      } 
+      .halconprocedure { 
+        font-family: Consolas,Inconsolata,"DejaVu Sans Mono",monospace; 
+      } 
+      span.operator { 
+        font-family: monospace,monospace; 
+      } 
+      span.procedure { 
+        font-family: monospace,monospace; 
+      } 
+      span.operation { 
+        font-family: monospace,monospace; 
+      } 
+      span.feature { 
+        font-family: Arial,Helvetica,Homerton,sans-serif; 
+      } 
+      ul { 
+        padding-left: 1.2em; 
+      } 
+      li.dot { 
+        list-style-type: square; 
+        color: #f28d26; 
+      } 
+      .breadcrumb { 
+        font-size: 80%; 
+        color: white; 
+        background-color: #062d64; 
+        margin-left: -20px; 
+        margin-right: -20px; 
+        margin-bottom: 20px; 
+        padding-left: 20px; 
+        padding-right: 20px; 
+        padding-bottom: 15px; 
+      } 
+      .webbar { 
+        font-size: 80%; 
+        background-color: #dddddd; 
+        margin-top: 0px; 
+        margin-left: -20px; 
+        margin-right: -20px; 
+        margin-bottom: 0px; 
+        padding-top: 5px; 
+        padding-left: 20px; 
+        padding-right: 20px; 
+        padding-bottom: 5px; 
+      } 
+      .footer { 
+        border-top: 1px dashed #f28d26; 
+        font-size: 80%; 
+        color: #666666; 
+        margin-left: -20px; 
+        margin-right: -20px; 
+        margin-top: 0px; 
+        padding-left: 20px; 
+        padding-right: 20px; 
+        padding-top: 10px; 
+        padding-bottom: 15px; 
+      } 
+      .breadcrumb a { 
+        color: #ffffff; 
+        border-bottom: 1px solid white; 
+      } 
+      .breadcrumb a:link:hover,.breadcrumb a:visited:hover { 
+        text-decoration: none; 
+        border-bottom: none; 
+      } 
+      .heading { 
+        margin-top: 1ex; 
+        font-size: 110%; 
+        font-weight: bold; 
+        color: #666666; 
+      } 
+      .text { 
+        color: black; 
+      } 
+      .example { 
+        font-size: 80%; 
+        background-color: #f3f3f3; 
+        border: 1px dashed #666666; 
+        padding: 10px; 
+      } 
+      .math { 
+      } 
+      .displaymath { 
+        text-align: center; 
+        margin-top: 1ex; 
+        margin-bottom: 1ex; 
+      } 
+      </style> 
+  </head> 
+  <body><div class="breadcrumb"> 
+<br class="inv"/> 
+<a href="../../../../documentation.html">HALCON</a> / <a href="acq-overview.html">Image Acquisition Interfaces</a> 
+<br class="inv"/> 
+</div> 
+<h1>Image Acquisition Interface for BitFlow Boards</h1> 
+<table summary="Image Acquisition Interface for BitFlow Boards"> 
+  <tr> 
+    <td> 
+      Interface: 
+    </td> 
+    <td> 
+      BitFlow 
+    </td> 
+  </tr> 
+  <tr> 
+    <td> 
+      Revision: 
+    </td> 
+    <td> 
+      13.0.3 
+    </td> 
+  </tr> 
+  <tr> 
+    <td> 
+      Date: 
+    </td> 
+    <td> 
+      2018-10-23 
+    </td> 
+  </tr> 
+</table>
+<ul class="toc">
+<li><a href="#GENERAL">General</a></li>
+<li><a href="#SYSTEM_REQUIREMENTS">System Requirements</a></li>
+<li><a href="#INSTALLATION">Installation</a></li>
+<li><a href="#FEATURES">Features</a></li>
+<li><a href="#LIMITATIONS">Limitations</a></li>
+<li><a href="#INFO_FRAMEGRABBER">Parameters for info_framegrabber</a></li>
+<li><a href="#OPEN_FRAMEGRABBER">Parameters for open_framegrabber</a></li>
+<li><a href="#SET_FRAMEGRABBER_PARAM">Parameters for set_framegrabber_param</a></li>
+<li><a href="#GET_FRAMEGRABBER_PARAM">Parameters for get_framegrabber_param</a></li>
+<li><a href="#SET_FRAMEGRABBER_LUT">Operator set_framegrabber_lut</a></li>
+<li><a href="#GET_FRAMEGRABBER_LUT">Operator get_framegrabber_lut</a></li>
+<li><a href="#SET_FRAMEGRABBER_CALLBACK">Operator set_framegrabber_callback</a></li>
+<li><a href="#GET_FRAMEGRABBER_CALLBACK">Operator get_framegrabber_callback</a></li>
+<li><a href="#GRAB_IMAGE_START">Operator grab_image_start</a></li>
+<li><a href="#GRAB_IMAGE">Operator grab_image</a></li>
+<li><a href="#GRAB_IMAGE_ASYNC">Operator grab_image_async</a></li>
+<li><a href="#GRAB_DATA">Operator grab_data</a></li>
+<li><a href="#GRAB_DATA_ASYNC">Operator grab_data_async</a></li>
+<li><a href="#CLOSE_FRAMEGRABBER">Operator close_framegrabber</a></li>
+<li><a href="#MULTIPLE_CAMERAS">Multiple Cameras (Port Switching)</a></li>
+<li><a href="#CONTINUOUS_GRABBING">Continuous Grabbing</a></li>
+<li><a href="#HDEVELOP_EXAMPLES">HDevelop Examples</a></li>
+<li><a href="#CPP_EXAMPLES">C++ Examples</a></li>
+<li><a href="#CS_EXAMPLES">C# Examples</a></li>
+<li><a href="#RELEASENOTES">Release Notes</a></li>
+</ul>
+  <!-- toc start -->
+<h2 id="GENERAL">General</h2><div> This page provides the documentation of the HALCON BitFlow interface  for the <a href="http://www.bitflow.com">BitFlow</a> frame grabber boards Alta-AN, Karbon-CL, 
+ Karbon-CXP, Cyton-CXP, Neon-CL, RoadRunner, RoadRunner-CL, R3, and R3-CL. 
+ <b>Please note, that the  RoadRunner-CL, R3, R3-CL boards are only supported 
+ by Windows 32-Bit</b>. Although Raven, R64, and R64e-CL boards are still 
+ supported by this interface they are no more actively tested as they are out 
+ of production. 
+ <a href="http://www.mvtec.com/download/registration.html">Registered</a> customers can download the 
+ <a href="http://www.mvtec.com/halcon/download/">latest revision</a> of this interface from the 
+ <a href="http://www.mvtec.com">MVTec WWW server</a>.
+</div>
+<h2 id="SYSTEM_REQUIREMENTS">System Requirements</h2><div>
+<ul>
+<li>Intel compatible PC with Windows    7 (32-bit or 64-bit) 
+   or newer that is also supported by the vendor-specific SDK. 
+</li>
+<li>Successfully installed BitFlow driver 
+   <b>BitFlow.sys (BitFlow SDK version 6.30)</b>.<br> 
+   If you do not have this driver version, please contact BitFlow 
+   or the vendor from which you bought the frame grabber board. 
+</li>
+<li>BitFlow DLLs <b>R2D.dll</b>, <b>Gn2.dll</b>, 
+   <b>CiD.dll</b>, and <b>BFD.dll</b>.<br> 
+   These DLLs must be in your search path %PATH%. If you do not have these 
+   DLLs, please contact BitFlow or the vendor from which you bought the 
+   frame grabber board. 
+</li>
+<li>HALCON image acquisition interface <b>hAcqBitFlow.dll</b> or 
+   <b>hAcqBitFlowxl.dll</b>, respectively.<br> 
+   If you have properly installed the interface, both DLLs should reside 
+   in <tt>bin\%HALCONARCH%</tt> within the HALCON base directory 
+   %HALCONROOT% you have chosen during the installation of HALCON.
+</li>
+</ul></div>
+<h2 id="INSTALLATION">Installation</h2><div>Only when installing or updating the interface manually follow these steps: <br> 
+
+<ul>
+<li><b>Windows:</b> Extract the archive containing the interface files to the 
+  HALCON base directory %HALCONROOT% (Note: Administrator privileges may be 
+  required for this step). Additionally, you have to move the interface 
+  examples to the directory %HALCONEXAMPLES% manually.
+</li>
+</ul></div>
+<h2 id="FEATURES">Features</h2><div>
+<ul>
+<li>Multiple frame grabber boards. </li>
+<li>Multiple compatible cameras per board (port switching). 
+</li>
+<li>Synchronous and asynchronous grabbing. 
+</li>
+<li>External trigger (with software override of the camera configuration 
+   file). 
+</li>
+<li>Up to 1000 frame buffers (e.g., for volatile and/or continuous grabbing). 
+</li>
+<li>Completely asynchronous grabbing of up to 40 images (with or without 
+   external triggering; see parameter 'continuous_grabbing' and the 
+   corresponding section below). 
+</li>
+<li>Support of multiple analog and digital cameras based on the BitFlow 
+   camera configuration files. 
+</li>
+<li>(Partial) software control of the number of bits per pixel 
+   (with software override of the camera configuration file). 
+</li>
+<li>Support of the digital output lines. 
+</li>
+<li>Support of line scan cameras. 
+</li>
+<li>Writing and reading of LUTs. 
+</li>
+<li>Dynamically changing the frame size of the grabbed image. 
+</li>
+<li>Support of start/stop trigger mode (for line scan cameras connected to 
+   RoadRunner or RoadRunner CL boards). 
+</li>
+<li>Serial communication with Camera Link cameras. 
+</li>
+<li>Support of user-specific callback function.
+</li>
+</ul></div>
+<h2 id="LIMITATIONS">Limitations</h2><div>
+<ul>
+<li>Only one image acquisition instance per frame grabber board (however,    multiple compatible cameras can be accessed using port switching). 
+</li>
+<li>No subsampling or cropping of image parts through the HALCON interface. 
+   This feature is supported through the use of camera files.
+</li>
+</ul></div>
+<h2 id="INFO_FRAMEGRABBER">Parameters for <a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a></h2><div></div>
+<table summary="Parameters for info_framegrabber" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Parameter</th>
+<th>Value List</th>
+<th>Type</th>
+<th>Kind</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><b>'bits_per_channel'</b></td>
+<td>[8, 10, 12]</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Values for bits per channel.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'camera_type'</b></td>
+<td>['CAMFILE:', 'cam;r64;rcl;rvc;anlg;bfml;kcxp', '<span class="var">&lt;camera_path&gt;</span>', 'default']</td>
+<td>string</td>
+<td>pre-defined</td>
+<td> Syntax for camera configuration file and default value.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'color_space'</b></td>
+<td>['gray', 'rgb']</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Values for color space.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'defaults'</b></td>
+<td>[1, 1, 0, 0, 0, 0, 'progressive', -1,               'gray', -1.0, 'false', 'default', 'default', 0, 1]
+</td>
+<td>mixed</td>
+<td>pre-defined</td>
+<td>Default values for <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'device'</b></td>
+<td> ['RoadRunner:0', 'RoadRunner:1', 'RoadRunner:2', 'RoadRunner:3',  'Gn2:0', 'Gn2:1', 'Gn2:2', 'Gn2:3', 
+ 'default']
+</td>
+<td>string</td>
+<td>dynamic</td>
+<td>Pre-defined list of possible device IDs.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'external_trigger'</b></td>
+<td>['false', 'true']</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Values for the external trigger.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'field'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unused.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'general'</b></td>
+<td>[]</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Information about the HALCON BitFlow interface.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'generic'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unsupported query.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'horizontal_resolution'</b></td>
+<td>1</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Value list for horizontal resolution.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'image_height'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unsupported query.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'image_width'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unsupported query.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'info_boards'</b></td>
+<td>['device:<span class="var">&lt;device_id&gt;</span>']</td>
+<td>string</td>
+<td>dynamic</td>
+<td> Returns a list of installed BitFlow boards.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'parameters'</b></td>
+<td>['<span class="var">&lt;parameters&gt;</span>']</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Pre-defined parameters of the HALCON interface.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'parameters_readonly'</b></td>
+<td>['<span class="var">&lt;parameters&gt;</span>']</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Pre-defined read-only parameters of the HALCON interface.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'parameters_writeonly'</b></td>
+<td>['<span class="var">&lt;parameters&gt;</span>']</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Pre-defined write-only parameters of the HALCON interface.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'port'</b></td>
+<td>[0, 1, 2, 3]</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td> Pre-defined list of possible port numbers.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'revision'</b></td>
+<td>'<span class="var">&lt;revision&gt;</span>'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Revision number of the BitFlow interface.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'start_column'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unsupported query.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'start_row'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unsupported query.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'vertical_resolution'</b></td>
+<td>1</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Value list for vertical resolution.</td>
+</tr></table>
+<h2 id="OPEN_FRAMEGRABBER">Parameters for <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a></h2><div></div>
+<table summary="Parameters for open_framegrabber" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Parameter</th>
+<th>Values</th>
+<th>Default</th>
+<th>Type</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><b>Name</b></td>
+<td>'BitFlow'</td>
+<td></td>
+<td>string</td>
+<td>Name of the HALCON interface.</td>
+</tr>
+<tr class="evenrow">
+<td><b>HorizontalResolution</b></td>
+<td>1, <span class="var">&lt;width&gt;</span></td>
+<td>1</td>
+<td>integer</td>
+<td> Desired image resolution. Use '1' for full resolution or the  corresponding absolute value (depending on your camera).
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>VerticalResolution</b></td>
+<td>1, <span class="var">&lt;height&gt;</span></td>
+<td>1</td>
+<td>integer</td>
+<td> Desired image resolution. Use '1' for full resolution or the  corresponding absolute value (depending on your camera).
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>ImageWidth</b></td>
+<td>0</td>
+<td>0</td>
+<td>integer</td>
+<td>Width of the desired image part ('0' stands for the complete image).
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>ImageHeight</b></td>
+<td>0</td>
+<td>0</td>
+<td>integer</td>
+<td>Height of the desired image part ('0' stands for the complete image).
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>StartRow</b></td>
+<td>0</td>
+<td>0</td>
+<td>integer</td>
+<td>Row coordinate of the upper left pixel within the desired image part.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>StartColumn</b></td>
+<td>0</td>
+<td>0</td>
+<td>integer</td>
+<td>Column coordinate of the upper left pixel within the desired image part.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>Field</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr>
+<tr class="oddrow">
+<td><b>BitsPerChannel</b></td>
+<td>-1, 8, 10, 12</td>
+<td>-1</td>
+<td>integer</td>
+<td> Number of bits per channel. By specifying the default '-1' the  corresponding setting of the camera configuration file is used.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>ColorSpace</b></td>
+<td>'gray', 'rgb'</td>
+<td>'gray'</td>
+<td>string</td>
+<td> Desired color space of the HALCON image. If <i>BitsPerChannel</i> is set to  -1, the value is ignored and overwritten by the settings of the camera 
+ configuration file.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>Generic</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr>
+<tr class="evenrow">
+<td><b>ExternalTrigger</b></td>
+<td>'false', 'true'</td>
+<td>'false'</td>
+<td>string</td>
+<td>Status of the external trigger.</td>
+</tr>
+<tr class="oddrow">
+<td><b>CameraType</b></td>
+<td>'<span class="var">&lt;file&gt;</span>', 'default'</td>
+<td>'default'</td>
+<td>string</td>
+<td> This parameter is used to specify the camera configuration file (e.g.,  'BfSynth256E1.cam' (RoadRunner) or 'Generic-Synthetic-1024x1024-1T.r64' (Neon) 
+ for a synthetic test image). If you specify 'default' the first camera 
+ you have set with <b>SysReg</b> is used. 
+ For Gen2 boards you can also provide a mode when passing the configuration file 
+ using 'mode@camfile.bfml' where 'mode' is one of the modes from the BFML file. 
+ If a mode is not provided with the configuration file then the default mode 
+ will be used.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>Device</b></td>
+<td>'<span class="var">&lt;BoardType&gt;</span>:<span class="var">&lt;nr&gt;</span>', 'default'</td>
+<td>'default'</td>
+<td>string</td>
+<td> Type ('Gen2' or 'RoadRunner') and number ('0', '1',  '2' ...) of the frame grabber board (passed as one string!), e.g., 
+ 'RoadRunner:1' or 'Gn2:0'.<br> 
+ Note that <b>R3 boards</b> are treated in the way as RoadRunner boards 
+ and that <b>Alta, Karbon and Neon boards</b> are treated in the way 
+ as the legacy R64 boards. If you specify 'default' the interface 
+ automatically selects the first board.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>Port</b></td>
+<td><span class="var">&lt;port&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td> The number attached to the desired camera via the BitFlow configuration  program <b>SysReg</b> (starting with 0 for the first camera). Only 
+ evaluated in case the CameraType parameter has been set to 'default'.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>LineIn</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr></table>
+<h2 id="SET_FRAMEGRABBER_PARAM">Parameters for <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a></h2><div></div>
+<table summary="Parameters for set_framegrabber_param" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Parameter</th>
+<th>Values</th>
+<th>Default</th>
+<th>Type</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><b>'cc:X'</b></td>
+<td><span class="var">&lt;command&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>Low CPU usage write to the CCx_CON register</td>
+</tr>
+<tr class="evenrow">
+<td><b>'continuous_grab_timeout'</b></td>
+<td><span class="var">&lt;milliseconds&gt;</span></td>
+<td>5000</td>
+<td>integer</td>
+<td>Specifies the desired timeout (milliseconds) for aborting an acquisition when in continuous grabbing mode. This timeout is used only by 
+the internal grabbing thread, it must see an image within this amount 
+of time. If not, it will abort acquisition. This timeout is not used 
+by the <a class="halconoperator" href="../operators/grab_image.html">grab_image</a>() functions. If -1 is specified, the timeout is set to 
+INFINITE.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'continuous_grabbing'</b></td>
+<td>'disable', 'enable'</td>
+<td>'disable'</td>
+<td>string</td>
+<td> Activates or deactivates 'continuous grabbing'. For details, please see the  corresponding section below.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'ctab_fill'</b></td>
+<td>['index <span class="var">&lt;index&gt;</span>: num_entries <span class="var">&lt;num&gt;</span>: mask <span class="var">&lt;mask&gt;</span>: value <span class="var">&lt;value&gt;</span>']</td>
+<td></td>
+<td>string</td>
+<td> Ctab_fill parameter writes a masked CTAB fill value to the Camera  Control Table. The following parameters must be specified: 
+
+<ul>
+<li>index - A decimal number indicating the offset into the CTAB table. 
+</li>
+<li>num_entries - A decimal number, of the number of CTAB values to write. 
+</li>
+<li>mask - The CTAB extraction mask value which can be one of the following: 
+
+<ul>
+<li>0xFFFF - R64CTab 
+</li>
+<li>0x00FF - R64HCTab 
+</li>
+<li>0xFF00 - R64VCTab 
+</li>
+<li>0x0001 - R64HCTabHStart 
+</li>
+<li>0x0002 - R64HCTabHReset 
+</li>
+<li>0x0004 - R64HCtabENHLoad 
+</li>
+<li>0x0008 - R64HCTabReserved 
+</li>
+<li>0x0010 - R64HCTabGPH0 
+</li>
+<li>0x0020 - R64HCTabGPH1 
+</li>
+<li>0x0040 - R64HCTabGPH2 
+</li>
+<li>0x0080 - R64HCTabGPH3 
+</li>
+<li>0x0100 - R64VCTabVStart 
+</li>
+<li>0x0200 - R64VCTabVReset 
+</li>
+<li>0x0400 - R64VCtabENVLoad 
+</li>
+<li>0x0800 - R64VCtabIRQ 
+</li>
+<li>0x1000 - R64VCTabGPV0 
+</li>
+<li>0x2000 - R64VCTabGPV1 
+</li>
+<li>0x4000 - R64VCTabGPV2 
+</li>
+<li>0x8000 - R64VCTabGPV3 
+</li>
+</ul></li>
+<li>value - A hex value to fill the CTAB table with. 
+</li>
+</ul> 
+<br> 
+  Note that this parameter is a write-only parameter!<br> 
+  Example: <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a><tt>(..., 'ctab_fill', 
+  'index 0:num_entries 256:mask 0xffff:value 0x0000')</tt>
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'dma_direction'</b></td>
+<td>'bottom-up', 'top-down'</td>
+<td>'top-down'</td>
+<td>string</td>
+<td>Read-out direction of the image.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'do_abort_grab'</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Aborts the current image acquisition.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'do_comm_close'</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Closes the comm port.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'do_comm_flush'</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td> Discards any bytes that are available in the input buffer of the comm port.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'do_comm_open'</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td> Opens and initializes the comm port for use on the board. The comm port will  always be opened with 9600 baud, 8 data bits, no parity, and 1 stop bit. The 
+ default timeout is 1 second.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'do_comm_param'</b></td>
+<td>'<span class="var">&lt;string&gt;</span>'</td>
+<td></td>
+<td>string</td>
+<td> Parameters for serial communication, separated by colons.  The following parameters can be specified: 
+
+<ul>
+<li>timeout: timeout in milliseconds. 
+</li>
+<li>baud_rate: baud rate. Valid baud rates are 9600, 19200, 38400, 
+   57600, 115200, 230400. 
+</li>
+<li>parity: parity to be used. N=No parity, E=Even parity, 
+   O=Odd parity. 
+</li>
+<li>data_bits: size of the data. 5="5" bit data, 6 = 6 bit data, 
+   7 = 7 bit data, 8 = 8 bit data. 
+</li>
+<li>stop_bits: number of stop bits. 1 = 1 stop bit, 15 = 1.5 stop bits, 
+   2 = 2 stop bits 
+</li>
+</ul> 
+Example: 
+<a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a><tt>(..., 'comm_param', 'baud_rate 9600:data_bits 
+8:parity N')</tt>
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'do_comm_write'</b></td>
+<td><span class="var">&lt;message&gt;</span></td>
+<td></td>
+<td>mixed</td>
+<td> Writes message to comm port. Note that message can either be a string value  or a tuple of integers. The latter case also allows the writing of NULL 
+ characters. Examples: <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a><tt>(..., 'do_comm_write', 
+ 'TR="2"\r\n')</tt>, <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a><tt>(..., 'do_comm_write', 
+ [0, 127, 128])</tt>
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'do_flush_buffers'</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td> Discards all image buffers in the output buffer queue in continuous grabbing  mode.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'do_force_trigger'</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Generate a software trigger signal for the camera.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'encoder_scan_step'</b></td>
+<td>0 ... 1023</td>
+<td></td>
+<td>integer</td>
+<td>Encoder divider value.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'grab_timeout'</b></td>
+<td><span class="var">&lt;milliseconds&gt;</span></td>
+<td>5000</td>
+<td>integer</td>
+<td>Desired timeout (milliseconds) for aborting a pending grab. If -1 is specified, the timeout is set to INFINITE.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'hardware_exception_thread'</b></td>
+<td>'disable', 'enable'</td>
+<td>'disable'</td>
+<td>string</td>
+<td> Start/stop hardware exception thread to reset acquisition in continuous  grabbing mode when there is a hardware exception.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'image_height'</b></td>
+<td><span class="var">&lt;height&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td> Dynamically change the current image height of the grabbed image. This  feature is limited to use with only free run camera files (see also the 
+ comments to CiAqFrameSize in the BitFlow SDK Reference).
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'image_width'</b></td>
+<td><span class="var">&lt;width&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td> Dynamically change the current image width of the grabbed image. This value  has to be a multiple of 4 and is limited to use with only free run camera 
+ files (see also the comments to CiAqFrameSize in the BitFlow SDK Reference).
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'lut'</b></td>
+<td>'disable', 'enable'</td>
+<td>'disable'</td>
+<td>string</td>
+<td> State of the lookup table.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'out:X'</b></td>
+<td>'high', 'low'</td>
+<td></td>
+<td>string</td>
+<td> State of one of the digital output lines (with X = 0, 1,  or 2 for RoadRunner/R3-DIF family; RoadRunner/R3 CL family). 
+ The default depends on the board settings.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'overflow_thread'</b></td>
+<td>'disable', 'enable'</td>
+<td>'disable'</td>
+<td>string</td>
+<td> Start/stop overflow thread to reset acquisition in continuous grabbing mode  when there is an overflow exception.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'overwrite_method'</b></td>
+<td>'abort', 'ignore'</td>
+<td>'abort'</td>
+<td>string</td>
+<td> Specify how the interface should handle situations where the external  trigger is received faster than the images are read by the application in 
+ continuous grabbing mode (see also the corresponding section below).
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'port'</b></td>
+<td><span class="var">&lt;port&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td> Switch to the camera with the specified number (attached via the BitFlow  configuration program <b>SysReg</b> - starting with 0 for the first camera). 
+ Using this port switching you can access multiple cameras with one frame 
+ grabber board (see below).
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'read_buf_size'</b></td>
+<td>0...32768</td>
+<td>0</td>
+<td>integer</td>
+<td> Number of bytes to read from the read buffer of an open comm port.  This will most likely be set before each read, unless the message from the 
+ camera is always the same size.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'register_index_poke:xx'</b></td>
+<td><span class="var">&lt;value&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td> Writes the given value of to register or bitfield index. The  index is obtained by calling register_index_get. This function 
+ uses very little CPU and can be used during CPU intensive operations
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'register_poke:xx'</b></td>
+<td><span class="var">&lt;value&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td> Writes the given value to a register or bitfield. The bitfield  names and the purpose are described in the hardware reference manual 
+ for the frame grabber being used. Note that this function is somewhat 
+ CPU intensive and should not be used during intensive processing.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'resnap'</b></td>
+<td>'false', 'true'</td>
+<td>'false'</td>
+<td>string</td>
+<td> Specifies whether to reset the DMA engine and to try a second snap in case of  an overflow. Note that in continuous grabbing mode you can use the parameter 
+ 'overflow_thread' to reset acquisition when there is an overflow exception.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'ring_buffer_stop_margin'</b></td>
+<td></td>
+<td>1</td>
+<td>integer</td>
+<td> This parameter controls the 'protection zone' used to look  ahead when a buffer is about to be overwritten. When 'continuous_grabbing' 
+ is enable, the frame grabber acquires automatically into a circular set 
+ of buffers. There is a thread that watches acquisition and makes sure that 
+ buffers which have not yet been processed by the user's program are not 
+ overwritten by new images. If a buffers is about to be overwritten, acquisition 
+ is aborted. If the frame rate is high and/or the CPU is very busy, the thread 
+ might not get serviced in time to protect unprocessed buffers. By increasing the 
+ size, the overwrite protection can still be maintained under these conditions. 
+ This parameters only is used with 'continuous_grabbing' is enabled.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'serial_baudrate'</b></td>
+<td><span class="var">&lt;baud&gt;</span></td>
+<td>9600</td>
+<td>integer</td>
+<td> Baud rate for serial communication.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'serial_message'</b></td>
+<td>'<span class="var">&lt;string&gt;</span>'</td>
+<td></td>
+<td>string</td>
+<td> Sends the string via the serial interface, see also 'do_comm_write'.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'serial_message_buf_size'</b></td>
+<td>1 ... 32767</td>
+<td>1024</td>
+<td>integer</td>
+<td> Maximum buffer size for receive strings via 'serial_message'.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'serial_terminate_code'</b></td>
+<td>0...255</td>
+<td>LF(0x0A)</td>
+<td>integer</td>
+<td> Termination character of the receive string. If you call  <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a> with the parameter 'serial_message', the receive 
+ process is finished by receiving this character.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'serial_timeout'</b></td>
+<td><span class="var">&lt;milliseconds&gt;</span></td>
+<td>1000</td>
+<td>integer</td>
+<td> Timeout for serial communication (in milliseconds).</td>
+</tr>
+<tr class="evenrow">
+<td><b>'serial_write_delay'</b></td>
+<td><span class="var">&lt;milliseconds&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td> Timeout in milliseconds for serial write operations.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'software_trigger'</b></td>
+<td>'disable', 'enable'</td>
+<td>'disable'</td>
+<td>string</td>
+<td> Enables or disables the software trigger mode (shot grabbing). Note that the  software trigger mode can only be used with a one shot camera file.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'start_async_after_grab_async'</b></td>
+<td>'disable', 'enable'</td>
+<td>'enable'</td>
+<td>string</td>
+<td>By default a new asynchronous grab command is automatically given to the acquisition device at the end of <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a>. If the parameter 
+'start_async_after_grab_async' is set to 'disable', this new grab command 
+is omitted.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'start_column'</b></td>
+<td>0 ... <span class="var">&lt;max&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>Column coordinate of the upper left pixel within the desired image part.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'start_row'</b></td>
+<td>0 ... <span class="var">&lt;max&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>Row coordinate of the upper left pixel within the desired image part.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'trigger_timeout'</b></td>
+<td><span class="var">&lt;milliseconds&gt;</span></td>
+<td>60000</td>
+<td>integer</td>
+<td> Timeout (milliseconds passed as an integer) for aborting  a pending grab when waiting for an external trigger.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'volatile'</b></td>
+<td>'disable', 'enable'</td>
+<td>'disable'</td>
+<td>string</td>
+<td> <b>Grayscale only.</b> In the volatile mode the two image acquisition  interface buffers are used directly to store HALCON images. This is the 
+ fastest mode avoiding to copy raw images in memory. However, be aware that 
+ older images are overwritten again and again as a side-effect. Thus, you 
+ can only process one image while you grab another image. Older images are 
+ invalid!
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'wait_frame_exposure_timeout'</b></td>
+<td><span class="var">&lt;milliseconds&gt;</span></td>
+<td>1000</td>
+<td>integer</td>
+<td> Sets the timeout [ms] used by 'wait_frame_exposure'.</td>
+</tr></table>
+<h2 id="GET_FRAMEGRABBER_PARAM">Parameters for <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a></h2><div>There may exist additional read-only parameters with the following postfixes: 
+<ul>
+<li><b>'_description'</b>: These parameters provide the tool-tip of the 
+   corresponding parameter as a string. 
+</li>
+<li><b>'_range'</b>: These parameters provide the minimum, maximum, 
+    step width, and default values for the corresponding integer or float 
+    parameter as a tuple with 4 elements, e.g., 
+    <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a><tt>(.., 'Shutter_range', ..)</tt> will return 
+    the output tuple <tt>[<i>min, max, step, default</i>]</tt>. 
+</li>
+<li><b>'_values'</b>: These parameters provide the valid value list for 
+    the corresponding parameter as a tuple, e.g., 
+    <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a><tt>(.., 'volatile_values', ..)</tt> will return 
+    the output tuple <tt>['enable', 'disable']</tt>. 
+</li>
+</ul> 
+<p> 
+All these postfixed parameter names are not returned when calling 
+<a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a><tt>(.., 'parameters', ..)</tt> and are used 
+to enable the easy parameterization via a generic graphical user 
+interface, particularly the HDevelop Image Acquisition Assistant. 
+</p>
+</div>
+<table summary="Parameters for get_framegrabber_param" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Parameter</th>
+<th>Values</th>
+<th>Default</th>
+<th>Type</th>
+<th>Kind</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><b>'available_callback_types'</b></td>
+<td>['<span class="var">&lt;callback_type&gt;</span>']</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td> Query all callback types which are supported by this interface.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'bits_per_channel'</b></td>
+<td>-1, 8, 10, 12</td>
+<td>-1</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Number of bits per channel of the resulting HALCON image. In case of -1 the current bit depth of the camera is used. By specifying a value greater than 8 the 
+grabbed images are delivered as uint2 images.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'camera_connected'</b></td>
+<td>'false', 'true'</td>
+<td></td>
+<td>string</td>
+<td>pre-defined</td>
+<td> Query the presence of the connected camera.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'camera_type'</b></td>
+<td>'<span class="var">&lt;default&gt;</span>'</td>
+<td>'default'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td> Name of the camera configuration file.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'color_space'</b></td>
+<td>'<span class="var">&lt;color_space&gt;</span>'</td>
+<td>'gray'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Desired color space and thus the number of image channels of the resulting HALCON image.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'comm_read_int'</b></td>
+<td>[<span class="var">&lt;int1&gt;</span>, ..., <span class="var">&lt;intN&gt;</span>]</td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td> Returns the N number of bytes set by read_buf_size from an open comm port.  This command will return when the read_buf_size of bytes are available or 
+ when the serial timeout period has passed. Upon success, read_buf_size 
+ number of bytes will be returned as a tuple of N integer values. In an 
+ error case, no data is returned. Note that this parameter allows also the 
+ reading of NULL characters.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'comm_read_str'</b></td>
+<td><span class="var">&lt;camera_response&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td> Returns the number of bytes set by read_buf_size from an open comm port. This  command will return when the read_buf_size of bytes are available or when 
+ the serial timeout period has passed. Upon success, read_buf_size number of 
+ bytes will be returned as a string. In an error case, no data is returned.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'continuous_grab_timeout'</b></td>
+<td><span class="var">&lt;milliseconds&gt;</span></td>
+<td>5000</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Returns the current continuous grabbing timeout value in milliseconds.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'continuous_grabbing'</b></td>
+<td>'disable', 'enable'</td>
+<td>'disable'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td> Activates or deactivates 'continuous grabbing'. For details, please see the  corresponding section below.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'device'</b></td>
+<td>'<span class="var">&lt;device_id&gt;</span>'</td>
+<td>'default'</td>
+<td>string</td>
+<td>dynamic</td>
+<td>Current device ID.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'dma_direction'</b></td>
+<td>'bottom-up', 'top-down'</td>
+<td>'top-down'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Read-out direction of the image.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'encoder_scan_step'</b></td>
+<td>0 ... 1023</td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td>Encoder divider value.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'external_trigger'</b></td>
+<td>'false', 'true'</td>
+<td>'false'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Status of the external trigger.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'field'</b></td>
+<td>'<span class="var">&lt;default&gt;</span>'</td>
+<td>'progressive'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>The value is not used, so a default value is returned.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'firmware_directory'</b></td>
+<td><span class="var">&lt;value&gt;</span></td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td>  Returns the path of the default firmware directory.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'firmware_file_name'</b></td>
+<td><span class="var">&lt;value&gt;</span></td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td>  Returns the file name of the used firmware.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'generic'</b></td>
+<td><span class="var">&lt;default&gt;</span></td>
+<td>-1</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td> The value is not used, so a default value is returned.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'grab_timeout'</b></td>
+<td><span class="var">&lt;milliseconds&gt;</span></td>
+<td>5000</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Current grab timeout in milliseconds.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'hardware_exception_count'</b></td>
+<td><span class="var">&lt;num&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td> Returns the number of hardware exceptions that have occurred.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'hardware_exception_thread'</b></td>
+<td>'disable', 'enable'</td>
+<td>'disable'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td> Start/stop hardware exception thread to reset acquisition in continuous  grabbing mode when there is a hardware exception.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'horizontal_resolution'</b></td>
+<td><span class="var">&lt;resolution&gt;</span></td>
+<td>1</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Current value of horizontal resolution.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'image_height'</b></td>
+<td><span class="var">&lt;height&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Height of the desired image part ('0' stands for the complete image).
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'image_width'</b></td>
+<td><span class="var">&lt;width&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Width of the desired image part ('0' stands for the complete image).
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'in:X'</b></td>
+<td>'high', 'low'</td>
+<td></td>
+<td>string</td>
+<td>pre-defined</td>
+<td> Returns the desired state of one of the digital input lines (with X = 0 for a  RoadRunner, X = 1 or 2 for a RoadRunner CL).
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'line_in'</b></td>
+<td><span class="var">&lt;default&gt;</span></td>
+<td>1</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>The value is not used, so a default value is returned.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'lut'</b></td>
+<td>'disable', 'enable'</td>
+<td>'disable'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td> State of the lookup table.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'name'</b></td>
+<td>'BitFlow'</td>
+<td></td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Name of the HALCON interface.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'next_buffer_acquired'</b></td>
+<td><span class="var">&lt;buffer&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>dyanmic</td>
+<td> Returns the index of the next acquired buffer in continuous grabbing mode. The buffer  number is between 0 and the number of allocated buffers.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'next_buffer_acquired_abs'</b></td>
+<td><span class="var">&lt;num&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td> Returns the buffer index that is being returned by the next call  of <a class="halconoperator" href="../operators/grab_image.html">grab_image</a> or <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a> in continuous 
+ grabbing mode. The incrementation is done continuously. The returned 
+ buffer number will be between 0 and 2^32.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'next_buffer_returned'</b></td>
+<td><span class="var">&lt;buffer&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td> Returns the buffer index that is being returned by the next call of <a class="halconoperator" href="../operators/grab_image.html">grab_image</a> or  <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a> in continuous grabbing mode. The buffer 
+ number is between 0 and the number of allocated buffers.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'num_buffers'</b></td>
+<td>2 - 1000</td>
+<td>2</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td> Number of buffers used for the image acquisition.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'num_buffers_overwritten'</b></td>
+<td><span class="var">&lt;value&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td>  Returns the number of overwritten buffers.   Only active, if the overwrite method is set.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'num_free_buffers'</b></td>
+<td><span class="var">&lt;num&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td> Returns the number of free buffers in continuous grabbing mode.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'out:X'</b></td>
+<td>'high', 'low'</td>
+<td></td>
+<td>string</td>
+<td>pre-defined</td>
+<td> State of one of the digital output lines (with X = 0, 1,  or 2 for RoadRunner/R3-DIF family; RoadRunner/R3 CL family). 
+ The default depends on the board settings.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'overflow_count'</b></td>
+<td><span class="var">&lt;num&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td> Returns the number of overflows that have occurred.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'overflow_thread'</b></td>
+<td>'disable', 'enable'</td>
+<td>'disable'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td> Start/stop overflow thread to reset acquisition in continuous grabbing mode  when there is an overflow exception.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'overwrite_method'</b></td>
+<td>'abort', 'ignore'</td>
+<td>'abort'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td> Specify how the interface should handle situations where the external  trigger is received faster than the images are read by the application in 
+ continuous grabbing mode (see also the corresponding section below).
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'port'</b></td>
+<td><span class="var">&lt;port&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Current port number.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'read_buf_size'</b></td>
+<td>0...32768</td>
+<td>0</td>
+<td>integer</td>
+<td>dynamic</td>
+<td> Number of bytes to read from the read buffer of an open comm port.  This will most likely be set before each read, unless the message from the 
+ camera is always the same size.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'register_index_get:xx'</b></td>
+<td><span class="var">&lt;value&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td> Returns a register which can be used for quick access (i.e. with low CPU  usage) to registers. The index returned from this function can be used 
+ with both register_index_poke and register_index_peek. The bitfield 
+ names and the purpose are described in the hardware reference manual 
+ for the frame grabber being used. Note that this function is somewhat 
+ CPU intensive and should not be used during intensive processing.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'register_index_peek:xx'</b></td>
+<td><span class="var">&lt;value&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td> Returns the current value of a register or bitfield index. The  index is obtained by calling register_index_get. This function 
+ uses very little CPU and can be used during CPU intensive operations
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'register_peek:xx'</b></td>
+<td><span class="var">&lt;value&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td> Returns the current value of a register or bitfield. The bitfield  names and the purpose are described in the hardware reference manual 
+ for the frame grabber being used. Note that this function is somewhat 
+ CPU intensive and should not be used during intensive processing.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'resnap'</b></td>
+<td>'false', 'true'</td>
+<td>'false'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td> Specifies whether to reset the DMA engine and to try a second snap in case of  an overflow. Note that in continuous grabbing mode you can use the parameter 
+ 'overflow_thread' to reset acquisition when there is an overflow exception.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'revision'</b></td>
+<td>'<span class="var">&lt;revision&gt;</span>'</td>
+<td></td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Revision number of the BitFlow interface. Further the             build date of the interface will be listed.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'ring_buffer_stop_margin'</b></td>
+<td></td>
+<td>1</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td> This parameter controls the 'protection zone' used to look  ahead when a buffer is about to be overwritten. When 'continuous_grabbing' 
+ is enable, the frame grabber acquires automatically into a circular set 
+ of buffers. There is a thread that watches acquisition and makes sure that 
+ buffers which have not yet been processed by the user's program are not 
+ overwritten by new images. If a buffers is about to be overwritten, acquisition 
+ is aborted. If the frame rate is high and/or the CPU is very busy, the thread 
+ might not get serviced in time to protect unprocessed buffers. By increasing the 
+ size, the overwrite protection can still be maintained under these conditions. 
+ This parameters only is used with 'continuous_grabbing' is enabled.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'sdk_build'</b></td>
+<td><span class="var">&lt;value&gt;</span></td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td>  Returns the build version.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'sdk_revision'</b></td>
+<td><span class="var">&lt;value&gt;</span></td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td>  Returns the version number of the SDK.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'serial_baudrate'</b></td>
+<td><span class="var">&lt;baud&gt;</span></td>
+<td>9600</td>
+<td>integer</td>
+<td>dynamic</td>
+<td> Baud rate for serial communication.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'serial_message'</b></td>
+<td>'<span class="var">&lt;string&gt;</span>'</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td> Receives a string via the serial interface, see also 'comm_read_str'.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'serial_message_buf_size'</b></td>
+<td>1 ... 32767</td>
+<td>1024</td>
+<td>integer</td>
+<td>dynamic</td>
+<td> Maximum buffer size for receive strings via 'serial_message'.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'serial_terminate_code'</b></td>
+<td>0...255</td>
+<td>LF(0x0A)</td>
+<td>integer</td>
+<td>dynamic</td>
+<td> Termination character of the receive string. If you call  <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a> with the parameter 'serial_message', the receive 
+ process is finished by receiving this character.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'serial_timeout'</b></td>
+<td><span class="var">&lt;milliseconds&gt;</span></td>
+<td>1000</td>
+<td>integer</td>
+<td>dynamic</td>
+<td> Timeout for serial communication (in milliseconds).</td>
+</tr>
+<tr class="oddrow">
+<td><b>'serial_write_delay'</b></td>
+<td><span class="var">&lt;milliseconds&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>dynamic</td>
+<td> Timeout in milliseconds for serial write operations.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'software_trigger'</b></td>
+<td>'disable', 'enable'</td>
+<td>'disable'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td> Enables or disables the software trigger mode (shot grabbing). Note that the  software trigger mode can only be used with a one shot camera file.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'start_async_after_grab_async'</b></td>
+<td>'disable', 'enable'</td>
+<td>'enable'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Status of 'start_async_after_grab_async'.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'start_column'</b></td>
+<td><span class="var">&lt;column&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Returns the current start column of the HALCON image.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'start_row'</b></td>
+<td><span class="var">&lt;row&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Returns the current start row of the HALCON image.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'trigger_timeout'</b></td>
+<td><span class="var">&lt;milliseconds&gt;</span></td>
+<td>60000</td>
+<td>integer</td>
+<td>dynamic</td>
+<td> Timeout (milliseconds passed as an integer) for aborting  a pending grab when waiting for an external trigger.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'vertical_resolution'</b></td>
+<td><span class="var">&lt;resolution&gt;</span></td>
+<td>1</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Current value of vertical resolution.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'volatile'</b></td>
+<td>'disable', 'enable'</td>
+<td>'disable'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td> <b>Grayscale only.</b> In the volatile mode the two image acquisition  interface buffers are used directly to store HALCON images. This is the 
+ fastest mode avoiding to copy raw images in memory. However, be aware that 
+ older images are overwritten again and again as a side-effect. Thus, you 
+ can only process one image while you grab another image. Older images are 
+ invalid!
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'wait_frame_exposure'</b></td>
+<td><span class="var">&lt;num&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td> Returns if the exposure of the camera has finished. If the value  0 is returned, an error occurred. The return value 1 indicates, 
+ that a timeout was reached (see 'wait_frame_exposure_timeout). 
+ In case of success, the value 2 is returned.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'wait_frame_exposure_timeout'</b></td>
+<td><span class="var">&lt;milliseconds&gt;</span></td>
+<td>1000</td>
+<td>integer</td>
+<td>dynamic</td>
+<td> Sets the timeout [ms] used by 'wait_frame_exposure'.</td>
+</tr></table>
+<h2 id="SET_FRAMEGRABBER_LUT">Operator <a class="halconoperator" href="../operators/set_framegrabber_lut.html">set_framegrabber_lut</a></h2><div> Set the lookup-table values if LUTs are supported by the used board.  Note that also the number of 'bits_per_channel' is important for the number 
+ of input values.
+</div>
+<h2 id="GET_FRAMEGRABBER_LUT">Operator <a class="halconoperator" href="../operators/get_framegrabber_lut.html">get_framegrabber_lut</a></h2><div> Query the lookup-table values.</div>
+<h2 id="SET_FRAMEGRABBER_CALLBACK">Operator <a class="halconoperator" href="../operators/set_framegrabber_callback.html">set_framegrabber_callback</a></h2><div> All actually supported callback types of a specific image acquisition  device can be queried by calling <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a> with the parameter 
+ 'available_callback_types'. 
+ Once the callback is registered, on every occurrence of the underlying 
+ event (e.g., the notification that the exposure has finished) the 
+ specified callback function will be called. If the callback function is 
+ set to NULL, the corresponding callback will be unregistered. 
+ <br><br> 
+ The signature of the callback function is 
+ <tt>Herror (__stdcall *HAcqCallback)(void *AcqHandle, void *Context, 
+   void *UserContext)</tt> and uses the following parameters: 
+
+<ul>
+<li><b>AcqHandle</b> 
+   Acquisition handle of the corresponding image acquisition instance. 
+</li>
+<li><b>Context</b> 
+   Optional context data of the specific callback. In the BitFlow 
+   interface, this parameter is not used, i.e., Context is set to NULL. 
+</li>
+<li><b>UserContext</b> 
+   User context as set via <a class="halconoperator" href="../operators/set_framegrabber_callback.html">set_framegrabber_callback</a>. 
+</li>
+</ul> 
+<p> 
+<b>Using user-callback functions</b><br> 
+Note that the execution time of a user-specific callback function should 
+always be as short as possible since during the execution of a callback 
+function the handling of further internal callbacks might be blocked. 
+This can be achieved by removing the current processing from the 
+user-specific callback function to a separate thread that is controlled 
+via signals or events. 
+</p>
+</div>
+<table summary="Operator set_framegrabber_callback" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Type</th>
+<th>Description</th>
+<tr class="oddrow">
+<td>'exposure_end'</td>
+<td>Corresponds to the end of the exposure.</td>
+</tr>
+<tr class="evenrow">
+<td>'transfer_end'</td>
+<td>Corresponds to the end of the image DMA.</td>
+</tr></table>
+<h2 id="GET_FRAMEGRABBER_CALLBACK">Operator <a class="halconoperator" href="../operators/get_framegrabber_callback.html">get_framegrabber_callback</a></h2><div> This interface supports device specific events via the operators  <a class="halconoperator" href="../operators/set_framegrabber_callback.html">set_framegrabber_callback</a> and <a class="halconoperator" href="../operators/get_framegrabber_callback.html">get_framegrabber_callback</a>. For more 
+ information see <a class="halconoperator" href="../operators/set_framegrabber_callback.html">set_framegrabber_callback</a>.
+</div>
+<h2 id="GRAB_IMAGE_START">Operator <a class="halconoperator" href="../operators/grab_image_start.html">grab_image_start</a></h2><div>Starts a new asynchronous grab. See also <a class="halconoperator" href="../operators/grab_image_start.html">grab_image_start</a>.</div>
+<h2 id="GRAB_IMAGE">Operator <a class="halconoperator" href="../operators/grab_image.html">grab_image</a></h2><div><a class="halconoperator" href="../operators/grab_image.html">grab_image</a> starts a new synchronous grab. See also <a class="halconoperator" href="../operators/grab_image.html">grab_image</a>. Note that 
+the interface converts the image from the device to the desired image format 
+specified by the parameters 'image_width', 'image_height', 'start_row', 
+'start_column', 'bits_per_channel', and 'color_space'.
+</div>
+<h2 id="GRAB_IMAGE_ASYNC">Operator <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a></h2><div><a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a> returns an image and starts the next asynchronous grab. See also <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a>. 
+Note that 
+the interface converts the image from the device to the desired image format 
+specified by the parameters 'image_width', 'image_height', 'start_row', 
+'start_column', 'bits_per_channel', and 'color_space'.
+</div>
+<h2 id="GRAB_DATA">Operator <a class="halconoperator" href="../operators/grab_data.html">grab_data</a></h2><div>Not supported by this interface.</div>
+<h2 id="GRAB_DATA_ASYNC">Operator <a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a></h2><div>Not supported by this interface.</div>
+<h2 id="CLOSE_FRAMEGRABBER">Operator <a class="halconoperator" href="../operators/close_framegrabber.html">close_framegrabber</a></h2><div>This operator closes the device. See also <a class="halconoperator" href="../operators/close_framegrabber.html">close_framegrabber</a>.</div>
+<h2 id="MULTIPLE_CAMERAS">Multiple Cameras (Port Switching)</h2><div> It is possible to connect more than one camera to a BitFlow board. You will  need specific camera configuration files to do this, which have to be 
+ installed in your system with the BitFlow configuration program 
+ <b>SysReg</b> (please contact BitFlow for details). SysReg attaches a 
+ number to each camera (starting with 0). This number is used as <b>port</b> 
+ parameter in the HALCON interface. To access a specific camera, you have to 
+ specify the corresponding port. This setting can be changed dynamically 
+ using the operator <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a> (port switching). However, in 
+ this case the used cameras must be <i>compatible</i>, that is of the same 
+ type or with similar features (if in doubt please contact your local vendor 
+ or BitFlow).<br><br> 
+ With this mechanism you can access multiple cameras with one frame grabber 
+ handle. Note that a pending asynchronous job is aborted when changing 
+ the port. Therefore, it does not make much sense to use <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a> 
+ in combination with port switching. Please note further the simple 
+ HDevelop example program <b>bitflow_2ports.dev</b> you will find in 
+ %HALCONROOT%\examples\hdevelop\Image\Acquisition.
+</div>
+<h2 id="CONTINUOUS_GRABBING">Continuous Grabbing</h2><div> The continuous grabbing mode is used for completely asynchronous grabbing  with or without external triggering: If you activate this mode via 
+ <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a><tt>(..., <b>'continuous_grabbing'</b>, 'enable')</tt> 
+ images will be acquired (with each trigger if triggering is enabled) and 
+ stored in N buffers in a cyclic way <b>without</b> any additional explicit 
+ software trigger like <a class="halconoperator" href="../operators/grab_image.html">grab_image</a>. Thus, your HALCON application can process 
+ other data without losing a frame.  This is, for example, very useful for 
+ the acquisition of images under specific lighting conditions which are 
+ triggered by a sequence controller with a fixed timing. In continuous 
+ grabbing mode both <a class="halconoperator" href="../operators/grab_image.html">grab_image</a> and <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a> simply will return the 
+ next frame (or wait if it has not been acquired so far). Note that with the 
+ standard asynchronous grabbing there can only be <i>one</i> grab job 
+ pending. Thus, you can only acquire one frame in parallel to processing, 
+ e.g., the previous frame.  Now you can acquire <i>N</i> frames in parallel 
+ with N between 2 and 1000 (as specified with the parameter 
+ <b>'num_buffers'</b>).  Note that you have to specify the desired number of 
+ buffers via <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a><tt>(...'num_buffers'...)</tt> <i>before</i> 
+ enabling the continuous grabbing mode!<br><br> 
+ In this continuous grabbing mode you might encounter situations where the 
+ images are acquired at a faster rate than they are read by your application. 
+ Thus, the N buffers will fill up and finally you will encounter a buffer 
+ that was not read so far, but should be overwritten by the next frame. 
+ You can decide what to do in this situation via the parameter 
+ <b>'overwrite_method'</b>: 
+
+<ul>
+<li><b>'abort':</b> 
+   Before overwriting any frame, abort the acquisition. This is the safest 
+   method. The main user will be able to process any good buffers 
+   still in the system before an error is returned. 
+</li>
+<li><b>'ignore':</b> 
+   Ignore the problem and overwrite the buffer. Thus, some of the older 
+   frames that already have been acquired (but not processed so far) will 
+   be lost.
+</li>
+</ul></div>
+<h2 id="HDEVELOP_EXAMPLES">HDevelop Examples</h2><div>For this interface there are the following examples available: 
+<ul>
+<li>bitflow_2boards.hdev - 
+    Grabbing images with two BitFlow frame grabber boards. 
+</li>
+<li>bitflow_2ports.hdev - 
+    Shows the usage of two cameras and port switching. 
+</li>
+<li>bitflow.hdev - 
+    Benchmark. 
+</li>
+<li>bitflow_cont.hdev - 
+    Parameterization of a BitFlow frame grabber board. 
+</li>
+<li>bitflow_change_size.hdev - 
+    Set different image sizes. 
+</li>
+<li>bitflow_cl_serial_usage.hdev - 
+    Shows the usage of serial communication of a BitFlow frame grabber board. 
+</li>
+<li>bitflow_cont_async_oneshot.hdev - 
+    Parameterization of a BitFlow frame grabber board. 
+</li>
+<li>bitflow_cxp_register_poke_peek.hdev - 
+    Read/write registers of a CXP BitFlow frame grabber board. 
+</li>
+<li>bitflow_lut.hdev - 
+    Setting a look-up table. 
+</li>
+<li>bitflow_open_by_switch_connector.hdev - 
+    Opening the board by sitch and connector. 
+</li>
+<li>bitflow_register_poke_peek.hdev - 
+    Read/write registers of a CL BitFlow frame grabber board. 
+</li>
+<li>bitflow_simple.hdev - 
+    A simple example to show the usage of the interface. 
+</li>
+<li>bitflow_simple_sw_trigger.hdev - 
+    Shows the usage of software trigger. 
+</li>
+<li>bitflow_version.hdev - 
+    Shows all versions.
+</li>
+</ul></div>
+<h2 id="CPP_EXAMPLES">C++ Examples</h2><div> For this interface there is also a further C++ Visual Studio Project to  demonstrate the usage of the operators <a class="halconoperator" href="../operators/get_framegrabber_callback.html">get_framegrabber_callback</a> and 
+ <a class="halconoperator" href="../operators/set_framegrabber_callback.html">set_framegrabber_callback</a>. Please check the directory 
+ %HALCONEXAMPLES%\cpp\console\vs2005\. If you prefer building the example via 
+ the console, please check the following folder %HALCONEXAMPLES%\cpp\console\. 
+ With a Linux OS please use $HALCONEXAMPLES/cpp/console/.
+</div>
+<h2 id="CS_EXAMPLES">C# Examples</h2><div> For this interface there is also a further C# Visual Studio Project to  demonstrate the usage of the operators <a class="halconoperator" href="../operators/get_framegrabber_callback.html">get_framegrabber_callback</a> and 
+ <a class="halconoperator" href="../operators/set_framegrabber_callback.html">set_framegrabber_callback</a>. Please check the directory 
+ %HALCONEXAMPLES%\cpp\console\vs2005\.
+</div>
+<h2 id="RELEASENOTES">Release Notes</h2><div>
+<ul>
+<li><b>Revision 13.0.3</b> (Oct 23, 2018): 
+<ul>
+<li>The BitFlow SDK has been updated to 6.30. 
+</li>
+<li>The technical dependency from the HALCON Library has been removed. 
+</li>
+<li>When querying the 'camera_type' parameter if the camera file path 
+      contained UNICODE characters it was not displayed correctly. 
+      This problem has been fixed. 
+</li>
+<li>The parameter 'ring_buffer_stop_margin' has been added. 
+</li>
+</ul></li>
+<li><b>Revision 13.0.2</b> (Oct 20, 2017): 
+
+<ul>
+<li>Renamed the parameter 'do_abort_capture' to 'do_abort_grab'. The 
+      parameter 'do_abort_capture' will continue to work for compatibility 
+      but should be avoided. 
+</li>
+<li>Information about the use of modes with Gen2 boards has been 
+      added to the CameraType parameter in <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>. 
+</li>
+</ul></li>
+<li><b>Revision 13.0.1</b> (Oct 28, 2016): 
+
+<ul>
+<li>HALCON 13 version of the interface. 
+</li>
+</ul></li>
+<li><b>Revision 6.2</b> (Sep 28, 2016): 
+
+<ul>
+<li>The BitFlow SDK has been updated to 6.20. 
+</li>
+<li>The parameter 'num_simultaneous_cameras' is no longer 
+      supported. For backward compatibility it is still available, 
+      but you get an error message, if you want to use it. 
+</li>
+<li>The parameters 'do_comm_read_int' and 'do_comm_read_str' have 
+      been renamed to 'comm_read_int' and 'comm_read_str'. 
+      For backward compatibility the old names still work. 
+</li>
+<li>Setting an empty value in <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a> led to a crash. 
+      This problem has been fixed. 
+</li>
+<li>The example 'bitflow_2simultaneous' has been removed. 
+</li>
+<li>The examples 'bitflow_2boards' and 'bitflow_cont' 
+      have been adapted. 
+</li>
+<li>The examples 'bitflow_change_size', 'bitflow_cl_serial_usage', 
+      'bitflow_cont_async_oneshot', 'bitflow_cxp_register_poke_peek', 
+      'bitflow_open_by_switch_connector', 'bitflow_register_poke_peek', 
+      'bitflow_simple_sw_trigger', and 'bitflow_version' have been added. 
+</li>
+</ul></li>
+<li><b>Revision 6.1</b> (Oct 20, 2015): 
+
+<ul>
+<li>The BitFlow SDK has been updated to 6.00. 
+</li>
+<li>New board types Karbon-CXP and Cyton-CXP were added. 
+</li>
+<li>New parameters 'num_buffers_overwritten', 'sdk_revision', 
+      'sdk_build', 'firmware_file_name', 'firmware_directory' were added. 
+</li>
+<li>The use of the serial communication led to a crash. 
+      This problem has been fixed. 
+</li>
+<li>This documentation did not list all available callback types. 
+      This problem has been fixed. 
+</li>
+<li>The legacy Raven and R64 and R64e-CL frame grabber families has 
+      been removed from the documentation. 
+</li>
+</ul></li>
+<li><b>Revision 6.0</b> (Oct 31, 2014): 
+
+<ul>
+<li>HALCON 12 version of the interface. 
+</li>
+</ul></li>
+<li><b>Revision 5.2</b> (Aug 28, 2013): 
+
+<ul>
+<li>Adapted to BitFlow SDK 5.70. 
+</li>
+<li>Added parameters 'cc:x', 'continuous_grab_timeout', 'register_peek', 
+      'register_poke', 'register_index_peek', 'register_index_poke', and 
+      'register_index_get'. 
+</li>
+<li>Adapted implementation of the serial communication. 
+</li>
+<li>Added functionality to handle 'exposure_end' callbacks. 
+</li>
+<li>Added hint for support of older frame grabbers to section 'General' 
+      in this document. 
+</li>
+</ul></li>
+<li><b>Revision 5.1</b> (Oct 29, 2012): 
+
+<ul>
+<li>Fixed bug in <a class="halconoperator" href="../operators/grab_image_start.html">grab_image_start</a> that could lead to a deadlock 
+      situation in combination with succeeding asynchronous image 
+      acquisition operators. 
+</li>
+</ul></li>
+<li><b>Revision 5.0</b> (May 15, 2012): 
+
+<ul>
+<li>HALCON 11 version of the interface (included in HALCON 11 DVD). 
+</li>
+<li>Adapted to BitFlow SDK 5.60. 
+</li>
+<li>Add new parameters 'next_buffer_acquired_abs', 
+      'wait_frame_exposure' and 'wait_frame_exposure_timeout'. 
+</li>
+<li>Fixed thread safety problem in <a class="halconoperator" href="../operators/grab_image.html">grab_image</a> and <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a> 
+      that could occur if a pending grab was aborted via the 'do_abort_grab' 
+      parameter of <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a>. 
+</li>
+</ul></li>
+<li><b>Revision 4.2</b> (Aug 27, 2010): 
+
+<ul>
+<li>Adapted to BitFlow SDK 5.30. 
+</li>
+<li>Added parameters 'dma_direction', 'lut', 'serial_write_delay', 
+      'start_column', and 'start_row'. 
+</li>
+<li>Improved internal thread handling. 
+</li>
+<li>Removed parameter 'show_internal_errors'; please use 
+      <a class="halconoperator" href="../operators/set_system.html">set_system</a>('do_low_error', ...) instead. 
+</li>
+<li>HALCON 10 version of the interface (included in HALCON 10 DVD). 
+</li>
+</ul></li>
+<li><b>Revision 4.1</b> (Jan 22, 2010): 
+
+<ul>
+<li>Add functionality to handle 'transfer_end' callbacks. 
+</li>
+</ul></li>
+<li><b>Revision 4.0</b> (Dec 1, 2008): 
+
+<ul>
+<li>HALCON 9.0 version of the interface (included in HALCON 9.0 DVD). 
+</li>
+<li>Bug fix in parameters 'do_comm_param' and 'ctab_fill'. 
+</li>
+<li>Bug fix in <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a> for the parameters 
+      'overflow_thread' and 'hardware_exception_thread' to ensure 
+      consistency with <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a>. 
+</li>
+</ul></li>
+<li><b>Revision 3.3</b> (Apr 22, 2008): 
+
+<ul>
+<li>Adaptation to BitFlow SDK 5.00 with support 
+      of the new Alta-AN, Karbon-CL, and Neon-CL boards. 
+</li>
+<li>New parameters 'start_async_after_grab_async', 
+      'software_trigger', 'do_force_trigger', 'do_abort_capture', 
+      'gport', 'encoder_scan_step', 'serial_timeout', 'serial_baudrate', 
+      'serial_message', 'serial_terminate_code', 
+      'serial_message_buf_size', 'ctab_fill', 'camera_connected', 
+      'do_flush_buffers', and 'num_free_buffers'. 
+</li>
+<li>Default value of parameter 'overwrite_method' changed to 'abort'. 
+</li>
+<li>Default value of parameter 'show_internal_errors' changed to 
+      'false'. 
+</li>
+<li>Added read-only parameters with postfix '_description', '_range', 
+      and '_values' to enable the easy parameterization via a generic 
+      graphical user interface. 
+</li>
+</ul></li>
+<li><b>Revision 3.2</b> (Feb 27, 2008): 
+
+<ul>
+<li>New parameter 'do_flush_buffers'. 
+</li>
+</ul></li>
+<li><b>Revision 3.1</b> (Jan 30, 2008): 
+
+<ul>
+<li>Bug fix concerning the general serial communication with Camera Link 
+      cameras (correct use of clserbit.lib instead of clallserial.lib). 
+</li>
+</ul></li>
+<li><b>Revision 3.0</b> (May 15, 2007): 
+
+<ul>
+<li>HALCON 8.0 version of the interface (included in HALCON 8.0 DVD). 
+</li>
+<li>Bug fix in parameter 'do_comm_param'. 
+</li>
+</ul></li>
+<li><b>Revision 2.12</b> (Feb 02, 2007): 
+
+<ul>
+<li>Support of Windows XP x64 for R64 and R64e boards (using BitFlow SDK 
+      version 4.80). 
+</li>
+</ul></li>
+<li><b>Revision 2.11</b> (Aug 16, 2006): 
+
+<ul>
+<li>Support of 3x 10bpp and 3x 12bpp RGB cameras. 
+</li>
+<li>Bug fix for 16bpp images. 
+</li>
+</ul></li>
+<li><b>Revision 2.10</b> (Jan 18, 2006): 
+
+<ul>
+<li>Adaptation to the new BitFlow SDK 4.50 with support of the new R64e 
+      boards. 
+</li>
+<li>New parameters 'next_buffer_acquired' and 'next_buffer_returned'. 
+</li>
+<li>Updated to Camera Link version 1.1 compliance. 
+</li>
+</ul></li>
+<li><b>Revision 2.9</b> (Jul 27, 2005): 
+
+<ul>
+<li>HALCON 7.1 version of the interface (included in HALCON 7.1 CD). 
+</li>
+<li>Speed-up for acquisition of RGB images (avoiding cache alignment 
+      failures when converting the interleaved image data into HALCON image 
+      objects). 
+</li>
+</ul></li>
+<li><b>Revision 2.8</b> (Nov 24, 2004): 
+
+<ul>
+<li>The serial communication with Camera Link cameras now supports the 
+      reading and writing of NULL characters. Thus, the parameter 
+      'do_comm_write' accepts also a tuple of integer values. Furthermore, 
+      the parameter 'do_comm_read' has been split into the two new 
+      parameters 'comm_read_str' and 'comm_read_int' to allow the 
+      reading of strings as well as the reading of integer tuples. 
+</li>
+<li>The maximum number of used frame buffers has been increased to 1000. 
+</li>
+<li>The query types 'bits_per_channel', 'camera_type', 'color_space', 
+      'device', 'external_trigger', 'field', and 'port' for 
+      <a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a> provide now specific value lists for the 
+      corresponding parameters in <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>. 
+</li>
+</ul></li>
+<li><b>Revision 2.7</b> (Aug 30, 2004): 
+
+<ul>
+<li>New parameters 'overflow_thread', 'hardware_exception_thread', 
+      'overflow_count', and 'hardware_exception_count' to reset acquisition 
+      in continuous grabbing mode when there is a hardware or overflow 
+      exception. 
+</li>
+<li>New parameters 'do_comm_param', 'do_comm_open', 'do_comm_close', 
+      'do_comm_write', 'do_comm_read', 'do_comm_flush', and 
+      'read_buf_size' to control the serial communication with Camera Link 
+      cameras. 
+</li>
+</ul></li>
+<li><b>Revision 2.6</b> (Jul 25, 2003): 
+
+<ul>
+<li>HALCON 7.0 version of the interface (included in HALCON 7.0 CD). 
+</li>
+<li>Adaptation to the new BitFlow SDK 4.00 with support of the new R64 
+      boards. 
+</li>
+</ul></li>
+<li><b>Revision 2.5</b> (Nov 19, 2002): 
+
+<ul>
+<li>New parameter 'in:X' to query the state of the digital input lines 
+      (GPIN). 
+</li>
+</ul></li>
+<li><b>Revision 2.4</b> (Jul 4, 2002): 
+
+<ul>
+<li>Adaptation to the new BitFlow SDK 3.00 with support of the new R3 and 
+      R3-CL boards. 
+</li>
+<li>New parameter 'resnap' to enable a second grab in case of an overflow. 
+</li>
+</ul></li>
+<li><b>Revision 2.3</b> (Aug 30, 2001): 
+
+<ul>
+<li>HALCON 6.1 version of the interface (included in HALCON 6.1 CD). 
+</li>
+<li>Bug fix in <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a> together with multi processor machines. 
+</li>
+<li>Bug fix forces correct LUT setting with model 11 RoadRunner boards. 
+</li>
+</ul></li>
+<li><b>Revision 2.2</b> (Jun 8, 2001): 
+
+<ul>
+<li>Adaptation to the new BitFlow SDK 2.50. Older revisions are no longer 
+      supported! 
+</li>
+<li>Support of start/stop trigger mode (for line scan cameras connected to 
+      RoadRunner or RoadRunner CL boards). 
+</li>
+<li>Dynamically changing the frame size of the grabbed image via 
+      <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a>. 
+</li>
+<li>Default value of parameter 'overwrite_method' changed from 'abort' to 
+      'holdoff'. 
+</li>
+</ul></li>
+<li><b>Revision 2.1</b> (Nov 24, 2000): 
+
+<ul>
+<li>Bug fix in overriding the BitsPerChannel parameter during 
+      <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a> 
+</li>
+<li>Automatic enabling of GPOUT when 
+      <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a><tt>(...'out:X'...)</tt> is 
+      called (regardless of the settings in the camera file). 
+</li>
+</ul></li>
+<li><b>Revision 2.0</b> (Nov 14, 2000): 
+
+<ul>
+<li>Adaptation to the HALCON 6.0 image acquisition interface. 
+</li>
+</ul></li>
+<li><b>Revision 1.2</b> (Nov 10, 2000): 
+
+<ul>
+<li>Bug fix in masking the LUT when using a 10 bit camera. 
+</li>
+<li>Bug fix in continuous grabbing mode together with external triggering. 
+</li>
+<li>Bug fix in cleaning up after an unsuccessful call of <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a> 
+</li>
+<li>Bug fix in switching between connected cameras. 
+</li>
+</ul></li>
+<li><b>Revision 1.1</b> (Oct 27, 2000): 
+
+<ul>
+<li>Adaptation to the new BitFlow SDK 2.10. Older revisions are no longer 
+      supported! 
+</li>
+<li>In contrast to the old HALCON RoadRunner and HALCON Raven interfaces 
+      the special long frame mode is no longer necessary. Therefore, the 
+      parameters 'long_frames', 'long_frame_size', and 'qtab_part' are no 
+      longer supported.
+</li>
+</ul></li>
+</ul></div>
+  <!-- toc end -->  <hr> 
+  <div class="imprint"> 
+    <span class="imprinthead">Legal disclaimer regarding hyperlinks</span>: 
+    This page may provide users with access by hypertext links to external, non-MVTec websites. 
+Any such access is provided with the understanding that the contents 
+of non-MVTec sites are beyond the control of MVTec Software GmbH, that 
+MVTec Software GmbH makes no representations whatsoever about such 
+sites, and that users shall proceed at their own risk. 
+MVTec Software GmbH is not responsible for the privacy practices or 
+the content of external, non-MVTec websites.
+ 
+  </div> 
+  <div class="imprint"> 
+    <span class="imprinthead">Copyright notes</span>: 
+    &copy; Copyright MVTec Software GmbH. All rights reserved. 
+Unless otherwise stated, the copyright and similar rights in the 
+contents of this page, including but not limited to all text, designs 
+and images appearing herein, are copyrighted works owned by MVTec 
+Software GmbH. 
+"MVTec Software GmbH" and "HALCON" are registered trademarks of MVTec 
+Software GmbH. 
+All other brand names, designs, service marks and trademarks (whether 
+or not registered) referenced or used herein are the property of their 
+respective owners.
+ 
+  </div> 
+  <div class="footer"> 
+    acqdump 1.5 / hdoc 1.2 / Generated: Wed Nov 21 11:54:44 CET 2018 
+  </div> 
+  </body> 
+</html>

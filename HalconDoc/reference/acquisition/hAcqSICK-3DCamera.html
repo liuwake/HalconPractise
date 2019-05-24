@@ -1,0 +1,2251 @@
+<!DOCTYPE HTML> 
+<html> 
+  <head> 
+  <meta id='acqdump-id' name='acqdump-id' content='halcon-acq-SICK-3DCamera-rev13.0.3'> 
+  <title>SICK-3DCamera / HALCON / MVTec Software GmbH</title> 
+      <style type="text/css"> 
+      body { 
+        color: #000000; 
+        background-color: #ffffff; 
+        margin-top: 0px; 
+        margin-bottom: 0px; 
+        margin-left: 20px; 
+        margin-right: 20px; 
+        font-family: Arial,Helvetica,sans-serif; 
+      } 
+      a:link { 
+        color: #0044cc; 
+      } 
+      a:link,a:visited { 
+        text-decoration: none; 
+      } 
+      a:link:hover,a:visited:hover { 
+        text-decoration: underline; 
+      } 
+      th { 
+        text-align: left; 
+      } 
+      h1,h2,h3,h4,h5,h6 { 
+        text-rendering: optimizeLegibility; 
+        color: #666666; 
+      } 
+      tt { 
+        font-family: monospace,monospace; 
+      } 
+      h1 a.halconoperator { 
+        font-family: Arial,Helvetica,sans-serif; 
+        color: #666666; 
+      } 
+      h2 a.halconoperator { 
+        font-family: Arial,Helvetica,sans-serif; 
+        color: #666666; 
+      } 
+      hr { 
+        border: 0; 
+        border-top: solid 1px #f28d26; 
+      } 
+      pre { 
+        font-family: monospace,monospace; 
+        padding: 1ex; 
+        white-space: pre-wrap; 
+      } 
+      .toc { 
+        font-size: 80%; 
+        border-top: 1px dashed #f28d26; 
+        border-bottom: 1px dashed #f28d26; 
+        padding-top: 5px; 
+        padding-bottom: 5px; 
+      } 
+      .inv { 
+        margin: 0; 
+        border: 0; 
+        padding: 0; 
+      } 
+      .banner { 
+        color: #666666; 
+        padding-left: 1em; 
+      } 
+      .logo { 
+        background-color: white; 
+      } 
+      .keyboard { 
+        font-size: 80%; 
+        padding-left: 3px; 
+        padding-right: 3px; 
+        border-radius: 5px; 
+        border-width: 1px; 
+        border-style: solid; 
+        border-color: #f28d26; 
+        background-color: #f3f3f3; 
+      } 
+      .warning { 
+        margin-top: 2ex; 
+        margin-bottom: 1ex; 
+        padding: 10px; 
+        text-align: center; 
+        border: 1px solid; 
+        color: #bb0000; 
+        background-color: #fff7f7 
+      } 
+      .imprint { 
+        margin-top: 1ex; 
+        font-size: 80%; 
+        color: #666666; 
+      } 
+      .imprinthead { 
+        font-weight: bolder; 
+        color: #666666; 
+      } 
+      .postscript { 
+        margin-top: 2ex; 
+        font-size: 80%; 
+        color: #666666 
+      } 
+      .evenrow { 
+        background-color: #e7e7ef; 
+        vertical-align: top; 
+      } 
+      .oddrow { 
+        background-color: #f7f7ff; 
+        vertical-align: top; 
+      } 
+      .headrow { 
+        background-color: #97979f; 
+        color: #ffffff; 
+        vertical-align: top; 
+      } 
+      .logorow { 
+        vertical-align: top; 
+      } 
+      .error { 
+        color: red; 
+      } 
+      .var { 
+        font-style: italic 
+      } 
+      .halconoperator { 
+        font-family: monospace,monospace; 
+      } 
+      .halconprocedure { 
+        font-family: Consolas,Inconsolata,"DejaVu Sans Mono",monospace; 
+      } 
+      span.operator { 
+        font-family: monospace,monospace; 
+      } 
+      span.procedure { 
+        font-family: monospace,monospace; 
+      } 
+      span.operation { 
+        font-family: monospace,monospace; 
+      } 
+      span.feature { 
+        font-family: Arial,Helvetica,Homerton,sans-serif; 
+      } 
+      ul { 
+        padding-left: 1.2em; 
+      } 
+      li.dot { 
+        list-style-type: square; 
+        color: #f28d26; 
+      } 
+      .breadcrumb { 
+        font-size: 80%; 
+        color: white; 
+        background-color: #062d64; 
+        margin-left: -20px; 
+        margin-right: -20px; 
+        margin-bottom: 20px; 
+        padding-left: 20px; 
+        padding-right: 20px; 
+        padding-bottom: 15px; 
+      } 
+      .webbar { 
+        font-size: 80%; 
+        background-color: #dddddd; 
+        margin-top: 0px; 
+        margin-left: -20px; 
+        margin-right: -20px; 
+        margin-bottom: 0px; 
+        padding-top: 5px; 
+        padding-left: 20px; 
+        padding-right: 20px; 
+        padding-bottom: 5px; 
+      } 
+      .footer { 
+        border-top: 1px dashed #f28d26; 
+        font-size: 80%; 
+        color: #666666; 
+        margin-left: -20px; 
+        margin-right: -20px; 
+        margin-top: 0px; 
+        padding-left: 20px; 
+        padding-right: 20px; 
+        padding-top: 10px; 
+        padding-bottom: 15px; 
+      } 
+      .breadcrumb a { 
+        color: #ffffff; 
+        border-bottom: 1px solid white; 
+      } 
+      .breadcrumb a:link:hover,.breadcrumb a:visited:hover { 
+        text-decoration: none; 
+        border-bottom: none; 
+      } 
+      .heading { 
+        margin-top: 1ex; 
+        font-size: 110%; 
+        font-weight: bold; 
+        color: #666666; 
+      } 
+      .text { 
+        color: black; 
+      } 
+      .example { 
+        font-size: 80%; 
+        background-color: #f3f3f3; 
+        border: 1px dashed #666666; 
+        padding: 10px; 
+      } 
+      .math { 
+      } 
+      .displaymath { 
+        text-align: center; 
+        margin-top: 1ex; 
+        margin-bottom: 1ex; 
+      } 
+      </style> 
+  </head> 
+  <body><div class="breadcrumb"> 
+<br class="inv"/> 
+<a href="../../../../documentation.html">HALCON</a> / <a href="acq-overview.html">Image Acquisition Interfaces</a> 
+<br class="inv"/> 
+</div> 
+<h1>Image Acquisition Interface for SICK 3D Cameras</h1> 
+<table summary="Image Acquisition Interface for SICK 3D Cameras"> 
+  <tr> 
+    <td> 
+      Interface: 
+    </td> 
+    <td> 
+      SICK-3DCamera 
+    </td> 
+  </tr> 
+  <tr> 
+    <td> 
+      Revision: 
+    </td> 
+    <td> 
+      13.0.3 
+    </td> 
+  </tr> 
+  <tr> 
+    <td> 
+      Date: 
+    </td> 
+    <td> 
+      2018-08-08 
+    </td> 
+  </tr> 
+</table>
+<ul class="toc">
+<li><a href="#GENERAL">General</a></li>
+<li><a href="#SYSTEM_REQUIREMENTS">System Requirements</a></li>
+<li><a href="#INSTALLATION">Installation</a></li>
+<li><a href="#FEATURES">Features</a></li>
+<li><a href="#LIMITATIONS">Limitations</a></li>
+<li><a href="#READING_MARK_DATA">Reading Mark Data</a></li>
+<li><a href="#3D_CALIBRATION_AND_RECTIFICATION">3D Calibration and Rectification</a></li>
+<li><a href="#REPRESENTATION_OF_IMAGES">Representation of Images in Ranger Studio and HALCON</a></li>
+<li><a href="#SICK_BUFFER_QUEUE">Using SICK frame grabber's internal queue of buffers</a></li>
+<li><a href="#INFO_FRAMEGRABBER">Parameters for info_framegrabber</a></li>
+<li><a href="#OPEN_FRAMEGRABBER">Parameters for open_framegrabber</a></li>
+<li><a href="#SET_FRAMEGRABBER_PARAM">Parameters for set_framegrabber_param</a></li>
+<li><a href="#GET_FRAMEGRABBER_PARAM">Parameters for get_framegrabber_param</a></li>
+<li><a href="#SET_FRAMEGRABBER_LUT">Operator set_framegrabber_lut</a></li>
+<li><a href="#GET_FRAMEGRABBER_LUT">Operator get_framegrabber_lut</a></li>
+<li><a href="#SET_FRAMEGRABBER_CALLBACK">Operator set_framegrabber_callback</a></li>
+<li><a href="#GET_FRAMEGRABBER_CALLBACK">Operator get_framegrabber_callback</a></li>
+<li><a href="#GRAB_IMAGE_START">Operator grab_image_start</a></li>
+<li><a href="#GRAB_IMAGE">Operator grab_image</a></li>
+<li><a href="#GRAB_IMAGE_ASYNC">Operator grab_image_async</a></li>
+<li><a href="#GRAB_DATA">Operator grab_data</a></li>
+<li><a href="#GRAB_DATA_ASYNC">Operator grab_data_async</a></li>
+<li><a href="#CLOSE_FRAMEGRABBER">Operator close_framegrabber</a></li>
+<li><a href="#HDEVELOP_EXAMPLES">HDevelop Examples</a></li>
+<li><a href="#RELEASENOTES">Release Notes</a></li>
+</ul>
+  <!-- toc start -->
+<h2 id="GENERAL">General</h2><div>This page provides the documentation of the HALCON SICK-3DCamera   image acquisition interface for 
+  <a href="http://www.sick.com/">Ranger C/D/E, Ruler E, and ColorRanger E cameras</a>. 
+  <a href="http://www.mvtec.com/download/registration">Registered</a> customers can download the 
+  <a href="http://www.mvtec.com/download/halcon/">latest revision</a> of this interface from the 
+  <a href="http://www.mvtec.com/">MVTec WWW server</a>.
+</div>
+<h2 id="SYSTEM_REQUIREMENTS">System Requirements</h2><div>
+<ul>
+<li>Intel compatible PC with Windows    7 (32-bit or 64-bit) 
+   or newer that is also supported by the vendor-specific SDK. 
+   Note that WoW64 (using 32-bit HALCON on 64-bit Windows) is not supported 
+   and can lead to a crash. 
+</li>
+<li><b>Ethernet cameras:</b> <br> 
+   Intel PRO/1000 network adapter with successfully installed eBUS 
+   driver (version 3.1). We recommend enabling continuous grabbing 
+   for best performance.<br> 
+   <b>Camera Link cameras (legacy):</b><br> 
+   DALSA Camera Link board X64-CL with successfully installed Sapera LT 
+   software library (version 7.10 or higher) and drivers. 
+</li>
+<li>Successfully installed SICK iCon API version 5.1 SR1. Please 
+   make sure that the <b>icon_51.dll</b> (or 
+   <b>icon_51_x64.dll</b>, respectively), is available 
+   via the %PATH% environment variable. 
+</li>
+<li>HALCON image acquisition interface <b>hAcqSICK-3DCamera.dll</b> or 
+   <b>hAcqSICK-3DCameraxl.dll</b>, respectively. If you have installed 
+   the interface properly, both DLLs should reside in 
+   <tt>bin\%HALCONARCH%</tt> within the HALCON base directory 
+   %HALCONROOT% you have chosen during the installation of HALCON.
+</li>
+</ul></div>
+<h2 id="INSTALLATION">Installation</h2><div>Only when installing or updating the interface manually follow these steps: <br> 
+
+<ul>
+<li><b>Windows:</b> Extract the archive containing the interface files to the 
+  HALCON base directory %HALCONROOT% (Note: Administrator privileges may be 
+  required for this step). Additionally, you have to move the interface 
+  examples to the directory %HALCONEXAMPLES% manually.
+</li>
+</ul></div>
+<h2 id="FEATURES">Features</h2><div>
+<ul>
+<li>Synchronous and asynchronous grabbing. </li>
+<li>Image or measurement configuration available. 
+</li>
+<li>Access to multiple measurement components either via multi-channel 
+   images (with <a class="halconoperator" href="../operators/grab_image.html">grab_image</a>/<a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a>) or via image tuples 
+   (with <a class="halconoperator" href="../operators/grab_data.html">grab_data</a>/<a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a>). 
+</li>
+<li>Access to calibrated and rectified measurement data via 
+   <a class="halconoperator" href="../operators/grab_data.html">grab_data</a>/<a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a>. 
+</li>
+<li>Access to mark data via <a class="halconoperator" href="../operators/grab_data.html">grab_data</a>/<a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a>. 
+</li>
+<li>Software control of all camera parameters.
+</li>
+</ul></div>
+<h2 id="LIMITATIONS">Limitations</h2><div>
+<ul>
+<li>Mark data is only available in continuous grabbing mode. </li>
+<li>No support of traits. 
+</li>
+<li>Parameters 'image_height' (lines per frame) and '&lt;Measurement&gt;scan 
+   height' are internally set to the same value. 
+</li>
+<li>Changing parameters in Ranger Studio (in Ethernet camera case) when using 
+   HDevelop in parallel can lead to an invalid parameters configuration. 
+</li>
+<li>Due to current iCon API limitations, Ranger C devices may not behave as 
+   expected in case of continuous synchronous grabbing and in case of 
+   continuous asynchronous grabbing with 'buffer_queue' and 
+   'start_async_after_grab_async' disabled.
+</li>
+</ul></div>
+<h2 id="READING_MARK_DATA">Reading Mark Data</h2><div>The SICK 3D cameras can be configured to deliver the optional mark data   (either a counter or the actual encoder values). To query these data 
+  together with the grabbed image data, the operator <a class="halconoperator" href="../operators/grab_data.html">grab_data</a> or 
+  <a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a> have to be used. If the mark data is enabled in the used 
+  camera configuration file, the output parameter 'Data' of 
+  <a class="halconoperator" href="../operators/grab_data.html">grab_data</a>/<a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a> contains for every mark subcomponent the name 
+  of the corresponding component and all mark values. The order of these 
+  integer values corresponds to the order of the components. Please note 
+  that the parameter 'continuous_grabbing' must be set to 'enable' to get 
+  the mark data continuously.
+</div>
+<h2 id="3D_CALIBRATION_AND_RECTIFICATION">3D Calibration and Rectification</h2><div>The SICK 3D cameras can be configured to deliver calibrated and rectified   range data. To generate these data you have to create a lookup-table (LUT) 
+  with the SICK Coordinator tool. The LUT can either be stored in the flash 
+  of the camera or in a file. With the parameter 'lut_file' you can 
+  use your LUT file for the calibration. If no LUT file is set, the 
+  calibration filter tries to load it from the flash of the camera. If you 
+  want to use a LUT file, this has to be set before the calibration filter 
+  is enabled. 
+  You have the choice between enabling only the calibration via the parameter 
+  'calibration_filter' and also enabling the rectification via the parameter 
+  'rectification_filter'. The method of the rectification filter can be 
+  set via the parameter 'rectification_method'. The rectification width can 
+  be set via the parameter 'rectification_width'. 
+  To access the calibrated (and rectified) data the operators 
+  <a class="halconoperator" href="../operators/grab_data.html">grab_data</a> or <a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a> have to be used. 
+  Here, the additional measurement data is provided as additional images 
+  ('Range X', 'Range R', 'Rectified Data (Range)', 
+  'Rectified Data (Intensity)').
+</div>
+<h2 id="REPRESENTATION_OF_IMAGES">Representation of Images in Ranger Studio and HALCON</h2><div> Note that there is a general difference regarding the image   representation between Ranger Studio and HALCON: 
+  The coordinate system of the SICK 3D cameras is right to left and 
+  top to down, but in order to display the images in the "correct" way, 
+  the SICK Ranger Studio flips the images automatically. 
+  In HALCON, the coordinate system is always left to right and 
+  top to down. Thus, the images, as they come from the buffers from the 
+  SICK 3D camera, look mirrored in comparison to the ones of 
+  Ranger Studio.<br> 
+  In some cases when using high resolution components and "normal" 
+  components, some image channels received from <a class="halconoperator" href="../operators/grab_image.html">grab_image</a> and 
+  <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a> are black at the right part of the image. This is caused 
+  by the higher width of the high resolution images and the restriction that 
+  the channels of one HALCON image object must have the same size. In this 
+  case we recommend using <a class="halconoperator" href="../operators/grab_data.html">grab_data</a> and <a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a> instead.
+</div>
+<h2 id="SICK_BUFFER_QUEUE">Using SICK frame grabber's internal queue of buffers</h2><div><p>   In case of continuous ('continuous_grabbing' = 'enable') asynchronous 
+  grabbing (<a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a>/<a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a>), the use of <i>SICK frame 
+  grabber's internal queue of buffers</i> can be activated by setting 
+  'buffer_queue' to 'enable'. Notice that the default value for the 
+  'buffer_queue' is 'disable'. 
+</p> 
+<p> 
+  The HDevelop example <b> sick-3dcamera_buffer_queue.hdev</b> shows 
+  how to enable the use of the <i>SICK frame grabber's internal queue of 
+  buffers</i>, how to calculate the available number of buffers, how to 
+  detect overflow using the mark data and how to recover from overflow 
+  using 'do_abort_grab'. 
+</p> 
+<p> 
+  The HDevelop example <b> sick-3dcamera_grabbing_modes.hdev</b> 
+  shows the behavior of the different grabbing modes 
+  (asynchronous/synchronous) depending on the following parameters: 
+  'continuous_grabbing', 'buffer_queue' and 'start_async_after_grab_async'. 
+</p> 
+<p> 
+  In case of Ethernet cameras (Ranger E/D), 
+  the <b>buffer size</b> can be set by means of the Generic parameter 
+  'buffer_size' in <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>. Its default value is 50 [MB]. 
+  The number of buffers can be calculated as follows depending on the 
+  current configuration: 
+</p>
+</div>
+<table summary="Using SICK frame grabber's internal queue of buffers" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Configuration</th>
+<th>Number of Buffers</th>
+<tr class="oddrow">
+<td>'measurement'</td>
+<td>'buffer_size'[MB] * 2^20[bytes/MB] /         ('scan_size'[bytes/scan] * 
+        '&lt;Measurement&gt;scan height'[scans/buffer])
+</td>
+</tr>
+<tr class="evenrow">
+<td>'image'</td>
+<td>'buffer_size'[MB] * 2^20[bytes/MB] /         ('scan_size'[bytes/scan] * 1)
+</td>
+</tr></table><div><p>   The current queue size can be also known by activating the SICK message 
+  errors (set 'use_error_handler=1' in <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>) and by checking 
+  the "Queue size" in the connection message shown in the <i>HDevelop output 
+  console</i>:<br> 
+  <i>"message: 13:36:13 <MyGrabber> Message: Connected: Queue size: 
+  <b>11</b> @512x9216 bytes. Driver mode: Fast"</i> 
+</p> 
+<p> 
+  Notice that the Generic parameter 'num_buffers' in <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a> has 
+  been removed to avoid confusion with <i>SICK frame grabber's internal 
+  queue of buffers</i>. 
+</p>
+</div>
+<h2 id="INFO_FRAMEGRABBER">Parameters for <a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a></h2><div></div>
+<table summary="Parameters for info_framegrabber" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Parameter</th>
+<th>Value List</th>
+<th>Type</th>
+<th>Kind</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><b>'bits_per_channel'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unused.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'camera_type'</b></td>
+<td>['CAMFILE:', 'prm', '<span class="var">&lt;path&gt;</span>', 'default']</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Syntax for camera file and default value.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'color_space'</b></td>
+<td>['image', 'measurement']</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Value list for configuration.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'defaults'</b></td>
+<td>[1, 1, 0, 0, 0, 0, 'progressive', -1, 'measurement', -1.0, 'false',             'default', 'default', 0, 0]
+</td>
+<td>mixed</td>
+<td>pre-defined</td>
+<td>Default values for <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'device'</b></td>
+<td>['<span class="var">&lt;ip_address&gt;</span>']</td>
+<td>string</td>
+<td>dynamic</td>
+<td> Returns the list of available Ethernet devices if possible. Otherwise, a  place-holder is returned. Camera Link devices (legacy) are ignored.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'external_trigger'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unused.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'field'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unused.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'general'</b></td>
+<td>[]</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Information about the HALCON SICK-3DCamera interface.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'generic'</b></td>
+<td>['', 'buffer_size=<span class="var">&lt;MB&gt;</span>', 'camera_reset_on_close=1',              'low_level_timeout=<span class="var">&lt;ms&gt;</span>', 'use_error_handler=1', 
+             'use_socket_driver=1']
+</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Value list for the Generic parameter.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'horizontal_resolution'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unused.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'image_height'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unsupported query.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'image_width'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unsupported query.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'info_boards'</b></td>
+<td>['device:<span class="var">&lt;ip_address&gt;</span> | default_gateway:<span class="var">&lt;default_gateway&gt;</span> |              netmask:<span class="var">&lt;netmask&gt;</span> | manufacturer:<span class="var">&lt;manufacturer_name&gt;</span> | 
+             model_name:<span class="var">&lt;model_name&gt;</span> | device_version:<span class="var">&lt;device_version&gt;</span> | 
+             manufacturer_specific:<span class="var">&lt;manufacturer_specific&gt;</span> | mac_address: 
+             <span class="var">&lt;mac_address&gt;</span>']
+</td>
+<td>string</td>
+<td>dynamic</td>
+<td>Returns the list of available Ethernet devices with additional            information. Camera Link devices (legacy) are ignored.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'parameters'</b></td>
+<td>['<span class="var">&lt;parameters&gt;</span>']</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Pre-defined parameters of the HALCON interface.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'parameters_readonly'</b></td>
+<td>['<span class="var">&lt;parameters&gt;</span>']</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Pre-defined read-only parameters of the HALCON interface.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'parameters_writeonly'</b></td>
+<td>['<span class="var">&lt;parameters&gt;</span>']</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Pre-defined write-only parameters of the HALCON interface.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'port'</b></td>
+<td><span class="var">&lt;port&gt;</span></td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Returns the static value list for port (for Ranger C devices).</td>
+</tr>
+<tr class="evenrow">
+<td><b>'revision'</b></td>
+<td>'<span class="var">&lt;revision&gt;</span>'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Revision number of the SICK-3DCamera interface.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'start_column'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unsupported query.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'start_row'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unsupported query.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'vertical_resolution'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unused.</td>
+</tr></table>
+<h2 id="OPEN_FRAMEGRABBER">Parameters for <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a></h2><div></div>
+<table summary="Parameters for open_framegrabber" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Parameter</th>
+<th>Values</th>
+<th>Default</th>
+<th>Type</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><b>Name</b></td>
+<td>'SICK-3DCamera'</td>
+<td></td>
+<td>string</td>
+<td>Name of the HALCON interface.</td>
+</tr>
+<tr class="evenrow">
+<td><b>HorizontalResolution</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr>
+<tr class="oddrow">
+<td><b>VerticalResolution</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr>
+<tr class="evenrow">
+<td><b>ImageWidth</b></td>
+<td>0, 256 ... 1536</td>
+<td>0</td>
+<td>integer</td>
+<td>Width of the desired image part. Please note that the image             width must be divisible by 8. If set to 0 the value in the 
+            prm-file (or the current setting of the camera) is used.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>ImageHeight</b></td>
+<td>0, <span class="var">&lt;height&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>Height of the desired image part (in image mode) or the number             of scans (in measurement mode). If set to 0 the value in the 
+            prm-file (or the current setting of the camera) is used.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>StartRow</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr>
+<tr class="oddrow">
+<td><b>StartColumn</b></td>
+<td>0, 1 ... 1280</td>
+<td>0</td>
+<td>integer</td>
+<td>Column coordinate of the upper left pixel within the desired             image part. Note that the sum of StartColumn and ImageWidth must 
+            not exceed 1536. If set to 0 the value in the prm-file (or the 
+            current setting of the camera) is used.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>Field</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr>
+<tr class="oddrow">
+<td><b>BitsPerChannel</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored. The value is defined by prm file.</td>
+</tr>
+<tr class="evenrow">
+<td><b>ColorSpace</b></td>
+<td>'image', 'measurement'</td>
+<td>'measurement'</td>
+<td>string</td>
+<td> Desired camera configuration. If set to 'image', every call of <a class="halconoperator" href="../operators/grab_image.html">grab_image</a>  and <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a> will result in a gray value image. If set to 
+ 'measurement', a multi-channel image containing the measurement components as 
+ defined in the prm-file will be returned.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>Generic</b></td>
+<td>'', ['buffer_size=<span class="var">&lt;MB&gt;</span>', 'camera_reset_on_close=1',             'low_level_timeout=<span class="var">&lt;ms&gt;</span>', 'use_error_handler=1', 
+            'use_socket_driver=1'], -1
+</td>
+<td>-1</td>
+<td>mixed</td>
+<td> Generic parameters: 
+<ul>
+<li><b>buffer_size:</b> 
+   Set the internal buffer size in Megabyte. Only valid for Ethernet cameras. Default: 50. 
+</li>
+<li><b>camera_reset_on_close:</b> 
+   Enable the camera reset in <a class="halconoperator" href="../operators/close_framegrabber.html">close_framegrabber</a> as a workaround to an 
+   internal camera problem for Ethernet devices (in case of repeatedly 
+   opening and closing the device). Notice that this setting can 
+   considerably increase the execution time of <a class="halconoperator" href="../operators/close_framegrabber.html">close_framegrabber</a>, 
+   therefore use it only if necessary (for instance, every 20 open and close 
+   iterations). For Camera Link devices this parameter has no effect. 
+</li>
+<li><b>low_level_timeout:</b> 
+   Set a low level timeout value in milliseconds for Pleora eBus to guarantee that 
+   buffer callbacks occur without delays even if network packets are lost. Default: 0 
+   (infinite). 
+</li>
+<li><b>use_error_handler:</b> 
+   Enable the SICK error handler to show the same error messages as in Ranger 
+   Studio. 
+</li>
+<li><b>use_socket_driver:</b> 
+   This setting makes it possible to use the socket driver (driver mode: 
+   Normal) instead of the new Fast Ethernet driver (driver mode: Fast). 
+   Notice that fast driver mode requires the Ethernet camera version 4.3.0.88 
+   (or higher).
+</li>
+</ul></td>
+</tr>
+<tr class="evenrow">
+<td><b>ExternalTrigger</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td> Ignored. Note that this parameter has been deprecated, your code may  require an adaptation. If activated, the 'use enable' parameter of the 
+ SICK API was set to '2' (rising edge), otherwise to '0'.The different 
+ trigger modes were manually selected via <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a>. Now the 
+ SICK parameter '&lt;Image&gt;use enable' or '&lt;Measurement&gt;use enable' 
+ can be directly modified using the <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a> operator.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>CameraType</b></td>
+<td>'<span class="var">&lt;prm_file&gt;</span>', 'default'</td>
+<td>'default'</td>
+<td>string</td>
+<td>Name of the camera parameter file. In case of 'default' the              current camera settings are used.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>Device</b></td>
+<td>'<span class="var">&lt;ip_address&gt;</span>', '<span class="var">&lt;device_id&gt;</span>'</td>
+<td>'default'</td>
+<td>string</td>
+<td> For Ethernet cameras, the IP address of the camera must be specified  here. For Ranger C cameras, the 'Camera Link API port index' as 
+ indicated in the Sapera Configuration Tool must be used.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>Port</b></td>
+<td><span class="var">&lt;port&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>Port value. In case of: 
+<ul>
+<li>Camera Link device: used camera port on the X64-CL board. 
+</li>
+<li>Ethernet device: if default value (0) used, then the port will be 
+   dynamically allocated, otherwise the value will be used to allocate 
+   the port statically and in that case, the 'port'+1 value will be 
+   internally used as redundancy port. Therefore, notice that in case of 
+   using more than one camera, the port values should not be consecutive 
+   values (e.g. set port 1000 for the first camera and port 1002 for the 
+   second camera). Static allocation shall only be used if the dynamic port 
+   reservation causes trouble or for some reason, the port to be used has 
+   to be exactly specified. Notice that in case of using the socket driver 
+   ('use_socket_driver=1'), the static port allocation is not possible and, 
+   therefore, the port has to be set to the default value (0).
+</li>
+</ul></td>
+</tr>
+<tr class="evenrow">
+<td><b>LineIn</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr></table>
+<h2 id="SET_FRAMEGRABBER_PARAM">Parameters for <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a></h2><div> The SICK parameters of the camera can be different depending on the device  type and the current loaded configuration file (.prm). Therefore, use 
+ <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a><tt>(..., 'available_param_names', ...)</tt> to obtain 
+ a tuple containing all available parameters of the connected camera. To set 
+ a parameter, e.g. the 'exposure time' of the 'HorThr 1' component in 
+ 'Measurement' configuration, the user can call <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a><tt>(..., 
+ '&lt;Measurement&gt;&lt;HorThr 1&gt;exposure time', ...)</tt>. Note that 
+ in case of 'Argument' parameter type (see SICK documentation regarding SICK 
+ parameter types), the camera will be internally stopped before changing the 
+ parameter and the data format will be automatically updated if required.
+</div>
+<table summary="Parameters for set_framegrabber_param" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Parameter</th>
+<th>Values</th>
+<th>Default</th>
+<th>Type</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><b>'active_channel'</b></td>
+<td>-1, <span class="var">value</span></td>
+<td>-1</td>
+<td>integer</td>
+<td> Number of the active channel, if measurement configuration is chosen. -1 uses  all channels.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'buffer_queue'</b></td>
+<td>'disable', 'enable'</td>
+<td>'disable'</td>
+<td>string</td>
+<td> Enables/disables the use of SICK frame grabber's internal queue of buffers  in case of continuous asynchronous grabbing. Notice that in case of 
+ continuous asynchronous grabbing with 'buffer_queue' disabled but 
+ 'start_async_after_grab_async' enabled, the 'buffer_queue' parameter will 
+ be ignored and the SICK frame grabber's internal queue of buffers will be 
+ used (no buffers lost). See also 'continuous_grabbing' parameter 
+ description.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'calibration_filter'</b></td>
+<td>'disable', 'enable'</td>
+<td>'disable'</td>
+<td>string</td>
+<td>Enables/disables the calibration filter for the 'Range' subcomponent. In measurement configuration, <a class="halconoperator" href="../operators/grab_data.html">grab_data</a>/<a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a> then returns two 
+additional images with the 'Range X' and 'Range R' data. Note that in case 
+a LUT file is used, it has to be loaded before the calibration filter is 
+enabled.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'camera_start_delay'</b></td>
+<td><span class="var">&lt;milliseconds&gt;</span></td>
+<td>20</td>
+<td>integer</td>
+<td>In some cases packets are lost, if the camera is started too soon after starting the grabber.  With this parameter a delay for starting the camera 
+can be set.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'configuration'</b></td>
+<td>'image', 'measurement'</td>
+<td>'measurement'</td>
+<td>string</td>
+<td> Configuration of the camera. If set to 'image', every call of <a class="halconoperator" href="../operators/grab_image.html">grab_image</a>  and <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a> will result in a gray value image. If set to 
+ 'measurement', a multi-channel image containing the measurement components 
+ as defined in the prm-file will be returned. Please note that when changing this 
+ parameter in HDevelop Image Acquisition Assistant, the 'Refresh' button has to 
+ be applied to update the current 'active_channel' values list.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'continuous_grabbing'</b></td>
+<td>'disable', 'enable'</td>
+<td>'disable'</td>
+<td>string</td>
+<td> If 'continuous_grabbing' is enabled, data is continuously acquired by the  camera. Otherwise data is only acquired when calling <a class="halconoperator" href="../operators/grab_image.html">grab_image</a> or 
+ <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a>. See also 'buffer_queue' parameter. Note: due to 
+ iCon API limitations, in case of Ranger C devices, 'continuous_grabbing' 
+ mode may not behave as expected: 
+
+<ul>
+<ul>
+<li>if synchronous grabbing (<a class="halconoperator" href="../operators/grab_image.html">grab_image</a>/<a class="halconoperator" href="../operators/grab_data.html">grab_data</a>): next available buffer 
+       in SICK frame grabber's internal queue of buffers is delivered. 
+</li>
+<li>if asynchronous grabbing (<a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a>/<a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a>) and 
+      'start_async_after_grab_async' and 'buffer_queue' disabled: next 
+      available buffer in SICK frame grabber's internal queue of buffers 
+      is delivered.
+</li>
+</ul>
+</ul></td>
+</tr>
+<tr class="oddrow">
+<td><b>'do_abort_grab'</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td> Aborts the current image acquisition and flushes the SICK frame grabber's  internal queue of buffers.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'do_load_parameters'</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Load the parameter settings file specified in 'parameters_file' parameter.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'do_save_parameters'</b></td>
+<td>'<span class="var">&lt;prm_file&gt;</span>'</td>
+<td>'saved_sick_parameters.prm'</td>
+<td>string</td>
+<td>Save the parameter settings to the specified filename.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'grab_timeout'</b></td>
+<td><span class="var">&lt;milliseconds&gt;</span></td>
+<td>5000</td>
+<td>integer</td>
+<td>Desired timeout (milliseconds) for aborting a pending grab. If -1 is specified, the timeout is set to INFINITE.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'interpolation_method'</b></td>
+<td>'linear', 'nearest_neighbor'</td>
+<td>'nearest_neighbor'</td>
+<td>string</td>
+<td>Interpolation method for the registration filter.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'lut_file'</b></td>
+<td>'<span class="var">&lt;LUT-file&gt;</span>', 'flash'</td>
+<td>'flash'</td>
+<td>string</td>
+<td>Load the lookup-table for calibration from the specified path and filename. Set the parameter value to 'flash' to clear the file name and to use the LUT 
+file from the camera flash. The LUT file has to be set before the calibration 
+filter is enabled.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'parameters_file'</b></td>
+<td>'<span class="var">&lt;prm_file&gt;</span>'</td>
+<td></td>
+<td>string</td>
+<td>Parameter file name (e.g. <i>C:\prm-files\RangerE.prm</i>) to be used by 'do_load_parameters' action parameter.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'rectification_filter'</b></td>
+<td>'disable', 'enable'</td>
+<td>'disable'</td>
+<td>string</td>
+<td>Enables/disables the rectification filter for the 'Range' subcomponent. In measurement configuration, <a class="halconoperator" href="../operators/grab_data.html">grab_data</a>/<a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a> then returns two 
+additional images with the rectified 'Range' and 'Intensity' data. Please 
+note that to enable this parameter, the 'calibration_filter' has to be 
+previously enabled.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'rectification_method'</b></td>
+<td>'bottom_most', 'mean', 'top_most'</td>
+<td>'mean'</td>
+<td>string</td>
+<td>Method for the rectification filter.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'rectification_width'</b></td>
+<td></td>
+<td></td>
+<td>integer</td>
+<td>Width of rectified buffer (X-direction).</td>
+</tr>
+<tr class="oddrow">
+<td><b>'shift_blue'</b></td>
+<td><span class="var">&lt;shift&gt;</span></td>
+<td>0.0</td>
+<td>float</td>
+<td> Shift value (as float) of the blue channel. Please note that this value must  be set according to your configuration, if color components are used. 
+ Continuous asynchronous grabbing is required 
+ (<a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a>/<a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a> with 'continuous_grabbing' enabled).
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'shift_green'</b></td>
+<td><span class="var">&lt;shift&gt;</span></td>
+<td>0.0</td>
+<td>float</td>
+<td> Shift value (as float) of the green channel. Please note that this value  must be set according to your configuration, if color components are used. 
+ Continuous asynchronous grabbing is required 
+ (<a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a>/<a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a> with 'continuous_grabbing' enabled).
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'shift_red'</b></td>
+<td><span class="var">&lt;shift&gt;</span></td>
+<td>0.0</td>
+<td>float</td>
+<td> Shift value (as float) of the red channel. Please note that this value must  be set according to your configuration, if color components are used. 
+ Continuous asynchronous grabbing is required 
+ (<a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a>/<a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a> with 'continuous_grabbing' enabled).
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'start_async_after_grab_async'</b></td>
+<td>'disable', 'enable'</td>
+<td>'enable'</td>
+<td>string</td>
+<td>By default a new asynchronous grab command is automatically given to the acquisition device at the end of <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a>. If the parameter 
+'start_async_after_grab_async' is set to 'disable', this new grab command 
+is omitted.
+</td>
+</tr></table>
+<h2 id="GET_FRAMEGRABBER_PARAM">Parameters for <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a></h2><div>There may exist additional read-only parameters with the following postfixes: 
+<ul>
+<li><b>'_access'</b>: These parameters provide the access permissions of 
+    the corresponding parameter as a string. Possible values are 
+     <tt>'ro'</tt> (read-only), <tt>'wo'</tt> (write-only), and 
+     <tt>'rw'</tt> (read/write). 
+</li>
+<li><b>'_category'</b>: These parameters provide the category of the 
+    corresponding parameter as a string. 
+</li>
+<li><b>'_description'</b>: These parameters provide the tool-tip of the 
+    corresponding parameter as a string. 
+</li>
+<li><b>'_range'</b>: These parameters provide the minimum, maximum, 
+    step width, and default values for the corresponding integer or float 
+    parameter as a tuple with 4 elements, e.g., 
+    <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a><tt>(.., 'Shutter_range', ..)</tt> will return 
+    the output tuple <tt>[<i>min, max, step, default</i>]</tt>. 
+</li>
+<li><b>'_values'</b>: These parameters provide the valid value list for 
+    the corresponding parameter as a tuple, e.g., 
+    <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a><tt>(.., 'volatile_values', ..)</tt> will return 
+    the output tuple <tt>['enable', 'disable']</tt>. 
+</li>
+<li><b>'_visibility'</b>: These parameters provide the visibility of the 
+    corresponding parameter as a string. Possible values are 
+    <tt>'beginner'</tt>, <tt>'expert'</tt>, and <tt>'guru'</tt>. 
+</li>
+</ul> 
+<p> 
+All these postfixed parameter names are not returned when calling 
+<a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a><tt>(.., 'parameters', ..)</tt> and are used 
+to enable the easy parameterization via a generic graphical user 
+interface, particularly the HDevelop Image Acquisition Assistant. 
+</p> 
+ The SICK parameters of the camera can be different depending on the device 
+ type and the current loaded configuration file (.prm). Therefore, use 
+ <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a><tt>(..., 'available_param_names', ...)</tt> to obtain 
+ a tuple containing all available parameters of the connected camera. To get 
+ a parameter, e.g. the current 'exposure time' of the 'HorThr 1' component 
+ in 'Measurement' configuration, the user can call 
+ <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a><tt>(..., 
+ '&lt;Measurement&gt;&lt;HorThr 1&gt;exposure time', ...)</tt>.
+</div>
+<table summary="Parameters for get_framegrabber_param" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Parameter</th>
+<th>Values</th>
+<th>Default</th>
+<th>Type</th>
+<th>Kind</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><b>'active_channel'</b></td>
+<td>-1, <span class="var">value</span></td>
+<td>-1</td>
+<td>integer</td>
+<td>dynamic</td>
+<td> Number of the active channel, if measurement configuration is chosen. -1 uses  all channels.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'available_callback_types'</b></td>
+<td>['<span class="var">&lt;callback_type&gt;</span>']</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td> Query all callback types which are supported by this interface.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'available_param_descriptions'</b></td>
+<td>['<span class="var">&lt;descriptions&gt;</span>']</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td>A list containing additional information about all parameters. The order of the entries is equal to the order of the parameter names returned by 
+'available_param_names'.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'available_param_names'</b></td>
+<td>['<span class="var">&lt;parameters&gt;</span>']</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td>The list contains the names of all available parameters.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'available_parameters'</b></td>
+<td>'<span class="var">&lt;iCon parameters tree&gt;</span>'</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td>Complete XML subtree of the current configuration ('image' or 'measurement').</td>
+</tr>
+<tr class="evenrow">
+<td><b>'bits_per_channel'</b></td>
+<td><span class="var">&lt;default&gt;</span></td>
+<td>-1</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>The value is not used, so a default value is returned.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'buffer_queue'</b></td>
+<td>'disable', 'enable'</td>
+<td>'disable'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td> Enables/disables the use of SICK frame grabber's internal queue of buffers  in case of continuous asynchronous grabbing. Notice that in case of 
+ continuous asynchronous grabbing with 'buffer_queue' disabled but 
+ 'start_async_after_grab_async' enabled, the 'buffer_queue' parameter will 
+ be ignored and the SICK frame grabber's internal queue of buffers will be 
+ used (no buffers lost). See also 'continuous_grabbing' parameter 
+ description.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'buffer_size'</b></td>
+<td><span class="var">&lt;MB&gt;</span></td>
+<td>50</td>
+<td>integer</td>
+<td>dynamic</td>
+<td>Size in Megabyte of the buffers used for the image acquisition. Only valid for Ethernet cameras.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'calibration_filter'</b></td>
+<td>'disable', 'enable'</td>
+<td>'disable'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Enables/disables the calibration filter for the 'Range' subcomponent. In measurement configuration, <a class="halconoperator" href="../operators/grab_data.html">grab_data</a>/<a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a> then returns two 
+additional images with the 'Range X' and 'Range R' data. Note that in case 
+a LUT file is used, it has to be loaded before the calibration filter is 
+enabled.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'camera_reset_on_close'</b></td>
+<td>0,1</td>
+<td>0</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Camera reset enabled in <a class="halconoperator" href="../operators/close_framegrabber.html">close_framegrabber</a>.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'camera_start_delay'</b></td>
+<td><span class="var">&lt;milliseconds&gt;</span></td>
+<td>20</td>
+<td>integer</td>
+<td>dynamic</td>
+<td>In some cases packets are lost, if the camera is started too soon after starting the grabber.  With this parameter a delay for starting the camera 
+can be set.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'camera_status'</b></td>
+<td>'<span class="var">&lt;status&gt;</span>'</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td>Current status of the SICK camera.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'camera_type'</b></td>
+<td>'<span class="var">&lt;prm_file&gt;</span>'</td>
+<td></td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Name of the camera parameter file.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'channel_names'</b></td>
+<td>'<span class="var">&lt;channel names&gt;</span>'</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td>Names of the data channels. Format: 'Component Name (Measure)' (e.g.['HorThr 1 (Range)', 'Gray 2 (Gray)', 'HiResGray 1 (Gray)', 
+ 'Scatter 1 (Direct)', 'Scatter 1 (Scatter)', 'Range X', 'Range R', 
+  'Rectified Data (Range)', 'Rectified Data (Intensity)']).
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'color_space'</b></td>
+<td>'<span class="var">&lt;configuration&gt;</span>'</td>
+<td>'measurement'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Current configuration.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'configuration'</b></td>
+<td>'image', 'measurement'</td>
+<td>'measurement'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td> Configuration of the camera. If set to 'image', every call of <a class="halconoperator" href="../operators/grab_image.html">grab_image</a>  and <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a> will result in a gray value image. If set to 
+ 'measurement', a multi-channel image containing the measurement components 
+ as defined in the prm-file will be returned. Please note that when changing this 
+ parameter in HDevelop Image Acquisition Assistant, the 'Refresh' button has to 
+ be applied to update the current 'active_channel' values list.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'continuous_grabbing'</b></td>
+<td>'disable', 'enable'</td>
+<td>'disable'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td> If 'continuous_grabbing' is enabled, data is continuously acquired by the  camera. Otherwise data is only acquired when calling <a class="halconoperator" href="../operators/grab_image.html">grab_image</a> or 
+ <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a>. See also 'buffer_queue' parameter. Note: due to 
+ iCon API limitations, in case of Ranger C devices, 'continuous_grabbing' 
+ mode may not behave as expected: 
+
+<ul>
+<ul>
+<li>if synchronous grabbing (<a class="halconoperator" href="../operators/grab_image.html">grab_image</a>/<a class="halconoperator" href="../operators/grab_data.html">grab_data</a>): next available buffer 
+       in SICK frame grabber's internal queue of buffers is delivered. 
+</li>
+<li>if asynchronous grabbing (<a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a>/<a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a>) and 
+      'start_async_after_grab_async' and 'buffer_queue' disabled: next 
+      available buffer in SICK frame grabber's internal queue of buffers 
+      is delivered.
+</li>
+</ul>
+</ul></td>
+</tr>
+<tr class="evenrow">
+<td><b>'device'</b></td>
+<td>'<span class="var">&lt;ip_address&gt;</span>' or '<span class="var">&lt;device_id&gt;</span>'</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td>Current device.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'device_type'</b></td>
+<td>'<span class="var">&lt;type&gt;</span>'</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td>Type of the current device.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'external_trigger'</b></td>
+<td><span class="var">&lt;default&gt;</span></td>
+<td>'false'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>The value is not used, so a default value is returned.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'field'</b></td>
+<td>'<span class="var">&lt;default&gt;</span>'</td>
+<td>'progressive'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>The value is not used, so a default value is returned.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'generic'</b></td>
+<td>'', ['buffer_size=<span class="var">&lt;MB&gt;</span>', 'camera_reset_on_close=1',             'low_level_timeout=<span class="var">&lt;ms&gt;</span>', 'use_error_handler=1', 
+            'use_socket_driver=1'], -1
+</td>
+<td>-1</td>
+<td>mixed</td>
+<td>pre-defined</td>
+<td>Values of the Generic parameter.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'grab_timeout'</b></td>
+<td><span class="var">&lt;milliseconds&gt;</span></td>
+<td>5000</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Current grab timeout in milliseconds.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'horizontal_resolution'</b></td>
+<td><span class="var">&lt;default&gt;</span></td>
+<td>1</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>The value is not used, so a default value is returned.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'image_available'</b></td>
+<td>0, 1</td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td>Status of the last asynchronous grab command. The value 1 means that the image is already acquired and thus can be fetched by <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a> without 
+delay. Note that this parameter is especially useful in combination with 
+external triggering.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'image_height'</b></td>
+<td><span class="var">&lt;height&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Height of the desired image part ('0' stands for the complete image).
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'image_width'</b></td>
+<td><span class="var">&lt;width&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Width of the desired image part ('0' stands for the complete image).
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'interpolation_method'</b></td>
+<td>'linear', 'nearest_neighbor'</td>
+<td>'nearest_neighbor'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Interpolation method for the registration filter.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'line_in'</b></td>
+<td><span class="var">&lt;default&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>The value is not used, so a default value is returned.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'low_level_timeout'</b></td>
+<td><span class="var">&lt;ms&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Low level timeout value in milliseconds for Pleora eBus.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'lut_file'</b></td>
+<td>'<span class="var">&lt;LUT-file&gt;</span>', 'flash'</td>
+<td>'flash'</td>
+<td>string</td>
+<td>dynamic</td>
+<td>Load the lookup-table for calibration from the specified path and filename. Set the parameter value to 'flash' to clear the file name and to use the LUT 
+file from the camera flash. The LUT file has to be set before the calibration 
+filter is enabled.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'name'</b></td>
+<td>'SICK-3DCamera'</td>
+<td></td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Name of the HALCON interface.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'parameters_file'</b></td>
+<td>'<span class="var">&lt;prm_file&gt;</span>'</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td>Parameter file name (e.g. <i>C:\prm-files\RangerE.prm</i>) to be used by 'do_load_parameters' action parameter.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'port'</b></td>
+<td><span class="var">&lt;port&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Current port number.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'rectification_filter'</b></td>
+<td>'disable', 'enable'</td>
+<td>'disable'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Enables/disables the rectification filter for the 'Range' subcomponent. In measurement configuration, <a class="halconoperator" href="../operators/grab_data.html">grab_data</a>/<a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a> then returns two 
+additional images with the rectified 'Range' and 'Intensity' data. Please 
+note that to enable this parameter, the 'calibration_filter' has to be 
+previously enabled.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'rectification_method'</b></td>
+<td>'bottom_most', 'mean', 'top_most'</td>
+<td>'mean'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Method for the rectification filter.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'rectification_width'</b></td>
+<td></td>
+<td></td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Width of rectified buffer (X-direction).</td>
+</tr>
+<tr class="evenrow">
+<td><b>'revision'</b></td>
+<td>'<span class="var">&lt;revision&gt;</span>'</td>
+<td></td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Revision number of the SICK-3DCamera interface.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'scan_size'</b></td>
+<td><span class="var">&lt;bytes&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td>Size in bytes of one profile (scan).</td>
+</tr>
+<tr class="evenrow">
+<td><b>'serial_number'</b></td>
+<td>'<span class="var">&lt;serial number&gt;</span>'</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td> Serial number of the camera.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'shift_blue'</b></td>
+<td><span class="var">&lt;shift&gt;</span></td>
+<td>0.0</td>
+<td>float</td>
+<td>pre-defined</td>
+<td> Shift value (as float) of the blue channel. Please note that this value must  be set according to your configuration, if color components are used. 
+ Continuous asynchronous grabbing is required 
+ (<a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a>/<a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a> with 'continuous_grabbing' enabled).
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'shift_green'</b></td>
+<td><span class="var">&lt;shift&gt;</span></td>
+<td>0.0</td>
+<td>float</td>
+<td>pre-defined</td>
+<td> Shift value (as float) of the green channel. Please note that this value  must be set according to your configuration, if color components are used. 
+ Continuous asynchronous grabbing is required 
+ (<a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a>/<a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a> with 'continuous_grabbing' enabled).
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'shift_red'</b></td>
+<td><span class="var">&lt;shift&gt;</span></td>
+<td>0.0</td>
+<td>float</td>
+<td>pre-defined</td>
+<td> Shift value (as float) of the red channel. Please note that this value must  be set according to your configuration, if color components are used. 
+ Continuous asynchronous grabbing is required 
+ (<a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a>/<a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a> with 'continuous_grabbing' enabled).
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'software_version'</b></td>
+<td>'<span class="var">&lt;version&gt;</span>'</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td>Version number of the SICK software SDK.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'start_async_after_grab_async'</b></td>
+<td>'disable', 'enable'</td>
+<td>'enable'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Status of 'start_async_after_grab_async'.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'start_column'</b></td>
+<td><span class="var">&lt;column&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Returns the current start column of the HALCON image.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'start_row'</b></td>
+<td><span class="var">&lt;default&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>The value is not used, so a default value is returned.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'use_error_handler'</b></td>
+<td>0, 1</td>
+<td>0</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Status of the SICK error handler.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'use_socket_driver'</b></td>
+<td>0, 1</td>
+<td>0</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Current driver mode (1: Normal (Socket driver) / 0: Fast (Fast Ethernet driver).</td>
+</tr>
+<tr class="evenrow">
+<td><b>'vertical_resolution'</b></td>
+<td><span class="var">&lt;default&gt;</span></td>
+<td>1</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>The value is not used, so a default value is returned.</td>
+</tr></table>
+<h2 id="SET_FRAMEGRABBER_LUT">Operator <a class="halconoperator" href="../operators/set_framegrabber_lut.html">set_framegrabber_lut</a></h2><div>Not supported by this interface.</div>
+<h2 id="GET_FRAMEGRABBER_LUT">Operator <a class="halconoperator" href="../operators/get_framegrabber_lut.html">get_framegrabber_lut</a></h2><div>Not supported by this interface.</div>
+<h2 id="SET_FRAMEGRABBER_CALLBACK">Operator <a class="halconoperator" href="../operators/set_framegrabber_callback.html">set_framegrabber_callback</a></h2><div>  <p>     All actually supported callback types of a specific image acquisition 
+    device can be queried by calling <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a> with the 
+    parameter 'available_callback_types'.  Once the callback is registered, 
+    on every occurrence of the underlying event (e.g., the notification 
+    that the exposure has finished) the specified callback function will be 
+    called. If the callback function is set to NULL, the corresponding 
+    callback will be unregistered. 
+  </p> 
+  <p> 
+    The signature of the callback function is 
+    <tt>Herror (__stdcall *HAcqCallback)(void *AcqHandle, void *Context, void *UserContext)</tt> 
+    and uses the following parameters: 
+
+<ul>
+<li><b>AcqHandle</b> 
+        Acquisition handle of the corresponding image acquisition 
+      instance. 
+</li>
+<li><b>Context</b> 
+        Optional context data of the specific callback. 
+</li>
+<li><b>UserContext</b> 
+      User context as set via <a class="halconoperator" href="../operators/set_framegrabber_callback.html">set_framegrabber_callback</a>. 
+</li>
+</ul> 
+  </p> 
+  <b>Using user-callback functions</b> 
+  <p> 
+    Note that the execution time of a user-specific callback function should 
+    always be as short as possible since during the execution of a callback 
+    function the handling of further internal callbacks might be blocked. 
+    This can be achieved by removing the actual processing from the 
+    user-specific callback function to a separate thread that is controlled 
+    via signals or events. 
+  </p>
+</div>
+<table summary="Operator set_framegrabber_callback" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Type</th>
+<th>Description</th>
+<tr class="oddrow">
+<td>'transfer_end'</td>
+<td>Corresponds to the end of the buffer copy in SICK callback         routine. This callback is called by the frame grabber as soon as 
+        there is a full buffer available. See SICK documentation for more 
+        details.
+</td>
+</tr></table>
+<h2 id="GET_FRAMEGRABBER_CALLBACK">Operator <a class="halconoperator" href="../operators/get_framegrabber_callback.html">get_framegrabber_callback</a></h2><div>This interface supports device specific events via the operators       <a class="halconoperator" href="../operators/set_framegrabber_callback.html">set_framegrabber_callback</a> and <a class="halconoperator" href="../operators/get_framegrabber_callback.html">get_framegrabber_callback</a>. For more 
+      information see <a class="halconoperator" href="../operators/set_framegrabber_callback.html">set_framegrabber_callback</a>.
+</div>
+<h2 id="GRAB_IMAGE_START">Operator <a class="halconoperator" href="../operators/grab_image_start.html">grab_image_start</a></h2><div>Starts a new asynchronous grab. See also <a class="halconoperator" href="../operators/grab_image_start.html">grab_image_start</a>.</div>
+<h2 id="GRAB_IMAGE">Operator <a class="halconoperator" href="../operators/grab_image.html">grab_image</a></h2><div><a class="halconoperator" href="../operators/grab_image.html">grab_image</a> starts a new synchronous grab. See also <a class="halconoperator" href="../operators/grab_image.html">grab_image</a>. Note that 
+the interface converts the image from the device to the desired image format 
+specified by the parameters 'image_width', 'image_height', 'start_row', 
+'start_column', 'bits_per_channel', and 'color_space'.
+</div>
+<h2 id="GRAB_IMAGE_ASYNC">Operator <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a></h2><div><a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a> returns an image and starts the next asynchronous grab.       See also <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a>. Note that the interface converts the image 
+      from the device to the desired image format specified by the parameters 
+      'image_width', 'image_height', 'start_row', 'start_column', 
+      'bits_per_channel', and 'color_space'. 'MaxDelay' argument parameter is 
+      ignored, that means that the image age check is deactivated.
+</div>
+<h2 id="GRAB_DATA">Operator <a class="halconoperator" href="../operators/grab_data.html">grab_data</a></h2><div>The SICK-3DCamera interface allows the grabbing of additional data       like mark data or calibrated images. <a class="halconoperator" href="../operators/grab_data.html">grab_data</a> returns an array of 
+      images instead of a multi-channel image like <a class="halconoperator" href="../operators/grab_image.html">grab_image</a> or <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a>. 
+      See also sections <a href="#READING_MARK_DATA">Reading Mark Data</a> and 
+      <a href="#3D_CALIBRATION_AND_RECTIFICATION">3D Calibration and Rectification</a>.
+</div>
+<table summary="Operator grab_data" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Parameter</th>
+<th>Type</th>
+<th>Count</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><b>'image'</b></td>
+<td></td>
+<td></td>
+<td>Depending on the used configuration an array of images is returned.      If calibration and rectification is used, the resulting image data 
+     is also returned. The names of the images can be queried by the 
+     parameter 'channel_names'. The type and the number of images depend on 
+     the used configuration.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'contours'</b></td>
+<td></td>
+<td></td>
+<td>Not used.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'region'</b></td>
+<td></td>
+<td></td>
+<td>Not used.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'data'</b></td>
+<td>tuple</td>
+<td></td>
+<td> If mark data is enabled, the values for each component are returned.</td>
+</tr></table>
+<h2 id="GRAB_DATA_ASYNC">Operator <a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a></h2><div> Same return values as <a class="halconoperator" href="../operators/grab_data.html">grab_data</a>, but here an asynchronous grab is started.</div>
+<h2 id="CLOSE_FRAMEGRABBER">Operator <a class="halconoperator" href="../operators/close_framegrabber.html">close_framegrabber</a></h2><div>This operator closes the device. See also <a class="halconoperator" href="../operators/close_framegrabber.html">close_framegrabber</a>.</div>
+<h2 id="HDEVELOP_EXAMPLES">HDevelop Examples</h2><div>For this interface there are the following examples available: 
+<ul>
+<li>sick-3dcamera.hdev - Benchmark. 
+</li>
+<li>sick-3dcamera_buffer_queue.hdev - 
+  Usage of SICK frame grabber's internal queue of buffers. 
+</li>
+<li>sick-3dcamera_calibration.hdev - 
+  Usage of calibration and rectification. 
+</li>
+<li>sick-3dcamera_components.hdev - 
+  Usage of different parameter sets. 
+</li>
+<li>sick-3dcamera_grabbing_modes.hdev - 
+  Usage of the different grabbing modes. 
+</li>
+<li>sick-3dcamera_objectmodel3d.hdev - 
+  Acquisition and visualization of SICK calibrated 3D data. 
+</li>
+<li>sick-3dcamera_parameters.hdev - 
+  Lists all parameters of a device. 
+</li>
+<li>sick-3dcamera_simple.hdev - 
+  A simple example to show the usage of the interface.
+</li>
+</ul></div>
+<h2 id="RELEASENOTES">Release Notes</h2><div>
+<ul>
+<li><b>Revision 13.0.3</b> (Aug 8, 2018): 
+<ul>
+<li>The technical dependency from the HALCON Library has been removed. 
+</li>
+<li>Camera Link devices support has been set to legacy. 
+</li>
+<li>Now <a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a><tt>(.., 'device'/'info_boards', ..)</tt> only 
+      lists the available Ethernet devices, but not the Camera Link devices 
+      (legacy). 
+</li>
+<li>Now <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a> using 'default' as Device parameter only works 
+      for Ethernet devices. Camera Link devices (legacy) are ignored. To 
+      open a Camera Link device (Ranger C) the device name has to be 
+      indicated, see <a href="#OPEN_FRAMEGRABBER">'Device'</a> parameter in 
+      <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>. 
+</li>
+</ul></li>
+<li><b>Revision 13.0.2</b> (Jul 14, 2017): 
+
+<ul>
+<li>The registration filter (used for color shifting) was allocated 
+      and de-allocated for each grab call, discarding the previous 
+      profiles and avoiding the reuse of the data for shifting. This 
+      problem has been fixed; and now the allocation is done only once. 
+</li>
+<li>Using a camera configuration with no intensity subcomponent led to a 
+      crash in HDevelop when calling a grabbing operator after enabling 
+      the rectification filter. This problem has been fixed. 
+</li>
+<li>The HDevelop example sick-3dcamera_objectmodel3d.hdev has been 
+      improved by checking if a Range component has been loaded and if the 
+      'Rectified Data (Intensity)' is available. 
+</li>
+<li>'do_load_parameters' did not re-initialize the calibration, 
+      rectification and registration filter, if needed. This problem 
+      has been fixed. 
+</li>
+<li>Changing the '&lt;Measurement&gt;number of columns' could lead to a 
+      crash in HDevelop. This problem has been fixed. 
+</li>
+</ul></li>
+<li><b>Revision 13.0.1</b> (Oct 28, 2016): 
+
+<ul>
+<li>HALCON 13 version of the interface. 
+</li>
+</ul></li>
+<li><b>Revision 6.4</b> (Jun 24, 2016): 
+
+<ul>
+<li>The interface has been adapted to support SICK iCon API 5.1 SR1. 
+</li>
+<li>The new Generic parameter 'low_level_timeout' has been added to 
+      set a low level timeout value for Pleora eBus. 
+</li>
+<li>In case of asynchronous grabbing with 'continuous_grabbing' disabled 
+      and 'start_async_after_grab_async' enabled (default mode), a timeout 
+      could happen although a new acquired buffer was already available. This 
+      problem has been fixed. 
+</li>
+<li>The parameter 'image_available' could be '1' in case of continuous 
+      asynchronous grabbing with 'buffer_queue' and 
+      'start_async_after_grab_async' disabled. Since all current buffers 
+      in the SICK frame grabber's internal queue will be discarded, in 
+      the next grabbing call, 'image_available' must remain '0'. This 
+      problem has been fixed. 
+</li>
+<li>Setting 'do_save_parameters' without specifying a value led to a 
+      crash. This problem has been fixed. 
+</li>
+<li>The error code H_ERR_FGABORTED (#5336) is now returned by the grab 
+      operators when a grab has been aborted instead of the former 
+      H_ERR_FGF (#5306). 
+</li>
+<li>In case that the Generic parameter 'use_error_handler' was set to 1 
+      in <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>, the SICK error handler was not removed in 
+      <a class="halconoperator" href="../operators/close_framegrabber.html">close_framegrabber</a>. This problem been fixed. 
+</li>
+<li>A WoW64 note has been added to the <a href="#SYSTEM_REQUIREMENTS"> 
+      System Requirements</a> section. 
+</li>
+</ul></li>
+<li><b>Revision 6.3</b> (Aug 26, 2015): 
+
+<ul>
+<li>When enabling the 'rectification_filter', only the rectified range 
+      was returned. Now the rectified intensity is also returned. Notice 
+      that the channel name (value in 'channel_names') for the rectified 
+      range has been changed from 'Rectified Data' to 'Rectified Data 
+      (Range)'. See section <a href="#3D_CALIBRATION_AND_RECTIFICATION">3D 
+      Calibration and Rectification</a> for further information. 
+</li>
+<li>The HDevelop example sick-3dcamera_objectmodel3d.hdev has been 
+      adapted to extract and display the 'Rectified Data (Range)' and 
+      'Rectified Data (Intensity)'. 
+</li>
+<li>The rectification width was internally set to the same value as 
+      the calibration width. Now this value can be changed via the parameter 
+     'rectification_width'. 
+</li>
+<li>The parameter 'available_param_names' returned some empty parameters 
+      and the subcomponents parameters were missing. This problem has been 
+      fixed. Notice that with SICK iCon 5 API the &lt;PC&gt; parameters are 
+      not available anymore. 
+</li>
+<li>The protocol timeout could not be changed when resetting the camera in 
+      <a class="halconoperator" href="../operators/close_framegrabber.html">close_framegrabber</a> (case 'camera_reset_on_close' = 1), because this 
+      SICK parameter has to be accessed in another way with SICK iCon 5 API. 
+      This problem has been fixed. 
+</li>
+<li>The Generic parameter 'camera_reset_on_close' is only required for 
+      Ethernet devices. For Camera Link devices, this parameter is now 
+      ignored and a note has been added to the parameter description in this 
+      documentation. 
+</li>
+</ul></li>
+<li><b>Revision 6.2</b> (Jul 22, 2015): 
+
+<ul>
+<li><a class="halconoperator" href="../operators/close_framegrabber.html">close_framegrabber</a> crashed if the 'rectification_filter' was enabled. 
+      This problem has been fixed. 
+</li>
+<li>The resources used by the rectification filter were not freed when 
+      disabling the 'rectification_filter'. This problem has been solved. 
+</li>
+</ul></li>
+<li><b>Revision 6.1</b> (May 4, 2015): 
+
+<ul>
+<li>Adapted to SICK iCon API 5.1. 
+</li>
+<li>Removed extraordinary runtime dependencies. 
+</li>
+<li>When using Measurement Component Hi3D COG with a Ranger D or E, 
+      bad images were returned. This problem has been fixed. 
+</li>
+</ul></li>
+<li><b>Revision 6.0</b> (Oct 31, 2014): 
+
+<ul>
+<li>HALCON 12 version of the interface. 
+</li>
+</ul></li>
+<li><b>Revision 5.9</b> (Aug 27, 2014): 
+
+<ul>
+<li>Adapted to SICK iCon API 4.4.3 and eBus driver 3.1. 
+</li>
+<li>Fixed checking relative or absolute path in 'do_save_parameters'. 
+</li>
+<li>Improved error handling of Generic parameter in <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>. 
+</li>
+</ul></li>
+<li><b>Revision 5.8</b> (May 23, 2014): 
+
+<ul>
+<li>Fixed bug in <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a> when freeing resources in case of an 
+      error. 
+</li>
+<li>Improved <a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a><tt>(.., 'camera_type', ..)</tt>. Now the 
+      search path is defined by the environment variable IVP_3D_CAMERA. 
+</li>
+<li>Fixed bug in <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a> when trying to set a parameter 
+      without specifying a value. 
+</li>
+<li>Fixed bug in <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a> when loading a camera parameter (.prm) 
+      file. In some cases, the internal state of the SICK parameters was not 
+      correctly updated. 
+</li>
+</ul></li>
+<li><b>Revision 5.7 Addendum</b> (Mar 20, 2014): 
+
+<ul>
+<li>The LUT file is now set before the calibration filter is enabled in 
+      the HDevelop example 
+       sick-3dcamera_calibration.hdev and 
+       sick-3dcamera_objectmodel3d.hdev. 
+</li>
+</ul></li>
+<li><b>Revision 5.7 Addendum</b> (Oct 11, 2013): 
+
+<ul>
+<li>Added, to this documentation, a hint to load the LUT file before the 
+      calibration filter is enabled. Here, the internal behaviour of the 
+      interface was changed in order to solve a bug 
+      in revision 5.4. 
+</li>
+</ul></li>
+<li><b>Revision 5.7</b> (Jul 23, 2013): 
+
+<ul>
+<li>Adapted to SICK iCon API 4.4: support of eBus driver 3.0, static 
+      port allocation (see <a href="#OPEN_FRAMEGRABBER">'Port'</a> parameter in 
+      <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>) and 64-bit Windows support for Ranger C. 
+</li>
+<li>Added Generic parameter 
+      <a href="#OPEN_FRAMEGRABBER">'camera_reset_on_close'</a> as a workaround to 
+      solve an internal camera problem in case of Ethernet devices. 
+</li>
+<li>Removed the legacy parameters 'module_path', 'module_name' and 
+      'module_value' used to set/get SICK parameter values. Please use 
+      the new handling method for SICK parameters instead (see Release 
+      Notes from Aug 23, 2012). 
+</li>
+<li>Removed the legacy parameter 'trigger_mode'. Please use 
+      '&lt;Image&gt;trig mode' or '&lt;Measurement&gt;trig mode' instead. 
+</li>
+<li>Fixed bug in <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a> in case of Generic parameter 
+      with empty string values. 
+</li>
+</ul></li>
+<li><b>Revision 5.6</b> (May 27, 2013): 
+
+<ul>
+<li>Added new example sick-3dcamera_grabbing_modes.hdev that shows 
+      the behavior of the different grabbing modes 
+      (asynchronous/synchronous) depending on the following parameters: 
+      'continuous_grabbing', 'buffer_queue' and 
+      'start_async_after_grab_async'. 
+</li>
+<li>Improved example sick-3dcamera_buffer_queue.hdev to show 
+      how to recover from overflow in SICK frame grabber's internal 
+      queue of buffers by using 'do_abort_grab'. 
+</li>
+<li>Fixed deadlock bug when registering the 'transfer_end' callback 
+      after enabling 'continuous_grabbing'. 
+</li>
+<li>Fixed bug in 'image_available' parameter in case of continuous 
+      asynchronous grabbing with 'buffer_queue' and 
+      'start_async_after_grab_async' disabled. 
+</li>
+<li>Fixed bug in <a class="halconoperator" href="../operators/grab_image_start.html">grab_image_start</a>. Now the camera and frame grabber will 
+      be correctly set for the next asynchronous grabbing. 
+</li>
+<li>Changed behavior of the 'continuous_grabbing' enabling. Now the camera 
+      and frame grabber will be first started in <a class="halconoperator" href="../operators/grab_image_start.html">grab_image_start</a> or in 
+      the corresponding grabbing operator. 
+</li>
+<li>Fixed calibration filter bug in case of error in <a class="halconoperator" href="../operators/grab_data.html">grab_data</a> or 
+      <a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a>. 
+</li>
+<li>Fixed synchronization bug when using more than one camera. 
+</li>
+</ul></li>
+<li><b>Revision 5.5</b> (Mar 25, 2013): 
+
+<ul>
+<li>Fixed bug in case of using only one component with a 16 bit 
+      representation. 
+</li>
+<li>Reviewed and adapted documentation. 
+</li>
+</ul></li>
+<li><b>Revision 5.4</b> (Feb 26, 2013): 
+
+<ul>
+<li>Added new parameter 'scan_size' to calculate the current number of 
+      buffers in SICK frame grabber's internal queue. 
+</li>
+<li>Added new example sick-3dcamera_buffer_queue.hdev that shows 
+      how to use the SICK frame grabber's internal queue of buffers. 
+</li>
+<li>Added new documentation section <a href="#SICK_BUFFER_QUEUE">'Using SICK 
+      frame grabber's internal queue of buffers section'</a>. 
+</li>
+<li>Fixed typo in the documentation: 'parameter_file' to 'parameters_file'. 
+</li>
+<li>Fixed bug when enabling the mark data with <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a>. 
+</li>
+<li>Fixed bug in the initialization of the calibration filter that could 
+      lead to a corrupted image. 
+</li>
+<li>Fixed thread-safety bug in the initialization of the calibration 
+      filter. 
+</li>
+<li>Fixed bug in 'Range R' and 'Range X' images width in case that the 
+      'rectification_filter' is disabled. 
+</li>
+</ul></li>
+<li><b>Revision 5.3</b> (Nov 16, 2012): 
+
+<ul>
+<li>Added new example sick-3dcamera_objectmodel3d.hdev that shows 
+      how to acquire and visualize SICK calibrated 3D data. 
+</li>
+<li>Fixed bug in case of image acquisition timeout. 
+</li>
+<li>Documentation improvement regarding SICK parameter handling and 
+      'transfer_end' callback. 
+</li>
+</ul></li>
+<li><b>Revision 5.2</b> (Sep 28, 2012): 
+
+<ul>
+<li>Fixed bug in measurement configuration with only 1 component and 
+      'active_channel' = -1. 
+</li>
+<li>Adapted the HDevelop example sick-3dcamera_components.hdev 
+      to be compatible with cameras that only support one single measurement 
+      configuration component. 
+</li>
+<li>Fixed bug when changing some SICK parameters with 'Argument' type 
+      (e.g., '&lt;Measurement&gt;scan height'). Now, if the data from the 
+      camera has changed, not only the camera and the frame grabber are 
+      stopped, but also disconnected. 
+</li>
+<li>Improvement in <a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a><tt>(.., 'defaults', ..)</tt>: Now 
+      the 'device' parameter default value is 'default' (instead of '0'). 
+      When using the 'default' value in <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>, the first 
+      Ethernet (or Camera Link) device found will be opened. 
+</li>
+</ul></li>
+<li><b>Revision 5.1</b> (Aug 23, 2012): 
+
+<ul>
+<li>The <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a> input parameter 'ExternalTrigger' has been 
+      deprecated to avoid confusion with SICK trigger mode methodology. Now 
+      this parameter is ignored and current camera configuration is kept. 
+      Please notice that your code may require an adaptation. Notice that, 
+      in case of 'ExternalTrigger'='true', 'use enable' was set to '2' and 
+      in case of 'ExternalTrigger'='false', 'use enable' was set to '0'. 
+</li>
+<li>Fixed bug in the 'Rectified Data'. If a high-resolution measurement 
+      component was available, the 'Rectified Data' width was not correctly 
+      set. Now 'Range R' and 'Rectified Data' have the same width. 
+</li>
+<li>Fixed bug in parameter 'channel_names'. When enabling the calibration/ 
+      rectification filter, in case of only 1 measurement component, 
+      'channel_names' was not correctly updated. 
+</li>
+<li>Improvement in parameter 'rectification_filter'. Now to enable this 
+      parameter, the 'calibration_filter' has to be previously enabled. 
+</li>
+<li>Improvement to verify if the Ethernet camera application version is 
+      compatible (>= 4.3.0.88) with the fast driver mode. If not compatible 
+      an error is returned. 
+</li>
+<li>Adapted grab engine to allow the use of frame grabber's internal queue 
+      of buffers in case of 'continuous_grabbing' enabled and improve CPU 
+      usage. 
+</li>
+<li>Added new parameter 'buffer_queue' to enable/disable the use of the 
+      frame grabber's internal queue of buffers. 
+</li>
+<li>Removed Generic parameter 'num_buffers' to avoid confusion with 
+      frame grabber's internal queue of buffers. 
+</li>
+<li>Fixed bug in 'grab_timeout' parameter. Now '-1'(INFINITE) value is 
+      correctly set. 
+</li>
+<li>Added 'do_abort_grab' functionality. 
+</li>
+<li>Adapted parameter 'camera_status' to also show Ranger C camera status. 
+</li>
+<li>Added implementation of queries <a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a><tt> 
+      (.., 'info_boards', ..)</tt> and <a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a><tt> 
+      (.., 'device', ..)</tt> to also list Ranger C devices in case of 32 bit 
+      OS. In case of 'info_boards', more detailed information is returned. 
+</li>
+<li>Updated the HDevelop example  sick-3dcamera.hdev to use 
+      <a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a><tt>(.., 'device', ..)</tt> query to list the available 
+      devices. 
+</li>
+<li>Fixed bug in parameter 'active_channel' when changing from one channel 
+      to another channel with bigger image width. 
+</li>
+<li>Fixed bug in parameter 'configuration'. Now after changing the 
+      configuration, 'active_channel' is set to '-1' in case of 'measurement' 
+      configuration and to '0' in case of 'image' configuration. 
+</li>
+<li>Added new parameter handling method for SICK parameters. Values can be 
+      set/get using <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a>/<a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a>. The name 
+      of the parameter needs a prefix to indicate the corresponding 
+      configuration and component (e.g. '&lt;Measurement&gt;&lt;Gray 2&gt;start 
+      row'). Use 'available_param_names' parameter to obtain a list of the 
+      current available parameters. 
+</li>
+<li>Added new parameters 'available_param_names' and 
+      'available_param_descriptions' to list the current available 
+      parameters and the corresponding description. 
+</li>
+<li>The parameters 'module_path', 'module_name' and 'module_value' are set 
+      legacy (not available in HDevelop Image Acquisition Assistant). 
+</li>
+<li>The parameter 'trigger_mode' is set legacy (not available in HDevelop 
+      Image Acquisition Assistant). Instead, use '&lt;Image&gt;trig mode' or 
+      '&lt;Measurement&gt;trig mode'. 
+</li>
+<li>Updated the HDevelop examples  sick-3dcamera_components.hdev 
+      and sick-3dcamera_parameters.hdev to show the new parameters 
+      handling method. 
+</li>
+<li>Added functionality to handle 'transfer_end' callback and the new 
+      parameter 'available_callback_types'. 
+</li>
+<li>Improved parameter handling in HDevelop Image Acquisition Assistant. 
+</li>
+<li>Added new parameters 'do_load_parameters' and 'parameters_file' to be 
+      able to load previous saved configurations (.prm file). 
+</li>
+<li>Updated the HDevelop example  sick-3dcamera_components.hdev to 
+      show how to use the new parameters 'do_load_parameters' and 
+      'parameters_file'. 
+</li>
+</ul></li>
+<li><b>Revision 5.0</b> (May 15, 2012): 
+
+<ul>
+<li>HALCON 11 version of the interface (included in HALCON 11 DVD). 
+</li>
+</ul></li>
+<li><b>Revision 4.7</b> (Oct 13, 2011): 
+
+<ul>
+<li>Adapted to SICK iCon API 4.3 with support of eBus driver 
+      for 64-bit Windows. 
+</li>
+<li>Changed requirements for x86 version of the interface from 
+      Microsoft Visual C++ 2005 Redistributable Package to 
+      Microsoft Visual C++ 2008 Redistributable Package. 
+</li>
+<li>Fixed problems with lost packets when setting parameters 
+      'configuration', 'module_value', or 'trigger_mode'. 
+</li>
+<li>Fixed problem with message boxes of the SICK error handler. 
+</li>
+<li>Added parameter 'camera_status' to show the current camera status. 
+</li>
+<li>Added Generic parameter 'use_socket_driver=1' to allow usage of 
+      the socket driver (driver mode: Normal). 
+</li>
+<li>Added setting of 'redundancy frequency' and 'heartbeat interval' 
+      to <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>. If these values are zero a default 
+      of 10s for 'redundancy frequency' and 180s for 'heartbeat interval' 
+      are set. 
+</li>
+<li>Added parameter 'camera_start_delay' to make it possible to delay 
+      the start of the camera. 
+</li>
+</ul></li>
+<li><b>Revision 4.6</b> (May 30, 2011): 
+
+<ul>
+<li>Fixed problem in <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a> regarding 
+      setting specific parameter values via 'module_value'. Now, 
+      the value is correctly set. 
+</li>
+</ul></li>
+<li><b>Revision 4.5</b> (Mar 11, 2011): 
+
+<ul>
+<li>Adapted to SICK iCon API 4.2 with support of Windows 7 and 
+      Windows XP x64 editions. 
+</li>
+<li>Fixed display problem of <a class="halconoperator" href="../operators/grab_image.html">grab_image</a>/<a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a> 
+      if a configuration with only one high resolution channel is used. 
+</li>
+<li>Fixed exception when using parameter 'active_channel' in 
+      combination with a high resolution image. 
+</li>
+<li>Improved behavior of parameter 'channel_names': Now the correct 
+      values are returned, even if only one channel is active. 
+</li>
+<li>Changed default value of parameter 'active_channel' to -1. 
+      Thus, it is also possible to reset this value. 
+</li>
+</ul></li>
+<li><b>Revision 4.4</b> (Oct 20, 2010): 
+
+<ul>
+<li>Fixed crashes while grabbing an image (caused by using wrong 
+      runtime libraries). 
+</li>
+<li>Fixed additional restart of acquisition when using external 
+      trigger with asynchronous grab and calibration filter. 
+</li>
+<li>Fixed problem causing error message #6001 ('Not enough memory 
+      available') when using calibration and rectification filter. 
+</li>
+</ul></li>
+<li><b>Revision 4.3</b> (Jul 30, 2010): 
+
+<ul>
+<li>Adapted to SICK iCon API 4.1. 
+</li>
+<li>Added support of color components to 
+      <a class="halconoperator" href="../operators/grab_image.html">grab_image</a>/<a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a> and <a class="halconoperator" href="../operators/grab_data.html">grab_data</a>/<a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a>. 
+</li>
+<li>Added parameters 'buffer_size', 'device_type', 
+      'interpolation_method', 'num_buffers', 'shift_blue', 
+      'shift_green', 'shift_red', 'start_async_after_grab_async', 
+      and 'use_error_handler'. 
+</li>
+<li>Added additional mark data information. Now the mark data for 
+      every scan is returned. The component name of the mark data values 
+      has been added for better readability. 
+</li>
+<li>Added trigger modes 3, 4, and 5 to parameter 'trigger_mode'. 
+</li>
+<li>Added 'num_buffers' to the Generic parameter in 
+      <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a> to allow setting of the used number 
+      of buffers. 
+</li>
+<li>Added the possibility to enable SICK error handler to the Generic 
+      parameter in <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>. 
+</li>
+<li>Added descriptions of parameters, which can be 
+      requested by 
+      <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a><tt>(..., '&lt;parameter_name&gt;_description', ...)</tt>. 
+</li>
+<li>Fixed problem when trying to set parameter 'trigger_mode' 
+      before an image has been grabbed. 
+</li>
+<li>Adapted example programs to support prm files with color components. 
+</li>
+<li>HALCON 10 version of the interface (included in HALCON 10 DVD). 
+</li>
+</ul></li>
+<li><b>Revision 4.2</b> (Mar 10, 2010): 
+
+<ul>
+<li>Fixed bug in 3D calibration functionality in combination 
+      with 'High 3D COG' configuration files. Note that for 
+      this fix it is necessary to use version 4.0.2.0 
+      of the SICK 3DCamera SDK installed. Otherwise, the call of 
+      <a class="halconoperator" href="../operators/grab_data.html">grab_data</a> or <a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a> will crash. 
+</li>
+<li>Added implementation of 
+      <a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a><tt>(.., 'generic', ...)</tt> to query all 
+      supported values for the Generic parameter in <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>. 
+</li>
+</ul></li>
+<li><b>Revision 4.1</b> (Feb 12, 2010): 
+
+<ul>
+<li>Fixed bug in operator 
+      <a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a><tt>(.., 'info_boards', ..)</tt> 
+      to prevent application termination. 
+</li>
+<li>Changed behavior of parameters 'external_trigger' and 
+      'trigger_mode': Now, 'external_trigger' correctly sets the 
+      parameter 'use enable' of the SICK API instead of 'trig mode'. 
+      The parameter 'trigger_mode' is now independent from the 
+      setting of the 'external_trigger' parameter. 
+</li>
+<li>In measurement mode, setting 'external trigger' to 
+      'true' in <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a> was ignored. 
+      This bug has been fixed. 
+</li>
+<li>Added paragraph about the difference between the image 
+      representation in Ranger Studio and HALCON. 
+</li>
+</ul></li>
+<li><b>Revision 4.0</b> (Nov 11, 2009): 
+
+<ul>
+<li>First official release.
+</li>
+</ul></li>
+</ul></div>
+  <!-- toc end -->  <hr> 
+  <div class="imprint"> 
+    <span class="imprinthead">Legal disclaimer regarding hyperlinks</span>: 
+    This page may provide users with access by hypertext links to external, non-MVTec websites. 
+Any such access is provided with the understanding that the contents 
+of non-MVTec sites are beyond the control of MVTec Software GmbH, that 
+MVTec Software GmbH makes no representations whatsoever about such 
+sites, and that users shall proceed at their own risk. 
+MVTec Software GmbH is not responsible for the privacy practices or 
+the content of external, non-MVTec websites.
+ 
+  </div> 
+  <div class="imprint"> 
+    <span class="imprinthead">Copyright notes</span>: 
+    &copy; Copyright MVTec Software GmbH. All rights reserved. 
+Unless otherwise stated, the copyright and similar rights in the 
+contents of this page, including but not limited to all text, designs 
+and images appearing herein, are copyrighted works owned by MVTec 
+Software GmbH. 
+"MVTec Software GmbH" and "HALCON" are registered trademarks of MVTec 
+Software GmbH. 
+All other brand names, designs, service marks and trademarks (whether 
+or not registered) referenced or used herein are the property of their 
+respective owners.
+ 
+  </div> 
+  <div class="footer"> 
+    acqdump 1.5 / hdoc 1.2 / Generated: Wed Aug  8 15:26:35 CEST 2018 
+  </div> 
+  </body> 
+</html>

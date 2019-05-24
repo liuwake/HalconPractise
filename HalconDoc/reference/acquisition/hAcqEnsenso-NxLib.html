@@ -1,0 +1,1133 @@
+<!DOCTYPE HTML> 
+<html> 
+  <head> 
+  <meta id='acqdump-id' name='acqdump-id' content='halcon-acq-Ensenso-NxLib-rev13.0.4'> 
+  <title>Ensenso-NxLib / HALCON / MVTec Software GmbH</title> 
+      <style type="text/css"> 
+      body { 
+        color: #000000; 
+        background-color: #ffffff; 
+        margin-top: 0px; 
+        margin-bottom: 0px; 
+        margin-left: 20px; 
+        margin-right: 20px; 
+        font-family: Arial,Helvetica,sans-serif; 
+      } 
+      a:link { 
+        color: #0044cc; 
+      } 
+      a:link,a:visited { 
+        text-decoration: none; 
+      } 
+      a:link:hover,a:visited:hover { 
+        text-decoration: underline; 
+      } 
+      th { 
+        text-align: left; 
+      } 
+      h1,h2,h3,h4,h5,h6 { 
+        text-rendering: optimizeLegibility; 
+        color: #666666; 
+      } 
+      tt { 
+        font-family: monospace,monospace; 
+      } 
+      h1 a.halconoperator { 
+        font-family: Arial,Helvetica,sans-serif; 
+        color: #666666; 
+      } 
+      h2 a.halconoperator { 
+        font-family: Arial,Helvetica,sans-serif; 
+        color: #666666; 
+      } 
+      hr { 
+        border: 0; 
+        border-top: solid 1px #f28d26; 
+      } 
+      pre { 
+        font-family: monospace,monospace; 
+        padding: 1ex; 
+        white-space: pre-wrap; 
+      } 
+      .toc { 
+        font-size: 80%; 
+        border-top: 1px dashed #f28d26; 
+        border-bottom: 1px dashed #f28d26; 
+        padding-top: 5px; 
+        padding-bottom: 5px; 
+      } 
+      .inv { 
+        margin: 0; 
+        border: 0; 
+        padding: 0; 
+      } 
+      .banner { 
+        color: #666666; 
+        padding-left: 1em; 
+      } 
+      .logo { 
+        background-color: white; 
+      } 
+      .keyboard { 
+        font-size: 80%; 
+        padding-left: 3px; 
+        padding-right: 3px; 
+        border-radius: 5px; 
+        border-width: 1px; 
+        border-style: solid; 
+        border-color: #f28d26; 
+        background-color: #f3f3f3; 
+      } 
+      .warning { 
+        margin-top: 2ex; 
+        margin-bottom: 1ex; 
+        padding: 10px; 
+        text-align: center; 
+        border: 1px solid; 
+        color: #bb0000; 
+        background-color: #fff7f7 
+      } 
+      .imprint { 
+        margin-top: 1ex; 
+        font-size: 80%; 
+        color: #666666; 
+      } 
+      .imprinthead { 
+        font-weight: bolder; 
+        color: #666666; 
+      } 
+      .postscript { 
+        margin-top: 2ex; 
+        font-size: 80%; 
+        color: #666666 
+      } 
+      .evenrow { 
+        background-color: #e7e7ef; 
+        vertical-align: top; 
+      } 
+      .oddrow { 
+        background-color: #f7f7ff; 
+        vertical-align: top; 
+      } 
+      .headrow { 
+        background-color: #97979f; 
+        color: #ffffff; 
+        vertical-align: top; 
+      } 
+      .logorow { 
+        vertical-align: top; 
+      } 
+      .error { 
+        color: red; 
+      } 
+      .var { 
+        font-style: italic 
+      } 
+      .halconoperator { 
+        font-family: monospace,monospace; 
+      } 
+      .halconprocedure { 
+        font-family: Consolas,Inconsolata,"DejaVu Sans Mono",monospace; 
+      } 
+      span.operator { 
+        font-family: monospace,monospace; 
+      } 
+      span.procedure { 
+        font-family: monospace,monospace; 
+      } 
+      span.operation { 
+        font-family: monospace,monospace; 
+      } 
+      span.feature { 
+        font-family: Arial,Helvetica,Homerton,sans-serif; 
+      } 
+      ul { 
+        padding-left: 1.2em; 
+      } 
+      li.dot { 
+        list-style-type: square; 
+        color: #f28d26; 
+      } 
+      .breadcrumb { 
+        font-size: 80%; 
+        color: white; 
+        background-color: #062d64; 
+        margin-left: -20px; 
+        margin-right: -20px; 
+        margin-bottom: 20px; 
+        padding-left: 20px; 
+        padding-right: 20px; 
+        padding-bottom: 15px; 
+      } 
+      .webbar { 
+        font-size: 80%; 
+        background-color: #dddddd; 
+        margin-top: 0px; 
+        margin-left: -20px; 
+        margin-right: -20px; 
+        margin-bottom: 0px; 
+        padding-top: 5px; 
+        padding-left: 20px; 
+        padding-right: 20px; 
+        padding-bottom: 5px; 
+      } 
+      .footer { 
+        border-top: 1px dashed #f28d26; 
+        font-size: 80%; 
+        color: #666666; 
+        margin-left: -20px; 
+        margin-right: -20px; 
+        margin-top: 0px; 
+        padding-left: 20px; 
+        padding-right: 20px; 
+        padding-top: 10px; 
+        padding-bottom: 15px; 
+      } 
+      .breadcrumb a { 
+        color: #ffffff; 
+        border-bottom: 1px solid white; 
+      } 
+      .breadcrumb a:link:hover,.breadcrumb a:visited:hover { 
+        text-decoration: none; 
+        border-bottom: none; 
+      } 
+      .heading { 
+        margin-top: 1ex; 
+        font-size: 110%; 
+        font-weight: bold; 
+        color: #666666; 
+      } 
+      .text { 
+        color: black; 
+      } 
+      .example { 
+        font-size: 80%; 
+        background-color: #f3f3f3; 
+        border: 1px dashed #666666; 
+        padding: 10px; 
+      } 
+      .math { 
+      } 
+      .displaymath { 
+        text-align: center; 
+        margin-top: 1ex; 
+        margin-bottom: 1ex; 
+      } 
+      </style> 
+  </head> 
+  <body><div class="breadcrumb"> 
+<br class="inv"/> 
+<a href="../../../../documentation.html">HALCON</a> / <a href="acq-overview.html">Image Acquisition Interfaces</a> 
+<br class="inv"/> 
+</div> 
+<h1>Image Acquisition Interface for Ensenso 3D Sensors</h1> 
+<table summary="Image Acquisition Interface for Ensenso 3D Sensors"> 
+  <tr> 
+    <td> 
+      Interface: 
+    </td> 
+    <td> 
+      Ensenso-NxLib 
+    </td> 
+  </tr> 
+  <tr> 
+    <td> 
+      Revision: 
+    </td> 
+    <td> 
+      13.0.4 
+    </td> 
+  </tr> 
+  <tr> 
+    <td> 
+      Date: 
+    </td> 
+    <td> 
+      2018-02-19 
+    </td> 
+  </tr> 
+</table>
+<ul class="toc">
+<li><a href="#GENERAL">General</a></li>
+<li><a href="#GENERAL_SYSTEM_REQUIREMENTS">General system requirements for using Ensenso-NxLib</a></li>
+<li><a href="#INSTALLATION">Installation</a></li>
+<li><a href="#FEATURES">Features</a></li>
+<li><a href="#LIMITATIONS">Limitations</a></li>
+<li><a href="#USE_MULTIPLE_SENSORS_SIMULTANEOUSLY">Use multiple sensors simultaneously</a></li>
+<li><a href="#INFO_FRAMEGRABBER">Parameters for info_framegrabber</a></li>
+<li><a href="#OPEN_FRAMEGRABBER">Parameters for open_framegrabber</a></li>
+<li><a href="#SET_FRAMEGRABBER_PARAM">Parameters for set_framegrabber_param</a></li>
+<li><a href="#GET_FRAMEGRABBER_PARAM">Parameters for get_framegrabber_param</a></li>
+<li><a href="#SET_FRAMEGRABBER_LUT">Operator set_framegrabber_lut</a></li>
+<li><a href="#GET_FRAMEGRABBER_LUT">Operator get_framegrabber_lut</a></li>
+<li><a href="#SET_FRAMEGRABBER_CALLBACK">Operator set_framegrabber_callback</a></li>
+<li><a href="#GET_FRAMEGRABBER_CALLBACK">Operator get_framegrabber_callback</a></li>
+<li><a href="#GRAB_IMAGE_START">Operator grab_image_start</a></li>
+<li><a href="#GRAB_IMAGE">Operator grab_image</a></li>
+<li><a href="#GRAB_IMAGE_ASYNC">Operator grab_image_async</a></li>
+<li><a href="#GRAB_DATA">Operator grab_data</a></li>
+<li><a href="#GRAB_DATA_ASYNC">Operator grab_data_async</a></li>
+<li><a href="#CLOSE_FRAMEGRABBER">Operator close_framegrabber</a></li>
+<li><a href="#HDEVELOP_EXAMPLES">HDevelop Examples</a></li>
+<li><a href="#RELEASENOTES">Release Notes</a></li>
+</ul>
+  <!-- toc start -->
+<h2 id="GENERAL">General</h2><div> This page provides the documentation of the HALCON image acquisition  interface for <a href="http://www.ensenso.de/index.php/products">Ensenso</a> 3D sensors. 
+ <a href="http://www.mvtec.com/download/registration">Registered</a> customers can download the 
+ <a href="http://www.mvtec.com/halcon/download">latest revision</a> of this interface from the 
+ <a href="http://www.mvtec.com">MVTec WWW server</a>.
+</div>
+<h2 id="GENERAL_SYSTEM_REQUIREMENTS">General system requirements for using Ensenso-NxLib</h2><div>
+<ul>
+<li>Intel compatible PC with Windows    7 (32-bit or 64-bit) 
+   or newer that is also supported by the vendor-specific SDK, 
+   also WoW64 (using 32-bit HALCON on 64-bit Windows) 
+</li>
+<li><b>Windows:</b> HALCON image acquisition interface 
+   <b>hAcqEnsenso-NxLib.dll</b> or <b>hAcqEnsenso-NxLibxl.dll</b>. 
+   If you have properly installed the interface, both DLLs should reside in 
+   <tt>bin\%HALCONARCH%</tt> within the HALCON base directory %HALCONROOT% 
+   you have chosen during the installation of HALCON.<br> 
+   For N10 camera models: IDS uEye driver version 4.40 or higher.<br> 
+   For N20 camera models: IDS uEye driver version 4.41 or higher.<br> 
+   Successful installation of EnsensoSDK 1.3.171 or higher. 
+   <br> 
+   <b>Linux:</b> HALCON image acquisition interface 
+   <b>hAcqEnsenso-NxLib.so</b> or <b>hAcqEnsenso-NxLibxl.so</b>. 
+   If you have properly installed the interface, both DLLs should reside in 
+   <tt>lib\%HALCONARCH%</tt> within the HALCON base directory %HALCONROOT% 
+   you have chosen during the installation of HALCON.<br> 
+   For N10 camera models: IDS uEye driver version 4.40 or higher.<br> 
+   For N20 camera models: IDS uEye driver version 4.41 or higher.<br> 
+   Successful installation of EnsensoSDK-1.3.180 or higher. 
+</li>
+<li>Please check, if the installation of the NxLib drivers was successful 
+   by opening a camera within the NxView program provided by Ensenso.
+</li>
+</ul></div>
+<h2 id="INSTALLATION">Installation</h2><div>Only when installing or updating the interface manually follow these steps: <br> 
+
+<ul>
+<li><b>Windows:</b> Extract the archive containing the interface files to the 
+  HALCON base directory %HALCONROOT% (Note: Administrator privileges may be 
+  required for this step). Additionally, you have to move the interface 
+  examples to the directory %HALCONEXAMPLES% manually.
+</li>
+</ul></div>
+<h2 id="FEATURES">Features</h2><div>
+<ul>
+<li>Support of <a class="halconoperator" href="../operators/grab_image.html">grab_image</a> to get the left and right sensor image. </li>
+<li>Support of <a class="halconoperator" href="../operators/grab_data.html">grab_data</a>. Pending on the configuration the user can retrieve 
+   the sensor image, the calibrated X, Y, and Z images (each float) and the 
+   corresponding region. 
+</li>
+<li>Support of multiple sensors. 
+</li>
+<li>Support of trigger multiple sensors simultaneously.
+</li>
+</ul></div>
+<h2 id="LIMITATIONS">Limitations</h2><div>
+<ul>
+<li>Asynchronous grabbing is only supported by executing    NxLib <a href="http://www.ensenso.de/manual/commands.htm">commands</a> manually.
+</li>
+</ul></div>
+<h2 id="USE_MULTIPLE_SENSORS_SIMULTANEOUSLY">Use multiple sensors simultaneously</h2><div>
+<ul>
+<li>The HALCON Ensenso-NxLib Image Acquisition Interface provides the option to    use multiple devices simultaneously. Therefor a global item handle 
+   to the global NxLib Tree node could be defined. The global NxLib Tree is 
+   a full representation of all Options and features provided by the interface. 
+   If the global handle is used together with <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a>, and e.g. 
+   with the parameter 'do_execute', all connected devices will receive the 
+   specified command simultaneously. 
+</li>
+<li>Please have a look at the example ensenso-nxlib_2cameras.hdev and 
+   the <a href="http://www.ensenso.de/manual">NxLib documentation</a>. 
+</li>
+<li>To get information about how to create a global NxLib Tree node handle with 
+   access to the global parameter, please see also the open_framgrabber 
+   parameter 'CameraType' and the required 'Item' value.
+</li>
+</ul></div>
+<h2 id="INFO_FRAMEGRABBER">Parameters for <a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a></h2><div></div>
+<table summary="Parameters for info_framegrabber" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Parameter</th>
+<th>Value List</th>
+<th>Type</th>
+<th>Kind</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><b>'bits_per_channel'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unsupported Query</td>
+</tr>
+<tr class="evenrow">
+<td><b>'camera_type'</b></td>
+<td>['Stereo', 'Monocular', 'Item']</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Value list for camera type parameter.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'color_space'</b></td>
+<td>'Raw', 'Rectified'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Image type from <a class="halconoperator" href="../operators/grab_image.html">grab_image</a>.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'defaults'</b></td>
+<td>[0, 0, 0, 0, 0, 0, 'default', -1, 'Raw', -1.0, 'false', 'Stereo', '', 0, 0]</td>
+<td>mixed</td>
+<td>pre-defined</td>
+<td>Default values for <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'device'</b></td>
+<td><span class="var">&lt;serial_number&gt;</span></td>
+<td>string</td>
+<td>dynamic</td>
+<td>Shows all connected devices listed via the serial number.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'external_trigger'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unsupported Query</td>
+</tr>
+<tr class="oddrow">
+<td><b>'field'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unsupported Query</td>
+</tr>
+<tr class="evenrow">
+<td><b>'general'</b></td>
+<td>[]</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Information about the HALCON Ensenso-NxLib interface.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'generic'</b></td>
+<td>[-1, '', 'auto_grab_data=<span class="var">&lt;0|1&gt;</span>', 'parallel_execution=<span class="var">&lt;0|1&gt;</span>']</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Possible values of the Generic parameter.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'horizontal_resolution'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unsupported Query</td>
+</tr>
+<tr class="oddrow">
+<td><b>'image_height'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unsupported Query</td>
+</tr>
+<tr class="evenrow">
+<td><b>'image_width'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unsupported Query</td>
+</tr>
+<tr class="oddrow">
+<td><b>'info_boards'</b></td>
+<td><span class="var">&lt;device:serial_number status:[available, used]&gt;</span></td>
+<td>string</td>
+<td>dynamic</td>
+<td>Shows all connected devices listed via the serial number.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'line_in'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unsupported Query</td>
+</tr>
+<tr class="oddrow">
+<td><b>'parameters'</b></td>
+<td>['<span class="var">&lt;parameters&gt;</span>']</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Pre-defined parameters of the HALCON interface.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'parameters_readonly'</b></td>
+<td>['<span class="var">&lt;parameters&gt;</span>']</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Pre-defined read-only parameters of the HALCON interface.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'parameters_writeonly'</b></td>
+<td>['<span class="var">&lt;parameters&gt;</span>']</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Pre-defined write-only parameters of the HALCON interface.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'port'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unsupported Query</td>
+</tr>
+<tr class="oddrow">
+<td><b>'revision'</b></td>
+<td>'<span class="var">&lt;revision&gt;</span>'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Revision number of the Ensenso-NxLib interface.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'start_column'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unsupported Query</td>
+</tr>
+<tr class="oddrow">
+<td><b>'start_row'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unsupported Query</td>
+</tr>
+<tr class="evenrow">
+<td><b>'vertical_resolution'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unsupported Query</td>
+</tr></table>
+<h2 id="OPEN_FRAMEGRABBER">Parameters for <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a></h2><div> This operator opens a camera and returns a handle to it. Each camera handle  is a reference to an <a href="http://www.ensenso.de/manual/_.htm">NxLib API Tree</a> node. Note that to each 
+ camera only one handle can be opened.
+</div>
+<table summary="Parameters for open_framegrabber" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Parameter</th>
+<th>Values</th>
+<th>Default</th>
+<th>Type</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><b>Name</b></td>
+<td>'Ensenso-NxLib'</td>
+<td></td>
+<td>string</td>
+<td>Name of the HALCON interface.</td>
+</tr>
+<tr class="evenrow">
+<td><b>HorizontalResolution</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Ignored</td>
+</tr>
+<tr class="oddrow">
+<td><b>VerticalResolution</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Ignored</td>
+</tr>
+<tr class="evenrow">
+<td><b>ImageWidth</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Ignored</td>
+</tr>
+<tr class="oddrow">
+<td><b>ImageHeight</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Ignored</td>
+</tr>
+<tr class="evenrow">
+<td><b>StartRow</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Ignored</td>
+</tr>
+<tr class="oddrow">
+<td><b>StartColumn</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Ignored</td>
+</tr>
+<tr class="evenrow">
+<td><b>Field</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Ignored</td>
+</tr>
+<tr class="oddrow">
+<td><b>BitsPerChannel</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Ignored</td>
+</tr>
+<tr class="evenrow">
+<td><b>ColorSpace</b></td>
+<td>'Raw', 'Rectified'</td>
+<td>'Raw'</td>
+<td>string</td>
+<td>Specifies the image type returned by <a class="halconoperator" href="../operators/grab_image.html">grab_image</a>.</td>
+</tr>
+<tr class="oddrow">
+<td><b>Generic</b></td>
+<td>[-1, '', 'auto_grab_data=<span class="var">&lt;0|1&gt;</span>', 'parallel_execution=<span class="var">&lt;0|1&gt;</span>']</td>
+<td>-1</td>
+<td>mixed</td>
+<td>With the Generic parameter some important values can be set before the device is initialized. Note that the parameter names 
+including the values must be strings. 
+
+<ul>
+<li><b>auto_grab_data</b>: 
+  With 'auto_grab_data=1' grabbing is done automatically (default) within 
+  the operator <a class="halconoperator" href="../operators/grab_image.html">grab_image</a> and <a class="halconoperator" href="../operators/grab_data.html">grab_data</a>. With 'auto_grab_data=0' no 
+  NxLib <a href="http://www.ensenso.de/manual/commands.htm">commands</a> are executed automatically, i.e. 
+  no images are acquired and only the current images will be returned. 
+  Therewith the user can (and must) execute all NxLib 
+  <a href="http://www.ensenso.de/manual/commands.htm">commands</a> manually and has full control over the 
+  NxLib functions. This is useful to grab from several devices simultaneously 
+  or use other NxLib functionality from within HALCON. To get further 
+  information about simultaneuous grabbing, please have a look at the Develop 
+  example ensenso-nxlib_2cameras.hdev. Specifying an empty string will 
+  also disable the auto_grab_data feature. 
+</li>
+<li><b>parallel_execution</b> 
+  With 'parallel_execution=1', the handle uses its own 
+  <a href="http://www.ensenso.de/manual/commands.htm">execute node</a> in the NxLib. Herewith you can execute 
+  multiple commands in parallel.
+</li>
+</ul></td>
+</tr>
+<tr class="evenrow">
+<td><b>CameraType</b></td>
+<td>'Stereo', 'Monocular', 'Item'</td>
+<td>'Stereo'</td>
+<td>string</td>
+<td>Camera type of the used device model. With 'Stereo' or               'Monocular' <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a> configures the returned 
+              handle to acquire 3D data or images from the device. If 
+              the value 'Item' is specified, no camera will be opened 
+              and the interface returns a handle associated with an 
+              arbitrary NxLib tree item. The item path can be specified 
+              in the 'device' parameter. This is useful to access global 
+              parameters or to use advanced functions of NxLib from 
+              within HALCON.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>Device</b></td>
+<td>['', <span class="var">&lt;serial_number&gt;</span>, <span class="var">&lt;eeprom_id&gt;</span>]</td>
+<td></td>
+<td>string</td>
+<td>Possible values to connect to a device. With an empty              string the first available device will be used.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>Port</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Ignored</td>
+</tr>
+<tr class="oddrow">
+<td><b>LineIn</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Ignored</td>
+</tr></table>
+<h2 id="SET_FRAMEGRABBER_PARAM">Parameters for <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a></h2><div> This operator is used for direct write access on the  <a href="http://www.ensenso.de/manual/_.htm">NxLib API Tree</a> and HALCON specific parameters.
+</div>
+<table summary="Parameters for set_framegrabber_param" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Parameter</th>
+<th>Values</th>
+<th>Default</th>
+<th>Type</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><b>'auto_grab_data'</b></td>
+<td>'true', 'false'</td>
+<td>'true'</td>
+<td>string</td>
+<td>With 'auto_grab_data' set to 'true' the necessary steps to              acquire an image or 3D data is handled internally by the 
+             HALCON Ensenso-NxLib Image Acquisition Interface.<br> 
+             By disabling this flag, the user has full control of the 
+             NxLib functions. In this case, the user has to run all 
+             NxLib <a href="http://www.ensenso.de/manual/commands.htm">commands</a> manually.<br>
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'do_close_tcp_port'</b></td>
+<td>[]</td>
+<td></td>
+<td>integer</td>
+<td>Close the TCP port for NxLibRemote.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'do_execute'</b></td>
+<td>'Capture', 'ComputeDisparityMap', 'ComputePointMap', ...</td>
+<td></td>
+<td>string</td>
+<td>The parameter 'do_execute' provides the command execution               of NxLib. The 'do_execute' parameter is only supported on 
+              handles referencing the tree's root node. To get a handle 
+              to the tree root node, please see the <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a> 
+              parameter CameraType with the value 'Item'. If the parameter 
+              'auto_grab_data' is set to 'true', the NxLib <a href="http://www.ensenso.de/manual/commands.htm">commands</a> 
+              are handled inside the HALCON Ensenso-NxLib Image Acquisition 
+              Interface automatically.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'do_open_tcp_port'</b></td>
+<td><span class="var">&lt;port&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>Open a TCP port. If a socket is created by the call of               'do_open_tcp_port', a connection from NxTreeEdit could be 
+              established. NxTreeEdit is a Tree Viewer provided with the 
+              installation of Ensenso. Please note, that you have to 
+              take care about the correct architecture of NxTreeEdit. 
+              Please use the NxTreeEdit matching the architecture of 
+              your running HALCON instance (32bit/64bit).
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'grab_data_items'</b></td>
+<td>['<span class="var">&lt;image_node_path&gt;</span>']</td>
+<td>'Images/PointMap'</td>
+<td>string</td>
+<td>The parameter controls the data returned by the operator               <a class="halconoperator" href="../operators/grab_image.html">grab_image</a>. If e.g. ['Images/Rectified/Left', 
+              'Images/PointMap'] will be passed as parameter value, a 
+              rectified image of the left sensor and a point map will be 
+              returned by <a class="halconoperator" href="../operators/grab_data.html">grab_data</a>. Please note that the node paths must 
+              be given relative to the path of the node to which the handle 
+              refers.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'parallel_execution'</b></td>
+<td>'true', 'false'</td>
+<td>'false'</td>
+<td>string</td>
+<td>With 'parallel_execution' set to 'true' the handle uses its own              <a href="http://www.ensenso.de/manual/commands.htm">execute node</a> in the NxLib. Herewith you can 
+             execute multiple commands in parallel.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>relative_node_path</b></td>
+<td><span class="var">&lt;value&gt;</span></td>
+<td></td>
+<td>string</td>
+<td>Write value to a NxLib node. The node is specified by a               relative path. The path is relative to the node to which 
+              the handle refers.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'replace_nans'</b></td>
+<td>'true', 'false'</td>
+<td>'true'</td>
+<td>string</td>
+<td>All internal binary fields use the NaN (Not a number) value               of the IEEE floating point format to indicate that a certain 
+              point is invalid (i.e. not triangulated). Unfortunately NaN 
+              values within image cause various problems. Therefore by 
+              default <a class="halconoperator" href="../operators/grab_data.html">grab_data</a> replaces NaN values within floating point 
+              images with 0. This behavior can be controlled by this 
+              parameter.
+</td>
+</tr></table>
+<h2 id="GET_FRAMEGRABBER_PARAM">Parameters for <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a></h2><div> This operator is used for direct read access on the  <a href="http://www.ensenso.de/manual/_.htm">NxLib API Tree</a> and HALCON specific parameters.
+</div>
+<table summary="Parameters for get_framegrabber_param" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Parameter</th>
+<th>Values</th>
+<th>Default</th>
+<th>Type</th>
+<th>Kind</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><b>'auto_grab_data'</b></td>
+<td>'true', 'false'</td>
+<td>'true'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>With 'auto_grab_data' set to 'true' the necessary steps to              acquire an image or 3D data is handled internally by the 
+             HALCON Ensenso-NxLib Image Acquisition Interface.<br> 
+             By disabling this flag, the user has full control of the 
+             NxLib functions. In this case, the user has to run all 
+             NxLib <a href="http://www.ensenso.de/manual/commands.htm">commands</a> manually.<br>
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'available_param_names'</b></td>
+<td>['<span class="var">&lt;parameter&gt;</span>']</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td>The list contains the names of all available parameter.               The HALCON Ensenso-NxLib Image Acquisition Interface provides 
+              the static HALCON parameter and also further generic parameter. 
+              To get the full list of supported parameter this parameter 
+              must be used.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'error_code'</b></td>
+<td><span class="var">&lt;error_code&gt;</span></td>
+<td></td>
+<td>string</td>
+<td></td>
+<td>Retrieve the API error code.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'error_item'</b></td>
+<td><span class="var">&lt;error_item_path&gt;</span></td>
+<td></td>
+<td>string</td>
+<td></td>
+<td>You can get extended error information of the last error by               calling <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a> on the device handle on which 
+              the error has happened. The parameter 'error_item' retrieves 
+              the path of the tree item which caused the error. Please see 
+              also the parameter 'error_code' and 'error_text'.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'error_text'</b></td>
+<td><span class="var">&lt;error_text&gt;</span></td>
+<td></td>
+<td>string</td>
+<td></td>
+<td>Retrieve the error text.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'execute_node'</b></td>
+<td><span class="var">&lt;absolute_node_path&gt;</span></td>
+<td></td>
+<td>string</td>
+<td></td>
+<td>Returns the path of the aqcuisition handle's execute node.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'type:<type>'</b></td>
+<td>'Null', 'Number', 'Bool', 'String', 'Array', 'Object', 'Inexistent';</td>
+<td></td>
+<td>string</td>
+<td></td>
+<td>Returns the Json-Type from an NxLib node or 'Inexistent' if the node does not exist.               The <type> after the colon has to be replaced by one of the possible values.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'grab_data_items'</b></td>
+<td>['<span class="var">&lt;image_node_path&gt;</span>']</td>
+<td>'Images/PointMap'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>The parameter controls the data returned by the operator               <a class="halconoperator" href="../operators/grab_image.html">grab_image</a>. If e.g. ['Images/Rectified/Left', 
+              'Images/PointMap'] will be passed as parameter value, a 
+              rectified image of the left sensor and a point map will be 
+              returned by <a class="halconoperator" href="../operators/grab_data.html">grab_data</a>. Please note that the node paths must 
+              be given relative to the path of the node to which the handle 
+              refers.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'name'</b></td>
+<td>'Ensenso-NxLib'</td>
+<td></td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Name of the HALCON interface.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'parallel_execution'</b></td>
+<td>'true', 'false'</td>
+<td>'false'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>With 'parallel_execution' set to 'true' the handle uses its own              <a href="http://www.ensenso.de/manual/commands.htm">execute node</a> in the NxLib. Herewith you can 
+             execute multiple commands in parallel.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'path'</b></td>
+<td><span class="var">&lt;absolute_node_path&gt;</span></td>
+<td></td>
+<td>string</td>
+<td></td>
+<td>Returns the absolute path of the NxLib node the acquisition handle is referring to.</td>
+</tr>
+<tr class="evenrow">
+<td><b>relative_node_path</b></td>
+<td><span class="var">&lt;value&gt;</span></td>
+<td></td>
+<td>string</td>
+<td></td>
+<td>Read value from an NxLib node. The node is specified by a               relative path. The path is relative to the node to which the 
+              handle refers.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'replace_nans'</b></td>
+<td>'true', 'false'</td>
+<td>'true'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>All internal binary fields use the NaN (Not a number) value               of the IEEE floating point format to indicate that a certain 
+              point is invalid (i.e. not triangulated). Unfortunately NaN 
+              values within image cause various problems. Therefore by 
+              default <a class="halconoperator" href="../operators/grab_data.html">grab_data</a> replaces NaN values within floating point 
+              images with 0. This behavior can be controlled by this 
+              parameter.
+</td>
+</tr></table>
+<h2 id="SET_FRAMEGRABBER_LUT">Operator <a class="halconoperator" href="../operators/set_framegrabber_lut.html">set_framegrabber_lut</a></h2><div>Not supported by this interface.</div>
+<h2 id="GET_FRAMEGRABBER_LUT">Operator <a class="halconoperator" href="../operators/get_framegrabber_lut.html">get_framegrabber_lut</a></h2><div>Not supported by this interface.</div>
+<h2 id="SET_FRAMEGRABBER_CALLBACK">Operator <a class="halconoperator" href="../operators/set_framegrabber_callback.html">set_framegrabber_callback</a></h2><div>Not supported by this interface.</div>
+<h2 id="GET_FRAMEGRABBER_CALLBACK">Operator <a class="halconoperator" href="../operators/get_framegrabber_callback.html">get_framegrabber_callback</a></h2><div>Not supported by this interface.</div>
+<h2 id="GRAB_IMAGE_START">Operator <a class="halconoperator" href="../operators/grab_image_start.html">grab_image_start</a></h2><div>Not supported.</div>
+<h2 id="GRAB_IMAGE">Operator <a class="halconoperator" href="../operators/grab_image.html">grab_image</a></h2><div>  Captures and returns an image of the camera associated with the given   handle. On a stereo camera this function always returns an image from 
+  the <i>left</i> sensor. <b>Notice:</b> This function is not influenced 
+  by 'auto_grab_data' and always executes the Capture command.
+</div>
+<h2 id="GRAB_IMAGE_ASYNC">Operator <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a></h2><div>Not supported.</div>
+<h2 id="GRAB_DATA">Operator <a class="halconoperator" href="../operators/grab_data.html">grab_data</a></h2><div> This operator is used to access the binary nodes of the  <a href="http://www.ensenso.de/manual/_.htm">NxLib API Tree</a>. It will return all binary nodes set by the 
+ parameter <b>'grab_data_items'</b>.
+</div>
+<table summary="Operator grab_data" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Parameter</th>
+<th>Type</th>
+<th>Count</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><b>'image'</b></td>
+<td></td>
+<td>1...4</td>
+<td> Depending on the parameter 'grab_data_items' the following images can  be returned: 
+
+<ul>
+<li>On camera handles: 
+
+<ul>
+<li><b>Images/Raw/Left</b>, <b>Images/Raw/Right</b> (1 channel / byte): 
+      Raw camera images 
+</li>
+<li><b>Images/Rectified/Left</b>, <b>Images/Rectified/Right</b> 
+      (1 channel / byte): Rectified images 
+</li>
+<li><b>Images/DisparityMap</b> (1 channel / int2): Disparity map resulting 
+      from stereo matching 
+</li>
+<li><b>Images/PointMap</b> (3 channels / real): calibrated 3d data as 
+      point cloud (x/y/z channel) 
+</li>
+</ul></li>
+<li>On root node handles: 
+
+<ul>
+<li><b>Images/RenderPointMap</b> (3 channels / real): depth image as 
+      orthographic/telecentric or perspective projection 
+</li>
+<li><b>Images/RenderPointMapTexture</b> (4 channels / byte): color 
+      image with alpha channel containing the texture corresponding to the 
+      depth data of RenderPointMap 
+</li>
+<li><b>Images/RenderView</b> (3 channels / byte): rendered color image of 
+      the captured surfaces from a viewer perspective
+</li>
+</ul></li>
+</ul></td>
+</tr>
+<tr class="evenrow">
+<td><b>'contours'</b></td>
+<td></td>
+<td></td>
+<td>Not used.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'region'</b></td>
+<td></td>
+<td></td>
+<td>Region which describes the valid 3D points.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'data'</b></td>
+<td></td>
+<td></td>
+<td>Not used.</td>
+</tr></table>
+<h2 id="GRAB_DATA_ASYNC">Operator <a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a></h2><div>Not supported.</div>
+<h2 id="CLOSE_FRAMEGRABBER">Operator <a class="halconoperator" href="../operators/close_framegrabber.html">close_framegrabber</a></h2><div>This operator closes the device. See also <a class="halconoperator" href="../operators/close_framegrabber.html">close_framegrabber</a>.</div>
+<h2 id="HDEVELOP_EXAMPLES">HDevelop Examples</h2><div>For this interface there are the following examples available: 
+<ul>
+<li>ensenso-nxlib_simple.hdev 
+    - Shows the simple usage of a devices. 
+</li>
+<li>ensenso-nxlib_2cameras.hdev 
+    - Shows the usage of two devices. 
+</li>
+<li>ensenso-nxlib_parameters.hdev 
+    - Shows the paramters provided by the device. 
+</li>
+<li>ensenso-nxlib_objectmodel3d.hdev 
+    - Shows the usage of the 3D object model. 
+</li>
+<li>ensenso-nxlib_surface_based_3d_matching.hdev 
+    - Shows the usage of the 3D matching. 
+</li>
+<li>ensenso-nxlib_workspace_calibration.hdev 
+    - Shows the usage to calibrate the workspace.
+</li>
+</ul></div>
+<h2 id="RELEASENOTES">Release Notes</h2><div>
+<ul>
+<li><b>Revision 13.0.4</b> (Feb 19, 2018): 
+<ul>
+<li>The technical dependency from the HALCON Library has been removed. 
+</li>
+<li>The error handling when trying to set a boolean value 
+      to a non-existing node was incorrect. This problem has been fixed. 
+</li>
+</ul></li>
+<li><b>Revision 13.0.3</b> (Jul 05, 2017): 
+
+<ul>
+<li>In combination with EnsensoSDK 2.0.145 or higher, <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a> 
+      always failed with "Operator failed (FAIL) (HALCON error code: 5)". 
+      This problem has been fixed. 
+</li>
+<li>If the prefix parameter 'type:' with <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a> was 
+      used, an unexpected result is returned. This problem has been fixed. 
+</li>
+<li>The exception handler in <a class="halconoperator" href="../operators/grab_image.html">grab_image</a>, <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a>, <a class="halconoperator" href="../operators/grab_data.html">grab_data</a>, 
+      <a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a>, <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a>, <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a>, 
+      <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a> and <a class="halconoperator" href="../operators/close_framegrabber.html">close_framegrabber</a> always returned the 
+      generic error "Operator failed (FAIL)". Now, a more detailed error 
+      is returned. 
+</li>
+</ul></li>
+<li><b>Revision 13.0.2</b> (Feb 22, 2017): 
+
+<ul>
+<li>Added support for Linux x64 architecture. 
+</li>
+<li>Added new parameters 'execute_node' and 'parallel_execution'. With 
+      at least Ensenso-NxLib SDK 1.9 the parallel execution of NxLib 
+      commands is supported. 
+</li>
+<li>Added new example ensenso-nxlib_workspace_calibration.hdev 
+</li>
+<li>With a specific setting inside the HDevelop example 
+      ensenso-nxlib_surface_based_3d_matching.hdev the execution 
+      could run into a state with uninitialized variables. 
+      This problem has been fixed. 
+</li>
+</ul></li>
+<li><b>Revision 13.0.1</b> (Oct 28, 2016): 
+
+<ul>
+<li>HALCON 13 version of the interface. 
+</li>
+</ul></li>
+<li><b>Revision 6.3</b> (Feb 15, 2016): 
+
+<ul>
+<li>During the parameter handling, invalid strings could appear. 
+      Therefore, the interface has been adapted to support Ensenso SDK 
+      version 1.3.171, which fixes this problem. 
+</li>
+<li>The internal parameter handling has been improved. 
+</li>
+</ul></li>
+<li><b>Revision 6.2</b> (May 20, 2015): 
+
+<ul>
+<li>Fixed bug in <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a>. Query several parameter values 
+      simultaneously has led to undefined results. 
+</li>
+<li>Fixed wrong device name in ensenso-nxlib_surface_based_3d_matching.hdev 
+</li>
+</ul></li>
+<li><b>Revision 6.1</b> (Mar 30, 2015): 
+
+<ul>
+<li>Added new read-only parameters 'path' and 'type' for <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a>. 
+</li>
+<li>Fixed bug in info_boards to list all detected devices, whether 
+      they are already in use or not. 
+</li>
+<li>Fixed bug in <a class="halconoperator" href="../operators/grab_image.html">grab_image</a>. Also in case of color cameras, always 
+      a single channel image was returned. 
+</li>
+<li>Improved performance of <a class="halconoperator" href="../operators/grab_data.html">grab_data</a> by using SSE2 instruction commands 
+      from Intel. 
+</li>
+<li>Replaced return value H_MSG_FAIL (5) inside <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a> by 
+      H_ERR_FGSETPAR (5329). 
+</li>
+</ul></li>
+<li><b>Revision 5.0 Addendum</b> (Oct 24, 2014): 
+
+<ul>
+<li>Adapted system requirements section. Changed underling uEye 
+      SDK version to 4.4 in case of N10 cameras and adapt Ensenso SDK to 
+      the needed version 1.2.342 to provide dynamic loading of the runtime DLL. 
+</li>
+</ul></li>
+<li><b>Revision 5.0</b> (Mar 28, 2014): 
+
+<ul>
+<li>First official release.
+</li>
+</ul></li>
+</ul></div>
+  <!-- toc end -->  <hr> 
+  <div class="imprint"> 
+    <span class="imprinthead">Legal disclaimer regarding hyperlinks</span>: 
+    This page may provide users with access by hypertext links to external, non-MVTec websites. 
+Any such access is provided with the understanding that the contents 
+of non-MVTec sites are beyond the control of MVTec Software GmbH, that 
+MVTec Software GmbH makes no representations whatsoever about such 
+sites, and that users shall proceed at their own risk. 
+MVTec Software GmbH is not responsible for the privacy practices or 
+the content of external, non-MVTec websites.
+ 
+  </div> 
+  <div class="imprint"> 
+    <span class="imprinthead">Copyright notes</span>: 
+    &copy; Copyright MVTec Software GmbH. All rights reserved. 
+Unless otherwise stated, the copyright and similar rights in the 
+contents of this page, including but not limited to all text, designs 
+and images appearing herein, are copyrighted works owned by MVTec 
+Software GmbH. 
+"MVTec Software GmbH" and "HALCON" are registered trademarks of MVTec 
+Software GmbH. 
+All other brand names, designs, service marks and trademarks (whether 
+or not registered) referenced or used herein are the property of their 
+respective owners.
+ 
+  </div> 
+  <div class="footer"> 
+    acqdump 1.5 / hdoc 1.2 / Generated: Thu Nov 15 16:53:42 CET 2018 
+  </div> 
+  </body> 
+</html>

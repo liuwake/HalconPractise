@@ -1,0 +1,1616 @@
+<!DOCTYPE HTML> 
+<html> 
+  <head> 
+  <meta id='acqdump-id' name='acqdump-id' content='halcon-acq-Video4Linux2-rev13.0.4'> 
+  <title>Video4Linux2 / HALCON / MVTec Software GmbH</title> 
+      <style type="text/css"> 
+      body { 
+        color: #000000; 
+        background-color: #ffffff; 
+        margin-top: 0px; 
+        margin-bottom: 0px; 
+        margin-left: 20px; 
+        margin-right: 20px; 
+        font-family: Arial,Helvetica,sans-serif; 
+      } 
+      a:link { 
+        color: #0044cc; 
+      } 
+      a:link,a:visited { 
+        text-decoration: none; 
+      } 
+      a:link:hover,a:visited:hover { 
+        text-decoration: underline; 
+      } 
+      th { 
+        text-align: left; 
+      } 
+      h1,h2,h3,h4,h5,h6 { 
+        text-rendering: optimizeLegibility; 
+        color: #666666; 
+      } 
+      tt { 
+        font-family: monospace,monospace; 
+      } 
+      h1 a.halconoperator { 
+        font-family: Arial,Helvetica,sans-serif; 
+        color: #666666; 
+      } 
+      h2 a.halconoperator { 
+        font-family: Arial,Helvetica,sans-serif; 
+        color: #666666; 
+      } 
+      hr { 
+        border: 0; 
+        border-top: solid 1px #f28d26; 
+      } 
+      pre { 
+        font-family: monospace,monospace; 
+        padding: 1ex; 
+        white-space: pre-wrap; 
+      } 
+      .toc { 
+        font-size: 80%; 
+        border-top: 1px dashed #f28d26; 
+        border-bottom: 1px dashed #f28d26; 
+        padding-top: 5px; 
+        padding-bottom: 5px; 
+      } 
+      .inv { 
+        margin: 0; 
+        border: 0; 
+        padding: 0; 
+      } 
+      .banner { 
+        color: #666666; 
+        padding-left: 1em; 
+      } 
+      .logo { 
+        background-color: white; 
+      } 
+      .keyboard { 
+        font-size: 80%; 
+        padding-left: 3px; 
+        padding-right: 3px; 
+        border-radius: 5px; 
+        border-width: 1px; 
+        border-style: solid; 
+        border-color: #f28d26; 
+        background-color: #f3f3f3; 
+      } 
+      .warning { 
+        margin-top: 2ex; 
+        margin-bottom: 1ex; 
+        padding: 10px; 
+        text-align: center; 
+        border: 1px solid; 
+        color: #bb0000; 
+        background-color: #fff7f7 
+      } 
+      .imprint { 
+        margin-top: 1ex; 
+        font-size: 80%; 
+        color: #666666; 
+      } 
+      .imprinthead { 
+        font-weight: bolder; 
+        color: #666666; 
+      } 
+      .postscript { 
+        margin-top: 2ex; 
+        font-size: 80%; 
+        color: #666666 
+      } 
+      .evenrow { 
+        background-color: #e7e7ef; 
+        vertical-align: top; 
+      } 
+      .oddrow { 
+        background-color: #f7f7ff; 
+        vertical-align: top; 
+      } 
+      .headrow { 
+        background-color: #97979f; 
+        color: #ffffff; 
+        vertical-align: top; 
+      } 
+      .logorow { 
+        vertical-align: top; 
+      } 
+      .error { 
+        color: red; 
+      } 
+      .var { 
+        font-style: italic 
+      } 
+      .halconoperator { 
+        font-family: monospace,monospace; 
+      } 
+      .halconprocedure { 
+        font-family: Consolas,Inconsolata,"DejaVu Sans Mono",monospace; 
+      } 
+      span.operator { 
+        font-family: monospace,monospace; 
+      } 
+      span.procedure { 
+        font-family: monospace,monospace; 
+      } 
+      span.operation { 
+        font-family: monospace,monospace; 
+      } 
+      span.feature { 
+        font-family: Arial,Helvetica,Homerton,sans-serif; 
+      } 
+      ul { 
+        padding-left: 1.2em; 
+      } 
+      li.dot { 
+        list-style-type: square; 
+        color: #f28d26; 
+      } 
+      .breadcrumb { 
+        font-size: 80%; 
+        color: white; 
+        background-color: #062d64; 
+        margin-left: -20px; 
+        margin-right: -20px; 
+        margin-bottom: 20px; 
+        padding-left: 20px; 
+        padding-right: 20px; 
+        padding-bottom: 15px; 
+      } 
+      .webbar { 
+        font-size: 80%; 
+        background-color: #dddddd; 
+        margin-top: 0px; 
+        margin-left: -20px; 
+        margin-right: -20px; 
+        margin-bottom: 0px; 
+        padding-top: 5px; 
+        padding-left: 20px; 
+        padding-right: 20px; 
+        padding-bottom: 5px; 
+      } 
+      .footer { 
+        border-top: 1px dashed #f28d26; 
+        font-size: 80%; 
+        color: #666666; 
+        margin-left: -20px; 
+        margin-right: -20px; 
+        margin-top: 0px; 
+        padding-left: 20px; 
+        padding-right: 20px; 
+        padding-top: 10px; 
+        padding-bottom: 15px; 
+      } 
+      .breadcrumb a { 
+        color: #ffffff; 
+        border-bottom: 1px solid white; 
+      } 
+      .breadcrumb a:link:hover,.breadcrumb a:visited:hover { 
+        text-decoration: none; 
+        border-bottom: none; 
+      } 
+      .heading { 
+        margin-top: 1ex; 
+        font-size: 110%; 
+        font-weight: bold; 
+        color: #666666; 
+      } 
+      .text { 
+        color: black; 
+      } 
+      .example { 
+        font-size: 80%; 
+        background-color: #f3f3f3; 
+        border: 1px dashed #666666; 
+        padding: 10px; 
+      } 
+      .math { 
+      } 
+      .displaymath { 
+        text-align: center; 
+        margin-top: 1ex; 
+        margin-bottom: 1ex; 
+      } 
+      </style> 
+  </head> 
+  <body><div class="breadcrumb"> 
+<br class="inv"/> 
+<a href="../../../../documentation.html">HALCON</a> / <a href="acq-overview.html">Image Acquisition Interfaces</a> 
+<br class="inv"/> 
+</div> 
+<h1>Image Acquisition Interface for Video4Linux2</h1> 
+<table summary="Image Acquisition Interface for Video4Linux2"> 
+  <tr> 
+    <td> 
+      Interface: 
+    </td> 
+    <td> 
+      Video4Linux2 
+    </td> 
+  </tr> 
+  <tr> 
+    <td> 
+      Revision: 
+    </td> 
+    <td> 
+      13.0.4 
+    </td> 
+  </tr> 
+  <tr> 
+    <td> 
+      Date: 
+    </td> 
+    <td> 
+      2018-07-30 
+    </td> 
+  </tr> 
+</table>
+<ul class="toc">
+<li><a href="#GENERAL">General</a></li>
+<li><a href="#SYSTEM_REQUIREMENTS">System Requirements</a></li>
+<li><a href="#INSTALLATION">Installation</a></li>
+<li><a href="#FEATURES">Features</a></li>
+<li><a href="#LIMITATIONS">Limitations</a></li>
+<li><a href="#DYNAMICCONTROLS">Dynamic Controls</a></li>
+<li><a href="#INFO_FRAMEGRABBER">Parameters for info_framegrabber</a></li>
+<li><a href="#OPEN_FRAMEGRABBER">Parameters for open_framegrabber</a></li>
+<li><a href="#SET_FRAMEGRABBER_PARAM">Parameters for set_framegrabber_param</a></li>
+<li><a href="#GET_FRAMEGRABBER_PARAM">Parameters for get_framegrabber_param</a></li>
+<li><a href="#SET_FRAMEGRABBER_LUT">Operator set_framegrabber_lut</a></li>
+<li><a href="#GET_FRAMEGRABBER_LUT">Operator get_framegrabber_lut</a></li>
+<li><a href="#SET_FRAMEGRABBER_CALLBACK">Operator set_framegrabber_callback</a></li>
+<li><a href="#GET_FRAMEGRABBER_CALLBACK">Operator get_framegrabber_callback</a></li>
+<li><a href="#GRAB_IMAGE_START">Operator grab_image_start</a></li>
+<li><a href="#GRAB_IMAGE">Operator grab_image</a></li>
+<li><a href="#GRAB_IMAGE_ASYNC">Operator grab_image_async</a></li>
+<li><a href="#GRAB_DATA">Operator grab_data</a></li>
+<li><a href="#GRAB_DATA_ASYNC">Operator grab_data_async</a></li>
+<li><a href="#CLOSE_FRAMEGRABBER">Operator close_framegrabber</a></li>
+<li><a href="#HDEVELOP_EXAMPLES">HDevelop Examples</a></li>
+<li><a href="#RELEASENOTES">Release Notes</a></li>
+</ul>
+  <!-- toc start -->
+<h2 id="GENERAL">General</h2><div> This page provides the documentation of the HALCON Video4Linux2 image  acquisition interface, which is based on the V4L2 API, a Linux kernel 
+ interface for video capture. V4L2 is the second generation of the 
+ Video4Linux API. 
+ <a href="http://www.mvtec.com/download/registration">Registered</a> customers can download the 
+ <a href="http://www.mvtec.com/download/halcon/">latest revision</a> of this interface from the 
+ <a href="http://www.mvtec.com/">MVTec WWW server</a>. For a description of V4L2, please see the 
+ official web page at <a href="http://linuxtv.org">Video For Linux 2</a>.
+</div>
+<h2 id="SYSTEM_REQUIREMENTS">System Requirements</h2><div>
+<ul>
+<li>Intel compatible PC with Linux (kernel 2.6.19 or higher)    and a working installation of V4L2 with all required kernel modules 
+   for the acquisition hardware to be used. The user that will be running 
+   HALCON will typically need to be in the <tt>video</tt> group in order 
+   to be able to access the V4L2 devices. 
+</li>
+<li>HALCON image acquisition interface <b>hAcqVideo4Linux2.so</b> or 
+   <b>hAcqVideo4Linux2xl.so</b>, respectively. 
+   If you have properly installed the interface, the shared objects should 
+   reside in <tt>lib\$HALCONARCH</tt> within the HALCON base directory 
+   <tt>$HALCONROOT</tt> you have chosen during the installation of HALCON. 
+</li>
+<li>The HALCON Video4Linux2 acquisition interface should be able to 
+   support any video capture device that provides a V4L2 driver compliant 
+   with the V4L2 specification (found at <a href="http://linuxtv.org">VideoFor Linux 
+   2</a>). However, the V4L2 specification allows a wide range of behaviors, 
+   and individual drivers may violate the specification, so some 
+   device/driver combinations may fail to work. Currently, the only device 
+   that has been tested is the <b>Logitech QuickCam 9000 Pro</b> with 
+   version 0.1.0 of the <tt>uvcvideo</tt> driver.
+</li>
+</ul></div>
+<h2 id="INSTALLATION">Installation</h2><div>Only when installing or updating the interface manually follow these steps: <br> 
+
+<ul>
+<li><b>Linux:</b> Extract the archive containing the interface files to the 
+  HALCON base directory $HALCONROOT.
+</li>
+</ul></div>
+<h2 id="FEATURES">Features</h2><div>
+<ul>
+<li>Grabbing from multiple cameras. <b>Attention:</b> Due to the bandwidth    allocation enforcement strategy (which is a kernel configuration option) 
+   of the Linux kernel it might be necessary to connect each camera to its 
+   own physical controller, else the grabbing might fail with I/O errors or 
+   timeouts. The easiest way to ensure sufficient bandwidth for each camera 
+   is to use dedicated USB controllers for each camera, see also the 
+   output of <tt>lsusb -v</tt> for more information about available USB 
+   devices. 
+</li>
+<li>Synchronous and asynchronous grabbing. 
+</li>
+<li>Cropping of image parts. 
+</li>
+<li>Software control of a variety of standard and camera-specific parameters.
+</li>
+</ul></div>
+<h2 id="LIMITATIONS">Limitations</h2><div>
+<ul>
+<li>Currently only 8-16 bits/channel HALCON images can be acquired, even if    the device is capable of capturing with higher bit depths. 
+</li>
+<li>Not all V4L2 image formats are supported (see below for a list of 
+   supported formats). 
+</li>
+<li>Only some V4L2 image formats can be captured into HALCON images with more 
+   than 8 bits/channel. 
+</li>
+<li>External camera triggering is not supported (not part of V4L2). 
+</li>
+<li>Asynchronously aborting a running grab with 'do_abort_grab' is not 
+   possible if the device doesn't use the streaming interface, and may not 
+   work even if it does depending on the Video4Linux2 device driver used.
+</li>
+</ul></div>
+<h2 id="DYNAMICCONTROLS">Dynamic Controls</h2><div> In addition to the <a href="#SET_FRAMEGRABBER_PARAM">standard driver  features</a> of the USB Video Class driver <tt>uvcvideo</tt>, the HALCON 
+ Video4Linux2 interface can access additional vendor-specific device 
+ features if these are supported and enabled.<br><br> 
+ The USB Video Class driver <tt>uvcvideo</tt> offers access to such 
+ additional, vendor-specific device features (like the focus control for the 
+ Logitech QuickCam 9000 Pro) using dynamic controls that are configured on a 
+ per-device basis after the <tt>uvcvideo</tt> driver has been loaded. The 
+ configuration can be done with the program <tt>uvcdynctrl</tt>, which is 
+ part of the <tt>libwebcam</tt> software package. For information on 
+ what (if any) dynamic controls are supported by for a specific device and 
+ what configuration files are required, please ask the device manufacturer.
+</div>
+<h2 id="INFO_FRAMEGRABBER">Parameters for <a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a></h2><div></div>
+<table summary="Parameters for info_framegrabber" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Parameter</th>
+<th>Value List</th>
+<th>Type</th>
+<th>Kind</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><b>'bits_per_channel'</b></td>
+<td>[-1, 8]</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Values for bits per channel.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'camera_type'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unused.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'color_space'</b></td>
+<td>['default', 'gray', 'raw', 'rgb']</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Values for color space.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'defaults'</b></td>
+<td>[1, 1, 0, 0, 0, 0, 'progressive', 8,                'default', -1.0, 'false', 'auto', 'default', 0, 0]
+</td>
+<td>mixed</td>
+<td>pre-defined</td>
+<td>Default values for <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'device'</b></td>
+<td> ['device:<span class="var">&lt;device_id&gt;</span> | port:<span class="var">&lt;port_number&gt;</span> | input_name:<span class="var">&lt;input_name&gt;</span>']</td>
+<td>string</td>
+<td>dynamic</td>
+<td>List of available devices.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'external_trigger'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unused.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'field'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unused.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'general'</b></td>
+<td>[]</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Information about the HALCON Video4Linux2 interface.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'generic'</b></td>
+<td>['', 'capture_format=<span class="var">&lt;format&gt;</span>', 'num_buffers=<span class="var">&lt;buffers&gt;</span>']</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Value list for the Generic parameter.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'horizontal_resolution'</b></td>
+<td>[1, 2, 4]</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Value list for horizontal resolution.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'image_height'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unsupported query.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'image_width'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unsupported query.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'info_boards'</b></td>
+<td> ['device:<span class="var">&lt;device_id&gt;</span> | port:<span class="var">&lt;port_number&gt;</span> | input_name:<span class="var">&lt;input_name&gt;</span>']</td>
+<td>string</td>
+<td>dynamic</td>
+<td>A list of the available devices.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'parameters'</b></td>
+<td>['<span class="var">&lt;parameters&gt;</span>']</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Pre-defined parameters of the HALCON interface.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'parameters_readonly'</b></td>
+<td>['<span class="var">&lt;parameters&gt;</span>']</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Pre-defined read-only parameters of the HALCON interface.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'parameters_writeonly'</b></td>
+<td>['<span class="var">&lt;parameters&gt;</span>']</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Pre-defined write-only parameters of the HALCON interface.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'port'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unused.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'revision'</b></td>
+<td>'<span class="var">&lt;revision&gt;</span>'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Revision number of the Video4Linux2 interface.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'start_column'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unsupported query.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'start_row'</b></td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>Unsupported query.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'vertical_resolution'</b></td>
+<td>[1, 2, 4]</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Value list for vertical resolution.</td>
+</tr></table>
+<h2 id="OPEN_FRAMEGRABBER">Parameters for <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a></h2><div> Please note that V4L2 devices are not required to support cropping or  scaling, and the interface can only do cropping in software, so the 
+ supported resolutions are device-dependent. Furthermore, some drivers (like 
+ the USB video class driver) will report the size of the currently selected 
+ capture image size as the maximum capture image size, so the desired 
+ resolution should always be specified in absolute terms for consistency.
+</div>
+<table summary="Parameters for open_framegrabber" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Parameter</th>
+<th>Values</th>
+<th>Default</th>
+<th>Type</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><b>Name</b></td>
+<td>'Video4Linux2'</td>
+<td></td>
+<td>string</td>
+<td>Name of the HALCON interface.</td>
+</tr>
+<tr class="evenrow">
+<td><b>HorizontalResolution</b></td>
+<td>1, 2, 4, <span class="var">resolution</span></td>
+<td>1</td>
+<td>integer</td>
+<td>Desired horizontal resolution of the camera image: 
+<ul>
+<li>1: Use full resolution. 
+</li>
+<li>2: Use half resolution. 
+</li>
+<li>4: Use quarter resolution. 
+</li>
+<li><i>resolution</i>: User defined horizontal resolution is set.
+</li>
+</ul></td>
+</tr>
+<tr class="oddrow">
+<td><b>VerticalResolution</b></td>
+<td>1, 2, 4, <span class="var">resolution</span></td>
+<td>1</td>
+<td>integer</td>
+<td>Desired vertical resolution of the camera image: 
+<ul>
+<li>1: Use full resolution. 
+</li>
+<li>2: Use half resolution. 
+</li>
+<li>4: Use quarter resolution. 
+</li>
+<li><i>resolution</i>: User defined vertical resolution is set.
+</li>
+</ul></td>
+</tr>
+<tr class="evenrow">
+<td><b>ImageWidth</b></td>
+<td>0, <span class="var">&lt;width&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>Width of the desired image part ('0' stands for the complete image).
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>ImageHeight</b></td>
+<td>0, <span class="var">&lt;height&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>Height of the desired image part ('0' stands for the complete image).
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>StartRow</b></td>
+<td>0, <span class="var">&lt;row&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>Row coordinate of the upper left pixel within the desired image part.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>StartColumn</b></td>
+<td>0, <span class="var">&lt;column&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>Column coordinate of the upper left pixel within the desired image part.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>Field</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr>
+<tr class="oddrow">
+<td><b>BitsPerChannel</b></td>
+<td>8</td>
+<td>8</td>
+<td>integer</td>
+<td>Number of bits per channel of the resulting HALCON image. In case of -1 the current bit depth of the camera is used. By specifying a value greater than 8 the 
+grabbed images are delivered as uint2 images.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>ColorSpace</b></td>
+<td>'default', 'gray', 'raw', 'rgb'</td>
+<td>'default'</td>
+<td>string</td>
+<td> Specify the desired color space and thus the number of image channels of  the resulting HALCON image. In case of 'default' the color space which is 
+ supported by the device will be used.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>Generic</b></td>
+<td>'', 'capture_format=<span class="var">&lt;format&gt;</span>', 'num_buffers=<span class="var">&lt;buffers&gt;</span>', -1</td>
+<td>-1</td>
+<td>mixed</td>
+<td> With the generic parameter some important values can be set before the  camera is initialized. Note that the parameter names including the values 
+ must be strings. 
+
+<ul>
+<li><b>capture_format:</b> 
+   The V4L2 image format the acquisition device should use to capture images, 
+   specified as a string of four ASCII characters corresponding to the 
+   "four CC" code of the format in the V4L2 specification. The following 
+   capture formats are supported by this interface: 'RGB0', 'R444', 'RGB1', 
+   'RGBP', 'RGBQ', 'RGBR', 'BGR3', 'RGB3', 'BGR4', 'RGB4', 'GBRG', 'GRBG', 
+   'RGGB', 'BA81', 'RG10', 'BA10', 'GB10', 'BG10', 'RG12', 'BA12', 'GB12', 
+   'BG12', 'RG16', 'GR16', 'GB16', 'BYR2', 'GBRG', 'GRBG', 'RGGB', 'GREY', 
+   'YUYV', 'UYVY', 'Y10 ', 'Y12 ', and 'Y16 '. In order to be usable, the 
+   device needs to support the format as well. If no capture_format is 
+   specified, the interface will use the first format supported by both the 
+   device and the interface. 
+</li>
+<li><b>num_buffers:</b> 
+   Set the number of image buffers the interface should use. The number 
+   must be at least one; the maximum number of buffers depends on the device 
+   driver. If this parameter is not specified, two buffers are used by 
+   default. Note that the device driver may decide to use more buffers than 
+   requested.
+</li>
+</ul></td>
+</tr>
+<tr class="evenrow">
+<td><b>ExternalTrigger</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr>
+<tr class="oddrow">
+<td><b>CameraType</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr>
+<tr class="evenrow">
+<td><b>Device</b></td>
+<td>'default', '<span class="var">&lt;device_id&gt;</span>'</td>
+<td>'default'</td>
+<td>string</td>
+<td> To open a specific camera the device name as shown in  <a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a><tt>(...'info_boards', ...)</tt> has to be set. 
+ Video4Linux2 devices are named 'video' followed by a number (e.g. 'video0'). 
+ Using 'default' here will select the first usable Video4Linux2 capture 
+ device found on the system.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>Port</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr>
+<tr class="evenrow">
+<td><b>LineIn</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td>Ignored.</td>
+</tr></table>
+<h2 id="SET_FRAMEGRABBER_PARAM">Parameters for <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a></h2><div> In general, the HALCON Video4Linux2 interface provides three types  of parameters: 
+
+<ul>
+<li>Parameters of the interface itself 
+</li>
+<li>Device-specific parameters provided by the <tt>uvcvideo</tt> driver 
+</li>
+<li>Vendor-specific device parameters using the dynamic control features 
+</li>
+</ul> 
+The interface provides access to device features using the V4L2 control API. 
+To access a V4L2 control, use the control's name as the parameter name for 
+<a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a> and <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a>. Unfortunately, these 
+names are not standardized and depend on the connected device. Call 
+<a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a><tt>(..., 'available_param_names', ...)</tt> to 
+obtain a tuple 
+containing all available parameters for the connected device. <br> 
+The following standard controls/parameters are provided for the Logitech 
+QuickCam 9000 Pro USB camera by the uvcvideo driver directly.<br><br> 
+In addition to the standard parameters, the uvcvideo driver for the Logitech 
+QuickCam 9000 Pro can also provide a number of vendor-specific device 
+parameters using the dynamic control feature. Please refer to the dynamic 
+controls section for details.
+</div>
+<table summary="Parameters for set_framegrabber_param" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Parameter</th>
+<th>Values</th>
+<th>Default</th>
+<th>Type</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><b>Backlight Compensation</b></td>
+<td>0, 1</td>
+<td></td>
+<td>integer</td>
+<td> <b>Standard Device Parameter</b>  Adjusts the backlight compensation in the camera. The value 0 disables 
+ backlight compensation.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'Brightness'</b></td>
+<td>0 ... 255</td>
+<td>128</td>
+<td>integer</td>
+<td> <b>Standard Device Parameter</b> The brightness value of the image.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'capture_format'</b></td>
+<td>'<span class="var">&lt;format&gt;</span>'</td>
+<td></td>
+<td>string</td>
+<td> <b>Interface Parameter</b>  The V4L2 image format the acquisition device should use to capture images, 
+ see also the generic parameter capture_format.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'Contrast'</b></td>
+<td>0 ... 255</td>
+<td></td>
+<td>integer</td>
+<td><b>Standard Device Parameter</b> Contrast value of the image.</td>
+</tr>
+<tr class="oddrow">
+<td><b>Disable video processing</b></td>
+<td>'false', 'true'</td>
+<td></td>
+<td>string</td>
+<td> <b>Dynamic Device Parameter</b>  This parameter should always be 'false', because HALCON can not handle 
+ the resulting video format.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'do_abort_grab'</b></td>
+<td>---</td>
+<td></td>
+<td></td>
+<td><b>Interface Parameter</b> Aborts the current image acquisition and unlocks parameters, which are 
+locked according to the status of the transport layer.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>Exposure (Absolute)</b></td>
+<td>1 ... 10000</td>
+<td></td>
+<td>integer</td>
+<td><b>Standard Device Parameter</b> Absolute exposure value.</td>
+</tr>
+<tr class="evenrow">
+<td><b>Exposure, Auto</b></td>
+<td> 'Aperture Priority Mode', 'Auto Mode', 'Manual Mode',  'Shutter Priority Mode'
+</td>
+<td></td>
+<td>string</td>
+<td> <b>Standard Device Parameter</b>  A special auto exposure mode. Note: Only the modes 'Manual Mode' and 
+ 'Aperture Priority Mode' are supported by the Logitech Quickcam 9000 Pro.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>Exposure, Auto Priority</b></td>
+<td>'false', 'true'</td>
+<td></td>
+<td>string</td>
+<td> <b>Standard Device Parameter</b> Enables/Disables the auto priority mode.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'Focus'</b></td>
+<td>0 ... 255</td>
+<td></td>
+<td>integer</td>
+<td> <b>Dynamic Device Parameter</b>  Sets the focal point of the camera to the specified position.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'frame_interval'</b></td>
+<td><span class="var">&lt;seconds&gt;</span></td>
+<td></td>
+<td>integer, float</td>
+<td> <b>Interface Parameter</b>  Interval (in seconds) between capturing two successive images. Only 
+ intervals that the device driver supports can be specified.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'Gain'</b></td>
+<td>0 ... 255</td>
+<td></td>
+<td>integer</td>
+<td> <b>Standard Device Parameter</b> Gain control value of the camera.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'grab_timeout'</b></td>
+<td><span class="var">&lt;milliseconds&gt;</span></td>
+<td>5000</td>
+<td>integer</td>
+<td>Desired timeout (milliseconds) for aborting a pending grab. If -1 is specified, the timeout is set to INFINITE.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>LED1 Frequency</b></td>
+<td>0 ... 255</td>
+<td></td>
+<td>integer</td>
+<td><b>Dynamic Device Parameter</b> Frequency of LED1.</td>
+</tr>
+<tr class="oddrow">
+<td><b>LED1 Mode</b></td>
+<td>0 ... 132</td>
+<td></td>
+<td>integer</td>
+<td> <b>Dynamic Device Parameter</b>  Mode of LED1. The following modes are available: 
+
+<ul>
+<li>0: Off. The LED is always off. 
+</li>
+<li>1: On.  The LED is always on. 
+</li>
+<li>2: Blink. The LED blinks with the frequency selected by 'LED1 Frequency'. 
+</li>
+<li>3: Auto.  The LED is controlled by the camera. This usually means the LED 
+      will be off when the camera is not streaming, and will blink with the 
+      frequency selected by 'LED1 Frequency' when it is.
+</li>
+</ul></td>
+</tr>
+<tr class="evenrow">
+<td><b>'num_buffers'</b></td>
+<td><span class="var">&lt;buffers&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td> <b>Interface Parameter</b>  The number of buffers the interface should use for image acquisition. A 
+ device driver may decide to use more buffers than requested, so this is the 
+ minimum number of buffers to use. The value must be at least one, with the 
+ maximum number dependent on the device driver and the available system 
+ memory.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>Power Line Frequency</b></td>
+<td>'Disable', '50 HZ', '60 HZ'</td>
+<td></td>
+<td>string</td>
+<td><b>Standard Device Parameter</b> Power line frequency.</td>
+</tr>
+<tr class="evenrow">
+<td><b>Raw bits per pixel</b></td>
+<td>0, 1</td>
+<td></td>
+<td>integer</td>
+<td> <b>Dynamic Device Parameter</b>  Specifies how many raw bits per pixel should be used. This value is only 
+ relevant if 'Disable video processing' is set to 'true'.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'Saturation'</b></td>
+<td>0 ... 255</td>
+<td></td>
+<td>integer</td>
+<td><b>Standard Device Parameter</b> Image color saturation.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'Sharpness'</b></td>
+<td>0 ... 255</td>
+<td></td>
+<td>integer</td>
+<td> <b>Standard Device Parameter</b>  Adjusts the sharpness filters in a camera. The minimum value disables the 
+ filters, higher values give a sharper picture.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'start_async_after_grab_async'</b></td>
+<td>'disable', 'enable'</td>
+<td>'enable'</td>
+<td>string</td>
+<td>By default a new asynchronous grab command is automatically given to the acquisition device at the end of <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a>. If the parameter 
+'start_async_after_grab_async' is set to 'disable', this new grab command 
+is omitted.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'timestamp_timebase'</b></td>
+<td>'auto', 'monotonic', 'realtime'</td>
+<td>'auto'</td>
+<td>string</td>
+<td> <b>Interface Parameter</b>  When using the streaming interface, the Video4Linux2 driver records the 
+ time the image was acquired with every buffer. This timestamp can be based 
+ on either CLOCK_REALTIME or CLOCK_MONOTONIC. The timestamp is used by the 
+ interface to determine if an image is too old, so the interface must know 
+ the timebase used. <br> 
+ The default setting of 'auto' tells the interface to determine the timebase 
+ used automatically. For Linux kernels prior to 3.9, this involves some 
+ guesswork, as older Linux kernels did not report the timebase used. If the 
+ interface guesses wrong, the correct timebase can be specified by setting 
+ the parameter to 'monotonic' or 'realtime', depending on which timebase 
+ (CLOCK_MONOTONIC or CLOCK_REALTIME) is actually used.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'volatile'</b></td>
+<td>'disable', 'enable'</td>
+<td>'disable'</td>
+<td>string</td>
+<td> <b>Interface Parameter</b>  Raw and grayscale only. In the volatile mode the image buffers are used 
+ directly to store HALCON images. This is the fastest mode avoiding to copy 
+ raw images in memory. However, be aware that older images are overwritten 
+ again and again as a side-effect. Thus, you can only process one image 
+ while you grab another image. Older images are invalid! <br> 
+ Please note that the HDevelop Image Acquisition Assistant offers only the 
+ 'enable' value, if the current capture format allows volatile mode. So 
+ after changing these parameters, the refresh button has to be used to get 
+ the new status of the values for volatile. Default: 'disable'.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>White Balance Temperature</b></td>
+<td>0 ... 10000</td>
+<td></td>
+<td>integer</td>
+<td> <b>Standard Device Parameter</b>  White balance settings as a color temperature in Kelvin. A driver should 
+ have a minimum of 2800 (incandescent) to 6500 (daylight).
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>White Balance Temperature, Auto</b></td>
+<td>'false', 'true'</td>
+<td></td>
+<td>string</td>
+<td> <b>Standard Device Parameter</b>  When activated, keeps adjusting the white balance temperature.
+</td>
+</tr></table>
+<h2 id="GET_FRAMEGRABBER_PARAM">Parameters for <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a></h2><div>There may exist additional read-only parameters with the following postfixes: 
+<ul>
+<li><b>'_description'</b>: These parameters provide the tool-tip of the 
+   corresponding parameter as a string. 
+</li>
+<li><b>'_range'</b>: These parameters provide the minimum, maximum, 
+    step width, and default values for the corresponding integer or float 
+    parameter as a tuple with 4 elements, e.g., 
+    <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a><tt>(.., 'Shutter_range', ..)</tt> will return 
+    the output tuple <tt>[<i>min, max, step, default</i>]</tt>. 
+</li>
+<li><b>'_values'</b>: These parameters provide the valid value list for 
+    the corresponding parameter as a tuple, e.g., 
+    <a class="halconoperator" href="../operators/get_framegrabber_param.html">get_framegrabber_param</a><tt>(.., 'volatile_values', ..)</tt> will return 
+    the output tuple <tt>['enable', 'disable']</tt>. 
+</li>
+</ul> 
+<p> 
+All these postfixed parameter names are not returned when calling 
+<a class="halconoperator" href="../operators/info_framegrabber.html">info_framegrabber</a><tt>(.., 'parameters', ..)</tt> and are used 
+to enable the easy parameterization via a generic graphical user 
+interface, particularly the HDevelop Image Acquisition Assistant. 
+</p>
+</div>
+<table summary="Parameters for get_framegrabber_param" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Parameter</th>
+<th>Values</th>
+<th>Default</th>
+<th>Type</th>
+<th>Kind</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><b>'available_param_descriptions'</b></td>
+<td><span class="var">&lt;descriptions&gt;</span></td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td> A list containing additional information about all parameters. The order of  the entries is equal to the order of the parameter names returned by 
+ 'available_param_names'.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'available_param_names'</b></td>
+<td>['<span class="var">&lt;parameters&gt;</span>']</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td>The list contains the names of all available parameters.</td>
+</tr>
+<tr class="oddrow">
+<td><b>Backlight Compensation</b></td>
+<td>0, 1</td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td> <b>Standard Device Parameter</b>  Adjusts the backlight compensation in the camera. The value 0 disables 
+ backlight compensation.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'bits_per_channel'</b></td>
+<td>-1, 8</td>
+<td>8</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Number of bits per channel of the resulting HALCON image. In case of -1 the current bit depth of the camera is used. By specifying a value greater than 8 the 
+grabbed images are delivered as uint2 images.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'Brightness'</b></td>
+<td>0 ... 255</td>
+<td>128</td>
+<td>integer</td>
+<td>dynamic</td>
+<td> <b>Standard Device Parameter</b> The brightness value of the image.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'camera_type'</b></td>
+<td>'<span class="var">&lt;default&gt;</span>'</td>
+<td>'auto'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>The value is not used, so a default value is returned.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'capture_format'</b></td>
+<td>'<span class="var">&lt;format&gt;</span>'</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td> <b>Interface Parameter</b>  The V4L2 image format the acquisition device should use to capture images, 
+ see also the generic parameter capture_format.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'color_space'</b></td>
+<td>'gray', 'raw', 'rgb'</td>
+<td>'default'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Desired color space and thus the number of image channels of the resulting HALCON image.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'Contrast'</b></td>
+<td>0 ... 255</td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td><b>Standard Device Parameter</b> Contrast value of the image.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'device'</b></td>
+<td>'<span class="var">&lt;device_id&gt;</span>'</td>
+<td>'default'</td>
+<td>string</td>
+<td>dynamic</td>
+<td>Current device ID.</td>
+</tr>
+<tr class="oddrow">
+<td><b>Disable video processing</b></td>
+<td>'false', 'true'</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td> <b>Dynamic Device Parameter</b>  This parameter should always be 'false', because HALCON can not handle 
+ the resulting video format.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>Exposure (Absolute)</b></td>
+<td>1 ... 10000</td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td><b>Standard Device Parameter</b> Absolute exposure value.</td>
+</tr>
+<tr class="oddrow">
+<td><b>Exposure, Auto</b></td>
+<td> 'Aperture Priority Mode', 'Auto Mode', 'Manual Mode',  'Shutter Priority Mode'
+</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td> <b>Standard Device Parameter</b>  A special auto exposure mode. Note: Only the modes 'Manual Mode' and 
+ 'Aperture Priority Mode' are supported by the Logitech Quickcam 9000 Pro.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>Exposure, Auto Priority</b></td>
+<td>'false', 'true'</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td> <b>Standard Device Parameter</b> Enables/Disables the auto priority mode.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'external_trigger'</b></td>
+<td>'<span class="var">&lt;default&gt;</span>'</td>
+<td>'false'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>The value is not used, so a default value is returned.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'field'</b></td>
+<td>'<span class="var">&lt;default&gt;</span>'</td>
+<td>'progressive'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>The value is not used, so a default value is returned.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'Focus'</b></td>
+<td>0 ... 255</td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td> <b>Dynamic Device Parameter</b>  Sets the focal point of the camera to the specified position.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'frame_interval'</b></td>
+<td><span class="var">&lt;seconds&gt;</span></td>
+<td></td>
+<td>integer, float</td>
+<td>dynamic</td>
+<td> <b>Interface Parameter</b>  Interval (in seconds) between capturing two successive images. Only 
+ intervals that the device driver supports can be specified.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'Gain'</b></td>
+<td>0 ... 255</td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td> <b>Standard Device Parameter</b> Gain control value of the camera.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'generic'</b></td>
+<td>'', 'capture_format=<span class="var">&lt;format&gt;</span>', 'num_buffers=<span class="var">&lt;buffers&gt;</span>', -1</td>
+<td>-1</td>
+<td>mixed</td>
+<td>pre-defined</td>
+<td>Values of the Generic parameter.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'grab_timeout'</b></td>
+<td><span class="var">&lt;milliseconds&gt;</span></td>
+<td>5000</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Current grab timeout in milliseconds.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'horizontal_resolution'</b></td>
+<td>1, 2, 4, <span class="var">resolution</span></td>
+<td>1</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Current value of horizontal resolution.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'image_height'</b></td>
+<td><span class="var">&lt;height&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Height of the desired image part ('0' stands for the complete image).
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'image_width'</b></td>
+<td><span class="var">&lt;width&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Width of the desired image part ('0' stands for the complete image).
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>LED1 Frequency</b></td>
+<td>0 ... 255</td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td><b>Dynamic Device Parameter</b> Frequency of LED1.</td>
+</tr>
+<tr class="evenrow">
+<td><b>LED1 Mode</b></td>
+<td>0 ... 132</td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td> <b>Dynamic Device Parameter</b>  Mode of LED1. The following modes are available: 
+
+<ul>
+<li>0: Off. The LED is always off. 
+</li>
+<li>1: On.  The LED is always on. 
+</li>
+<li>2: Blink. The LED blinks with the frequency selected by 'LED1 Frequency'. 
+</li>
+<li>3: Auto.  The LED is controlled by the camera. This usually means the LED 
+      will be off when the camera is not streaming, and will blink with the 
+      frequency selected by 'LED1 Frequency' when it is.
+</li>
+</ul></td>
+</tr>
+<tr class="oddrow">
+<td><b>'line_in'</b></td>
+<td><span class="var">&lt;default&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>The value is not used, so a default value is returned.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'max_height'</b></td>
+<td><span class="var">&lt;height&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td>Maximum image height which is supported by the device.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'max_width'</b></td>
+<td><span class="var">&lt;width&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td>Maximum image width which is supported by the device.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'name'</b></td>
+<td>'Video4Linux2'</td>
+<td></td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Name of the HALCON interface.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'num_buffers'</b></td>
+<td><span class="var">&lt;buffers&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td></td>
+<td> <b>Interface Parameter</b>  The number of buffers the interface should use for image acquisition. A 
+ device driver may decide to use more buffers than requested, so this is the 
+ minimum number of buffers to use. The value must be at least one, with the 
+ maximum number dependent on the device driver and the available system 
+ memory.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'port'</b></td>
+<td><span class="var">&lt;default&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>The value is not used, so a default value is returned.</td>
+</tr>
+<tr class="oddrow">
+<td><b>Power Line Frequency</b></td>
+<td>'Disable', '50 HZ', '60 HZ'</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td><b>Standard Device Parameter</b> Power line frequency.</td>
+</tr>
+<tr class="evenrow">
+<td><b>Raw bits per pixel</b></td>
+<td>0, 1</td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td> <b>Dynamic Device Parameter</b>  Specifies how many raw bits per pixel should be used. This value is only 
+ relevant if 'Disable video processing' is set to 'true'.
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>'revision'</b></td>
+<td>'<span class="var">&lt;revision&gt;</span>'</td>
+<td></td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Revision number of the Video4Linux2 interface.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'Saturation'</b></td>
+<td>0 ... 255</td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td><b>Standard Device Parameter</b> Image color saturation.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'Sharpness'</b></td>
+<td>0 ... 255</td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td> <b>Standard Device Parameter</b>  Adjusts the sharpness filters in a camera. The minimum value disables the 
+ filters, higher values give a sharper picture.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'start_async_after_grab_async'</b></td>
+<td>'disable', 'enable'</td>
+<td>'enable'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td>Status of 'start_async_after_grab_async'.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'start_column'</b></td>
+<td><span class="var">&lt;column&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Returns the current start column of the HALCON image.</td>
+</tr>
+<tr class="evenrow">
+<td><b>'start_row'</b></td>
+<td><span class="var">&lt;row&gt;</span></td>
+<td>0</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Returns the current start row of the HALCON image.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'timestamp_timebase'</b></td>
+<td>'auto', 'monotonic', 'realtime'</td>
+<td>'auto'</td>
+<td>string</td>
+<td></td>
+<td> <b>Interface Parameter</b>  When using the streaming interface, the Video4Linux2 driver records the 
+ time the image was acquired with every buffer. This timestamp can be based 
+ on either CLOCK_REALTIME or CLOCK_MONOTONIC. The timestamp is used by the 
+ interface to determine if an image is too old, so the interface must know 
+ the timebase used. <br> 
+ The default setting of 'auto' tells the interface to determine the timebase 
+ used automatically. For Linux kernels prior to 3.9, this involves some 
+ guesswork, as older Linux kernels did not report the timebase used. If the 
+ interface guesses wrong, the correct timebase can be specified by setting 
+ the parameter to 'monotonic' or 'realtime', depending on which timebase 
+ (CLOCK_MONOTONIC or CLOCK_REALTIME) is actually used.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>'vertical_resolution'</b></td>
+<td>1, 2, 4, <span class="var">resolution</span></td>
+<td>1</td>
+<td>integer</td>
+<td>pre-defined</td>
+<td>Current value of vertical resolution.</td>
+</tr>
+<tr class="oddrow">
+<td><b>'volatile'</b></td>
+<td>'disable', 'enable'</td>
+<td>'disable'</td>
+<td>string</td>
+<td>pre-defined</td>
+<td> <b>Interface Parameter</b>  Raw and grayscale only. In the volatile mode the image buffers are used 
+ directly to store HALCON images. This is the fastest mode avoiding to copy 
+ raw images in memory. However, be aware that older images are overwritten 
+ again and again as a side-effect. Thus, you can only process one image 
+ while you grab another image. Older images are invalid! <br> 
+ Please note that the HDevelop Image Acquisition Assistant offers only the 
+ 'enable' value, if the current capture format allows volatile mode. So 
+ after changing these parameters, the refresh button has to be used to get 
+ the new status of the values for volatile. Default: 'disable'.
+</td>
+</tr>
+<tr class="evenrow">
+<td><b>White Balance Temperature</b></td>
+<td><span class="var">&lt;Kelvin&gt;</span></td>
+<td></td>
+<td>integer</td>
+<td>dynamic</td>
+<td> <b>Standard Device Parameter</b>  White balance settings as a color temperature in Kelvin. A driver should 
+ have a minimum of 2800 (incandescent) to 6500 (daylight).
+</td>
+</tr>
+<tr class="oddrow">
+<td><b>White Balance Temperature, Auto</b></td>
+<td>'false', 'true'</td>
+<td></td>
+<td>string</td>
+<td>dynamic</td>
+<td> <b>Standard Device Parameter</b>  When activated, keeps adjusting the white balance temperature.
+</td>
+</tr></table>
+<h2 id="SET_FRAMEGRABBER_LUT">Operator <a class="halconoperator" href="../operators/set_framegrabber_lut.html">set_framegrabber_lut</a></h2><div>Not supported by this interface.</div>
+<h2 id="GET_FRAMEGRABBER_LUT">Operator <a class="halconoperator" href="../operators/get_framegrabber_lut.html">get_framegrabber_lut</a></h2><div>Not supported by this interface.</div>
+<h2 id="SET_FRAMEGRABBER_CALLBACK">Operator <a class="halconoperator" href="../operators/set_framegrabber_callback.html">set_framegrabber_callback</a></h2><div>Not supported by this interface.</div>
+<h2 id="GET_FRAMEGRABBER_CALLBACK">Operator <a class="halconoperator" href="../operators/get_framegrabber_callback.html">get_framegrabber_callback</a></h2><div>Not supported by this interface.</div>
+<h2 id="GRAB_IMAGE_START">Operator <a class="halconoperator" href="../operators/grab_image_start.html">grab_image_start</a></h2><div>Starts a new asynchronous grab. See also <a class="halconoperator" href="../operators/grab_image_start.html">grab_image_start</a>.</div>
+<h2 id="GRAB_IMAGE">Operator <a class="halconoperator" href="../operators/grab_image.html">grab_image</a></h2><div><a class="halconoperator" href="../operators/grab_image.html">grab_image</a> starts a new synchronous grab. See also <a class="halconoperator" href="../operators/grab_image.html">grab_image</a>. Note that 
+the interface converts the image from the device to the desired image format 
+specified by the parameters 'image_width', 'image_height', 'start_row', 
+'start_column', 'bits_per_channel', and 'color_space'.
+</div>
+<h2 id="GRAB_IMAGE_ASYNC">Operator <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a></h2><div><a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a> returns an image and starts the next asynchronous grab. See also <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a>. 
+Note that 
+the interface converts the image from the device to the desired image format 
+specified by the parameters 'image_width', 'image_height', 'start_row', 
+'start_column', 'bits_per_channel', and 'color_space'.
+</div>
+<h2 id="GRAB_DATA">Operator <a class="halconoperator" href="../operators/grab_data.html">grab_data</a></h2><div>Not supported by this interface.</div>
+<h2 id="GRAB_DATA_ASYNC">Operator <a class="halconoperator" href="../operators/grab_data_async.html">grab_data_async</a></h2><div>Not supported by this interface.</div>
+<h2 id="CLOSE_FRAMEGRABBER">Operator <a class="halconoperator" href="../operators/close_framegrabber.html">close_framegrabber</a></h2><div>This operator closes the device. See also <a class="halconoperator" href="../operators/close_framegrabber.html">close_framegrabber</a>.</div>
+<h2 id="HDEVELOP_EXAMPLES">HDevelop Examples</h2><div>For this interface there are the following examples available: 
+<ul>
+<li>video4linux2_2cameras.hdev - 
+    Example for grabbing images with concurrent grabbing from two 
+    connected cameras. 
+</li>
+<li>video4linux2.hdev - Benchmark 
+</li>
+<li>video4linux2_parameters.hdev - Lists all parameters of a device. 
+</li>
+<li>video4linux2_simple.hdev - 
+    A simple example to show the usage of the interface.
+</li>
+</ul></div>
+<h2 id="RELEASENOTES">Release Notes</h2><div>
+<ul>
+<li><b>Revision 13.0.4</b> (Jul 30, 2018): 
+<ul>
+<li>Add support for the pixel formats 'RG10', 'GB10', 'BG10', 'RG12', 
+      'BA12', 'GB12', 'BG12', 'RG16', 'GR16', and 'GB16' 
+</li>
+<li>Correctly handle a maxDelay parameter of -1 in <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a> 
+      and <a class="halconoperator" href="../operators/grab_image_start.html">grab_image_start</a> for very long intervals between images (> 12 days). 
+      Note that as a result, a maxDelay of exactly 1073741824ms will be 
+      treated like -1, i.e. no timeout. 
+</li>
+<li>When calling <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a> with Device 'default', 
+      there was a leak of file descriptors to /sys/class/video4linux. 
+      This problem has been fixed. 
+</li>
+</ul></li>
+<li><b>Revision 13.0.3</b> (Nov 28, 2017): 
+
+<ul>
+<li>The technical dependency from the HALCON Library has been removed. 
+</li>
+</ul></li>
+<li><b>Revision 13.0.2</b> (Dec 15, 2016): 
+
+<ul>
+<li>Fixed possible crash if V4L2 driver supplied more buffers than 
+      requested. 
+</li>
+</ul></li>
+<li><b>Revision 13.0.1</b> (Oct 28, 2016): 
+
+<ul>
+<li>HALCON 13 version of the interface. 
+</li>
+<li>Added parameter 'num_buffers' to set the number of image buffers to 
+      use. 
+</li>
+<li>Fixed YUYV and UYUV capture formats not working on x86 and x86_64 
+      machines. 
+</li>
+</ul></li>
+<li><b>Revision 6.3</b> (Nov 4, 2015): 
+
+<ul>
+<li>Added parameter 'timestamp_timebase'. 
+</li>
+<li>Fixed potential problem with incorrect timeout calculation. 
+</li>
+<li>Added support for the 'Y10 ' and 'Y12 ' pixel formats. 
+</li>
+<li>Added (limited) support for capturing more than 8 bits/channel. 
+</li>
+<li>Added support for <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a>'s BitsPerChannel parameter set to 
+      -1. 
+</li>
+</ul></li>
+<li><b>Revision 6.2</b> (May 6, 2015): 
+
+<ul>
+<li>Fixed bug in conversion of big- and little-endian RGB555 and RGB565 
+      pixel formats. 
+</li>
+</ul></li>
+<li><b>Revision 6.1</b> (Feb 23, 2015): 
+
+<ul>
+<li>Fixed bug in handling of various RGB pixel formats. 
+</li>
+</ul></li>
+<li><b>Revision 6.0</b> (Oct 31, 2014): 
+
+<ul>
+<li>HALCON 12 version of the interface. 
+</li>
+</ul></li>
+<li><b>Revision 5.4</b> (Aug 27, 2014): 
+
+<ul>
+<li>Added support for the 'RGGB' format. 
+</li>
+<li>The interface will no longer assume the 'default' device is video0; 
+      instead it will use the first video capture device found. 
+</li>
+<li>If the colorspace is set to 'default', the value of the colorspace 
+      parameter is updated to what is actually used internally. 
+</li>
+<li>Fixed bug that could lead to spurious timeouts in rare cases when 
+      calling <a class="halconoperator" href="../operators/grab_image_async.html">grab_image_async</a> with MaxDelay of -1 
+</li>
+</ul></li>
+<li><b>Revision 5.3</b> (Jul 29, 2014): 
+
+<ul>
+<li>Removed debug messages which were unintentionally logged to stderr. 
+</li>
+</ul></li>
+<li><b>Revision 5.2</b> (Jun 25, 2014): 
+
+<ul>
+<li>Fixed interface not handling ENOTTY return value correctly for various 
+      ioctls. 
+</li>
+<li>Fixed bug in <a class="halconoperator" href="../operators/set_framegrabber_param.html">set_framegrabber_param</a> when trying to set a parameter 
+      without specifying a value. 
+</li>
+<li>Fixed bug in <a class="halconoperator" href="../operators/grab_image.html">grab_image</a> timeing out incorrectly. 
+</li>
+</ul></li>
+<li><b>Revision 5.1</b> (Nov 27, 2013): 
+
+<ul>
+<li>Fixed incorrect calculation of image parameters if the top left corner 
+      of Video4Linux2's bounds_rect did not start at (0, 0). 
+</li>
+<li>Fixed endless loop during <a class="halconoperator" href="../operators/open_framegrabber.html">open_framegrabber</a> if the VIDIOC_QUERYCTRL 
+      ioctl doesn't return any results. 
+</li>
+</ul></li>
+<li><b>Revision 5.0</b> (May 15, 2012): 
+
+<ul>
+<li>HALCON 11 version of the interface (included in HALCON 11 DVD). 
+</li>
+</ul></li>
+<li><b>Revision 4.0</b> (Apr 14, 2011): 
+
+<ul>
+<li>First official release.
+</li>
+</ul></li>
+</ul></div>
+  <!-- toc end -->  <hr> 
+  <div class="imprint"> 
+    <span class="imprinthead">Legal disclaimer regarding hyperlinks</span>: 
+    This page may provide users with access by hypertext links to external, non-MVTec websites. 
+Any such access is provided with the understanding that the contents 
+of non-MVTec sites are beyond the control of MVTec Software GmbH, that 
+MVTec Software GmbH makes no representations whatsoever about such 
+sites, and that users shall proceed at their own risk. 
+MVTec Software GmbH is not responsible for the privacy practices or 
+the content of external, non-MVTec websites.
+ 
+  </div> 
+  <div class="imprint"> 
+    <span class="imprinthead">Copyright notes</span>: 
+    &copy; Copyright MVTec Software GmbH. All rights reserved. 
+Unless otherwise stated, the copyright and similar rights in the 
+contents of this page, including but not limited to all text, designs 
+and images appearing herein, are copyrighted works owned by MVTec 
+Software GmbH. 
+"MVTec Software GmbH" and "HALCON" are registered trademarks of MVTec 
+Software GmbH. 
+All other brand names, designs, service marks and trademarks (whether 
+or not registered) referenced or used herein are the property of their 
+respective owners.
+ 
+  </div> 
+  <div class="footer"> 
+    acqdump 1.5 / hdoc 1.2 / Generated: Thu Sep  6 10:41:39 CEST 2018 
+  </div> 
+  </body> 
+</html>

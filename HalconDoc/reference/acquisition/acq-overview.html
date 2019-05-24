@@ -1,0 +1,615 @@
+<!DOCTYPE HTML> 
+<html> 
+  <head> 
+  <meta id='acqdump-id' name='acqdump-id' content='halcon-acq-Overview-rev1.0'> 
+  <title>Overview / HALCON / MVTec Software GmbH</title> 
+      <style type="text/css"> 
+      body { 
+        color: #000000; 
+        background-color: #ffffff; 
+        margin-top: 0px; 
+        margin-bottom: 0px; 
+        margin-left: 20px; 
+        margin-right: 20px; 
+        font-family: Arial,Helvetica,sans-serif; 
+      } 
+      a:link { 
+        color: #0044cc; 
+      } 
+      a:link,a:visited { 
+        text-decoration: none; 
+      } 
+      a:link:hover,a:visited:hover { 
+        text-decoration: underline; 
+      } 
+      th { 
+        text-align: left; 
+      } 
+      h1,h2,h3,h4,h5,h6 { 
+        text-rendering: optimizeLegibility; 
+        color: #666666; 
+      } 
+      tt { 
+        font-family: monospace,monospace; 
+      } 
+      h1 a.halconoperator { 
+        font-family: Arial,Helvetica,sans-serif; 
+        color: #666666; 
+      } 
+      h2 a.halconoperator { 
+        font-family: Arial,Helvetica,sans-serif; 
+        color: #666666; 
+      } 
+      hr { 
+        border: 0; 
+        border-top: solid 1px #f28d26; 
+      } 
+      pre { 
+        font-family: monospace,monospace; 
+        padding: 1ex; 
+        white-space: pre-wrap; 
+      } 
+      .toc { 
+        font-size: 80%; 
+        border-top: 1px dashed #f28d26; 
+        border-bottom: 1px dashed #f28d26; 
+        padding-top: 5px; 
+        padding-bottom: 5px; 
+      } 
+      .inv { 
+        margin: 0; 
+        border: 0; 
+        padding: 0; 
+      } 
+      .banner { 
+        color: #666666; 
+        padding-left: 1em; 
+      } 
+      .logo { 
+        background-color: white; 
+      } 
+      .keyboard { 
+        font-size: 80%; 
+        padding-left: 3px; 
+        padding-right: 3px; 
+        border-radius: 5px; 
+        border-width: 1px; 
+        border-style: solid; 
+        border-color: #f28d26; 
+        background-color: #f3f3f3; 
+      } 
+      .warning { 
+        margin-top: 2ex; 
+        margin-bottom: 1ex; 
+        padding: 10px; 
+        text-align: center; 
+        border: 1px solid; 
+        color: #bb0000; 
+        background-color: #fff7f7 
+      } 
+      .imprint { 
+        margin-top: 1ex; 
+        font-size: 80%; 
+        color: #666666; 
+      } 
+      .imprinthead { 
+        font-weight: bolder; 
+        color: #666666; 
+      } 
+      .postscript { 
+        margin-top: 2ex; 
+        font-size: 80%; 
+        color: #666666 
+      } 
+      .evenrow { 
+        background-color: #e7e7ef; 
+        vertical-align: top; 
+      } 
+      .oddrow { 
+        background-color: #f7f7ff; 
+        vertical-align: top; 
+      } 
+      .headrow { 
+        background-color: #97979f; 
+        color: #ffffff; 
+        vertical-align: top; 
+      } 
+      .logorow { 
+        vertical-align: top; 
+      } 
+      .error { 
+        color: red; 
+      } 
+      .var { 
+        font-style: italic 
+      } 
+      .halconoperator { 
+        font-family: monospace,monospace; 
+      } 
+      .halconprocedure { 
+        font-family: Consolas,Inconsolata,"DejaVu Sans Mono",monospace; 
+      } 
+      span.operator { 
+        font-family: monospace,monospace; 
+      } 
+      span.procedure { 
+        font-family: monospace,monospace; 
+      } 
+      span.operation { 
+        font-family: monospace,monospace; 
+      } 
+      span.feature { 
+        font-family: Arial,Helvetica,Homerton,sans-serif; 
+      } 
+      ul { 
+        padding-left: 1.2em; 
+      } 
+      li.dot { 
+        list-style-type: square; 
+        color: #f28d26; 
+      } 
+      .breadcrumb { 
+        font-size: 80%; 
+        color: white; 
+        background-color: #062d64; 
+        margin-left: -20px; 
+        margin-right: -20px; 
+        margin-bottom: 20px; 
+        padding-left: 20px; 
+        padding-right: 20px; 
+        padding-bottom: 15px; 
+      } 
+      .webbar { 
+        font-size: 80%; 
+        background-color: #dddddd; 
+        margin-top: 0px; 
+        margin-left: -20px; 
+        margin-right: -20px; 
+        margin-bottom: 0px; 
+        padding-top: 5px; 
+        padding-left: 20px; 
+        padding-right: 20px; 
+        padding-bottom: 5px; 
+      } 
+      .footer { 
+        border-top: 1px dashed #f28d26; 
+        font-size: 80%; 
+        color: #666666; 
+        margin-left: -20px; 
+        margin-right: -20px; 
+        margin-top: 0px; 
+        padding-left: 20px; 
+        padding-right: 20px; 
+        padding-top: 10px; 
+        padding-bottom: 15px; 
+      } 
+      .breadcrumb a { 
+        color: #ffffff; 
+        border-bottom: 1px solid white; 
+      } 
+      .breadcrumb a:link:hover,.breadcrumb a:visited:hover { 
+        text-decoration: none; 
+        border-bottom: none; 
+      } 
+      .heading { 
+        margin-top: 1ex; 
+        font-size: 110%; 
+        font-weight: bold; 
+        color: #666666; 
+      } 
+      .text { 
+        color: black; 
+      } 
+      .example { 
+        font-size: 80%; 
+        background-color: #f3f3f3; 
+        border: 1px dashed #666666; 
+        padding: 10px; 
+      } 
+      .math { 
+      } 
+      .displaymath { 
+        text-align: center; 
+        margin-top: 1ex; 
+        margin-bottom: 1ex; 
+      } 
+      </style> 
+  </head> 
+  <body><div class="breadcrumb"> 
+<br class="inv"/> 
+<a href="../../../../documentation.html">HALCON</a> / Image Acquisition Interfaces 
+<br class="inv"/> 
+</div> 
+<h1>Image Acquisition Interfaces</h1> 
+<div class="banner"> 
+  <a href="http://www.mvtec.com/">MVTec Software GmbH</a> 
+</div> 
+<p> 
+    HALCON is delivered with the following image acquisition devices, listed below   under the according operating systems. 
+  For additional image acquisition interfaces and 
+  up-to-date information about the latest releases of 
+  interfaces including legacy interfaces, please refer to 
+  the MVTec <a href="http://www.halcon.com/image-acquisition/">image acquisition interfaces</a> page.
+ 
+</p>
+<ul class="toc">
+<li><a href="#IF_WINDOWS_X64">Windows x64</a></li>
+<li><a href="#IF_WINDOWS">Windows</a></li>
+<li><a href="#IF_LINUX">Linux x64</a></li>
+<li><a href="#IF_AARCH64">Linux aarch64</a></li>
+<li><a href="#IF_ARMV7A">Linux armv7a</a></li>
+<li><a href="#IF_OSX">macOS</a></li>
+<li><a href="#IF_ADD">Interfaces Available Online</a></li>
+</ul>
+  <!-- toc start -->
+<h2 id="IF_WINDOWS_X64">Windows x64</h2><div></div>
+<table summary="Windows x64" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Interface</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><a href="hAcqBitFlow.html">BitFlow</a></td>
+<td>Image Acquisition Interface for BitFlow Boards</td>
+</tr>
+<tr class="evenrow">
+<td><a href="hAcqDirectFile.html">DirectFile</a></td>
+<td>Image Acquisition Interface for DirectShow File Reader</td>
+</tr>
+<tr class="oddrow">
+<td><a href="hAcqDirectShow.html">DirectShow</a></td>
+<td>Image Acquisition Interface for DirectShow</td>
+</tr>
+<tr class="evenrow">
+<td><a href="hAcqEnsenso-NxLib.html">Ensenso-NxLib</a></td>
+<td>Image Acquisition Interface for Ensenso 3D Sensors</td>
+</tr>
+<tr class="oddrow">
+<td><a href="hAcqFile.html">File</a></td>
+<td>Virtual Image Acquisition Interface (File Interface)</td>
+</tr>
+<tr class="evenrow">
+<td><a href="hAcqGenICamTL.html">GenICamTL</a></td>
+<td>Image Acquisition Interface for GenICam GenTL compliant cameras</td>
+</tr>
+<tr class="oddrow">
+<td><a href="hAcqGigEVision2.html">GigEVision2</a></td>
+<td>Image Acquisition Interface for GigE Vision compliant cameras</td>
+</tr>
+<tr class="evenrow">
+<td><a href="hAcqLinX.html">LinX</a></td>
+<td>Image Acquisition Interface for LinX GINGA digital-CLe and GINGA++Me Boards</td>
+</tr>
+<tr class="oddrow">
+<td><a href="hAcqMILLite.html">MILLite</a></td>
+<td>Image Acquisition Interface for Matrox Morphis, Radient, Solios, and Vio Boards</td>
+</tr>
+<tr class="evenrow">
+<td><a href="hAcqMultiCam.html">MultiCam</a></td>
+<td>Image Acquisition Interface for Euresys DOMINO, GRABLINK, PICOLO, and QUICKPACK Boards</td>
+</tr>
+<tr class="oddrow">
+<td><a href="hAcqO3D3xx.html">O3D3xx</a></td>
+<td>Image Acquisition Interface for ifm 3D Time of Flight Cameras (O3D3xx)</td>
+</tr>
+<tr class="evenrow">
+<td><a href="hAcqpylon.html">pylon</a></td>
+<td>Image Acquisition Interface for Basler Cameras via pylon Camera Software Suite</td>
+</tr>
+<tr class="oddrow">
+<td><a href="hAcqSaperaLT.html">SaperaLT</a></td>
+<td>Image Acquisition Interface for Teledyne DALSA Boards, Genie, and Spyder3 Cameras via Sapera LT library</td>
+</tr>
+<tr class="evenrow">
+<td><a href="hAcqSICK-3DCamera.html">SICK-3DCamera</a></td>
+<td>Image Acquisition Interface for SICK 3D Cameras</td>
+</tr>
+<tr class="oddrow">
+<td><a href="hAcqSiliconSoftware.html">SiliconSoftware</a></td>
+<td>Image Acquisition Interface for Silicon Software Boards</td>
+</tr>
+<tr class="evenrow">
+<td><a href="hAcquEye.html">uEye</a></td>
+<td>Image Acquisition Interface for IDS uEye Cameras</td>
+</tr>
+<tr class="oddrow">
+<td><a href="hAcqUSB3Vision.html">USB3Vision</a></td>
+<td>Image Acquisition Interface for USB3 Vision compliant cameras</td>
+</tr></table>
+<h2 id="IF_WINDOWS">Windows</h2><div></div>
+<table summary="Windows" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Interface</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><a href="hAcqBitFlow.html">BitFlow</a></td>
+<td>Image Acquisition Interface for BitFlow Boards</td>
+</tr>
+<tr class="evenrow">
+<td><a href="hAcqDirectFile.html">DirectFile</a></td>
+<td>Image Acquisition Interface for DirectShow File Reader</td>
+</tr>
+<tr class="oddrow">
+<td><a href="hAcqDirectShow.html">DirectShow</a></td>
+<td>Image Acquisition Interface for DirectShow</td>
+</tr>
+<tr class="evenrow">
+<td><a href="hAcqEnsenso-NxLib.html">Ensenso-NxLib</a></td>
+<td>Image Acquisition Interface for Ensenso 3D Sensors</td>
+</tr>
+<tr class="oddrow">
+<td><a href="hAcqFile.html">File</a></td>
+<td>Virtual Image Acquisition Interface (File Interface)</td>
+</tr>
+<tr class="evenrow">
+<td><a href="hAcqGenICamTL.html">GenICamTL</a></td>
+<td>Image Acquisition Interface for GenICam GenTL compliant cameras</td>
+</tr>
+<tr class="oddrow">
+<td><a href="hAcqGigEVision2.html">GigEVision2</a></td>
+<td>Image Acquisition Interface for GigE Vision compliant cameras</td>
+</tr>
+<tr class="evenrow">
+<td><a href="hAcqLinX.html">LinX</a></td>
+<td>Image Acquisition Interface for LinX GINGA digital-CLe and GINGA++Me Boards</td>
+</tr>
+<tr class="oddrow">
+<td><a href="hAcqMILLite.html">MILLite</a></td>
+<td>Image Acquisition Interface for Matrox Morphis, Radient, Solios, and Vio Boards</td>
+</tr>
+<tr class="evenrow">
+<td><a href="hAcqMultiCam.html">MultiCam</a></td>
+<td>Image Acquisition Interface for Euresys DOMINO, GRABLINK, PICOLO, and QUICKPACK Boards</td>
+</tr>
+<tr class="oddrow">
+<td><a href="hAcqO3D3xx.html">O3D3xx</a></td>
+<td>Image Acquisition Interface for ifm 3D Time of Flight Cameras (O3D3xx)</td>
+</tr>
+<tr class="evenrow">
+<td><a href="hAcqpylon.html">pylon</a></td>
+<td>Image Acquisition Interface for Basler Cameras via pylon Camera Software Suite</td>
+</tr>
+<tr class="oddrow">
+<td><a href="hAcqSaperaLT.html">SaperaLT</a></td>
+<td>Image Acquisition Interface for Teledyne DALSA Boards, Genie, and Spyder3 Cameras via Sapera LT library</td>
+</tr>
+<tr class="evenrow">
+<td><a href="hAcqSICK-3DCamera.html">SICK-3DCamera</a></td>
+<td>Image Acquisition Interface for SICK 3D Cameras</td>
+</tr>
+<tr class="oddrow">
+<td><a href="hAcqSiliconSoftware.html">SiliconSoftware</a></td>
+<td>Image Acquisition Interface for Silicon Software Boards</td>
+</tr>
+<tr class="evenrow">
+<td><a href="hAcquEye.html">uEye</a></td>
+<td>Image Acquisition Interface for IDS uEye Cameras</td>
+</tr>
+<tr class="oddrow">
+<td><a href="hAcqUSB3Vision.html">USB3Vision</a></td>
+<td>Image Acquisition Interface for USB3 Vision compliant cameras</td>
+</tr></table>
+<h2 id="IF_LINUX">Linux x64</h2><div></div>
+<table summary="Linux x64" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Interface</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><a href="hAcqEnsenso-NxLib.html">Ensenso-NxLib</a></td>
+<td>Image Acquisition Interface for Ensenso 3D Sensors</td>
+</tr>
+<tr class="evenrow">
+<td><a href="hAcqFile.html">File</a></td>
+<td>Virtual Image Acquisition Interface (File Interface)</td>
+</tr>
+<tr class="oddrow">
+<td><a href="hAcqGenICamTL.html">GenICamTL</a></td>
+<td>Image Acquisition Interface for GenICam GenTL compliant cameras</td>
+</tr>
+<tr class="evenrow">
+<td><a href="hAcqGigEVision2.html">GigEVision2</a></td>
+<td>Image Acquisition Interface for GigE Vision compliant cameras</td>
+</tr>
+<tr class="oddrow">
+<td><a href="hAcqO3D3xx.html">O3D3xx</a></td>
+<td>Image Acquisition Interface for ifm 3D Time of Flight Cameras (O3D3xx)</td>
+</tr>
+<tr class="evenrow">
+<td><a href="hAcquEye.html">uEye</a></td>
+<td>Image Acquisition Interface for IDS uEye Cameras</td>
+</tr>
+<tr class="oddrow">
+<td><a href="hAcqUSB3Vision.html">USB3Vision</a></td>
+<td>Image Acquisition Interface for USB3 Vision compliant cameras</td>
+</tr>
+<tr class="evenrow">
+<td><a href="hAcqVideo4Linux2.html">Video4Linux2</a></td>
+<td>Image Acquisition Interface for Video4Linux2</td>
+</tr></table>
+<h2 id="IF_AARCH64">Linux aarch64</h2><div></div>
+<table summary="Linux aarch64" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Interface</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><a href="hAcqFile.html">File</a></td>
+<td>Virtual Image Acquisition Interface (File Interface)</td>
+</tr>
+<tr class="evenrow">
+<td><a href="hAcqGenICamTL.html">GenICamTL</a></td>
+<td>Image Acquisition Interface for GenICam GenTL compliant cameras</td>
+</tr>
+<tr class="oddrow">
+<td><a href="hAcqGigEVision2.html">GigEVision2</a></td>
+<td>Image Acquisition Interface for GigE Vision compliant cameras</td>
+</tr>
+<tr class="evenrow">
+<td><a href="hAcqUSB3Vision.html">USB3Vision</a></td>
+<td>Image Acquisition Interface for USB3 Vision compliant cameras</td>
+</tr>
+<tr class="oddrow">
+<td><a href="hAcqVideo4Linux2.html">Video4Linux2</a></td>
+<td>Image Acquisition Interface for Video4Linux2</td>
+</tr></table>
+<h2 id="IF_ARMV7A">Linux armv7a</h2><div></div>
+<table summary="Linux armv7a" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Interface</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><a href="hAcqFile.html">File</a></td>
+<td>Virtual Image Acquisition Interface (File Interface)</td>
+</tr>
+<tr class="evenrow">
+<td><a href="hAcqGenICamTL.html">GenICamTL</a></td>
+<td>Image Acquisition Interface for GenICam GenTL compliant cameras</td>
+</tr>
+<tr class="oddrow">
+<td><a href="hAcqGigEVision2.html">GigEVision2</a></td>
+<td>Image Acquisition Interface for GigE Vision compliant cameras</td>
+</tr>
+<tr class="evenrow">
+<td><a href="hAcqUSB3Vision.html">USB3Vision</a></td>
+<td>Image Acquisition Interface for USB3 Vision compliant cameras</td>
+</tr>
+<tr class="oddrow">
+<td><a href="hAcqVideo4Linux2.html">Video4Linux2</a></td>
+<td>Image Acquisition Interface for Video4Linux2</td>
+</tr></table>
+<h2 id="IF_OSX">macOS</h2><div></div>
+<table summary="macOS" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Interface</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><a href="hAcqFile.html">File</a></td>
+<td>Virtual Image Acquisition Interface (File Interface)</td>
+</tr>
+<tr class="evenrow">
+<td><a href="hAcqGenICamTL.html">GenICamTL</a></td>
+<td>Image Acquisition Interface for GenICam GenTL compliant cameras</td>
+</tr>
+<tr class="oddrow">
+<td><a href="hAcqGigEVision2.html">GigEVision2</a></td>
+<td>Image Acquisition Interface for GigE Vision compliant cameras</td>
+</tr>
+<tr class="evenrow">
+<td><a href="hAcqUSB3Vision.html">USB3Vision</a></td>
+<td>Image Acquisition Interface for USB3 Vision compliant cameras</td>
+</tr></table>
+<h2 id="IF_ADD">Interfaces Available Online</h2><div></div>
+<table summary="Interfaces Available Online" width="100%" cellpadding="5">
+<tr class="headrow">
+<th>Interface</th>
+<th>Description</th>
+<tr class="oddrow">
+<td><a href="https://www.mvtec.com/products/interfaces?tx_mvtecproduct_extension%5BextensionFilter%5D%5BextensionName%5D=ABS">ABS</a></td>
+<td>Image Acquisition Interface for the ABS UK11xx/31xxx Camera Family</td>
+</tr>
+<tr class="evenrow">
+<td><a href="https://www.mvtec.com/products/interfaces?tx_mvtecproduct_extension%5BextensionFilter%5D%5BextensionName%5D=ADLINK">ADLINK</a></td>
+<td>Image Acquisition Interface for ADLINK CPL64 Boards</td>
+</tr>
+<tr class="oddrow">
+<td><a href="https://www.mvtec.com/products/interfaces?tx_mvtecproduct_extension%5BextensionFilter%5D%5BextensionName%5D=Andor">Andor</a></td>
+<td>Image Acquisition Interface for Andor Scientific Cameras</td>
+</tr>
+<tr class="evenrow">
+<td><a href="https://www.mvtec.com/products/interfaces?tx_mvtecproduct_extension%5BextensionFilter%5D%5BextensionName%5D=Crevis">Crevis</a></td>
+<td>Image Acquisition Interface for Crevis USB 2.0 Cameras</td>
+</tr>
+<tr class="oddrow">
+<td><a href="https://www.mvtec.com/products/interfaces?tx_mvtecproduct_extension%5BextensionFilter%5D%5BextensionName%5D=DahengCAM">DahengCAM</a></td>
+<td>Image Acquisition Interface for Daheng Cameras</td>
+</tr>
+<tr class="evenrow">
+<td><a href="https://www.mvtec.com/products/interfaces?tx_mvtecproduct_extension%5BextensionFilter%5D%5BextensionName%5D=FocalSpecLCI">FocalSpecLCI</a></td>
+<td>Image Acquisition Interface for FocalSpec LCI 3D scanners</td>
+</tr>
+<tr class="oddrow">
+<td><a href="https://www.mvtec.com/products/interfaces?tx_mvtecproduct_extension%5BextensionFilter%5D%5BextensionName%5D=Ginga%2B%2B">Ginga++</a></td>
+<td>Image Acquisition Interface for LinX Ginga++ Boards</td>
+</tr>
+<tr class="evenrow">
+<td><a href="https://www.mvtec.com/products/interfaces?tx_mvtecproduct_extension%5BextensionFilter%5D%5BextensionName%5D=GingaDG">GingaDG</a></td>
+<td>Image Acquisition Interface for LinX Ginga digital Boards</td>
+</tr>
+<tr class="oddrow">
+<td><a href="https://www.mvtec.com/products/interfaces?tx_mvtecproduct_extension%5BextensionFilter%5D%5BextensionName%5D=heliCamC3">heliCamC3</a></td>
+<td>Image Acquisition Interface for Heliotis heliCam C3 Cameras</td>
+</tr>
+<tr class="evenrow">
+<td><a href="https://www.mvtec.com/products/interfaces?tx_mvtecproduct_extension%5BextensionFilter%5D%5BextensionName%5D=LPS36">LPS36</a></td>
+<td>Image Acquisition Interface for Leuze LPS 36 Sensors</td>
+</tr>
+<tr class="oddrow">
+<td><a href="https://www.mvtec.com/products/interfaces?tx_mvtecproduct_extension%5BextensionFilter%5D%5BextensionName%5D=LuCam">LuCam</a></td>
+<td>Image Acquisition Interface for Lumenera USB 2.0, USB 3.0 and GigE      Vision Cameras
+</td>
+</tr>
+<tr class="evenrow">
+<td><a href="https://www.mvtec.com/products/interfaces?tx_mvtecproduct_extension%5BextensionFilter%5D%5BextensionName%5D=MatrixVisionAcquire">MatrixVisionAcquire</a></td>
+<td>Image Acquisition Interface for MATRIX VISION Boards and Cameras</td>
+</tr>
+<tr class="oddrow">
+<td><a href="https://www.mvtec.com/products/interfaces?tx_mvtecproduct_extension%5BextensionFilter%5D%5BextensionName%5D=Opteon">Opteon</a></td>
+<td>Image Acquisition Interface for Opteon Imaging Systems</td>
+</tr>
+<tr class="evenrow">
+<td><a href="https://www.mvtec.com/products/interfaces?tx_mvtecproduct_extension%5BextensionFilter%5D%5BextensionName%5D=PhoXi">PhoXi</a></td>
+<td>Image Acquisition Interface for Photoneo PhoXi 3D scanners</td>
+</tr>
+<tr class="oddrow">
+<td><a href="https://www.mvtec.com/products/interfaces?tx_mvtecproduct_extension%5BextensionFilter%5D%5BextensionName%5D=PixeLINK">PixeLINK</a></td>
+<td>Image Acquisition Interface for PixeLINK IEEE 1394 (FireWire),Image Acquisition Interface for PixeLINK IEEE 1394 (FireWire),</td>
+</tr>
+<tr class="evenrow">
+<td><a href="https://www.mvtec.com/products/interfaces?tx_mvtecproduct_extension%5BextensionFilter%5D%5BextensionName%5D=Sentech">Sentech</a></td>
+<td>Image Acquisition Interface for Sentech STC USB 2.0 and USB 3.0 Cameras</td>
+</tr>
+<tr class="oddrow">
+<td><a href="https://www.mvtec.com/products/interfaces?tx_mvtecproduct_extension%5BextensionFilter%5D%5BextensionName%5D=SICK%2DScanningRuler">SICK-ScanningRuler</a></td>
+<td>Image Acquisition Interface for SICK ScanningRuler</td>
+</tr>
+<tr class="evenrow">
+<td><a href="https://www.mvtec.com/products/interfaces?tx_mvtecproduct_extension%5BextensionFilter%5D%5BextensionName%5D=Slink">Slink</a></td>
+<td>Image Acquisition Interface for Matrix MAS devices via Slink</td>
+</tr>
+<tr class="oddrow">
+<td><a href="https://www.mvtec.com/products/interfaces?tx_mvtecproduct_extension%5BextensionFilter%5D%5BextensionName%5D=TWAIN">TWAIN</a></td>
+<td>Image Acquisition Interface for TWAIN compatible devices</td>
+</tr>
+<tr class="evenrow">
+<td><a href="https://www.mvtec.com/products/interfaces?tx_mvtecproduct_extension%5BextensionFilter%5D%5BextensionName%5D=VRmUsbCam">VRmUsbCam</a></td>
+<td>Image Acquisition Interface for VRmagic Imaging Devices</td>
+</tr></table>
+  <!-- toc end -->  <hr> 
+  <div class="imprint"> 
+    <span class="imprinthead">Legal disclaimer regarding hyperlinks</span>: 
+    This page may provide users with access by hypertext links to external, non-MVTec websites. 
+Any such access is provided with the understanding that the contents 
+of non-MVTec sites are beyond the control of MVTec Software GmbH, that 
+MVTec Software GmbH makes no representations whatsoever about such 
+sites, and that users shall proceed at their own risk. 
+MVTec Software GmbH is not responsible for the privacy practices or 
+the content of external, non-MVTec websites.
+ 
+  </div> 
+  <div class="imprint"> 
+    <span class="imprinthead">Copyright notes</span>: 
+    &copy; Copyright MVTec Software GmbH. All rights reserved. 
+Unless otherwise stated, the copyright and similar rights in the 
+contents of this page, including but not limited to all text, designs 
+and images appearing herein, are copyrighted works owned by MVTec 
+Software GmbH. 
+"MVTec Software GmbH" and "HALCON" are registered trademarks of MVTec 
+Software GmbH. 
+All other brand names, designs, service marks and trademarks (whether 
+or not registered) referenced or used herein are the property of their 
+respective owners.
+ 
+  </div> 
+  <div class="footer"> 
+    acqdump 1.5 / hdoc 1.0 / Generated: Tue Dec 11 12:16:57 CET 2018 
+  </div> 
+  </body> 
+</html>
