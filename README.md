@@ -1,0 +1,20 @@
+# HalconPractise
+
+## Download 下载
+
+- [MVtec官方下载](https://www.mvtec.com/download/halcon/)*需注册MVtec用户;如果网络卡顿,请将VPN挂在国外服务器节点.建议美国香港日本*
+
+- [iHalcon(Halcon学习网)下载](http://www.ihalcon.com/read-7605-1.html)
+   - [iHalcon(Halcon学习网)最新下载地址19.05](http://www.ihalcon.com/read-11123.html)
+- [大恒图像国内代理下载](http://www.daheng-imaging.com)
+
+## License 许可证
+
+- [大恒图像国内代理购买](http://www.daheng-imaging.com)
+- [51Halcon网适用许可证](https://www.51halcon.com/thread-387-1-1.html)
+
+## Install 安装
+
+- 一直下一步
+- 只要能勾选✔就都打勾
+
