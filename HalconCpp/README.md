@@ -1,6 +1,6 @@
 # Halcon Cpp on VS
 
-## Before 前期准备
+## 0. Before 前期准备
 
 - 安装Halcon
   - 需要安装完毕18.11stead(19年建议版本)或者19.05stead(19年目前最新版)版本
@@ -9,23 +9,49 @@
 
 - 安装VS
 
-## VS Project VS项目
+## 1. VS Project VS项目
 
-### 手动创建
-1. 创建一个VsCppWinDeskApp或者Cpp Console
+### 1. Create Project 创建项目
+1. 创建新项目```Ctrl + Shift + N```
 
-2. 先在配置管理器，把平台改为X64(或X86)
+<img src="Create Project1.png" width = "50%" />
+
+ 
+1. 在下拉菜单中选定需要的
+```
+Language: C++
+Platform: Windows
+Project Type: Desktop OR Console
+```
+<img src="Create Project2.png" width = "50%" />
+
+2. 选定一个项目(此处以```Console App```为例);
+点击下一步;
+文本框根据需求修改:
+<img src="Create Project3.png" width = "50%" />
+
+```
+Project Name: Led(按需修改,此处Led为例)
+Location: C:\xxx\Desktop(按需修改,此处以桌面为例)
+Solution: 保持默认
+Solution Name: 保持默认(默认生成Project Name 同名)
+```
+点击下一步;
+### 2. Configuration 配置
+#### Method 1: Configure Manually 方法1:手动创建
+1. 先在配置管理器，把平台改为X64(或X86)
+
+<img src="Configuration1.png" width = "50%" />
+
+2. 项目属性 -- 配置属性 -- VC++目录 -- 包含目录 -- 添加 ```$(HALCONROOT)\include;$(HALCONROOT)\include\halconcpp```;
 
 
-3. 项目属性 -- 配置属性 -- VC++目录 -- 包含目录 -- 添加 ```$(HALCONROOT)\include;$(HALCONROOT)\include\halconcpp```;
+3. 项目属性 -- 配置属性 -- VC++目录 -- 库目录 -- 添加 ```$(HALCONROOT)\lib\$(HALCONARCH)```;
 
+4. 项目属性 -- 配置属性 -- 链接器 -- 输入 -- 附加依赖项 -- 添加 ```halconcpp.lib```
 
-4. 项目属性 -- 配置属性 -- VC++目录 -- 库目录 -- 添加 ```$(HALCONROOT)\lib\$(HALCONARCH)```;
-
-5. 项目属性 -- 配置属性 -- 链接器 -- 输入 -- 附加依赖项 -- 添加 ```halconcpp.lib```
-
-6. 添加头文件
-7. Main.cpp中加入
+5. 添加头文件
+6. Main.cpp中加入
 
 ```
 //Halcon库
@@ -41,7 +67,7 @@ using namespace std;
 #include "Hal.h"
 ```
 
-### 直接导入设置
+#### Method 1: Import Settings Directly 方法2: 直接导入设置
 
 1. 使用目录下的HalconX64两个文件(VS2019测试可用)
 2.  添加头文件
