@@ -14,7 +14,7 @@
 ### 1. Create Project 创建项目
 1. 创建新项目```Ctrl + Shift + N```
 
-<img src="Create Project1.png" width = "50%" />
+<img src="Create Project1.png" width = "75%" />
 
  
 1. 在下拉菜单中选定需要的
@@ -23,12 +23,12 @@ Language: C++
 Platform: Windows
 Project Type: Desktop OR Console
 ```
-<img src="Create Project2.png" width = "50%" />
+<img src="Create Project2.png" width = "75%" />
 
 2. 选定一个项目(此处以```Console App```为例);
 点击下一步;
 文本框根据需求修改:
-<img src="Create Project3.png" width = "50%" />
+<img src="Create Project3.png" width = "75%" />
 
 ```
 Project Name: Led(按需修改,此处Led为例)
@@ -38,40 +38,40 @@ Solution Name: 保持默认(默认生成Project Name 同名)
 ```
 点击下一步;
 ### 2. Configuration 配置
-#### Method 1: Configure Manually 方法1:手动创建
-1. 先在配置管理器，把平台改为X64(或X86)
 
-<img src="Configuration1.png" width = "50%" />
+1. Build-> Configuration Management 配置管理器:
+把平台改为```X64OR X86```(此处以X86为例)
+<img src="Configuration1.png" width = "75%" />
 
-2. 项目属性 -- 配置属性 -- VC++目录 -- 包含目录 -- 添加 ```$(HALCONROOT)\include;$(HALCONROOT)\include\halconcpp```;
+1. Project -> Led Properties Led项目属性 -> Configuration Properties配置属性 -> VC++ Directories VC++目录 -> Include Directories 包含目录 
 
+<img src="Configuration2.png" width = "75%" />
 
-3. 项目属性 -- 配置属性 -- VC++目录 -- 库目录 -- 添加 ```$(HALCONROOT)\lib\$(HALCONARCH)```;
+-> 添加 ```$(HALCONROOT)\include;$(HALCONROOT)\include\halconcpp```;
 
-4. 项目属性 -- 配置属性 -- 链接器 -- 输入 -- 附加依赖项 -- 添加 ```halconcpp.lib```
+<img src="Configuration3.png" width = "75%" />
 
-5. 添加头文件
-6. Main.cpp中加入
+2. Project -> Led Properties Led项目属性 -> Configuration Properties配置属性 -> VC++ Directories VC++目录 -> Library Directory 库目录 
 
-```
-//Halcon库
-#include "HalconCpp.h"
-using namespace HalconCpp;
+<img src="Configuration4.png" width = "75%" />
 
-//公共库
-using namespace std;
-#include <string>
-#include <iostream>
+-> 添加 ```$(HALCONROOT)\lib\$(HALCONARCH)```;
 
-//自写函数头
-#include "Hal.h"
-```
+<img src="Configuration5.png" width = "75%" />
 
-#### Method 1: Import Settings Directly 方法2: 直接导入设置
+3. Project -> Led Properties Led项目属性 -> Configuration Properties配置属性 -> Linker 链接器 -> Input 输入 -> 附加依赖项 
 
-1. 使用目录下的HalconX64两个文件(VS2019测试可用)
-2.  添加头文件
-3.  Main.cpp中加入
+<img src="Configuration6.png" width = "75%" />
+
+-> 添加 ```halconcpp.lib```
+
+<img src="Configuration7.png" width = "75%" />
+
+4. 添加头文件:
+
+Solution Explorer -> Led -> Header Files -> 右击 -> Add -> Add Exiting Item -> 添加 Hal.h
+
+5. Led.cpp中加入
 
 ```
 //Halcon库
