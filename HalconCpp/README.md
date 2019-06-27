@@ -40,14 +40,14 @@ Solution Name: 保持默认(默认生成Project Name 同名)
 ### 2. Configuration 配置
 
 1. Build-> Configuration Management 配置管理器:
-把平台改为```X64OR X86```(此处以X86为例)
+把平台改为```X64 OR X86```(此处以X86为例)
 <img src="Configuration1.png" width = "75%" />
 
 1. Project -> Led Properties Led项目属性 -> Configuration Properties配置属性 -> VC++ Directories VC++目录 -> Include Directories 包含目录 
 
 <img src="Configuration2.png" width = "75%" />
 
--> 添加 ```$(HALCONROOT)\include;$(HALCONROOT)\include\halconcpp```;
+-> 添加 ```$(HALCONROOT)\include;$(HALCONROOT)\include\halconcpp```;*也可写绝对路径;也可使用```./```;下同*
 
 <img src="Configuration3.png" width = "75%" />
 
@@ -56,10 +56,11 @@ Solution Name: 保持默认(默认生成Project Name 同名)
 <img src="Configuration4.png" width = "75%" />
 
 -> 添加 ```$(HALCONROOT)\lib\$(HALCONARCH)```;
+*$(HALCONARCH)也可手动改为```x64-win64```或```x86sse2-win32```*
 
 <img src="Configuration5.png" width = "75%" />
 
-3. Project -> Led Properties Led项目属性 -> Configuration Properties配置属性 -> Linker 链接器 -> Input 输入 -> 附加依赖项 
+1. Project -> Led Properties Led项目属性 -> Configuration Properties配置属性 -> Linker 链接器 -> Input 输入 -> 附加依赖项 
 
 <img src="Configuration6.png" width = "75%" />
 
