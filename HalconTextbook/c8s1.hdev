@@ -2,7 +2,12 @@
 <hdevelop file_version="1.2" halcon_version="18.11.1.1">
 <procedure name="main">
 <interface/>
-<body/>
+<body>
+<c>** eg 8-1//</c>
+<c></c>
+<c></c>
+<c></c>
+</body>
 <docu id="main">
 <parameters/>
 </docu>
