@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.0.0">
+<procedure name="main">
+<interface/>
+<body>
+<c>* </c>
+<c>* Example for the usage of two DALSA frame grabber boards</c>
+<c>* </c>
+<l>info_framegrabber ('SaperaLT', 'info_boards', InfoBoardsInfo, InfoBoardsValues)</l>
+<l>info_framegrabber ('SaperaLT', 'camera_type', CameraTypeInfo, CameraTypeValues)</l>
+<l>info_framegrabber ('SaperaLT', 'defaults', DefaultsInfo, DefaultsValues)</l>
+<l>info_framegrabber ('SaperaLT', 'parameters', ParametersInfo, ParametersValues)</l>
+<l>info_framegrabber ('SaperaLT', 'port', PortInfo, PortValues)</l>
+<l>info_framegrabber ('SaperaLT', 'revision', RevisionInfo, RevisionValues)</l>
+<c>* </c>
+<c>* Note, that you have to configure your board (via the tools of the Sapera SDK) appropriately.</c>
+<c>* Please see also the HTML documentation of the HALCON SaperaLT interface!</c>
+<c>* </c>
+<l>myBoard1 := 'X64-CL_iPro_1'</l>
+<l>myBoard2 := 'PC2-Vision_1'</l>
+<l>CameraConfigFilename1 := 'T_CSB1100CL_10-bits_Default.ccf'</l>
+<l>CameraConfigFilename2 := 'T_CS8530D_Progressive_Default.ccf'</l>
+<l>CameraConfigFileDir := 'C:\\Program files\\Teledyne DALSA\\Sapera\\CamFiles\\User\\'</l>
+<l>CameraType1 := CameraConfigFileDir + CameraConfigFilename1</l>
+<l>CameraType2 := CameraConfigFileDir + CameraConfigFilename2</l>
+<l>open_framegrabber ('SaperaLT', 1, 1, 0, 0, 0, 0, 'default', -1, 'default', -1, 'false', CameraType1, myBoard1, -1, -1, AcqHandle1)</l>
+<l>open_framegrabber ('SaperaLT', 1, 1, 0, 0, 0, 0, 'default', -1, 'default', -1, 'false', CameraType2, myBoard2, -1, -1, AcqHandle2)</l>
+<c>* </c>
+<l>get_framegrabber_param (AcqHandle1, 'image_width', Width1)</l>
+<l>get_framegrabber_param (AcqHandle1, 'image_height', Height1)</l>
+<l>get_framegrabber_param (AcqHandle2, 'image_width', Width2)</l>
+<l>get_framegrabber_param (AcqHandle2, 'image_height', Height2)</l>
+<c>* </c>
+<l>dev_update_window ('off')</l>
+<l>* dev_update_var ('off')</l>
+<l>dev_close_window ()</l>
+<l>dev_close_window ()</l>
+<l>dev_open_window (0, 0, Width1 / 2, Height1 / 2, 'black', WindowHandle1)</l>
+<l>dev_set_part (0, 0, Height1 - 1, Width1 - 1)</l>
+<l>dev_open_window (0, Width1 / 2 + 10, Width2 / 2, Height2 / 2, 'black', WindowHandle2)</l>
+<l>dev_set_part (0, 0, Height2 - 1, Width2 - 1)</l>
+<c>* </c>
+<l>count_seconds (SecondsOld)</l>
+<l>while (1)</l>
+<l>    grab_image (Image1, AcqHandle1)</l>
+<l>    dev_set_window (WindowHandle1)</l>
+<l>    dev_display (Image1)</l>
+<c>    * </c>
+<l>    grab_image (Image2, AcqHandle2)</l>
+<l>    dev_set_window (WindowHandle2)</l>
+<l>    dev_display (Image2)</l>
+<c>    * </c>
+<l>    count_seconds (SecondsNew)</l>
+<l>    FrameRate := 1 / (SecondsNew - SecondsOld)</l>
+<l>    SecondsOld := SecondsNew</l>
+<l>endwhile</l>
+<l>stop ()</l>
+<l>close_framegrabber (AcqHandle1)</l>
+<l>close_framegrabber (AcqHandle2)</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>

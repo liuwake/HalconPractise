@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.0.0">
+<procedure name="main">
+<interface/>
+<body>
+<c>* </c>
+<c>* Example for the usage of the SaperaLT interface</c>
+<c>* (concurrent grabbing from two connected cameras)</c>
+<c>* </c>
+<l>info_framegrabber ('SaperaLT', 'info_boards', InfoBoardsInfo, InfoBoardsValues)</l>
+<l>info_framegrabber ('SaperaLT', 'device', DeviceInfo, DeviceValues)</l>
+<l>info_framegrabber ('SaperaLT', 'camera_type', CameraTypeInfo, CameraTypeValues)</l>
+<l>info_framegrabber ('SaperaLT', 'defaults', DefaultsInfo, DefaultsValues)</l>
+<l>info_framegrabber ('SaperaLT', 'parameters', ParametersInfo, ParametersValues)</l>
+<l>info_framegrabber ('SaperaLT', 'port', PortInfo, PortValues)</l>
+<l>info_framegrabber ('SaperaLT', 'revision', RevisionInfo, RevisionValues)</l>
+<c>* </c>
+<c>* Note, that you have to configure your board (via the tools of the Sapera SDK) appropriately.</c>
+<c>* Please see also the HTML documentation of the HALCON SaperaLT interface!</c>
+<c>* </c>
+<l>myBoard1 := DeviceValues[0]</l>
+<l>myBoard2 := DeviceValues[1]</l>
+<l>CameraConfigFileDir := 'C:\\Program files\\Teledyne DALSA\\Sapera\\CamFiles\\User\\'</l>
+<l>* CameraConfigFilename1 := 'T_CSB1100CL_10-bits_Default.ccf'</l>
+<l>* CameraConfigFilename2 := 'T_CSB1100CL_10-bits_Default.ccf'</l>
+<l>CameraConfigFilename1 := 'D_Genie_C640-S3_Default_Default.ccf'</l>
+<l>CameraConfigFilename2 := 'D_Genie_M640-S3_Default_Default.ccf'</l>
+<l>CameraType1 := CameraConfigFileDir + CameraConfigFilename1</l>
+<l>CameraType2 := CameraConfigFileDir + CameraConfigFilename2</l>
+<c>* </c>
+<l>open_framegrabber ('SaperaLT', 1, 1, 0, 0, 0, 0, 'default', -1, 'default', -1, 'false', CameraType1, myBoard1, -1, -1, AcqHandle1)</l>
+<l>open_framegrabber ('SaperaLT', 1, 1, 0, 0, 0, 0, 'default', -1, 'default', -1, 'false', CameraType2, myBoard2, -1, -1, AcqHandle2)</l>
+<c>* </c>
+<l>dev_update_window ('off')</l>
+<l>dev_close_window ()</l>
+<l>dev_close_window ()</l>
+<l>get_framegrabber_param (AcqHandle1, ['image_width','image_height'], ImageSize1)</l>
+<l>dev_open_window (0, 0, ImageSize1[0] / 2, ImageSize1[1] / 2, 'black', WindowHandle1)</l>
+<l>dev_set_part (0, 0, ImageSize1[1] - 1, ImageSize1[0] - 1)</l>
+<l>* set_framegrabber_param (AcqHandle1, 'continuous_grabbing', 'enable')</l>
+<l>get_framegrabber_param (AcqHandle2, ['image_width','image_height'], ImageSize2)</l>
+<l>dev_open_window (0, (ImageSize1[0] / 2) + 10, ImageSize2[0] / 2, ImageSize2[1] / 2, 'black', WindowHandle2)</l>
+<l>dev_set_part (0, 0, ImageSize2[1] - 1, ImageSize2[0] - 1)</l>
+<l>* set_framegrabber_param (AcqHandle2, 'continuous_grabbing', 'enable')</l>
+<c>* </c>
+<l>NumImages := 0</l>
+<l>count_seconds (SecondsBegin)</l>
+<l>while (1)</l>
+<l>    grab_image_async (Image1, AcqHandle1, -1)</l>
+<l>    dev_set_window (WindowHandle1)</l>
+<l>    dev_display (Image1)</l>
+<c>    * </c>
+<l>    grab_image_async (Image2, AcqHandle2, -1)</l>
+<l>    dev_set_window (WindowHandle2)</l>
+<l>    dev_display (Image2)</l>
+<c>    * </c>
+<l>    NumImages := NumImages + 1</l>
+<l>    count_seconds (SecondsCurrent)</l>
+<l>    FrameRate := NumImages / (SecondsCurrent - SecondsBegin)</l>
+<l>endwhile</l>
+<c>* </c>
+<l>close_framegrabber (AcqHandle1)</l>
+<l>close_framegrabber (AcqHandle2)</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>
