@@ -31,11 +31,14 @@
 <l>* Object := '-01-Test'</l>
 <l>* Object := '-1-Keplar'</l>
 <l>* Object := '-2-Stone'</l>
-<l>* Object := '-3-Sand'</l>
-<l>Object := '-4-Remote'</l>
+<l>Object := '-3-Sand'</l>
+<l>* Object := '-4-Remote'</l>
 <l>* Object := '-5-Square'</l>
 <l>* Object := '-02-Test'</l>
-<c></c>
+<l>* Object := 'E1'</l>
+<l>* Object :='R1' //angle we calculate</l>
+<l>*    Object :='R2' //angle we calculate</l>
+<c>   </c>
 <l>times := 0    </l>
 <c>   </c>
 <c></c>
