@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="19.05.0.0">
+<procedure name="main">
+<interface/>
+<body>
+<c>*</c>
+<c>* Initialization</c>
+<l>dev_update_off ()</l>
+<l>dev_close_window ()</l>
+<l>dev_open_window_fit_size (0, 0, 1600, 1200, -1, -1, WindowHandle)</l>
+<c>*</c>
+<c>* Input parameters</c>
+<l>read_image (Image, 'printer_chip/printer_chip_01')</l>
+<l>MinGray := 128</l>
+<c>*</c>
+<c>* Code for application</c>
+<l>get_printer_chip_regions (Image, ConnectedRegions, MinGray)</l>
+<c>*</c>
+<c>* Visualization</c>
+<l>dev_display (Image)</l>
+<l>dev_display (ConnectedRegions)</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+<procedure name="threshold_printer_chip">
+<interface>
+<io>
+<par name="Image" base_type="iconic" dimension="0"/>
+</io>
+<oo>
+<par name="Region" base_type="iconic" dimension="0"/>
+</oo>
+<ic>
+<par name="MinGray" base_type="ctrl" dimension="0"/>
+</ic>
+</interface>
+<body>
+<c></c>
+<l>connection (Region, ConnectedRegions)</l>
+<l>select_shape (ConnectedRegions, Region, 'area', 'and', 24812.9, 50000)</l>
+<c></c>
+<l>return ()</l>
+</body>
+<docu id="threshold_printer_chip">
+<parameters>
+<parameter id="Image"/>
+<parameter id="MinGray"/>
+<parameter id="Region"/>
+</parameters>
+</docu>
+</procedure>
+<procedure name="get_printer_chip_region">
+<interface>
+<io>
+<par name="Image" base_type="iconic" dimension="0"/>
+</io>
+<oo>
+<par name="ConnectedRegions" base_type="iconic" dimension="0"/>
+</oo>
+<ic>
+<par name="MinGray" base_type="ctrl" dimension="0"/>
+</ic>
+</interface>
+<body>
+<c></c>
+<l>return ()</l>
+</body>
+<docu id="get_printer_chip_region">
+<parameters>
+<parameter id="ConnectedRegions"/>
+<parameter id="Image"/>
+<parameter id="MinGray"/>
+</parameters>
+</docu>
+</procedure>
+<procedure name="get_printer_chip_regions">
+<interface>
+<io>
+<par name="Image" base_type="iconic" dimension="0"/>
+</io>
+<oo>
+<par name="ConnectedRegions" base_type="iconic" dimension="0"/>
+</oo>
+<ic>
+<par name="MinGray" base_type="ctrl" dimension="0"/>
+</ic>
+</interface>
+<body>
+<l>threshold (Image, Region, MinGray, 255)</l>
+<l>connection (Region, ConnectedRegions)</l>
+<l>return ()</l>
+</body>
+<docu id="get_printer_chip_regions">
+<parameters>
+<parameter id="ConnectedRegions"/>
+<parameter id="Image"/>
+<parameter id="MinGray"/>
+</parameters>
+</docu>
+</procedure>
+</hdevelop>
