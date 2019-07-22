@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.1" halcon_version="12.0.2">
+<procedure name="pts_to_best_circle1">
+<interface>
+<oo>
+<par name="Circle" base_type="iconic" dimension="0"/>
+</oo>
+<ic>
+<par name="Rows" base_type="ctrl" dimension="0"/>
+<par name="Cols" base_type="ctrl" dimension="0"/>
+<par name="ActiveNum" base_type="ctrl" dimension="0"/>
+<par name="ArcType" base_type="ctrl" dimension="0"/>
+</ic>
+<oc>
+<par name="RowCenter" base_type="ctrl" dimension="0"/>
+<par name="ColCenter" base_type="ctrl" dimension="0"/>
+<par name="Radius" base_type="ctrl" dimension="0"/>
+<par name="StartPhi" base_type="ctrl" dimension="0"/>
+<par name="EndPhi" base_type="ctrl" dimension="0"/>
+<par name="PointOrder" base_type="ctrl" dimension="0"/>
+</oc>
+</interface>
+<body>
+<c>*初始化</c>
+<l>RowCenter := 0</l>
+<l>ColCenter := 0</l>
+<l>Radius := 0</l>
+<c>*产生一个空的直线对象，用于保存拟合后的圆</c>
+<l>gen_empty_obj (Circle)</l>
+<c>*计算边缘数量</c>
+<l>tuple_length(Cols, Length)</l>
+<c>*当边缘数量不小于有效点数时进行拟合</c>
+<l>if (Length&gt;=ActiveNum and ActiveNum&gt;2)</l>
+<c>    *halcon的拟合是基于xld的，需要把边缘连接成xld</c>
+<l>    if(ArcType='circle')</l>
+<c>        *如果是闭合的圆，轮廓需要首尾相连</c>
+<l>        gen_contour_polygon_xld(Contour, [Rows,Rows[0]], [Cols,Cols[0]])</l>
+<l>    else</l>
+<l>        gen_contour_polygon_xld(Contour, Rows, Cols)</l>
+<l>    endif</l>
+<c>    *拟合圆。使用的算法是''geotukey''，其他算法请参考fit_circle_contour_xld的描述部分。</c>
+<l>    fit_circle_contour_xld (Contour, 'geotukey', -1, 0, 0, 3, 2, RowCenter, ColCenter, Radius, StartPhi, EndPhi, PointOrder)</l>
+<c>    *判断拟合结果是否有效：如果拟合成功，数组中元素的数量大于0</c>
+<l>    tuple_length(StartPhi, Length1)</l>
+<l>    if(Length1&lt;1)</l>
+<l>        return()</l>
+<l>    endif</l>
+<c>    *根据拟合结果，产生直线xld</c>
+<l>    if(ArcType='arc')</l>
+<l>        gen_circle_contour_xld(Circle, RowCenter, ColCenter, Radius, StartPhi, EndPhi, PointOrder, 1)</l>
+<l>    else</l>
+<l>        StartPhi:=0</l>
+<l>        EndPhi:=rad(360)</l>
+<l>        gen_circle_contour_xld(Circle, RowCenter, ColCenter, Radius, StartPhi, EndPhi, PointOrder, 1)</l>
+<l>    endif</l>
+<l>endif</l>
+<c></c>
+<l>return ()</l>
+<l>return ()</l>
+</body>
+<docu id="pts_to_best_circle1">
+<parameters>
+<parameter id="ActiveNum"/>
+<parameter id="ArcType"/>
+<parameter id="Circle"/>
+<parameter id="ColCenter"/>
+<parameter id="Cols"/>
+<parameter id="EndPhi"/>
+<parameter id="PointOrder"/>
+<parameter id="Radius"/>
+<parameter id="RowCenter"/>
+<parameter id="Rows"/>
+<parameter id="StartPhi"/>
+</parameters>
+</docu>
+</procedure>
+</hdevelop>

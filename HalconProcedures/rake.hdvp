@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.0" halcon_version="10.0" cs="-692775315">
+<procedure name="rake">
+<interface>
+<io>
+<par name="Image"/>
+</io>
+<oo>
+<par name="Regions"/>
+</oo>
+<ic>
+<par name="Elements"/>
+<par name="DetectHeight"/>
+<par name="DetectWidth"/>
+<par name="Sigma"/>
+<par name="Threshold"/>
+<par name="Transition"/>
+<par name="Select"/>
+<par name="Row1"/>
+<par name="Column1"/>
+<par name="Row2"/>
+<par name="Column2"/>
+</ic>
+<oc>
+<par name="ResultRow"/>
+<par name="ResultColumn"/>
+</oc>
+</interface>
+<body>
+<l>	get_image_size(Image,Width,Height)</l>
+<c>	 </c>
+<l>	gen_empty_obj(Regions)</l>
+<l>ResultRow := []</l>
+<l>ResultColumn := []</l>
+<l>    tuple_atan2 (-Row2+Row1, Column2-Column1, ATan)</l>
+<l>tuple_deg (ATan, Deg1)</l>
+<c> </c>
+<l>ATan:=ATan+rad(90)</l>
+<c> </c>
+<l>tuple_deg (ATan, Deg)</l>
+<c> </c>
+<c></c>
+<l>for i:=1 to Elements by 1</l>
+<l>	RowC := Row1+(((Row2-Row1)*i)/(Elements+1))</l>
+<l>	ColC := Column1+(Column2-Column1)*i/(Elements+1)</l>
+<l>	if (RowC&gt;Height-1 or RowC&lt;0 or ColC&gt;Width-1 or ColC&lt;0)</l>
+<l>		continue </l>
+<l>    endif</l>
+<l>   if(Elements=1)</l>
+<l>       distance_pp(Row1, Column1, Row2, Column2, Distance)</l>
+<l>       gen_rectangle2_contour_xld(Rectangle, RowC, ColC, rad(Deg), DetectHeight/2,Distance/2)</l>
+<l>   else</l>
+<l> 	gen_rectangle2_contour_xld(Rectangle, RowC, ColC, rad(Deg), DetectHeight/2,DetectWidth/2)</l>
+<l>   endif</l>
+<c></c>
+<l>    concat_obj (Regions, Rectangle, Regions)</l>
+<l>    if(i=1)</l>
+<l>*     RowL2:=RowC+DetectHeight/2*sin(ATan)</l>
+<l>*     RowL1:=RowC-DetectHeight/2*sin(ATan)</l>
+<l>*     ColL2:=ColC-DetectHeight/2*cos(ATan)</l>
+<l>*     ColL1:=ColC+DetectHeight/2*cos(ATan)   </l>
+<c>        </c>
+<l>    RowL2:=RowC+DetectHeight/2*sin(-ATan)</l>
+<l>    RowL1:=RowC-DetectHeight/2*sin(-ATan)</l>
+<l>    ColL2:=ColC+DetectHeight/2*cos(-ATan)</l>
+<l>    ColL1:=ColC-DetectHeight/2*cos(-ATan)</l>
+<l>    gen_arrow_contour_xld (Arrow1, RowL1, ColL1, RowL2, ColL2, 25, 25)</l>
+<l>    concat_obj (Regions, Arrow1, Regions)</l>
+<l>    endif </l>
+<c>    * Deg 是根据拟合线的角度加上90可得，拟合线的角度在-180到180之间（不包括-180），由开始点到到结束点的角度，例如：（0,0)到,（1,1)就是45度，（1,1)到,（0,0)就是-135度</c>
+<l>		gen_measure_rectangle2(RowC, ColC, rad(Deg), DetectHeight/2,DetectWidth/2,Width, Height, 'nearest_neighbor', MsrHandle_Measure)</l>
+<c>	 </c>
+<c>		 </c>
+<l>		if (Transition = 'negative')</l>
+<l>            Transition := 'negative'</l>
+<l>        else </l>
+<l>          if (Transition = 'positive')</l>
+<c>		 </c>
+<l>			Transition := 'positive'</l>
+<l>     	  else  </l>
+<l>            Transition := 'all'</l>
+<l>          endif</l>
+<l>       endif</l>
+<c>   </c>
+<l>		if (Select = 'first')</l>
+<l>            Select := 'first'</l>
+<l>        else </l>
+<l>          if (Select = 'last')</l>
+<c>		 </c>
+<l>			Select := 'last'</l>
+<l>     	  else  </l>
+<l>            Select := 'all'</l>
+<l>          endif</l>
+<l>       endif</l>
+<c>	</c>
+<l>    measure_pos (Image, MsrHandle_Measure, Sigma, Threshold, Transition, Select, RowEdge, ColEdge, Amplitude, Distance)</l>
+<l>		close_measure(MsrHandle_Measure)</l>
+<l>		tRow := 0</l>
+<l>		tCol := 0</l>
+<l>		t:= 0</l>
+<l>    tuple_length(RowEdge, Number)</l>
+<l>    if(Number&lt;1)</l>
+<l>        continue</l>
+<l>    endif</l>
+<l>		for j:=0 to Number-1 by 1</l>
+<l>		    if(abs(Amplitude[j])&gt;t)</l>
+<c>			 </c>
+<l>            tRow := RowEdge[j]</l>
+<l>				tCol := ColEdge[j]</l>
+<l>				t := abs(Amplitude[j])</l>
+<l>			endif</l>
+<l>       endfor</l>
+<l>		if(t&gt;0)</l>
+<c>		 </c>
+<l>			ResultRow:=[ResultRow,tRow]</l>
+<l>			ResultColumn:=[ResultColumn,tCol]</l>
+<l>		endif</l>
+<l>  endfor</l>
+<l>  tuple_length(ResultRow, Number)</l>
+<c></c>
+<c>  </c>
+<l>return ()</l>
+</body>
+<docu id="rake">
+<library lang="zh_CN">MVTec Standard Procedures</library>
+<parameters>
+<parameter id="Column1">
+<description lang="zh_CN">检测区域起点的x值</description>
+<sem_type>real</sem_type>
+<type_list>
+<item>real</item>
+</type_list>
+</parameter>
+<parameter id="Column2">
+<description lang="zh_CN">检测区域终点的x值</description>
+<sem_type>real</sem_type>
+<type_list>
+<item>real</item>
+</type_list>
+</parameter>
+<parameter id="DetectHeight">
+<default_value>60</default_value>
+<description lang="zh_CN">卡尺工具的高度</description>
+<multivalue>false</multivalue>
+<sem_type>integer</sem_type>
+<type_list>
+<item>integer</item>
+</type_list>
+<values>
+<item>30</item>
+<item>60</item>
+<item>90</item>
+<item>120</item>
+</values>
+</parameter>
+<parameter id="DetectWidth">
+<default_value>15</default_value>
+<description lang="zh_CN">卡尺工具的宽度</description>
+<multivalue>false</multivalue>
+<sem_type>integer</sem_type>
+<type_list>
+<item>integer</item>
+</type_list>
+<values>
+<item>5</item>
+<item>10</item>
+<item>15</item>
+<item>20</item>
+<item>25</item>
+<item>30</item>
+</values>
+</parameter>
+<parameter id="Elements">
+<default_value>30</default_value>
+<description lang="zh_CN">检测边缘点数</description>
+<multivalue>false</multivalue>
+<sem_type>number</sem_type>
+<type_list>
+<item>integer</item>
+</type_list>
+<value_list>
+<item>1</item>
+<item>5</item>
+<item>10</item>
+<item>20</item>
+<item>30</item>
+</value_list>
+<value_max>100000</value_max>
+<value_min>1</value_min>
+</parameter>
+<parameter id="Image">
+<description lang="zh_CN">输入图像</description>
+<sem_type>image</sem_type>
+<type_list>
+<item>byte</item>
+<item>int1</item>
+<item>int2</item>
+<item>uint2</item>
+<item>int4</item>
+<item>int8</item>
+<item>real</item>
+<item>cyclic</item>
+<item>direction</item>
+<item>complex</item>
+<item>vector_field</item>
+</type_list>
+</parameter>
+<parameter id="Regions">
+<description lang="zh_CN">输出边缘点检测区域及方向</description>
+<sem_type>object</sem_type>
+</parameter>
+<parameter id="ResultColumn">
+<description lang="zh_CN">检测到的边缘点的x坐标数组</description>
+<sem_type>real</sem_type>
+<type_list>
+<item>real</item>
+</type_list>
+<values>
+<item>ResultColumn</item>
+</values>
+</parameter>
+<parameter id="ResultRow">
+<description lang="zh_CN">检测到的边缘点的y坐标数组</description>
+<sem_type>real</sem_type>
+<type_list>
+<item>real</item>
+<item>string</item>
+</type_list>
+<values>
+<item>ResultRow</item>
+</values>
+</parameter>
+<parameter id="Row1">
+<description lang="zh_CN">检测区域起点的y值</description>
+<sem_type>real</sem_type>
+<type_list>
+<item>real</item>
+</type_list>
+</parameter>
+<parameter id="Row2">
+<description lang="zh_CN">检测区域终点的y值</description>
+<sem_type>real</sem_type>
+<type_list>
+<item>real</item>
+</type_list>
+</parameter>
+<parameter id="Select">
+<default_value>'max'</default_value>
+<description lang="zh_CN">first表示选择第一点
+last表示选择最后一点
+max表示选择边缘强度最强点</description>
+<sem_type>string</sem_type>
+<type_list>
+<item>string</item>
+</type_list>
+<values>
+<item>'first'</item>
+<item>'last'</item>
+<item>'max'</item>
+</values>
+</parameter>
+<parameter id="Sigma">
+<default_value>1</default_value>
+<description lang="zh_CN">高斯滤波因子</description>
+<multivalue>false</multivalue>
+<sem_type>real</sem_type>
+<type_list>
+<item>real</item>
+</type_list>
+<values>
+<item>0.5</item>
+<item>1</item>
+<item>1.5</item>
+<item>2</item>
+<item>2.5</item>
+<item>3</item>
+</values>
+</parameter>
+<parameter id="Threshold">
+<default_value>20</default_value>
+<description lang="zh_CN">边缘检测阈值，又叫边缘强度</description>
+<multivalue>false</multivalue>
+<sem_type>real</sem_type>
+<type_list>
+<item>integer</item>
+<item>real</item>
+</type_list>
+<values>
+<item>5</item>
+<item>10</item>
+<item>15</item>
+<item>20</item>
+<item>25</item>
+<item>30</item>
+<item>40</item>
+</values>
+</parameter>
+<parameter id="Transition">
+<default_value>'all'</default_value>
+<description lang="zh_CN">极性：
+positive表示由黑到白
+negative表示由白到黑
+all表示以上两种方向</description>
+<multivalue>false</multivalue>
+<sem_type>string</sem_type>
+<type_list>
+<item>string</item>
+</type_list>
+<values>
+<item>'positive'</item>
+<item>'negative'</item>
+<item>'all'</item>
+</values>
+</parameter>
+</parameters>
+</docu>
+</procedure>
+</hdevelop>

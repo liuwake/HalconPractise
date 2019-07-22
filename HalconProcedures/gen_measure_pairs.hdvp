@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.1" halcon_version="12.0">
+<procedure name="gen_measure_pairs">
+<interface>
+<oo>
+<par name="CloseSlotMarker1" base_type="iconic" dimension="0"/>
+</oo>
+<ic>
+<par name="Row1_Measure_01_0" base_type="ctrl" dimension="0"/>
+<par name="Column1_Measure_01_0" base_type="ctrl" dimension="0"/>
+<par name="TmpCtrl_Phi" base_type="ctrl" dimension="0"/>
+<par name="CloseSlotLength1" base_type="ctrl" dimension="0"/>
+</ic>
+<oc>
+<par name="CloseSlotRowStart" base_type="ctrl" dimension="0"/>
+<par name="CloseSlotRowEnd" base_type="ctrl" dimension="0"/>
+<par name="CloseSlotColStart" base_type="ctrl" dimension="0"/>
+<par name="CloseSlotColEnd" base_type="ctrl" dimension="0"/>
+</oc>
+</interface>
+<body>
+<l>* CloseSlotLength1:=15</l>
+<c>*根据测量句柄方向和测量中心点生成边缘直线</c>
+<l>CloseSlotRowStart:= Row1_Measure_01_0 + CloseSlotLength1 * cos(TmpCtrl_Phi)</l>
+<l>CloseSlotRowEnd := Row1_Measure_01_0 - CloseSlotLength1 * cos(TmpCtrl_Phi)</l>
+<l>CloseSlotColStart := Column1_Measure_01_0 + CloseSlotLength1 * sin(TmpCtrl_Phi)</l>
+<l>CloseSlotColEnd := Column1_Measure_01_0 - CloseSlotLength1 * sin(TmpCtrl_Phi)</l>
+<l>dev_set_color ('green')</l>
+<l>dev_set_line_width (2)</l>
+<l>gen_contour_polygon_xld (CloseSlotMarker1, [CloseSlotRowStart,CloseSlotRowEnd], [CloseSlotColStart,CloseSlotColEnd])</l>
+<l>return ()</l>
+</body>
+<docu id="gen_measure_pairs">
+<parameters>
+<parameter id="CloseSlotColEnd"/>
+<parameter id="CloseSlotColStart"/>
+<parameter id="CloseSlotLength1"/>
+<parameter id="CloseSlotMarker1"/>
+<parameter id="CloseSlotRowEnd"/>
+<parameter id="CloseSlotRowStart"/>
+<parameter id="Column1_Measure_01_0"/>
+<parameter id="Row1_Measure_01_0"/>
+<parameter id="TmpCtrl_Phi"/>
+</parameters>
+</docu>
+</procedure>
+</hdevelop>

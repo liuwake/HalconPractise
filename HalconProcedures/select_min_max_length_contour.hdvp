@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.1" halcon_version="12.0.2">
+<procedure name="select_min_max_length_contour">
+<interface>
+<io>
+<par name="Edges" base_type="iconic" dimension="0"/>
+</io>
+<oo>
+<par name="MaxLengthContour" base_type="iconic" dimension="0"/>
+<par name="MinLengthContour" base_type="iconic" dimension="0"/>
+</oo>
+</interface>
+<body>
+<c>*打开错误信息</c>
+<l>dev_set_check ('give_error')</l>
+<c>*最长轮廓变量初始化</c>
+<l>gen_empty_obj (MaxLengthContour)</l>
+<c>*/gen_empty_obj (MinLengthContour)</c>
+<c></c>
+<c>*开始捕获异常</c>
+<l>try</l>
+<c>    *统计轮廓集合的数量</c>
+<l>    count_obj (Edges, Number)</l>
+<c>    *捕获异常</c>
+<l>    catch (Exception)</l>
+<c>    *异常处理</c>
+<l>    return ( )</l>
+<l>endtry</l>
+<c>*如果轮廓数量无效，返回</c>
+<l>if (Number&lt;1)</l>
+<l>    return ( )</l>
+<l>endif</l>
+<c></c>
+<c>*最长长度、最长长度索引初始化</c>
+<l>Max_Length:=0</l>
+<l>Max_Index:=0</l>
+<c>*最短长度、最短长度索引初始化</c>
+<l>Min_Length:=99999</l>
+<l>Min_Index:=0</l>
+<c></c>
+<c>*遍历每个轮廓的长度</c>
+<l>for i := 1 to Number by 1</l>
+<c>    *选择轮廓</c>
+<l>    select_obj (Edges, ObjectSelected, i)</l>
+<c>    *求轮廓长度</c>
+<l>    length_xld (ObjectSelected, Length)</l>
+<c>    *保存最长轮廓的长度和索引</c>
+<l>    if (Max_Length&lt;Length)</l>
+<l>        Max_Length:=Length</l>
+<l>        Max_Index:=i</l>
+<l>    endif</l>
+<c>    *保存最短轮廓的长度和索引</c>
+<l>    if (Min_Length&gt;Length)</l>
+<l>        Min_Length:=Length</l>
+<l>        Min_Index:=i</l>
+<l>    endif</l>
+<l>endfor</l>
+<c>*选择最长轮廓</c>
+<l>select_obj (Edges, MaxLengthContour, Max_Index)</l>
+<c>*选择最短轮廓</c>
+<l>select_obj (Edges, MinLengthContour, Min_Index)</l>
+<c>*返回</c>
+<l>return ()</l>
+<l>return ()</l>
+<l>return ()</l>
+</body>
+<docu id="select_min_max_length_contour">
+<parameters>
+<parameter id="Edges"/>
+<parameter id="MaxLengthContour"/>
+<parameter id="MinLengthContour"/>
+</parameters>
+</docu>
+</procedure>
+</hdevelop>

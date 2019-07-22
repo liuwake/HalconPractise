@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.1" halcon_version="12.0">
+<procedure name="measure_pairs_tool">
+<interface>
+<io>
+<par name="Image" base_type="iconic" dimension="0"/>
+</io>
+<ic>
+<par name="Threshold" base_type="ctrl" dimension="0"/>
+<par name="RoiWidthLen" base_type="ctrl" dimension="0"/>
+<par name="LineRowStart_Measure" base_type="ctrl" dimension="0"/>
+<par name="LineColumnStart_Measure" base_type="ctrl" dimension="0"/>
+<par name="LineRowEnd_Measure" base_type="ctrl" dimension="0"/>
+<par name="LineColumnEnd_Measure" base_type="ctrl" dimension="0"/>
+</ic>
+<oc>
+<par name="Row1_Measure_01_0" base_type="ctrl" dimension="0"/>
+<par name="Column1_Measure_01_0" base_type="ctrl" dimension="0"/>
+<par name="Row2_Measure_01_0" base_type="ctrl" dimension="0"/>
+<par name="Column2_Measure_01_0" base_type="ctrl" dimension="0"/>
+<par name="TmpCtrl_Phi" base_type="ctrl" dimension="0"/>
+<par name="Width_Measure_01_0" base_type="ctrl" dimension="0"/>
+<par name="Distance_Measure_01_0" base_type="ctrl" dimension="0"/>
+</oc>
+</interface>
+<body>
+<c></c>
+<c as_id="measure1d" as_name="Measure 01" as_grp="[2,1]" as_ord="1">*阈值</c>
+<l as_id="measure1d" as_name="Measure 01" as_grp="[2,1]" as_ord="2">AmplitudeThreshold := Threshold</l>
+<c>*测量矩形宽度</c>
+<l as_id="measure1d" as_name="Measure 01" as_grp="[2,1]" as_ord="3">RoiWidthLen2 := RoiWidthLen</l>
+<c as_id="measure1d" as_name="Measure 01" as_grp="[2,2]" as_ord="1">*测量矩形起点和终止点</c>
+<l as_id="measure1d" as_name="Measure 01" as_grp="[2,2]" as_ord="2">LineRowStart_Measure_01_0 := LineRowStart_Measure</l>
+<l as_id="measure1d" as_name="Measure 01" as_grp="[2,2]" as_ord="3">LineColumnStart_Measure_01_0 := LineColumnStart_Measure</l>
+<l as_id="measure1d" as_name="Measure 01" as_grp="[2,2]" as_ord="4">LineRowEnd_Measure_01_0 := LineRowEnd_Measure</l>
+<l as_id="measure1d" as_name="Measure 01" as_grp="[2,2]" as_ord="5">LineColumnEnd_Measure_01_0 := LineColumnEnd_Measure</l>
+<c as_id="measure1d" as_name="Measure 01" as_grp="[2,3]" as_ord="1">*形成测量矩形具体参数</c>
+<l as_id="measure1d" as_name="Measure 01" as_grp="[2,3]" as_ord="2">TmpCtrl_Row := 0.5*(LineRowStart_Measure_01_0+LineRowEnd_Measure_01_0)</l>
+<l as_id="measure1d" as_name="Measure 01" as_grp="[2,3]" as_ord="3">TmpCtrl_Column := 0.5*(LineColumnStart_Measure_01_0+LineColumnEnd_Measure_01_0)</l>
+<l as_id="measure1d" as_name="Measure 01" as_grp="[2,3]" as_ord="4">TmpCtrl_Dr := LineRowStart_Measure_01_0-LineRowEnd_Measure_01_0</l>
+<l as_id="measure1d" as_name="Measure 01" as_grp="[2,3]" as_ord="5">TmpCtrl_Dc := LineColumnEnd_Measure_01_0-LineColumnStart_Measure_01_0</l>
+<l as_id="measure1d" as_name="Measure 01" as_grp="[2,3]" as_ord="6">TmpCtrl_Phi := atan2(TmpCtrl_Dr, TmpCtrl_Dc)</l>
+<l as_id="measure1d" as_name="Measure 01" as_grp="[2,3]" as_ord="7">TmpCtrl_Len1 := 0.5*sqrt(TmpCtrl_Dr*TmpCtrl_Dr + TmpCtrl_Dc*TmpCtrl_Dc)</l>
+<l as_id="measure1d" as_name="Measure 01" as_grp="[2,3]" as_ord="8">TmpCtrl_Len2 := RoiWidthLen2</l>
+<c as_id="measure1d" as_name="Measure 01" as_grp="[2,3]" as_ord="10">*生成测量矩形的句柄</c>
+<l>get_image_size (Image, Width, Height)</l>
+<l as_id="measure1d" as_name="Measure 01" as_grp="[2,3]" as_ord="11">gen_measure_rectangle2 (TmpCtrl_Row, TmpCtrl_Column, TmpCtrl_Phi, TmpCtrl_Len1, TmpCtrl_Len2, Width, Height, 'nearest_neighbor', MsrHandle_Measure_01_0)</l>
+<l as_id="measure1d" as_name="Measure 01" as_grp="[3,2]" as_ord="3">copy_obj (Image, Image, 1, 1)</l>
+<c as_id="measure1d" as_name="Measure 01" as_grp="[4,1]" as_ord="1">**测量边缘对</c>
+<l as_id="measure1d" as_name="Measure 01" as_grp="[4,3]" as_ord="1">measure_pairs (Image, MsrHandle_Measure_01_0, 1, 40, 'all', 'all', Row1_Measure_01_0, Column1_Measure_01_0, Amplitude1_Measure_01_0, Row2_Measure_01_0, Column2_Measure_01_0, \
+Amplitude2_Measure_01_0, Width_Measure_01_0, Distance_Measure_01_0)</l>
+<l as_id="measure1d" as_name="Measure 01" as_grp="[5,2]" as_ord="2">close_measure (MsrHandle_Measure_01_0)</l>
+<l>return ()</l>
+<c></c>
+<c></c>
+</body>
+<docu id="measure_pairs_tool">
+<parameters>
+<parameter id="Column1_Measure_01_0"/>
+<parameter id="Column2_Measure_01_0"/>
+<parameter id="Distance_Measure_01_0"/>
+<parameter id="Image"/>
+<parameter id="LineColumnEnd_Measure"/>
+<parameter id="LineColumnStart_Measure"/>
+<parameter id="LineRowEnd_Measure"/>
+<parameter id="LineRowStart_Measure"/>
+<parameter id="RoiWidthLen"/>
+<parameter id="Row1_Measure_01_0"/>
+<parameter id="Row2_Measure_01_0"/>
+<parameter id="Threshold"/>
+<parameter id="TmpCtrl_Phi"/>
+<parameter id="Width_Measure_01_0"/>
+</parameters>
+</docu>
+</procedure>
+</hdevelop>

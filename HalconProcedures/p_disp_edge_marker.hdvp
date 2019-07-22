@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.1" halcon_version="12.0">
+<procedure name="p_disp_edge_marker">
+<interface>
+<ic>
+<par name="Rows" base_type="ctrl" dimension="0"/>
+<par name="Cols" base_type="ctrl" dimension="0"/>
+<par name="Phi" base_type="ctrl" dimension="0"/>
+<par name="Length" base_type="ctrl" dimension="0"/>
+<par name="Color" base_type="ctrl" dimension="0"/>
+<par name="LineWidth" base_type="ctrl" dimension="0"/>
+<par name="WindowHandle" base_type="ctrl" dimension="0"/>
+</ic>
+</interface>
+<body>
+<c>* Determine the number of edges</c>
+<l>NumRows := |Rows|</l>
+<l>NumCols := |Cols|</l>
+<l>Num := min([NumRows,NumCols])</l>
+<c>* </c>
+<c>* Loop over the edges</c>
+<l>for i := 0 to Num - 1 by 1</l>
+<l>    Row := Rows[i]</l>
+<l>    Col := Cols[i]</l>
+<c>    * </c>
+<c>    * Determine start and end point of the edge marker.</c>
+<l>    RowStart := Row + Length * cos(Phi)</l>
+<l>    RowEnd := Row - Length * cos(Phi)</l>
+<l>    ColStart := Col + Length * sin(Phi)</l>
+<l>    ColEnd := Col - Length * sin(Phi)</l>
+<c>    * </c>
+<c>    * Generate a contour that connects the start and end point.</c>
+<l>    gen_contour_polygon_xld (Marker, [RowStart,RowEnd], [ColStart,ColEnd])</l>
+<c>    * </c>
+<c>    * Display the contour with  the specified style.</c>
+<l>    dev_set_color (Color)</l>
+<l>    dev_set_line_width (LineWidth)</l>
+<l>    dev_display (Marker)</l>
+<l>endfor</l>
+<l>return ()</l>
+</body>
+<docu id="p_disp_edge_marker">
+<short lang="en_US">Displays a marker, which indicates the position of an edge</short>
+<parameters>
+<parameter id="Color"/>
+<parameter id="Cols"/>
+<parameter id="Length"/>
+<parameter id="LineWidth"/>
+<parameter id="Phi"/>
+<parameter id="Rows"/>
+<parameter id="WindowHandle"/>
+</parameters>
+</docu>
+</procedure>
+</hdevelop>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.1" halcon_version="12.0.2">
+<procedure name="get_rectangle_points">
+<interface>
+<ic>
+<par name="CenterY" base_type="ctrl" dimension="0"/>
+<par name="CenterX" base_type="ctrl" dimension="0"/>
+<par name="Phi" base_type="ctrl" dimension="0"/>
+<par name="Len1" base_type="ctrl" dimension="0"/>
+<par name="Len2" base_type="ctrl" dimension="0"/>
+</ic>
+<oc>
+<par name="CornerY" base_type="ctrl" dimension="0"/>
+<par name="CornerX" base_type="ctrl" dimension="0"/>
+<par name="LineCenterY" base_type="ctrl" dimension="0"/>
+<par name="LineCenterX" base_type="ctrl" dimension="0"/>
+</oc>
+</interface>
+<body>
+<c>*矩形端点坐标变量、边中心变量初始化</c>
+<l>CornerX:=[]</l>
+<l>CornerY:=[]</l>
+<l>LineCenterX:=[]</l>
+<l>LineCenterY:=[]</l>
+<c></c>
+<c>*临时变量初始化</c>
+<l>RowT:=0</l>
+<l>ColT:=0</l>
+<c></c>
+<c>*判断仿射矩形是否有效</c>
+<l>if (Len1&lt;=0 or Len2&lt;=0)</l>
+<l>    return ( )</l>
+<l>endif</l>
+<c></c>
+<c>*计算仿射矩形角度的正弦值、余弦值</c>
+<l>tuple_cos (Phi, Cos)</l>
+<l>tuple_sin (Phi, Sin)</l>
+<c></c>
+<c>*矩形第一个端点坐标</c>
+<l>ColT:=CenterX-Len1*Cos-Len2*Sin</l>
+<l>RowT:=CenterY-(-Len1*Sin+Len2*Cos)</l>
+<l>CornerY:=[CornerY,RowT]</l>
+<l>CornerX:=[CornerX,ColT]</l>
+<c></c>
+<c>*矩形第二个端点坐标</c>
+<l>ColT:=CenterX+Len1*Cos-Len2*Sin</l>
+<l>RowT:=CenterY-(Len1*Sin+Len2*Cos)</l>
+<l>CornerY:=[CornerY,RowT]</l>
+<l>CornerX:=[CornerX,ColT]</l>
+<c></c>
+<c>*矩形第三个端点坐标</c>
+<l>ColT:=CenterX+Len1*Cos+Len2*Sin</l>
+<l>RowT:=CenterY-(Len1*Sin-Len2*Cos)</l>
+<l>CornerY:=[CornerY,RowT]</l>
+<l>CornerX:=[CornerX,ColT]</l>
+<c></c>
+<c>*矩形第四个端点坐标</c>
+<l>ColT:=CenterX-Len1*Cos+Len2*Sin</l>
+<l>RowT:=CenterY-(-Len1*Sin-Len2*Cos)</l>
+<l>CornerY:=[CornerY,RowT]</l>
+<l>CornerX:=[CornerX,ColT]</l>
+<c></c>
+<c>*矩形第一条边中心坐标</c>
+<l>LineCenterY[0] := (CornerY[0]+CornerY[1])*0.5</l>
+<l>LineCenterX[0] := (CornerX[0]+CornerX[1])*0.5</l>
+<c></c>
+<c>*矩形第二条边中心坐标</c>
+<l>LineCenterY[1] := (CornerY[1]+CornerY[2])*0.5</l>
+<l>LineCenterX[1] := (CornerX[1]+CornerX[2])*0.5</l>
+<c></c>
+<c>*矩形第三条边中心坐标</c>
+<l>LineCenterY[2] := (CornerY[2]+CornerY[3])*0.5</l>
+<l>LineCenterX[2] := (CornerX[2]+CornerX[3])*0.5</l>
+<c></c>
+<c>*矩形第四条边中心坐标</c>
+<l>LineCenterY[3] := (CornerY[0]+CornerY[3])*0.5</l>
+<l>LineCenterX[3] := (CornerX[0]+CornerX[3])*0.5</l>
+<c></c>
+<c>*返回</c>
+<l>return ( )</l>
+<l>return ()</l>
+<l>return ()</l>
+<l>return ()</l>
+</body>
+<docu id="get_rectangle_points">
+<parameters>
+<parameter id="CenterX"/>
+<parameter id="CenterY"/>
+<parameter id="CornerX"/>
+<parameter id="CornerY"/>
+<parameter id="Len1"/>
+<parameter id="Len2"/>
+<parameter id="LineCenterX"/>
+<parameter id="LineCenterY"/>
+<parameter id="Phi"/>
+</parameters>
+</docu>
+</procedure>
+</hdevelop>

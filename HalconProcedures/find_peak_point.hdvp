@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.1" halcon_version="17.12">
+<procedure name="find_peak_point">
+<interface>
+<io>
+<par name="Image" base_type="iconic" dimension="0"/>
+</io>
+<oo>
+<par name="Cross1" base_type="iconic" dimension="0"/>
+</oo>
+<ic>
+<par name="Alpha" base_type="ctrl" dimension="0"/>
+<par name="Low" base_type="ctrl" dimension="0"/>
+<par name="High" base_type="ctrl" dimension="0"/>
+</ic>
+<oc>
+<par name="Row" base_type="ctrl" dimension="0"/>
+<par name="Col" base_type="ctrl" dimension="0"/>
+</oc>
+</interface>
+<xb>/SXCqzVSNZCJs3CA88kPhIuyIc07vkjF56TbHXzU6FzybFyIAb9fDsGUXNJ7DZ9oflSfXoKOTUXwOzC1Fk1ixx1B2UGQXBbpw4Sti81CW3b6UhqXgQ4+u+by7oWU0O/Lt7RjXozFU/snV2caICfLHC22ioBuHphx/7quXTazs4CsxMoYhdIPRqyzXgqnlY0WlHGxa9wS/k23risHmJYu74tuBjXUiLWQ2JOUx4WWGFs/dVdISD0G8Qu7YJzs3Uk+F1AWW9wHASQ0c53O2+ur9DgDPvVyUrsH16VyIQimTlmCQ/eRhPLDp34uUbIzzd8KOopHYL4fHm/LC6s37ZpPcHoDfxvTzglSxjJJCq7AwcUhv5pRHXpTitTCNw+g0ULk9EP0aOFrtgvjDg2O9GbOdUcycvD/wqJEqKV8C39urfINN8J9D8e/PEL6G0hXx1XTOkKK+7gW8TcrZm77vw1Ewi+nXlOU7wf+kWAlkB3o4cbwsLKYMGCv2HgQa0F2MRa8I8eP8Rx2i1E+Vrx8JuhPEAkFsvuMUd+NVnG8S0FCRrPL/iYigWqthGFIRNcdshz028TrwGSJwOToTsdN1hpBCuZIij/yvm/FvWhXaKbFTKbnsTU1LGC2WJq5ryEJqJHHS6leB+t9voXhQcZdOena+wzHMlel6GwzmRckAd341Z3BYe2/3K/+0mWDzD7gY0bPkQlyuSaI6B/mQxXVFeLu5L2g6x1GyB/T65RWe8Ni8oVnbzs3Y2/P0mcjUbKTITzp9fi8dSB2TF15yAjrBmT5VWx2lgdNr3XuqaC0UQexGmYSKhRTf1Dqh4QcPDhLnPw2yNxAIWLxbjmFf5M+9smENw+NxWAh+sC5yNr4jx4gq5QcnqLVS7Njf2EroOS3sMXFknt1F1Be8X/Mt/XQ6+xBHPjCkV83Z1EX3CK42epkIgXeShDKH8zOSYEK0lq7Ct7xf92N++cAVsifC5FGIa/pdoCJ7dI8Cem6ObHx5ki1KZWDUp11lTSPhveF62FVvP3tZ1YleSDxb4myH53Ba6piq/lAqdgflrdlyHi0rWQl4zNQPS9NRStdTjPnGR1JGof8ueuM/a9d8jqhyW/o7VklCMM2IXBqhLC1b7NCNykNr8ljVt3J+k/IxtlsGuk51FTa3k4ocp/vfteu9sPuWV3l0IcXtByf0D3dmOvtvfZDOseN5dGZQoyM3DKKqxByWuwtNWq1da/5Wj0GlCl8S6Wik/c5LO+RMyO303SVzPSuB3726N1XxACCYPd9604Vh926N71N+WE5yMMpOYRMIp7PQ69KNv5beUq5d6ee9WpfE4EzxiDVHi9xjCnmOjV8N+QMNmjdiR0Tqb7WC4ieIS/pSnjGoFbARGPPD32ymol7WaPI6mRfSTQUC/K5IZSoHS/sJ1dsW6F3CIRYoHxxa3rDfw/4Z64C28DCSSZ41kYzWd67Rz3MFeF3u8fJh4KH0yRgJyitRRbrH5471J30XWdn+5PomTN7YnD64W8Hg30L/4HaqTLLavmWg3MclqDGH2315nTEGavwrMW293Qh3Kf6bkpCVKzi9O5e0N55jFF21YzFs/LWJvnr81okDXCSPOLPotqXWm7kNvDZw49ArHRsVegigBC5bQFzIldzzVyWe5KpTonYcEEnyOk+dZgMxpwelO6XtZ+NsQqAdBqspvfkAsjRE48x5zKf5fRVK6lQ7f2X1ZvX/ywQ11qLIIQbiVai+/vLmVbq+uo7A2CnwBZJ1eBCzv/kRw9j1YV7Fxhui2HLwhp1fpxHqNmf22cW9QHHfsM3uo2ZmXljinIxtr5FYhxTvwIyOQfilblR7C/VjM/Yc3ZWVO7F69vLupPErY8reb1mu5pWyunv2KpNb06ZuG9J88qfFCjZwLSfoapmea+sJ8gZ3yHxBm8f2UFS/2ywbaXynMwWOKkclVuGLZRbfvsu6FcypPly9i88BUR/sX22LEO0bk4P14wNRL8n1BDF+VILMXcDn1AsAWxB4r5pdmFTnHId75nI6pu/tVvA6bxTUlYRerCyl4BRVouE5UUyS0ZGX9PQRsnEdXhSTiT7KvX/BxJ7LjtJWSQfv/tujDSHQTchzTeSA7cVcM/IWTvZr1keINK7QxvKh8MWlvqzvHXnPJtuUVsCFcuHKu7nhTIfNFhi0wnICDMWN+OZ6KXzeL/yyYRjstKrGcyU7NVYnhULI7Nw2hE8SmQaI4pyN6Pcmjw5/2pSEEOZm1tQKdZYkBDj0h8/EQ1WTaXyUltOBhI6J3gRiwUVdFzpf5Gz6kBhDHIz/+tDQjVhADk+0YxTMVIdymIbcBHCOf3r0Mnybg</xb>
+<docu id="find_peak_point">
+<parameters>
+<parameter id="Alpha">
+<default_value>1</default_value>
+</parameter>
+<parameter id="Col"/>
+<parameter id="Cross1"/>
+<parameter id="High">
+<default_value>40</default_value>
+</parameter>
+<parameter id="Image"/>
+<parameter id="Low">
+<default_value>20</default_value>
+</parameter>
+<parameter id="Row"/>
+</parameters>
+</docu>
+</procedure>
+</hdevelop>

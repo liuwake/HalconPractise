@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.0" halcon_version="10.0" cs="1030398478">
+<procedure name="pts_to_best_line">
+<interface>
+<oo>
+<par name="Line"/>
+</oo>
+<ic>
+<par name="Rows"/>
+<par name="Cols"/>
+<par name="ActiveNum"/>
+</ic>
+<oc>
+<par name="Row1"/>
+<par name="Col1"/>
+<par name="Row2"/>
+<par name="Col2"/>
+</oc>
+</interface>
+<body>
+<l>Row1:=0</l>
+<l>Col1:=0</l>
+<l>Row2:=0</l>
+<l>Col2:=0</l>
+<l>gen_empty_obj(Line)</l>
+<l>tuple_length(Cols, Length)</l>
+<c></c>
+<l>	if (Length&gt;=ActiveNum and ActiveNum&gt;1)</l>
+<c>	</c>
+<l>		gen_contour_polygon_xld(Contour, Rows, Cols)</l>
+<l>		fit_line_contour_xld(Contour, 'tukey',ActiveNum, 0, 5, 2, Row1,Col1, Row2, Col2, Nr, Nc, Dist)</l>
+<l>        tuple_length(Dist, Length1)</l>
+<l>        if(Length1&lt;1)</l>
+<l>           return()</l>
+<l>        endif</l>
+<l>		gen_contour_polygon_xld(Line, [Row1,Row2], [Col1,Col2])</l>
+<c>	 </c>
+<l>	endif</l>
+<c></c>
+<l>return ()</l>
+</body>
+<docu id="pts_to_best_line">
+<parameters>
+<parameter id="ActiveNum">
+<description lang="zh_CN">最小有效点数</description>
+<sem_type>any</sem_type>
+<type_list>
+<item>integer</item>
+<item>real</item>
+</type_list>
+</parameter>
+<parameter id="Col1">
+<description lang="zh_CN">拟合的直线起点x值</description>
+<sem_type>real</sem_type>
+</parameter>
+<parameter id="Col2">
+<description lang="zh_CN">拟合的直线终点x值</description>
+<sem_type>real</sem_type>
+</parameter>
+<parameter id="Cols">
+<description lang="zh_CN">拟合直线的输入x数组</description>
+<sem_type>real</sem_type>
+</parameter>
+<parameter id="Line">
+<description lang="zh_CN">输出拟合直线的xld</description>
+<sem_type>xld</sem_type>
+</parameter>
+<parameter id="Row1">
+<description lang="zh_CN">拟合的直线起点y值</description>
+<sem_type>real</sem_type>
+</parameter>
+<parameter id="Row2">
+<description lang="zh_CN">拟合的直线终点y值</description>
+<sem_type>real</sem_type>
+</parameter>
+<parameter id="Rows">
+<description lang="zh_CN">拟合直线的输入y数组</description>
+<sem_type>real</sem_type>
+</parameter>
+</parameters>
+</docu>
+</procedure>
+</hdevelop>

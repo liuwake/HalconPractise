@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.1" halcon_version="17.12">
+<procedure name="find_peak_ponit_2">
+<interface>
+<io>
+<par name="Image" base_type="iconic" dimension="0"/>
+<par name="Rectangle" base_type="iconic" dimension="0"/>
+</io>
+<oo>
+<par name="Edges" base_type="iconic" dimension="0"/>
+<par name="Cross1" base_type="iconic" dimension="0"/>
+</oo>
+<ic>
+<par name="Row" base_type="ctrl" dimension="0"/>
+<par name="Column" base_type="ctrl" dimension="0"/>
+<par name="Phi" base_type="ctrl" dimension="0"/>
+<par name="Length1" base_type="ctrl" dimension="0"/>
+<par name="Length2" base_type="ctrl" dimension="0"/>
+<par name="Alpha" base_type="ctrl" dimension="0"/>
+<par name="Low" base_type="ctrl" dimension="0"/>
+<par name="High" base_type="ctrl" dimension="0"/>
+</ic>
+<oc>
+<par name="RowOut" base_type="ctrl" dimension="0"/>
+<par name="ColOut" base_type="ctrl" dimension="0"/>
+</oc>
+</interface>
+<xb>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</xb>
+<docu id="find_peak_ponit_2">
+<parameters>
+<parameter id="Alpha">
+<default_value>1</default_value>
+</parameter>
+<parameter id="ColOut"/>
+<parameter id="Column">
+<sem_type>any</sem_type>
+</parameter>
+<parameter id="Cross1"/>
+<parameter id="Edges"/>
+<parameter id="High">
+<default_value>40</default_value>
+</parameter>
+<parameter id="Image">
+<sem_type>image</sem_type>
+</parameter>
+<parameter id="Length1">
+<default_type>real</default_type>
+<sem_type>real</sem_type>
+<type_list>
+<item>real</item>
+</type_list>
+</parameter>
+<parameter id="Length2">
+<default_type>real</default_type>
+<sem_type>real</sem_type>
+<type_list>
+<item>real</item>
+</type_list>
+</parameter>
+<parameter id="Low">
+<default_value>20</default_value>
+</parameter>
+<parameter id="Phi">
+<default_type>real</default_type>
+<sem_type>real</sem_type>
+<type_list>
+<item>real</item>
+</type_list>
+</parameter>
+<parameter id="Rectangle">
+<sem_type>region</sem_type>
+</parameter>
+<parameter id="Row">
+<sem_type>any</sem_type>
+</parameter>
+<parameter id="RowOut"/>
+</parameters>
+</docu>
+</procedure>
+</hdevelop>

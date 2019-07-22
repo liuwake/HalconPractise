@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.0" halcon_version="10.0" cs="190304714">
+<procedure name="pts_to_best_circle">
+<interface>
+<oo>
+<par name="Circle"/>
+</oo>
+<ic>
+<par name="Rows"/>
+<par name="Cols"/>
+<par name="ActiveNum"/>
+<par name="ArcType"/>
+</ic>
+<oc>
+<par name="RowCenter"/>
+<par name="ColCenter"/>
+<par name="Radius"/>
+</oc>
+</interface>
+<body>
+<l>RowCenter := 0</l>
+<l>ColCenter := 0</l>
+<l>Radius := 0</l>
+<c></c>
+<l>gen_empty_obj (Circle)</l>
+<l>tuple_length(Cols, Length)</l>
+<c></c>
+<l>	if (Length&gt;=ActiveNum and ActiveNum&gt;2)</l>
+<c>	</c>
+<l>		gen_contour_polygon_xld(Contour, Rows, Cols)</l>
+<l>        fit_circle_contour_xld (Contour, 'geotukey', -1, 0, 0, 3, 2, RowCenter, ColCenter, Radius, StartPhi, EndPhi, PointOrder)</l>
+<c>		 </c>
+<l>        tuple_length(StartPhi, Length1)</l>
+<l>        if(Length1&lt;1)</l>
+<l>           return()</l>
+<l>        endif</l>
+<l>        if(ArcType='arc')</l>
+<l>            gen_circle_contour_xld(Circle, RowCenter, ColCenter, Radius, StartPhi, EndPhi, PointOrder, 1)</l>
+<l>        else</l>
+<l>            gen_circle_contour_xld(Circle, RowCenter, ColCenter, Radius, 0, rad(360), PointOrder, 1)</l>
+<l>        endif</l>
+<l>	endif</l>
+<c></c>
+<l>return ()</l>
+</body>
+<docu id="pts_to_best_circle">
+<parameters>
+<parameter id="ActiveNum">
+<description lang="zh_CN">最小有效点数</description>
+<sem_type>any</sem_type>
+<type_list>
+<item>integer</item>
+<item>real</item>
+</type_list>
+</parameter>
+<parameter id="ArcType">
+<default_value>'circle'</default_value>
+<description lang="zh_CN">拟合圆弧类型：'arc'圆弧；'circle'圆</description>
+<multivalue>false</multivalue>
+<sem_type>string</sem_type>
+<type_list>
+<item>string</item>
+</type_list>
+<values>
+<item>'circle'</item>
+<item>'arc'</item>
+</values>
+</parameter>
+<parameter id="Circle">
+<description lang="zh_CN">输出拟合圆的xld</description>
+<sem_type>xld</sem_type>
+</parameter>
+<parameter id="ColCenter">
+<description lang="zh_CN">拟合的圆中心x</description>
+<sem_type>real</sem_type>
+</parameter>
+<parameter id="Cols">
+<description lang="zh_CN">拟合圆的输入x数组</description>
+<sem_type>real</sem_type>
+</parameter>
+<parameter id="Radius">
+<description lang="zh_CN">拟合的圆半径</description>
+<sem_type>real</sem_type>
+</parameter>
+<parameter id="RowCenter">
+<description lang="zh_CN">拟合的圆中心y</description>
+<sem_type>real</sem_type>
+</parameter>
+<parameter id="Rows">
+<description lang="zh_CN">拟合圆的输入y数组</description>
+<sem_type>real</sem_type>
+</parameter>
+</parameters>
+</docu>
+</procedure>
+</hdevelop>

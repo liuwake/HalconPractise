@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.1" halcon_version="12.0">
+<procedure name="measure_edges_tool">
+<interface>
+<io>
+<par name="Image" base_type="iconic" dimension="0"/>
+</io>
+<ic>
+<par name="threshold" base_type="ctrl" dimension="0"/>
+<par name="len" base_type="ctrl" dimension="0"/>
+<par name="LineRowStart_Measure_01_0" base_type="ctrl" dimension="0"/>
+<par name="LineColumnStart_Measure_01_0" base_type="ctrl" dimension="0"/>
+<par name="LineRowEnd_Measure_01_0" base_type="ctrl" dimension="0"/>
+<par name="LineColumnEnd_Measure_01_0" base_type="ctrl" dimension="0"/>
+</ic>
+<oc>
+<par name="ResultRow" base_type="ctrl" dimension="0"/>
+<par name="ResultColumn" base_type="ctrl" dimension="0"/>
+<par name="Amplitude" base_type="ctrl" dimension="0"/>
+<par name="Distance" base_type="ctrl" dimension="0"/>
+<par name="Phi" base_type="ctrl" dimension="0"/>
+</oc>
+</interface>
+<body>
+<c>*阈值</c>
+<l>Threshold:=threshold</l>
+<c></c>
+<c>*测量矩形的半宽度</c>
+<l>RoiWidth:=len/2</l>
+<c>*直线测量区域的起点和终止点</c>
+<l>Row1:=LineRowStart_Measure_01_0</l>
+<l>Col1:=LineColumnStart_Measure_01_0</l>
+<l>Row2:=LineRowEnd_Measure_01_0</l>
+<l>Col2:=LineColumnEnd_Measure_01_0</l>
+<c>*根据测量矩形的半宽度+直线测量区域的起点和终止点，形成测量矩形具体参数</c>
+<l>TmpCtrl_Row := 0.5*(Row1+Row2)</l>
+<l>TmpCtrl_Column := 0.5*(Col1+Col2)</l>
+<l>TmpCtrl_Dr := Row1-Row2</l>
+<l>TmpCtrl_Dc := Col2-Col1</l>
+<l>Phi := atan2(TmpCtrl_Dr, TmpCtrl_Dc)</l>
+<l>TmpCtrl_Len1 := 0.5*sqrt(TmpCtrl_Dr*TmpCtrl_Dr + TmpCtrl_Dc*TmpCtrl_Dc)</l>
+<l>TmpCtrl_Len2 := RoiWidth</l>
+<c>*生成测量矩形的句柄</c>
+<l>gen_measure_rectangle2 (TmpCtrl_Row, TmpCtrl_Column, Phi, TmpCtrl_Len1, TmpCtrl_Len2, \
+                        1440, 1080, 'nearest_neighbor', MsrHandle_Measure_01_0)</l>
+<l>copy_obj (Image, Image, 1, 1)</l>
+<c>**测量边缘</c>
+<l>Sigma:=1</l>
+<c>*极性</c>
+<l>Transition:='all'</l>
+<c>*点的选择</c>
+<l>Select:='all'</l>
+<l>measure_pos (Image, MsrHandle_Measure_01_0, 1, Threshold, Transition, Select, \
+             ResultRow, ResultColumn, Amplitude, Distance)</l>
+<l>close_measure (MsrHandle_Measure_01_0)</l>
+<l>return ()</l>
+</body>
+<docu id="measure_edges_tool">
+<parameters>
+<parameter id="Amplitude"/>
+<parameter id="Distance"/>
+<parameter id="Image"/>
+<parameter id="LineColumnEnd_Measure_01_0"/>
+<parameter id="LineColumnStart_Measure_01_0"/>
+<parameter id="LineRowEnd_Measure_01_0"/>
+<parameter id="LineRowStart_Measure_01_0"/>
+<parameter id="Phi"/>
+<parameter id="ResultColumn"/>
+<parameter id="ResultRow"/>
+<parameter id="len"/>
+<parameter id="threshold"/>
+</parameters>
+</docu>
+</procedure>
+</hdevelop>
