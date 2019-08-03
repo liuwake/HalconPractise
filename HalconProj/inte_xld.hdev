@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.05.0.1">
+<procedure name="main">
+<interface/>
+<body>
+<c>*轮廓的创建，区域边缘生成轮廓，提取，分割，合并</c>
+<c>*画圆生成圆轮廓</c>
+<l>dev_open_window (0, 0, 512, 512, 'black', WindowHandle)</l>
+<l>draw_circle (WindowHandle, Row, Column, Radius)</l>
+<l>gen_circle_contour_xld (ContCircle, Row, Column, Radius, 0, 6.28318, 'positive', 1)</l>
+<c>*画矩形生成矩形轮廓</c>
+<l>draw_rectangle2 (WindowHandle, Row1, Column1, Phi, Length1, Length2)</l>
+<l>gen_rectangle2_contour_xld (Rectangle, Row1, Column1, Phi, Length1, Length2)</l>
+<c>*生成箭头轮廓</c>
+<l>gen_arrow_contour_xld (Arrow, Row, Column, Row1, Column1, 25, 50)</l>
+<c>*生成十字叉轮廓</c>
+<l>gen_cross_contour_xld (Cross, Row, Column, 25, 0)</l>
+<c>*画一个区域并将将区域边缘生成轮廓</c>
+<l>draw_region (Region, WindowHandle)</l>
+<l>gen_contour_region_xld (Region, Contours, 'border')</l>
+<c>*区域生成骨骼，骨骼转轮廓</c>
+<l>skeleton (Region, Skeleton)</l>
+<l>gen_contours_skeleton_xld (Skeleton, Contours1, 1, 'filter')</l>
+<c>*图像边缘提取得到轮廓</c>
+<l>read_image (Image, 'fabrik')</l>
+<l>threshold_sub_pix (Image, Border, 128)</l>
+<c>*带通滤波：滤波器是提取出图像，白的更白，黑的更黑</c>
+<l>bandpass_image (Image, ImageBandpass, 'lines')</l>
+<l>threshold_sub_pix (ImageBandpass, Border, 128)</l>
+<c>*索蓓尔放大器,把边缘区域变亮，不是边缘的都变暗，也是梯度值变化，就是保留梯度值变化的位置</c>
+<l>sobel_amp (ImageBandpass, EdgeAmplitude, 'sum_abs', 3)</l>
+<l>threshold_sub_pix (EdgeAmplitude, Border, 128)</l>
+<c>*高通滤波器:梯度值低和高的变化会变亮</c>
+<l>highpass_image (EdgeAmplitude, Highpass, 9, 9)</l>
+<c>*亚像素提取轮廓，通过过滤器和梯度变化率来获取边缘</c>
+<l>edges_sub_pix (Image, Edges, 'canny', 1, 20, 40)</l>
+<c>*从最大宽度和提取线的对比度计算出lines_gauss的参数Sigma、Low和High。</c>
+<l>calculate_lines_gauss_parameters (8, [12,0], Sigma, Low, High)</l>
+<c>*精确的抽出线，返回亚像素轮廓，三平滑系数，四五阈值范围，越小线越多，第六个参数标识提</c>
+<c>*取亮线还是暗线，七，是否提取线的宽度（如果获取线的宽度，则线提前的位置越宽则显示的线就越宽）</c>
+<l>lines_gauss (Highpass, Lines, Sigma, Low, High, 'light', 'true', 'bar-shaped', 'true')</l>
+<l>circularity_xld (Lines, Circularity)//获取圆度</l>
+<l>length_xld (Lines, Length)//获取长度</l>
+<l>area_center_xld (Lines, Area, Row2, Column2, PointOrder)//获取面积中心点</l>
+<c>*轮廓等高线过滤</c>
+<l>select_contours_xld (Lines, SelectedContours, 'contour_length', 20, 200, -0.5, 0.5)</l>
+<c>*轮廓几何形状过滤</c>
+<l>select_shape_xld (SelectedContours, SelectedXLD, 'area', 'and', 150, 99999)</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>
