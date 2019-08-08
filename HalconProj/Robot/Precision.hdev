@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<hdevelop file_version="1.2" halcon_version="18.11.1.1">
+<hdevelop file_version="1.2" halcon_version="18.05.0.1">
 <procedure name="main">
 <interface/>
 <body>
+<c></c>
+<c>* 横向纵向视觉机器人联合矫正</c>
+<c>*  - 纵向矫正以确定:视觉像素当量+视觉算法结果+通信+机器人反馈=准确</c>
+<c>*  - 横向确定:视觉像素当量+视觉算法结果+通信+机器人反馈=准确</c>
+<c>*    - 偶有横向笛卡尔机器人横向确认笛卡尔机器人脉冲当量无异常</c>
+<c></c>
+<c></c>
+<c></c>
 <c>** METHOD 1: 对比每张图的差值</c>
 <c></c>
 <c></c>
