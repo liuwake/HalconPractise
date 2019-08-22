@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.05.0.1">
+<procedure name="main">
+<interface/>
+<body>
+<c>* 关闭错误显示</c>
+<l>dev_set_check ('~give_error')</l>
+<c></c>
+<c>* 参数设置</c>
+<l>Protocol := 'TCP4'</l>
+<l>Timeout := 3.0</l>
+<c></c>
+<c>* 打开SOCKET 仅用于接连接服务端</c>
+<l>open_socket_connect ('localhost', 7080,['protocol','timeout'], [Protocol,Timeout], Socket)</l>
+<c></c>
+<c>* 获取客户端地址和端口信息</c>
+<l>get_socket_param (Socket, 'address_info', Address)</l>
+<c>* 获取对方IP和端口信息</c>
+<l>if(|Address|=4)</l>
+<l>    To:=[]</l>
+<l>    To:= [Address[2],Address[3]]</l>
+<l>endif</l>
+<c></c>
+<l>Answer := []</l>
+<c>* 数据通讯 发送End字符串结束监听</c>
+<l>while (Answer != 'End')</l>
+<l>    Format := 'z'</l>
+<c>    * 获取客户度发送的消息</c>
+<l>    receive_data (Socket, Format, Answer, From)</l>
+<l>    if (|Answer|&gt;0)</l>
+<l>        Data:='Recv:'+Answer  </l>
+<l>        send_data (Socket, Format, Data, To)</l>
+<l>    endif</l>
+<c>       </c>
+<l>endwhile</l>
+<c></c>
+<l>close_socket (Socket)</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>
