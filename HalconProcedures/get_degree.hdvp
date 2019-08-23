@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.05.0.1">
+<procedure name="get_degree">
+<interface>
+<ic>
+<par name="Phi" base_type="ctrl" dimension="0"/>
+</ic>
+<oc>
+<par name="Degree" base_type="ctrl" dimension="0"/>
+</oc>
+</interface>
+<body>
+<c></c>
+<l>Pi := 3.141592654</l>
+<l>Degree := (Phi * 180)/Pi</l>
+<l>return ()</l>
+</body>
+<docu id="get_degree">
+<parameters>
+<parameter id="Degree"/>
+<parameter id="Phi"/>
+</parameters>
+</docu>
+</procedure>
+</hdevelop>
