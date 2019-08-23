@@ -3,7 +3,10 @@
 <procedure name="main">
 <interface/>
 <body>
-<l>read_image (Image11, '11')</l>
+<l>read_image (Image1, '11')</l>
+<l>read_image(Image2,'arrow.png')</l>
+<c></c>
+<l>ImageCurrent := Image2</l>
 <l>dev_get_window (WindowHandle)</l>
 <c></c>
 <c>*画仿射矩形(箭尾临近最高点)</c>
@@ -13,10 +16,10 @@
 <c>*生成仿射矩形xld</c>
 <l>gen_rectangle2_contour_xld (Rectangle, Row, Column, Phi, Length1, Length2)</l>
 <c>*找顶点工具（基于卡尺工具）</c>
-<l>peak (Image11, Row, Column, Phi, Length1, Length2, 2, 0.41, 20, 'negative', 'first', EdgesY, EdgesX, ResultRow, ResultColumn)</l>
+<l>peak (ImageCurrent, Row, Column, Phi, Length1, Length2, 2, 0.41, 20, 'negative', 'first', EdgesY, EdgesX, ResultRow, ResultColumn)</l>
 <c></c>
 <c>*显示图像</c>
-<l>dev_display (Image11)</l>
+<l>dev_display (ImageCurrent)</l>
 <c>*显示仿射矩形</c>
 <l>dev_display (Rectangle)</l>
 <c>*显示所有边缘点</c>
