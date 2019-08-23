@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.05.0.1">
+<procedure name="main">
+<interface/>
+<body>
+<c></c>
+<l>dev_set_colored(12)</l>
+<l>dev_get_window (WindowHandle)</l>
+<c></c>
+<c></c>
+<l>angle := 90</l>
+<l>num := 5</l>
+<l>read_image(Image,'monkey')</l>
+<l>dev_display (Image)</l>
+<c>*画仿射矩形(箭尾临近最高点)</c>
+<l>dev_set_color ('green')</l>
+<l>draw_rectangle2 (WindowHandle, Row, Column, Phi, Length1, Length2)</l>
+<l>get_degree (Phi, Degree)</l>
+<c>*生成仿射矩形xld</c>
+<l>gen_rectangle2 (Rectangle, Row, Column, Phi, Length1, Length2)</l>
+<c></c>
+<l>dev_display(Rectangle)</l>
+<c></c>
+<l>dev_set_color('red')</l>
+<l>step := (Length1)/num</l>
+<l>Length_Line := Length2/2</l>
+<l>Fix_Col := Length_Line * sin(Degree)</l>
+<l>Fix_Row := Length_Line * cos(Degree)</l>
+<l>gen_contour_polygon_xld (Line, [Row - Fix_Row,Row + Fix_Row], [Column - Fix_Col,Column + Fix_Col])</l>
+<c></c>
+<c></c>
+<c></c>
+<l>*     Row_Current := Row1</l>
+<l>*     for Index := 1 to num + 1  by 1</l>
+<l>*          gen_contour_polygon_xld (Line, [Row1,Row1], [Column1,Column1])</l>
+<l>*          dev_display (Line)</l>
+<l>*          disp_line (WindowHandle, Row_Current, Column1, Row_Current, Column2)</l>
+<l>*          Row_Curent := Row_Current + step</l>
+<l>*          tuple_add (Row_Current, step, Row_Current)</l>
+<c></c>
+<l>*     endfor</l>
+<c>    </c>
+<c>   </c>
+<l>*     gen_line2(Rectangle, Row, Column, Phi, Length1, Length2)</l>
+<l>*     a := step + tan(Degree)</l>
+<c>    </c>
+<c>    </c>
+<c>    </c>
+<c></c>
+<c></c>
+<c></c>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>
