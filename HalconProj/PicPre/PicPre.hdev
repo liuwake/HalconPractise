@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.1">
+<procedure name="main">
+<interface/>
+<body>
+<l>dev_clear_window ()</l>
+<c></c>
+<c></c>
+<l>NameImage := 'PicInv1.jpg'</l>
+<c></c>
+<l>read_image (Image, NameImage)</l>
+<c></c>
+<l>dev_open_window_fit_image (Image, 0, 0, -1, -1, WindowHandle)</l>
+<c></c>
+<l>dev_display (Image)</l>
+<c></c>
+<c></c>
+<l>* draw_line (WindowHandle, Row1, Column1, Row2, Column2)</l>
+<c></c>
+<l>* div := (Row2 - Row1)/(Column2 - Column1)</l>
+<l>* tuple_atan (div, phi)</l>
+<c></c>
+<l>* tuple_atan2 (Row2 - Row1,Column2 - Column1, phi)</l>
+<c></c>
+<l>rotate_image (Image, ImageRotate, 90, 'nearest_neighbor')</l>
+<c></c>
+<c></c>
+<c></c>
+<l>write_image (Image, 'jpg', 0, NameImage)</l>
+<c></c>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>
