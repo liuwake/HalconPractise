@@ -93,12 +93,18 @@ using namespace std;
 
 
 ## PS
-### 去掉预编译PCH
+### 1. 去掉预编译PCH
 - 配置属性
 - 点选C/C++
 - 预编译头
 - 不使用预编译头(NO)
-
+### 2. 解决mvc140.dll缺失等问题
+- 使用mtd编译
+  - 配置属性
+  - C/C++
+  - 代码生成
+  - 运行库
+  - 多线程调试(/MTd)
 
 
 
@@ -114,3 +120,4 @@ using namespace std;
 - [halcon第九讲：halcon联合vc实现ocr识别](https://blog.csdn.net/qq_24946843/article/details/82114589)
 - [原MFC+Halcon混合编程，图像读入，显示和存储](https://blog.csdn.net/bettyshasha/article/details/51544203)
 - [[Halcon]Halcon12在vs2013下的配置](https://blog.csdn.net/kingcooper/article/details/50774760)
+- [VS中的多线程（/MT）、多线程调试（/MTd）、多线程DLL（/MD）、多线程调试DLL（/MDd）的区别](https://blog.csdn.net/qq_33757398/article/details/82156956)
