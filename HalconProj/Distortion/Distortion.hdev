@@ -5,12 +5,12 @@
 <body>
 <l>dev_close_window ()</l>
 <c></c>
-<l>read_image (Image, 'paper.jpg')</l>
+<l>read_image (Image, 'paper2.jpg')</l>
 <c></c>
-<l>dev_open_window_fit_image (Image, 0, 0, -1, -1, WindowHandle)</l>
+<l>dev_open_window_fit_image (Image, 110, 110, -1, -1, WindowHandle)</l>
 <l>dev_display (Image)</l>
 <c></c>
-<l>critical_points_sub_pix (Image, 'facet', 1.5, 10, RowMin, ColumnMin, RowMax, ColumnMax, RowSaddle, ColumnSaddle)</l>
+<l>critical_points_sub_pix (Image, 'gauss', 1.5, 13, RowMin, ColumnMin, RowMax, ColumnMax, RowSaddle, ColumnSaddle)</l>
 <c></c>
 <l>dev_set_color ('yellow')</l>
 <l>for i := 0 to |RowSaddle| - 1 by 1</l>

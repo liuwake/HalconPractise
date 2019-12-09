@@ -5,7 +5,7 @@
 # Distortion
 
 ## Flow
-- Localiztion
+- [x] Localiztion
 - [ ] lens ~~镜头矫正~~
 - [ ] Perspective transform 透视变换
 
@@ -14,9 +14,9 @@
 ### Localiztion
 - Method
   - [ ] 检测四角点
-  - [ ] 检测四角的mark点
-- Function
-  - critical_points_sub_pix (Operator)查找鞍点,mark点
+  - [x] 检测四角的mark点
+- [ ] Function
+  - [x] critical_points_sub_pix (Operator)查找鞍点,mark点
 - reference
   - intersect_lines_of_sight_targets.hdev
 ### Perspective transform 透视变换
