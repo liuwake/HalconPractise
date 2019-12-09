@@ -92,7 +92,12 @@ using namespace std;
 
 
 
-
+## PS
+### 去掉预编译PCH
+- 配置属性
+- 点选C/C++
+- 预编译头
+- 不使用预编译头(NO)
 
 
 
