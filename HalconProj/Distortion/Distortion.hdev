@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.1">
+<procedure name="main">
+<interface/>
+<body>
+<l>dev_close_window ()</l>
+<c></c>
+<l>read_image (Image, 'paper.jpg')</l>
+<c></c>
+<l>dev_open_window_fit_image (Image, 0, 0, -1, -1, WindowHandle)</l>
+<l>dev_display (Image)</l>
+<c></c>
+<l>critical_points_sub_pix (Image, 'facet', 1.5, 10, RowMin, ColumnMin, RowMax, ColumnMax, RowSaddle, ColumnSaddle)</l>
+<c></c>
+<l>dev_set_color ('yellow')</l>
+<l>for i := 0 to |RowSaddle| - 1 by 1</l>
+<l>  gen_cross_contour_xld (Cross, RowSaddle[i], ColumnSaddle[i], 25, 0.785398)</l>
+<l>  dev_display (Cross)</l>
+<l>endfor</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>
