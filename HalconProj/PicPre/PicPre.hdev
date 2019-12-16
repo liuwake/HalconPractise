@@ -5,13 +5,15 @@
 <body>
 <l>dev_clear_window ()</l>
 <c></c>
+<l>PathImage := 'C:/Users/iwake/OneDrive - wake/Desktop/Localization/Images/SignBox'</l>
+<l>* NameImage := 'PicInv1.jpg'</l>
 <c></c>
-<l>NameImage := 'PicInv1.jpg'</l>
+<l>list_image_files (PathImage, 'default', [], ImageFiles)</l>
+<l>read_image (Image, ImageFiles)</l>
 <c></c>
-<l>read_image (Image, NameImage)</l>
+<l>* dev_open_window_fit_image (Image, 0, 0, -1, -1, WindowHandle)</l>
 <c></c>
-<l>dev_open_window_fit_image (Image, 0, 0, -1, -1, WindowHandle)</l>
-<c></c>
+<l>dev_open_window (110, 110, 512, 512, 'black', WindowHandle)</l>
 <l>dev_display (Image)</l>
 <c></c>
 <c></c>
@@ -26,7 +28,7 @@
 <c></c>
 <c></c>
 <c></c>
-<l>write_image (Image, 'jpg', 0, NameImage)</l>
+<l>write_image (ImageRotate, 'jpg', 0, ImageFiles)</l>
 <c></c>
 </body>
 <docu id="main">
