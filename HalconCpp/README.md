@@ -104,7 +104,11 @@ using namespace std;
   - C/C++
   - 代码生成
   - 运行库
-  - 多线程调试(/MTd)
+  - 调试方式
+    - Debug下多线程调试(/MTd)
+    - Release下多线程调试(/MT)
+
+### 3. 项目属性所有配置
 
 
 
@@ -121,3 +125,6 @@ using namespace std;
 - [原MFC+Halcon混合编程，图像读入，显示和存储](https://blog.csdn.net/bettyshasha/article/details/51544203)
 - [[Halcon]Halcon12在vs2013下的配置](https://blog.csdn.net/kingcooper/article/details/50774760)
 - [VS中的多线程（/MT）、多线程调试（/MTd）、多线程DLL（/MD）、多线程调试DLL（/MDd）的区别](https://blog.csdn.net/qq_33757398/article/details/82156956)
+
+## TODO
+- [ ] 项目属性所有配置
