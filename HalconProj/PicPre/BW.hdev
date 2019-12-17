@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.1">
+<procedure name="main">
+<interface/>
+<body>
+<c>* </c>
+<c>* Convert All Image to GrayScale</c>
+<c>* Output direction is current direction</c>
+<l>dev_close_window ()</l>
+<l>dev_open_window (111,111,512, 512, 'black', WindowHandle)</l>
+<c></c>
+<l>PathImage := 'C:/Users/iwake/OneDrive - wake/Desktop/Localization/Images/Inv'</l>
+<l>list_image_files (PathImage, 'default', [], ImageFiles)</l>
+<c></c>
+<l>for Index := 0 to |ImageFiles|-1 by 1</l>
+<l>    read_image (Image,ImageFiles[Index])</l>
+<l>*     rgb1_to_gray (Image, GrayImage)</l>
+<l>    dev_display (Image)</l>
+<l>    binary_threshold (Image, Region, 'max_separability', 'light', UsedThreshold)</l>
+<c>    </c>
+<l>    reduce_domain (Image, Region, ImageReduced)</l>
+<l>    scale_image (ImageReduced, ImageScaled, 0.01, 250)</l>
+<c>    </c>
+<c>   </c>
+<c>    </c>
+<c>    </c>
+<l>*     exp_image (Image, ExpImage, 2)</l>
+<l>*     binary_threshold (ExpImage, ExpRegion, 'max_separability', 'dark', UsedThreshold)</l>
+<c>    </c>
+<l>*     illuminate (Image, ImageIlluminate, 101, 101, 0.7)</l>
+<l>*     equ_histo_image (Image, ImageEquHisto)</l>
+<c>                    </c>
+<l>*     scale_image (ExpImage, ImageScaled,1, 255)</l>
+<l>*     var_threshold (Image, Region, 15, 15, 0.2, 2, 'dark')</l>
+<l>    tuple_split (ImageFiles[Index],'/', Substrings)</l>
+<l>    tuple_length (Substrings, Length)</l>
+<l>    NameImage :=  Substrings[Length-1]</l>
+<l>*     convert_image_type (ImageScaled, ImageConverted, 'byte')</l>
+<l>    write_image (ImageReduced, 'jpg', 0, NameImage)</l>
+<c>    </c>
+<l>endfor</l>
+<c></c>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>
