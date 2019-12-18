@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.1">
+<procedure name="main">
+<interface/>
+<body>
+<c></c>
+<l>dev_close_window ()</l>
+<l>dev_open_window (111,111,512, 512, 'black', WindowHandle)</l>
+<c></c>
+<l>read_image (Image, 'C:/Users/iwake/OneDrive - wake/Desktop/Localization/Images/Ori/InvV1 (1).bmp')</l>
+<c></c>
+<l>image_cali_map (Image,ImageRect,[],[])</l>
+<c></c>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>
