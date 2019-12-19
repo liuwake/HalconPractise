@@ -1,3 +1,11 @@
+# Halcon
+
+# Image
+*.png
+*.bmp
+*.jpg
+*.tiff
+
 # Mac OS
 .DS_Store
 *.app
