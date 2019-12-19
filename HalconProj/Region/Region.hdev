@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.1">
+<procedure name="main">
+<interface/>
+<body>
+<l>dev_close_window ()</l>
+<l>dev_update_off ()</l>
+<l>dev_open_window (110, 110, 512, 512, 'black', WindowHandle)</l>
+<c></c>
+<c></c>
+<l>gen_empty_region (Name)</l>
+<l>for i := 1 to 5 by 1</l>
+<c>       </c>
+<l>    gen_rectangle1 (Temp, 20 *i,10,20*i +10,200)</l>
+<l>    concat_obj (Temp,Name,Name)</l>
+<c>    </c>
+<l>endfor</l>
+<l>dev_display (Name)</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>
