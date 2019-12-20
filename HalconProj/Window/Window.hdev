@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.1">
+<procedure name="main">
+<interface/>
+<body>
+<c></c>
+<c></c>
+<c></c>
+<c></c>
+<l>dev_close_window ()</l>
+<l>dev_open_window (110, 110, 512, 512, 'black', WindowHandle)</l>
+<l>for i := 1 to 99 by 1</l>
+<l>    get_window_extents (WindowHandle, Row, Column, Width, Height)</l>
+<l>    stop()</l>
+<l>endfor</l>
+<c></c>
+<c>*设置字体颜色</c>
+<l>dev_set_color ('green')</l>
+<c>*设置文字大小</c>
+<l>set_display_font (WindowHandle, 30, 'mono', 'true', 'false')</l>
+<c>*设置文字位置</c>
+<l>set_tposition (WindowHandle, 240, 120)</l>
+<c>*设置文字内容</c>
+<l>write_string (WindowHandle, 'hello')</l>
+<c></c>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>
