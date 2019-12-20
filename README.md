@@ -19,6 +19,13 @@
 - 一直下一步
 - 只要能勾选✔就都打勾
 
+
+## HalconProj
+### Cam
+
+### PicPre 图像预处理相关
+#### Rgb2Gray 彩色图像转黑白
+
 ## GitProj
 - https://github.com/bitbyte27/Halcon s28
 
