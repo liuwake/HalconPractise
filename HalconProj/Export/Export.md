@@ -11,7 +11,7 @@
 ![Export Config](Export.png)
 - 文件 - 导出
   - 选择文件路径
-    - eg:```C:/Users/iwake/OneDrive - wake/Desktop/HalconPractise/HalconProj/Export/Export.cs```
+    - eg:```C:/Users/iwake/OneDrive - wake/Desktop/HalconPractise/HalconProj/Export/HalFeature.cs```建议功能和类名字相同,统一改成```HalFeature```eg.```HalScan```,```HalMeasure```
   - 选语言 
     - [ ] 文本文件
     - [ ] C
@@ -26,7 +26,7 @@
     - [x] 导出所有引用的外部函数
     -  外部函数目标地址:单个文件
  -  窗口导出
-    -  [ ] 使用halcon窗口()
+    -  [ ] 使用halcon窗口:建议文件名```HalFeatureIso.cs```(```Iso```abbr.```Isolated```)
        - ```导出一个独立的工程```(GUI注释)
        -  2Class(装饰有```#if !(NO_EXPORT_MAIN || NO_EXPORT_APP_MAIN)```)
           -  ```public class HDevelopExportApp;```
@@ -36,7 +36,7 @@
              -  ```private void action()```
              -  etc.
        -  比较适合做```Program.cs```(C# Main程序)
-    -  [x] 使用导出模板
+    -  [x] 使用导出模板:建议文件名```HalFeatureIso.cs```
        - ```使用提供的工程模板导出成一个工程,(仅支持HALCON/.NET和HALCON/COM)```(GUI注释)
        - 1Class
          - ```public partial class HDevelopExport```
