@@ -1,4 +1,6 @@
 # Halcon
+# Folder 
+!Images/*.png
 
 # Image
 *.png
