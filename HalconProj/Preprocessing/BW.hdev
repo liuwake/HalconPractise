@@ -16,6 +16,8 @@
 <l>    read_image (Image,ImageFiles[Index])</l>
 <l>*     rgb1_to_gray (Image, GrayImage)</l>
 <l>    dev_display (Image)</l>
+<c>    * 分割出现锯齿</c>
+<l>*     gauss_filter (Image, Image, 5)</l>
 <l>    binary_threshold (Image, Region, 'max_separability', 'light', UsedThreshold)</l>
 <c>    </c>
 <l>    reduce_domain (Image, Region, ImageReduced)</l>
@@ -36,7 +38,7 @@
 <l>    tuple_length (Substrings, Length)</l>
 <l>    NameImage :=  Substrings[Length-1]</l>
 <l>*     convert_image_type (ImageScaled, ImageConverted, 'byte')</l>
-<l>    write_image (ImageReduced, 'jpg', 0, NameImage)</l>
+<l>    write_image (ImageScaled, 'jpg', 0, NameImage)</l>
 <c>    </c>
 <l>endfor</l>
 <c></c>
