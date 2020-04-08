@@ -29,7 +29,7 @@
 <l>    for Index := 0 to |ImageFiles| - 1 by 1</l>
 <l>        read_image (Image, ImageFiles[Index])</l>
 <c>        * Image Acquisition 01: Do something</c>
-<l>        loop_source (Image, Regions, SAVE)</l>
+<l>        loop_preprocessing (Image, Regions, SAVE)</l>
 <l>    endfor</l>
 <l>endif</l>
 <c></c>
@@ -41,7 +41,7 @@
 <l as_id="image_acquisition" as_name="Image Acquisition 02" as_grp="[2,2]" as_ord="1">    while (true)</l>
 <l as_id="image_acquisition" as_name="Image Acquisition 02" as_grp="[2,3]" as_ord="1">        grab_image_async (Image, AcqHandle, -1)</l>
 <c as_id="image_acquisition" as_name="Image Acquisition 02" as_grp="[2,4]" as_ord="1">        * Image Acquisition 02: Do something</c>
-<l>        loop_source (Image, Regions, SAVE)</l>
+<l>        loop_preprocessing (Image, Regions, SAVE)</l>
 <l as_id="image_acquisition" as_name="Image Acquisition 02" as_grp="[3,1]" as_ord="1">    endwhile</l>
 <l as_id="image_acquisition" as_name="Image Acquisition 02" as_grp="[4,1]" as_ord="1">    close_framegrabber (AcqHandle)</l>
 <l>endif</l>
@@ -57,7 +57,7 @@
 <parameters/>
 </docu>
 </procedure>
-<procedure name="loop_source" access="local">
+<procedure name="loop_preprocessing" access="local">
 <interface>
 <io>
 <par name="Image" base_type="iconic" dimension="0"/>
@@ -71,14 +71,21 @@
 </interface>
 <body>
 <c></c>
-<l>* auto_threshold (Image, Regions, 2)</l>
 <c></c>
+<c>*** PREPROCESSING</c>
+<c>** WhiteSheet</c>
+<c></c>
+<l>auto_threshold (Image, Regions, 2)</l>
+<c></c>
+<c>**</c>
+<c></c>
+<c>*** AFTER</c>
 <l>if(SAVE == 1)</l>
 <l>    write_image (Image, 'bmp', 0, SAVE)</l>
 <l>endif</l>
 <l>return ()</l>
 </body>
-<docu id="loop_source">
+<docu id="loop_preprocessing">
 <parameters>
 <parameter id="Image"/>
 <parameter id="Regions"/>
