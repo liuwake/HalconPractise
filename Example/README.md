@@ -21,7 +21,7 @@
 - [ ] inspect_blister_photometric_stereo.hdev
   - [ ] 光度立体学检测药片锡纸包装起泡(blister)
 - [ ] inspect_flooring_photometric_stereo.hdev
-  - [ ] 广度立体学检测墙面
+  - [ ] 光度立体学检测墙面
 - [ ] inspect_flooring_uncalib_photometric_stereo.hdev
   - [ ] 同上,没cali
 - [ ] inspect_leather_photometric_stereo.hdev
@@ -34,3 +34,27 @@
   - 检测孔眼
 - compare_surface_sheet_of_light.hdev
   - 用什么方法检测零件??
+
+## Method 方法
+### 拼接
+
+- [x] adjust_mosaic_images
+  - [ ] 教堂图片弯曲拼接
+- [x] blended_mosaic
+  - [ ] 教堂图片弯曲拼接,*???啥区别*
+- [x] bundle_adjusted_mosaicking
+  - [ ] 10张芯片拼成一张*??? 啥区别*
+- [x] *gen_projective_mosaic*
+  - [ ] 6张PCB拼一张
+- [x] mosaicking
+  - [ ] 10张芯片拼成一张
+- [x] inspect_bottle_label_360_degree.hdev 
+  - [x] 4张图像恢复瓶身标签带
+- [x] mosaicking_pyramid.hdev
+  - [x] 两张芯片图像不同金字塔层级拼接,并比较速度.
+- [x] proj_match_points_distortion_ransac.hdev
+  - [ ] 两张楼房图片成功(失败)拼接
+- [ ] proj_match_points_distortion_ransac_guided
+  - [x] 两张楼房图片成功拼接 *???guided*
+- [x] stationary_camera_self_calibration
+  - [ ] *标定*
