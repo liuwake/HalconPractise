@@ -46,6 +46,8 @@
   - [ ] 10张芯片拼成一张*??? 啥区别*
 - [x] *gen_projective_mosaic*
   - [ ] 6张PCB拼一张
+  
+
 - [x] mosaicking
   - [ ] 10张芯片拼成一张
 - [x] inspect_bottle_label_360_degree.hdev 
@@ -58,3 +60,6 @@
   - [x] 两张楼房图片成功拼接 *???guided*
 - [x] stationary_camera_self_calibration
   - [ ] *标定*
+
+- [ ] Ref
+    - [x] [Halcon一日一练：图像拼接技术2:步骤与例程](https://www.cnblogs.com/amosyang/p/8478213.html?utm_source=debugrun&utm_medium=referral) 中文讲解
