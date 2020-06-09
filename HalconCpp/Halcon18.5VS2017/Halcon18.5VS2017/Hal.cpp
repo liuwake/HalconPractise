@@ -2,33 +2,33 @@
 Copyright: HRG
 Author: LiuWake
 Date:06/04/19
-Description: ÊäÈëÍ¼ÏñÎ»ÖÃ,·µ»ØOCR½á¹û
+Description: è¾“å…¥å›¾åƒä½ç½®,è¿”å›OCRç»“æœ
 **************************************************/
 
 
 /*************************************************
-Function:       Ê¶±ğÍ¼ÏñÉÏµÄLedÊıÂë¹ÜÊı×Ö
-Description:    ÊäÈëÍ¼ÏñÎ»ÖÃ,·µ»ØOCR½á¹û
+Function:       è¯†åˆ«å›¾åƒä¸Šçš„Ledæ•°ç ç®¡æ•°å­—
+Description:    è¾“å…¥å›¾åƒä½ç½®,è¿”å›OCRç»“æœ
 Calls:          // Null
 Table Accessed: // Null
 Table Updated: // Null
-Input:          string ÊäÈëÎÄ¼şÎ»ÖÃ,Èç"C:/Led/led1.jpg";
-				ĞèÒªÊÇ¾ø¶ÔÎ»ÖÃ,Ïà¶ÔÎ»ÖÃ¿ÉÄÜ³ö´í;×¢ÒâĞ±¸Ü·´Ğ±¸Ü;
-Output:        string Êä³öÊ¶±ğ½á¹û,eg 840
-Return:        string Êä³öÊ¶±ğ½á¹û,eg 840
+Input:          string è¾“å…¥æ–‡ä»¶ä½ç½®,å¦‚"C:/Led/led1.jpg";
+				éœ€è¦æ˜¯ç»å¯¹ä½ç½®,ç›¸å¯¹ä½ç½®å¯èƒ½å‡ºé”™;æ³¨æ„æ–œæ åæ–œæ ;
+Output:        string è¾“å‡ºè¯†åˆ«ç»“æœ,eg 840
+Return:        string è¾“å‡ºè¯†åˆ«ç»“æœ,eg 840
 Others:         null
 *************************************************/
 
-//Halcon¿â
+//Halconåº“
 #include "HalconCpp.h"
 using namespace HalconCpp;
 
-//¹«¹²¿â
+//å…¬å…±åº“
 using namespace std;
 #include <string>
 #include <iostream>
 
-//×ÔĞ´º¯ÊıÍ·
+//è‡ªå†™å‡½æ•°å¤´
 #include "Hal.h"
 
 
@@ -174,13 +174,13 @@ void led_autoLroi(HObject ho_InputImage, HObject* ho_Rectangle)
 	Decompose3(ho_Image, &ho_Red, &ho_Green, &ho_Blue);
 	TransFromRgb(ho_Red, ho_Green, ho_Blue, &ho_Hue, &ho_Saturation, &ho_Intensity,
 		"hsv");
-	//¶Ô±¥ºÍ¶ÈÍ¼Ïñ½øĞĞ¶şÖµ»¯
+	//å¯¹é¥±å’Œåº¦å›¾åƒè¿›è¡ŒäºŒå€¼åŒ–
 	Threshold(ho_Saturation, &ho_HighSaturation, 100, 255);
-	//ÔÚÉ«µ÷Í¼ÏñÖĞ¿ÙÍ¼
+	//åœ¨è‰²è°ƒå›¾åƒä¸­æŠ å›¾
 	ReduceDomain(ho_Hue, ho_HighSaturation, &ho_HueHighSaturation);
 	Threshold(ho_HueHighSaturation, &ho_Yellow, 20, 50);
 	Connection(ho_Yellow, &ho_ConnectedRegions);
-	//¸ù¾İĞÎ×´Ñ¡Ôñ£¬¡®max_area¡¯ÎªÑ¡ÔñÃæ»ı×î´óµÄÁ¬Í¨Óò
+	//æ ¹æ®å½¢çŠ¶é€‰æ‹©ï¼Œâ€˜max_areaâ€™ä¸ºé€‰æ‹©é¢ç§¯æœ€å¤§çš„è¿é€šåŸŸ
 	SelectShapeStd(ho_ConnectedRegions, &ho_SelectedRegions, "max_area", 70);
 	ClosingCircle(ho_SelectedRegions, &ho_Yellow, 3.5);
 	SmallestCircle(ho_SelectedRegions, &hv_Row, &hv_Column, &hv_Radius);
@@ -193,8 +193,8 @@ void led_autoLroi(HObject ho_InputImage, HObject* ho_Rectangle)
 		DispObj(ho_ImageReduced, HDevWindowStack::GetActive());
 	//stop ()
 
-	//* eg 1.2 ¸ù¾İÔ²ºÍ±ÈÀıÑ¡È¡LEDÇøÓò
-	//* ³õÊ¼»¯Éè±¸³ß¶È²ÎÊı
+	//* eg 1.2 æ ¹æ®åœ†å’Œæ¯”ä¾‹é€‰å–LEDåŒºåŸŸ
+	//* åˆå§‹åŒ–è®¾å¤‡å°ºåº¦å‚æ•°
 	hv_watch_r = hv_Radius;
 	hv_watch_x = hv_Column;
 	hv_watch_y = hv_Row;
@@ -208,7 +208,7 @@ void led_autoLroi(HObject ho_InputImage, HObject* ho_Rectangle)
 
 	hv_led_x2 = hv_Column + (0.7 * hv_led_width);
 	hv_led_y2 = hv_watch_y;
-	//*Éú³É¾ØĞÎ
+	//*ç”ŸæˆçŸ©å½¢
 
 	GenRectangle1(&(*ho_Rectangle), hv_led_y1, hv_led_x1, hv_led_y2, hv_led_x2);
 	return;
@@ -227,8 +227,8 @@ string action(string path)
 	HTuple  hv_Confidences_OCR_01_0, hv_Words_OCR_01_0, hv_Scores_OCR_01_0;
 
 	//*
-	//*×¢Òâ:
-	//* µ÷ÓÃhdvpÇëÏÈ½«µ±Ç°Ä¿Â¼Ìí¼Óµ½Procedures Directories
+	//*æ³¨æ„:
+	//* è°ƒç”¨hdvpè¯·å…ˆå°†å½“å‰ç›®å½•æ·»åŠ åˆ°Procedures Directories
 
 	//dev_close_window ()
 	//dev_open_window (0, 0, 640, 480, 'black', WindowHandle)
@@ -256,9 +256,9 @@ string action(string path)
 	//std::cout << hv_Words_OCR_01_0;
 
 	string str = (string)hv_Words_OCR_01_0[0].S();
-	//Htuple ×ª string	
+	//Htuple è½¬ string	
 	return str;
-	//·µ»Østring
+	//è¿”å›string
 }
 
 
