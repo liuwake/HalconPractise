@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.1">
+<procedure name="image_judge_stop">
+<interface>
+<io>
+<par name="ImageBefore" base_type="iconic" dimension="0"/>
+<par name="ImageLater" base_type="iconic" dimension="0"/>
+</io>
+<oo>
+<par name="Selected" base_type="iconic" dimension="0"/>
+</oo>
+<oc>
+<par name="juadge_stop" base_type="ctrl" dimension="0"/>
+</oc>
+</interface>
+<body>
+<c>*** 初始化图片</c>
+<c>** 测试traffic demo</c>
+<l>* read_image (ImageBefore, 'traffic1')</l>
+<l>* read_image (ImageLater, 'traffic2')</l>
+<c>** 测试 高拍测试</c>
+<l>* read_image (ImageBefore, 'C:/Users/iwake/MVS/Data/Hos0.bmp')</l>
+<l>* read_image (ImageLater, 'C:/Users/iwake/MVS/Data/Hos1.bmp')</l>
+<l>* read_image (ImageLater2, 'C:/Users/iwake/MVS/Data/Hos2.bmp')</l>
+<c></c>
+<c>** 对比图像</c>
+<c>* difference </c>
+<l>* diff_of_gauss (ImageLater, DiffOfGauss, 3, 1.6)</l>
+<c>* traffic demo 参数</c>
+<l>* check_difference (ImageBefore, ImageLater2, Selected, 'diff_outside', -15, 255, 0, 0, 0)</l>
+<c>* 高拍测试 参数</c>
+<l>check_difference (ImageBefore, ImageLater, Selected, 'diff_outside', -15, 255, 0, 0, 0)</l>
+<c></c>
+<l>area_center (Selected, Area, Row, Column)</l>
+<l>* disp_obj (Selected, WindowHandle)</l>
+<c></c>
+<c>*** 判断</c>
+<l>juadge_stop := 0</l>
+<l>if (Area &lt;= 10000)</l>
+<l>    juadge_stop := 1</l>
+<l>endif</l>
+<l>return ()</l>
+</body>
+<docu id="image_judge_stop">
+<parameters>
+<parameter id="ImageBefore"/>
+<parameter id="ImageLater"/>
+<parameter id="Selected"/>
+<parameter id="juadge_stop"/>
+</parameters>
+</docu>
+</procedure>
+</hdevelop>
