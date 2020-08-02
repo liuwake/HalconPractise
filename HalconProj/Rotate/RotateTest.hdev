@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.1">
+<procedure name="main">
+<interface/>
+<body>
+<l>read_image (Image, 'C:/Users/iwake/OneDrive - wake/Desktop/Mia/Images/V0.0/CWDL.jpg')</l>
+<l>rotate_image (Image, ImageRotate, 30, 'constant')</l>
+<c></c>
+<l>x1 :=1535</l>
+<l>y1 := 370</l>
+<c></c>
+<l>x2 := 260</l>
+<l>y2 := 2557</l>
+<c></c>
+<c></c>
+<l>tuple_atan2 (x2-x1,y2-y1,ATan)</l>
+<c></c>
+<l>d := deg(ATan)</l>
+<l>rotate_image (ImageRotate, ImageRotate2, d, 'constant')</l>
+<c></c>
+<c></c>
+<c></c>
+<l>hom_mat2d_identity (HomMat2D)</l>
+<l>hom_mat2d_rotate( HomMat2D, ATan, 0, 0, HomMat2DRotate)V\QAW A</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>
