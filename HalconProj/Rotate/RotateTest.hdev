@@ -4,6 +4,8 @@
 <interface/>
 <body>
 <l>read_image (Image, 'C:/Users/iwake/OneDrive - wake/Desktop/Mia/Images/V0.0/CWDL.jpg')</l>
+<c></c>
+<c>** Method 1 rotate 不可以指定圆点旋转</c>
 <l>rotate_image (Image, ImageRotate, 30, 'constant')</l>
 <c></c>
 <l>x1 :=1535</l>
@@ -19,9 +21,10 @@
 <l>rotate_image (ImageRotate, ImageRotate2, d, 'constant')</l>
 <c></c>
 <c></c>
-<c></c>
+<c>** Method 2 affine_trans 可以指定原点旋转</c>
 <l>hom_mat2d_identity (HomMat2D)</l>
-<l>hom_mat2d_rotate( HomMat2D, ATan, 0, 0, HomMat2DRotate)V\QAW A</l>
+<l>hom_mat2d_rotate( HomMat2D, ATan, 1110, 1500, HomMat2DRotate)</l>
+<l>affine_trans_image (ImageRotate, ImageAffineTrans, HomMat2DRotate, 'constant', 'false')</l>
 </body>
 <docu id="main">
 <parameters/>
