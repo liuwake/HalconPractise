@@ -4,9 +4,9 @@
 <interface/>
 <body>
 <l>dev_close_window ()</l>
-<l>PathImages := 'C:/Users/iwake/OneDrive - wake/Desktop/HalconPractise/Images'</l>
+<l>PathImages := 'D:/WK/Hospital/实际采集图像'</l>
 <c></c>
-<l>read_image (Image, PathImages + '/PaperBlank (3).jpg')</l>
+<l>read_image (Image, PathImages + '/BoxG2 (7).jpg')</l>
 <c></c>
 <l>dev_open_window_fit_image (Image, 110,110, -1, -1, WindowHandle)</l>
 <c></c>
