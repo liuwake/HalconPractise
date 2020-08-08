@@ -1,8 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<hdevelop file_version="1.2" halcon_version="18.05.0.1">
+<hdevelop file_version="1.2" halcon_version="18.11.1.1">
 <procedure name="main">
 <interface/>
-<body/>
+<body>
+<c>**** Line</c>
+<c></c>
+<c>*** Line Function</c>
+<c>** Gen Line</c>
+<c>* gen_region_line 注意Hesse normal 法线形式?</c>
+<l>* gen_region_line (RegionLines, 100, 70, 100, 130)</l>
+<c></c>
+<c>* Test 6 paraments via gen_region_line in loop</c>
+<l>* Degree  := [0, 10, 30, 45, 90]</l>
+<l>* for Index := 0 to 4 by 1    </l>
+<l>*     gen_region_hline (Regions,rad(Degree[Index]) , 10)    </l>
+<l>* endfor</l>
+<c></c>
+<c>* Test 4  paraments via gen_region_line </c>
+<l>* gen_region_hline (Regions, 0, 10)</l>
+<l>* gen_region_hline (Regions, rad(10), 10)</l>
+<l>* gen_region_hline (Regions, 30, 30)</l>
+<l>* gen_region_hline (Regions, 45, 45)</l>
+<l>* gen_region_hline (Regions, 90, 90)</l>
+<c></c>
+<c>* Test 4 45degrees via gen_region_line</c>
+<c>* 1st and 3rd quadrants </c>
+<l>* gen_region_hline (RegionsCorner,rad(-45) , -200) </l>
+<l>* gen_region_hline (RegionsCorner,rad(-45) , 200) </l>
+<c></c>
+<c>* 2nd and 4th quadrants </c>
+<l>* gen_region_hline (RegionsCorner,rad(45) , 600) </l>
+<l>* gen_region_hline (RegionsCorner,rad(45) , 200)</l>
+<c></c>
+<c>* gen_region_line </c>
+<l>* for Index := 1 to 5 by 1</l>
+<l>*     gen_region_line (RegionLines, 100, 70, 100, 130)</l>
+<l>* endfor</l>
+<c></c>
+<c>** Cal Cross</c>
+<c>* </c>
+<l>* intersection (RegionLines, RegionLines1, RegionIntersection)</l>
+<l>* get_region_points (RegionIntersection, Rows, Columns)</l>
+<c></c>
+</body>
 <docu id="main">
 <parameters/>
 </docu>
