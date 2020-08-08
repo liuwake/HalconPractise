@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.1">
+<procedure name="Region_get_corner">
+<interface>
+<io>
+<par name="Image" base_type="iconic" dimension="0"/>
+<par name="Rectangle" base_type="iconic" dimension="0"/>
+</io>
+<ic>
+<par name="WindowHandle" base_type="ctrl" dimension="0"/>
+</ic>
+<oc>
+<par name="Rows" base_type="ctrl" dimension="0"/>
+<par name="Cols" base_type="ctrl" dimension="0"/>
+</oc>
+</interface>
+<body>
+<c>** Gen Line In Loop and juage cross</c>
+<l>get_image_size (Image, Width, Height)</l>
+<l>tuple_sqrt(Width*Width + Height*Height, LengthDiagonal)</l>
+<l>HalfDiagonal := LengthDiagonal/2</l>
+<l>* PolarityDegree := 1</l>
+<l>* PolarityLength := 1</l>
+<l>* Polarity := 3</l>
+<l>Rows  := []</l>
+<l>Cols := []</l>
+<l>for Polarity := 1 to 4 by 1</l>
+<l>    if (Polarity == 1)</l>
+<l>        for Index := 0 to HalfDiagonal by 1    </l>
+<l>            gen_region_hline (RegionsLine3,rad(-45) , 1 * (1*HalfDiagonal - Index) )</l>
+<l>            intersection (RegionsLine3, Rectangle, RegionIntersection)</l>
+<l>            area_center (RegionIntersection, RegionIntersectionArea, Row, Column)    </l>
+<l>            if (RegionIntersectionArea &gt; 0 )</l>
+<l>                Rows[Polarity] := Row</l>
+<l>                Cols[Polarity] := Column</l>
+<l>                break</l>
+<l>            endif     </l>
+<l>        endfor</l>
+<l>    endif</l>
+<l>    if (Polarity == 2)</l>
+<l>        for Index := 0 to HalfDiagonal by 1    </l>
+<l>            gen_region_hline (RegionsLine3,rad(45) , 1 * (0 *HalfDiagonal + Index) )</l>
+<l>            intersection (RegionsLine3, Rectangle, RegionIntersection)</l>
+<l>            area_center (RegionIntersection, RegionIntersectionArea, Row, Column)    </l>
+<l>            if (RegionIntersectionArea &gt; 0 )</l>
+<l>                Rows[Polarity] := Row</l>
+<l>                Cols[Polarity] := Column</l>
+<l>                break</l>
+<l>            endif       </l>
+<l>        endfor</l>
+<l>    endif</l>
+<l>    if (Polarity == 3)</l>
+<l>        for Index := 0 to HalfDiagonal by 1    </l>
+<l>            gen_region_hline (RegionsLine3,rad(-45) , -1 * (1*HalfDiagonal - Index) )</l>
+<l>            intersection (RegionsLine3, Rectangle, RegionIntersection)</l>
+<l>            area_center (RegionIntersection, RegionIntersectionArea, Row, Column)    </l>
+<l>            if (RegionIntersectionArea &gt; 0 )</l>
+<l>                Rows[Polarity] := Row</l>
+<l>                Cols[Polarity] := Column</l>
+<l>                break</l>
+<l>            endif      </l>
+<l>        endfor</l>
+<l>    endif</l>
+<l>    if (Polarity == 4)</l>
+<l>        for Index := 0 to HalfDiagonal by 1    </l>
+<l>            gen_region_hline (RegionsLine3,rad(45) , 1 * (2* HalfDiagonal - Index) )</l>
+<l>            intersection (RegionsLine3, Rectangle, RegionIntersection)</l>
+<l>            area_center (RegionIntersection, RegionIntersectionArea, Row, Column)    </l>
+<l>            if (RegionIntersectionArea &gt; 0 )</l>
+<l>                Rows[Polarity] := Row</l>
+<l>                Cols[Polarity] := Column</l>
+<l>                break</l>
+<l>            endif      </l>
+<l>        endfor</l>
+<l>    endif</l>
+<l>*     get_region_points (RegionIntersection, Rows, Columns)</l>
+<l>*     disp_message (WindowHandle, 'Intesection Row:'+ Row +'Col'+ Column, 'window', Row, Column, 'black', 'true')</l>
+<l>endfor</l>
+<l>return ()</l>
+</body>
+<docu id="Region_get_corner">
+<parameters>
+<parameter id="Cols"/>
+<parameter id="Image"/>
+<parameter id="Rectangle"/>
+<parameter id="Rows"/>
+<parameter id="WindowHandle"/>
+</parameters>
+</docu>
+</procedure>
+</hdevelop>
