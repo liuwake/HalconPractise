@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <hdevelop file_version="1.2" halcon_version="18.11.1.1">
-<procedure name="Region_get_corner">
+<procedure name="region_get_corner">
 <interface>
 <io>
 <par name="Image" base_type="iconic" dimension="0"/>
@@ -76,9 +76,13 @@
 <l>*     get_region_points (RegionIntersection, Rows, Columns)</l>
 <l>*     disp_message (WindowHandle, 'Intesection Row:'+ Row +'Col'+ Column, 'window', Row, Column, 'black', 'true')</l>
 <l>endfor</l>
+<l>* dev_set_colored (12)</l>
+<l>* for Index := 1 to 4 by 1</l>
+<l>*     disp_circle(WindowHandle,Rows[Index],Cols[Index],64)</l>
+<l>* endfor</l>
 <l>return ()</l>
 </body>
-<docu id="Region_get_corner">
+<docu id="region_get_corner">
 <parameters>
 <parameter id="Cols"/>
 <parameter id="Image"/>

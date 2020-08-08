@@ -25,6 +25,7 @@
 <c>    </c>
 <c>    </c>
 <l>* endfor</l>
+<c>** Detect Corner</c>
 <l>Region_get_corner (Image, Rectangle, WindowHandle, Rows, Cols)</l>
 <c></c>
 <c></c>
