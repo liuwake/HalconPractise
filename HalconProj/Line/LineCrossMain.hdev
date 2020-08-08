@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.1">
+<procedure name="main">
+<interface/>
+<body>
+<c></c>
+<c></c>
+<c></c>
+<c>*** Init</c>
+<l>dev_open_window (0, 0, 512, 512, 'black', WindowHandle)</l>
+<c></c>
+<c></c>
+<c>** </c>
+<c>*** Line and Region Cross</c>
+<c>** Gen Rect</c>
+<l>gen_rectangle1 (Rectangle, 30, 20, 400, 400)</l>
+<c>** Gen Line</c>
+<l>tuple_sqrt(2, DegreeSqrt)</l>
+<l>LengthCenter := -0.0001 + 512/DegreeSqrt</l>
+<l>gen_region_hline (RegionsCorner,rad(-45) , LengthCenter ) </l>
+<c>** Gen Line In Loop</c>
+<l>* for Index := 0 to LengthCenter by 1</l>
+<c>    </c>
+<l>*     gen_region_hline (RegionsCorner,rad(-45) , LengthCenter - Index) </l>
+<c>    </c>
+<c>    </c>
+<l>* endfor</l>
+<c>** Gen Line In Loop and juage cross</c>
+<l>for Index := 0 to LengthCenter by 1</l>
+<c>    </c>
+<l>    gen_region_hline (RegionsLine3,rad(-45) , -(LengthCenter - Index) )</l>
+<l>    intersection (RegionsLine3, Rectangle, RegionIntersection)</l>
+<l>    area_center (RegionIntersection, RegionIntersectionArea, Row, Column)</l>
+<c>    </c>
+<l>    if (RegionIntersectionArea &gt; 0 )        </l>
+<l>        break</l>
+<l>    endif   </l>
+<c>    </c>
+<l>endfor</l>
+<c></c>
+<l>get_region_points (RegionIntersection, Rows, Columns)</l>
+<l>disp_message (WindowHandle, 'Intesection Row:'+ Row +'Col'+ Column, 'window', Row, Column, 'black', 'true')</l>
+<c></c>
+<c></c>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>
