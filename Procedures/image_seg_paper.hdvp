@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.1">
+<procedure name="image_seg_paper">
+<interface>
+<io>
+<par name="Image" base_type="iconic" dimension="0"/>
+</io>
+<oo>
+<par name="Image_rectified" base_type="iconic" dimension="0"/>
+</oo>
+<ic>
+<par name="WindowHandle" base_type="ctrl" dimension="0"/>
+</ic>
+</interface>
+<body>
+<c>*** Prog</c>
+<l>get_image_size (Image, Width, Height)</l>
+<c>*对饱和度图像进行二值化</c>
+<c></c>
+<c>** Detecting Paper</c>
+<l>* auto_threshold (Saturation, Regions, 20)</l>
+<l>binary_threshold (Image, Region, 'max_separability', 'light', UsedThreshold)</l>
+<l>* threshold (Saturation, HighSaturation, 100, 255)</l>
+<l>fill_up_shape (Region, Paper, 'area', 1, 40000)</l>
+<c></c>
+<c>** Detecting Corner</c>
+<c></c>
+<l>region_get_corner (Image, Paper, WindowHandle, Rows, Cols)</l>
+<l>* dev_set_colored (12)</l>
+<l>* for Index := 1 to 4 by 1</l>
+<l>*     disp_circle(WindowHandle,Rows[Index],Cols[Index],64)</l>
+<l>* endfor</l>
+<c></c>
+<l>XCoordCorners :=[Rows[2],Rows[3],Rows[4],Rows[1]]</l>
+<l>YCoordCorners :=[Cols[2],Cols[3],Cols[4],Cols[1]]</l>
+<l>hom_vector_to_proj_hom_mat2d (XCoordCorners, YCoordCorners, [1,1,1,1], [0,Height,Height,0], [0,0,Width,Width], [1,1,1,1], 'normalized_dlt', HomMat2D)</l>
+<l>projective_trans_image (Image, Image_rectified, HomMat2D, 'bilinear', 'false', 'false')</l>
+<l>return ()</l>
+</body>
+<docu id="image_seg_paper">
+<parameters>
+<parameter id="Image"/>
+<parameter id="Image_rectified"/>
+<parameter id="WindowHandle"/>
+</parameters>
+</docu>
+</procedure>
+</hdevelop>
