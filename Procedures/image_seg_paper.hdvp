@@ -20,8 +20,12 @@
 <c>** Detecting Paper</c>
 <l>* auto_threshold (Saturation, Regions, 20)</l>
 <l>binary_threshold (Image, Region, 'max_separability', 'light', UsedThreshold)</l>
-<l>* threshold (Saturation, HighSaturation, 100, 255)</l>
-<l>fill_up_shape (Region, Paper, 'area', 1, 40000)</l>
+<l>fill_up_shape (Region, RegionFill, 'area', 1, 40000)</l>
+<l>connection (RegionFill, ConnectedRegions)</l>
+<c></c>
+<l>area_center (ConnectedRegions, Area, Row, Column)</l>
+<l>select_shape (ConnectedRegions, Paper, 'area', 'and', max(Area), 9999999)</l>
+<c></c>
 <c></c>
 <c>** Detecting Corner</c>
 <c></c>
