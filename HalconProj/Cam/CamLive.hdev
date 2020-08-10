@@ -7,19 +7,23 @@
 <c as_id="image_acquisition" as_name="Image Acquisition 01" as_grp="[1,2]" as_ord="1">* Image Acquisition 01: Attention: The initialization may fail in case parameters need to</c>
 <c as_id="image_acquisition" as_name="Image Acquisition 01" as_grp="[1,2]" as_ord="2">* Image Acquisition 01: be set in a specific order (e.g., image resolution vs. offset).</c>
 <l as_id="image_acquisition" as_name="Image Acquisition 01" as_grp="[1,2,1]" as_ord="1">open_framegrabber ('GigEVision2', 0, 0, 0, 0, 0, 0, 'progressive', -1, 'default', -1, 'false', 'default', 'c42f90f2b7fa_Hikvision_MVCE12010GM', 0, -1, AcqHandle)</l>
-<l>    set_framegrabber_param (AcqHandle, 'TriggerMode', 'On')</l>
-<l>    set_framegrabber_param (AcqHandle, 'TriggerSource', 'Software')</l>
-<l as_id="image_acquisition" as_name="Image Acquisition 01" as_grp="[1,2,2]" as_ord="1">set_framegrabber_param (AcqHandle, 'Width', 4024)</l>
-<l as_id="image_acquisition" as_name="Image Acquisition 01" as_grp="[1,2,2]" as_ord="2">set_framegrabber_param (AcqHandle, 'Height', 3036)</l>
-<l as_id="image_acquisition" as_name="Image Acquisition 01" as_grp="[1,2,2]" as_ord="3">set_framegrabber_param (AcqHandle, 'TestPatternGeneratorSelector', 'Region0')</l>
-<l as_id="image_acquisition" as_name="Image Acquisition 01" as_grp="[1,2,2]" as_ord="4">set_framegrabber_param (AcqHandle, 'TriggerSelector', 'FrameBurstStart')</l>
-<l as_id="image_acquisition" as_name="Image Acquisition 01" as_grp="[1,2,2]" as_ord="5">set_framegrabber_param (AcqHandle, 'HDREnable', 0)</l>
-<l as_id="image_acquisition" as_name="Image Acquisition 01" as_grp="[1,2,2]" as_ord="6">set_framegrabber_param (AcqHandle, 'HDRSelector', 1)</l>
-<l as_id="image_acquisition" as_name="Image Acquisition 01" as_grp="[1,2,2]" as_ord="7">set_framegrabber_param (AcqHandle, 'Gain', 0.2872)</l>
-<l as_id="image_acquisition" as_name="Image Acquisition 01" as_grp="[2,1]" as_ord="1">grab_image_start (AcqHandle, -1)</l>
+<c></c>
+<c>** Set cam param, if nessary</c>
+<c></c>
+<l>* set_framegrabber_param (AcqHandle, 'TriggerMode', 'On')</l>
+<l>*     set_framegrabber_param (AcqHandle, 'TriggerSource', 'Software')</l>
+<l as_id="image_acquisition" as_name="Image Acquisition 01" as_grp="[1,2,2]" as_ord="1">*     set_framegrabber_param (AcqHandle, 'Width', 4024)</l>
+<l as_id="image_acquisition" as_name="Image Acquisition 01" as_grp="[1,2,2]" as_ord="2">*     set_framegrabber_param (AcqHandle, 'Height', 3036)</l>
+<l as_id="image_acquisition" as_name="Image Acquisition 01" as_grp="[1,2,2]" as_ord="3">*     set_framegrabber_param (AcqHandle, 'TestPatternGeneratorSelector', 'Region0')</l>
+<l as_id="image_acquisition" as_name="Image Acquisition 01" as_grp="[1,2,2]" as_ord="4">*     set_framegrabber_param (AcqHandle, 'TriggerSelector', 'FrameBurstStart')</l>
+<l as_id="image_acquisition" as_name="Image Acquisition 01" as_grp="[1,2,2]" as_ord="5">*     set_framegrabber_param (AcqHandle, 'HDREnable', 0)</l>
+<l as_id="image_acquisition" as_name="Image Acquisition 01" as_grp="[1,2,2]" as_ord="6">*     set_framegrabber_param (AcqHandle, 'HDRSelector', 1)</l>
+<l as_id="image_acquisition" as_name="Image Acquisition 01" as_grp="[1,2,2]" as_ord="7">*     set_framegrabber_param (AcqHandle, 'Gain', 0.2872)</l>
+<l as_id="image_acquisition" as_name="Image Acquisition 01" as_grp="[2,1]" as_ord="1">*     grab_image_start (AcqHandle, -1)</l>
 <l as_id="image_acquisition" as_name="Image Acquisition 01" as_grp="[2,2]" as_ord="1">while (true)</l>
 <l as_id="image_acquisition" as_name="Image Acquisition 01" as_grp="[2,3]" as_ord="1">    grab_image_async (Image, AcqHandle, -1)</l>
 <c as_id="image_acquisition" as_name="Image Acquisition 01" as_grp="[2,4]" as_ord="1">    * Image Acquisition 01: Do something</c>
+<l>    intensity (Image,Image, Mean, Deviation)</l>
 <l as_id="image_acquisition" as_name="Image Acquisition 01" as_grp="[3,1]" as_ord="1">endwhile</l>
 <l as_id="image_acquisition" as_name="Image Acquisition 01" as_grp="[4,1]" as_ord="1">close_framegrabber (AcqHandle)</l>
 <c></c>
