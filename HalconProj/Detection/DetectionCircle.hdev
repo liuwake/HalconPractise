@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.1">
+<procedure name="main">
+<interface/>
+<body>
+<c>**** DetectionCircle</c>
+<c>****</c>
+<c>**** Ref</c>
+<c>**** halcon检测圆 https://www.baidu.com/s?ie=UTF-8&amp;wd=halcon%20%E6%A3%80%E6%B5%8B%E5%9C%86</c>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>
