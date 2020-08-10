@@ -23,7 +23,7 @@
 <l as_id="image_acquisition" as_name="Image Acquisition 01" as_grp="[1,3]" as_ord="10">* ImageFiles[9] := 'C:/Users/iwake/OneDrive - wake/Desktop/Localization/Images/Ori/InvV1 (10).bmp'</l>
 <c>** Open Image By Floder选择一个位置作为待cali图像的路径</c>
 <l>ImageDirection := 'C:/Users/iwake/OneDrive - wake/Desktop/HalconPractise/HalconProj/Cali/ImageToCali'</l>
-<l>ImageDirection := 'C:/Users/iwake/MVS/Data'</l>
+<l>* ImageDirection := 'C:/Users/iwake/MVS/Data'</l>
 <l>list_image_files (ImageDirection, 'default', [], ImageFiles)</l>
 <c></c>
 <c></c>
