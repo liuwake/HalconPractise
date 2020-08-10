@@ -3,7 +3,7 @@
 <procedure name="main">
 <interface/>
 <body>
-<l>read_image (Image, 'pcb.png')</l>
+<l>read_image (Image, 'C:/Users/iwake/OneDrive - wake/Desktop/HalconPractise/Images/Pcb2.png')</l>
 <l>dev_display(Image)</l>
 <c></c>
 <l>binary_threshold (Image, Region, 'max_separability', 'light', UsedThreshold)</l>
