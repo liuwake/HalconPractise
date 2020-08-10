@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <hdevelop file_version="1.1" halcon_version="12.0.2">
-<procedure name="pts_to_best_circle1">
+<procedure name="pts_to_best_circle">
 <interface>
 <oo>
 <par name="Circle" base_type="iconic" dimension="0"/>
@@ -58,7 +58,7 @@
 <l>return ()</l>
 <l>return ()</l>
 </body>
-<docu id="pts_to_best_circle1">
+<docu id="pts_to_best_circle">
 <parameters>
 <parameter id="ActiveNum"/>
 <parameter id="ArcType"/>
