@@ -7,6 +7,21 @@
 <c>****</c>
 <c>**** Ref</c>
 <c>**** halcon检测圆 https://www.baidu.com/s?ie=UTF-8&amp;wd=halcon%20%E6%A3%80%E6%B5%8B%E5%9C%86</c>
+<c></c>
+<c></c>
+<c>**** 手动华园拟合</c>
+<c></c>
+<l>dev_open_window (0, 0, 512, 512, 'black', WindowHandle)</l>
+<l>* dev_get_window (WindowHandle)</l>
+<c></c>
+<l>read_image (Image, 'C:/Users/iwake/OneDrive - wake/Desktop/HalconPractise/Images/CircleGear.png')</l>
+<l>draw_spoke2 (Image, Regions, WindowHandle, 30, 60, 15, ROIRows, ROICols, Direct)</l>
+<l>spoke (Image, Regions1, 30, 60, 15, 1, 20, 'all', 'max', ROIRows, ROICols, Direct, ResultRow, ResultColumn, ArcType)</l>
+<l>pts_to_best_circle (Circle, ResultRow, ResultColumn, 15, ArcType, RowCenter, ColCenter, Radius)</l>
+<c></c>
+<c></c>
+<l>dev_set_line_width (5)</l>
+<l>dev_display(Circle)</l>
 </body>
 <docu id="main">
 <parameters/>
