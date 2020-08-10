@@ -3,10 +3,10 @@
 <procedure name="main">
 <interface/>
 <body>
-<c></c>
 <c>**** CamCap</c>
 <c>**** Camera Capture Auto</c>
-<c></c>
+<c>**** 使用前先建立Proj/文件夹;除了ObjectName文件夹自动建立,其他需要手动建立</c>
+<c>****</c>
 <c>***Init</c>
 <c>** Init Dir</c>
 <c>    </c>
