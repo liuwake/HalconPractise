@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.1" halcon_version="12.0.3">
+<procedure name="region_to_spoke">
+<interface>
+<io>
+<par name="Region" base_type="iconic" dimension="0"/>
+</io>
+<ic>
+<par name="Offset" base_type="ctrl" dimension="0"/>
+</ic>
+<oc>
+<par name="SpokeRows" base_type="ctrl" dimension="0"/>
+<par name="SpokeCols" base_type="ctrl" dimension="0"/>
+</oc>
+</interface>
+<body>
+<l>try</l>
+<l>    SpokeRows:=[]</l>
+<l>    SpokeCols:=[]</l>
+<l>    select_shape_std (Region, SelectedRegions, 'max_area', 70)</l>
+<l>    fill_up (SelectedRegions, RegionFillUp)</l>
+<l>    smallest_circle (RegionFillUp, Row, Column, Radius)</l>
+<l>    opening_circle (RegionFillUp, RegionOpening, Radius/16)</l>
+<l>    closing_circle (RegionOpening, RegionClosing, Radius/8)</l>
+<l>    fill_up (RegionClosing, RegionFillUp1)</l>
+<l>    shape_trans (RegionFillUp1, RegionTrans, 'outer_circle')</l>
+<l>    gen_contour_region_xld (RegionTrans, Contours, 'border')</l>
+<l>    get_contour_xld (Contours, Rows, Cols)</l>
+<l>    tuple_length (Rows, Length)</l>
+<l>    SpokeRows:=[Rows[Offset],Rows[Offset+Length/4],Rows[Offset+Length*2/4],Rows[Offset+Length*3/4],Rows[Offset]]</l>
+<l>    SpokeCols:=[Cols[Offset],Cols[Offset+Length/4],Cols[Offset+Length*2/4],Cols[Offset+Length*3/4],Cols[Offset]]</l>
+<l>catch (Exception)</l>
+<l>    SpokeRows:=[]</l>
+<l>    SpokeCols:=[]</l>
+<l>endtry</l>
+<l>return ()</l>
+</body>
+<docu id="region_to_spoke">
+<parameters>
+<parameter id="Offset">
+<default_value>0</default_value>
+<sem_type>integer</sem_type>
+</parameter>
+<parameter id="Region">
+<multivalue>false</multivalue>
+<sem_type>region</sem_type>
+</parameter>
+<parameter id="SpokeCols">
+<default_type>integer</default_type>
+<sem_type>number</sem_type>
+<type_list>
+<item>integer</item>
+<item>real</item>
+</type_list>
+</parameter>
+<parameter id="SpokeRows">
+<default_type>integer</default_type>
+<sem_type>number</sem_type>
+<type_list>
+<item>integer</item>
+<item>real</item>
+</type_list>
+</parameter>
+</parameters>
+</docu>
+</procedure>
+</hdevelop>

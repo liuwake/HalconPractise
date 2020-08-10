@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.0" halcon_version="11.0.1" cs="4241473870">
+<procedure name="pts_to_best_line">
+<interface>
+<oo>
+<par name="Line"/>
+</oo>
+<ic>
+<par name="Rows"/>
+<par name="Cols"/>
+<par name="ActiveNum"/>
+</ic>
+<oc>
+<par name="Row1"/>
+<par name="Column1"/>
+<par name="Row2"/>
+<par name="Column2"/>
+</oc>
+</interface>
+<body>
+<c>*初始化</c>
+<l>Row1:=0</l>
+<l>Column1:= 0</l>
+<l>Row2:=0</l>
+<l>Column2:= 0</l>
+<c>*产生一个空的直线对象，用于保存拟合后的直线</c>
+<l>gen_empty_obj(Line)</l>
+<c>*计算边缘数量</c>
+<l>tuple_length(Cols, Length)</l>
+<c>*当边缘数量不小于有效点数时进行拟合</c>
+<l>if (Length&gt;=ActiveNum and ActiveNum&gt;1)</l>
+<c>    *halcon的拟合是基于xld的，需要把边缘连接成xld</c>
+<l>    gen_contour_polygon_xld(Contour, Rows, Cols)</l>
+<c>    *拟合直线。使用的算法是'tukey'，其他算法请参考fit_line_contour_xld的描述部分。</c>
+<l>    fit_line_contour_xld (Contour, 'tukey', -1, 0, 5, 2, Row1, Column1, Row2, Column2, Nr, Nc, Dist)</l>
+<c>    *判断拟合结果是否有效：如果拟合成功，数组中元素的数量大于0</c>
+<l>    tuple_length(Dist, Length1)</l>
+<l>    if(Length1&lt;1)</l>
+<l>        return()</l>
+<l>    endif</l>
+<c>    *根据拟合结果，产生直线xld</c>
+<l>    gen_contour_polygon_xld (Line, [Row1,Row2], [Column1,Column2])   </l>
+<l>endif</l>
+<c></c>
+<l>return ()</l>
+</body>
+<docu id="pts_to_best_line">
+<parameters>
+<parameter id="ActiveNum">
+<default_value>2</default_value>
+<description lang="zh_CN">最小有效点数</description>
+<sem_type>any</sem_type>
+<type_list>
+<item>integer</item>
+<item>real</item>
+</type_list>
+</parameter>
+<parameter id="Cols">
+<description lang="zh_CN">拟合直线的输入x数组</description>
+<sem_type>real</sem_type>
+</parameter>
+<parameter id="Column1">
+<description lang="zh_CN">拟合的直线起点x值</description>
+<sem_type>real</sem_type>
+<type_list>
+<item>integer</item>
+<item>real</item>
+</type_list>
+</parameter>
+<parameter id="Column2">
+<description lang="zh_CN">拟合的直线终点x值</description>
+<sem_type>real</sem_type>
+<type_list>
+<item>integer</item>
+<item>real</item>
+</type_list>
+</parameter>
+<parameter id="Line">
+<description lang="zh_CN">输出拟合直线的xld</description>
+<sem_type>xld</sem_type>
+</parameter>
+<parameter id="Row1">
+<description lang="zh_CN">拟合的直线起点y值</description>
+<sem_type>real</sem_type>
+<type_list>
+<item>integer</item>
+<item>real</item>
+</type_list>
+</parameter>
+<parameter id="Row2">
+<description lang="zh_CN">拟合的直线终点y值</description>
+<sem_type>real</sem_type>
+<type_list>
+<item>integer</item>
+<item>real</item>
+</type_list>
+</parameter>
+<parameter id="Rows">
+<description lang="zh_CN">拟合直线的输入y数组</description>
+<sem_type>real</sem_type>
+</parameter>
+</parameters>
+</docu>
+</procedure>
+</hdevelop>

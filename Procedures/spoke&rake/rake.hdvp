@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.0" halcon_version="11.0.1" cs="3864410223">
+<procedure name="rake">
+<interface>
+<io>
+<par name="Image"/>
+</io>
+<oo>
+<par name="Regions"/>
+</oo>
+<ic>
+<par name="Elements"/>
+<par name="DetectHeight"/>
+<par name="DetectWidth"/>
+<par name="Sigma"/>
+<par name="Threshold"/>
+<par name="Transition"/>
+<par name="Select"/>
+<par name="Row1"/>
+<par name="Column1"/>
+<par name="Row2"/>
+<par name="Column2"/>
+</ic>
+<oc>
+<par name="ResultRow"/>
+<par name="ResultColumn"/>
+</oc>
+</interface>
+<body>
+<c>*获取图像尺寸	</c>
+<l>get_image_size(Image,Width,Height)</l>
+<c>*产生一个空显示对象，用于显示</c>
+<l>gen_empty_obj(Regions)</l>
+<c>*初始化边缘坐标数组</c>
+<l>ResultRow := []</l>
+<l>ResultColumn := []</l>
+<c>*产生直线xld</c>
+<l>gen_contour_polygon_xld (RegionLines, [Row1,Row2], [Column1,Column2])</l>
+<c>*存储到显示对象</c>
+<l>concat_obj(Regions, RegionLines, Regions)</l>
+<c>*计算直线与x轴的夹角，逆时针方向为正向。</c>
+<l>angle_lx (Row1, Column1, Row2, Column2, ATan)</l>
+<c></c>
+<c>*边缘检测方向垂直于检测直线：直线方向正向旋转90°为边缘检测方向</c>
+<l>ATan:=ATan+rad(90)</l>
+<c></c>
+<c>*根据检测直线按顺序产生测量区域矩形，并存储到显示对象</c>
+<l>for i:=1 to Elements by 1</l>
+<l>*     RowC := Row1+(((Row2-Row1)*i)/(Elements+1))</l>
+<l>*     ColC := Column1+(Column2-Column1)*i/(Elements+1)</l>
+<l>*     if (RowC&gt;Height-1 or RowC&lt;0 or ColC&gt;Width-1 or ColC&lt;0)</l>
+<l>*     continue </l>
+<l>*     endif</l>
+<c>    *如果只有一个测量矩形，作为卡尺工具，宽度为检测直线的长度</c>
+<l>    if(Elements=1)</l>
+<l>        RowC := (Row1+Row2)*0.5</l>
+<l>        ColC := (Column1+Column2)*0.5</l>
+<c>        *判断是否超出图像,超出不检测边缘</c>
+<l>        if (RowC&gt;Height-1 or RowC&lt;0 or ColC&gt;Width-1 or ColC&lt;0)</l>
+<l>            continue </l>
+<l>        endif</l>
+<l>        distance_pp(Row1, Column1, Row2, Column2, Distance)</l>
+<l>        DetectWidth:=Distance</l>
+<l>        gen_rectangle2_contour_xld(Rectangle, RowC, ColC,ATan, DetectHeight/2,Distance/2)</l>
+<l>    else</l>
+<c>        *如果有多个测量矩形，产生该测量矩形xld</c>
+<l>        RowC := Row1+(((Row2-Row1)*(i-1))/(Elements-1))</l>
+<l>        ColC := Column1+(Column2-Column1)*(i-1)/(Elements-1)</l>
+<c>        *判断是否超出图像,超出不检测边缘</c>
+<l>        if (RowC&gt;Height-1 or RowC&lt;0 or ColC&gt;Width-1 or ColC&lt;0)</l>
+<l>            continue </l>
+<l>        endif</l>
+<l>        gen_rectangle2_contour_xld(Rectangle, RowC, ColC, ATan, DetectHeight/2,DetectWidth/2)</l>
+<l>    endif</l>
+<c>    </c>
+<c>     *把测量矩形xld存储到显示对象</c>
+<l>    concat_obj (Regions, Rectangle, Regions)</l>
+<l>    if(i=1)</l>
+<c>        *在第一个测量矩形绘制一个箭头xld，用于只是边缘检测方向</c>
+<l>        RowL2:=RowC+DetectHeight/2*sin(-ATan)</l>
+<l>        RowL1:=RowC-DetectHeight/2*sin(-ATan)</l>
+<l>        ColL2:=ColC+DetectHeight/2*cos(-ATan)</l>
+<l>        ColL1:=ColC-DetectHeight/2*cos(-ATan)</l>
+<l>        gen_arrow_contour_xld (Arrow1, RowL1, ColL1, RowL2, ColL2, 25, 25)</l>
+<c>        *把xld存储到显示对象</c>
+<l>        concat_obj (Regions, Arrow1, Regions)</l>
+<l>    endif</l>
+<c>    *产生测量对象句柄</c>
+<l>    gen_measure_rectangle2(RowC, ColC,ATan, DetectHeight/2,DetectWidth/2,Width, Height, 'nearest_neighbor', MsrHandle_Measure)</l>
+<c>    </c>
+<c>    *设置极性</c>
+<l>    if (Transition = 'negative')</l>
+<l>        Transition := 'negative'</l>
+<l>    else </l>
+<l>        if (Transition = 'positive')</l>
+<c>            </c>
+<l>            Transition := 'positive'</l>
+<l>     	  else  </l>
+<l>            Transition := 'all'</l>
+<l>        endif</l>
+<l>    endif</l>
+<c>    *设置边缘位置。最强点是从所有边缘中选择幅度绝对值最大点，需要设置为'all'</c>
+<l>    if (Select = 'first')</l>
+<l>        Select := 'first'</l>
+<l>    else </l>
+<l>        if (Select = 'last')</l>
+<c>            </c>
+<l>            Select := 'last'</l>
+<l>     	  else  </l>
+<l>            Select := 'all'</l>
+<l>        endif</l>
+<l>    endif</l>
+<c>    *检测边缘</c>
+<l>    measure_pos (Image, MsrHandle_Measure, Sigma, Threshold, Transition, Select, RowEdge, ColEdge, Amplitude, Distance)</l>
+<c>    *清除测量对象句柄</c>
+<l>    close_measure(MsrHandle_Measure)</l>
+<c>    </c>
+<c>    *临时变量初始化</c>
+<c>    *tRow，tCol保存找到指定边缘的坐标</c>
+<l>    tRow := 0</l>
+<l>    tCol := 0</l>
+<c>    *t保存边缘的幅度绝对值</c>
+<l>    t:= 0</l>
+<c>    *找到的边缘必须至少为1个</c>
+<l>    tuple_length(RowEdge, Number)</l>
+<l>    if(Number&lt;1)</l>
+<l>        continue</l>
+<l>    endif</l>
+<c>    *有多个边缘时，选择幅度绝对值最大的边缘</c>
+<l>    for j:=0 to Number-1 by 1</l>
+<l>        if(abs(Amplitude[j])&gt;t)</l>
+<c>            </c>
+<l>            tRow := RowEdge[j]</l>
+<l>            tCol := ColEdge[j]</l>
+<l>            t := abs(Amplitude[j])</l>
+<l>        endif</l>
+<l>    endfor</l>
+<c>    *把找到的边缘保存在输出数组</c>
+<l>    if(t&gt;0)</l>
+<l>        ResultRow:=[ResultRow,tRow]</l>
+<l>        ResultColumn:=[ResultColumn,tCol]</l>
+<l>    endif</l>
+<l>endfor</l>
+<c></c>
+<l>return ()</l>
+</body>
+<docu id="rake">
+<library lang="zh_CN">MVTec Standard Procedures</library>
+<parameters>
+<parameter id="Column1">
+<description lang="zh_CN">直线ROI起点的x值</description>
+<sem_type>real</sem_type>
+<type_list>
+<item>integer</item>
+<item>real</item>
+</type_list>
+</parameter>
+<parameter id="Column2">
+<description lang="zh_CN">直线ROI终点的x值</description>
+<sem_type>real</sem_type>
+<type_list>
+<item>integer</item>
+<item>real</item>
+</type_list>
+</parameter>
+<parameter id="DetectHeight">
+<default_value>60</default_value>
+<description lang="zh_CN">卡尺工具的高度</description>
+<multivalue>false</multivalue>
+<sem_type>integer</sem_type>
+<type_list>
+<item>integer</item>
+</type_list>
+<values>
+<item>30</item>
+<item>60</item>
+<item>90</item>
+<item>120</item>
+</values>
+</parameter>
+<parameter id="DetectWidth">
+<default_value>15</default_value>
+<description lang="zh_CN">卡尺工具的宽度</description>
+<multivalue>false</multivalue>
+<sem_type>integer</sem_type>
+<type_list>
+<item>integer</item>
+</type_list>
+<values>
+<item>5</item>
+<item>10</item>
+<item>15</item>
+<item>20</item>
+<item>25</item>
+<item>30</item>
+</values>
+</parameter>
+<parameter id="Elements">
+<default_value>30</default_value>
+<description lang="zh_CN">检测边缘数</description>
+<multivalue>false</multivalue>
+<sem_type>number</sem_type>
+<type_list>
+<item>integer</item>
+</type_list>
+<value_list>
+<item>1</item>
+<item>5</item>
+<item>10</item>
+<item>20</item>
+<item>30</item>
+</value_list>
+<value_max>100000</value_max>
+<value_min>1</value_min>
+</parameter>
+<parameter id="Image">
+<description lang="zh_CN">输入图像</description>
+<sem_type>image</sem_type>
+<type_list>
+<item>byte</item>
+<item>int1</item>
+<item>int2</item>
+<item>uint2</item>
+<item>int4</item>
+<item>int8</item>
+<item>real</item>
+<item>cyclic</item>
+<item>direction</item>
+<item>complex</item>
+<item>vector_field</item>
+</type_list>
+</parameter>
+<parameter id="Regions">
+<description lang="zh_CN">输出边缘检测ROI及检测方向</description>
+<sem_type>object</sem_type>
+</parameter>
+<parameter id="ResultColumn">
+<description lang="zh_CN">检测到的边缘的x坐标数组</description>
+<sem_type>real</sem_type>
+<type_list>
+<item>real</item>
+</type_list>
+<values>
+<item>ResultColumn</item>
+</values>
+</parameter>
+<parameter id="ResultRow">
+<description lang="zh_CN">检测到的边缘的y坐标数组</description>
+<sem_type>real</sem_type>
+<type_list>
+<item>real</item>
+<item>string</item>
+</type_list>
+<values>
+<item>ResultRow</item>
+</values>
+</parameter>
+<parameter id="Row1">
+<description lang="zh_CN">直线ROI起点的y值</description>
+<sem_type>real</sem_type>
+<type_list>
+<item>integer</item>
+<item>real</item>
+</type_list>
+</parameter>
+<parameter id="Row2">
+<description lang="zh_CN">直线ROI终点的y值</description>
+<sem_type>real</sem_type>
+<type_list>
+<item>integer</item>
+<item>real</item>
+</type_list>
+</parameter>
+<parameter id="Select">
+<default_value>'max'</default_value>
+<description lang="zh_CN">first表示选择第一点
+last表示选择最后一点
+max表示选择边缘幅度最强点</description>
+<sem_type>string</sem_type>
+<type_list>
+<item>string</item>
+</type_list>
+<values>
+<item>'first'</item>
+<item>'last'</item>
+<item>'max'</item>
+</values>
+</parameter>
+<parameter id="Sigma">
+<default_value>1</default_value>
+<description lang="zh_CN">高斯滤波因子</description>
+<multivalue>false</multivalue>
+<sem_type>real</sem_type>
+<type_list>
+<item>real</item>
+</type_list>
+<values>
+<item>0.5</item>
+<item>1</item>
+<item>1.5</item>
+<item>2</item>
+<item>2.5</item>
+<item>3</item>
+</values>
+</parameter>
+<parameter id="Threshold">
+<default_value>20</default_value>
+<description lang="zh_CN">边缘幅度阈值</description>
+<multivalue>false</multivalue>
+<sem_type>real</sem_type>
+<type_list>
+<item>integer</item>
+<item>real</item>
+</type_list>
+<values>
+<item>5</item>
+<item>10</item>
+<item>15</item>
+<item>20</item>
+<item>25</item>
+<item>30</item>
+<item>40</item>
+</values>
+</parameter>
+<parameter id="Transition">
+<default_value>'all'</default_value>
+<description lang="zh_CN">极性：
+positive表示由黑到白
+negative表示由白到黑
+all表示以上两种方向</description>
+<multivalue>false</multivalue>
+<sem_type>string</sem_type>
+<type_list>
+<item>string</item>
+</type_list>
+<values>
+<item>'positive'</item>
+<item>'negative'</item>
+<item>'all'</item>
+</values>
+</parameter>
+</parameters>
+</docu>
+</procedure>
+</hdevelop>

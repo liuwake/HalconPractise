@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <hdevelop file_version="1.1" halcon_version="12.0">
-<procedure name="draw_spoke">
+<procedure name="draw_spoke2">
 <interface>
 <io>
 <par name="Image" base_type="iconic" dimension="0"/>
@@ -22,28 +22,59 @@
 </interface>
 <body>
 <c>*提示</c>
-<l>* disp_message (WindowHandle, '1、画4个以上点确定一个圆弧,点击右键确认', 'window', 1, 12, 'red', 'false')</l>
-<c>*产生一个空显示对象，用于显示</c>
+<l>disp_message (WindowHandle, '1、画4个以上点确定一个圆弧,点击右键确认', 'window', 12, 12, 'red', 'false')</l>
+<l>try</l>
+<l>    Rows:=[]</l>
+<l>    Cols:=[]</l>
+<l>    while(1)</l>
+<l>        get_mbutton (WindowHandle, Row, Column, Button)</l>
+<l>        if(Button==1)</l>
+<l>            Rows:=[Rows,Row]</l>
+<l>            Cols:=[Cols,Column]</l>
+<c>            *产生一个空显示对象，用于显示</c>
+<l>            gen_empty_obj(objArrow)</l>
+<l>            if(|Rows|&gt;1)</l>
+<l>                for i := 0 to |Rows|-2 by 1</l>
+<l>                    gen_arrow_contour_xld (Arrow, Rows[i], Cols[i], Rows[i+1], Cols[i+1], 25, 25)</l>
+<l>                    concat_obj (objArrow, Arrow, objArrow)</l>
+<l>                endfor</l>
+<l>            endif</l>
+<l>        else</l>
+<l>            if(Button==4)</l>
+<l>                if(|Rows|&gt;1)</l>
+<l>                    distance_pp (Rows[0], Cols[0], Rows[|Rows|-1], Cols[|Rows|-1], Distance)</l>
+<l>                    if(Distance&lt;5)</l>
+<l>                        if(Rows[|Rows|-1]!=Rows[0] or Cols[|Cols|-1]!=Cols[0])</l>
+<l>                            Rows:=[Rows,Rows[0]]</l>
+<l>                            Cols:=[Cols,Cols[0]]</l>
+<l>                        endif</l>
+<l>                    endif</l>
+<l>                endif</l>
+<l>                break</l>
+<l>            endif</l>
+<l>        endif</l>
+<l>    endwhile</l>
+<l>catch (ExceptionT)</l>
+<l>endtry</l>
+<l>disp_obj (Image, WindowHandle)</l>
+<c> *产生一个空显示对象，用于显示</c>
 <l>gen_empty_obj(Regions)</l>
-<c>*沿着圆弧或圆的边缘画点</c>
-<l>draw_nurbs (ContOut1, WindowHandle, 'true', 'true', 'true', 'true', 3, Rows, Cols, Weights)</l>
 <c>*至少要4个点</c>
-<l>tuple_length (Weights, Length1)</l>
+<l>tuple_length (Rows, Length1)</l>
 <l>if(Length1&lt;4)</l>
 <l>    disp_message (WindowHandle, '提示：点数太少，请重画', 'window', 32, 12, 'red', 'false')</l>
 <l>    ROIRows:=[]</l>
 <l>    ROICols:=[]</l>
 <l>    return()</l>
-<l>endif  </l>
+<l>endif   </l>
 <c>*获取点</c>
 <l>ROIRows:=Rows</l>
 <l>ROICols:=Cols</l>
-<c>*生成一个XLD轮廓多边形</c>
-<l>gen_contour_polygon_xld(Contour, Rows, Cols)</l>
-<l>* gen_ellipse_contour_xld (ContEllipse, 200, 200, 0, 100, 50, 0, 6.28318/2, 'negative', 1.5)</l>
-<c>* 用回归线法（不抛出异常点，所有点权重一样）拟合圆</c>
-<l>fit_circle_contour_xld (Contour, 'algebraic', -1, 0, 0, 3, 2, RowC, ColumnC, Radius, StartPhi, EndPhi, PointOrder)</l>
-<c>* 根据拟合结果产生xld，并保持到显示对象</c>
+<c>*产生xld </c>
+<l>gen_contour_polygon_xld(Contour, ROIRows, ROICols)</l>
+<c>*用回归线法（不抛出异常点，所有点权重一样）拟合圆</c>
+<l>fit_circle_contour_xld (Contour, 'algebraic', -1, 0, 0, 1, 2, RowC, ColumnC, Radius, StartPhi, EndPhi, PointOrder)</l>
+<c>*根据拟合结果产生xld，并保持到显示对象</c>
 <l>gen_circle_contour_xld (ContCircle, RowC, ColumnC, Radius, StartPhi, EndPhi, PointOrder, 3)</l>
 <l>concat_obj(Regions, ContCircle, Regions)</l>
 <c></c>
@@ -56,9 +87,8 @@
 <l>gen_cross_contour_xld(Cross, RowC, ColumnC, 60, 0.785398)</l>
 <l>dev_display(Cross)</l>
 <c>*提示</c>
-<l>* disp_message (WindowHandle, '2、以远离圆心方向且垂直于边缘，画箭头确定边缘检测方向，点击右键确认', 'window', 12, 12, 'red', 'false') </l>
-<l>* dev_set_color('red')</l>
-<c>* 画线，确定检测方向</c>
+<l>disp_message (WindowHandle, '2、远离圆心，画箭头确定边缘检测方向，点击右键确认', 'window', 12, 12, 'red', 'false') </l>
+<c>*画线，确定检测方向</c>
 <l>draw_line(WindowHandle, Row1, Column1, Row2, Column2) </l>
 <c>*求圆心到检测方向直线起点的距离</c>
 <l>distance_pp(RowC, ColumnC, Row1, Column1, DistanceStart)</l>
@@ -73,14 +103,15 @@
 <l>    ROICols:=[]</l>
 <l>    disp_message (WindowHandle, '检测的边缘数量太少，请重新设置!', 'window', 52, 12, 'red', 'false')</l>
 <l>    return()</l>
-<l>endif</l>
+<l>endif  </l>
 <c>*如果xld是圆弧，有Length2个点，从起点开始，等间距（间距为Length2/(Elements-1)）取Elements个点，作为卡尺工具的中点</c>
 <c>*如果xld是圆，有Length2个点，以0°为起点，从起点开始，等间距（间距为Length2/(Elements)）取Elements个点，作为卡尺工具的中点</c>
 <l>for i := 0 to Elements-1 by 1</l>
-<c>    *头元组和尾元组相同则说明轮廓是一个圆</c>
+<c>    </c>
 <l>    if(RowXLD[0]=RowXLD[Length2-1])</l>
 <c>        *xld的起点和终点坐标相对，为圆</c>
-<l>        tuple_int(1.0*Length2/(Elements-1)*(i), j)</l>
+<l>        tuple_int(1.0*Length2/(Elements)*(i), j)</l>
+<c>        </c>
 <l>    else</l>
 <c>        *否则为圆弧</c>
 <l>        tuple_int(1.0*Length2/(Elements-1)*(i), j)</l>
@@ -92,12 +123,13 @@
 <l>    endif</l>
 <c>    *获取卡尺工具中心</c>
 <l>    RowE:=RowXLD[j]</l>
-<l>    ColE:=ColXLD[j]</l>
-<c>    * 如果圆心到检测方向直线的起点的距离大于圆心到检测方向直线的终点的距离，搜索方向由圆外指向圆心</c>
-<c>    * 如果圆心到检测方向直线的起点的距离不大于圆心到检测方向直线的终点的距离，搜索方向由圆心指向圆外</c>
+<l>    ColE:=ColXLD[j] </l>
+<c>    </c>
+<c>    *如果圆心到检测方向直线的起点的距离大于圆心到检测方向直线的终点的距离，搜索方向由圆外指向圆心</c>
+<c>    *如果圆心到检测方向直线的起点的距离不大于圆心到检测方向直线的终点的距离，搜索方向由圆心指向圆外</c>
 <l>    if(DistanceStart&gt;DistanceEnd)</l>
 <c>        *求卡尺工具的边缘搜索方向</c>
-<c>         *求圆心指向边缘的矢量的角度</c>
+<c>        *求圆心指向边缘的矢量的角度</c>
 <l>        tuple_atan2(-RowE+RowC, ColE-ColumnC, ATan)</l>
 <c>        *角度反向</c>
 <l>        ATan:=rad(180)+ATan</l>
@@ -112,7 +144,7 @@
 <l>    endif</l>
 <c>    </c>
 <c>    *产生卡尺xld，并保持到显示对象</c>
-<l>    gen_rectangle2(Rectangle1, RowE,  ColE, ATan, DetectHeight/2, DetectWidth/2)</l>
+<l>    gen_rectangle2_contour_xld(Rectangle1, RowE,  ColE, ATan, DetectHeight/2, DetectWidth/2)</l>
 <l>    concat_obj(Regions, Rectangle1, Regions)</l>
 <c>    </c>
 <c>    *用箭头xld指示边缘搜索方向，并保持到显示对象</c>
@@ -128,7 +160,7 @@
 <c></c>
 <l>return ()</l>
 </body>
-<docu id="draw_spoke">
+<docu id="draw_spoke2">
 <parameters>
 <parameter id="DetectHeight">
 <default_value>60</default_value>
@@ -216,7 +248,7 @@
 <sem_type>object</sem_type>
 </parameter>
 <parameter id="WindowHandle">
-<description lang="zh_CN">图像串口句柄</description>
+<description lang="zh_CN">图形窗口句柄</description>
 <mixed_type>false</mixed_type>
 <sem_type>window</sem_type>
 <type_list>

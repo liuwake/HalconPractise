@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.0" halcon_version="11.0.1" cs="3655439164">
+<procedure name="draw_rake">
+<interface>
+<oo>
+<par name="Regions"/>
+</oo>
+<ic>
+<par name="WindowHandle"/>
+<par name="Elements"/>
+<par name="DetectHeight"/>
+<par name="DetectWidth"/>
+</ic>
+<oc>
+<par name="Row1"/>
+<par name="Column1"/>
+<par name="Row2"/>
+<par name="Column2"/>
+</oc>
+</interface>
+<body>
+<c>*提示</c>
+<l>disp_message (WindowHandle, '点击鼠标左键画一条直线,点击右键确认', 'window', 12, 12, 'red', 'false')</l>
+<c>*产生一个空显示对象，用于显示</c>
+<l>gen_empty_obj(Regions)</l>
+<c>*画矢量检测直线</c>
+<l>draw_line(WindowHandle, Row1, Column1, Row2, Column2)</l>
+<c>*产生直线xld</c>
+<l>gen_contour_polygon_xld (RegionLines, [Row1,Row2], [Column1,Column2])</l>
+<c>*存储到显示对象</c>
+<l>concat_obj(Regions, RegionLines, Regions)</l>
+<c>*计算直线与x轴的夹角，逆时针方向为正向。</c>
+<l>angle_lx (Row1, Column1, Row2, Column2, ATan)</l>
+<c></c>
+<c>*边缘检测方向垂直于检测直线：直线方向正向旋转90°为边缘检测方向</c>
+<l>ATan:=ATan+rad(90)</l>
+<c></c>
+<c>*根据检测直线按顺序产生测量区域矩形，并存储到显示对象</c>
+<l>for i:=1 to Elements by 1</l>
+<c>    *如果只有一个测量矩形，作为卡尺工具，宽度为检测直线的长度</c>
+<l>    if(Elements=1)</l>
+<l>        RowC := (Row1+Row2)*0.5</l>
+<l>        ColC := (Column1+Column2)*0.5</l>
+<l>        distance_pp(Row1, Column1, Row2, Column2, Distance)</l>
+<l>        gen_rectangle2_contour_xld(Rectangle, RowC, ColC,ATan, DetectHeight/2,Distance/2)</l>
+<l>    else</l>
+<c>        *如果有多个测量矩形，产生该测量矩形xld</c>
+<l>        RowC := Row1+(((Row2-Row1)*(i-1))/(Elements-1))</l>
+<l>        ColC := Column1+(Column2-Column1)*(i-1)/(Elements-1)</l>
+<l>        gen_rectangle2_contour_xld(Rectangle, RowC, ColC, ATan, DetectHeight/2,DetectWidth/2)</l>
+<l>    endif</l>
+<c>    *把测量矩形xld存储到显示对象</c>
+<l>    concat_obj (Regions, Rectangle, Regions)</l>
+<l>    if(i=1)</l>
+<c>        *在第一个测量矩形绘制一个箭头xld，用于只是边缘检测方向</c>
+<l>        RowL2:=RowC+DetectHeight/2*sin(-ATan)</l>
+<l>        RowL1:=RowC-DetectHeight/2*sin(-ATan)</l>
+<l>        ColL2:=ColC+DetectHeight/2*cos(-ATan)</l>
+<l>        ColL1:=ColC-DetectHeight/2*cos(-ATan)</l>
+<l>        gen_arrow_contour_xld (Arrow1, RowL1, ColL1, RowL2, ColL2, 25, 25)</l>
+<c>        *把xld存储到显示对象</c>
+<l>        concat_obj (Regions, Arrow1, Regions)</l>
+<l>    endif</l>
+<l>endfor</l>
+<c></c>
+<l>return ()</l>
+</body>
+<docu id="draw_rake">
+<parameters>
+<parameter id="Column1">
+<description lang="zh_CN">检测区域起点的x</description>
+<sem_type>real</sem_type>
+<type_list>
+<item>real</item>
+</type_list>
+</parameter>
+<parameter id="Column2">
+<description lang="zh_CN">检测区域终点的x</description>
+<sem_type>real</sem_type>
+<type_list>
+<item>real</item>
+</type_list>
+</parameter>
+<parameter id="DetectHeight">
+<default_value>60</default_value>
+<description lang="zh_CN">检测边缘的卡尺工具的高度</description>
+<sem_type>integer</sem_type>
+<values>
+<item>30</item>
+<item>60</item>
+<item>90</item>
+<item>120</item>
+</values>
+</parameter>
+<parameter id="DetectWidth">
+<default_value>15</default_value>
+<description lang="zh_CN">检测边缘的卡尺工具的宽度</description>
+<sem_type>integer</sem_type>
+<values>
+<item>5</item>
+<item>10</item>
+<item>15</item>
+<item>20</item>
+<item>25</item>
+<item>30</item>
+<item>40</item>
+</values>
+</parameter>
+<parameter id="Elements">
+<default_value>30</default_value>
+<description lang="zh_CN">检测边缘数</description>
+<sem_type>integer</sem_type>
+<type_list>
+<item>real</item>
+</type_list>
+<values>
+<item>10</item>
+<item>20</item>
+<item>30</item>
+<item>50</item>
+<item>60</item>
+</values>
+</parameter>
+<parameter id="Regions">
+<description lang="zh_CN">输出边缘点检测区域及检测方向</description>
+<sem_type>object</sem_type>
+</parameter>
+<parameter id="Row1">
+<description lang="zh_CN">检测区域起点的y</description>
+<mixed_type>false</mixed_type>
+<sem_type>real</sem_type>
+<type_list>
+<item>real</item>
+</type_list>
+</parameter>
+<parameter id="Row2">
+<description lang="zh_CN">检测区域终点的y</description>
+<sem_type>real</sem_type>
+<type_list>
+<item>real</item>
+</type_list>
+</parameter>
+<parameter id="WindowHandle">
+<description lang="zh_CN">图形窗口句柄</description>
+<mixed_type>false</mixed_type>
+<sem_type>window</sem_type>
+<type_list>
+<item>integer</item>
+</type_list>
+</parameter>
+</parameters>
+</docu>
+</procedure>
+</hdevelop>

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.0" halcon_version="10.0" cs="40566313">
+<procedure name="pts_to_best_circle">
+<interface>
+<oo>
+<par name="Circle"/>
+</oo>
+<ic>
+<par name="Rows"/>
+<par name="Cols"/>
+<par name="ArcType"/>
+<par name="ActiveNum"/>
+</ic>
+<oc>
+<par name="RowCenter"/>
+<par name="ColCenter"/>
+<par name="Radius"/>
+<par name="StartPhi"/>
+<par name="EndPhi"/>
+<par name="PointOrder"/>
+<par name="ArcAngle"/>
+</oc>
+</interface>
+<body>
+<c>*初始化</c>
+<l>RowCenter := 0</l>
+<l>ColCenter := 0</l>
+<l>Radius := 0</l>
+<c>*产生一个空的直线对象，用于保存拟合后的圆</c>
+<l>gen_empty_obj (Circle)</l>
+<c>*计算边缘数量</c>
+<l>tuple_length(Cols, Length)</l>
+<c>*当边缘数量不小于有效点数时进行拟合</c>
+<l>if (Length&gt;=ActiveNum and ActiveNum&gt;2)</l>
+<c>    *halcon的拟合是基于xld的，需要把边缘连接成xld</c>
+<l>    if(ArcType='circle')</l>
+<c>        *如果是闭合的圆，轮廓需要首尾相连</c>
+<l>        gen_contour_polygon_xld(Contour, [Rows,Rows[0]], [Cols,Cols[0]])</l>
+<l>    else</l>
+<l>        gen_contour_polygon_xld(Contour, Rows, Cols)</l>
+<l>    endif</l>
+<c>    *拟合圆。使用的算法是''geotukey''，其他算法请参考fit_circle_contour_xld的描述部分。</c>
+<l>    fit_circle_contour_xld (Contour, 'geotukey', -1, 0, 0, 3, 2, RowCenter, ColCenter, Radius, StartPhi, EndPhi, PointOrder)</l>
+<c>    *判断拟合结果是否有效：如果拟合成功，数组中元素的数量大于0</c>
+<l>    tuple_length(StartPhi, Length1)</l>
+<l>    if(Length1&lt;1)</l>
+<l>        return()</l>
+<l>    endif</l>
+<c>    *根据拟合结果，产生直线xld</c>
+<l>    if(ArcType='arc')</l>
+<c>        *判断圆弧的方向：顺时针还是逆时针</c>
+<c>        *halcon求圆弧会出现方向混乱的问题</c>
+<l>        gen_circle_contour_xld (Circle1, RowCenter, ColCenter, Radius, StartPhi, EndPhi, 'positive', 1)</l>
+<l>        gen_circle_contour_xld (Circle2, RowCenter, ColCenter, Radius, StartPhi, EndPhi, 'negative', 1)</l>
+<c>        </c>
+<l>        distance_pc (Circle1,  Rows, Cols, DistanceMin1, DistanceMax1)</l>
+<l>        distance_pc (Circle2,  Rows, Cols, DistanceMin2, DistanceMax2)</l>
+<l>        tuple_sum(DistanceMin1, Sum1)</l>
+<l>        tuple_sum(DistanceMin2, Sum2)</l>
+<l>        if(Sum1&lt;Sum2)</l>
+<l>            PointOrder:='positive'</l>
+<l>        else</l>
+<l>            PointOrder:='negative'</l>
+<l>        endif</l>
+<l>        gen_circle_contour_xld (Circle, RowCenter, ColCenter, Radius, StartPhi, EndPhi,PointOrder, 1)</l>
+<l>        get_contour_xld (Circle, Row, Col)</l>
+<l>        angle_ll (RowCenter, ColCenter, Row[0], Col[0], RowCenter, ColCenter, Row[|Row|-1], Col[|Row|-1], ArcAngle)</l>
+<l>        if(0)</l>
+<l>            length_xld (Circle, CircleLength)</l>
+<l>            ArcAngle:=EndPhi-StartPhi</l>
+<l>            if(CircleLength&gt;rad(180)*Radius)</l>
+<l>                if(abs(ArcAngle)&lt;rad(180))</l>
+<l>                    if(ArcAngle&gt;0)</l>
+<l>                        ArcAngle:=rad(360)-ArcAngle</l>
+<l>                    else                </l>
+<l>                        ArcAngle:=rad(360)+ArcAngle</l>
+<l>                    endif</l>
+<l>                endif</l>
+<l>            else</l>
+<l>                if(CircleLength&lt;rad(180)*Radius)</l>
+<l>                    if(abs(ArcAngle)&gt;rad(180))</l>
+<l>                        if(ArcAngle&gt;0)</l>
+<l>                            ArcAngle:=ArcAngle-rad(360)                </l>
+<l>                        else</l>
+<l>                            ArcAngle:=rad(360)+ArcAngle</l>
+<l>                        endif</l>
+<l>                    endif</l>
+<l>                endif</l>
+<c>                </c>
+<l>            endif</l>
+<l>        endif</l>
+<l>    else</l>
+<l>        StartPhi:=0</l>
+<l>        EndPhi:=rad(360)</l>
+<l>        ArcAngle:=rad(360)</l>
+<l>        gen_circle_contour_xld(Circle, RowCenter, ColCenter, Radius, StartPhi,EndPhi, PointOrder, 1)</l>
+<l>    endif</l>
+<l>endif</l>
+<c></c>
+<l>return ()</l>
+</body>
+<docu id="pts_to_best_circle">
+<parameters>
+<parameter id="ActiveNum">
+<description lang="zh_CN">最小有效点数</description>
+<sem_type>any</sem_type>
+<type_list>
+<item>integer</item>
+<item>real</item>
+</type_list>
+<values>
+<item>3</item>
+</values>
+</parameter>
+<parameter id="ArcAngle"/>
+<parameter id="ArcType">
+<default_value>'circle'</default_value>
+<description lang="zh_CN">拟合圆弧类型：'arc'圆弧；'circle'圆</description>
+<multivalue>false</multivalue>
+<sem_type>string</sem_type>
+<type_list>
+<item>string</item>
+</type_list>
+<values>
+<item>'circle'</item>
+<item>'arc'</item>
+</values>
+</parameter>
+<parameter id="Circle">
+<description lang="zh_CN">输出拟合圆的xld</description>
+<sem_type>xld</sem_type>
+</parameter>
+<parameter id="ColCenter">
+<description lang="zh_CN">拟合的圆中心x</description>
+<sem_type>real</sem_type>
+</parameter>
+<parameter id="Cols">
+<description lang="zh_CN">拟合圆的边缘x数组</description>
+<sem_type>real</sem_type>
+</parameter>
+<parameter id="EndPhi">
+<description lang="zh_CN">圆弧终点角度(单位：弧度)</description>
+</parameter>
+<parameter id="PointOrder">
+<description lang="zh_CN">轮廓点方向</description>
+</parameter>
+<parameter id="Radius">
+<description lang="zh_CN">拟合的圆半径</description>
+<sem_type>real</sem_type>
+</parameter>
+<parameter id="RowCenter">
+<description lang="zh_CN">拟合的圆中心y</description>
+<sem_type>real</sem_type>
+</parameter>
+<parameter id="Rows">
+<description lang="zh_CN">拟合圆的边缘y数组</description>
+<sem_type>real</sem_type>
+</parameter>
+<parameter id="StartPhi">
+<description lang="zh_CN">圆弧起点角度(单位：弧度)</description>
+</parameter>
+</parameters>
+</docu>
+</procedure>
+</hdevelop>
