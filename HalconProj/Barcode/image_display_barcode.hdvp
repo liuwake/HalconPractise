@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.1">
+<procedure name="image_display_barcode">
+<interface>
+<io>
+<par name="SymbolRegions" base_type="iconic" dimension="0"/>
+</io>
+<ic>
+<par name="DecodedDataStrings" base_type="ctrl" dimension="0"/>
+<par name="WindowHandle" base_type="ctrl" dimension="0"/>
+<par name="BarHeight" base_type="ctrl" dimension="0"/>
+<par name="BarWidth" base_type="ctrl" dimension="0"/>
+</ic>
+</interface>
+<body>
+<c>*** DISPLAY</c>
+<c>** DISPLAY BARCODE</c>
+<l>        for BarIndex := 1 to |DecodedDataStrings| by 1</l>
+<l>            select_obj (SymbolRegions, ObjectSelected, BarIndex)</l>
+<l>            area_center (ObjectSelected, Area, Row, Column)</l>
+<c>              </c>
+<l>            set_tposition (WindowHandle, Row - BarHeight, Column - 0.25* BarWidth) </l>
+<l>            write_string (WindowHandle, DecodedDataStrings[BarIndex-1])</l>
+<l>         endfor</l>
+<c>** DISPLAY INFO        </c>
+<l>*     stop()</l>
+<l>return ()</l>
+</body>
+<docu id="image_display_barcode">
+<parameters>
+<parameter id="BarHeight"/>
+<parameter id="BarWidth"/>
+<parameter id="DecodedDataStrings"/>
+<parameter id="SymbolRegions"/>
+<parameter id="WindowHandle"/>
+</parameters>
+</docu>
+</procedure>
+</hdevelop>

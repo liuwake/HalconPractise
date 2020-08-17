@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.1">
+<procedure name="image_get_bar">
+<interface>
+<io>
+<par name="Image" base_type="iconic" dimension="0"/>
+</io>
+<oo>
+<par name="SymbolRegions" base_type="iconic" dimension="0"/>
+</oo>
+<ic>
+<par name="BarCodeHandle" base_type="ctrl" dimension="0"/>
+<par name="WindowHandle" base_type="ctrl" dimension="0"/>
+</ic>
+<oc>
+<par name="DecodedDataStrings" base_type="ctrl" dimension="0"/>
+<par name="someitem" base_type="ctrl" dimension="0"/>
+</oc>
+</interface>
+<body>
+<c>* </c>
+<c>* Use autodiscrimination to decode any of the bar code types</c>
+<c>* supported by HALCON (except PharmaCode) or determine the bar</c>
+<c>* code type of unknown bar codes</c>
+<c>* </c>
+<c>** INIT CONST</c>
+<l>BarWidth := 800</l>
+<l>BarHeight := 100</l>
+<l>CodeTypes := ['Code 128']</l>
+<l>CodeTypes := ['auto']</l>
+<c></c>
+<l>read_bar_code_model ('C:/Users/iwake/OneDrive - wake/Desktop/HalconPractise/HalconProj/Barcode/BarCodeHandle.bcm', BarCodeHandle)</l>
+<c></c>
+<c>* </c>
+<c>* Set display defaults</c>
+<l>* get_image_size (Image, Width, Height)</l>
+<c></c>
+<c></c>
+<c>* </c>
+<c>* Find and decode bar codes. Measure the time needed.</c>
+<l>find_bar_code (Image, SymbolRegions, BarCodeHandle, CodeTypes, DecodedDataStrings)</l>
+<l>* get_bar_code_result (BarCodeHandle, 'all', 'someitem', someitem)</l>
+<c></c>
+<c></c>
+<c>** DISPLAY BARCODE</c>
+<l>set_display_font (WindowHandle, 14, 'mono', 'true', 'false')</l>
+<l>dev_set_draw ('margin')</l>
+<l>dev_set_line_width (3)</l>
+<l>dev_set_color ('forest green')</l>
+<l>dev_display (SymbolRegions)</l>
+<l>    for BarIndex := 1 to |DecodedDataStrings| by 1</l>
+<l>        select_obj (SymbolRegions, ObjectSelected, BarIndex)</l>
+<l>        area_center (ObjectSelected, Area, Row, Column)              </l>
+<l>        set_tposition (WindowHandle, Row - BarHeight, Column - 0.25* BarWidth) </l>
+<l>        write_string (WindowHandle, DecodedDataStrings[BarIndex-1])</l>
+<l>     endfor</l>
+<l>return ()</l>
+</body>
+<docu id="image_get_bar">
+<parameters>
+<parameter id="BarCodeHandle"/>
+<parameter id="DecodedDataStrings"/>
+<parameter id="Image"/>
+<parameter id="SymbolRegions"/>
+<parameter id="WindowHandle"/>
+<parameter id="someitem"/>
+</parameters>
+</docu>
+</procedure>
+</hdevelop>

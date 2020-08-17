@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.1">
+<procedure name="image_display_datacode">
+<interface>
+<io>
+<par name="SymbolXLDs" base_type="iconic" dimension="0"/>
+</io>
+<ic>
+<par name="ResultHandles" base_type="ctrl" dimension="0"/>
+<par name="WindowHandle" base_type="ctrl" dimension="0"/>
+<par name="DecodedDataStrings" base_type="ctrl" dimension="0"/>
+<par name="DataCodeHandle" base_type="ctrl" dimension="0"/>
+</ic>
+</interface>
+<body>
+<c>* Display all symbols, the strings encoded in them, and the module size</c>
+<l>dev_set_color ('green')</l>
+<l>for i := 0 to |ResultHandles| - 1 by 1</l>
+<l>    select_obj (SymbolXLDs, SymbolXLD, i+1)</l>
+<l>    dev_display (SymbolXLD)</l>
+<l>    get_contour_xld (SymbolXLD, Row, Col)</l>
+<l>    set_tposition (WindowHandle, min(Row), max(Col))</l>
+<l>    write_string (WindowHandle, DecodedDataStrings[i])</l>
+<l>    get_data_code_2d_results (DataCodeHandle, ResultHandles[i], \
+                              ['module_height','module_width'], ModuleSize)</l>
+<l>    new_line (WindowHandle)</l>
+<l>*     write_string (WindowHandle, 'module size = ' + ModuleSize[0] + 'x' + \
+                                 ModuleSize[1])</l>
+<l>endfor</l>
+<l>return ()</l>
+</body>
+<docu id="image_display_datacode">
+<parameters>
+<parameter id="DataCodeHandle"/>
+<parameter id="DecodedDataStrings"/>
+<parameter id="ResultHandles"/>
+<parameter id="SymbolXLDs"/>
+<parameter id="WindowHandle"/>
+</parameters>
+</docu>
+</procedure>
+</hdevelop>
