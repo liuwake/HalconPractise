@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.1">
+<procedure name="test_barcode">
+<interface>
+<io>
+<par name="Image" base_type="iconic" dimension="0"/>
+</io>
+<ic>
+<par name="WindowHandle" base_type="ctrl" dimension="0"/>
+</ic>
+</interface>
+<body>
+<l>set_current_dir ('C:/Users/iwake/OneDrive - wake/Desktop/HalconPractise/HalconProj/Barcode')</l>
+<l>image_get_bar (Image, SymbolRegions, WindowHandle, WindowHandle, DecodedDataStrings, someitem)</l>
+<l>return ()</l>
+</body>
+<docu id="test_barcode">
+<parameters>
+<parameter id="Image"/>
+<parameter id="WindowHandle"/>
+</parameters>
+</docu>
+</procedure>
+</hdevelop>

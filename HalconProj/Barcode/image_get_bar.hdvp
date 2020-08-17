@@ -29,8 +29,8 @@
 <l>CodeTypes := ['Code 128']</l>
 <l>CodeTypes := ['auto']</l>
 <c></c>
-<l>read_bar_code_model ('C:/Users/iwake/OneDrive - wake/Desktop/HalconPractise/HalconProj/Barcode/BarCodeHandle.bcm', BarCodeHandle)</l>
-<c></c>
+<l>* read_bar_code_model ('C:/Users/iwake/OneDrive - wake/Desktop/HalconPractise/HalconProj/Barcode/BarCodeHandle.bcm', BarCodeHandle)</l>
+<l>read_bar_code_model ('BarCodeHandle.bcm', BarCodeHandle)</l>
 <c>* </c>
 <c>* Set display defaults</c>
 <l>* get_image_size (Image, Width, Height)</l>
