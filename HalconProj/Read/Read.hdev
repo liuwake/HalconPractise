@@ -3,10 +3,24 @@
 <procedure name="main">
 <interface/>
 <body>
+<c>****</c>
+<c>*** Init</c>
+<c>** WinHandle</c>
+<l>dev_open_window (0, 0, 512, 512, 'black', WindowHandle)</l>
+<c></c>
+<c>** Dir</c>
+<l>get_current_dir (DirName)</l>
+<c></c>
+<c>** Init Image</c>
 <l>read_image (Image, 'printer_chip/printer_chip_01')</l>
+<l>read_image (Image, 'C:/Users/iwake/OneDrive - wake/Desktop/Mia/Images/ScanRaw.jpg')</l>
+<c></c>
 <l>dev_display (Image)</l>
 <l>get_image_size (Image, Width, Height)</l>
 <c></c>
+<c></c>
+<c>** Proc</c>
+<l>test_barcode (Image, WindowHandle)</l>
 <c></c>
 </body>
 <docu id="main">
