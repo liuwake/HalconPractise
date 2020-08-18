@@ -1,10 +1,21 @@
 #
 
 ## Example
+----
+## hdevelop
+
+```C:\Users\Public\Documents\MVTec\HALCON-18.11-Steady\examples```
 
 ----
 ## Applications
-- C:\Users\Public\Documents\MVTec\HALCON-18.11-Steady\examples\hdevelop\Applications\Surface-Inspection
+
+```C:\Users\Public\Documents\MVTec\HALCON-18.11-Steady\examples\hdevelop\Applications\```
+
+### Bar-Codes
+- [x] circular_barcode:圆拉伸变换
+  - [x] 轴承变换,识别二维码
+
+
 ### SurfaceInspect
 #### 表面
 - [x] detect_indent_fft.hdev Detect defects on the surface of plastic items 
@@ -60,6 +71,17 @@
   - [x] 两张楼房图片成功拼接 *???guided*
 - [x] stationary_camera_self_calibration
   - [ ] *标定*
+
+----
+## solution_guide
+```C:\Users\Public\Documents\MVTec\HALCON-18.11-Steady\examples\solution_guide```
+### 1d_measuring
+- [ ] measure_ring
+  - [ ] 测量多个螺母的半径
+    - [ ] 测试运行,效果测量了一行螺母的半径?
+
+
+
 
 - [ ] Ref
     - [x] [Halcon一日一练：图像拼接技术2:步骤与例程](https://www.cnblogs.com/amosyang/p/8478213.html?utm_source=debugrun&utm_medium=referral) 中文讲解
