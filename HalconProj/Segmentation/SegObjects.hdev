@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.1">
+<procedure name="main">
+<interface/>
+<body>
+<c></c>
+<c></c>
+<c></c>
+<c>*读入一张图片</c>
+<l>read_image (Image, 'rings_and_nuts')</l>
+<c>*灰度处理,仅黑白两色的图片无需灰度处理</c>
+<l>*rgb1_to_gray(Image,ImageGray)</l>
+<c>*阈值分割</c>
+<l>threshold(Image,Image_t,0,200)</l>
+<c>*连通分量计算</c>
+<l>connection(Image_t,Image_c)</l>
+<c>*统计区域个数</c>
+<l>count_obj(Image_c,count)</l>
+<l>for i:=1 to count by 1</l>
+<c>    *获取元组中的单个元素</c>
+<l>    select_obj(Image_c,Image_so,i)</l>
+<c>    *缩小图像的阈</c>
+<c>    *之前很不解为什么write_image之前为什么还要经过reduce_domain和crop_domain处理？</c>
+<c>    *后面才知道连通分量计算connection中得到的对象是区域，并不是正真的图像。</c>
+<c>    *reduce_domain就是通过区域来框定原图中的某个特定的图型</c>
+<l>    reduce_domain(Image,Image_so,Image_rd)</l>
+<c></c>
+<c>    *从已定义的灰度值中删除</c>
+<l>    crop_domain(Image_rd,Image_cd)</l>
+<c>    *将元素写出</c>
+<l>*     write_image(Image_cd,'bmp',-1,'C:/Users/斌/Desktop/test/'+i)</l>
+<c></c>
+<l>endfor</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>
