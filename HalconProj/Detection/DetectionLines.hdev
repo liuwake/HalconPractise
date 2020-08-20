@@ -7,8 +7,12 @@
 <l>dev_set_colored (3)</l>
 <c></c>
 <c>*读图</c>
-<l>read_image (Image, 'C:/Users/iwake/OneDrive - wake/Desktop/HalconPractise/Images/LineBarcode.jpg')</l>
-<l>get_image_size (Image, Width, Height)</l>
+<l>read_image (Image, 'D:/WK/Hospital/1.jpg')</l>
+<c></c>
+<l>gen_gauss_pyramid (Image, ImagePyramid, 'weighted', 0.5)</l>
+<c></c>
+<l>select_obj (ImagePyramid, ObjectSelected, 5)</l>
+<l>get_image_size (ObjectSelected, Width, Height)</l>
 <c></c>
 <c>*在我们要检的边界上画线</c>
 <l>draw_line (WindowHandle, Row1, Column1, Row2, Column2)</l>
@@ -43,7 +47,7 @@
 <c></c>
 <c>*得到线的起点和终点坐标并显示出来</c>
 <l>get_metrology_object_result (MetrologyHandle, 'all', 'all', 'result_type', 'all_param', Parameter)</l>
-<l>get_metrology_object_result_contour (Contour, MetrologyHandle, 'all', 'all', 1.5)</l>
+<l>get_metrology_object_result_contour (Contour, MetrologyHandle, 'all', 'all', 3)</l>
 <c></c>
 <c>*释放测量句柄</c>
 <l>clear_metrology_model (MetrologyHandle)</l>
