@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.1">
+<procedure name="main">
+<interface/>
+<body>
+<l>dev_get_window (WindowHandle)</l>
+<l>dev_set_colored (3)</l>
+<c></c>
+<c>*读图</c>
+<l>read_image (Image, 'C:/Users/iwake/OneDrive - wake/Desktop/HalconPractise/Images/LineBarcode.jpg')</l>
+<l>get_image_size (Image, Width, Height)</l>
+<c></c>
+<c>*在我们要检的边界上画线</c>
+<l>draw_line (WindowHandle, Row1, Column1, Row2, Column2)</l>
+<l>shapeParam:= [Row1,Column1,Row2,Column2]</l>
+<c></c>
+<c>*创建句柄</c>
+<l>create_metrology_model (MetrologyHandle)</l>
+<l>set_metrology_model_image_size (MetrologyHandle, Width, Height)</l>
+<c></c>
+<c>*添加线模型</c>
+<l>add_metrology_object_generic (MetrologyHandle, 'line', shapeParam, 20, 5, 1, 30, [], [], Index)</l>
+<c></c>
+<c>*设置参数，这里根据自己需求设置，这一坨用的都是同一个算子</c>
+<l>set_metrology_object_param (MetrologyHandle, 'all', 'measure_transition', 'negative')</l>
+<l>set_metrology_object_param (MetrologyHandle, 'all', 'num_measures',50)</l>
+<l>set_metrology_object_param (MetrologyHandle, 'all', 'num_instances', 40)</l>
+<l>set_metrology_object_param (MetrologyHandle, 'all', 'measure_sigma', 1)</l>
+<l>set_metrology_object_param (MetrologyHandle, 'all', 'measure_length1', 80)</l>
+<l>set_metrology_object_param (MetrologyHandle, 'all', 'measure_length2', 1)</l>
+<l>set_metrology_object_param (MetrologyHandle, 'all', 'measure_threshold',50)</l>
+<l>set_metrology_object_param (MetrologyHandle, 'all', 'measure_interpolation', 'bicubic')</l>
+<l>set_metrology_object_param (MetrologyHandle, 'all', 'measure_select', 'all')</l>
+<l>set_metrology_object_param (MetrologyHandle, 'all', 'min_score', 0.7)</l>
+<c></c>
+<c>*开始找边缘，顺便把边缘上卡尺找到的所有点坐标输出在ROW,Column里面（数组形式）</c>
+<l>apply_metrology_model (Image, MetrologyHandle)</l>
+<l>get_metrology_object_measures (Contours, MetrologyHandle, 'all', 'all', Row, Column)</l>
+<c></c>
+<l>dev_set_line_width (5)</l>
+<c>*把点显示出来</c>
+<l>gen_cross_contour_xld (Cross, Row, Column, 6, 0.785398)</l>
+<c></c>
+<c>*得到线的起点和终点坐标并显示出来</c>
+<l>get_metrology_object_result (MetrologyHandle, 'all', 'all', 'result_type', 'all_param', Parameter)</l>
+<l>get_metrology_object_result_contour (Contour, MetrologyHandle, 'all', 'all', 1.5)</l>
+<c></c>
+<c>*释放测量句柄</c>
+<l>clear_metrology_model (MetrologyHandle)</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>
