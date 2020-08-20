@@ -10,6 +10,7 @@
 </oo>
 <ic>
 <par name="WindowHandle" base_type="ctrl" dimension="0"/>
+<par name="factorScale" base_type="ctrl" dimension="0"/>
 </ic>
 </interface>
 <body>
@@ -52,12 +53,13 @@
 <l>XCoordCorners :=[Rows[2],Rows[3],Rows[4],Rows[1]]</l>
 <l>YCoordCorners :=[Cols[2],Cols[3],Cols[4],Cols[1]]</l>
 <c></c>
+<l>* factorScale := 0.5</l>
+<l>paperHeight := factorScale * DistanceHeight</l>
+<l>paperWidth := factorScale * DistanceWidth</l>
 <c></c>
-<c></c>
-<c></c>
-<l>hom_vector_to_proj_hom_mat2d (XCoordCorners, YCoordCorners, [1,1,1,1], [0,DistanceHeight,DistanceHeight,0], [0,0,DistanceWidth,DistanceWidth], [1,1,1,1], 'normalized_dlt', HomMat2D)</l>
+<l>hom_vector_to_proj_hom_mat2d (XCoordCorners, YCoordCorners, [1,1,1,1], [0,paperHeight,paperHeight,0], [0,0,paperWidth,paperWidth], [1,1,1,1], 'normalized_dlt', HomMat2D)</l>
 <l>projective_trans_image (Image, Image_trans, HomMat2D, 'bilinear', 'false', 'false')</l>
-<l>gen_rectangle1 (Rectangle, 0, 0, DistanceHeight, DistanceWidth)</l>
+<l>gen_rectangle1 (Rectangle, 0, 0, paperHeight, paperWidth)</l>
 <l>reduce_domain(Image_trans,Rectangle,Mask)      //裁剪区域</l>
 <l>crop_domain(Mask, Image_rectified)                  //切割图像 </l>
 <l>return ()</l>
@@ -67,6 +69,7 @@
 <parameter id="Image"/>
 <parameter id="Image_rectified"/>
 <parameter id="WindowHandle"/>
+<parameter id="factorScale"/>
 </parameters>
 </docu>
 </procedure>
