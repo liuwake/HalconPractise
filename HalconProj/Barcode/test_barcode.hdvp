@@ -8,9 +8,6 @@
 <ic>
 <par name="WindowHandle" base_type="ctrl" dimension="0"/>
 </ic>
-<oc>
-<par name="Failure" base_type="ctrl" dimension="0"/>
-</oc>
 </interface>
 <body>
 <c></c>
@@ -23,25 +20,23 @@
 <l>read_bar_code_model ('BarCodeHandle.bcm', BarCodeHandle)</l>
 <l>* read_bar_code_model ('BarCodeHandle0605.bcm', BarCodeHandle)</l>
 <l>* set_bar_code_param (BarCodeHandle, 'check_char', 'present')</l>
-<l>set_bar_code_param (BarCodeHandle, 'quiet_zone',true)</l>
+<l>* set_bar_code_param (BarCodeHandle, 'quiet_zone',true)</l>
+<l>* set_bar_code_param (BarCodeHandle, 'timeout', 50) </l>
+<l>* set_bar_code_param (BarCodeHandle, 'majority_voting', true) </l>
+<l>set_bar_code_param (BarCodeHandle, 'num_scanlines', 30) </l>
+<l>* set_bar_code_param (BarCodeHandle, 'start_stop_tolerance', 'low') </l>
+<l>* set_bar_code_param (BarCodeHandle, 'contrast_min', 2) </l>
+<l>* set_bar_code_param (BarCodeHandle, 'timeout', 50) </l>
 <c></c>
 <c>** Recognition Barcode这行代码什么时候想识别二维码放到那里,输入Image,BarCodeHandle, WindowHandle,</c>
 <c>**输出SymbolRegions,DecodedDataStrings, BarcodeLocation</c>
-<l>try</l>
-<l>    image_get_bar (Image, SymbolRegions, BarCodeHandle, WindowHandle, DecodedDataStrings, BarcodeLocation)</l>
-<l>*     NumFailure := NumFailure+1</l>
-<l>catch (Exception)</l>
-<l>    Failure :=1</l>
-<c>    </c>
-<l>endtry</l>
 <c></c>
-<c></c>
+<l>image_get_bar (Image, SymbolRegions, BarCodeHandle, WindowHandle, DecodedDataStrings, BarcodeLocation)</l>
 <c></c>
 <l>return ()</l>
 </body>
 <docu id="test_barcode">
 <parameters>
-<parameter id="Failure"/>
 <parameter id="Image"/>
 <parameter id="WindowHandle"/>
 </parameters>
