@@ -24,13 +24,13 @@
 <c>* code type of unknown bar codes</c>
 <c>* </c>
 <c>** INIT CONST</c>
-<l>BarWidth := 800</l>
-<l>BarHeight := 100</l>
+<l>* BarWidth := 800</l>
+<l>* BarHeight := 100</l>
 <l>CodeTypes := ['Code 128']</l>
-<l>CodeTypes := ['auto']</l>
+<l>* CodeTypes := ['auto']</l>
 <c></c>
 <l>* read_bar_code_model ('C:/Users/iwake/OneDrive - wake/Desktop/HalconPractise/HalconProj/Barcode/BarCodeHandle.bcm', BarCodeHandle)</l>
-<l>read_bar_code_model ('BarCodeHandle.bcm', BarCodeHandle)</l>
+<l>* read_bar_code_model ('BarCodeHandle.bcm', BarCodeHandle)</l>
 <l>* set_bar_code_param (BarCodeHandle, 'check_char', 'present')</l>
 <c>* </c>
 <c>* Set display defaults</c>
@@ -40,8 +40,7 @@
 <c>* </c>
 <c>* Find and decode bar codes. Measure the time needed.</c>
 <l>find_bar_code (Image, SymbolRegions, BarCodeHandle, CodeTypes, DecodedDataStrings)</l>
-<l>area_center (SymbolRegions, BarcodeArea, BarcodeRow, BarcodeColumn)</l>
-<l>someitem := [BarcodeRow,BarcodeColumn]</l>
+<c></c>
 <l>* get_bar_code_result (BarCodeHandle, 'all', 'someitem', someitem)</l>
 <c></c>
 <c></c>
@@ -53,10 +52,13 @@
 <l>dev_display (SymbolRegions)</l>
 <l>    for BarIndex := 1 to |DecodedDataStrings| by 1</l>
 <l>        select_obj (SymbolRegions, ObjectSelected, BarIndex)</l>
-<l>        area_center (ObjectSelected, Area, Row, Column)              </l>
-<l>        set_tposition (WindowHandle, Row - BarHeight, Column - 0.25* BarWidth) </l>
+<l>        area_center (SymbolRegions, BarcodeArea, BarcodeRow, BarcodeColumn)  </l>
+<l>        height_width_ratio (ObjectSelected, BarHeight, BarWidth, BarRatio)</l>
+<l>        set_tposition (WindowHandle, BarcodeRow - BarHeight, BarcodeColumn - 0.5* BarWidth) </l>
 <l>        write_string (WindowHandle, DecodedDataStrings[BarIndex-1])</l>
 <l>     endfor</l>
+<c>     </c>
+<l>someitem := [BarcodeRow,BarcodeColumn]     </l>
 <l>return ()</l>
 </body>
 <docu id="image_get_bar">

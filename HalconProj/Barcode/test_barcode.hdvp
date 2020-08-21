@@ -8,14 +8,40 @@
 <ic>
 <par name="WindowHandle" base_type="ctrl" dimension="0"/>
 </ic>
+<oc>
+<par name="Failure" base_type="ctrl" dimension="0"/>
+</oc>
 </interface>
 <body>
+<c></c>
+<c>** 测试用</c>
+<l>* NumFailure := 0</l>
+<l>Failure := 0</l>
+<c>** Init Barcode这行代码放到初始化位置,函数最上边,打开相机之前</c>
+<c></c>
 <l>set_current_dir ('C:/Users/iwake/OneDrive - wake/Desktop/HalconPractise/HalconProj/Barcode')</l>
-<l>image_get_bar (Image, SymbolRegions, WindowHandle, WindowHandle, DecodedDataStrings, someitem)</l>
+<l>read_bar_code_model ('BarCodeHandle.bcm', BarCodeHandle)</l>
+<l>* read_bar_code_model ('BarCodeHandle0605.bcm', BarCodeHandle)</l>
+<l>* set_bar_code_param (BarCodeHandle, 'check_char', 'present')</l>
+<l>set_bar_code_param (BarCodeHandle, 'quiet_zone',true)</l>
+<c></c>
+<c>** Recognition Barcode这行代码什么时候想识别二维码放到那里,输入Image,BarCodeHandle, WindowHandle,</c>
+<c>**输出SymbolRegions,DecodedDataStrings, BarcodeLocation</c>
+<l>try</l>
+<l>    image_get_bar (Image, SymbolRegions, BarCodeHandle, WindowHandle, DecodedDataStrings, BarcodeLocation)</l>
+<l>*     NumFailure := NumFailure+1</l>
+<l>catch (Exception)</l>
+<l>    Failure :=1</l>
+<c>    </c>
+<l>endtry</l>
+<c></c>
+<c></c>
+<c></c>
 <l>return ()</l>
 </body>
 <docu id="test_barcode">
 <parameters>
+<parameter id="Failure"/>
 <parameter id="Image"/>
 <parameter id="WindowHandle"/>
 </parameters>
