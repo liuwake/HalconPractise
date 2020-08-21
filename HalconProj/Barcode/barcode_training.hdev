@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.1">
+<procedure name="main">
+<interface/>
+<body>
+<c>* This example program demonstrates how to use the training</c>
+<c>* mode of the bar code reader.</c>
+<c>* The program is split into two main parts. In the first part</c>
+<c>* the parameters of the bar code reader are trained.</c>
+<c>* This is typically done in the offline phase of the application.</c>
+<c>* The trained model is stored into a file to be used in the</c>
+<c>* online phase.</c>
+<c>* In the second part the trained model is loaded from the file</c>
+<c>* and is used to decode bar codes in the online phase of the</c>
+<c>* application.</c>
+<c>* </c>
+<l>TrainFailure := 0</l>
+<l>TestFailure := 0 </l>
+<c>* Specify the bar code type that will be trained</c>
+<l>CodeType := 'Code 128'</l>
+<c>* </c>
+<c>* Specify additional bar code parameter names and values.</c>
+<c>* Here, we specify that the training images have check characters.</c>
+<l>PredefGenParNames := 'check_char'</l>
+<l>PredefGenParValues := 'present'</l>
+<c>* </c>
+<c>* Initialization</c>
+<l>dev_update_off ()</l>
+<l>dev_close_window ()</l>
+<l>dev_open_window (0, 520, 400, 300, 'white', WindowHandleStatus)</l>
+<l>dev_open_window (0, 0, 512, 384, 'black', WindowHandleImage)</l>
+<l>set_display_font (WindowHandleStatus, 14, 'mono', 'true', 'false')</l>
+<l>dev_set_draw ('margin')</l>
+<l>dev_set_line_width (3)</l>
+<l>dev_set_color ('green')</l>
+<c>* </c>
+<c>* Read the training images</c>
+<l>FileNames := []</l>
+<l>list_files ('D:/WK/Hospital/表单扫描/0820扫描表单/黑/img', ['files'], FileNames)</l>
+<l>NumImages := |FileNames|</l>
+<l>read_image (TrainImages, FileNames)</l>
+<c>* </c>
+<c>* </c>
+<c>* PART ONE: Training (OFFLINE)</c>
+<c>* </c>
+<c>* </c>
+<c>* Bar code training for the bar code type 2/5 Interleaved</c>
+<c>* </c>
+<c>* Create the bar code model in the training mode</c>
+<l>create_bar_code_model ('train', 'all', BarCodeHandle)</l>
+<c></c>
+<l>set_bar_code_param (BarCodeHandle, 'stop_after_result_num', 1)</l>
+<l>* set_bar_code_param (BarCodeHandle, 'check_char', 'present')</l>
+<l>set_bar_code_param (BarCodeHandle, 'quiet_zone',true)</l>
+<l>get_bar_code_param (BarCodeHandle, 'train', TrainParNames)</l>
+<c>* </c>
+<c>* Set all additional, non-trained parameters in advance:</c>
+<l>set_bar_code_param (BarCodeHandle, PredefGenParNames, PredefGenParValues)</l>
+<c>* </c>
+<l>for I := 1 to NumImages by 1</l>
+<c>    * </c>
+<c>    * Get one of the training images</c>
+<l>    select_obj (TrainImages, Image, I)</l>
+<l>    dev_display (Image)</l>
+<l>    disp_message (WindowHandleStatus, 'Train bar code ' + I + ' of ' + NumImages + '...', 'window', 12, 12, 'black', 'true')</l>
+<c>    * </c>
+<c>    * Apply the training</c>
+<l>    count_seconds (S1)</l>
+<l>    find_bar_code (Image, SymbolRegion, BarCodeHandle, CodeType, DecodedDataStrings)</l>
+<l>    count_seconds (S2)</l>
+<c>    * </c>
+<l>    Time := (S2 - S1) * 1000</l>
+<l>    disp_message (WindowHandleStatus, 'Training time: ' + Time$'.2f' + ' ms', 'window', 36, 12, 'black', ['white','false'])</l>
+<c>    * </c>
+<c>    * Display the training status</c>
+<l>    if (|DecodedDataStrings| == 0)</l>
+<l>        TrainFailure := TrainFailure+1</l>
+<l>        disp_message (WindowHandleStatus, ['Did not find bar code of type',CodeType + '.','The bar code reader could not be','trained with this image!'+' NumFailure: '+TrainFailure], 'window', 60, 12, 'white', 'red')</l>
+<l>    else</l>
+<l>        dev_display (SymbolRegion)</l>
+<l>        disp_message (WindowHandleStatus, 'Found and trained bar code: ' + DecodedDataStrings, 'window', 60, 12, 'black', ['true','false'])</l>
+<l>        query_bar_code_params (BarCodeHandle, 'trained_general', TrainParNamesGeneral)</l>
+<l>        query_bar_code_params (BarCodeHandle, 'trained_specific', TrainParNamesSpecific)</l>
+<l>        get_bar_code_param (BarCodeHandle, TrainParNamesGeneral, TrainParValuesGeneral)</l>
+<l>        get_bar_code_param_specific (BarCodeHandle, CodeType, TrainParNamesSpecific, TrainParValuesSpecific)</l>
+<l>        TrainParNames := [TrainParNamesGeneral,TrainParNamesSpecific]</l>
+<l>        TrainParValues := [TrainParValuesGeneral,TrainParValuesSpecific]</l>
+<l>        Tab := '-' + (max(strlen(TrainParNames)) + 2) + 's'</l>
+<l>        disp_message (WindowHandleStatus, (TrainParNames + ': ')$Tab + TrainParValues, 'window', 90, 12, 'black', ['white','false'])</l>
+<l>    endif</l>
+<l>    if (I &lt; NumImages)</l>
+<l>        wait_seconds (1)</l>
+<l>    else</l>
+<l>        disp_continue_message (WindowHandleStatus, 'black', 'true')</l>
+<l>        stop ()</l>
+<l>    endif</l>
+<l>endfor</l>
+<c>* </c>
+<c>* When the training is completed, the training mode</c>
+<c>* must be disabled. The trained parameters are preserved</c>
+<c>* in the bar code model.</c>
+<l>set_bar_code_param (BarCodeHandle, 'train', '~all')</l>
+<c>* </c>
+<c>* For the case that the given samples do not completely cover</c>
+<c>* the whole range of orientations we increase the orientation</c>
+<c>* tolerance by a tolerance value of 5 percent (but not more</c>
+<c>* than 90 degrees).</c>
+<l>get_bar_code_param_specific (BarCodeHandle, CodeType, 'orientation_tol', OrientationTol)</l>
+<l>set_bar_code_param_specific (BarCodeHandle, CodeType, 'orientation_tol', min([1.05 * OrientationTol,90]))</l>
+<c>* </c>
+<c>* Finally, store the trained model such that it can be reused</c>
+<c>* in the ONLINE phase of a industrial bar code reading</c>
+<c>* application.</c>
+<l>write_bar_code_model (BarCodeHandle, 'bar_code_model.bcm')</l>
+<c>* </c>
+<c>* </c>
+<c>* PART TWO: Use the previously trained parameters (ONLINE)</c>
+<c>* </c>
+<c>* The main advantage of the automatic training is an</c>
+<c>* increased robustness of the bar code reader.</c>
+<c>* </c>
+<l>dev_set_window (WindowHandleStatus)</l>
+<l>dev_clear_window ()</l>
+<l>dev_set_window (WindowHandleImage)</l>
+<c>* </c>
+<c>* Read the previously traines bar code</c>
+<c>* </c>
+<l>read_bar_code_model ('BarCodeHandle.bcm', BarCodeHandle)</l>
+<c>* </c>
+<c>* Read the images</c>
+<l>FileNames := []</l>
+<l>list_files ('D:/WK/Hospital/表单扫描/0820扫描表单/黑/img', ['files'], FileNames)</l>
+<l>NumImages := |FileNames|</l>
+<l>read_image (TrainImages, FileNames)</l>
+<c>* </c>
+<l>for I := 1 to NumImages by 1</l>
+<c>    * </c>
+<c>    * Get one of the training images</c>
+<l>    select_obj (TrainImages, Image, I)</l>
+<l>    dev_display (Image)</l>
+<l>    disp_message (WindowHandleStatus, 'Read bar code ' + I + ' of ' + NumImages + '...', 'window', 12, 12, 'black', 'true')</l>
+<c>    * </c>
+<c>    * Find bar code</c>
+<l>    count_seconds (S1)</l>
+<l>    find_bar_code (Image, SymbolRegion, BarCodeHandle, CodeType, DecodedDataStrings)</l>
+<l>    count_seconds (S2)</l>
+<c>    * </c>
+<l>    Time := (S2 - S1) * 1000</l>
+<l>    disp_message (WindowHandleStatus, 'Reading time: ' + Time$'.2f' + ' ms', 'window', 36, 12, 'black', ['white','false'])</l>
+<c>    * </c>
+<c>    * Display results</c>
+<l>    if (|DecodedDataStrings| == 0)</l>
+<l>        TestFailure := TestFailure +1</l>
+<l>        disp_message (WindowHandleStatus, ['Did not find bar code of type',CodeType + '.'+' NumFailure: '+ TestFailure], 'window', 60, 12, 'white', 'red')</l>
+<l>    else</l>
+<l>        dev_display (SymbolRegion)</l>
+<l>        disp_message (WindowHandleStatus, 'Found bar code: ' + DecodedDataStrings, 'window', 60, 12, 'black', ['true','false'])</l>
+<l>    endif</l>
+<l>    if (I &lt; NumImages)</l>
+<l>        wait_seconds (0.1)</l>
+<l>    endif</l>
+<l>endfor</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>
