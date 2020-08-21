@@ -31,6 +31,7 @@
 <c></c>
 <l>* read_bar_code_model ('C:/Users/iwake/OneDrive - wake/Desktop/HalconPractise/HalconProj/Barcode/BarCodeHandle.bcm', BarCodeHandle)</l>
 <l>read_bar_code_model ('BarCodeHandle.bcm', BarCodeHandle)</l>
+<l>* set_bar_code_param (BarCodeHandle, 'check_char', 'present')</l>
 <c>* </c>
 <c>* Set display defaults</c>
 <l>* get_image_size (Image, Width, Height)</l>
@@ -39,6 +40,8 @@
 <c>* </c>
 <c>* Find and decode bar codes. Measure the time needed.</c>
 <l>find_bar_code (Image, SymbolRegions, BarCodeHandle, CodeTypes, DecodedDataStrings)</l>
+<l>area_center (SymbolRegions, BarcodeArea, BarcodeRow, BarcodeColumn)</l>
+<l>someitem := [BarcodeRow,BarcodeColumn]</l>
 <l>* get_bar_code_result (BarCodeHandle, 'all', 'someitem', someitem)</l>
 <c></c>
 <c></c>
