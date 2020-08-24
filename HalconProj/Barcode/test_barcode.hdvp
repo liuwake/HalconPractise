@@ -14,15 +14,20 @@
 <c>** 测试用</c>
 <l>* NumFailure := 0</l>
 <l>Failure := 0</l>
+<l>flagSeg := 1</l>
 <c>** Init</c>
 <l>get_image_size (Image, Width, Height)</l>
 <c>*** 增强算法</c>
 <c>** 分割</c>
-<l>*      image_seg_paper (Image, paper, WindowHandle, 1)</l>
-<l>*     get_image_size (paper, paperWidth, paperHeight)</l>
+<l>if (flagSeg == 1)</l>
+<l>     image_seg_paper (Image, paper, WindowHandle, 1)</l>
+<l>    get_image_size (paper, paperWidth, paperHeight)</l>
 <l>*     dev_display (Image)</l>
 <l>*     scale_image (Image, Image, 1.8, -100)</l>
 <l>*     binary_threshold (Image, Region, 'max_separability', 'dark', UsedThreshold)</l>
+<l>    Image := paper</l>
+<l>endif</l>
+<c>    </c>
 <c>** 预处理</c>
 <l>*      equ_histo_image (Image, ImageEquHisto)</l>
 <c>     </c>
