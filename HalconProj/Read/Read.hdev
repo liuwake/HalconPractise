@@ -7,6 +7,7 @@
 <c>*** Init</c>
 <c></c>
 <l>NumFailure := 0</l>
+<l>ImageFailure := []</l>
 <c>** WinHandle</c>
 <l>dev_open_window (0, 0, 512, 512, 'black', WindowHandle)</l>
 <l>dev_update_off ()</l>
@@ -40,17 +41,25 @@
 <l>*    endtry</l>
 <c>   </c>
 <c>    **Barcode</c>
-<l>    image_seg_paper (Image, Image, WindowHandle, 1)</l>
-<l>    dev_display (Image)</l>
+<l>    image_seg_paper (Image, paper, WindowHandle, 1)</l>
+<l>    get_image_size (paper, paperWidth, paperHeight)</l>
+<l>*     dev_display (Image)</l>
 <l>*     scale_image (Image, Image, 1.8, -100)</l>
 <l>*     binary_threshold (Image, Region, 'max_separability', 'dark', UsedThreshold)</l>
-<l>    auto_threshold (Image, Regions, 2)</l>
 <c>    </c>
+<c>** 裁剪方法识别条码    27/118</c>
+<l>*     gen_rectangle1 (Rectangle, 0, paperWidth/2, paperHeight/3, paperWidth)</l>
+<l>*     reduce_domain(paper,Rectangle,Mask)      //裁剪区域</l>
+<l>*     crop_domain(Mask, paper)                  //切割图像 </l>
+<c>    </c>
+<l>    auto_threshold (paper, Regions, 2)</l>
+<c></c>
 <c>    </c>
 <l>    try</l>
-<l>        test_barcode (Image, WindowHandle)</l>
+<l>        test_barcode (paper, WindowHandle)</l>
 <l>    catch (Exception)        </l>
 <l>        NumFailure := NumFailure + 1</l>
+<l>        ImageFailure := ImageFailure + ImageFiles[Index]</l>
 <l>*         stop()</l>
 <l>    endtry</l>
 <c>  </c>
