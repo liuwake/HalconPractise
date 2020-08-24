@@ -14,6 +14,26 @@
 <c>** 测试用</c>
 <l>* NumFailure := 0</l>
 <l>Failure := 0</l>
+<c>** Init</c>
+<l>get_image_size (Image, Width, Height)</l>
+<c>*** 增强算法</c>
+<c>** 分割</c>
+<l>*      image_seg_paper (Image, paper, WindowHandle, 1)</l>
+<l>*     get_image_size (paper, paperWidth, paperHeight)</l>
+<l>*     dev_display (Image)</l>
+<l>*     scale_image (Image, Image, 1.8, -100)</l>
+<l>*     binary_threshold (Image, Region, 'max_separability', 'dark', UsedThreshold)</l>
+<c>** 预处理</c>
+<l>*      equ_histo_image (Image, ImageEquHisto)</l>
+<c>     </c>
+<c>** 裁剪方法识别条码    27/118</c>
+<l>*     gen_rectangle1 (Rectangle, 0, paperWidth/2, paperHeight/3, paperWidth)</l>
+<l>*     reduce_domain(paper,Rectangle,Mask)      //裁剪区域</l>
+<l>*     crop_domain(Mask, paper)                  //切割图像 </l>
+<c>** 二值化    0806 37/179</c>
+<l>*     binary_threshold (Image, Region, 'max_separability', 'light', UsedThreshold)</l>
+<l>*     region_to_bin (Region, BinImage, 255, 0, Width, Height)</l>
+<c>     </c>
 <c>** Init Barcode这行代码放到初始化位置,函数最上边,打开相机之前</c>
 <c></c>
 <l>set_current_dir ('C:/Users/iwake/OneDrive - wake/Desktop/HalconPractise/HalconProj/Barcode')</l>
