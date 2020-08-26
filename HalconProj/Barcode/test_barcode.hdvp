@@ -18,7 +18,7 @@
 <c>** Init</c>
 <l>get_image_size (Image, Width, Height)</l>
 <c>*** 增强算法</c>
-<c>** 分割</c>
+<c>** 分割纸张</c>
 <l>if (flagSeg == 1)</l>
 <l>     image_seg_paper (Image, paper, WindowHandle, 1)</l>
 <l>    get_image_size (paper, paperWidth, paperHeight)</l>
@@ -27,7 +27,8 @@
 <l>*     binary_threshold (Image, Region, 'max_separability', 'dark', UsedThreshold)</l>
 <l>    Image := paper</l>
 <l>endif</l>
-<c>    </c>
+<c>*** 检测二维码/分割二维码</c>
+<c></c>
 <c>** 预处理</c>
 <l>*      equ_histo_image (Image, ImageEquHisto)</l>
 <c>     </c>
