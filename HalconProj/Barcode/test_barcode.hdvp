@@ -14,7 +14,7 @@
 <c>** 测试用</c>
 <l>* NumFailure := 0</l>
 <l>Failure := 0</l>
-<l>flagSeg := 1</l>
+<l>flagSeg := 0</l>
 <c>** Init</c>
 <l>get_image_size (Image, Width, Height)</l>
 <c>*** 增强算法</c>
@@ -30,7 +30,8 @@
 <c>*** 检测二维码/分割二维码</c>
 <c></c>
 <c>** 预处理</c>
-<l>*      equ_histo_image (Image, ImageEquHisto)</l>
+<l>*      equ_histo_image (Image, Image)</l>
+<l>*      gauss_image (Image, Image, 3)</l>
 <c>     </c>
 <c>** 裁剪方法识别条码    27/118</c>
 <l>*     gen_rectangle1 (Rectangle, 0, paperWidth/2, paperHeight/3, paperWidth)</l>

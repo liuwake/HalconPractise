@@ -39,24 +39,24 @@
 <l>*     dev_display (Image)</l>
 <l>    get_image_size (Image, Width, Height)</l>
 <c>   ** Seg Paper</c>
-<l>   try</l>
-<l>       Failure := 0</l>
-<l>       image_seg_paper (Image, Image_rectified, WindowHandle, 1)</l>
-<l>       dev_display(Image_rectified)</l>
+<l>*    try</l>
+<l>*        Failure := 0</l>
+<l>*        image_seg_paper (Image, Image_rectified, WindowHandle, 1)</l>
+<l>*        dev_display(Image_rectified)</l>
 <c>       </c>
-<l>       write_image (Image_rectified, 'jpg', 0, FileNameNoExtend)</l>
-<l>   catch (Exception)</l>
-<l>       Failure :=1</l>
-<l>   endtry</l>
+<l>*        write_image (Image_rectified, 'jpg', 0, FileNameNoExtend)</l>
+<l>*    catch (Exception)</l>
+<l>*        Failure :=1</l>
+<l>*    endtry</l>
 <c>   </c>
 <c>    **Barcode    </c>
-<l>*     try</l>
-<l>*         test_barcode (Image, WindowHandle)</l>
-<l>*     catch (Exception)        </l>
-<l>*         NumFailure := NumFailure + 1</l>
-<l>*         ImageFailure := ImageFailure + ImageFiles[Index]</l>
+<l>    try</l>
+<l>        test_barcode (Image, WindowHandle)</l>
+<l>    catch (Exception)        </l>
+<l>        NumFailure := NumFailure + 1</l>
+<l>        ImageFailure := ImageFailure + ImageFiles[Index]</l>
 <l>*         stop()</l>
-<l>*     endtry</l>
+<l>    endtry</l>
 <c>  </c>
 <c>    </c>
 <l>*     stop()</l>
