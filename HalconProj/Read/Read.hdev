@@ -25,29 +25,38 @@
 <l>* list_files ('D:/WK/Hospital/表单扫描/0820扫描表单/黑/img', ['files'], ImageFiles)</l>
 <l>* list_files ('D:/WK/Hospital/表单扫描/0820扫描表单/彩/img', ['files'], ImageFiles)</l>
 <l>* list_files ('D:/WK/Hospital/表单扫描/0806扫描表单/img', ['files'], ImageFiles)</l>
-<l>list_files ('C:/Users/iwake/OneDrive - wake/Desktop/Mia/Images/0821Ori', ['files'], ImageFiles)</l>
+<l>list_files ('C:/Users/iwake/OneDrive - wake/Desktop/Mia/Images/0821Seg', ['files'], ImageFiles)</l>
+<c></c>
 <l as_id="image_acquisition" as_name="Image Acquisition 01" as_grp="[2,2]" as_ord="1">for Index := 0 to |ImageFiles| - 1 by 1</l>
 <l as_id="image_acquisition" as_name="Image Acquisition 01" as_grp="[2,3]" as_ord="1">    read_image (Image, ImageFiles[Index])</l>
-<c as_id="image_acquisition" as_name="Image Acquisition 01" as_grp="[2,4]" as_ord="1">    * Image Acquisition 01: Do something</c>
+<l>    FileName := ImageFiles[Index]</l>
+<l>*     tuple_length (FileName, Length)</l>
+<l>    tuple_strlen (FileName, Length)</l>
+<l>*     tuple_select_range (FileName,0,Length-4, FileNameNoExtend)</l>
+<l>    tuple_substr (FileName, 0, Length-5, FileNameNoExtend)</l>
+<c>    </c>
+<c>    * Image Acquisition 01: Do something</c>
 <l>*     dev_display (Image)</l>
 <l>    get_image_size (Image, Width, Height)</l>
 <c>   ** Seg Paper</c>
-<l>*    try</l>
-<l>*        Failure := 0</l>
-<l>*        image_seg_paper (Image, Image_rectified, WindowHandle, 1)</l>
-<l>*        dev_display(Image_rectified)</l>
-<l>*    catch (Exception)</l>
-<l>*        Failure :=1</l>
-<l>*    endtry</l>
+<l>   try</l>
+<l>       Failure := 0</l>
+<l>       image_seg_paper (Image, Image_rectified, WindowHandle, 1)</l>
+<l>       dev_display(Image_rectified)</l>
+<c>       </c>
+<l>       write_image (Image_rectified, 'jpg', 0, FileNameNoExtend)</l>
+<l>   catch (Exception)</l>
+<l>       Failure :=1</l>
+<l>   endtry</l>
 <c>   </c>
 <c>    **Barcode    </c>
-<l>    try</l>
-<l>        test_barcode (Image, WindowHandle)</l>
-<l>    catch (Exception)        </l>
-<l>        NumFailure := NumFailure + 1</l>
-<l>        ImageFailure := ImageFailure + ImageFiles[Index]</l>
+<l>*     try</l>
+<l>*         test_barcode (Image, WindowHandle)</l>
+<l>*     catch (Exception)        </l>
+<l>*         NumFailure := NumFailure + 1</l>
+<l>*         ImageFailure := ImageFailure + ImageFiles[Index]</l>
 <l>*         stop()</l>
-<l>    endtry</l>
+<l>*     endtry</l>
 <c>  </c>
 <c>    </c>
 <l>*     stop()</l>
