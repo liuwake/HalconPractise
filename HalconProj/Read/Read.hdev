@@ -29,6 +29,7 @@
 <c></c>
 <l as_id="image_acquisition" as_name="Image Acquisition 01" as_grp="[2,2]" as_ord="1">for Index := 0 to |ImageFiles| - 1 by 1</l>
 <l as_id="image_acquisition" as_name="Image Acquisition 01" as_grp="[2,3]" as_ord="1">    read_image (Image, ImageFiles[Index])</l>
+<l>*     dev_display (Image)</l>
 <l>    FileName := ImageFiles[Index]</l>
 <l>*     tuple_length (FileName, Length)</l>
 <l>    tuple_strlen (FileName, Length)</l>
@@ -51,7 +52,9 @@
 <c>   </c>
 <c>    **Barcode    </c>
 <l>    try</l>
-<l>        test_barcode (Image, WindowHandle)</l>
+<l>        test_barcode (Image, ImageCrop, WindowHandle)</l>
+<l>*         write_image (ImageReduced, 'jpg', 0, FileName)</l>
+<c></c>
 <l>    catch (Exception)        </l>
 <l>        NumFailure := NumFailure + 1</l>
 <l>        ImageFailure := ImageFailure + ImageFiles[Index]</l>
@@ -67,7 +70,7 @@
 <c></c>
 <c></c>
 <c>** Proc</c>
-<l>* test_barcode (Image, WindowHandle)</l>
+<l>* test_barcode (Image, ImageReduced1, WindowHandle)</l>
 <l>* create_bar_code_model ([], [], BarCodeHandle)</l>
 <l>* set_bar_code_param (BarCodeHandle,'check_char','present')</l>
 <l>* set_bar_code_param (BarCodeHandle,'check_char','absent')</l>
