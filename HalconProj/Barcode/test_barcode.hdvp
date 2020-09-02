@@ -18,6 +18,9 @@
 <l>* NumFailure := 0</l>
 <l>Failure := 0</l>
 <l>flagSeg := 0</l>
+<l>flagCrop := 0</l>
+<l>flagFind := 1</l>
+<l>flagDisp := 0</l>
 <c>** Init</c>
 <l>get_image_size (Image, Width, Height)</l>
 <c>*** 增强算法</c>
@@ -33,51 +36,64 @@
 <l>    Image := paper</l>
 <l>endif</l>
 <c>*** 检测二维码/分割二维码</c>
-<c>** 预处理</c>
-<l>gen_gauss_pyramid (Image, ImagePyramid, 'weighted', 0.5)</l>
-<l>select_obj(ImagePyramid,ImageSelected,2)</l>
+<l>if (flagCrop == 1)</l>
+<c>    ** 预处理</c>
+<l>    gen_gauss_pyramid (Image, ImagePyramid, 'weighted', 0.5)</l>
+<l>    select_obj(ImagePyramid,ImageSelected,2)</l>
+<c>    </c>
+<l>    rgb1_to_gray (ImageSelected,GrayImage)</l>
+<l>     equ_histo_image (GrayImage, ImageEq)</l>
+<l>    median_image (ImageEq, ImageMedian, 'circle', 1, 'mirrored')</l>
+<l>    gauss_image (ImageEq, ImageEqGauss, 3)</l>
+<l>    sobel_amp (ImageEqGauss, EdgeX, 'x', 3)</l>
+<l>    abs_image (EdgeX, EdgeXAbs)</l>
+<l>    sobel_amp (ImageEqGauss, EdgeY, 'y', 3)</l>
+<c>    * Y方向处理</c>
+<l>    abs_image (EdgeY, EdgeYAbs)</l>
+<l>    binary_threshold (EdgeYAbs, YRegion, 'max_separability', 'light', UsedThreshold)</l>
+<l>    dilation_circle (YRegion, RegionDilation, 4)</l>
+<l>    overpaint_region (EdgeYAbs, RegionDilation, 127, 'fill')</l>
+<c>    * 提取Y方向线条</c>
+<l>     sub_image (EdgeXAbs, EdgeYAbs, ImageSub, 1, 0)</l>
+<l>*      abs_image (ImageSub, ImageAbs)</l>
+<l>     mean_image (ImageSub, ImageMean, 3, 3)</l>
+<c>     ** 二值化    0806 37/179</c>
+<l>    binary_threshold (ImageMean, Region, 'max_separability', 'light', UsedThreshold)</l>
+<l>    region_to_bin (Region, BinImage, 255, 0, Width, Height)</l>
+<c>    * 开闭运算</c>
+<l>    closing_circle (Region, RegionClosing, 7)</l>
+<c>    * 腐蚀膨胀</c>
+<l>    erosion_circle (RegionClosing, RegionErosion, 7)</l>
+<l>    connection (RegionErosion, ConnectedRegions)</l>
+<l>    area_center( ConnectedRegions, Area, Row, Column)</l>
+<l>    select_shape (ConnectedRegions, SelectedRegions, 'area', 'and',max(Area), 99999)</l>
+<l>    dilation_circle (SelectedRegions, RegionDilation2, 7)</l>
+<l>    dilation_circle (RegionDilation2, RegionDilation3, 7)</l>
+<l>    dilation_circle (RegionDilation3, RegionDilation4, 7)</l>
+<c>    * 框选</c>
+<l>*     smallest_rectangle1 (RegionDilation4, Row1, Column1, Row2, Column2)</l>
+<l>*     gen_rectangle1 (Rectangle, Row1*2, Column1*2, Row2*2, Column2*2)</l>
+<c>    </c>
+<l>    smallest_rectangle2 (RegionDilation4, Row3, Column3, Phi, Length1, Length2)</l>
+<l>    gen_rectangle2 (Rectangle, Row3*2, Column3*2, Phi, Length2*12, Length2*2)</l>
+<c>    </c>
+<l>    reduce_domain (Image, Rectangle, ImageReduced)</l>
+<l>    crop_domain (ImageReduced, ImageCrop)</l>
+<c>    * 再处理</c>
+<c>*对barcode没用</c>
+<l>* illuminate (ImageCrop, ImageCrop, 101, 101, 1)</l>
+<l>* emphasize (ImageCrop, ImageCrop, 3, 3, 1)</l>
+<l>endif</l>
 <c></c>
-<l>rgb1_to_gray (ImageSelected,GrayImage)</l>
-<l> equ_histo_image (GrayImage, ImageEq)</l>
-<l>median_image (ImageEq, ImageMedian, 'circle', 1, 'mirrored')</l>
-<l>gauss_image (ImageEq, ImageEqGauss, 3)</l>
-<l>sobel_amp (ImageEqGauss, EdgeX, 'x', 3)</l>
-<l>abs_image (EdgeX, EdgeXAbs)</l>
-<l>sobel_amp (ImageEqGauss, EdgeY, 'y', 3)</l>
-<c>* Y方向处理</c>
-<l>abs_image (EdgeY, EdgeYAbs)</l>
-<l>binary_threshold (EdgeYAbs, YRegion, 'max_separability', 'light', UsedThreshold)</l>
-<l>dilation_circle (YRegion, RegionDilation, 4)</l>
-<l>overpaint_region (EdgeYAbs, RegionDilation, 127, 'fill')</l>
-<c>* 提取Y方向线条</c>
-<l> sub_image (EdgeXAbs, EdgeYAbs, ImageSub, 1, 0)</l>
-<l>*  abs_image (ImageSub, ImageAbs)</l>
-<l> mean_image (ImageSub, ImageMean, 3, 3)</l>
-<c> ** 二值化    0806 37/179</c>
-<l>binary_threshold (ImageMean, Region, 'max_separability', 'light', UsedThreshold)</l>
-<l>region_to_bin (Region, BinImage, 255, 0, Width, Height)</l>
-<c>* 开闭运算</c>
-<l>closing_circle (Region, RegionClosing, 7)</l>
-<c>* 腐蚀膨胀</c>
-<l>erosion_circle (RegionClosing, RegionErosion, 7)</l>
-<l>connection (RegionErosion, ConnectedRegions)</l>
-<l>area_center( ConnectedRegions, Area, Row, Column)</l>
-<l>select_shape (ConnectedRegions, SelectedRegions, 'area', 'and',max(Area), 99999)</l>
-<l>dilation_circle (SelectedRegions, RegionDilation2, 7)</l>
-<l>dilation_circle (RegionDilation2, RegionDilation3, 7)</l>
-<l>dilation_circle (RegionDilation3, RegionDilation4, 7)</l>
-<c>* 框选</c>
-<l>smallest_rectangle1 (RegionDilation4, Row1, Column1, Row2, Column2)</l>
 <c></c>
-<l>gen_rectangle1 (Rectangle, Row1*2, Column1*2, Row2*2, Column2*2)</l>
 <c></c>
-<l>reduce_domain (Image, Rectangle, ImageReduced)</l>
-<l>crop_domain (ImageReduced, ImageCrop)</l>
 <c>* 展示</c>
-<l>dev_display (ImageCrop)</l>
-<l>dev_set_draw('margin')</l>
-<l>dev_set_color ('green')</l>
-<l>dev_display (Rectangle)</l>
+<l>if (flagDisp == 1)</l>
+<l>    dev_display (ImageCrop)</l>
+<l>    dev_set_draw('margin')</l>
+<l>    dev_set_color ('green')</l>
+<l>    dev_display (Rectangle)</l>
+<l>endif</l>
 <c></c>
 <c></c>
 <c></c>
@@ -92,25 +108,25 @@
 <c></c>
 <c></c>
 <c></c>
-<c>     </c>
-<c>** Init Barcode这行代码放到初始化位置,函数最上边,打开相机之前</c>
+<l>if (flagFind == 1)  </l>
+<c>   ** Init Barcode这行代码放到初始化位置,函数最上边,打开相机之前</c>
 <c></c>
-<l>set_current_dir ('C:/Users/iwake/OneDrive - wake/Desktop/HalconPractise/HalconProj/Barcode')</l>
-<l>read_bar_code_model ('BarCodeHandle.bcm', BarCodeHandle)</l>
-<l>* read_bar_code_model ('BarCodeHandle0605.bcm', BarCodeHandle)</l>
-<l>* set_bar_code_param (BarCodeHandle, 'check_char', 'present')</l>
-<l>* set_bar_code_param (BarCodeHandle, 'quiet_zone',true)</l>
-<l>* set_bar_code_param (BarCodeHandle, 'timeout', 50) </l>
-<l>* set_bar_code_param (BarCodeHandle, 'majority_voting', true) </l>
-<l>set_bar_code_param (BarCodeHandle, 'num_scanlines', 30) </l>
-<l>* set_bar_code_param (BarCodeHandle, 'start_stop_tolerance', 'low') </l>
-<l>* set_bar_code_param (BarCodeHandle, 'contrast_min', 2) </l>
-<l>* set_bar_code_param (BarCodeHandle, 'timeout', 50) </l>
-<c></c>
+<l>    set_current_dir ('C:/Users/iwake/OneDrive - wake/Desktop/HalconPractise/HalconProj/Barcode')</l>
+<l>    read_bar_code_model ('BarCodeHandle.bcm', BarCodeHandle)</l>
+<l>*    read_bar_code_model ('BarCodeHandle0605.bcm', BarCodeHandle)</l>
+<l>*    set_bar_code_param (BarCodeHandle, 'check_char', 'present')</l>
+<l>*    set_bar_code_param (BarCodeHandle, 'quiet_zone',true)</l>
+<l>*    set_bar_code_param (BarCodeHandle, 'timeout', 50) </l>
+<l>*    set_bar_code_param (BarCodeHandle, 'majority_voting', true) </l>
+<l>    set_bar_code_param (BarCodeHandle, 'num_scanlines', 30) </l>
+<l>*    set_bar_code_param (BarCodeHandle, 'start_stop_tolerance', 'low') </l>
+<l>*    set_bar_code_param (BarCodeHandle, 'contrast_min', 2) </l>
+<l>*    set_bar_code_param (BarCodeHandle, 'timeout', 50) </l>
 <c>** Recognition Barcode这行代码什么时候想识别二维码放到那里,输入Image,BarCodeHandle, WindowHandle,</c>
 <c>**输出SymbolRegions,DecodedDataStrings, BarcodeLocation</c>
+<l>    image_get_bar (Image, SymbolRegions, BarCodeHandle, WindowHandle, DecodedDataStrings, BarcodeLocation)</l>
+<l>endif</l>
 <c></c>
-<l>image_get_bar (ImageCrop, SymbolRegions, BarCodeHandle, WindowHandle, DecodedDataStrings, BarcodeLocation)</l>
 <l>* stop()</l>
 <l>return ()</l>
 </body>

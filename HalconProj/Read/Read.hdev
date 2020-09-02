@@ -25,10 +25,14 @@
 <l>* list_files ('D:/WK/Hospital/表单扫描/0820扫描表单/黑/img', ['files'], ImageFiles)</l>
 <l>* list_files ('D:/WK/Hospital/表单扫描/0820扫描表单/彩/img', ['files'], ImageFiles)</l>
 <l>* list_files ('D:/WK/Hospital/表单扫描/0806扫描表单/img', ['files'], ImageFiles)</l>
-<l>list_files ('C:/Users/iwake/OneDrive - wake/Desktop/Mia/Images/0821Seg', ['files'], ImageFiles)</l>
-<c></c>
+<l>* list_files ('C:/Users/iwake/OneDrive - wake/Desktop/Mia/Images/0821Seg', ['files'], ImageFiles)</l>
+<l>* list_files ('D:/WK/Hospital/表单扫描/0820扫描表单/黑/imgSegBarcode', ['files'], ImageFiles)</l>
+<l>* list_files ('D:/WK/Hospital/表单扫描/0820扫描表单/黑/imgBarcode2', ['files'], ImageFiles)</l>
+<l>list_files ('D:/WK/Hospital/表单扫描/0828扫描表单/SegBarcode', ['files'], ImageFiles)</l>
 <l as_id="image_acquisition" as_name="Image Acquisition 01" as_grp="[2,2]" as_ord="1">for Index := 0 to |ImageFiles| - 1 by 1</l>
 <l as_id="image_acquisition" as_name="Image Acquisition 01" as_grp="[2,3]" as_ord="1">    read_image (Image, ImageFiles[Index])</l>
+<l>*     rotate_image (Image, Image, 90, 'constant')</l>
+<c>    </c>
 <l>*     dev_display (Image)</l>
 <l>    FileName := ImageFiles[Index]</l>
 <l>*     tuple_length (FileName, Length)</l>
@@ -39,7 +43,7 @@
 <c>    * Image Acquisition 01: Do something</c>
 <l>*     dev_display (Image)</l>
 <l>    get_image_size (Image, Width, Height)</l>
-<c>   ** Seg Paper</c>
+<c>** Seg Paper</c>
 <l>*    try</l>
 <l>*        Failure := 0</l>
 <l>*        image_seg_paper (Image, Image_rectified, WindowHandle, 1)</l>
@@ -50,15 +54,21 @@
 <l>*        Failure :=1</l>
 <l>*    endtry</l>
 <c>   </c>
-<c>    **Barcode    </c>
+<c>**Barcode    </c>
 <l>    try</l>
 <l>        test_barcode (Image, ImageCrop, WindowHandle)</l>
-<l>*         write_image (ImageReduced, 'jpg', 0, FileName)</l>
+<c>        ** Bin</c>
+<l>*         binary_threshold (ImageCrop, Region, 'max_separability', 'light', UsedThreshold)</l>
+<l>*         get_image_size (ImageCrop, CropWidth, CropHeight)</l>
+<l>*         region_to_bin (Region, BinImage, 255, 0, CropWidth, CropHeight)</l>
+<c>        ** Eq</c>
+<l>*         equ_histo_image ( ImageCrop, ImageEq)</l>
+<l>*         write_image (ImageCrop, 'jpg', 0, FileName)</l>
 <c></c>
 <l>    catch (Exception)        </l>
 <l>        NumFailure := NumFailure + 1</l>
 <l>        ImageFailure := ImageFailure + ImageFiles[Index]</l>
-<l>*         stop()</l>
+<l>        stop()</l>
 <l>    endtry</l>
 <c>  </c>
 <c>    </c>
