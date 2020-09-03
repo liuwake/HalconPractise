@@ -25,7 +25,7 @@
 <l>connection (RegionFill, ConnectedRegions)</l>
 <c></c>
 <l>area_center (ConnectedRegions, Area, Row, Column)</l>
-<l>select_shape (ConnectedRegions, Paper, 'area', 'and', max(Area), 9999999)</l>
+<l>select_shape (ConnectedRegions, Paper, 'area', 'and', max(Area), 99999999)</l>
 <c></c>
 <c></c>
 <c>** Detecting Corner</c>
