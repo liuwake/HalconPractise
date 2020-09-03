@@ -39,7 +39,10 @@
 <c></c>
 <c>* </c>
 <c>* Find and decode bar codes. Measure the time needed.</c>
-<l>find_bar_code (Image, SymbolRegions, BarCodeHandle, CodeTypes, DecodedDataStrings)</l>
+<l>* if (|DecodedDataStrings| == 0)</l>
+<l>    find_bar_code (Image, SymbolRegions, BarCodeHandle, CodeTypes, DecodedDataStrings)</l>
+<l>* endif</l>
+<c></c>
 <c></c>
 <l>* get_bar_code_result (BarCodeHandle, 'all', 'someitem', someitem)</l>
 <c></c>
@@ -58,7 +61,8 @@
 <l>        write_string (WindowHandle, DecodedDataStrings[BarIndex-1])</l>
 <l>     endfor</l>
 <c>     </c>
-<l>someitem := [BarcodeRow,BarcodeColumn]     </l>
+<l>someitem := [BarcodeRow,BarcodeColumn] </l>
+<c></c>
 <l>return ()</l>
 </body>
 <docu id="image_get_bar">
