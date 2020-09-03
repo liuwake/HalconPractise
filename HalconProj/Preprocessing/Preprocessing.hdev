@@ -82,8 +82,10 @@
 <c>* Scale</c>
 <l>* scale_image (Image, ImageScaled, 2, 0)</l>
 <c>* ruihua</c>
-<l>emphasize (Image, ImageEmphasize, 3, 3, 1)</l>
-<c></c>
+<l>* emphasize (Image, ImageEmphasize, 3, 3, 1)</l>
+<l>* laplace (Image, ImageLaplace, 'absolute', 3, 'n_4')</l>
+<l>* laplace_of_gauss (ImageLaplace, ImageLoG, 3)</l>
+<l>stop()</l>
 <c>**</c>
 <c></c>
 <c>*** AFTER</c>

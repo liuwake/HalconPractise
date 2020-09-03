@@ -28,9 +28,10 @@
 <l>* list_files ('C:/Users/iwake/OneDrive - wake/Desktop/Mia/Images/0821Seg', ['files'], ImageFiles)</l>
 <l>* list_files ('D:/WK/Hospital/表单扫描/0820扫描表单/黑/imgSegBarcode', ['files'], ImageFiles)</l>
 <l>* list_files ('D:/WK/Hospital/表单扫描/0820扫描表单/黑/imgBarcode2', ['files'], ImageFiles)</l>
-<l>list_files ('D:/WK/Hospital/表单扫描/0828扫描表单/SegBarcode', ['files'], ImageFiles)</l>
+<l>list_files ('D:/WK/Hospital/表单扫描/2020903', ['files'], ImageFiles)</l>
 <l as_id="image_acquisition" as_name="Image Acquisition 01" as_grp="[2,2]" as_ord="1">for Index := 0 to |ImageFiles| - 1 by 1</l>
 <l as_id="image_acquisition" as_name="Image Acquisition 01" as_grp="[2,3]" as_ord="1">    read_image (Image, ImageFiles[Index])</l>
+<l>    rgb1_to_gray (Image, Image)</l>
 <l>*     rotate_image (Image, Image, 90, 'constant')</l>
 <c>    </c>
 <l>*     dev_display (Image)</l>
@@ -68,7 +69,7 @@
 <l>    catch (Exception)        </l>
 <l>        NumFailure := NumFailure + 1</l>
 <l>        ImageFailure := ImageFailure + ImageFiles[Index]</l>
-<l>        stop()</l>
+<l>*         stop()</l>
 <l>    endtry</l>
 <c>  </c>
 <c>    </c>
