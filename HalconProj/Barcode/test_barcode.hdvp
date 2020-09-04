@@ -17,10 +17,10 @@
 <c>** 测试用</c>
 <l>* NumFailure := 0</l>
 <l>Failure := 0</l>
-<l>flagSeg := 1</l>
-<l>flagCrop := 1</l>
+<l>flagSeg := 0</l>
+<l>flagCrop := 0</l>
 <c></c>
-<l>flagFind := 0</l>
+<l>flagFind := 1</l>
 <c></c>
 <c>** Init</c>
 <l>get_image_size (Image, Width, Height)</l>
@@ -39,13 +39,16 @@
 <c>*** 检测二维码/分割二维码</c>
 <l>if (flagCrop == 1)</l>
 <l>    image_seg_bar (Image, ImageCrop, BarRow, BarCol)</l>
-<c>    * 再处理</c>
+<c></c>
+<c></c>
+<l>endif</l>
+<c>* 再处理</c>
 <c>*对barcode没用</c>
 <l>* illuminate (ImageCrop, ImageCrop, 101, 101, 1)</l>
 <l>* emphasize (ImageCrop, ImageCrop, 3, 3, 1)</l>
-<c></c>
-<l>endif</l>
-<c></c>
+<c>* Motion 管用</c>
+<l>simulate_motion (Image, MovedImage, 60, 90, 3)</l>
+<l>convert_image_type (MovedImage, Image, 'byte')</l>
 <l>*  stop()</l>
 <c>* 缩小画幅</c>
 <c>* 裁剪1/4区域方法识别条码    27/118</c>
