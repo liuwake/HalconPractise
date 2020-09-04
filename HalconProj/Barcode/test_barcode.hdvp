@@ -38,7 +38,7 @@
 <l>endif</l>
 <c>*** 检测二维码/分割二维码</c>
 <l>if (flagCrop == 1)</l>
-<l>    image_seg_bar (Image, ImageCrop, Row, Column)</l>
+<l>    image_seg_bar (Image, ImageCrop, BarRow, BarCol)</l>
 <c>    * 再处理</c>
 <c>*对barcode没用</c>
 <l>* illuminate (ImageCrop, ImageCrop, 101, 101, 1)</l>

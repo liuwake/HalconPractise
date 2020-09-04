@@ -9,8 +9,8 @@
 <par name="ImageCrop" base_type="iconic" dimension="0"/>
 </oo>
 <oc>
-<par name="Row" base_type="ctrl" dimension="0"/>
-<par name="Column" base_type="ctrl" dimension="0"/>
+<par name="BarRow" base_type="ctrl" dimension="0"/>
+<par name="BarCol" base_type="ctrl" dimension="0"/>
 </oc>
 </interface>
 <body>
@@ -46,7 +46,7 @@
 <c>* 腐蚀膨胀</c>
 <l>erosion_circle (RegionClosing, RegionErosion, 7)</l>
 <l>connection (RegionErosion, ConnectedRegions)</l>
-<l>area_center( ConnectedRegions, Area, Row, Column)</l>
+<l>area_center (ConnectedRegions, Area, Row, Column)</l>
 <l>select_shape (ConnectedRegions, SelectedRegions, 'area', 'and',max(Area), 99999)</l>
 <l>dilation_circle (SelectedRegions, RegionDilation2, 7)</l>
 <l>dilation_circle (RegionDilation2, RegionDilation3, 7)</l>
@@ -54,12 +54,12 @@
 <c>* 框选</c>
 <l>* smallest_rectangle1 (RegionDilation4, Row1, Column1, Row2, Column2)</l>
 <l>* gen_rectangle1 (Rectangle, Row1*2, Column1*2, Row2*2, Column2*2)</l>
-<l>smallest_rectangle2 (RegionDilation4, Row3, Column3, Phi, Length1, Length2)</l>
+<l>smallest_rectangle2 (RegionDilation4, BarRow, BarCol, Phi, Length1, Length2)</l>
 <l>if(CropBig == 1)</l>
 <l>    BarcodeAreaScale := 2</l>
-<l>    gen_rectangle2 (Rectangle, Row3*2, Column3*2, 0, Length2*2*8*BarcodeAreaScale, Length2*2*BarcodeAreaScale*2)</l>
+<l>    gen_rectangle2 (Rectangle, BarRow*2, BarCol*2, 0, Length2*2*8*BarcodeAreaScale, Length2*2*BarcodeAreaScale*2)</l>
 <l>else       </l>
-<l>   gen_rectangle2 (Rectangle, Row3*2, Column3*2, Phi, Length2*2*8, Length2*2)</l>
+<l>   gen_rectangle2 (Rectangle, BarRow*2, BarCol*2, Phi, Length2*2*8, Length2*2)</l>
 <l>endif  </l>
 <c></c>
 <l>reduce_domain (Image, Rectangle, ImageReduced)</l>
@@ -74,11 +74,18 @@
 <l>return ()</l>
 </body>
 <docu id="image_seg_bar">
+<library lang="zh_CN">WK</library>
 <parameters>
-<parameter id="Column"/>
-<parameter id="Image"/>
-<parameter id="ImageCrop"/>
-<parameter id="Row"/>
+<parameter id="BarCol"/>
+<parameter id="BarRow">
+<sem_type>any</sem_type>
+</parameter>
+<parameter id="Image">
+<sem_type>image</sem_type>
+</parameter>
+<parameter id="ImageCrop">
+<sem_type>image</sem_type>
+</parameter>
 </parameters>
 </docu>
 </procedure>
