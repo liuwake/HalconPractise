@@ -85,7 +85,11 @@
 <l>* emphasize (Image, ImageEmphasize, 3, 3, 1)</l>
 <l>* laplace (Image, ImageLaplace, 'absolute', 3, 'n_4')</l>
 <l>* laplace_of_gauss (ImageLaplace, ImageLoG, 3)</l>
-<l>stop()</l>
+<c>* Motion Simulation</c>
+<l>* gen_psf_motion (Psf, 256, 256, 20, 0, 3)</l>
+<l>simulate_motion (Image, MovedImage, 50, 90, 3)</l>
+<l>dev_display (MovedImage)</l>
+<l>stop() </l>
 <c>**</c>
 <c></c>
 <c>*** AFTER</c>
