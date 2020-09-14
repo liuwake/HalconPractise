@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.1">
+<procedure name="main">
+<interface/>
+<body>
+<l>dev_close_window ( )</l>
+<l>read_image (Image, 'C:/Users/iwake/OneDrive - wake/Desktop/HalconPractise/Images/Model.jpg')</l>
+<l>scale_image (Image, ImageScaled1, 1.81, 0)</l>
+<l>dev_open_window_fit_image (Image, 0, 0, -1, -1, WindowHandle)</l>
+<l>dev_display (Image)</l>
+<c></c>
+<l>* gen_rectangle1 (Rectangle, 1247, 1182, 1632, 1842)</l>
+<l>gen_rectangle1 (Rectangle, 101.375, 442.625, 300.125, 722.625)</l>
+<c></c>
+<l>area_center (Rectangle, Area, Row3, Column3)</l>
+<l>reduce_domain (ImageScaled1, Rectangle, ImageReduced)</l>
+<l>*stop()</l>
+<l>create_shape_model (ImageReduced, 'auto', rad(0), rad(360), 'auto', 'auto', 'use_polarity', 'auto', 'auto', ModelID)</l>
+<l>draw_rake (Regions, WindowHandle,30, 160, 15, Row1First, Column1First, Row2First, Column2First)</l>
+<l>draw_rake (Regions2, WindowHandle, 30, 160, 15, Row1Secound, Column1Secound, Row2Secound, Column2Secound)</l>
+<l>draw_rake (Regions3, WindowHandle, 30, 160, 15, Row1thress, Column1thress, Row2thress, Column2thress)</l>
+<l>find_shape_model (Image, ModelID, rad(0), rad(360), 0.5, 0, 0.5, 'least_squares', 0, 0.9, Row, Column, Angle, Score)</l>
+<l>stop()</l>
+<l>gen_empty_obj(EmptyObject)</l>
+<l>for Index := 0 to |Row|-1 by 1</l>
+<l>    dev_display_shape_matching_results (ModelID, 'red', Row[Index], Column[Index], Angle[Index], 1, 1, 0)</l>
+<l>    vector_angle_to_rigid ( Row3, Column3, 0, Row[Index], Column[Index], Angle[Index], HomMat2D)</l>
+<l>     affine_trans_pixel (HomMat2D, Row1First, Column1First, RowTrans, ColTrans)</l>
+<l>     affine_trans_pixel (HomMat2D, Row2First, Column2First, RowTrans1, ColTrans1)</l>
+<l>     rake (ImageScaled1, Regions1, 5, 20, 1, 1, 20, 'all', 'max', RowTrans, ColTrans, RowTrans1, ColTrans1, ResultRow, ResultColumn)</l>
+<l>     pts_to_best_line (LineFirst,  ResultRow, ResultColumn, 2, Row12, Column12, Row22, Column22)</l>
+<l>     affine_trans_pixel (HomMat2D, Row1Secound, Column1Secound, RowTrans2, ColTrans2)</l>
+<l>     affine_trans_pixel (HomMat2D, Row2Secound, Column2Secound, RowTrans3, ColTrans3)</l>
+<l>     rake (ImageScaled1, Regions4, 5, 20, 1, 1, 20, 'all', 'max',  RowTrans2, ColTrans2, RowTrans3, ColTrans3, ResultRow1, ResultColumn1)</l>
+<l>     pts_to_best_line (LineSecound, ResultRow1, ResultColumn1, 2, Row1, Column1, Row2, Column2)</l>
+<l>     affine_trans_pixel (HomMat2D, Row1thress, Column1thress, RowTrans4, ColTrans4)</l>
+<l>     affine_trans_pixel (HomMat2D,  Row2thress, Column2thress, RowTrans5, ColTrans5)</l>
+<l>     rake (ImageReduced, Regions5, 5, 20, 1, 1, 20, 'all', 'max',RowTrans4, ColTrans4,RowTrans5, ColTrans5, ResultRow2, ResultColumn2)</l>
+<l>     pts_to_best_line (Linethress, ResultRow2, ResultColumn2, 2, Row11, Column11, Row21, Column21)</l>
+<c>     </c>
+<l>     intersection_ll (Row1, Column1, Row2, Column2, Row12, Column12, Row22, Column22, Row4, Column4, IsParallel)</l>
+<l>     gen_cross_contour_xld (Cross, Row4, Column4, 16, Angle)</l>
+<l>     intersection_ll (Row11, Column11, Row21, Column21, Row12, Column12, Row22, Column22, Row5, Column5, IsParallel1)</l>
+<l>     gen_cross_contour_xld (Cross1, Row5, Column5, 16, Angle)</l>
+<l>     ROIRow:=(Row5+Row4)/2</l>
+<l>     ROICol:=(Column5+Column4)/2</l>
+<l>     gen_cross_contour_xld (Cross2, ROIRow, ROICol, 16, Angle)</l>
+<l>     dev_display (Image)</l>
+<l>     concat_obj(EmptyObject, LineFirst, EmptyObject)</l>
+<l>     concat_obj(EmptyObject, LineSecound, EmptyObject)</l>
+<l>     concat_obj(EmptyObject, Linethress, EmptyObject)</l>
+<l>     concat_obj(EmptyObject, Cross, EmptyObject)</l>
+<l>     concat_obj(EmptyObject, Cross1, EmptyObject)</l>
+<l>     concat_obj(EmptyObject, Cross2, EmptyObject)</l>
+<l>     dev_display (LineFirst)</l>
+<l>     dev_display (LineSecound)</l>
+<l>*      dev_display (Linethress)</l>
+<l>     dev_display (Cross)</l>
+<l>     dev_display (Cross1)</l>
+<l>     dev_display (Cross2)</l>
+<l>     *stop ()</l>
+<l>endfor</l>
+<l>dev_display(EmptyObject)</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>
