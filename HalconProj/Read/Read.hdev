@@ -28,7 +28,9 @@
 <l>* list_files ('C:/Users/iwake/OneDrive - wake/Desktop/Mia/Images/0821Seg', ['files'], ImageFiles)</l>
 <l>* list_files ('D:/WK/Hospital/表单扫描/0820扫描表单/黑/imgSegBarcode', ['files'], ImageFiles)</l>
 <l>* list_files ('D:/WK/Hospital/表单扫描/0820扫描表单/黑/imgBarcode2', ['files'], ImageFiles)</l>
-<l>list_files ('D:/WK/Hospital/表单扫描/2020903', ['files'], ImageFiles)</l>
+<l>* list_files ('D:/WK/Hospital/表单扫描/0828扫描表单/SegBarcode', ['files'], ImageFiles)</l>
+<l>list_files ('D:/WK/Hospital/表单扫描/0903扫描表单', ['files'], ImageFiles)</l>
+<l>* list_files ('D:/WK/Hospital/表单扫描/0903扫描表单', ['files'], ImageFiles)</l>
 <l as_id="image_acquisition" as_name="Image Acquisition 01" as_grp="[2,2]" as_ord="1">for Index := 0 to |ImageFiles| - 1 by 1</l>
 <l as_id="image_acquisition" as_name="Image Acquisition 01" as_grp="[2,3]" as_ord="1">    read_image (Image, ImageFiles[Index])</l>
 <l>    rgb1_to_gray (Image, Image)</l>
@@ -44,6 +46,23 @@
 <c>    * Image Acquisition 01: Do something</c>
 <l>*     dev_display (Image)</l>
 <l>    get_image_size (Image, Width, Height)</l>
+<c></c>
+<c>    </c>
+<c>*** Detection</c>
+<c>** Detection Line</c>
+<l>    gen_gauss_pyramid (Image, ImagePyramid, 'weighted', 0.5)</l>
+<l>    select_obj(ImagePyramid, ObjectSelected, 5)</l>
+<l>    sobel_dir (ObjectSelected, EdgeAmplitude, EdgeDirection, 'sum_abs', 3)</l>
+<l>    dev_set_color ('red')</l>
+<l>    threshold (EdgeAmplitude, Region, 55, 255)</l>
+<c>    * Reduce the direction image to the edge region</c>
+<l>    reduce_domain (EdgeDirection, Region, EdgeDirectionReduced)</l>
+<c>    * Start the Hough transform using the edge direction information</c>
+<l>    hough_lines_dir (EdgeDirectionReduced, HoughImage, Lines, 4, 2, 'mean', 3, 25, 5, 5, 'true', Angle, Dist)</l>
+<c>    * Store input lines described in HNF</c>
+<l>    gen_region_hline (LinesHNF, Angle, Dist)</l>
+<l>    stop()</l>
+<c>    </c>
 <c>** Seg Paper</c>
 <l>*    try</l>
 <l>*        Failure := 0</l>
@@ -56,8 +75,8 @@
 <l>*    endtry</l>
 <c>   </c>
 <c>**Barcode    </c>
-<l>    try</l>
-<l>        test_barcode (Image, ImageCrop, WindowHandle)</l>
+<l>*     try</l>
+<l>*         test_barcode (Image, ImageCrop, WindowHandle)</l>
 <c>        ** Bin</c>
 <l>*         binary_threshold (ImageCrop, Region, 'max_separability', 'light', UsedThreshold)</l>
 <l>*         get_image_size (ImageCrop, CropWidth, CropHeight)</l>
@@ -66,11 +85,11 @@
 <l>*         equ_histo_image ( ImageCrop, ImageEq)</l>
 <l>*         write_image (ImageCrop, 'jpg', 0, FileName)</l>
 <c></c>
-<l>    catch (Exception)        </l>
-<l>        NumFailure := NumFailure + 1</l>
-<l>        ImageFailure := ImageFailure + ImageFiles[Index]</l>
+<l>*     catch (Exception)        </l>
+<l>*         NumFailure := NumFailure + 1</l>
+<l>*         ImageFailure := ImageFailure + ImageFiles[Index]</l>
 <l>*         stop()</l>
-<l>    endtry</l>
+<l>*     endtry</l>
 <c>  </c>
 <c>    </c>
 <l>*     stop()</l>
