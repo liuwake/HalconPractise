@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.1">
+<procedure name="image_get_corner_line">
+<interface>
+<io>
+<par name="Image" base_type="iconic" dimension="0"/>
+</io>
+<ic>
+<par name="WindowHandle" base_type="ctrl" dimension="0"/>
+</ic>
+<oc>
+<par name="LinePointRow" base_type="ctrl" dimension="0"/>
+<par name="LinePointCol" base_type="ctrl" dimension="0"/>
+</oc>
+</interface>
+<body>
+<c>** Detection Line Corner</c>
+<c></c>
+<c></c>
+<l>    NumPy := 5</l>
+<l>    tuple_pow (2,  NumPy-1, NumPyScale)</l>
+<c></c>
+<l>    gen_gauss_pyramid (Image, ImagePyramid, 'weighted', 0.5)</l>
+<l>    select_obj(ImagePyramid, ObjectSelected, NumPy)</l>
+<l>    sobel_dir (ObjectSelected, EdgeAmplitude, EdgeDirection, 'sum_abs', 3)</l>
+<l>    dev_set_color ('red')</l>
+<l>    threshold (EdgeAmplitude, Region, 55, 255)</l>
+<c>    * Reduce the direction image to the edge region</c>
+<l>    reduce_domain (EdgeDirection, Region, EdgeDirectionReduced)</l>
+<c>    * Start the Hough transform using the edge direction information</c>
+<l>    hough_lines_dir (EdgeDirectionReduced, HoughImage, Lines, 4, 2, 'mean', 3, 25, 5, 5, 'true', Angle, Dist)</l>
+<c>    * Store input lines described in HNF</c>
+<l>    gen_region_hline (LinesHNF, Angle, Dist)</l>
+<c>    </c>
+<l>    count_obj(LinesHNF,NumLines)  </l>
+<l>    LinePoint := []</l>
+<l>    LinePointRow :=[]</l>
+<l>    LinePointCol :=[]</l>
+<c>    </c>
+<l>    for IndexLine := 1 to NumLines-1 by 1</l>
+<l>        select_obj (LinesHNF, Line1, IndexLine)</l>
+<l>        select_obj (LinesHNF, Line2, IndexLine+1)</l>
+<l>        intersection (Line1, Line2, RegionIntersection)</l>
+<l>        area_center (RegionIntersection, RegionIntersectionArea, Row, Col)</l>
+<l>        LinePointRow[IndexLine] := Row * NumPyScale</l>
+<l>        LinePointCol[IndexLine] := Col * NumPyScale</l>
+<l>    endfor</l>
+<l>    dev_display (Image)</l>
+<l>    disp_cross (WindowHandle, LinePointRow, LinePointCol, 72,0)</l>
+<l>    stop()</l>
+<l>return ()</l>
+</body>
+<docu id="image_get_corner_line">
+<parameters>
+<parameter id="Image"/>
+<parameter id="LinePointCol"/>
+<parameter id="LinePointRow"/>
+<parameter id="WindowHandle"/>
+</parameters>
+</docu>
+</procedure>
+</hdevelop>

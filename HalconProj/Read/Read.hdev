@@ -49,19 +49,7 @@
 <c></c>
 <c>    </c>
 <c>*** Detection</c>
-<c>** Detection Line</c>
-<l>    gen_gauss_pyramid (Image, ImagePyramid, 'weighted', 0.5)</l>
-<l>    select_obj(ImagePyramid, ObjectSelected, 5)</l>
-<l>    sobel_dir (ObjectSelected, EdgeAmplitude, EdgeDirection, 'sum_abs', 3)</l>
-<l>    dev_set_color ('red')</l>
-<l>    threshold (EdgeAmplitude, Region, 55, 255)</l>
-<c>    * Reduce the direction image to the edge region</c>
-<l>    reduce_domain (EdgeDirection, Region, EdgeDirectionReduced)</l>
-<c>    * Start the Hough transform using the edge direction information</c>
-<l>    hough_lines_dir (EdgeDirectionReduced, HoughImage, Lines, 4, 2, 'mean', 3, 25, 5, 5, 'true', Angle, Dist)</l>
-<c>    * Store input lines described in HNF</c>
-<l>    gen_region_hline (LinesHNF, Angle, Dist)</l>
-<l>    stop()</l>
+<l>*     image_get_corner_line (Image, WindowHandle, LinePointRow, LinePointCol)</l>
 <c>    </c>
 <c>** Seg Paper</c>
 <l>*    try</l>
