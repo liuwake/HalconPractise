@@ -86,7 +86,9 @@
     - [ ] 测试运行,效果测量了一行螺母的半径?
 
 
-
+### 3d_vision
+- [ ] two_camera_calibration
+  - [ ] 双cam cali拼接尺子图像,并测算损失
 
 - [ ] Ref
     - [x] [Halcon一日一练：图像拼接技术2:步骤与例程](https://www.cnblogs.com/amosyang/p/8478213.html?utm_source=debugrun&utm_medium=referral) 中文讲解
