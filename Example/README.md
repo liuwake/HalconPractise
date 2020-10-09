@@ -62,6 +62,7 @@
   - [ ] 10张芯片拼成一张*??? 啥区别*
 - [x] *gen_projective_mosaic*
   - [ ] 6张PCB拼一张
+  - [ ] 适合面阵车底拼接
   
 
 - [x] mosaicking
