@@ -15,10 +15,14 @@
 - [51Halcon网适用许可证](https://www.51halcon.com/thread-387-1-1.html)
 
 ### Install 安装
-
+#### win/mac
 - 一直下一步
 - 只要能勾选✔就都打勾
-
+#### linux
+- Download __SOM__
+- ./som
+- open `localhost:8188` and login.(You cannot login with ssh -L $REMOTE:8188. Only can you login locally!)
+- select what you want, and install for all users.
 
 ## HalconProj
 ### Cam
