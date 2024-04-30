@@ -16,6 +16,10 @@
 
 ```C:\Users\Public\Documents\MVTec\HALCON-18.11-Steady\examples\hdevelop\Applications\```
 
+### Completeness-Check 完整性检测
+- [x] segment_plants:分割树叶
+  - [x] 转换到cielab颜色空间;利用segment_image_mser分割.
+
 ### Bar-Codes
 - [x] circular_barcode:圆拉伸变换
   - [x] 轴承变换,识别二维码

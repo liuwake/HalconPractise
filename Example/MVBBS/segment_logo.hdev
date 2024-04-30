@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="18.11.1.1">
+<procedure name="main">
+<interface/>
+<body>
+<c>**** Misc</c>
+<c>** Data Create: 2020/12/30</c>
+<c>** Data Modify: None</c>
+<c>** Contributor: Wake</c>
+<c>**** Log</c>
+<c>** 2020/12/30 Created and run M1 and M2; Debug 1;</c>
+<c></c>
+<c></c>
+<c>** Init </c>
+<c>* Init Env</c>
+<c></c>
+<l>dev_close_window ()</l>
+<l>dev_update_off ()</l>
+<c></c>
+<c>* read Image</c>
+<c></c>
+<l>read_image (Image, 'C:/Users/iwake/OneDrive - wake/Desktop/HalconPractise/Images/IntelLogo.jpeg') </l>
+<c></c>
+<c></c>
+<c></c>
+<c>** Method 1</c>
+<c></c>
+<c></c>
+<l>* mean_image (Image, ImageMean, 30, 30) </l>
+<c></c>
+<l>* dyn_threshold (Image, ImageMean, RegionDynThresh, 3, 'dark') </l>
+<c></c>
+<l>* connection (RegionDynThresh, ConnectedRegions) </l>
+<c></c>
+<l>* select_shape (ConnectedRegions, SelectedRegions, 'area', 'and', 200, 99999) </l>
+<c></c>
+<l>* closing_circle (SelectedRegions, RegionClosing, 5) </l>
+<c></c>
+<c>**方法2 </c>
+<c></c>
+<l>* rgb1_to_gray(Image, Image) </l>
+<c></c>
+<l>* get_image_size(Image, Width, Height) </l>
+<c></c>
+<l>* Sigma1 :=0.7 </l>
+<c></c>
+<l>* gen_gauss_filter (GaussFilter1, Sigma1, Sigma1, 0.0, 'none', 'rft', Width, Height) </l>
+<c></c>
+<c>* Perform the convolution in the frequency domain </c>
+<c></c>
+<l>* rft_generic (Image, ImageFFT, 'to_freq', 'none', 'complex', Width) </l>
+<c></c>
+<l>* convol_fft (ImageFFT, GaussFilter1, ImageConvol) </l>
+<c></c>
+<l>* rft_generic (ImageConvol, ImageFiltered, 'from_freq', 'n', 'real', Width) </l>
+<c></c>
+<l>* stop() </l>
+<c></c>
+<l>* mean_image(ImageFiltered, ImageMean, 80, 110) </l>
+<c></c>
+<l>* dyn_threshold(ImageFiltered, ImageMean, RegionDynThresh, 4, 'dark') </l>
+<c></c>
+<l>* connection(RegionDynThresh, ConnectedRegions) </l>
+<c></c>
+<l>* select_shape(ConnectedRegions, SelectedRegions, 'area', 'and',150, 99999) </l>
+<c></c>
+<c>*方法3 </c>
+<c></c>
+<l>get_image_size(Image, Width, Height) </l>
+<c></c>
+<l>dev_close_window() </l>
+<c></c>
+<l>dev_open_window_fit_image(Image, 0, 0, Width, Height, WindowHandle) </l>
+<c></c>
+<l>dev_display(Image) </l>
+<c></c>
+<l>decompose3(Image, R, G, B) </l>
+<c></c>
+<l>trans_from_rgb(R, G, B, H, S, V, 'hsv') </l>
+<c></c>
+<l>scale_image_max(V, ImageScaleMax) </l>
+<c></c>
+<l>emphasize(ImageScaleMax, ImageEmphasize, 25, 25, 5) </l>
+<l>threshold (ImageEmphasize, Regions, 100, 255) //阈值参数调试不适合,所以字母A,M在转角处有空缺;已调整成功</l>
+<c></c>
+<c></c>
+<l>complement(Regions, RegionComplement) </l>
+<c></c>
+<l>connection(RegionComplement, ConnectedRegions) </l>
+<c></c>
+<l>select_shape(ConnectedRegions, SelectedRegions, 'area', 'and', 210, 99999)</l>
+<c></c>
+<c></c>
+<c></c>
+<c>** dilation_circle(SelectedRegions, RegionDilation, 2.5)也可 </c>
+<c></c>
+<l>expand_region(SelectedRegions, SelectedRegions, RegionExpanded, 2, 'image') </l>
+<c></c>
+<l>dev_set_draw('fill') </l>
+<c></c>
+<l>dev_display(Image) </l>
+<c></c>
+<l>dev_display(RegionExpanded) </l>
+<c></c>
+<c>*方法4</c>
+<c></c>
+<c></c>
+<c></c>
+<l>* rgb1_to_gray (Image, GrayImage)</l>
+<c></c>
+<l>* scale_image_max (Image, ImageScaleMax1)</l>
+<c></c>
+<l>* emphasize (ImageScaleMax1, ImageEmphasize1, 25, 25, 5)</l>
+<c></c>
+<l>* threshold (ImageEmphasize1, Region, 0, 40)</l>
+<c></c>
+<l>* connection (Region, ConnectedRegions1)</l>
+<c></c>
+<l>* select_shape (ConnectedRegions1, SelectedRegions1, 'area', 'and', 200, 99999)</l>
+<c></c>
+<l>* dilation_circle (SelectedRegions1, RegionDilation, 2)</l>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>
