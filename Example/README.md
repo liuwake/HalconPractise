@@ -14,7 +14,12 @@
 ----
 ## Applications
 
-```C:\Users\Public\Documents\MVTec\HALCON-18.11-Steady\examples\hdevelop\Applications\```
+`C:\Users\Public\Documents\MVTec\HALCON-18.11-Steady\examples\hdevelop\Applications\` and `/opt/MVTec/HALCON-23.11-Progress/examples/hdevelop/Applications/`
+
+### Object-Recognition-2D
+- classify_pills_auto_select_features.hdev
+  - 分割药片.可以用来分割硬币,蛤蜊等.
+
 
 ### Completeness-Check 完整性检测
 - [x] segment_plants:分割树叶
